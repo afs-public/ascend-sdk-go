@@ -1,0 +1,12 @@
+# OperatingEnrollmentMetadata
+
+Metadata for the REGISTRATION_OPERATING enrollment type.
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     | Example                                                                                         |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `OperatingPurpose`                                                                              | [*components.EnrollmentOperatingPurpose](../../models/components/enrollmentoperatingpurpose.md) | :heavy_minus_sign:                                                                              | The purpose of the operating account.                                                           | CUSTODY                                                                                         |
+| `Subtitle`                                                                                      | **string*                                                                                       | :heavy_minus_sign:                                                                              | Optional subtitle for the operating purpose                                                     | C/F Optionality Securities                                                                      |
+| `TaxWithholdingMetadata`                                                                        | [*components.TaxWithholdingMetadata](../../models/components/taxwithholdingmetadata.md)         | :heavy_minus_sign:                                                                              | Optional tax withholding metadata for TAX_WITHHOLDING operating purpose                         |                                                                                                 |

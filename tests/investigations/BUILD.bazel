@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_test")
+
+go_test(
+    name = "tests",
+    srcs = glob(
+        ["**/*.go"],
+    ),
+    tags = [
+        "manual",
+        "no-ci",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//ascend-sdk/v1/ascend-sdk-go:go_sdk",
+        "//ascend-sdk/v1/ascend-sdk-go/models/components",
+        "//ascend-sdk/v1/ascend-sdk-go/models/operations",
+        "//ascend-sdk/v1/ascend-sdk-go/tests:utils",
+        "@com_github_google_uuid//:go_default_library",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

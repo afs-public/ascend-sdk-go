@@ -1,0 +1,9 @@
+# AccountsUpdateLegalEntityRequest
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `LegalEntityID`                                                              | *string*                                                                     | :heavy_check_mark:                                                           | The legalEntity id.                                                          | 42567868-9373-4872-9d24-2e33f6c19b75                                         |
+| `LegalEntityUpdate`                                                          | [components.LegalEntityUpdate](../../models/components/legalentityupdate.md) | :heavy_check_mark:                                                           | N/A                                                                          |                                                                              |

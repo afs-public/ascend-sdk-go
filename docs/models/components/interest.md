@@ -1,0 +1,12 @@
+# Interest
+
+Object containing metadata for Margin interest
+
+
+## Fields
+
+| Field                                                                                       | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `InterestAccrualEndDate`                                                                    | [*components.InterestAccrualEndDate](../../models/components/interestaccrualenddate.md)     | :heavy_minus_sign:                                                                          | Date on which interest accrues before the calculation is made for payment or charge         | {<br/>"day": 28,<br/>"month": 10,<br/>"year": 2024<br/>}                                    |
+| `InterestAccrualStartDate`                                                                  | [*components.InterestAccrualStartDate](../../models/components/interestaccrualstartdate.md) | :heavy_minus_sign:                                                                          | Date on which interest begins to accrue on a cash balance or borrowed funds                 | {<br/>"day": 28,<br/>"month": 10,<br/>"year": 2024<br/>}                                    |
+| `InterestType`                                                                              | [*components.InterestType](../../models/components/interesttype.md)                         | :heavy_minus_sign:                                                                          | N/A                                                                                         | CREDIT                                                                                      |

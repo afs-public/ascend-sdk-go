@@ -1,0 +1,11 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "sdkerrors",
+    srcs = glob(["**/*.go"]),
+    importpath = "ascend-sdk/models/sdkerrors",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//ascend-sdk/v1/ascend-sdk-go/models/components",
+    ],
+)

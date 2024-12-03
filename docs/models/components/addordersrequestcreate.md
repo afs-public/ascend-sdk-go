@@ -1,0 +1,11 @@
+# AddOrdersRequestCreate
+
+The message to add a list of basket orders to a basket
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `BasketOrders`                                                                                | [][components.BasketOrderCreate](../../models/components/basketordercreate.md)                | :heavy_check_mark:                                                                            | The orders to add to the basket. A maximum of 1000 orders can be added to a basket at a time. |                                                                                               |
+| `Name`                                                                                        | *string*                                                                                      | :heavy_check_mark:                                                                            | Format: correspondents/{correspondent}/baskets/{basket}                                       | correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521         |
