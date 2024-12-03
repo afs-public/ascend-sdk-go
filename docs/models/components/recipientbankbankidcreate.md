@@ -1,0 +1,11 @@
+# RecipientBankBankIDCreate
+
+A bank identifier
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ID`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | The bank identifier                                                                                  | ABNANL2AXXX                                                                                          |
+| `Type`                                                                                               | [components.RecipientBankBankIDCreateType](../../models/components/recipientbankbankidcreatetype.md) | :heavy_check_mark:                                                                                   | The type of bank identifier specified                                                                | BIC                                                                                                  |

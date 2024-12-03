@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "hooks",
+    srcs = glob(["**/*.go"]),
+    importpath = "ascend-sdk/internal/hooks",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//ascend-sdk/v1/ascend-sdk-go/models/components",
+        "@com_github_dgrijalva_jwt_go//:go_default_library",
+    ],
+)

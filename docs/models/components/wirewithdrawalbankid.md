@@ -1,0 +1,11 @@
+# WireWithdrawalBankID
+
+An identifier that represents ABA routing number for domestic wire or BIC for foreign wire
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               | Example                                                                                                   |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `ID`                                                                                                      | **string*                                                                                                 | :heavy_minus_sign:                                                                                        | The bank identifier                                                                                       | ABNANL2AXXX                                                                                               |
+| `Type`                                                                                                    | [*components.WireWithdrawalRecipientBankType](../../models/components/wirewithdrawalrecipientbanktype.md) | :heavy_minus_sign:                                                                                        | The type of bank identifier specified                                                                     | BIC                                                                                                       |

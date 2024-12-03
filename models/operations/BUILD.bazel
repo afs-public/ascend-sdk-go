@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "operations",
+    srcs = glob(["**/*.go"]),
+    importpath = "ascend-sdk/models/operations",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//ascend-sdk/v1/ascend-sdk-go/internal/utils",
+        "//ascend-sdk/v1/ascend-sdk-go/models/components",
+        "//ascend-sdk/v1/ascend-sdk-go/models/sdkerrors",
+        "//ascend-sdk/v1/ascend-sdk-go/retry",
+    ],
+)
