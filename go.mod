@@ -1,5 +1,5 @@
 
-module ascend-sdk
+module github.com/afs-public/ascend-sdk-go
 
 go 1.20
 
