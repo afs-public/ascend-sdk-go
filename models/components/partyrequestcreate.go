@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // ProspectusDeliveryPreference - Delivery method instruction for prospectuses for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type ProspectusDeliveryPreference string
 
@@ -19,25 +14,6 @@ const (
 
 func (e ProspectusDeliveryPreference) ToPointer() *ProspectusDeliveryPreference {
 	return &e
-}
-func (e *ProspectusDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = ProspectusDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ProspectusDeliveryPreference: %v", v)
-	}
 }
 
 // ProxyDeliveryPreference - Delivery method instruction for proxy voting for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
@@ -52,25 +28,6 @@ const (
 
 func (e ProxyDeliveryPreference) ToPointer() *ProxyDeliveryPreference {
 	return &e
-}
-func (e *ProxyDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = ProxyDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ProxyDeliveryPreference: %v", v)
-	}
 }
 
 // RelationType - Conveys how a person is related to account; Located on each account Party record; Examples are `PRIMARY_OWNER`, `JOINT_OWNER`, `EXECUTOR`, etc.
@@ -95,43 +52,6 @@ const (
 func (e RelationType) ToPointer() *RelationType {
 	return &e
 }
-func (e *RelationType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PARTY_RELATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRIMARY_OWNER":
-		fallthrough
-	case "JOINT_OWNER":
-		fallthrough
-	case "CUSTODIAN":
-		fallthrough
-	case "GUARDIAN_CONSERVATOR":
-		fallthrough
-	case "POWER_OF_ATTORNEY":
-		fallthrough
-	case "EXECUTOR":
-		fallthrough
-	case "AUTHORIZED_SIGNER":
-		fallthrough
-	case "BENEFICIAL_OWNER":
-		fallthrough
-	case "CONTROL_PERSON":
-		fallthrough
-	case "AUTHORIZED_REPRESENTATIVE":
-		fallthrough
-	case "TRUSTEE":
-		fallthrough
-	case "AUTH_TRUSTEE_REP":
-		*e = RelationType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RelationType: %v", v)
-	}
-}
 
 // PartyRequestCreateStatementDeliveryPreference - Delivery method instruction for account statements for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyRequestCreateStatementDeliveryPreference string
@@ -145,25 +65,6 @@ const (
 
 func (e PartyRequestCreateStatementDeliveryPreference) ToPointer() *PartyRequestCreateStatementDeliveryPreference {
 	return &e
-}
-func (e *PartyRequestCreateStatementDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestCreateStatementDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestCreateStatementDeliveryPreference: %v", v)
-	}
 }
 
 // TaxDocumentDeliveryPreference - Delivery method instruction for tax documents for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated; Per regulation, selected tax forms will be mailed by regulation regardless of this setting
@@ -179,25 +80,6 @@ const (
 func (e TaxDocumentDeliveryPreference) ToPointer() *TaxDocumentDeliveryPreference {
 	return &e
 }
-func (e *TaxDocumentDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = TaxDocumentDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TaxDocumentDeliveryPreference: %v", v)
-	}
-}
 
 // PartyRequestCreateTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyRequestCreateTradeConfirmationDeliveryPreference string
@@ -211,25 +93,6 @@ const (
 
 func (e PartyRequestCreateTradeConfirmationDeliveryPreference) ToPointer() *PartyRequestCreateTradeConfirmationDeliveryPreference {
 	return &e
-}
-func (e *PartyRequestCreateTradeConfirmationDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestCreateTradeConfirmationDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestCreateTradeConfirmationDeliveryPreference: %v", v)
-	}
 }
 
 // PartyRequestCreate - A single record representing an owner or manager of an Account. Contains fully populated Party Identity object.

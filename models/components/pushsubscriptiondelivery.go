@@ -3,10 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
-	"encoding/json"
-	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // Result - The outcome of the delivery
@@ -20,23 +19,6 @@ const (
 
 func (e Result) ToPointer() *Result {
 	return &e
-}
-func (e *Result) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PUSH_SUBSCRIPTION_DELIVERY_RESULT_UNSPECIFIED":
-		fallthrough
-	case "SUCCEEDED":
-		fallthrough
-	case "FAILED":
-		*e = Result(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Result: %v", v)
-	}
 }
 
 // PushSubscriptionDelivery - Represents the delivery results of an event for a push subscription

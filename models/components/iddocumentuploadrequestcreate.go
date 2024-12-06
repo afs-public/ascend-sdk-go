@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // IDDocumentUploadRequestCreateDocumentType - Describes the contents of a document and how it is used; Required for all identity documents
 type IDDocumentUploadRequestCreateDocumentType string
 
@@ -45,77 +40,6 @@ const (
 
 func (e IDDocumentUploadRequestCreateDocumentType) ToPointer() *IDDocumentUploadRequestCreateDocumentType {
 	return &e
-}
-func (e *IDDocumentUploadRequestCreateDocumentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ID_DOCUMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "BIRTH_CERTIFICATE":
-		fallthrough
-	case "CUSTOMER_IDENTIFICATION_PROCESS":
-		fallthrough
-	case "DEATH_CERTIFICATE":
-		fallthrough
-	case "DRIVING_LICENSE":
-		fallthrough
-	case "EMPLOYER_CONSENT_FORM_407_LETTER":
-		fallthrough
-	case "MARRIAGE_CERTIFICATE":
-		fallthrough
-	case "PASSPORT":
-		fallthrough
-	case "PROOF_OF_TAX_ID":
-		fallthrough
-	case "SOCIAL_SECURITY_DOCUMENT":
-		fallthrough
-	case "THIRD_PARTY_CIP_RESULTS":
-		fallthrough
-	case "STATE_ID_CARD":
-		fallthrough
-	case "NATIONAL_ID_CARD":
-		fallthrough
-	case "PERMANENT_RESIDENT_VISA":
-		fallthrough
-	case "IRIS_ITIN_LETTER":
-		fallthrough
-	case "UTILITY_BILL":
-		fallthrough
-	case "MILITARY_ID_CARD":
-		fallthrough
-	case "MORTGAGE_STATEMENT":
-		fallthrough
-	case "LEASE_AGREEMENT":
-		fallthrough
-	case "EXECUTOR_CERTIFICATION":
-		fallthrough
-	case "TRUSTEE_CERTIFICATION":
-		fallthrough
-	case "SELFIE":
-		fallthrough
-	case "ARTICLES_OF_ORGANISATION":
-		fallthrough
-	case "CERT_OF_SOLE_OFFICER":
-		fallthrough
-	case "CERTIFICATION_CORRESPONDENT_ACCOUNTS":
-		fallthrough
-	case "CERTIFICATION_FOREIGN_BANKS":
-		fallthrough
-	case "CHARTER_ARTICLES_OF_INCORPORATION":
-		fallthrough
-	case "DIVORCE_DECREE":
-		fallthrough
-	case "PROOF_OF_RESIDENCE":
-		fallthrough
-	case "BO_REPORTING_EXEMPTION_PROOF":
-		*e = IDDocumentUploadRequestCreateDocumentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IDDocumentUploadRequestCreateDocumentType: %v", v)
-	}
 }
 
 // IDDocumentUploadRequestCreate - Identity document to be uploaded;

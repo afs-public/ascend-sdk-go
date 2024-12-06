@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // FeeAmount - Monetary amount associated with the fee
 type FeeAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -58,77 +53,6 @@ const (
 
 func (e FeeType) ToPointer() *FeeType {
 	return &e
-}
-func (e *FeeType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FEE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CLIENT_CLEARING":
-		fallthrough
-	case "LIQUIDITY":
-		fallthrough
-	case "GENERAL_PURPOSE":
-		fallthrough
-	case "COMMISSION":
-		fallthrough
-	case "ORF":
-		fallthrough
-	case "TAF":
-		fallthrough
-	case "SEC":
-		fallthrough
-	case "ACCOUNT_CLOSING":
-		fallthrough
-	case "ACCOUNT_IRA":
-		fallthrough
-	case "ACH_RETURN":
-		fallthrough
-	case "ADVISORY":
-		fallthrough
-	case "CHECK_FEE":
-		fallthrough
-	case "EXCHANGE":
-		fallthrough
-	case "MANAGEMENT":
-		fallthrough
-	case "OVERNIGHT":
-		fallthrough
-	case "PLATFORM":
-		fallthrough
-	case "STATEMENT":
-		fallthrough
-	case "STOP_PAYMENT":
-		fallthrough
-	case "WIRE_FEE":
-		fallthrough
-	case "INACTIVITY":
-		fallthrough
-	case "AMA_SERVICE":
-		fallthrough
-	case "NOTICE_OF_CHANGE":
-		fallthrough
-	case "ACCOUNT_TRANSFER":
-		fallthrough
-	case "AGENCY_PROCESSING":
-		fallthrough
-	case "RTP_FEE":
-		fallthrough
-	case "DOMESTIC_WIRE_DEPOSIT_FEE":
-		fallthrough
-	case "DOMESTIC_WIRE_WITHDRAWAL_FEE":
-		fallthrough
-	case "INTERNATIONAL_WIRE_DEPOSIT_FEE":
-		fallthrough
-	case "INTERNATIONAL_WIRE_WITHDRAWAL_FEE":
-		*e = FeeType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FeeType: %v", v)
-	}
 }
 
 type Fee struct {

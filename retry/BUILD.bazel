@@ -3,6 +3,6 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "retry",
     srcs = glob(["**/*.go"]),
-    importpath = "ascend-sdk/retry",
+    importpath = "github.com/afs-public/ascend-sdk-go/retry",
     visibility = ["//visibility:public"],
 )

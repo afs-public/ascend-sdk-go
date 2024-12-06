@@ -3,8 +3,9 @@
 package sdkerrors
 
 import (
-	"ascend-sdk/models/components"
 	"encoding/json"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
 // Status - The status message serves as the general-purpose service error message. Each status message includes a gRPC error code, error message, and error details.

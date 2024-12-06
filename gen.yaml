@@ -12,7 +12,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 go:
-  version: 0.4.0
+  version: 0.5.0
   additionalDependencies:
     github.com/dgrijalva/jwt-go: v3.2.0+incompatible
   allowUnknownFieldsInWeakUnions: false
@@ -30,5 +30,5 @@ go:
   maxMethodParams: 4
   methodArguments: require-security-and-request
   outputModelSuffix: output
-  packageName: ascend-sdk
+  packageName: github.com/afs-public/ascend-sdk-go
   responseFormat: envelope-http

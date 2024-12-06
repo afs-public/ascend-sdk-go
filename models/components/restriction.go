@@ -3,8 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // Restriction - An account restriction.

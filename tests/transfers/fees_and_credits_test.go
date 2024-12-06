@@ -2,12 +2,13 @@ package transfers
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/google/uuid"
 
@@ -16,7 +17,7 @@ import (
 )
 
 func TestFeesAndCredits(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 	accountId := os.Getenv("account_id")
 

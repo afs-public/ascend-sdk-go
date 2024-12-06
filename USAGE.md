@@ -3,15 +3,15 @@
 package main
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-	s := ascendsdk.New()
+	s := ascendsdkgo.New()
 
 	ctx := context.Background()
 	res, err := s.Authentication.GenerateServiceAccountToken(ctx, components.GenerateServiceAccountTokenRequestCreate{

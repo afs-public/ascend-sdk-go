@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type LegalEntityUpdateBusinessIndustrialClassification string
 
 const (
@@ -26,39 +21,6 @@ const (
 func (e LegalEntityUpdateBusinessIndustrialClassification) ToPointer() *LegalEntityUpdateBusinessIndustrialClassification {
 	return &e
 }
-func (e *LegalEntityUpdateBusinessIndustrialClassification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BUSINESS_INDUSTRIAL_CLASSIFICATION_UNSPECIFIED":
-		fallthrough
-	case "AGRICULTURE_FORESTRY_AND_FISHING":
-		fallthrough
-	case "MINING":
-		fallthrough
-	case "CONSTRUCTION":
-		fallthrough
-	case "MANUFACTURING":
-		fallthrough
-	case "TRANSPORTATION_COMMUNICATIONS_ELECTRIC_GAS_AND_SANITARY_SERVICES":
-		fallthrough
-	case "WHOLESALE_TRADE":
-		fallthrough
-	case "RETAIL_TRADE":
-		fallthrough
-	case "FINANCE_INSURANCE_AND_REAL_ESTATE":
-		fallthrough
-	case "SERVICES":
-		fallthrough
-	case "PUBLIC_ADMINISTRATION":
-		*e = LegalEntityUpdateBusinessIndustrialClassification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalEntityUpdateBusinessIndustrialClassification: %v", v)
-	}
-}
 
 // LegalEntityUpdateCorporateStructure - Corporate structure of the entity.
 type LegalEntityUpdateCorporateStructure string
@@ -73,27 +35,6 @@ const (
 
 func (e LegalEntityUpdateCorporateStructure) ToPointer() *LegalEntityUpdateCorporateStructure {
 	return &e
-}
-func (e *LegalEntityUpdateCorporateStructure) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTITY_CORPORATE_STRUCTURE_UNSPECIFIED":
-		fallthrough
-	case "CORPORATION_C_CORP":
-		fallthrough
-	case "CORPORATION_S_CORP":
-		fallthrough
-	case "CORPORATION_B_CORP":
-		fallthrough
-	case "CORPORATION_NONPROFIT":
-		*e = LegalEntityUpdateCorporateStructure(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalEntityUpdateCorporateStructure: %v", v)
-	}
 }
 
 // LegalEntityUpdateEntityType - The entity type.
@@ -111,31 +52,6 @@ const (
 
 func (e LegalEntityUpdateEntityType) ToPointer() *LegalEntityUpdateEntityType {
 	return &e
-}
-func (e *LegalEntityUpdateEntityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTITY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CORPORATION":
-		fallthrough
-	case "LIMITED_LIABILITY_COMPANY":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC":
-		fallthrough
-	case "TRUST":
-		fallthrough
-	case "ESTATE":
-		*e = LegalEntityUpdateEntityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalEntityUpdateEntityType: %v", v)
-	}
 }
 
 // LegalEntityUpdateExemptCustomerReason - The reason the customer is exempt from verifying beneficial owners, if applicable.
@@ -159,41 +75,6 @@ const (
 func (e LegalEntityUpdateExemptCustomerReason) ToPointer() *LegalEntityUpdateExemptCustomerReason {
 	return &e
 }
-func (e *LegalEntityUpdateExemptCustomerReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EXEMPT_REASON_UNSPECIFIED":
-		fallthrough
-	case "REGULATED_FINANCIAL_INSTITUTION":
-		fallthrough
-	case "DEPARTMENT_OR_AGENCY_OF_FEDERAL_STATE_OR_SUBDIVISION":
-		fallthrough
-	case "NON_BANK_LISTED_ENTITY":
-		fallthrough
-	case "SECTION_12_SECURITIES_EXCHANGE_ACT_1934_OR_15D":
-		fallthrough
-	case "SECTION_3_INVESTMENT_COMPANY_ACT_1940":
-		fallthrough
-	case "SECTION_202A_INVESTMENT_ADVISORS_ACT_1940":
-		fallthrough
-	case "SECTION_3_SECURITIES_EXCHANGE_ACT_1934_SECTION_6_OR_17A":
-		fallthrough
-	case "ANY_OTHER_SECURITIES_EXCHANGE_ACT_1934":
-		fallthrough
-	case "COMMODITY_FUTURES_TRADING_COMMISSION_REGISTERED":
-		fallthrough
-	case "PUBLIC_ACCOUNTING_FIRM_SECTION_102_SARBANES_OXLEY":
-		fallthrough
-	case "STATE_REGULATED_INSURANCE_COMPANY":
-		*e = LegalEntityUpdateExemptCustomerReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalEntityUpdateExemptCustomerReason: %v", v)
-	}
-}
 
 // LegalEntityUpdateTaxIDType - The nature of the U.S. Tax ID indicated in the related tax_id field; Examples include ITIN, SSN, EIN.
 type LegalEntityUpdateTaxIDType string
@@ -207,25 +88,6 @@ const (
 
 func (e LegalEntityUpdateTaxIDType) ToPointer() *LegalEntityUpdateTaxIDType {
 	return &e
-}
-func (e *LegalEntityUpdateTaxIDType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TAX_ID_TYPE_SSN":
-		fallthrough
-	case "TAX_ID_TYPE_ITIN":
-		fallthrough
-	case "TAX_ID_TYPE_EIN":
-		*e = LegalEntityUpdateTaxIDType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalEntityUpdateTaxIDType: %v", v)
-	}
 }
 
 // LegalEntityUpdate - A legal entity. Legal entities are organizations, such as companies, that participate in financial transactions

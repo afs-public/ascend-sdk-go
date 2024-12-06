@@ -3,7 +3,6 @@
 package utils
 
 import (
-	"ascend-sdk/retry"
 	"context"
 	"errors"
 	"fmt"
@@ -13,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/afs-public/ascend-sdk-go/retry"
 	"github.com/cenkalti/backoff/v4"
 )
 

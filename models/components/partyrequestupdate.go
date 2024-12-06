@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // PartyRequestUpdateProspectusDeliveryPreference - Delivery method instruction for prospectuses for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyRequestUpdateProspectusDeliveryPreference string
 
@@ -19,25 +14,6 @@ const (
 
 func (e PartyRequestUpdateProspectusDeliveryPreference) ToPointer() *PartyRequestUpdateProspectusDeliveryPreference {
 	return &e
-}
-func (e *PartyRequestUpdateProspectusDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestUpdateProspectusDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestUpdateProspectusDeliveryPreference: %v", v)
-	}
 }
 
 // PartyRequestUpdateProxyDeliveryPreference - Delivery method instruction for proxy voting for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
@@ -52,25 +28,6 @@ const (
 
 func (e PartyRequestUpdateProxyDeliveryPreference) ToPointer() *PartyRequestUpdateProxyDeliveryPreference {
 	return &e
-}
-func (e *PartyRequestUpdateProxyDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestUpdateProxyDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestUpdateProxyDeliveryPreference: %v", v)
-	}
 }
 
 // PartyRequestUpdateRelationType - Conveys how a person is related to account; Located on each account Party record; Examples are `PRIMARY_OWNER`, `JOINT_OWNER`, `EXECUTOR`, etc.
@@ -95,43 +52,6 @@ const (
 func (e PartyRequestUpdateRelationType) ToPointer() *PartyRequestUpdateRelationType {
 	return &e
 }
-func (e *PartyRequestUpdateRelationType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PARTY_RELATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRIMARY_OWNER":
-		fallthrough
-	case "JOINT_OWNER":
-		fallthrough
-	case "CUSTODIAN":
-		fallthrough
-	case "GUARDIAN_CONSERVATOR":
-		fallthrough
-	case "POWER_OF_ATTORNEY":
-		fallthrough
-	case "EXECUTOR":
-		fallthrough
-	case "AUTHORIZED_SIGNER":
-		fallthrough
-	case "BENEFICIAL_OWNER":
-		fallthrough
-	case "CONTROL_PERSON":
-		fallthrough
-	case "AUTHORIZED_REPRESENTATIVE":
-		fallthrough
-	case "TRUSTEE":
-		fallthrough
-	case "AUTH_TRUSTEE_REP":
-		*e = PartyRequestUpdateRelationType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestUpdateRelationType: %v", v)
-	}
-}
 
 // PartyRequestUpdateStatementDeliveryPreference - Delivery method instruction for account statements for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyRequestUpdateStatementDeliveryPreference string
@@ -145,25 +65,6 @@ const (
 
 func (e PartyRequestUpdateStatementDeliveryPreference) ToPointer() *PartyRequestUpdateStatementDeliveryPreference {
 	return &e
-}
-func (e *PartyRequestUpdateStatementDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestUpdateStatementDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestUpdateStatementDeliveryPreference: %v", v)
-	}
 }
 
 // PartyRequestUpdateTaxDocumentDeliveryPreference - Delivery method instruction for tax documents for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated; Per regulation, selected tax forms will be mailed by regulation regardless of this setting
@@ -179,25 +80,6 @@ const (
 func (e PartyRequestUpdateTaxDocumentDeliveryPreference) ToPointer() *PartyRequestUpdateTaxDocumentDeliveryPreference {
 	return &e
 }
-func (e *PartyRequestUpdateTaxDocumentDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestUpdateTaxDocumentDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestUpdateTaxDocumentDeliveryPreference: %v", v)
-	}
-}
 
 // PartyRequestUpdateTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyRequestUpdateTradeConfirmationDeliveryPreference string
@@ -211,25 +93,6 @@ const (
 
 func (e PartyRequestUpdateTradeConfirmationDeliveryPreference) ToPointer() *PartyRequestUpdateTradeConfirmationDeliveryPreference {
 	return &e
-}
-func (e *PartyRequestUpdateTradeConfirmationDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyRequestUpdateTradeConfirmationDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRequestUpdateTradeConfirmationDeliveryPreference: %v", v)
-	}
 }
 
 // PartyRequestUpdate - A single record representing an owner or manager of an Account. Contains fully populated Party Identity object.

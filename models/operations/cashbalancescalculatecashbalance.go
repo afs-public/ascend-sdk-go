@@ -3,9 +3,10 @@
 package operations
 
 import (
-	"ascend-sdk/models/components"
 	"encoding/json"
 	"fmt"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
 // Mechanism - The withdraw mechanism to calculate the balance for. The mechanism determines what account activity will affect the balance.

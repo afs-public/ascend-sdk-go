@@ -2,8 +2,7 @@ package transfers
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"fmt"
 	"math/rand"
@@ -11,6 +10,8 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -25,7 +26,7 @@ func getMicrodepositAmounts(sdk *ascendsdk.SDK, ctx context.Context, accountId s
 }
 
 func TestBankRelationships(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
 	ctx := context.Background()

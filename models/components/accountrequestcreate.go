@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // CatAccountHolderType - The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
 type CatAccountHolderType string
 
@@ -24,35 +19,6 @@ const (
 
 func (e CatAccountHolderType) ToPointer() *CatAccountHolderType {
 	return &e
-}
-func (e *CatAccountHolderType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CAT_ACCOUNT_HOLDER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "A_INSTITUTIONAL_CUSTOMER":
-		fallthrough
-	case "E_EMPLOYEE_ACCOUNT":
-		fallthrough
-	case "F_FOREIGN":
-		fallthrough
-	case "I_INDIVIDUAL":
-		fallthrough
-	case "O_MARKET_MAKING":
-		fallthrough
-	case "V_AGENCY_AVERAGE_PRICE_ACCOUNT":
-		fallthrough
-	case "P_OTHER_PROPRIETARY":
-		fallthrough
-	case "X_ERROR_ACCOUNT":
-		*e = CatAccountHolderType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CatAccountHolderType: %v", v)
-	}
 }
 
 // AccountRequestCreate - A single record representing an owner or manager of an Account.

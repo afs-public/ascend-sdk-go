@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // DividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type DividendReinvestmentPlan string
 
@@ -18,23 +13,6 @@ const (
 
 func (e DividendReinvestmentPlan) ToPointer() *DividendReinvestmentPlan {
 	return &e
-}
-func (e *DividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_ENROLL":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_DECLINE":
-		*e = DividendReinvestmentPlan(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DividendReinvestmentPlan: %v", v)
-	}
 }
 
 // FdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -48,23 +26,6 @@ const (
 
 func (e FdicCashSweep) ToPointer() *FdicCashSweep {
 	return &e
-}
-func (e *FdicCashSweep) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
-		fallthrough
-	case "FDIC_CASH_SWEEP_ENROLL":
-		fallthrough
-	case "FDIC_CASH_SWEEP_DECLINE":
-		*e = FdicCashSweep(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FdicCashSweep: %v", v)
-	}
 }
 
 type CorporationEnrollmentMetadataCreate struct {

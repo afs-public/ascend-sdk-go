@@ -3,21 +3,21 @@
 package tests
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
 	"context"
 	"os"
 	"testing"
 
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestSubscriber_SubscriberListPushSubscriptions_AssetsGetAsset1(t *testing.T) {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
 				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
@@ -28,7 +28,7 @@ func TestSubscriber_SubscriberListPushSubscriptions_AssetsGetAsset1(t *testing.T
 	)
 
 	ctx := context.Background()
-	res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdk.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdk.Int(50), ascendsdk.String("ZXhhbXBsZQo"))
+	res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdkgo.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

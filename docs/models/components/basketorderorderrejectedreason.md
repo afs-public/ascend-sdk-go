@@ -30,3 +30,4 @@ When an order has the REJECTED status, this will be populated with a system code
 | `BasketOrderOrderRejectedReasonMaxSellQuantityProhibited`                         | MAX_SELL_QUANTITY_PROHIBITED                                                      |
 | `BasketOrderOrderRejectedReasonStockTradesDisabled`                               | STOCK_TRADES_DISABLED                                                             |
 | `BasketOrderOrderRejectedReasonAssetNotSetUpToTrade`                              | ASSET_NOT_SET_UP_TO_TRADE                                                         |
+| `BasketOrderOrderRejectedReasonAnotherBasketOrderForAccountHasFailedRiskChecks`   | ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS                           |

@@ -4,11 +4,11 @@ package components
 
 // ListSnapshotsResponse - Returns the requested snapshots.
 type ListSnapshotsResponse struct {
-	// The token for retrieving the next page of snapshots.
+	// The token for retrieving the next page of snapshots. This is only returned where total_size is greater than page_size.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-	// The returned snapshots.
+	// The returned snapshots, with pagination and filtering applied.
 	Snapshots []Snapshot `json:"snapshots,omitempty"`
-	// The total number of snapshots to return.
+	// The total number of snapshots matching the request criteria. All available snapshots may not be contained in a single response. If this number is greater than the page_size in the request, pagination will need to be applied to retrieve all snapshots.
 	TotalSize *string `json:"total_size,omitempty"`
 }
 

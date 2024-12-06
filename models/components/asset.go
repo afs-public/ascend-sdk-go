@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // CurrencyType - Indicates the type of currency
 type CurrencyType string
 
@@ -18,23 +13,6 @@ const (
 
 func (e CurrencyType) ToPointer() *CurrencyType {
 	return &e
-}
-func (e *CurrencyType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CURRENCY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CURRENCY":
-		fallthrough
-	case "CURRENCY_EQUIVALENT":
-		*e = CurrencyType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CurrencyType: %v", v)
-	}
 }
 
 // Currency specific asset details
@@ -83,47 +61,6 @@ const (
 func (e AssetEquityType) ToPointer() *AssetEquityType {
 	return &e
 }
-func (e *AssetEquityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EQUITY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "COMMON_STOCK":
-		fallthrough
-	case "PREFERRED_STOCK":
-		fallthrough
-	case "PREFERRED_ADR":
-		fallthrough
-	case "SPECIAL_STOCK":
-		fallthrough
-	case "INDEX":
-		fallthrough
-	case "WARRANT":
-		fallthrough
-	case "ADR":
-		fallthrough
-	case "RIGHTS":
-		fallthrough
-	case "SHARES_OF_BENEFICIAL_INTEREST":
-		fallthrough
-	case "CERTIFICATES":
-		fallthrough
-	case "UNITS":
-		fallthrough
-	case "DEBT_ISSUE":
-		fallthrough
-	case "EQUITY_TYPE_OPTION":
-		fallthrough
-	case "ETF":
-		*e = AssetEquityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AssetEquityType: %v", v)
-	}
-}
 
 // Equity specific asset details
 type Equity struct {
@@ -170,27 +107,6 @@ const (
 func (e CallType) ToPointer() *CallType {
 	return &e
 }
-func (e *CallType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CALL_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ORDINARY":
-		fallthrough
-	case "SPECIAL":
-		fallthrough
-	case "MAKE_WHOLE":
-		fallthrough
-	case "REGULATORY":
-		*e = CallType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CallType: %v", v)
-	}
-}
 
 // CouponFrequency - Frequency of payments
 type CouponFrequency string
@@ -207,31 +123,6 @@ const (
 
 func (e CouponFrequency) ToPointer() *CouponFrequency {
 	return &e
-}
-func (e *CouponFrequency) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "COUPON_FREQUENCY_UNSPECIFIED":
-		fallthrough
-	case "SEMI_ANNUAL":
-		fallthrough
-	case "MONTHLY":
-		fallthrough
-	case "AT_MATURITY":
-		fallthrough
-	case "ZERO":
-		fallthrough
-	case "QUARTERLY":
-		fallthrough
-	case "ANNUAL":
-		*e = CouponFrequency(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CouponFrequency: %v", v)
-	}
 }
 
 // CouponRate - A measure of income an investor can expect to receive expressed as a percent
@@ -258,23 +149,6 @@ const (
 
 func (e CouponType) ToPointer() *CouponType {
 	return &e
-}
-func (e *CouponType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "COUPON_TYPE_UNSPECIFIED":
-		fallthrough
-	case "COUPON_TYPE_FIXED":
-		fallthrough
-	case "COUPON_TYPE_ZERO":
-		*e = CouponType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CouponType: %v", v)
-	}
 }
 
 // Duration - Weighted average time until a bond’s cash flows are received in years
@@ -345,47 +219,6 @@ const (
 func (e FixedIncomeStatus) ToPointer() *FixedIncomeStatus {
 	return &e
 }
-func (e *FixedIncomeStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FIXED_INCOME_STATUS_UNSPECIFIED":
-		fallthrough
-	case "OUTSTANDING":
-		fallthrough
-	case "MATURED":
-		fallthrough
-	case "CALLED":
-		fallthrough
-	case "UNKNOWN":
-		fallthrough
-	case "DEFAULTED":
-		fallthrough
-	case "CONVERTED":
-		fallthrough
-	case "TENDERED":
-		fallthrough
-	case "PRE_ISSUANCE":
-		fallthrough
-	case "LIQUIDATED":
-		fallthrough
-	case "REPURCHASED":
-		fallthrough
-	case "REPAID":
-		fallthrough
-	case "RESTRUCTURED":
-		fallthrough
-	case "PUT":
-		fallthrough
-	case "FUNGED":
-		*e = FixedIncomeStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FixedIncomeStatus: %v", v)
-	}
-}
 
 // FixedIncomeSubtype - The type of treasury
 type FixedIncomeSubtype string
@@ -401,29 +234,6 @@ const (
 
 func (e FixedIncomeSubtype) ToPointer() *FixedIncomeSubtype {
 	return &e
-}
-func (e *FixedIncomeSubtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FIXED_INCOME_SUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "BOND":
-		fallthrough
-	case "STRIPS":
-		fallthrough
-	case "BILL":
-		fallthrough
-	case "NOTE":
-		fallthrough
-	case "TIPS":
-		*e = FixedIncomeSubtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FixedIncomeSubtype: %v", v)
-	}
 }
 
 // FixedIncomeType - Type of fixed income security
@@ -442,33 +252,6 @@ const (
 
 func (e FixedIncomeType) ToPointer() *FixedIncomeType {
 	return &e
-}
-func (e *FixedIncomeType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FIXED_INCOME_TYPE_UNSPECIFIED":
-		fallthrough
-	case "MUNICIPAL":
-		fallthrough
-	case "CORPORATE":
-		fallthrough
-	case "CD":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "TREASURY":
-		fallthrough
-	case "GOVERNMENT":
-		fallthrough
-	case "FOREIGN_GOVERNMENT":
-		*e = FixedIncomeType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FixedIncomeType: %v", v)
-	}
 }
 
 // AssetIssueDate - The date of issuance
@@ -703,77 +486,6 @@ const (
 
 func (e SpRating) ToPointer() *SpRating {
 	return &e
-}
-func (e *SpRating) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SP_RATING_UNSPECIFIED":
-		fallthrough
-	case "AAA":
-		fallthrough
-	case "AA_PLUS":
-		fallthrough
-	case "AA":
-		fallthrough
-	case "AA_MINUS":
-		fallthrough
-	case "A_PLUS":
-		fallthrough
-	case "A":
-		fallthrough
-	case "A_MINUS":
-		fallthrough
-	case "BBB_PLUS":
-		fallthrough
-	case "BBB":
-		fallthrough
-	case "BBB_MINUS":
-		fallthrough
-	case "BB_PLUS":
-		fallthrough
-	case "BB":
-		fallthrough
-	case "BB_MINUS":
-		fallthrough
-	case "B_PLUS":
-		fallthrough
-	case "B":
-		fallthrough
-	case "B_MINUS":
-		fallthrough
-	case "CCC_PLUS":
-		fallthrough
-	case "CCC":
-		fallthrough
-	case "CCC_MINUS":
-		fallthrough
-	case "CC":
-		fallthrough
-	case "C":
-		fallthrough
-	case "D":
-		fallthrough
-	case "NR":
-		fallthrough
-	case "SP_1_PLUS":
-		fallthrough
-	case "SP_1":
-		fallthrough
-	case "SP_1_MINUS":
-		fallthrough
-	case "A_1_PLUS":
-		fallthrough
-	case "A_1":
-		fallthrough
-	case "A_1_MINUS":
-		*e = SpRating(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SpRating: %v", v)
-	}
 }
 
 // SpRatingDate - The date of Standard & Poor's (S&P) rating of the creditworthiness of borrowers. Correspondents must be configured to view this field.
@@ -1062,25 +774,6 @@ const (
 func (e MutualFundType) ToPointer() *MutualFundType {
 	return &e
 }
-func (e *MutualFundType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MUTUAL_FUND_TYPE_UNSPECIFIED":
-		fallthrough
-	case "BOND":
-		fallthrough
-	case "MONEY_MARKET_FUND":
-		fallthrough
-	case "EQUITY":
-		*e = MutualFundType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for MutualFundType: %v", v)
-	}
-}
 
 // MutualFund specific asset details
 type MutualFund struct {
@@ -1138,33 +831,6 @@ const (
 
 func (e AssetType1) ToPointer() *AssetType1 {
 	return &e
-}
-func (e *AssetType1) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		fallthrough
-	case "OPTION":
-		fallthrough
-	case "CURRENCY":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "FDIC_SYNTHETIC":
-		fallthrough
-	case "FIXED_INCOME":
-		fallthrough
-	case "MUTUAL_FUND":
-		*e = AssetType1(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AssetType1: %v", v)
-	}
 }
 
 // Asset is the Apex representation of a security

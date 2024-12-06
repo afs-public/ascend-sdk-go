@@ -3,7 +3,7 @@
 package operations
 
 import (
-	"ascend-sdk/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
 type InvestigationServiceUpdateInvestigationRequest struct {

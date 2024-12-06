@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -18,23 +13,6 @@ const (
 
 func (e ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
-}
-func (e *ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_ENROLL":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_DECLINE":
-		*e = ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
-	}
 }
 
 // ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -48,23 +26,6 @@ const (
 
 func (e ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep) ToPointer() *ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep {
 	return &e
-}
-func (e *ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
-		fallthrough
-	case "FDIC_CASH_SWEEP_ENROLL":
-		fallthrough
-	case "FDIC_CASH_SWEEP_DECLINE":
-		*e = ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep: %v", v)
-	}
 }
 
 type ForeignIndividualAccountEnrollmentMetadataCreate struct {

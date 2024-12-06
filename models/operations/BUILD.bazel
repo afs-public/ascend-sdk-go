@@ -3,7 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "operations",
     srcs = glob(["**/*.go"]),
-    importpath = "ascend-sdk/models/operations",
+    importpath = "github.com/afs-public/ascend-sdk-go/models/operations",
     visibility = ["//visibility:public"],
     deps = [
         "//ascend-sdk/v1/ascend-sdk-go/internal/utils",

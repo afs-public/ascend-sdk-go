@@ -1,0 +1,25 @@
+# Running Go SDK Tests
+
+Run the following commands in your shell:
+
+```
+export SERVICE_ACCOUNT_CREDS_NAME="Apigee_Automation_Test_uat_acnd"
+export SERVICE_ACCOUNT_CREDS_ORGANIZATION="correspondents/00000000-0000-0000-0000-000000000001"
+export SERVICE_ACCOUNT_CREDS_PRIVATE_KEY="-----BEGIN PRIVATE KEY----- ..."
+export API_KEY="..."
+export CORRESPONDENT_ID="00000000-0000-0000-0000-000000000001"
+export ACCOUNT_GROUP_ID="00000000-0000-0000-0000-000000000002"
+```
+
+Replace the values for `SERVICE_ACCOUNT_CREDS_PRIVATE_KEY` with the value in `apex_creds_acnd` in the Client Developer Experience workspace in Postman (under Environments / APIGee - uat).
+Replace the `API_KEY` value with the value of `x-api-key` in the Client Developer Experience Workspace in Postman (under Environments / APIGee - uat).
+
+Navigate to the directory you want to run the tests in. For example
+
+> cd investigations
+
+Run
+
+> bazel run test
+
+to run the tests in that directory.

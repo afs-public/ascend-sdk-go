@@ -3,10 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
-	"encoding/json"
-	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // AgreementSource - An internal indicator from where the agreement was generated; Typically `ACCOUNTS_SERVICE` if accessing our public APIs
@@ -22,25 +21,6 @@ const (
 func (e AgreementSource) ToPointer() *AgreementSource {
 	return &e
 }
-func (e *AgreementSource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AGREEMENT_SOURCE_UNSPECIFIED":
-		fallthrough
-	case "ATLAS_FORM":
-		fallthrough
-	case "OTHER_SOURCE":
-		fallthrough
-	case "ACCOUNTS_SERVICE":
-		*e = AgreementSource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AgreementSource: %v", v)
-	}
-}
 
 // AgreementState - The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or `AFFIRMED` if acknowledgement has been received by AFS
 type AgreementState string
@@ -54,25 +34,6 @@ const (
 
 func (e AgreementState) ToPointer() *AgreementState {
 	return &e
-}
-func (e *AgreementState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AGREEMENT_STATE_UNSPECIFIED":
-		fallthrough
-	case "REQUIRED":
-		fallthrough
-	case "AFFIRMED":
-		fallthrough
-	case "VOIDED":
-		*e = AgreementState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AgreementState: %v", v)
-	}
 }
 
 // Agreement - A legal Agreement for an Account.

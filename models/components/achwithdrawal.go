@@ -3,10 +3,11 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"encoding/json"
 	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // AchWithdrawalAmount - The amount to withdraw in USD. The value should not be set if the withdrawal is `full_disbursement`.

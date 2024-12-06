@@ -1,0 +1,12 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "helpers",
+    srcs = glob(["**/*.go"]),
+    importpath = "ascend-sdk/tests/helpers",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//ascend-sdk/v1/ascend-sdk-go:go_sdk",
+        "//ascend-sdk/v1/ascend-sdk-go/models/components",
+    ],
+)
