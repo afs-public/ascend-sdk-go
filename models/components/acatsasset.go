@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // AssetCategory - The NSCC asset category
 type AssetCategory string
 
@@ -40,67 +35,6 @@ const (
 
 func (e AssetCategory) ToPointer() *AssetCategory {
 	return &e
-}
-func (e *AssetCategory) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_CATEGORY_UNSPECIFIED":
-		fallthrough
-	case "ALTERNATIVE_INVESTMENT":
-		fallthrough
-	case "ANNUITY":
-		fallthrough
-	case "AUCTION_RATE_PREFERRED_UIT":
-		fallthrough
-	case "CD_AND_COMMERCIAL_PAPER":
-		fallthrough
-	case "CORPORATE_BOND":
-		fallthrough
-	case "DEFERRED_SALE_CHARGE_UIT":
-		fallthrough
-	case "EQUITY":
-		fallthrough
-	case "FOREIGN_CURRENCY":
-		fallthrough
-	case "FOREIGN_DEBT":
-		fallthrough
-	case "FOREIGN_EQUITY":
-		fallthrough
-	case "LIFE_INSURANCE":
-		fallthrough
-	case "LIMITED_PARTNERSHIP":
-		fallthrough
-	case "MORTGAGE_BACKED_SECURITY":
-		fallthrough
-	case "MUTUAL_FUND_MONEY_MARKET":
-		fallthrough
-	case "MUTUAL_FUND_NON_MONEY_MARKET":
-		fallthrough
-	case "MUNICIPAL_BOND":
-		fallthrough
-	case "OPTION":
-		fallthrough
-	case "REAL_ESTATE_INVESTMENT_TRUST":
-		fallthrough
-	case "RIGHT":
-		fallthrough
-	case "US_GOVERNMENT":
-		fallthrough
-	case "UNIT_INVESTMENT_TRUST":
-		fallthrough
-	case "UNIT":
-		fallthrough
-	case "WARRANT":
-		fallthrough
-	case "ZERO_COUPON_BOND":
-		*e = AssetCategory(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AssetCategory: %v", v)
-	}
 }
 
 // AcatsAssetQuantity - The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position Fractional amounts only supported for certain asset types
@@ -138,31 +72,11 @@ const (
 	AcatsAssetTypeCusip                     AcatsAssetType = "CUSIP"
 	AcatsAssetTypeSymbol                    AcatsAssetType = "SYMBOL"
 	AcatsAssetTypeIsin                      AcatsAssetType = "ISIN"
+	AcatsAssetTypeAssetID                   AcatsAssetType = "ASSET_ID"
 )
 
 func (e AcatsAssetType) ToPointer() *AcatsAssetType {
 	return &e
-}
-func (e *AcatsAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTIFIER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CURRENCY_CODE":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "SYMBOL":
-		fallthrough
-	case "ISIN":
-		*e = AcatsAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AcatsAssetType: %v", v)
-	}
 }
 
 // AcatsAsset - The asset being transferred If cash, the asset_id is the currency code (e.g. USD) and the position is the amount

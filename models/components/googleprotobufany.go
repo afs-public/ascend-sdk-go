@@ -3,7 +3,7 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // GoogleProtobufAny - Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.

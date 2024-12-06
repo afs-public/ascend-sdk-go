@@ -3,21 +3,21 @@
 package tests
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
 	"context"
 	"os"
 	"testing"
 
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestInvestigations_InvestigationServiceGetInvestigation_GetInvestigation1(t *testing.T) {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
 				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
@@ -34,10 +34,10 @@ func TestInvestigations_InvestigationServiceGetInvestigation_GetInvestigation1(t
 }
 
 func TestInvestigations_InvestigationServiceListInvestigations_ListInvestigations1(t *testing.T) {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
 				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
@@ -48,16 +48,16 @@ func TestInvestigations_InvestigationServiceListInvestigations_ListInvestigation
 	)
 
 	ctx := context.Background()
-	res, err := s.Investigations.ListInvestigations(ctx, ascendsdk.Int(100), nil, ascendsdk.String("investigation_subject.person_investigation.given_name == 'Jane' && investigation_subject.person_investigation.family_name == 'Dough'"))
+	res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(100), nil, ascendsdkgo.String("investigation_subject.person_investigation.given_name == 'Jane' && investigation_subject.person_investigation.family_name == 'Dough'"))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }
 
 func TestInvestigations_WatchlistServiceGetWatchlistItem_GetWatchlistItem1(t *testing.T) {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
 				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),

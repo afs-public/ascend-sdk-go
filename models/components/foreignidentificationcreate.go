@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Type - Identification type
 type Type string
 
@@ -19,25 +14,6 @@ const (
 
 func (e Type) ToPointer() *Type {
 	return &e
-}
-func (e *Type) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTIFICATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PASSPORT":
-		fallthrough
-	case "NATIONAL_ID":
-		fallthrough
-	case "DRIVERS_LICENSE":
-		*e = Type(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Type: %v", v)
-	}
 }
 
 // ForeignIdentificationCreate - Foreign identification

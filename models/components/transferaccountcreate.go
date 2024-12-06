@@ -5,21 +5,21 @@ package components
 // TransferAccountCreate - The delivering/receiving party information
 type TransferAccountCreate struct {
 	// The internal apex account id
-	ApexAccountID string `json:"apex_account_id"`
+	ApexAccountID *string `json:"apex_account_id,omitempty"`
 	// The external account information
-	ExternalAccount ExternalAccountCreate `json:"external_account"`
+	ExternalAccount *ExternalAccountCreate `json:"external_account,omitempty"`
 }
 
-func (o *TransferAccountCreate) GetApexAccountID() string {
+func (o *TransferAccountCreate) GetApexAccountID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.ApexAccountID
 }
 
-func (o *TransferAccountCreate) GetExternalAccount() ExternalAccountCreate {
+func (o *TransferAccountCreate) GetExternalAccount() *ExternalAccountCreate {
 	if o == nil {
-		return ExternalAccountCreate{}
+		return nil
 	}
 	return o.ExternalAccount
 }

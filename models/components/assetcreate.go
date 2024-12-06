@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // AssetCreateType - The asset identifier type
 type AssetCreateType string
 
@@ -16,31 +11,11 @@ const (
 	AssetCreateTypeCusip                     AssetCreateType = "CUSIP"
 	AssetCreateTypeSymbol                    AssetCreateType = "SYMBOL"
 	AssetCreateTypeIsin                      AssetCreateType = "ISIN"
+	AssetCreateTypeAssetID                   AssetCreateType = "ASSET_ID"
 )
 
 func (e AssetCreateType) ToPointer() *AssetCreateType {
 	return &e
-}
-func (e *AssetCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTIFIER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CURRENCY_CODE":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "SYMBOL":
-		fallthrough
-	case "ISIN":
-		*e = AssetCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AssetCreateType: %v", v)
-	}
 }
 
 // AssetCreate - The asset being transferred If cash, the asset_id is the currency code (e.g. USD) and the position is the amount

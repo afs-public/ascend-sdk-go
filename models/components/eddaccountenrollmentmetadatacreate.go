@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // DeterminedAccountRiskRating - The client determined account risk rating of the entity customer
 type DeterminedAccountRiskRating string
 
@@ -19,25 +14,6 @@ const (
 
 func (e DeterminedAccountRiskRating) ToPointer() *DeterminedAccountRiskRating {
 	return &e
-}
-func (e *DeterminedAccountRiskRating) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DETERMINED_ACCOUNT_RISK_RATING_UNSPECIFIED":
-		fallthrough
-	case "LOW":
-		fallthrough
-	case "MEDIUM":
-		fallthrough
-	case "HIGH":
-		*e = DeterminedAccountRiskRating(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DeterminedAccountRiskRating: %v", v)
-	}
 }
 
 // EddAccountEnrollmentMetadataCreate - Enrollment metadata for Entity Accounts

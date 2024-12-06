@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // PrimaryAccountActivityType - The primary account activity type
 type PrimaryAccountActivityType string
 
@@ -19,25 +14,6 @@ const (
 
 func (e PrimaryAccountActivityType) ToPointer() *PrimaryAccountActivityType {
 	return &e
-}
-func (e *PrimaryAccountActivityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PRIMARY_ACCOUNT_ACTIVITY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ACTIVE_TRADING":
-		fallthrough
-	case "SHORT_TERM_INVESTING":
-		fallthrough
-	case "LONG_TERM_INVESTING":
-		*e = PrimaryAccountActivityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PrimaryAccountActivityType: %v", v)
-	}
 }
 
 // WithdrawalFrequency - The frequency by which cash is anticipated to be withdrawn from the account
@@ -52,25 +28,6 @@ const (
 
 func (e WithdrawalFrequency) ToPointer() *WithdrawalFrequency {
 	return &e
-}
-func (e *WithdrawalFrequency) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHDRAWAL_FREQUENCY_UNSPECIFIED":
-		fallthrough
-	case "FREQUENT":
-		fallthrough
-	case "OCCASIONAL":
-		fallthrough
-	case "RARE":
-		*e = WithdrawalFrequency(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WithdrawalFrequency: %v", v)
-	}
 }
 
 // PlannedActivityCreate - Details the customer's intended trading and banking-related activities at the time of account application; informs risk checks and forms a baseline for anomalous activity detection

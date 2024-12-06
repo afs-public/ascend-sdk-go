@@ -3,8 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // AccruedInterestAmount - The amount of accrued interest exchanged in this execution. Will only be present for orders of Fixed Income assets.

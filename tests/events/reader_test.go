@@ -2,7 +2,7 @@ package events
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"testing"
 
@@ -11,7 +11,7 @@ import (
 )
 
 func TestReader(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
 	ctx := context.Background()

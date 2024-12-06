@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // HTTPCallback - The information about an HTTP target callback
 type HTTPCallback struct {
 	// The maximum amount of time, in seconds, the service will wait for an acknowledgement of a delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
@@ -42,27 +37,6 @@ const (
 
 func (e State) ToPointer() *State {
 	return &e
-}
-func (e *State) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PUSH_SUBSCRIPTION_STATE_UNSPECIFIED":
-		fallthrough
-	case "CREATING":
-		fallthrough
-	case "ACTIVE":
-		fallthrough
-	case "UPDATING":
-		fallthrough
-	case "DELETING":
-		*e = State(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for State: %v", v)
-	}
 }
 
 // PushSubscription - Configuration information about a push subscription

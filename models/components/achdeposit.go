@@ -3,10 +3,11 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"encoding/json"
 	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // Amount - The amount to deposit in USD.

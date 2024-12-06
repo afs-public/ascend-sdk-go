@@ -3,10 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
-	"encoding/json"
-	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // AcatsPendingOut - Object containing metadata for pending outgoing acats
@@ -46,29 +45,6 @@ const (
 func (e AccountMemo) ToPointer() *AccountMemo {
 	return &e
 }
-func (e *AccountMemo) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MEMO_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FULLY_PAID_STOCK_LOAN":
-		fallthrough
-	case "FREE":
-		fallthrough
-	case "PENDING_OUTGOING_ACAT":
-		fallthrough
-	case "PENDING_DRIP":
-		fallthrough
-	case "PENDING_WITHDRAWAL":
-		*e = AccountMemo(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountMemo: %v", v)
-	}
-}
 
 // Action - Indicates whether the account transfer is incoming or outgoing
 type Action string
@@ -83,25 +59,6 @@ const (
 func (e Action) ToPointer() *Action {
 	return &e
 }
-func (e *Action) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = Action(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Action: %v", v)
-	}
-}
 
 // Method - the method used for the account transfer
 type Method string
@@ -115,25 +72,6 @@ const (
 
 func (e Method) ToPointer() *Method {
 	return &e
-}
-func (e *Method) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACCOUNT_TRANSFER_METHOD_UNSPECIFIED":
-		fallthrough
-	case "ACATS":
-		fallthrough
-	case "INTERNAL":
-		fallthrough
-	case "MANUAL":
-		*e = Method(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Method: %v", v)
-	}
 }
 
 // AccountTransfer - Object containing metadata for account transfers
@@ -794,83 +732,6 @@ const (
 func (e Subtype) ToPointer() *Subtype {
 	return &e
 }
-func (e *Subtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CORPORATEACTIONSUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "ADDITIONAL_DIVIDEND":
-		fallthrough
-	case "APPROXIMATE_RATE":
-		fallthrough
-	case "DIVIDEND_ARREARS":
-		fallthrough
-	case "DIVIDEND_CANCELLED":
-		fallthrough
-	case "DIVIDEND_PAYMENT_TAX_CLASSIFICATIONS":
-		fallthrough
-	case "DIVIDEND_RESCINDED":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "EXTRA_DIVIDEND":
-		fallthrough
-	case "EXTRA_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "FINAL_PAYMENT_TRANSFER_BOOKS_ARE_CLOSED":
-		fallthrough
-	case "GROSS_RATE":
-		fallthrough
-	case "INITIAL_DIVIDEND":
-		fallthrough
-	case "INITIAL_DIVIDEND_LONG_PERIOD":
-		fallthrough
-	case "INITIAL_DIVIDEND_SHORT_PERIOD":
-		fallthrough
-	case "LIMITED_PARTNERSHIP_DISTRIBUTION":
-		fallthrough
-	case "LIQUIDATION":
-		fallthrough
-	case "NET_RATE":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "PROCEEDS_FROM_SALE_OF_RIGHTS":
-		fallthrough
-	case "REGULAR_DIVIDEND":
-		fallthrough
-	case "RETURN_OF_CAPITAL":
-		fallthrough
-	case "RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "SPECIAL_DIVIDEND":
-		fallthrough
-	case "SPECIAL_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "YEAR_END_DIVIDEND":
-		fallthrough
-	case "YEAR_END_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "PARTIAL":
-		fallthrough
-	case "FULL":
-		fallthrough
-	case "MATURITY":
-		fallthrough
-	case "TERMINATION":
-		fallthrough
-	case "REDEMPTION_OF_WARRANTS":
-		*e = Subtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Subtype: %v", v)
-	}
-}
 
 // CashDividend - Object containing for cash dividends
 type CashDividend struct {
@@ -1103,25 +964,6 @@ const (
 func (e EntryConversionType) ToPointer() *EntryConversionType {
 	return &e
 }
-func (e *EntryConversionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EVENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "STOCK":
-		fallthrough
-	case "CASH_AND_STOCK":
-		*e = EntryConversionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryConversionType: %v", v)
-	}
-}
 
 // Conversion - Object containing metadata for conversions (Conversion of securities into another form of securities)
 type Conversion struct {
@@ -1200,31 +1042,6 @@ const (
 
 func (e CreditType) ToPointer() *CreditType {
 	return &e
-}
-func (e *CreditType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CREDIT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FULLY_PAID_STOCK_LOAN":
-		fallthrough
-	case "WRITE_OFF":
-		fallthrough
-	case "REIMBURSEMENT":
-		fallthrough
-	case "PROMOTIONAL":
-		fallthrough
-	case "FDIC_INSURED_DEPOSIT_PROGRAM":
-		fallthrough
-	case "ACCOUNT_TRANSFER_ADJUSTMENT":
-		*e = CreditType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CreditType: %v", v)
-	}
 }
 
 // Credit - Object containing more information about the credit being paid
@@ -1359,41 +1176,6 @@ const (
 func (e ContributionType) ToPointer() *ContributionType {
 	return &e
 }
-func (e *ContributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CONTRIBUTION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		fallthrough
-	case "CONTRIBUTION_NON_REPORTABLE":
-		*e = ContributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ContributionType: %v", v)
-	}
-}
 
 // EntryDepositType - The mechanism by which funds were deposited
 type EntryDepositType string
@@ -1411,33 +1193,6 @@ const (
 
 func (e EntryDepositType) ToPointer() *EntryDepositType {
 	return &e
-}
-func (e *EntryDepositType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EXTERNAL_MOVEMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ACH":
-		fallthrough
-	case "CHECK":
-		fallthrough
-	case "WIRE":
-		fallthrough
-	case "PAYPAL":
-		fallthrough
-	case "RTP":
-		fallthrough
-	case "ICT":
-		fallthrough
-	case "JOURNAL":
-		*e = EntryDepositType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryDepositType: %v", v)
-	}
 }
 
 // Deposit - Object containing more information about a deposit
@@ -1509,23 +1264,6 @@ const (
 
 func (e EntryAction) ToPointer() *EntryAction {
 	return &e
-}
-func (e *EntryAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DRIP_ACTION_UNSPECIFIED":
-		fallthrough
-	case "DRIP_PENDING":
-		fallthrough
-	case "DRIP_COMPLETE":
-		*e = EntryAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryAction: %v", v)
-	}
 }
 
 // Drip - Object containing metadata for reserving cash until the DRIP trades are executed
@@ -1647,25 +1385,6 @@ const (
 func (e EntryExchangeType) ToPointer() *EntryExchangeType {
 	return &e
 }
-func (e *EntryExchangeType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EVENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "STOCK":
-		fallthrough
-	case "CASH_AND_STOCK":
-		*e = EntryExchangeType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryExchangeType: %v", v)
-	}
-}
 
 // Exchange - Object containing metadata for exchanges
 type Exchange struct {
@@ -1746,77 +1465,6 @@ const (
 func (e EntryFeeType) ToPointer() *EntryFeeType {
 	return &e
 }
-func (e *EntryFeeType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FEE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CLIENT_CLEARING":
-		fallthrough
-	case "LIQUIDITY":
-		fallthrough
-	case "GENERAL_PURPOSE":
-		fallthrough
-	case "COMMISSION":
-		fallthrough
-	case "ORF":
-		fallthrough
-	case "TAF":
-		fallthrough
-	case "SEC":
-		fallthrough
-	case "ACCOUNT_CLOSING":
-		fallthrough
-	case "ACCOUNT_IRA":
-		fallthrough
-	case "ACH_RETURN":
-		fallthrough
-	case "ADVISORY":
-		fallthrough
-	case "CHECK_FEE":
-		fallthrough
-	case "EXCHANGE":
-		fallthrough
-	case "MANAGEMENT":
-		fallthrough
-	case "OVERNIGHT":
-		fallthrough
-	case "PLATFORM":
-		fallthrough
-	case "STATEMENT":
-		fallthrough
-	case "STOP_PAYMENT":
-		fallthrough
-	case "WIRE_FEE":
-		fallthrough
-	case "INACTIVITY":
-		fallthrough
-	case "AMA_SERVICE":
-		fallthrough
-	case "NOTICE_OF_CHANGE":
-		fallthrough
-	case "ACCOUNT_TRANSFER":
-		fallthrough
-	case "AGENCY_PROCESSING":
-		fallthrough
-	case "RTP_FEE":
-		fallthrough
-	case "DOMESTIC_WIRE_DEPOSIT_FEE":
-		fallthrough
-	case "DOMESTIC_WIRE_WITHDRAWAL_FEE":
-		fallthrough
-	case "INTERNATIONAL_WIRE_DEPOSIT_FEE":
-		fallthrough
-	case "INTERNATIONAL_WIRE_WITHDRAWAL_FEE":
-		*e = EntryFeeType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryFeeType: %v", v)
-	}
-}
 
 // EntryFee - Object containing more information about the fee being charged
 type EntryFee struct {
@@ -1852,25 +1500,6 @@ const (
 
 func (e EntryFlipBrokerCapacity) ToPointer() *EntryFlipBrokerCapacity {
 	return &e
-}
-func (e *EntryFlipBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		fallthrough
-	case "MIXED":
-		*e = EntryFlipBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryFlipBrokerCapacity: %v", v)
-	}
 }
 
 // EntryFlipPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
@@ -1924,25 +1553,6 @@ const (
 
 func (e EntryPriceAdjustmentType) ToPointer() *EntryPriceAdjustmentType {
 	return &e
-}
-func (e *EntryPriceAdjustmentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "MARKUP":
-		fallthrough
-	case "MARKDOWN":
-		fallthrough
-	case "SALES_LOAD":
-		*e = EntryPriceAdjustmentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryPriceAdjustmentType: %v", v)
-	}
 }
 
 // EntryPriceAdjustmentRecord - Information about any price adjustments applied to the security
@@ -2239,23 +1849,6 @@ const (
 func (e EntryFpslAction) ToPointer() *EntryFpslAction {
 	return &e
 }
-func (e *EntryFpslAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FPSL_ACTION_UNSPECIFIED":
-		fallthrough
-	case "ALLOCATE":
-		fallthrough
-	case "DEALLOCATE":
-		*e = EntryFpslAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryFpslAction: %v", v)
-	}
-}
 
 // Fpsl - Object containing metadata for fully paid stock lending entries
 type Fpsl struct {
@@ -2355,23 +1948,6 @@ const (
 
 func (e InterestType) ToPointer() *InterestType {
 	return &e
-}
-func (e *InterestType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "INTEREST_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CREDIT":
-		fallthrough
-	case "DEBIT":
-		*e = InterestType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InterestType: %v", v)
-	}
 }
 
 // Interest - Object containing metadata for Margin interest
@@ -2621,25 +2197,6 @@ const (
 func (e EntryLiquidationAction) ToPointer() *EntryLiquidationAction {
 	return &e
 }
-func (e *EntryLiquidationAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = EntryLiquidationAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryLiquidationAction: %v", v)
-	}
-}
 
 // EntryLiquidationCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type EntryLiquidationCashRate struct {
@@ -2881,83 +2438,6 @@ const (
 
 func (e EntrySubtype) ToPointer() *EntrySubtype {
 	return &e
-}
-func (e *EntrySubtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CORPORATEACTIONSUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "ADDITIONAL_DIVIDEND":
-		fallthrough
-	case "APPROXIMATE_RATE":
-		fallthrough
-	case "DIVIDEND_ARREARS":
-		fallthrough
-	case "DIVIDEND_CANCELLED":
-		fallthrough
-	case "DIVIDEND_PAYMENT_TAX_CLASSIFICATIONS":
-		fallthrough
-	case "DIVIDEND_RESCINDED":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "EXTRA_DIVIDEND":
-		fallthrough
-	case "EXTRA_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "FINAL_PAYMENT_TRANSFER_BOOKS_ARE_CLOSED":
-		fallthrough
-	case "GROSS_RATE":
-		fallthrough
-	case "INITIAL_DIVIDEND":
-		fallthrough
-	case "INITIAL_DIVIDEND_LONG_PERIOD":
-		fallthrough
-	case "INITIAL_DIVIDEND_SHORT_PERIOD":
-		fallthrough
-	case "LIMITED_PARTNERSHIP_DISTRIBUTION":
-		fallthrough
-	case "LIQUIDATION":
-		fallthrough
-	case "NET_RATE":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "PROCEEDS_FROM_SALE_OF_RIGHTS":
-		fallthrough
-	case "REGULAR_DIVIDEND":
-		fallthrough
-	case "RETURN_OF_CAPITAL":
-		fallthrough
-	case "RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "SPECIAL_DIVIDEND":
-		fallthrough
-	case "SPECIAL_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "YEAR_END_DIVIDEND":
-		fallthrough
-	case "YEAR_END_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "PARTIAL":
-		fallthrough
-	case "FULL":
-		fallthrough
-	case "MATURITY":
-		fallthrough
-	case "TERMINATION":
-		fallthrough
-	case "REDEMPTION_OF_WARRANTS":
-		*e = EntrySubtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntrySubtype: %v", v)
-	}
 }
 
 // Liquidation - Object containing metadata for liquidations
@@ -3222,25 +2702,6 @@ const (
 func (e EntryMergerAction) ToPointer() *EntryMergerAction {
 	return &e
 }
-func (e *EntryMergerAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = EntryMergerAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryMergerAction: %v", v)
-	}
-}
 
 // EntryMergerCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type EntryMergerCashRate struct {
@@ -3392,25 +2853,6 @@ const (
 func (e EntryMergerType) ToPointer() *EntryMergerType {
 	return &e
 }
-func (e *EntryMergerType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EVENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "STOCK":
-		fallthrough
-	case "CASH_AND_STOCK":
-		*e = EntryMergerType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryMergerType: %v", v)
-	}
-}
 
 // Merger - Object containing metadata for merger events
 type Merger struct {
@@ -3491,25 +2933,6 @@ const (
 
 func (e EntryNameChangeAction) ToPointer() *EntryNameChangeAction {
 	return &e
-}
-func (e *EntryNameChangeAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = EntryNameChangeAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryNameChangeAction: %v", v)
-	}
 }
 
 // EntryNameChangeCorporateActionGeneralInformation - Common fields for corporate actions
@@ -3972,25 +3395,6 @@ const (
 func (e EntryRedemptionFullAction) ToPointer() *EntryRedemptionFullAction {
 	return &e
 }
-func (e *EntryRedemptionFullAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = EntryRedemptionFullAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryRedemptionFullAction: %v", v)
-	}
-}
 
 // EntryRedemptionFullCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type EntryRedemptionFullCashRate struct {
@@ -4158,83 +3562,6 @@ const (
 func (e EntryRedemptionFullSubtype) ToPointer() *EntryRedemptionFullSubtype {
 	return &e
 }
-func (e *EntryRedemptionFullSubtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CORPORATEACTIONSUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "ADDITIONAL_DIVIDEND":
-		fallthrough
-	case "APPROXIMATE_RATE":
-		fallthrough
-	case "DIVIDEND_ARREARS":
-		fallthrough
-	case "DIVIDEND_CANCELLED":
-		fallthrough
-	case "DIVIDEND_PAYMENT_TAX_CLASSIFICATIONS":
-		fallthrough
-	case "DIVIDEND_RESCINDED":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "EXTRA_DIVIDEND":
-		fallthrough
-	case "EXTRA_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "FINAL_PAYMENT_TRANSFER_BOOKS_ARE_CLOSED":
-		fallthrough
-	case "GROSS_RATE":
-		fallthrough
-	case "INITIAL_DIVIDEND":
-		fallthrough
-	case "INITIAL_DIVIDEND_LONG_PERIOD":
-		fallthrough
-	case "INITIAL_DIVIDEND_SHORT_PERIOD":
-		fallthrough
-	case "LIMITED_PARTNERSHIP_DISTRIBUTION":
-		fallthrough
-	case "LIQUIDATION":
-		fallthrough
-	case "NET_RATE":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "PROCEEDS_FROM_SALE_OF_RIGHTS":
-		fallthrough
-	case "REGULAR_DIVIDEND":
-		fallthrough
-	case "RETURN_OF_CAPITAL":
-		fallthrough
-	case "RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "SPECIAL_DIVIDEND":
-		fallthrough
-	case "SPECIAL_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "YEAR_END_DIVIDEND":
-		fallthrough
-	case "YEAR_END_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "PARTIAL":
-		fallthrough
-	case "FULL":
-		fallthrough
-	case "MATURITY":
-		fallthrough
-	case "TERMINATION":
-		fallthrough
-	case "REDEMPTION_OF_WARRANTS":
-		*e = EntryRedemptionFullSubtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryRedemptionFullSubtype: %v", v)
-	}
-}
 
 // RedemptionFull - Object containing more information about a redemption
 type RedemptionFull struct {
@@ -4306,25 +3633,6 @@ const (
 
 func (e EntryRedemptionPartialAction) ToPointer() *EntryRedemptionPartialAction {
 	return &e
-}
-func (e *EntryRedemptionPartialAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = EntryRedemptionPartialAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryRedemptionPartialAction: %v", v)
-	}
 }
 
 // EntryRedemptionPartialCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
@@ -4512,25 +3820,6 @@ const (
 
 func (e EntryReverseStockSplitAction) ToPointer() *EntryReverseStockSplitAction {
 	return &e
-}
-func (e *EntryReverseStockSplitAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = EntryReverseStockSplitAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryReverseStockSplitAction: %v", v)
-	}
 }
 
 // EntryReverseStockSplitCorporateActionGeneralInformation - Common fields for corporate actions
@@ -5272,23 +4561,6 @@ const (
 func (e EntrySide) ToPointer() *EntrySide {
 	return &e
 }
-func (e *EntrySide) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_UNSPECIFIED":
-		fallthrough
-	case "BUY":
-		fallthrough
-	case "SELL":
-		*e = EntrySide(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntrySide: %v", v)
-	}
-}
 
 // SideModifier - Additional information about a trade Should be populated if possible for trades; the side modifier for the trade
 type SideModifier string
@@ -5304,29 +4576,6 @@ const (
 
 func (e SideModifier) ToPointer() *SideModifier {
 	return &e
-}
-func (e *SideModifier) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_MODIFIER_UNSPECIFIED":
-		fallthrough
-	case "SHORT":
-		fallthrough
-	case "SHORT_EXEMPT":
-		fallthrough
-	case "SHORT_COVER":
-		fallthrough
-	case "OPEN":
-		fallthrough
-	case "CLOSE":
-		*e = SideModifier(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SideModifier: %v", v)
-	}
 }
 
 // EntrySpinOffCorporateActionGeneralInformation - Common fields for corporate actions
@@ -5545,25 +4794,6 @@ const (
 
 func (e EntryState) ToPointer() *EntryState {
 	return &e
-}
-func (e *EntryState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTRY_STATE_UNSPECIFIED":
-		fallthrough
-	case "NEW":
-		fallthrough
-	case "REVERSAL":
-		fallthrough
-	case "CORRECTION":
-		*e = EntryState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryState: %v", v)
-	}
 }
 
 // EntryStockDividendCorporateActionGeneralInformation - Common fields for corporate actions
@@ -6008,23 +5238,6 @@ const (
 func (e EntrySweepAction) ToPointer() *EntrySweepAction {
 	return &e
 }
-func (e *EntrySweepAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SWEEP_ACTION_UNSPECIFIED":
-		fallthrough
-	case "PURCHASE":
-		fallthrough
-	case "REDEMPTION":
-		*e = EntrySweepAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntrySweepAction: %v", v)
-	}
-}
 
 // EntrySweepType - Sweep program that cash is being swept to/ from
 type EntrySweepType string
@@ -6037,23 +5250,6 @@ const (
 
 func (e EntrySweepType) ToPointer() *EntrySweepType {
 	return &e
-}
-func (e *EntrySweepType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SWEEP_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FDIC":
-		fallthrough
-	case "MONEY_MARKET":
-		*e = EntrySweepType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntrySweepType: %v", v)
-	}
 }
 
 // Sweep - Object containing metadata for sweeps
@@ -6202,25 +5398,6 @@ const (
 func (e EntryBrokerCapacity) ToPointer() *EntryBrokerCapacity {
 	return &e
 }
-func (e *EntryBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		fallthrough
-	case "MIXED":
-		*e = EntryBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryBrokerCapacity: %v", v)
-	}
-}
 
 // EntryPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
 type EntryPrevailingMarketPrice struct {
@@ -6273,25 +5450,6 @@ const (
 
 func (e PriceAdjustmentType) ToPointer() *PriceAdjustmentType {
 	return &e
-}
-func (e *PriceAdjustmentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "MARKUP":
-		fallthrough
-	case "MARKDOWN":
-		fallthrough
-	case "SALES_LOAD":
-		*e = PriceAdjustmentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PriceAdjustmentType: %v", v)
-	}
 }
 
 // PriceAdjustmentRecord - Information about any price adjustments applied to the security
@@ -6577,27 +5735,6 @@ const (
 func (e EntryTransferType) ToPointer() *EntryTransferType {
 	return &e
 }
-func (e *EntryTransferType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TRANSFER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TRANSFER_CONVERSION":
-		fallthrough
-	case "DECONVERSION":
-		fallthrough
-	case "MIGRATION":
-		fallthrough
-	case "MANUAL_ADJUSTMENT":
-		*e = EntryTransferType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryTransferType: %v", v)
-	}
-}
 
 // Transfer - Object containing metadata for transfers
 type Transfer struct {
@@ -6643,27 +5780,6 @@ const (
 
 func (e EntryType) ToPointer() *EntryType {
 	return &e
-}
-func (e *EntryType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "TRADE":
-		fallthrough
-	case "MOVEMENT":
-		fallthrough
-	case "MEMO":
-		fallthrough
-	case "CORPORATE_ACTION":
-		*e = EntryType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryType: %v", v)
-	}
 }
 
 // EntryUnitSplitCorporateActionGeneralInformation - Common fields for corporate actions
@@ -6878,59 +5994,6 @@ const (
 func (e DistributionType) ToPointer() *DistributionType {
 	return &e
 }
-func (e *DistributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DISTRIBUTION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DIST_TRANSFER":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DIST_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "NET_INCOME_ATTRIBUTABLE":
-		fallthrough
-	case "REVOCATION":
-		fallthrough
-	case "NON_REPORTABLE":
-		*e = DistributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DistributionType: %v", v)
-	}
-}
 
 // RetirementType - Used for descriptive purposes only. Indicates the type of retirement account
 type RetirementType string
@@ -6949,33 +6012,6 @@ const (
 func (e RetirementType) ToPointer() *RetirementType {
 	return &e
 }
-func (e *RetirementType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RETIREMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "IRA":
-		fallthrough
-	case "SEP":
-		fallthrough
-	case "SIMPLE":
-		fallthrough
-	case "KEOGH":
-		fallthrough
-	case "ROTH":
-		fallthrough
-	case "QP":
-		fallthrough
-	case "ROLLOVER_IRA":
-		*e = RetirementType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetirementType: %v", v)
-	}
-}
 
 // EntryWithdrawalType - Provides information on the method through which a deposit/ withdrawal was initiated
 type EntryWithdrawalType string
@@ -6993,33 +6029,6 @@ const (
 
 func (e EntryWithdrawalType) ToPointer() *EntryWithdrawalType {
 	return &e
-}
-func (e *EntryWithdrawalType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EXTERNAL_MOVEMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ACH":
-		fallthrough
-	case "CHECK":
-		fallthrough
-	case "WIRE":
-		fallthrough
-	case "PAYPAL":
-		fallthrough
-	case "RTP":
-		fallthrough
-	case "ICT":
-		fallthrough
-	case "JOURNAL":
-		*e = EntryWithdrawalType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryWithdrawalType: %v", v)
-	}
 }
 
 // Withdrawal - Object containing metadata for withdrawals
@@ -7136,23 +6145,6 @@ const (
 func (e Review) ToPointer() *Review {
 	return &e
 }
-func (e *Review) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "REVIEW_STATE_UNSPECIFIED":
-		fallthrough
-	case "REVIEW_STATE_PENDING":
-		fallthrough
-	case "REVIEW_STATE_COMPLETE":
-		*e = Review(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Review: %v", v)
-	}
-}
 
 // WithdrawalPendingReview - Object containing metadata about withdrawals that have been requested, but have not posted
 type WithdrawalPendingReview struct {
@@ -7239,119 +6231,6 @@ const (
 func (e EntryWithholdingState) ToPointer() *EntryWithholdingState {
 	return &e
 }
-func (e *EntryWithholdingState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_STATE_UNSPECIFIED":
-		fallthrough
-	case "CA":
-		fallthrough
-	case "ME":
-		fallthrough
-	case "VT":
-		fallthrough
-	case "AL":
-		fallthrough
-	case "AK":
-		fallthrough
-	case "AZ":
-		fallthrough
-	case "AR":
-		fallthrough
-	case "CO":
-		fallthrough
-	case "CT":
-		fallthrough
-	case "DE":
-		fallthrough
-	case "FL":
-		fallthrough
-	case "GA":
-		fallthrough
-	case "HI":
-		fallthrough
-	case "ID":
-		fallthrough
-	case "IL":
-		fallthrough
-	case "IN":
-		fallthrough
-	case "IA":
-		fallthrough
-	case "KS":
-		fallthrough
-	case "KY":
-		fallthrough
-	case "LA":
-		fallthrough
-	case "MD":
-		fallthrough
-	case "MA":
-		fallthrough
-	case "MI":
-		fallthrough
-	case "MN":
-		fallthrough
-	case "MS":
-		fallthrough
-	case "MO":
-		fallthrough
-	case "MT":
-		fallthrough
-	case "NE":
-		fallthrough
-	case "NV":
-		fallthrough
-	case "NH":
-		fallthrough
-	case "NJ":
-		fallthrough
-	case "NM":
-		fallthrough
-	case "NY":
-		fallthrough
-	case "NC":
-		fallthrough
-	case "ND":
-		fallthrough
-	case "OH":
-		fallthrough
-	case "OK":
-		fallthrough
-	case "OR":
-		fallthrough
-	case "PA":
-		fallthrough
-	case "RI":
-		fallthrough
-	case "SC":
-		fallthrough
-	case "SD":
-		fallthrough
-	case "TN":
-		fallthrough
-	case "TX":
-		fallthrough
-	case "UT":
-		fallthrough
-	case "VA":
-		fallthrough
-	case "WA":
-		fallthrough
-	case "WV":
-		fallthrough
-	case "WI":
-		fallthrough
-	case "WY":
-		*e = EntryWithholdingState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryWithholdingState: %v", v)
-	}
-}
 
 // EntryWithholdingType - The type of withholding
 type EntryWithholdingType string
@@ -7368,31 +6247,6 @@ const (
 
 func (e EntryWithholdingType) ToPointer() *EntryWithholdingType {
 	return &e
-}
-func (e *EntryWithholdingType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FEDERAL":
-		fallthrough
-	case "STATE":
-		fallthrough
-	case "FOREIGN_SECURITY":
-		fallthrough
-	case "FEDERAL_IRA":
-		fallthrough
-	case "STATE_IRA":
-		fallthrough
-	case "NON_RESIDENT_ALIEN":
-		*e = EntryWithholdingType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntryWithholdingType: %v", v)
-	}
 }
 
 // EntryWithholding - Object containing metadata for tax withholdings

@@ -2,12 +2,13 @@ package events
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -40,7 +41,7 @@ func subscriberId(s *ascendsdk.SDK, ctx context.Context, t *testing.T) string {
 func TestSubscriber(t *testing.T) {
 	ctx := context.Background()
 
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
 	subscriberId := subscriberId(sdk, context.Background(), t)

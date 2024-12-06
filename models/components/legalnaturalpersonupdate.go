@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // LegalNaturalPersonUpdateMaritalStatus - The legal marital status of an account-holder; Used in combination with state of domicile to determine qualification for account types and beneficiary exclusion rules.
 type LegalNaturalPersonUpdateMaritalStatus string
 
@@ -20,27 +15,6 @@ const (
 
 func (e LegalNaturalPersonUpdateMaritalStatus) ToPointer() *LegalNaturalPersonUpdateMaritalStatus {
 	return &e
-}
-func (e *LegalNaturalPersonUpdateMaritalStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MARITAL_STATUS_UNSPECIFIED":
-		fallthrough
-	case "SINGLE":
-		fallthrough
-	case "MARRIED":
-		fallthrough
-	case "DIVORCED":
-		fallthrough
-	case "WIDOWED":
-		*e = LegalNaturalPersonUpdateMaritalStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalNaturalPersonUpdateMaritalStatus: %v", v)
-	}
 }
 
 // LegalNaturalPersonUpdateNameSuffix - The suffix of a natural person; A suffix in a name is any part of the name that comes after the last name
@@ -58,29 +32,6 @@ const (
 func (e LegalNaturalPersonUpdateNameSuffix) ToPointer() *LegalNaturalPersonUpdateNameSuffix {
 	return &e
 }
-func (e *LegalNaturalPersonUpdateNameSuffix) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "NAME_SUFFIX_UNSPECIFIED":
-		fallthrough
-	case "SR":
-		fallthrough
-	case "JR":
-		fallthrough
-	case "III":
-		fallthrough
-	case "IV":
-		fallthrough
-	case "V":
-		*e = LegalNaturalPersonUpdateNameSuffix(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalNaturalPersonUpdateNameSuffix: %v", v)
-	}
-}
 
 // LegalNaturalPersonUpdateTaxIDType - The nature of the U.S. Tax ID indicated in the related tax_id field; Examples include ITIN, SSN, EIN.
 type LegalNaturalPersonUpdateTaxIDType string
@@ -94,25 +45,6 @@ const (
 
 func (e LegalNaturalPersonUpdateTaxIDType) ToPointer() *LegalNaturalPersonUpdateTaxIDType {
 	return &e
-}
-func (e *LegalNaturalPersonUpdateTaxIDType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TAX_ID_TYPE_SSN":
-		fallthrough
-	case "TAX_ID_TYPE_ITIN":
-		fallthrough
-	case "TAX_ID_TYPE_EIN":
-		*e = LegalNaturalPersonUpdateTaxIDType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LegalNaturalPersonUpdateTaxIDType: %v", v)
-	}
 }
 
 // LegalNaturalPersonUpdate - A legal natural person. This represents the full set of data for an individual. A Customer Identification Program (CIP) may be run on legal natural persons.

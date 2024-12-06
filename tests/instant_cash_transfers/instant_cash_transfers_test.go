@@ -2,13 +2,14 @@ package instant_cash_transfers
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 
 	"github.com/stretchr/testify/require"
 
@@ -17,7 +18,7 @@ import (
 )
 
 func TestInstantCashTransfer(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 	ctx := context.Background()
 	accountId := "01J7XASQ2EGHNVENARVENT2HTG"

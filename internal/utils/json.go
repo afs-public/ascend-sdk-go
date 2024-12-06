@@ -13,7 +13,7 @@ import (
 	"time"
 	"unsafe"
 
-	"ascend-sdk/types"
+	"github.com/afs-public/ascend-sdk-go/types"
 
 	"github.com/ericlagergren/decimal"
 )

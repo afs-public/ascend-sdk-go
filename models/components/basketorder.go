@@ -3,10 +3,11 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"encoding/json"
 	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // BasketOrderAssetType - The type of the asset in this order
@@ -119,6 +120,7 @@ const (
 	BasketOrderOrderRejectedReasonMaxSellQuantityProhibited                         BasketOrderOrderRejectedReason = "MAX_SELL_QUANTITY_PROHIBITED"
 	BasketOrderOrderRejectedReasonStockTradesDisabled                               BasketOrderOrderRejectedReason = "STOCK_TRADES_DISABLED"
 	BasketOrderOrderRejectedReasonAssetNotSetUpToTrade                              BasketOrderOrderRejectedReason = "ASSET_NOT_SET_UP_TO_TRADE"
+	BasketOrderOrderRejectedReasonAnotherBasketOrderForAccountHasFailedRiskChecks   BasketOrderOrderRejectedReason = "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS"
 )
 
 func (e BasketOrderOrderRejectedReason) ToPointer() *BasketOrderOrderRejectedReason {
@@ -175,6 +177,8 @@ func (e *BasketOrderOrderRejectedReason) UnmarshalJSON(data []byte) error {
 	case "STOCK_TRADES_DISABLED":
 		fallthrough
 	case "ASSET_NOT_SET_UP_TO_TRADE":
+		fallthrough
+	case "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS":
 		*e = BasketOrderOrderRejectedReason(v)
 		return nil
 	default:

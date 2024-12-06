@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type ResidencyStatus string
 
 const (
@@ -18,25 +13,6 @@ const (
 
 func (e ResidencyStatus) ToPointer() *ResidencyStatus {
 	return &e
-}
-func (e *ResidencyStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RESIDENCY_STATUS_UNSPECIFIED":
-		fallthrough
-	case "US_PERMANENT_RESIDENT":
-		fallthrough
-	case "US_TEMPORARY_RESIDENT":
-		fallthrough
-	case "US_NON_RESIDENT":
-		*e = ResidencyStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ResidencyStatus: %v", v)
-	}
 }
 
 // NonCitizenResidencyCreate - Non Citizenship Residency to facilitate non-Citizen lawful US residents to open domestic accounts.

@@ -1,7 +1,6 @@
 package hooks
 
 import (
-	"ascend-sdk/models/components"
 	"bytes"
 	"crypto/x509"
 	"encoding/base64"
@@ -13,6 +12,8 @@ import (
 	"net/url"
 	"strings"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/dgrijalva/jwt-go"
 )

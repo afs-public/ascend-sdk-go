@@ -2,10 +2,11 @@ package ach_transfers
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"strings"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
@@ -19,7 +20,7 @@ func TestAchTransfers(t *testing.T) {
 	accountId := "01J5T7W3T7PYCYCH4YQADAQ7VD"
 	bankRelationshipId := "66c5c6bd8603496314c4678f"
 	ctx := context.Background()
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 	achDepositId := testAchTransfers_TransfersCreateAchDeposit_CreateAchDeposit1(t, *sdk, ctx, accountId, bankRelationshipId)
 	testAchTransfers_TransfersGetAchDeposit_GetAchDeposit1(t, *sdk, ctx, accountId, achDepositId)

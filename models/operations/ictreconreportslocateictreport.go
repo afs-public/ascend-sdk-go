@@ -3,9 +3,10 @@
 package operations
 
 import (
-	"ascend-sdk/models/components"
 	"encoding/json"
 	"fmt"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
 // ProgramDateFilterProgram - The ICT program for which to locate the report.

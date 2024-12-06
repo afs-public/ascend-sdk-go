@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // PersonIdentificationType - Tax id type (e.g. ssn)
 type PersonIdentificationType string
 
@@ -14,27 +9,14 @@ const (
 	PersonIdentificationTypeIDTypeUnspecified PersonIdentificationType = "ID_TYPE_UNSPECIFIED"
 	PersonIdentificationTypeSsn               PersonIdentificationType = "SSN"
 	PersonIdentificationTypeItin              PersonIdentificationType = "ITIN"
+	PersonIdentificationTypeFtin              PersonIdentificationType = "FTIN"
+	PersonIdentificationTypeNationalID        PersonIdentificationType = "NATIONAL_ID"
+	PersonIdentificationTypePassport          PersonIdentificationType = "PASSPORT"
+	PersonIdentificationTypeDrivingLicense    PersonIdentificationType = "DRIVING_LICENSE"
 )
 
 func (e PersonIdentificationType) ToPointer() *PersonIdentificationType {
 	return &e
-}
-func (e *PersonIdentificationType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "SSN":
-		fallthrough
-	case "ITIN":
-		*e = PersonIdentificationType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PersonIdentificationType: %v", v)
-	}
 }
 
 // PersonIdentification - stores various identification types

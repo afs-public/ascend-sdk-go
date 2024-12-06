@@ -3,10 +3,11 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"encoding/json"
 	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // ProcessDate - The process date of the batch associated with the report.

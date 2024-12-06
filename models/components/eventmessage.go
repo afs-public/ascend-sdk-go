@@ -3,8 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // EventMessage - Represents an envelope and the data of an event

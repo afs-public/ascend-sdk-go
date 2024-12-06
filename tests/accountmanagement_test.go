@@ -3,22 +3,22 @@
 package tests
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
 	"context"
 	"os"
 	"testing"
 
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestAccountManagement_AccountsListAccounts_ListAccounts1(t *testing.T) {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
 				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
@@ -30,10 +30,10 @@ func TestAccountManagement_AccountsListAccounts_ListAccounts1(t *testing.T) {
 
 	ctx := context.Background()
 	res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{
-		PageSize:  ascendsdk.Int(25),
-		PageToken: ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
-		OrderBy:   ascendsdk.String("state"),
-		Filter:    ascendsdk.String("account_number == \"R9AHY8P\""),
+		PageSize:  ascendsdkgo.Int(25),
+		PageToken: ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
+		OrderBy:   ascendsdkgo.String("state"),
+		Filter:    ascendsdkgo.String("account_number == \"R9AHY8P\""),
 		View:      operations.ViewFull.ToPointer(),
 	})
 	require.NoError(t, err)

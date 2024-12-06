@@ -2,13 +2,14 @@ package transfers
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"os"
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
@@ -17,7 +18,7 @@ import (
 )
 
 func TestScheduleTransfers(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 	accountId := os.Getenv("account_id")
 	bankRelationshipId := os.Getenv("bank_relationship_id")

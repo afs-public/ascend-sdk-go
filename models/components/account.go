@@ -3,10 +3,9 @@
 package components
 
 import (
-	"ascend-sdk/internal/utils"
-	"encoding/json"
-	"fmt"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
 // AccountCatAccountHolderType - The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
@@ -27,35 +26,6 @@ const (
 func (e AccountCatAccountHolderType) ToPointer() *AccountCatAccountHolderType {
 	return &e
 }
-func (e *AccountCatAccountHolderType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CAT_ACCOUNT_HOLDER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "A_INSTITUTIONAL_CUSTOMER":
-		fallthrough
-	case "E_EMPLOYEE_ACCOUNT":
-		fallthrough
-	case "F_FOREIGN":
-		fallthrough
-	case "I_INDIVIDUAL":
-		fallthrough
-	case "O_MARKET_MAKING":
-		fallthrough
-	case "V_AGENCY_AVERAGE_PRICE_ACCOUNT":
-		fallthrough
-	case "P_OTHER_PROPRIETARY":
-		fallthrough
-	case "X_ERROR_ACCOUNT":
-		*e = AccountCatAccountHolderType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountCatAccountHolderType: %v", v)
-	}
-}
 
 // Domicile - Indicates if the account is `DOMESTIC` or `FOREIGN`
 type Domicile string
@@ -68,23 +38,6 @@ const (
 
 func (e Domicile) ToPointer() *Domicile {
 	return &e
-}
-func (e *Domicile) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DOMICILE_UNSPECIFIED":
-		fallthrough
-	case "DOMESTIC":
-		fallthrough
-	case "FOREIGN":
-		*e = Domicile(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Domicile: %v", v)
-	}
 }
 
 // FinraCoaCode - The FINRA COA code associated with the account
@@ -160,145 +113,6 @@ const (
 func (e FinraCoaCode) ToPointer() *FinraCoaCode {
 	return &e
 }
-func (e *FinraCoaCode) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FINRA_COA_CODE_UNSPECIFIED":
-		fallthrough
-	case "CAT_01_CUSTOMER_DVP_RVP":
-		fallthrough
-	case "CAT_02_CUSTOMER_MANAGED_ACCOUNTS":
-		fallthrough
-	case "CAT_03_CUSTOMER_IRA_ACCOUNTS":
-		fallthrough
-	case "CAT_04_CUSTOMER_EMPLOYEE":
-		fallthrough
-	case "CAT_05_CUSTOMER_PRIME_BROKER":
-		fallthrough
-	case "CAT_06_CUSTOMER_AFFILIATE_NON_BD":
-		fallthrough
-	case "CAT_07_CUSTOMER_OMNIBUS":
-		fallthrough
-	case "CAT_08_CUSTOMER":
-		fallthrough
-	case "CAT_09_NON_CUSTOMER_OFFICER_DIRECTOR":
-		fallthrough
-	case "CAT_10_NON_CUSTOMER_OFFICER_DIRECTOR_OR_FAMILY_MEMBERS":
-		fallthrough
-	case "CAT_11_NON_CUSTOMER_AFFILIATE_BD":
-		fallthrough
-	case "CAT_12_NON_CUSTOMER_OMNIBUS":
-		fallthrough
-	case "CAT_13_NON_CUSTOMER":
-		fallthrough
-	case "CAT_14_PAIB":
-		fallthrough
-	case "CAT_15_FIRM_INVENTORY":
-		fallthrough
-	case "CAT_16_CNS_FAILS":
-		fallthrough
-	case "CAT_17_OTHER_CLEARING_CORP_FAILS":
-		fallthrough
-	case "CAT_18_EXECUTING_PRIME_BROKER":
-		fallthrough
-	case "CAT_19_BROKER_FAILS_TO_RECEIVE":
-		fallthrough
-	case "CAT_20_BROKER_FAILS_TO_DELIVER":
-		fallthrough
-	case "CAT_21_BROKER_FAILS":
-		fallthrough
-	case "CAT_22_FAIL_TO_DELIVER_GREATER_THAN_30_DAYS":
-		fallthrough
-	case "CAT_23_SECURITIES_BORROWED":
-		fallthrough
-	case "CAT_24_SECURITIES_BORROWED_NON_CASH":
-		fallthrough
-	case "CAT_25_SECURITIES_BORROWED_CONDUIT":
-		fallthrough
-	case "CAT_26_SECURITIES_LOANED":
-		fallthrough
-	case "CAT_27_SECURITIES_LOANED_NON_CASH":
-		fallthrough
-	case "CAT_28_SECURITIES_LOANED_CONDUIT":
-		fallthrough
-	case "CAT_29_SECURITIES_LOANED_CNS":
-		fallthrough
-	case "CAT_30_REVERSE_REPO":
-		fallthrough
-	case "CAT_31_REVERSE_REPO_TRI_PARTY":
-		fallthrough
-	case "CAT_32_REPO":
-		fallthrough
-	case "CAT_33_REPO_HOLD_IN_CUSTODY":
-		fallthrough
-	case "CAT_34_REPO_TRI_PARTY":
-		fallthrough
-	case "CAT_35_BANK_LOAN_FIRM":
-		fallthrough
-	case "CAT_36_BANK_LOAN_CUSTOMER":
-		fallthrough
-	case "CAT_37_BANK_LOAN_NON_CUSTOMER":
-		fallthrough
-	case "CAT_38_BANK_LOAN_PAIB":
-		fallthrough
-	case "CAT_39_SUSPENSE":
-		fallthrough
-	case "CAT_40_REORGANIZATIONS":
-		fallthrough
-	case "CAT_41_STOCK_DIVIDENDS":
-		fallthrough
-	case "CAT_42_ABANDONED_PROPERTY":
-		fallthrough
-	case "CAT_43_PHYSICAL_BOX":
-		fallthrough
-	case "CAT_44_LEGAL_BOX":
-		fallthrough
-	case "CAT_45_SAFEKEEPING":
-		fallthrough
-	case "CAT_46_15C3_3_DEPOSIT":
-		fallthrough
-	case "CAT_47_DOMESTIC_DEPOSITORY_CONTROL":
-		fallthrough
-	case "CAT_48_FOREIGN_DEPOSITORY_CONTROL":
-		fallthrough
-	case "CAT_49_DOMESTIC_DEPOSITORY_NON_CONTROL":
-		fallthrough
-	case "CAT_50_FOREIGN_DEPOSITORY_NON_CONTROL":
-		fallthrough
-	case "CAT_51_TRANSFER_CONTROL":
-		fallthrough
-	case "CAT_52_TRANSFER_NON_CONTROL":
-		fallthrough
-	case "CAT_53_TRANSFER_LEGAL":
-		fallthrough
-	case "CAT_54_IN_TRANSIT_CONTROL":
-		fallthrough
-	case "CAT_55_IN_TRANSIT_NON_CONTROL":
-		fallthrough
-	case "CAT_56_CLEARING_DOMESTIC":
-		fallthrough
-	case "CAT_57_CLEARING_FOREIGN":
-		fallthrough
-	case "CAT_58_TEST_ACCOUNT":
-		fallthrough
-	case "CAT_59_OUT_OF_BALANCE":
-		fallthrough
-	case "CAT_60_CONVERSION":
-		fallthrough
-	case "CAT_61_DEPOSITS_OCC_MARGIN":
-		fallthrough
-	case "CAT_62_DEPOSITS_OTHER":
-		fallthrough
-	case "CAT_63_OTHER":
-		*e = FinraCoaCode(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FinraCoaCode: %v", v)
-	}
-}
 
 // FundingType - Describes if the account is cash-only or has access to a form of margin
 type FundingType string
@@ -313,27 +127,6 @@ const (
 
 func (e FundingType) ToPointer() *FundingType {
 	return &e
-}
-func (e *FundingType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FUNDING_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "MARGIN_LIMITED_PURPOSE":
-		fallthrough
-	case "MARGIN_REG_T":
-		fallthrough
-	case "MARGIN_PORTFOLIO":
-		*e = FundingType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FundingType: %v", v)
-	}
 }
 
 // AccountInvestmentObjective - The financial goal or purpose that an investor has in mind when making investment decisions; firms often ask investors to specify their investment objectives when opening an account, in order to provide appropriate investment recommendations and manage risk appropriately
@@ -359,45 +152,6 @@ const (
 func (e AccountInvestmentObjective) ToPointer() *AccountInvestmentObjective {
 	return &e
 }
-func (e *AccountInvestmentObjective) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "INVESTMENT_OBJECTIVE_UNSPECIFIED":
-		fallthrough
-	case "BALANCED":
-		fallthrough
-	case "CAPITAL_APPRECIATION":
-		fallthrough
-	case "CAPITAL_PRESERVATION":
-		fallthrough
-	case "GROWTH":
-		fallthrough
-	case "GROWTH_AND_INCOME":
-		fallthrough
-	case "GROWTH_INCOME":
-		fallthrough
-	case "INCOME":
-		fallthrough
-	case "LONG_TERM_GROWTH_WITH_GREATER_RISK":
-		fallthrough
-	case "LONG_TERM_GROWTH_WITH_SAFETY":
-		fallthrough
-	case "MAXIMUM_GROWTH":
-		fallthrough
-	case "SHORT_TERM_GROWTH_WITH_RISK":
-		fallthrough
-	case "SPECULATION":
-		fallthrough
-	case "OTHER":
-		*e = AccountInvestmentObjective(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountInvestmentObjective: %v", v)
-	}
-}
 
 // AccountLiquidityNeeds - An investor’s short-term cash requirements or the need to access funds quickly; it is important to consider an investor’s liquidity needs to ensure that they have sufficient cash or easily liquidated assets available to meet their financial obligations - this may include holding cash or cash equivalents
 type AccountLiquidityNeeds string
@@ -411,25 +165,6 @@ const (
 
 func (e AccountLiquidityNeeds) ToPointer() *AccountLiquidityNeeds {
 	return &e
-}
-func (e *AccountLiquidityNeeds) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "LIQUIDITY_NEEDS_UNSPECIFIED":
-		fallthrough
-	case "VERY_IMPORTANT":
-		fallthrough
-	case "SOMEWHAT_IMPORTANT":
-		fallthrough
-	case "NOT_IMPORTANT":
-		*e = AccountLiquidityNeeds(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountLiquidityNeeds: %v", v)
-	}
 }
 
 // AccountRiskTolerance - An investor’s willingness and ability to tolerate risk when making investment decisions; reflects the investor’s comfort level with the potential ups and downs of the market and their ability to withstand potential losses
@@ -445,25 +180,6 @@ const (
 func (e AccountRiskTolerance) ToPointer() *AccountRiskTolerance {
 	return &e
 }
-func (e *AccountRiskTolerance) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RISK_TOLERANCE_UNSPECIFIED":
-		fallthrough
-	case "LOW":
-		fallthrough
-	case "MEDIUM":
-		fallthrough
-	case "HIGH":
-		*e = AccountRiskTolerance(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountRiskTolerance: %v", v)
-	}
-}
 
 // AccountTimeHorizon - TThe length of time an investor expects to hold an investment before selling it; this can affect the appropriate asset allocation and risk level for the portfolio
 type AccountTimeHorizon string
@@ -477,25 +193,6 @@ const (
 
 func (e AccountTimeHorizon) ToPointer() *AccountTimeHorizon {
 	return &e
-}
-func (e *AccountTimeHorizon) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TIME_HORIZON_UNSPECIFIED":
-		fallthrough
-	case "SHORT":
-		fallthrough
-	case "AVERAGE":
-		fallthrough
-	case "LONG":
-		*e = AccountTimeHorizon(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountTimeHorizon: %v", v)
-	}
 }
 
 // AccountGoals - Account goals.
@@ -557,37 +254,6 @@ const (
 func (e AccountAnnualIncomeRangeUsd) ToPointer() *AccountAnnualIncomeRangeUsd {
 	return &e
 }
-func (e *AccountAnnualIncomeRangeUsd) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "USD_RANGE_UNSPECIFIED":
-		fallthrough
-	case "UNDER_25K":
-		fallthrough
-	case "FROM_25K_TO_50K":
-		fallthrough
-	case "FROM_50K_TO_100K":
-		fallthrough
-	case "FROM_100K_TO_200K":
-		fallthrough
-	case "FROM_200K_TO_300K":
-		fallthrough
-	case "FROM_300K_TO_500K":
-		fallthrough
-	case "FROM_500K_TO_1M":
-		fallthrough
-	case "FROM_1M_TO_5M":
-		fallthrough
-	case "OVER_5M":
-		*e = AccountAnnualIncomeRangeUsd(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountAnnualIncomeRangeUsd: %v", v)
-	}
-}
 
 // AccountInvestmentExperience - Investment experience.
 type AccountInvestmentExperience string
@@ -602,27 +268,6 @@ const (
 
 func (e AccountInvestmentExperience) ToPointer() *AccountInvestmentExperience {
 	return &e
-}
-func (e *AccountInvestmentExperience) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "INVESTMENT_EXPERIENCE_UNSPECIFIED":
-		fallthrough
-	case "NONE":
-		fallthrough
-	case "LIMITED":
-		fallthrough
-	case "GOOD":
-		fallthrough
-	case "EXTENSIVE":
-		*e = AccountInvestmentExperience(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountInvestmentExperience: %v", v)
-	}
 }
 
 // AccountLiquidNetWorthRangeUsd - Liquid net worth range; the low number is exclusive, the high number is inclusive
@@ -644,37 +289,6 @@ const (
 func (e AccountLiquidNetWorthRangeUsd) ToPointer() *AccountLiquidNetWorthRangeUsd {
 	return &e
 }
-func (e *AccountLiquidNetWorthRangeUsd) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "USD_RANGE_UNSPECIFIED":
-		fallthrough
-	case "UNDER_25K":
-		fallthrough
-	case "FROM_25K_TO_50K":
-		fallthrough
-	case "FROM_50K_TO_100K":
-		fallthrough
-	case "FROM_100K_TO_200K":
-		fallthrough
-	case "FROM_200K_TO_300K":
-		fallthrough
-	case "FROM_300K_TO_500K":
-		fallthrough
-	case "FROM_500K_TO_1M":
-		fallthrough
-	case "FROM_1M_TO_5M":
-		fallthrough
-	case "OVER_5M":
-		*e = AccountLiquidNetWorthRangeUsd(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountLiquidNetWorthRangeUsd: %v", v)
-	}
-}
 
 // AccountTotalNetWorthRangeUsd - Total net worth range; the low number is exclusive, the high number is inclusive
 type AccountTotalNetWorthRangeUsd string
@@ -694,37 +308,6 @@ const (
 
 func (e AccountTotalNetWorthRangeUsd) ToPointer() *AccountTotalNetWorthRangeUsd {
 	return &e
-}
-func (e *AccountTotalNetWorthRangeUsd) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "USD_RANGE_UNSPECIFIED":
-		fallthrough
-	case "UNDER_25K":
-		fallthrough
-	case "FROM_25K_TO_50K":
-		fallthrough
-	case "FROM_50K_TO_100K":
-		fallthrough
-	case "FROM_100K_TO_200K":
-		fallthrough
-	case "FROM_200K_TO_300K":
-		fallthrough
-	case "FROM_300K_TO_500K":
-		fallthrough
-	case "FROM_500K_TO_1M":
-		fallthrough
-	case "FROM_1M_TO_5M":
-		fallthrough
-	case "OVER_5M":
-		*e = AccountTotalNetWorthRangeUsd(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountTotalNetWorthRangeUsd: %v", v)
-	}
 }
 
 // CustomerProfile - Customer profile.
@@ -824,33 +407,6 @@ const (
 func (e OwnershipType) ToPointer() *OwnershipType {
 	return &e
 }
-func (e *OwnershipType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "OWNERSHIP_TYPE_UNSPECIFIED":
-		fallthrough
-	case "INDIVIDUAL":
-		fallthrough
-	case "JOINT":
-		fallthrough
-	case "ESTATE":
-		fallthrough
-	case "RETIREMENT":
-		fallthrough
-	case "TRUST":
-		fallthrough
-	case "ENTITY":
-		fallthrough
-	case "MINOR":
-		*e = OwnershipType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OwnershipType: %v", v)
-	}
-}
 
 // RegistrationType - The registration of the account (e.g. Individual, Joint, IRA, etc.)
 type RegistrationType string
@@ -881,57 +437,6 @@ const (
 func (e RegistrationType) ToPointer() *RegistrationType {
 	return &e
 }
-func (e *RegistrationType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "REGISTRATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "INDIVIDUAL_REGISTRATION":
-		fallthrough
-	case "ESTATE_REGISTRATION":
-		fallthrough
-	case "TRADITIONAL_IRA_REGISTRATION":
-		fallthrough
-	case "SIMPLE_IRA_REGISTRATION":
-		fallthrough
-	case "SEP_IRA_REGISTRATION":
-		fallthrough
-	case "ROTH_IRA_REGISTRATION":
-		fallthrough
-	case "ROLLOVER_IRA_REGISTRATION":
-		fallthrough
-	case "JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION":
-		fallthrough
-	case "JOINT_TENANTS_IN_COMMON_REGISTRATION":
-		fallthrough
-	case "JOINT_TENANTS_BY_ENTIRETY_REGISTRATION":
-		fallthrough
-	case "JOINT_COMMUNITY_PROPERTY_REGISTRATION":
-		fallthrough
-	case "TRUST_REGISTRATION":
-		fallthrough
-	case "CORPORATION_REGISTRATION":
-		fallthrough
-	case "LLC_REGISTRATION":
-		fallthrough
-	case "PARTNERSHIP_REGISTRATION":
-		fallthrough
-	case "OPERATING_REGISTRATION":
-		fallthrough
-	case "IRA_BENEFICIARY_TRADITIONAL_REGISTRATION":
-		fallthrough
-	case "IRA_BENEFICIARY_ROTH_REGISTRATION":
-		fallthrough
-	case "CUSTODIAL_REGISTRATION":
-		*e = RegistrationType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RegistrationType: %v", v)
-	}
-}
 
 // ReserveClass - The Reserve Class associated with the account
 type ReserveClass string
@@ -948,29 +453,6 @@ const (
 func (e ReserveClass) ToPointer() *ReserveClass {
 	return &e
 }
-func (e *ReserveClass) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RESERVE_CLASS_UNSPECIFIED":
-		fallthrough
-	case "CUSTOMER":
-		fallthrough
-	case "PAB":
-		fallthrough
-	case "FIRM":
-		fallthrough
-	case "STREET":
-		fallthrough
-	case "G_L":
-		*e = ReserveClass(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ReserveClass: %v", v)
-	}
-}
 
 // AccountState - Indicates if the account is `OPEN`, `PENDING`, or `CLOSED`
 type AccountState string
@@ -984,25 +466,6 @@ const (
 
 func (e AccountState) ToPointer() *AccountState {
 	return &e
-}
-func (e *AccountState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PENDING":
-		fallthrough
-	case "OPEN":
-		fallthrough
-	case "CLOSED":
-		*e = AccountState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountState: %v", v)
-	}
 }
 
 // AccountCostBasisLotDisposalMethod - A method of determining the cost basis of an asset that has been sold or disposed of, by identifying which specific lot of the asset was sold and using the cost of that lot to calculate the cost basis; this method is commonly used for tax purposes to determine the amount of reportable capital gains or losses By default, this is set to `COST_BASIS_LOT_DISPOSAL_MIN_TAX_TERM`
@@ -1023,37 +486,6 @@ const (
 
 func (e AccountCostBasisLotDisposalMethod) ToPointer() *AccountCostBasisLotDisposalMethod {
 	return &e
-}
-func (e *AccountCostBasisLotDisposalMethod) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "COST_BASIS_LOT_DISPOSAL_METHOD_UNSPECIFIED":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_FIFO":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_LIFO":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_HIGH_COST":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_HIGH_COST_LONG_TERM":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_HIGH_COST_SHORT_TERM":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_LOW_COST":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_LOW_COST_LONG_TERM":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_LOW_COST_SHORT_TERM":
-		fallthrough
-	case "COST_BASIS_LOT_DISPOSAL_MIN_TAX_TERM":
-		*e = AccountCostBasisLotDisposalMethod(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AccountCostBasisLotDisposalMethod: %v", v)
-	}
 }
 
 // AccountTaxProfile - Tax-related attributes for the account; A tax profile with taxpayer attributes is located on the `legal_natural_person` or `legal_entity` objects elsewhere on the account record

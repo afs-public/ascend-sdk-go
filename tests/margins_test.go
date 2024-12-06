@@ -3,21 +3,21 @@
 package tests
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
 	"context"
 	"os"
 	"testing"
 
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
 func TestMargins_MarginsRealTimeGetBuyingPower_GetBuyingPower1(t *testing.T) {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
 				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),

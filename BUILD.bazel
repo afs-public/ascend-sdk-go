@@ -7,7 +7,7 @@ go_library(
         exclude = [
             "**/*_test.go",
             "**/files.go",
-            "**/utils.go",
+            "**/tests/helpers/*",
         ],
     ),
     importpath = "ascend-sdk",

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TaxAuthority - Tax Authority for Enrollment
 type TaxAuthority string
 
@@ -68,121 +63,6 @@ const (
 func (e TaxAuthority) ToPointer() *TaxAuthority {
 	return &e
 }
-func (e *TaxAuthority) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_AUTHORITY_UNSPECIFIED":
-		fallthrough
-	case "AL":
-		fallthrough
-	case "AK":
-		fallthrough
-	case "AZ":
-		fallthrough
-	case "AR":
-		fallthrough
-	case "CA":
-		fallthrough
-	case "CO":
-		fallthrough
-	case "CT":
-		fallthrough
-	case "DE":
-		fallthrough
-	case "FL":
-		fallthrough
-	case "GA":
-		fallthrough
-	case "HI":
-		fallthrough
-	case "ID":
-		fallthrough
-	case "IL":
-		fallthrough
-	case "IN":
-		fallthrough
-	case "IA":
-		fallthrough
-	case "KS":
-		fallthrough
-	case "KY":
-		fallthrough
-	case "LA":
-		fallthrough
-	case "ME":
-		fallthrough
-	case "MD":
-		fallthrough
-	case "MA":
-		fallthrough
-	case "MI":
-		fallthrough
-	case "MN":
-		fallthrough
-	case "MS":
-		fallthrough
-	case "MO":
-		fallthrough
-	case "MT":
-		fallthrough
-	case "NE":
-		fallthrough
-	case "NV":
-		fallthrough
-	case "NH":
-		fallthrough
-	case "NJ":
-		fallthrough
-	case "NM":
-		fallthrough
-	case "NY":
-		fallthrough
-	case "NC":
-		fallthrough
-	case "ND":
-		fallthrough
-	case "OH":
-		fallthrough
-	case "OK":
-		fallthrough
-	case "OR":
-		fallthrough
-	case "PA":
-		fallthrough
-	case "RI":
-		fallthrough
-	case "SC":
-		fallthrough
-	case "SD":
-		fallthrough
-	case "TN":
-		fallthrough
-	case "TX":
-		fallthrough
-	case "UT":
-		fallthrough
-	case "VT":
-		fallthrough
-	case "VA":
-		fallthrough
-	case "WA":
-		fallthrough
-	case "WV":
-		fallthrough
-	case "WI":
-		fallthrough
-	case "WY":
-		fallthrough
-	case "IRS":
-		*e = TaxAuthority(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TaxAuthority: %v", v)
-	}
-}
 
 // WithholdingType - A designation used by the custodian to determine how much federal income tax should be withheld from the proceeds of a sale
 type WithholdingType string
@@ -197,27 +77,6 @@ const (
 
 func (e WithholdingType) ToPointer() *WithholdingType {
 	return &e
-}
-func (e *WithholdingType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_TYPE_UNSPECIFIED":
-		fallthrough
-	case "BACKUP":
-		fallthrough
-	case "BACKUP_PROCEEDS":
-		fallthrough
-	case "BACKUP_DIVIDENDS_AND_INTEREST":
-		fallthrough
-	case "IRA":
-		*e = WithholdingType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WithholdingType: %v", v)
-	}
 }
 
 // TaxWithholdingMetadataCreate - Enrollment metadata for TAX_WITHHOLDING operating purpose

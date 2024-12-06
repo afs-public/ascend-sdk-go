@@ -3,9 +3,10 @@
 package operations
 
 import (
-	"ascend-sdk/models/components"
 	"encoding/json"
 	"fmt"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
 // State - The state of bank relationships to filter by. Unspecified returns relationships of all states.

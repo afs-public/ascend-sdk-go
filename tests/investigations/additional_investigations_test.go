@@ -2,10 +2,11 @@ package tests
 
 import (
 	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/tests"
+	"ascend-sdk/tests/helpers"
 	"context"
 	"testing"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
@@ -13,7 +14,7 @@ import (
 )
 
 func TestInvestigationServiceUpdate(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
 	ctx := context.Background()
@@ -31,7 +32,7 @@ func testInvestigationServiceUpdate(t *testing.T, sdk *ascendsdk.SDK, ctx contex
 }
 
 func TestInvestigationServiceLinkDocuments(t *testing.T) {
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
 	ctx := context.Background()
