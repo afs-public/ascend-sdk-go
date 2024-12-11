@@ -23,17 +23,17 @@ Creates a new order for equity or fixed income securities.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"ascend-sdk/types"
+	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -53,7 +53,7 @@ func main() {
             Type: components.CommissionCreateTypeAmount,
             Value: components.DecimalCreate{},
         },
-        CurrencyCode: ascendsdk.String("USD"),
+        CurrencyCode: ascendsdkgo.String("USD"),
         Identifier: "SBUX",
         IdentifierType: components.IdentifierTypeSymbol,
         LimitPrice: &components.LimitPriceCreate{
@@ -114,16 +114,16 @@ Gets an order by order ID.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -176,16 +176,16 @@ Submits an order cancellation request by order ID. Confirmation of order cancell
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

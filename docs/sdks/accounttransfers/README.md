@@ -18,16 +18,16 @@ Creates a transfer
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -62,16 +62,16 @@ func main() {
                 Type: components.AssetCreateTypeCusip,
             },
         },
-        Comment: ascendsdk.String("From XYZ Brokerage"),
+        Comment: ascendsdkgo.String("From XYZ Brokerage"),
         Deliverer: components.TransferAccountCreate{
-            ApexAccountID: "01H8FB90ZRRFWXB4XC2JPJ1D4Y",
-            ExternalAccount: components.ExternalAccountCreate{
+            ApexAccountID: ascendsdkgo.String("01H8FB90ZRRFWXB4XC2JPJ1D4Y"),
+            ExternalAccount: &components.ExternalAccountCreate{
                 AccountNumber: "1234567890",
                 ParticipantNumber: "987",
             },
         },
-        OriginalControlNumber: ascendsdk.String("20240201123456"),
-    }, ascendsdk.String("ABC-123"))
+        OriginalControlNumber: ascendsdkgo.String("20240201123456"),
+    }, ascendsdkgo.String("ABC-123"))
     if err != nil {
         log.Fatal(err)
     }
@@ -113,16 +113,16 @@ Gets an existing transfer
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

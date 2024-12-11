@@ -33,16 +33,16 @@ Forces approval of an existing ACH deposit that is pending review. FOR TESTING O
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -96,16 +96,16 @@ Forces a Nacha notice of change (NOC) on a completed ACH deposit. FOR TESTING ON
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -119,9 +119,9 @@ func main() {
     res, err := s.TestSimulation.ForceNocAchDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceNocAchDepositRequestCreate{
         NachaNoc: components.NachaNocCreate{
             Code: components.CodeC01,
-            UpdatedBankAccountNumber: ascendsdk.String("12345678"),
+            UpdatedBankAccountNumber: ascendsdkgo.String("12345678"),
             UpdatedBankAccountType: components.UpdatedBankAccountTypeSavings.ToPointer(),
-            UpdatedBankRoutingNumber: ascendsdk.String("100100123"),
+            UpdatedBankRoutingNumber: ascendsdkgo.String("100100123"),
         },
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319",
     })
@@ -165,16 +165,16 @@ Forces rejection of an existing ACH deposit that is pending review. FOR TESTING 
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -228,16 +228,16 @@ Forces a Nacha return on a completed ACH deposit. FOR TESTING ONLY!
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -294,16 +294,16 @@ Forces approval of an existing ACH withdrawal that is pending review. FOR TESTIN
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -357,16 +357,16 @@ Forces a Nacha notice of change (NOC) on a completed ACH withdrawal. FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -380,9 +380,9 @@ func main() {
     res, err := s.TestSimulation.ForceNocAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230620500726", components.ForceNocAchWithdrawalRequestCreate{
         NachaNoc: components.NachaNocCreate{
             Code: components.CodeC01,
-            UpdatedBankAccountNumber: ascendsdk.String("12345678"),
+            UpdatedBankAccountNumber: ascendsdkgo.String("12345678"),
             UpdatedBankAccountType: components.UpdatedBankAccountTypeSavings.ToPointer(),
-            UpdatedBankRoutingNumber: ascendsdk.String("100100123"),
+            UpdatedBankRoutingNumber: ascendsdkgo.String("100100123"),
         },
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726",
     })
@@ -426,16 +426,16 @@ Forces rejection of an existing ACH withdrawal that is pending review. FOR TESTI
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -489,16 +489,16 @@ Forces a Nacha return on a completed ACH withdrawal. FOR TESTING ONLY!
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -555,16 +555,16 @@ Gets micro deposit amounts for bank relationships with the `MICRO_DEPOSIT` verif
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -615,16 +615,16 @@ Forces an approval on an existing ICT deposit pending review - FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -678,16 +678,16 @@ Forces a rejection on an existing ICT deposit pending review - FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -741,16 +741,16 @@ Forces an approval on an existing ICT withdrawal pending review - FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -804,16 +804,16 @@ Forces a rejection on an existing ICT withdrawal pending review - FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -867,16 +867,16 @@ Forces an approval on an existing wire withdrawal pending review - FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -930,16 +930,16 @@ Forces a rejection on an existing wire withdrawal pending review - FOR TESTING
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -952,7 +952,7 @@ func main() {
     ctx := context.Background()
     res, err := s.TestSimulation.ForceRejectWireWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceRejectWireWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319",
-        Reason: ascendsdk.String("Simulate a rejected transfer"),
+        Reason: ascendsdkgo.String("Simulate a rejected transfer"),
     })
     if err != nil {
         log.Fatal(err)
@@ -994,16 +994,16 @@ Forces approval of an existing cash journal that is pending review FOR TESTING O
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -1056,16 +1056,16 @@ Forces rejection of an existing cash journal that is pending review FOR TESTING 
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -1078,7 +1078,7 @@ func main() {
     ctx := context.Background()
     res, err := s.TestSimulation.ForceRejectCashJournal(ctx, "20230817000319", components.ForceRejectCashJournalRequestCreate{
         Name: "cashJournals/20230817000319",
-        Reason: ascendsdk.String("Forced rejection test"),
+        Reason: ascendsdkgo.String("Forced rejection test"),
     })
     if err != nil {
         log.Fatal(err)

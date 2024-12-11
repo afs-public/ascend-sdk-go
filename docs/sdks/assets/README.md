@@ -20,16 +20,16 @@ Lists assets
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -40,7 +40,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Assets.ListAssets(ctx, ascendsdk.String("correspondents/1234"), ascendsdk.Int(100), ascendsdk.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdk.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
+    res, err := s.Assets.ListAssets(ctx, ascendsdkgo.String("correspondents/1234"), ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
     if err != nil {
         log.Fatal(err)
     }
@@ -82,16 +82,16 @@ Gets assets
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -141,16 +141,16 @@ Lists assets
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -161,7 +161,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Assets.ListAssetsCorrespondent(ctx, "1234", ascendsdk.Int(100), ascendsdk.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdk.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
+    res, err := s.Assets.ListAssetsCorrespondent(ctx, "1234", ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
     if err != nil {
         log.Fatal(err)
     }
@@ -203,16 +203,16 @@ Gets assets
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

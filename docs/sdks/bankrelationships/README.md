@@ -23,16 +23,16 @@ Creates a bank relationship.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -51,7 +51,7 @@ func main() {
             Type: components.BankAccountCreateTypeChecking,
         },
         Nickname: "My Primary Bank",
-        PlaidProcessorToken: ascendsdk.String("processor-sandbox-b03434a75-801-4000-990c-eb404cc"),
+        PlaidProcessorToken: ascendsdkgo.String("processor-sandbox-b03434a75-801-4000-990c-eb404cc"),
         VerificationMethod: components.VerificationMethodMicroDeposit,
     })
     if err != nil {
@@ -93,17 +93,17 @@ Lists bank relationships for an account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"ascend-sdk/models/operations"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -114,7 +114,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.BankRelationships.ListBankRelationships(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdk.Int(100), ascendsdk.String("CMFRGgYQup3BhQgaCSkAQCKS7AAAAA=="), operations.StateApproved.ToPointer())
+    res, err := s.BankRelationships.ListBankRelationships(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.Int(100), ascendsdkgo.String("CMFRGgYQup3BhQgaCSkAQCKS7AAAAA=="), operations.StateApproved.ToPointer())
     if err != nil {
         log.Fatal(err)
     }
@@ -156,16 +156,16 @@ Gets an existing bank relationship.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -216,16 +216,16 @@ Updates an existing bank relationship.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -238,14 +238,14 @@ func main() {
     ctx := context.Background()
     res, err := s.BankRelationships.UpdateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.BankRelationshipUpdate{
         BankAccount: &components.BankAccountUpdate{
-            AccountNumber: ascendsdk.String("100100123"),
-            Owner: ascendsdk.String("John Doe"),
-            RoutingNumber: ascendsdk.String("12345678"),
+            AccountNumber: ascendsdkgo.String("100100123"),
+            Owner: ascendsdkgo.String("John Doe"),
+            RoutingNumber: ascendsdkgo.String("12345678"),
             Type: components.BankAccountUpdateTypeChecking.ToPointer(),
         },
-        Nickname: ascendsdk.String("My Primary Bank"),
-        PlaidProcessorToken: ascendsdk.String("processor-sandbox-b03434a75-801-4000-990c-eb404cc"),
-    }, ascendsdk.String("{\"update_mask\":{\"paths\":[\"nickname\"]}}"))
+        Nickname: ascendsdkgo.String("My Primary Bank"),
+        PlaidProcessorToken: ascendsdkgo.String("processor-sandbox-b03434a75-801-4000-990c-eb404cc"),
+    }, ascendsdkgo.String("{\"update_mask\":{\"paths\":[\"nickname\"]}}"))
     if err != nil {
         log.Fatal(err)
     }
@@ -287,16 +287,16 @@ Cancels an existing bank relationship.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -351,16 +351,16 @@ Verifies a pending bank relationship with the `MICRO_DEPOSIT` verification metho
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -418,16 +418,16 @@ Reissues micro deposits after micro deposit verification has failed. The user sh
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

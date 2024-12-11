@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // EmploymentStatus - Classifies in what capacity (or if) the underlying natural person holds a job
 type EmploymentStatus string
 
@@ -16,6 +21,29 @@ const (
 
 func (e EmploymentStatus) ToPointer() *EmploymentStatus {
 	return &e
+}
+func (e *EmploymentStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "STATUS_UNSPECIFIED":
+		fallthrough
+	case "EMPLOYED":
+		fallthrough
+	case "SELF_EMPLOYED":
+		fallthrough
+	case "UNEMPLOYED":
+		fallthrough
+	case "RETIRED":
+		fallthrough
+	case "STUDENT":
+		*e = EmploymentStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EmploymentStatus: %v", v)
+	}
 }
 
 // EmploymentCreate - Object containing information pertaining to a investor's current employer including the name, address, and duration of employment.

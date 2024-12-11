@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // BeneficiaryCreateEntityType - The entity type of the beneficiary; Required if the beneficiary is a legal entity.
 type BeneficiaryCreateEntityType string
 
@@ -18,6 +23,31 @@ const (
 func (e BeneficiaryCreateEntityType) ToPointer() *BeneficiaryCreateEntityType {
 	return &e
 }
+func (e *BeneficiaryCreateEntityType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ENTITY_TYPE_UNSPECIFIED":
+		fallthrough
+	case "CORPORATION":
+		fallthrough
+	case "LIMITED_LIABILITY_COMPANY":
+		fallthrough
+	case "PARTNERSHIP":
+		fallthrough
+	case "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC":
+		fallthrough
+	case "TRUST":
+		fallthrough
+	case "ESTATE":
+		*e = BeneficiaryCreateEntityType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for BeneficiaryCreateEntityType: %v", v)
+	}
+}
 
 // BeneficiaryCreateRelationType - The relationship of the beneficiary to the account owner
 type BeneficiaryCreateRelationType string
@@ -32,6 +62,25 @@ const (
 func (e BeneficiaryCreateRelationType) ToPointer() *BeneficiaryCreateRelationType {
 	return &e
 }
+func (e *BeneficiaryCreateRelationType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "RELATION_TYPE_UNSPECIFIED":
+		fallthrough
+	case "SPOUSE":
+		fallthrough
+	case "TRUST":
+		fallthrough
+	case "OTHER":
+		*e = BeneficiaryCreateRelationType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for BeneficiaryCreateRelationType: %v", v)
+	}
+}
 
 // BeneficiaryCreateTaxIDType - The nature of the U.S. Tax ID indicated in the related tax_id field; Examples include ITIN, SSN, EIN. Tax id type is required if birth date is not provided.
 type BeneficiaryCreateTaxIDType string
@@ -45,6 +94,25 @@ const (
 
 func (e BeneficiaryCreateTaxIDType) ToPointer() *BeneficiaryCreateTaxIDType {
 	return &e
+}
+func (e *BeneficiaryCreateTaxIDType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_ID_TYPE_UNSPECIFIED":
+		fallthrough
+	case "TAX_ID_TYPE_SSN":
+		fallthrough
+	case "TAX_ID_TYPE_ITIN":
+		fallthrough
+	case "TAX_ID_TYPE_EIN":
+		*e = BeneficiaryCreateTaxIDType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for BeneficiaryCreateTaxIDType: %v", v)
+	}
 }
 
 // BeneficiaryCreate - The beneficiary for transfer on death.

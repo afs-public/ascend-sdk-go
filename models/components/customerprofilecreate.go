@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // AnnualIncomeRangeUsd - Annual income range; the low number is exclusive, the high number is inclusive
 type AnnualIncomeRangeUsd string
 
@@ -21,6 +26,37 @@ const (
 func (e AnnualIncomeRangeUsd) ToPointer() *AnnualIncomeRangeUsd {
 	return &e
 }
+func (e *AnnualIncomeRangeUsd) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USD_RANGE_UNSPECIFIED":
+		fallthrough
+	case "UNDER_25K":
+		fallthrough
+	case "FROM_25K_TO_50K":
+		fallthrough
+	case "FROM_50K_TO_100K":
+		fallthrough
+	case "FROM_100K_TO_200K":
+		fallthrough
+	case "FROM_200K_TO_300K":
+		fallthrough
+	case "FROM_300K_TO_500K":
+		fallthrough
+	case "FROM_500K_TO_1M":
+		fallthrough
+	case "FROM_1M_TO_5M":
+		fallthrough
+	case "OVER_5M":
+		*e = AnnualIncomeRangeUsd(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AnnualIncomeRangeUsd: %v", v)
+	}
+}
 
 // InvestmentExperience - Investment experience.
 type InvestmentExperience string
@@ -35,6 +71,27 @@ const (
 
 func (e InvestmentExperience) ToPointer() *InvestmentExperience {
 	return &e
+}
+func (e *InvestmentExperience) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "INVESTMENT_EXPERIENCE_UNSPECIFIED":
+		fallthrough
+	case "NONE":
+		fallthrough
+	case "LIMITED":
+		fallthrough
+	case "GOOD":
+		fallthrough
+	case "EXTENSIVE":
+		*e = InvestmentExperience(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InvestmentExperience: %v", v)
+	}
 }
 
 // LiquidNetWorthRangeUsd - Liquid net worth range; the low number is exclusive, the high number is inclusive
@@ -56,6 +113,37 @@ const (
 func (e LiquidNetWorthRangeUsd) ToPointer() *LiquidNetWorthRangeUsd {
 	return &e
 }
+func (e *LiquidNetWorthRangeUsd) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USD_RANGE_UNSPECIFIED":
+		fallthrough
+	case "UNDER_25K":
+		fallthrough
+	case "FROM_25K_TO_50K":
+		fallthrough
+	case "FROM_50K_TO_100K":
+		fallthrough
+	case "FROM_100K_TO_200K":
+		fallthrough
+	case "FROM_200K_TO_300K":
+		fallthrough
+	case "FROM_300K_TO_500K":
+		fallthrough
+	case "FROM_500K_TO_1M":
+		fallthrough
+	case "FROM_1M_TO_5M":
+		fallthrough
+	case "OVER_5M":
+		*e = LiquidNetWorthRangeUsd(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LiquidNetWorthRangeUsd: %v", v)
+	}
+}
 
 // TotalNetWorthRangeUsd - Total net worth range; the low number is exclusive, the high number is inclusive
 type TotalNetWorthRangeUsd string
@@ -75,6 +163,37 @@ const (
 
 func (e TotalNetWorthRangeUsd) ToPointer() *TotalNetWorthRangeUsd {
 	return &e
+}
+func (e *TotalNetWorthRangeUsd) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USD_RANGE_UNSPECIFIED":
+		fallthrough
+	case "UNDER_25K":
+		fallthrough
+	case "FROM_25K_TO_50K":
+		fallthrough
+	case "FROM_50K_TO_100K":
+		fallthrough
+	case "FROM_100K_TO_200K":
+		fallthrough
+	case "FROM_200K_TO_300K":
+		fallthrough
+	case "FROM_300K_TO_500K":
+		fallthrough
+	case "FROM_500K_TO_1M":
+		fallthrough
+	case "FROM_1M_TO_5M":
+		fallthrough
+	case "OVER_5M":
+		*e = TotalNetWorthRangeUsd(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TotalNetWorthRangeUsd: %v", v)
+	}
 }
 
 // CustomerProfileCreate - A detailed summary of financial and personal details of an investor, to help understand the investor's financial standing, investment experience and risk tolerance.

@@ -32,17 +32,17 @@ Gets a list of Accounts based on search criteria.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"ascend-sdk/models/operations"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -54,10 +54,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{
-        PageSize: ascendsdk.Int(25),
-        PageToken: ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
-        OrderBy: ascendsdk.String("state"),
-        Filter: ascendsdk.String("account_number == \"R9AHY8P\""),
+        PageSize: ascendsdkgo.Int(25),
+        PageToken: ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
+        OrderBy: ascendsdkgo.String("state"),
+        Filter: ascendsdkgo.String("account_number == \"R9AHY8P\""),
         View: operations.ViewFull.ToPointer(),
     })
     if err != nil {
@@ -98,16 +98,16 @@ UPDATE Updates an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -119,8 +119,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.UpdateAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AccountRequestUpdate{
-        AcceptsIssuerDirectCommunication: ascendsdk.Bool(false),
-        Advised: ascendsdk.Bool(true),
+        AcceptsIssuerDirectCommunication: ascendsdkgo.Bool(false),
+        Advised: ascendsdkgo.Bool(true),
         CatAccountHolderType: components.AccountRequestUpdateCatAccountHolderTypeIIndividual.ToPointer(),
         Identifiers: []components.IdentifierUpdate{
             components.IdentifierUpdate{
@@ -129,17 +129,17 @@ func main() {
         },
         InterestedParties: []components.InterestedPartyUpdate{
             components.InterestedPartyUpdate{
-                Recipient: ascendsdk.String("John Dough"),
+                Recipient: ascendsdkgo.String("John Dough"),
                 StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
                 TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
             components.InterestedPartyUpdate{
-                Recipient: ascendsdk.String("John Dough"),
+                Recipient: ascendsdkgo.String("John Dough"),
                 StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
                 TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
             components.InterestedPartyUpdate{
-                Recipient: ascendsdk.String("John Dough"),
+                Recipient: ascendsdkgo.String("John Dough"),
                 StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
                 TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
@@ -153,16 +153,16 @@ func main() {
             },
             CustomerProfile: &components.CustomerProfileUpdate{
                 AnnualIncomeRangeUsd: components.CustomerProfileUpdateAnnualIncomeRangeUsdFrom100KTo200K.ToPointer(),
-                FederalTaxBracket: ascendsdk.Float64(1.5),
+                FederalTaxBracket: ascendsdkgo.Float64(1.5),
                 InvestmentExperience: components.CustomerProfileUpdateInvestmentExperienceGood.ToPointer(),
                 LiquidNetWorthRangeUsd: components.CustomerProfileUpdateLiquidNetWorthRangeUsdFrom100KTo200K.ToPointer(),
                 TotalNetWorthRangeUsd: components.CustomerProfileUpdateTotalNetWorthRangeUsdFrom100KTo200K.ToPointer(),
             },
         },
-        Managed: ascendsdk.Bool(true),
+        Managed: ascendsdkgo.Bool(true),
         Parties: []components.PartyRequestUpdate{
             components.PartyRequestUpdate{
-                EmailAddress: ascendsdk.String("example@domain.com"),
+                EmailAddress: ascendsdkgo.String("example@domain.com"),
                 ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
                 ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
                 RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
@@ -171,7 +171,7 @@ func main() {
                 TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
             components.PartyRequestUpdate{
-                EmailAddress: ascendsdk.String("example@domain.com"),
+                EmailAddress: ascendsdkgo.String("example@domain.com"),
                 ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
                 ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
                 RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
@@ -180,7 +180,7 @@ func main() {
                 TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
             components.PartyRequestUpdate{
-                EmailAddress: ascendsdk.String("example@domain.com"),
+                EmailAddress: ascendsdkgo.String("example@domain.com"),
                 ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
                 ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
                 RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
@@ -189,26 +189,26 @@ func main() {
                 TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
         },
-        PrimaryRegisteredRepID: ascendsdk.String("01HB7N66WW02WG3B6B9W29K0HF"),
+        PrimaryRegisteredRepID: ascendsdkgo.String("01HB7N66WW02WG3B6B9W29K0HF"),
         TaxProfile: &components.AccountTaxProfileUpdate{
             CostBasisLotDisposalMethod: components.AccountTaxProfileUpdateCostBasisLotDisposalMethodCostBasisLotDisposalFifo.ToPointer(),
-            Section475Election: ascendsdk.Bool(true),
+            Section475Election: ascendsdkgo.Bool(true),
         },
         TrustedContacts: []components.TrustedContactUpdate{
             components.TrustedContactUpdate{
-                EmailAddress: ascendsdk.String("example@email.com"),
-                FamilyName: ascendsdk.String("Doe"),
-                GivenName: ascendsdk.String("John"),
-                MiddleNames: ascendsdk.String("Larry"),
+                EmailAddress: ascendsdkgo.String("example@email.com"),
+                FamilyName: ascendsdkgo.String("Doe"),
+                GivenName: ascendsdkgo.String("John"),
+                MiddleNames: ascendsdkgo.String("Larry"),
             },
             components.TrustedContactUpdate{
-                EmailAddress: ascendsdk.String("example@email.com"),
-                FamilyName: ascendsdk.String("Doe"),
-                GivenName: ascendsdk.String("John"),
-                MiddleNames: ascendsdk.String("Larry"),
+                EmailAddress: ascendsdkgo.String("example@email.com"),
+                FamilyName: ascendsdkgo.String("Doe"),
+                GivenName: ascendsdkgo.String("John"),
+                MiddleNames: ascendsdkgo.String("Larry"),
             },
         },
-        WrapFeeBilled: ascendsdk.Bool(true),
+        WrapFeeBilled: ascendsdkgo.Bool(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -249,16 +249,16 @@ Adds a party to an account
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -326,16 +326,16 @@ Updates a Party.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -347,7 +347,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.UpdateParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "a58ddb02-3954-4249-a7d5-1d408def12cf", components.PartyRequestUpdate{
-        EmailAddress: ascendsdk.String("example@domain.com"),
+        EmailAddress: ascendsdkgo.String("example@domain.com"),
         ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
         ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
         RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
@@ -395,16 +395,16 @@ Replaces a party on an account
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -473,16 +473,16 @@ Remove a party from an account
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -540,16 +540,16 @@ CUSTOM Places an ACCT_MAINT_CLOSURE_PREP_BY_CORRESPONDENT restriction on the Acc
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -561,7 +561,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.CloseAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.CloseAccountRequestCreate{
-        ReplacedFdid: ascendsdk.String("JY3E1OC2J3IA"),
+        ReplacedFdid: ascendsdkgo.String("JY3E1OC2J3IA"),
     })
     if err != nil {
         log.Fatal(err)
@@ -602,16 +602,16 @@ Creates a new Trusted Contact for an account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -623,10 +623,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.CreateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.TrustedContactCreate{
-        EmailAddress: ascendsdk.String("example@email.com"),
+        EmailAddress: ascendsdkgo.String("example@email.com"),
         FamilyName: "Doe",
         GivenName: "John",
-        MiddleNames: ascendsdk.String("Larry"),
+        MiddleNames: ascendsdkgo.String("Larry"),
     })
     if err != nil {
         log.Fatal(err)
@@ -667,16 +667,16 @@ Updates a Trusted Contact.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -688,10 +688,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.UpdateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.TrustedContactUpdate{
-        EmailAddress: ascendsdk.String("example@email.com"),
-        FamilyName: ascendsdk.String("Doe"),
-        GivenName: ascendsdk.String("John"),
-        MiddleNames: ascendsdk.String("Larry"),
+        EmailAddress: ascendsdkgo.String("example@email.com"),
+        FamilyName: ascendsdkgo.String("Doe"),
+        GivenName: ascendsdkgo.String("John"),
+        MiddleNames: ascendsdkgo.String("Larry"),
     })
     if err != nil {
         log.Fatal(err)
@@ -733,16 +733,16 @@ DELETE Deletes a Trusted Contact for an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -793,16 +793,16 @@ Creates an Interested Party record for an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -858,16 +858,16 @@ Updates an Interested Party.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -879,7 +879,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.UpdateInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "ecf44f2f-7030-48ed-b937-c40891ee10c8", components.InterestedPartyUpdate{
-        Recipient: ascendsdk.String("John Dough"),
+        Recipient: ascendsdkgo.String("John Dough"),
         StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
         TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
     })
@@ -923,16 +923,16 @@ Deletes an Interested Party associated from an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -983,16 +983,16 @@ Gets a list of possible Restrictions that can be placed on an Account based on E
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -1042,16 +1042,16 @@ Applies a Restriction to an account that suspends one or more Entitlements.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -1064,7 +1064,7 @@ func main() {
     ctx := context.Background()
     res, err := s.AccountManagement.CreateRestriction(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.RestrictionCreate{
         CreateReason: "Some reason for creating",
-        EndedReason: ascendsdk.String("Some reason for removing"),
+        EndedReason: ascendsdkgo.String("Some reason for removing"),
         RestrictionCode: "MARGIN_CALL_VIOLATION_REG_T",
     })
     if err != nil {
@@ -1106,16 +1106,16 @@ Ends a Restriction on an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

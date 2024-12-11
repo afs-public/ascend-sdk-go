@@ -3,6 +3,8 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -73,6 +75,23 @@ const (
 func (e Direction) ToPointer() *Direction {
 	return &e
 }
+func (e *Direction) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DIRECTION_UNSPECIFIED":
+		fallthrough
+	case "OUTGOING":
+		fallthrough
+	case "INCOMING":
+		*e = Direction(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Direction: %v", v)
+	}
+}
 
 // NsccStatus - The NSCC transfer status
 type NsccStatus string
@@ -100,6 +119,53 @@ const (
 
 func (e NsccStatus) ToPointer() *NsccStatus {
 	return &e
+}
+func (e *NsccStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "NSCC_STATUS_UNSPECIFIED":
+		fallthrough
+	case "REQUEST":
+		fallthrough
+	case "REQUEST_ADJUST":
+		fallthrough
+	case "REQUEST_ADJUST_PAST":
+		fallthrough
+	case "REQUEST_PAST":
+		fallthrough
+	case "REQUEST_REJECT":
+		fallthrough
+	case "REVIEW":
+		fallthrough
+	case "REVIEW_ADJUST_DELIVERER":
+		fallthrough
+	case "REVIEW_ERROR":
+		fallthrough
+	case "REVIEW_ACCELERATE":
+		fallthrough
+	case "REVIEW_ADJUST_RECEIVER_ACCELERATE":
+		fallthrough
+	case "SETTLE_PREP":
+		fallthrough
+	case "SETTLE_CLOSE":
+		fallthrough
+	case "CLOSE_PURGE":
+		fallthrough
+	case "PARTIAL_REQUEST":
+		fallthrough
+	case "MEMO_PURGE_PARTIAL_TRANSFER_REQUEST_RECEIVER":
+		fallthrough
+	case "REJECT":
+		fallthrough
+	case "SYSTEM_PURGE":
+		*e = NsccStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for NsccStatus: %v", v)
+	}
 }
 
 // AcatsTransferExternalAccount - The external account information
@@ -180,6 +246,49 @@ const (
 func (e RejectCode) ToPointer() *RejectCode {
 	return &e
 }
+func (e *RejectCode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "REJECT_CODE_UNSPECIFIED":
+		fallthrough
+	case "REJECT_CODE_SSN_TAX_ID_MISMATCH":
+		fallthrough
+	case "REJECT_CODE_ACCOUNT_TITLE_MISMATCH":
+		fallthrough
+	case "REJECT_CODE_DOCUMENTATION_NEEDED":
+		fallthrough
+	case "REJECT_CODE_ACCOUNT_FLAT":
+		fallthrough
+	case "REJECT_CODE_INVALID_ACCOUNT_NUMBER":
+		fallthrough
+	case "REJECT_CODE_DUPLICATE":
+		fallthrough
+	case "REJECT_CODE_ACCOUNT_IN_DISTRIBUTION_OR_TRANSFER":
+		fallthrough
+	case "REJECT_CODE_CLIENT_RESCINDED":
+		fallthrough
+	case "REJECT_CODE_MISSING_AUTHORIZATION_SIGNATURE":
+		fallthrough
+	case "REJECT_CODE_ACCOUNT_VIOLATES_CREDIT_POLICY_OF_RECEIVING_FIRM":
+		fallthrough
+	case "REJECT_CODE_UNRECOGNIZED_FOR_RESIDUAL_CREDIT_BALANCE":
+		fallthrough
+	case "REJECT_CODE_PARTIAL_TRANSFER_DELIVERER":
+		fallthrough
+	case "REJECT_CODE_FAIL_REVERSAL":
+		fallthrough
+	case "REJECT_CODE_RECLAIM":
+		fallthrough
+	case "REJECT_CODE_MUTUAL_FUND_CLEANUP":
+		*e = RejectCode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for RejectCode: %v", v)
+	}
+}
 
 // AcatsTransferState - The transfer state
 type AcatsTransferState string
@@ -203,6 +312,43 @@ const (
 func (e AcatsTransferState) ToPointer() *AcatsTransferState {
 	return &e
 }
+func (e *AcatsTransferState) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "STATE_UNSPECIFIED":
+		fallthrough
+	case "RECEIVED":
+		fallthrough
+	case "SUBMITTED":
+		fallthrough
+	case "REJECTED":
+		fallthrough
+	case "PENDING_CONTRA_RESPONSE":
+		fallthrough
+	case "ERROR":
+		fallthrough
+	case "ACCEPTED":
+		fallthrough
+	case "PENDING_REVIEW":
+		fallthrough
+	case "PENDING_REJECTION":
+		fallthrough
+	case "PENDING_SETTLEMENT":
+		fallthrough
+	case "PENDING_BOOKKEEPING":
+		fallthrough
+	case "COMPLETED":
+		fallthrough
+	case "PURGED":
+		*e = AcatsTransferState(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AcatsTransferState: %v", v)
+	}
+}
 
 // TransferType - The type of transfer
 type TransferType string
@@ -221,6 +367,35 @@ const (
 
 func (e TransferType) ToPointer() *TransferType {
 	return &e
+}
+func (e *TransferType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TRANSFER_TYPE_UNSPECIFIED":
+		fallthrough
+	case "FAIL_REVERSAL_BROKER_TO_BROKER_ONLY":
+		fallthrough
+	case "FULL_TRANSFER":
+		fallthrough
+	case "MUTUAL_FUND_CLEANUP":
+		fallthrough
+	case "PARTIAL_TRANSFER_DELIVERER":
+		fallthrough
+	case "PARTIAL_TRANSFER_RECEIVER":
+		fallthrough
+	case "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY":
+		fallthrough
+	case "RECLAIM":
+		fallthrough
+	case "RESIDUAL_CREDIT":
+		*e = TransferType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TransferType: %v", v)
+	}
 }
 
 // AcatsTransfer - An account transfer which contains the receiving and delivering party information, assets being transferred, NSCC status information, etc.

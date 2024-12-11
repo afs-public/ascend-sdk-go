@@ -32,16 +32,16 @@ Lists transfer schedule summaries that match the filter in the request
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -52,7 +52,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListScheduleSummaries(ctx, ascendsdk.String("mechanism == 'ACH' && direction == DEPOSIT && state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdk.Int(100), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListScheduleSummaries(ctx, ascendsdkgo.String("mechanism == 'ACH' && direction == DEPOSIT && state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -93,16 +93,16 @@ Creates an ACH deposit transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -120,7 +120,7 @@ func main() {
             Type: components.AchDepositScheduleCreateTypeRegular,
         },
         RetirementContribution: &components.ScheduledRetirementContributionCreate{
-            TaxYear: ascendsdk.Int(2024),
+            TaxYear: ascendsdkgo.Int(2024),
             TemporalTaxYear: components.TemporalTaxYearCurrentCalendarYear.ToPointer(),
             Type: components.ScheduledRetirementContributionCreateTypeRegular,
         },
@@ -128,7 +128,7 @@ func main() {
             Amount: components.DecimalCreate{},
             ClientScheduleID: "ABC-123",
             ScheduleProperties: components.SchedulePropertiesCreate{
-                Occurrences: ascendsdk.Int(12),
+                Occurrences: ascendsdkgo.Int(12),
                 StartDate: components.DateCreate{},
                 TimeUnit: components.TimeUnitMonth,
                 UnitMultiplier: 1,
@@ -174,16 +174,16 @@ Return a list of ACH deposit schedules for the specified account and filter para
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -194,7 +194,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListAchDepositSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdk.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdk.Int(100), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListAchDepositSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -236,16 +236,16 @@ Gets an ACH deposit transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -296,16 +296,16 @@ Updates the amount of an ACH deposit transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -358,16 +358,16 @@ Cancels an ACH deposit transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -379,7 +379,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CancelAchDepositSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelAchDepositScheduleRequestCreate{
-        Comment: ascendsdk.String("User Request"),
+        Comment: ascendsdkgo.String("User Request"),
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDepositSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
     })
     if err != nil {
@@ -422,16 +422,16 @@ Creates an ACH withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -449,9 +449,9 @@ func main() {
         },
         ScheduleDetails: components.WithdrawalScheduleDetailsCreate{
             ClientScheduleID: "ABC-123",
-            FullDisbursement: ascendsdk.Bool(false),
+            FullDisbursement: ascendsdkgo.Bool(false),
             ScheduleProperties: components.SchedulePropertiesCreate{
-                Occurrences: ascendsdk.Int(12),
+                Occurrences: ascendsdkgo.Int(12),
                 StartDate: components.DateCreate{},
                 TimeUnit: components.TimeUnitMonth,
                 UnitMultiplier: 1,
@@ -497,16 +497,16 @@ Return a list of ACH withdrawal schedules for the specified account and filter p
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -517,7 +517,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListAchWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdk.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdk.Int(100), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListAchWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -559,16 +559,16 @@ Gets an ACH withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -619,16 +619,16 @@ Updates the amount of an ACH withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -681,16 +681,16 @@ Cancels an ACH withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -702,7 +702,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CancelAchWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelAchWithdrawalScheduleRequestCreate{
-        Comment: ascendsdk.String("User Request"),
+        Comment: ascendsdkgo.String("User Request"),
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
     })
     if err != nil {
@@ -745,16 +745,16 @@ Creates a Wire withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -768,8 +768,8 @@ func main() {
     res, err := s.ScheduleTransfers.CreateWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.WireWithdrawalScheduleCreate{
         Beneficiary: components.WireWithdrawalBeneficiaryCreate{
             Account: "73849218650987",
-            AccountTitle: ascendsdk.String("Jane Dough"),
-            ThirdParty: ascendsdk.Bool(false),
+            AccountTitle: ascendsdkgo.String("Jane Dough"),
+            ThirdParty: ascendsdkgo.Bool(false),
         },
         Intermediary: &components.WireWithdrawalIntermediaryCreate{
             Account: "NL02ABNA0123456789",
@@ -782,7 +782,7 @@ func main() {
                 Type: components.RecipientBankBankIDCreateTypeBic,
             },
             InternationalBankDetails: &components.RecipientBankBankDetailsCreate{
-                AdditionalInfo: ascendsdk.String("Jane Dough transfer through intermediary account"),
+                AdditionalInfo: ascendsdkgo.String("Jane Dough transfer through intermediary account"),
                 Address: components.AddressCreate{},
                 BankName: "ABN AMRO BANK N.V.",
             },
@@ -792,9 +792,9 @@ func main() {
         },
         ScheduleDetails: components.WithdrawalScheduleDetailsCreate{
             ClientScheduleID: "ABC-123",
-            FullDisbursement: ascendsdk.Bool(false),
+            FullDisbursement: ascendsdkgo.Bool(false),
             ScheduleProperties: components.SchedulePropertiesCreate{
-                Occurrences: ascendsdk.Int(12),
+                Occurrences: ascendsdkgo.Int(12),
                 StartDate: components.DateCreate{},
                 TimeUnit: components.TimeUnitMonth,
                 UnitMultiplier: 1,
@@ -840,16 +840,16 @@ Return a list of Wire withdrawal schedules for the specified account and filter 
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -860,7 +860,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListWireWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdk.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdk.Int(100), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListWireWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -902,16 +902,16 @@ Gets a Wire withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -962,16 +962,16 @@ Updates the amount of a Wire withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -982,7 +982,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.UpdateWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.WireWithdrawalScheduleUpdate{}, ascendsdk.String("{\"update_mask\":\"schedule_details.amount\"}"))
+    res, err := s.ScheduleTransfers.UpdateWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.WireWithdrawalScheduleUpdate{}, ascendsdkgo.String("{\"update_mask\":\"schedule_details.amount\"}"))
     if err != nil {
         log.Fatal(err)
     }
@@ -1024,16 +1024,16 @@ Cancels a Wire withdrawal transfer schedule
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -1045,7 +1045,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CancelWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelWireWithdrawalScheduleRequestCreate{
-        Comment: ascendsdk.String("User Request"),
+        Comment: ascendsdkgo.String("User Request"),
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
     })
     if err != nil {

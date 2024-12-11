@@ -18,16 +18,16 @@ CREATE Creates an account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -39,9 +39,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountCreation.CreateAccount(ctx, components.AccountRequestCreate{
-        AcceptsIssuerDirectCommunication: ascendsdk.Bool(false),
+        AcceptsIssuerDirectCommunication: ascendsdkgo.Bool(false),
         AccountGroupID: "01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        Advised: ascendsdk.Bool(true),
+        Advised: ascendsdkgo.Bool(true),
         CatAccountHolderType: components.CatAccountHolderTypeIIndividual.ToPointer(),
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
         Identifiers: []components.IdentifierCreate{
@@ -67,13 +67,13 @@ func main() {
             },
             CustomerProfile: &components.CustomerProfileCreate{
                 AnnualIncomeRangeUsd: components.AnnualIncomeRangeUsdFrom100KTo200K.ToPointer(),
-                FederalTaxBracket: ascendsdk.Float64(1.5),
+                FederalTaxBracket: ascendsdkgo.Float64(1.5),
                 InvestmentExperience: components.InvestmentExperienceGood.ToPointer(),
                 LiquidNetWorthRangeUsd: components.LiquidNetWorthRangeUsdFrom100KTo200K.ToPointer(),
                 TotalNetWorthRangeUsd: components.TotalNetWorthRangeUsdFrom100KTo200K.ToPointer(),
             },
         },
-        Managed: ascendsdk.Bool(true),
+        Managed: ascendsdkgo.Bool(true),
         Parties: []components.PartyRequestCreate{
             components.PartyRequestCreate{
                 EmailAddress: "example@domain.com",
@@ -98,26 +98,26 @@ func main() {
                 TradeConfirmationDeliveryPreference: components.PartyRequestCreateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
         },
-        PrimaryRegisteredRepID: ascendsdk.String("01HB7N66WW02WG3B6B9W29K0HF"),
+        PrimaryRegisteredRepID: ascendsdkgo.String("01HB7N66WW02WG3B6B9W29K0HF"),
         TaxProfile: &components.AccountTaxProfileCreate{
             CostBasisLotDisposalMethod: components.CostBasisLotDisposalMethodCostBasisLotDisposalFifo.ToPointer(),
-            Section475Election: ascendsdk.Bool(true),
+            Section475Election: ascendsdkgo.Bool(true),
         },
         TrustedContacts: []components.TrustedContactCreate{
             components.TrustedContactCreate{
-                EmailAddress: ascendsdk.String("example@email.com"),
+                EmailAddress: ascendsdkgo.String("example@email.com"),
                 FamilyName: "Doe",
                 GivenName: "John",
-                MiddleNames: ascendsdk.String("Larry"),
+                MiddleNames: ascendsdkgo.String("Larry"),
             },
             components.TrustedContactCreate{
-                EmailAddress: ascendsdk.String("example@email.com"),
+                EmailAddress: ascendsdkgo.String("example@email.com"),
                 FamilyName: "Doe",
                 GivenName: "John",
-                MiddleNames: ascendsdk.String("Larry"),
+                MiddleNames: ascendsdkgo.String("Larry"),
             },
         },
-        WrapFeeBilled: ascendsdk.Bool(true),
+        WrapFeeBilled: ascendsdkgo.Bool(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -157,17 +157,17 @@ READ Get Account
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"ascend-sdk/models/operations"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

@@ -3,6 +3,8 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -43,6 +45,25 @@ const (
 func (e ConsentMethod) ToPointer() *ConsentMethod {
 	return &e
 }
+func (e *ConsentMethod) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "CONSENT_METHOD_UNSPECIFIED":
+		fallthrough
+	case "ESIGNATURE":
+		fallthrough
+	case "WET_SIGNATURE":
+		fallthrough
+	case "NEGATIVE_CONSENT_CONVERSION":
+		*e = ConsentMethod(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ConsentMethod: %v", v)
+	}
+}
 
 // EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan string
@@ -55,6 +76,23 @@ const (
 
 func (e EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
+}
+func (e *EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentCorporationEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
 }
 
 // InitialDepositAmount - The initial deposit amount in USD
@@ -104,6 +142,25 @@ const (
 
 func (e EnrollmentCorporationEnrollmentMetadataDeterminedAccountRiskRating) ToPointer() *EnrollmentCorporationEnrollmentMetadataDeterminedAccountRiskRating {
 	return &e
+}
+func (e *EnrollmentCorporationEnrollmentMetadataDeterminedAccountRiskRating) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DETERMINED_ACCOUNT_RISK_RATING_UNSPECIFIED":
+		fallthrough
+	case "LOW":
+		fallthrough
+	case "MEDIUM":
+		fallthrough
+	case "HIGH":
+		*e = EnrollmentCorporationEnrollmentMetadataDeterminedAccountRiskRating(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentCorporationEnrollmentMetadataDeterminedAccountRiskRating: %v", v)
+	}
 }
 
 // OtherAccounts - A customer-disclosed list of other Apex-held accounts owned by the Entity applicant at the time of this account's application; expressed as zero, one, or many account numbers
@@ -238,6 +295,25 @@ const (
 func (e EnrollmentCorporationEnrollmentMetadataPrimaryAccountActivityType) ToPointer() *EnrollmentCorporationEnrollmentMetadataPrimaryAccountActivityType {
 	return &e
 }
+func (e *EnrollmentCorporationEnrollmentMetadataPrimaryAccountActivityType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "PRIMARY_ACCOUNT_ACTIVITY_TYPE_UNSPECIFIED":
+		fallthrough
+	case "ACTIVE_TRADING":
+		fallthrough
+	case "SHORT_TERM_INVESTING":
+		fallthrough
+	case "LONG_TERM_INVESTING":
+		*e = EnrollmentCorporationEnrollmentMetadataPrimaryAccountActivityType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentCorporationEnrollmentMetadataPrimaryAccountActivityType: %v", v)
+	}
+}
 
 // EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency - The frequency by which cash is anticipated to be withdrawn from the account
 type EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency string
@@ -251,6 +327,25 @@ const (
 
 func (e EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency) ToPointer() *EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency {
 	return &e
+}
+func (e *EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "WITHDRAWAL_FREQUENCY_UNSPECIFIED":
+		fallthrough
+	case "FREQUENT":
+		fallthrough
+	case "OCCASIONAL":
+		fallthrough
+	case "RARE":
+		*e = EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentCorporationEnrollmentMetadataWithdrawalFrequency: %v", v)
+	}
 }
 
 // PlannedActivity - Details the customer's intended trading and banking-related activities at the time of account application; informs risk checks and forms a baseline for anomalous activity detection
@@ -385,6 +480,23 @@ const (
 func (e EnrollmentCorporationEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentCorporationEnrollmentMetadataFdicCashSweep {
 	return &e
 }
+func (e *EnrollmentCorporationEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentCorporationEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentCorporationEnrollmentMetadataFdicCashSweep: %v", v)
+	}
+}
 
 // CorporationEnrollmentMetadata - Metadata for the REGISTRATION_CORPORATION type
 type CorporationEnrollmentMetadata struct {
@@ -429,6 +541,23 @@ const (
 func (e EnrollmentCustodialType) ToPointer() *EnrollmentCustodialType {
 	return &e
 }
+func (e *EnrollmentCustodialType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "CUSTODIAL_TYPE_UNSPECIFIED":
+		fallthrough
+	case "UGMA":
+		fallthrough
+	case "UTMA":
+		*e = EnrollmentCustodialType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentCustodialType: %v", v)
+	}
+}
 
 // EnrollmentDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type EnrollmentDividendReinvestmentPlan string
@@ -442,6 +571,23 @@ const (
 func (e EnrollmentDividendReinvestmentPlan) ToPointer() *EnrollmentDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentFdicCashSweep string
@@ -454,6 +600,23 @@ const (
 
 func (e EnrollmentFdicCashSweep) ToPointer() *EnrollmentFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentFdicCashSweep: %v", v)
+	}
 }
 
 // CustodialEnrollmentMetadata - Metadata for the REGISTRATION_CUSTODIAL type
@@ -499,6 +662,23 @@ const (
 func (e EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EstateEnrollmentMetadata - Metadata for the REGISTRATION_ESTATE enrollment type
 type EstateEnrollmentMetadata struct {
@@ -534,6 +714,23 @@ const (
 func (e EnrollmentForeignIndividualAccountEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentForeignIndividualAccountEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentForeignIndividualAccountEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentForeignIndividualAccountEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentForeignIndividualAccountEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep string
@@ -546,6 +743,23 @@ const (
 
 func (e EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentForeignIndividualAccountEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // EnrollmentInitialDepositAmount - The initial deposit amount in USD
@@ -715,6 +929,25 @@ const (
 func (e EnrollmentPrimaryAccountActivityType) ToPointer() *EnrollmentPrimaryAccountActivityType {
 	return &e
 }
+func (e *EnrollmentPrimaryAccountActivityType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "PRIMARY_ACCOUNT_ACTIVITY_TYPE_UNSPECIFIED":
+		fallthrough
+	case "ACTIVE_TRADING":
+		fallthrough
+	case "SHORT_TERM_INVESTING":
+		fallthrough
+	case "LONG_TERM_INVESTING":
+		*e = EnrollmentPrimaryAccountActivityType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentPrimaryAccountActivityType: %v", v)
+	}
+}
 
 // EnrollmentWithdrawalFrequency - The frequency by which cash is anticipated to be withdrawn from the account
 type EnrollmentWithdrawalFrequency string
@@ -728,6 +961,25 @@ const (
 
 func (e EnrollmentWithdrawalFrequency) ToPointer() *EnrollmentWithdrawalFrequency {
 	return &e
+}
+func (e *EnrollmentWithdrawalFrequency) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "WITHDRAWAL_FREQUENCY_UNSPECIFIED":
+		fallthrough
+	case "FREQUENT":
+		fallthrough
+	case "OCCASIONAL":
+		fallthrough
+	case "RARE":
+		*e = EnrollmentWithdrawalFrequency(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentWithdrawalFrequency: %v", v)
+	}
 }
 
 // EnrollmentPlannedActivity - Details the customer's intended trading and banking-related activities at the time of account application; informs risk checks and forms a baseline for anomalous activity detection
@@ -915,6 +1167,23 @@ const (
 func (e EnrollmentIndividualEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIndividualEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIndividualEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIndividualEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIndividualEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIndividualEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIndividualEnrollmentMetadataFdicCashSweep string
@@ -927,6 +1196,23 @@ const (
 
 func (e EnrollmentIndividualEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIndividualEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIndividualEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIndividualEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIndividualEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // IndividualEnrollmentMetadata - Metadata for the INDIVIDUAL enrollment type
@@ -963,6 +1249,23 @@ const (
 func (e EnrollmentIraBeneficiaryEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIraBeneficiaryEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIraBeneficiaryEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIraBeneficiaryEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraBeneficiaryEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep string
@@ -975,6 +1278,23 @@ const (
 
 func (e EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraBeneficiaryEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // InheritedFromOwnerBirthDate - The birth date of the owner from whom the account is inherited
@@ -1109,6 +1429,23 @@ const (
 func (e EnrollmentIraRolloverEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIraRolloverEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIraRolloverEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIraRolloverEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraRolloverEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep string
@@ -1121,6 +1458,23 @@ const (
 
 func (e EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraRolloverEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // IraRolloverEnrollmentMetadata - Metadata for the ROLLOVER_IRA_REGISTRATION enrollment type
@@ -1157,6 +1511,23 @@ const (
 func (e EnrollmentIraRothEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIraRothEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIraRothEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIraRothEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraRothEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIraRothEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIraRothEnrollmentMetadataFdicCashSweep string
@@ -1169,6 +1540,23 @@ const (
 
 func (e EnrollmentIraRothEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIraRothEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIraRothEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIraRothEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraRothEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // IraRothEnrollmentMetadata - Metadata for the ROTH_IRA_REGISTRATION enrollment type
@@ -1205,6 +1593,23 @@ const (
 func (e EnrollmentIraSepEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIraSepEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIraSepEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIraSepEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraSepEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIraSepEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIraSepEnrollmentMetadataFdicCashSweep string
@@ -1217,6 +1622,23 @@ const (
 
 func (e EnrollmentIraSepEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIraSepEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIraSepEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIraSepEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraSepEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // IraSepEnrollmentMetadata - Metadata for the SEP_IRA_REGISTRATION enrollment type
@@ -1253,6 +1675,23 @@ const (
 func (e EnrollmentIraSimpleEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIraSimpleEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIraSimpleEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIraSimpleEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraSimpleEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep string
@@ -1265,6 +1704,23 @@ const (
 
 func (e EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraSimpleEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // IraSimpleEnrollmentMetadata - Metadata for the SIMPLE_IRA_REGISTRATION enrollment type
@@ -1301,6 +1757,23 @@ const (
 func (e EnrollmentIraTraditionalEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentIraTraditionalEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentIraTraditionalEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentIraTraditionalEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraTraditionalEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep string
@@ -1313,6 +1786,23 @@ const (
 
 func (e EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentIraTraditionalEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // IraTraditionalEnrollmentMetadata - Metadata for the TRADITIONAL_IRA_REGISTRATION enrollment type
@@ -1349,6 +1839,23 @@ const (
 func (e EnrollmentJointCommunityPropertyEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentJointCommunityPropertyEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentJointCommunityPropertyEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentJointCommunityPropertyEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointCommunityPropertyEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep string
@@ -1361,6 +1868,23 @@ const (
 
 func (e EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointCommunityPropertyEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple - The legal residency state of a married couple
@@ -1407,6 +1931,87 @@ const (
 func (e EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple) ToPointer() *EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple {
 	return &e
 }
+func (e *EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "LEGAL_RESIDENCY_STATE_OF_MARRIED_COUPLE_UNSPECIFIED":
+		fallthrough
+	case "AK":
+		fallthrough
+	case "AZ":
+		fallthrough
+	case "AR":
+		fallthrough
+	case "CA":
+		fallthrough
+	case "DE":
+		fallthrough
+	case "FL":
+		fallthrough
+	case "HI":
+		fallthrough
+	case "ID":
+		fallthrough
+	case "IL":
+		fallthrough
+	case "IN":
+		fallthrough
+	case "KY":
+		fallthrough
+	case "LA":
+		fallthrough
+	case "MD":
+		fallthrough
+	case "MA":
+		fallthrough
+	case "MI":
+		fallthrough
+	case "MS":
+		fallthrough
+	case "MO":
+		fallthrough
+	case "NV":
+		fallthrough
+	case "NJ":
+		fallthrough
+	case "NM":
+		fallthrough
+	case "NY":
+		fallthrough
+	case "NC":
+		fallthrough
+	case "OH":
+		fallthrough
+	case "OK":
+		fallthrough
+	case "OR":
+		fallthrough
+	case "PA":
+		fallthrough
+	case "RI":
+		fallthrough
+	case "TN":
+		fallthrough
+	case "TX":
+		fallthrough
+	case "VT":
+		fallthrough
+	case "VA":
+		fallthrough
+	case "WA":
+		fallthrough
+	case "WI":
+		fallthrough
+	case "WY":
+		*e = EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointCommunityPropertyEnrollmentMetadataLegalResidencyStateOfMarriedCouple: %v", v)
+	}
+}
 
 // JointCommunityPropertyEnrollmentMetadata - Metadata for the JOINT_COMMUNITY_PROPERTY_REGISTRATION enrollment type
 type JointCommunityPropertyEnrollmentMetadata struct {
@@ -1451,6 +2056,23 @@ const (
 func (e EnrollmentJointTenantsByEntiretyEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentJointTenantsByEntiretyEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentJointTenantsByEntiretyEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentJointTenantsByEntiretyEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointTenantsByEntiretyEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep string
@@ -1463,6 +2085,23 @@ const (
 
 func (e EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointTenantsByEntiretyEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // EnrollmentLegalResidencyStateOfMarriedCouple - The legal residency state of a married couple
@@ -1509,6 +2148,87 @@ const (
 func (e EnrollmentLegalResidencyStateOfMarriedCouple) ToPointer() *EnrollmentLegalResidencyStateOfMarriedCouple {
 	return &e
 }
+func (e *EnrollmentLegalResidencyStateOfMarriedCouple) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "LEGAL_RESIDENCY_STATE_OF_MARRIED_COUPLE_UNSPECIFIED":
+		fallthrough
+	case "AK":
+		fallthrough
+	case "AZ":
+		fallthrough
+	case "AR":
+		fallthrough
+	case "CA":
+		fallthrough
+	case "DE":
+		fallthrough
+	case "FL":
+		fallthrough
+	case "HI":
+		fallthrough
+	case "ID":
+		fallthrough
+	case "IL":
+		fallthrough
+	case "IN":
+		fallthrough
+	case "KY":
+		fallthrough
+	case "LA":
+		fallthrough
+	case "MD":
+		fallthrough
+	case "MA":
+		fallthrough
+	case "MI":
+		fallthrough
+	case "MS":
+		fallthrough
+	case "MO":
+		fallthrough
+	case "NV":
+		fallthrough
+	case "NJ":
+		fallthrough
+	case "NM":
+		fallthrough
+	case "NY":
+		fallthrough
+	case "NC":
+		fallthrough
+	case "OH":
+		fallthrough
+	case "OK":
+		fallthrough
+	case "OR":
+		fallthrough
+	case "PA":
+		fallthrough
+	case "RI":
+		fallthrough
+	case "TN":
+		fallthrough
+	case "TX":
+		fallthrough
+	case "VT":
+		fallthrough
+	case "VA":
+		fallthrough
+	case "WA":
+		fallthrough
+	case "WI":
+		fallthrough
+	case "WY":
+		*e = EnrollmentLegalResidencyStateOfMarriedCouple(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentLegalResidencyStateOfMarriedCouple: %v", v)
+	}
+}
 
 // JointTenantsByEntiretyEnrollmentMetadata - Metadata for the JOINT_TENANTS_BY_ENTIRETY_REGISTRATION enrollment type
 type JointTenantsByEntiretyEnrollmentMetadata struct {
@@ -1553,6 +2273,23 @@ const (
 func (e EnrollmentJointTenantsInCommonEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentJointTenantsInCommonEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentJointTenantsInCommonEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentJointTenantsInCommonEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointTenantsInCommonEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep string
@@ -1565,6 +2302,23 @@ const (
 
 func (e EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointTenantsInCommonEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // JointTenantsInCommonEnrollmentMetadata - Metadata for the JOINT_TENANTS_IN_COMMON_REGISTRATION enrollment type
@@ -1601,6 +2355,23 @@ const (
 func (e EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
 }
+func (e *EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep string
@@ -1613,6 +2384,23 @@ const (
 
 func (e EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep {
 	return &e
+}
+func (e *EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentJointWithRightsOfSurvivorshipEnrollmentMetadataFdicCashSweep: %v", v)
+	}
 }
 
 // JointWithRightsOfSurvivorshipEnrollmentMetadata - Metadata for the JOINT_WITH_RIGHTS_OF_SURVIVORSHIP_REGISTRATION enrollment type
@@ -1648,6 +2436,23 @@ const (
 
 func (e EnrollmentLlcEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentLlcEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
+}
+func (e *EnrollmentLlcEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentLlcEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentLlcEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
 }
 
 // EnrollmentLlcEnrollmentMetadataInitialDepositAmount - The initial deposit amount in USD
@@ -1697,6 +2502,25 @@ const (
 
 func (e EnrollmentDeterminedAccountRiskRating) ToPointer() *EnrollmentDeterminedAccountRiskRating {
 	return &e
+}
+func (e *EnrollmentDeterminedAccountRiskRating) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DETERMINED_ACCOUNT_RISK_RATING_UNSPECIFIED":
+		fallthrough
+	case "LOW":
+		fallthrough
+	case "MEDIUM":
+		fallthrough
+	case "HIGH":
+		*e = EnrollmentDeterminedAccountRiskRating(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentDeterminedAccountRiskRating: %v", v)
+	}
 }
 
 // EnrollmentLlcEnrollmentMetadataOtherAccounts - A customer-disclosed list of other Apex-held accounts owned by the Entity applicant at the time of this account's application; expressed as zero, one, or many account numbers
@@ -1831,6 +2655,25 @@ const (
 func (e EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType) ToPointer() *EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType {
 	return &e
 }
+func (e *EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "PRIMARY_ACCOUNT_ACTIVITY_TYPE_UNSPECIFIED":
+		fallthrough
+	case "ACTIVE_TRADING":
+		fallthrough
+	case "SHORT_TERM_INVESTING":
+		fallthrough
+	case "LONG_TERM_INVESTING":
+		*e = EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentLlcEnrollmentMetadataPrimaryAccountActivityType: %v", v)
+	}
+}
 
 // EnrollmentLlcEnrollmentMetadataWithdrawalFrequency - The frequency by which cash is anticipated to be withdrawn from the account
 type EnrollmentLlcEnrollmentMetadataWithdrawalFrequency string
@@ -1844,6 +2687,25 @@ const (
 
 func (e EnrollmentLlcEnrollmentMetadataWithdrawalFrequency) ToPointer() *EnrollmentLlcEnrollmentMetadataWithdrawalFrequency {
 	return &e
+}
+func (e *EnrollmentLlcEnrollmentMetadataWithdrawalFrequency) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "WITHDRAWAL_FREQUENCY_UNSPECIFIED":
+		fallthrough
+	case "FREQUENT":
+		fallthrough
+	case "OCCASIONAL":
+		fallthrough
+	case "RARE":
+		*e = EnrollmentLlcEnrollmentMetadataWithdrawalFrequency(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentLlcEnrollmentMetadataWithdrawalFrequency: %v", v)
+	}
 }
 
 // EnrollmentLlcEnrollmentMetadataPlannedActivity - Details the customer's intended trading and banking-related activities at the time of account application; informs risk checks and forms a baseline for anomalous activity detection
@@ -1978,6 +2840,23 @@ const (
 func (e EnrollmentLlcEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentLlcEnrollmentMetadataFdicCashSweep {
 	return &e
 }
+func (e *EnrollmentLlcEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentLlcEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentLlcEnrollmentMetadataFdicCashSweep: %v", v)
+	}
+}
 
 // LlcEnrollmentMetadata - Metadata for the REGISTRATION_LLC type
 type LlcEnrollmentMetadata struct {
@@ -2038,6 +2917,57 @@ const (
 
 func (e EnrollmentOperatingPurpose) ToPointer() *EnrollmentOperatingPurpose {
 	return &e
+}
+func (e *EnrollmentOperatingPurpose) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "OPERATING_PURPOSE_UNSPECIFIED":
+		fallthrough
+	case "CUSTODY":
+		fallthrough
+	case "SEC_FEE":
+		fallthrough
+	case "TAF_FEE":
+		fallthrough
+	case "TEFRA_WITHHOLDING":
+		fallthrough
+	case "SUSPENSE":
+		fallthrough
+	case "ALLOCATION":
+		fallthrough
+	case "ERROR":
+		fallthrough
+	case "DEPOSIT":
+		fallthrough
+	case "WRITE_OFF":
+		fallthrough
+	case "UNSECURED_RESERVE":
+		fallthrough
+	case "PAYABLE":
+		fallthrough
+	case "COMMISSION":
+		fallthrough
+	case "ESCHEATMENT":
+		fallthrough
+	case "INTEREST_REVENUE":
+		fallthrough
+	case "STREET_DEPOSITORY":
+		fallthrough
+	case "INVENTORY":
+		fallthrough
+	case "TAX_WITHHOLDING":
+		fallthrough
+	case "FEE":
+		fallthrough
+	case "PRINCIPAL_TRADING":
+		*e = EnrollmentOperatingPurpose(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentOperatingPurpose: %v", v)
+	}
 }
 
 // EnrollmentTaxAuthority - Tax Authority for Enrollment
@@ -2101,6 +3031,121 @@ const (
 func (e EnrollmentTaxAuthority) ToPointer() *EnrollmentTaxAuthority {
 	return &e
 }
+func (e *EnrollmentTaxAuthority) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_AUTHORITY_UNSPECIFIED":
+		fallthrough
+	case "AL":
+		fallthrough
+	case "AK":
+		fallthrough
+	case "AZ":
+		fallthrough
+	case "AR":
+		fallthrough
+	case "CA":
+		fallthrough
+	case "CO":
+		fallthrough
+	case "CT":
+		fallthrough
+	case "DE":
+		fallthrough
+	case "FL":
+		fallthrough
+	case "GA":
+		fallthrough
+	case "HI":
+		fallthrough
+	case "ID":
+		fallthrough
+	case "IL":
+		fallthrough
+	case "IN":
+		fallthrough
+	case "IA":
+		fallthrough
+	case "KS":
+		fallthrough
+	case "KY":
+		fallthrough
+	case "LA":
+		fallthrough
+	case "ME":
+		fallthrough
+	case "MD":
+		fallthrough
+	case "MA":
+		fallthrough
+	case "MI":
+		fallthrough
+	case "MN":
+		fallthrough
+	case "MS":
+		fallthrough
+	case "MO":
+		fallthrough
+	case "MT":
+		fallthrough
+	case "NE":
+		fallthrough
+	case "NV":
+		fallthrough
+	case "NH":
+		fallthrough
+	case "NJ":
+		fallthrough
+	case "NM":
+		fallthrough
+	case "NY":
+		fallthrough
+	case "NC":
+		fallthrough
+	case "ND":
+		fallthrough
+	case "OH":
+		fallthrough
+	case "OK":
+		fallthrough
+	case "OR":
+		fallthrough
+	case "PA":
+		fallthrough
+	case "RI":
+		fallthrough
+	case "SC":
+		fallthrough
+	case "SD":
+		fallthrough
+	case "TN":
+		fallthrough
+	case "TX":
+		fallthrough
+	case "UT":
+		fallthrough
+	case "VT":
+		fallthrough
+	case "VA":
+		fallthrough
+	case "WA":
+		fallthrough
+	case "WV":
+		fallthrough
+	case "WI":
+		fallthrough
+	case "WY":
+		fallthrough
+	case "IRS":
+		*e = EnrollmentTaxAuthority(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentTaxAuthority: %v", v)
+	}
+}
 
 // EnrollmentWithholdingType - A designation used by the custodian to determine how much federal income tax should be withheld from the proceeds of a sale
 type EnrollmentWithholdingType string
@@ -2115,6 +3160,27 @@ const (
 
 func (e EnrollmentWithholdingType) ToPointer() *EnrollmentWithholdingType {
 	return &e
+}
+func (e *EnrollmentWithholdingType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "WITHHOLDING_TYPE_UNSPECIFIED":
+		fallthrough
+	case "BACKUP":
+		fallthrough
+	case "BACKUP_PROCEEDS":
+		fallthrough
+	case "BACKUP_DIVIDENDS_AND_INTEREST":
+		fallthrough
+	case "IRA":
+		*e = EnrollmentWithholdingType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentWithholdingType: %v", v)
+	}
 }
 
 // TaxWithholdingMetadata - Optional tax withholding metadata for TAX_WITHHOLDING operating purpose
@@ -2185,6 +3251,29 @@ const (
 func (e EnrollmentState) ToPointer() *EnrollmentState {
 	return &e
 }
+func (e *EnrollmentState) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ENROLLMENT_STATE_UNSPECIFIED":
+		fallthrough
+	case "ACTIVE":
+		fallthrough
+	case "INACTIVE":
+		fallthrough
+	case "PENDING_AGREEMENT":
+		fallthrough
+	case "PROCESSING":
+		fallthrough
+	case "EXPIRED":
+		*e = EnrollmentState(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentState: %v", v)
+	}
+}
 
 // EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan string
@@ -2197,6 +3286,23 @@ const (
 
 func (e EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan {
 	return &e
+}
+func (e *EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentTrustEnrollmentMetadataDividendReinvestmentPlan: %v", v)
+	}
 }
 
 // EnrollmentTrustEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -2211,6 +3317,23 @@ const (
 func (e EnrollmentTrustEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentTrustEnrollmentMetadataFdicCashSweep {
 	return &e
 }
+func (e *EnrollmentTrustEnrollmentMetadataFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = EnrollmentTrustEnrollmentMetadataFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentTrustEnrollmentMetadataFdicCashSweep: %v", v)
+	}
+}
 
 // EnrollmentOpenedOnBehalfOf - Trust account is opened on behalf of
 type EnrollmentOpenedOnBehalfOf string
@@ -2224,6 +3347,25 @@ const (
 
 func (e EnrollmentOpenedOnBehalfOf) ToPointer() *EnrollmentOpenedOnBehalfOf {
 	return &e
+}
+func (e *EnrollmentOpenedOnBehalfOf) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "OPENED_ON_BEHALF_OF_UNSPECIFIED":
+		fallthrough
+	case "PERSONAL_TRUST":
+		fallthrough
+	case "BUSINESS_TRUST":
+		fallthrough
+	case "THIRD_PARTY_ADMINISTRATOR":
+		*e = EnrollmentOpenedOnBehalfOf(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentOpenedOnBehalfOf: %v", v)
+	}
 }
 
 // TrustEnrollmentMetadata - Metadata for the REGISTRATION_TRUST type
@@ -2290,6 +3432,67 @@ const (
 
 func (e EnrollmentType1) ToPointer() *EnrollmentType1 {
 	return &e
+}
+func (e *EnrollmentType1) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ENROLLMENT_TYPE_UNSPECIFIED":
+		fallthrough
+	case "REGISTRATION_INDIVIDUAL":
+		fallthrough
+	case "LENDING_LIMITED_PURPOSE_MARGIN":
+		fallthrough
+	case "LENDING_FULLY_PAID_STOCK_LOAN":
+		fallthrough
+	case "BENEFICIARY_DESIGNATION":
+		fallthrough
+	case "REGISTRATION_JOINT_WROS":
+		fallthrough
+	case "REGISTRATION_JOINT_TIC":
+		fallthrough
+	case "REGISTRATION_JOINT_TBE":
+		fallthrough
+	case "REGISTRATION_JOINT_CP":
+		fallthrough
+	case "REGISTRATION_ESTATE":
+		fallthrough
+	case "REGISTRATION_IRA_TRADITIONAL":
+		fallthrough
+	case "REGISTRATION_IRA_SIMPLE":
+		fallthrough
+	case "REGISTRATION_IRA_SEP":
+		fallthrough
+	case "REGISTRATION_IRA_ROTH":
+		fallthrough
+	case "REGISTRATION_IRA_ROLLOVER":
+		fallthrough
+	case "REGISTRATION_TRUST":
+		fallthrough
+	case "REGISTRATION_CORPORATION":
+		fallthrough
+	case "CASH_FDIC_CASH_SWEEP":
+		fallthrough
+	case "MARGINS_PDT_RESET":
+		fallthrough
+	case "RETIREMENT_BENEFICIARY_DESIGNATION":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_PLAN":
+		fallthrough
+	case "REGISTRATION_IRA_BENEFICIARY_TRADITIONAL":
+		fallthrough
+	case "REGISTRATION_IRA_BENEFICIARY_ROTH":
+		fallthrough
+	case "REGISTRATION_CUSTODIAL":
+		fallthrough
+	case "REG_T_MARGIN":
+		*e = EnrollmentType1(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnrollmentType1: %v", v)
+	}
 }
 
 // An Enrollment represents programs the account may enroll in.

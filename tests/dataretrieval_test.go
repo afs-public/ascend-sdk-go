@@ -28,7 +28,7 @@ func TestDataRetrieval_SnapshotsListSnapshots_ListSnapshots1(t *testing.T) {
 	)
 
 	ctx := context.Background()
-	res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String("snapshot_type==\"daily_accounts\"&&process_date==date(\"2023-09-30\")"), ascendsdkgo.Int(10), ascendsdkgo.String("M_-BAwEBCVBhZ2VUb2tlbgH_ggABAgEMUnVubmluZ1RvdGFsAQQAAQZGaWx0ZXIBDAAAAAX_ggEyAA=="))
+	res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String("snapshot_id==\"daily_accounts\"&&process_date==date(\"2023-09-30\")"), ascendsdkgo.Int(10), ascendsdkgo.String("ZXhhbXBsZQo"))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // AccountGoalsUpdateInvestmentObjective - The financial goal or purpose that an investor has in mind when making investment decisions; firms often ask investors to specify their investment objectives when opening an account, in order to provide appropriate investment recommendations and manage risk appropriately
 type AccountGoalsUpdateInvestmentObjective string
 
@@ -25,6 +30,45 @@ const (
 func (e AccountGoalsUpdateInvestmentObjective) ToPointer() *AccountGoalsUpdateInvestmentObjective {
 	return &e
 }
+func (e *AccountGoalsUpdateInvestmentObjective) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "INVESTMENT_OBJECTIVE_UNSPECIFIED":
+		fallthrough
+	case "BALANCED":
+		fallthrough
+	case "CAPITAL_APPRECIATION":
+		fallthrough
+	case "CAPITAL_PRESERVATION":
+		fallthrough
+	case "GROWTH":
+		fallthrough
+	case "GROWTH_AND_INCOME":
+		fallthrough
+	case "GROWTH_INCOME":
+		fallthrough
+	case "INCOME":
+		fallthrough
+	case "LONG_TERM_GROWTH_WITH_GREATER_RISK":
+		fallthrough
+	case "LONG_TERM_GROWTH_WITH_SAFETY":
+		fallthrough
+	case "MAXIMUM_GROWTH":
+		fallthrough
+	case "SHORT_TERM_GROWTH_WITH_RISK":
+		fallthrough
+	case "SPECULATION":
+		fallthrough
+	case "OTHER":
+		*e = AccountGoalsUpdateInvestmentObjective(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccountGoalsUpdateInvestmentObjective: %v", v)
+	}
+}
 
 // AccountGoalsUpdateLiquidityNeeds - An investor’s short-term cash requirements or the need to access funds quickly; it is important to consider an investor’s liquidity needs to ensure that they have sufficient cash or easily liquidated assets available to meet their financial obligations - this may include holding cash or cash equivalents
 type AccountGoalsUpdateLiquidityNeeds string
@@ -38,6 +82,25 @@ const (
 
 func (e AccountGoalsUpdateLiquidityNeeds) ToPointer() *AccountGoalsUpdateLiquidityNeeds {
 	return &e
+}
+func (e *AccountGoalsUpdateLiquidityNeeds) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "LIQUIDITY_NEEDS_UNSPECIFIED":
+		fallthrough
+	case "VERY_IMPORTANT":
+		fallthrough
+	case "SOMEWHAT_IMPORTANT":
+		fallthrough
+	case "NOT_IMPORTANT":
+		*e = AccountGoalsUpdateLiquidityNeeds(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccountGoalsUpdateLiquidityNeeds: %v", v)
+	}
 }
 
 // AccountGoalsUpdateRiskTolerance - An investor’s willingness and ability to tolerate risk when making investment decisions; reflects the investor’s comfort level with the potential ups and downs of the market and their ability to withstand potential losses
@@ -53,6 +116,25 @@ const (
 func (e AccountGoalsUpdateRiskTolerance) ToPointer() *AccountGoalsUpdateRiskTolerance {
 	return &e
 }
+func (e *AccountGoalsUpdateRiskTolerance) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "RISK_TOLERANCE_UNSPECIFIED":
+		fallthrough
+	case "LOW":
+		fallthrough
+	case "MEDIUM":
+		fallthrough
+	case "HIGH":
+		*e = AccountGoalsUpdateRiskTolerance(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccountGoalsUpdateRiskTolerance: %v", v)
+	}
+}
 
 // AccountGoalsUpdateTimeHorizon - TThe length of time an investor expects to hold an investment before selling it; this can affect the appropriate asset allocation and risk level for the portfolio
 type AccountGoalsUpdateTimeHorizon string
@@ -66,6 +148,25 @@ const (
 
 func (e AccountGoalsUpdateTimeHorizon) ToPointer() *AccountGoalsUpdateTimeHorizon {
 	return &e
+}
+func (e *AccountGoalsUpdateTimeHorizon) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TIME_HORIZON_UNSPECIFIED":
+		fallthrough
+	case "SHORT":
+		fallthrough
+	case "AVERAGE":
+		fallthrough
+	case "LONG":
+		*e = AccountGoalsUpdateTimeHorizon(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AccountGoalsUpdateTimeHorizon: %v", v)
+	}
 }
 
 // AccountGoalsUpdate - The account goals on an investor profile.

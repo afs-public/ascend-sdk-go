@@ -23,16 +23,16 @@ Creates a new push subscription for event notifications.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -44,14 +44,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Subscriber.CreatePushSubscription(ctx, components.PushSubscriptionCreate{
-        CorrespondentID: ascendsdk.String("01H8MCDXH4HYJJAV921BDKCC83"),
+        CorrespondentID: ascendsdkgo.String("01H8MCDXH4HYJJAV921BDKCC83"),
         DisplayName: "This is an example HTTP configuration.",
         EventTypes: []string{
             "position.v1.updated",
         },
         HTTPCallback: &components.HTTPPushCallbackCreate{
             ClientSecret: "mysecretkey",
-            TimeoutSeconds: ascendsdk.Int(30),
+            TimeoutSeconds: ascendsdkgo.Int(30),
             URL: "https://webhook.example.com",
         },
     })
@@ -93,16 +93,16 @@ Gets a list of push subscriptions.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -113,7 +113,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdk.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdk.Int(50), ascendsdk.String("ZXhhbXBsZQo"))
+    res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdkgo.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
     if err != nil {
         log.Fatal(err)
     }
@@ -154,16 +154,16 @@ Gets the details of a specific push subscription.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -213,16 +213,16 @@ Updates the details of a push subscription.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -234,14 +234,14 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Subscriber.UpdatePushSubscription(ctx, "01H8MCDXH4JVH7KVNB2YY42907", components.PushSubscriptionUpdate{
-        DisplayName: ascendsdk.String("This is an example HTTP configuration."),
+        DisplayName: ascendsdkgo.String("This is an example HTTP configuration."),
         EventTypes: []string{
             "position.v1.updated",
         },
         HTTPCallback: &components.HTTPPushCallbackUpdate{
-            ClientSecret: ascendsdk.String("mysecretkey"),
-            TimeoutSeconds: ascendsdk.Int(30),
-            URL: ascendsdk.String("https://webhook.example.com"),
+            ClientSecret: ascendsdkgo.String("mysecretkey"),
+            TimeoutSeconds: ascendsdkgo.Int(30),
+            URL: ascendsdkgo.String("https://webhook.example.com"),
         },
     }, nil)
     if err != nil {
@@ -284,16 +284,16 @@ Stops receiving events from a push subscription, and then deletes it.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -343,16 +343,16 @@ Gets the details of a specific push subscription delivery.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -403,16 +403,16 @@ Gets a list of a push subscription's event deliveries.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -423,7 +423,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Subscriber.ListPushSubscriptionDeliveries(ctx, "01H8MCDXH4JVH7KVNB2YY42907", ascendsdk.String("event_publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"), ascendsdk.Int(50), ascendsdk.String("ZXhhbXBsZQo"))
+    res, err := s.Subscriber.ListPushSubscriptionDeliveries(ctx, "01H8MCDXH4JVH7KVNB2YY42907", ascendsdkgo.String("event_publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
     if err != nil {
         log.Fatal(err)
     }

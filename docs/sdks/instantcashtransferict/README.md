@@ -23,16 +23,16 @@ Creates an ICT deposit
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -54,12 +54,12 @@ func main() {
         TravelRule: components.IctDepositTravelRuleCreate{
             EntityOriginatingParty: &components.TravelRuleEntityPartyCreate{
                 Address: components.PostalAddressCreate{},
-                TaxID: ascendsdk.String("987-65-4321"),
+                TaxID: ascendsdkgo.String("987-65-4321"),
                 Title: "Acme, Inc.",
             },
             EntityRecipientParty: &components.TravelRuleEntityPartyCreate{
                 Address: components.PostalAddressCreate{},
-                TaxID: ascendsdk.String("987-65-4321"),
+                TaxID: ascendsdkgo.String("987-65-4321"),
                 Title: "Acme, Inc.",
             },
             IndividualOriginatingParty: &components.TravelRulePartyCreate{
@@ -121,16 +121,16 @@ Gets an existing ICT deposit
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -181,16 +181,16 @@ Cancels an existing ICT deposit
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -203,7 +203,7 @@ func main() {
     ctx := context.Background()
     res, err := s.InstantCashTransferICT.CancelIctDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472", components.CancelIctDepositRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472",
-        Reason: ascendsdk.String("User Request"),
+        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)
@@ -245,16 +245,16 @@ Creates an ICT withdrawal
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -267,7 +267,7 @@ func main() {
     ctx := context.Background()
     res, err := s.InstantCashTransferICT.CreateIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.IctWithdrawalCreate{
         ClientTransferID: "20230817000319",
-        FullDisbursement: ascendsdk.Bool(true),
+        FullDisbursement: ascendsdkgo.Bool(true),
         Program: components.IctWithdrawalCreateProgramBrokerPartner,
         RetirementDistribution: &components.RetirementDistributionCreate{
             Type: components.RetirementDistributionCreateTypeNormal,
@@ -318,16 +318,16 @@ Gets an existing ICT withdrawal
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -378,16 +378,16 @@ Cancels an existing ICT withdrawal
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -400,7 +400,7 @@ func main() {
     ctx := context.Background()
     res, err := s.InstantCashTransferICT.CancelIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472", components.CancelIctWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472",
-        Reason: ascendsdk.String("User Request"),
+        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)
@@ -442,17 +442,17 @@ Returns a signed link pointing to a recon report file for a specific ICT batch.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"ascend-sdk/models/operations"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -463,7 +463,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.InstantCashTransferICT.LocateIctReport(ctx, "01H8MCDXH4HYJJAV921BDKCC83", ascendsdk.String("24114.108.2b2c1.001"), operations.ProgramDateFilterProgramBrokerPartner.ToPointer(), &components.DateCreate{})
+    res, err := s.InstantCashTransferICT.LocateIctReport(ctx, "01H8MCDXH4HYJJAV921BDKCC83", ascendsdkgo.String("24114.108.2b2c1.001"), operations.ProgramDateFilterProgramBrokerPartner.ToPointer(), &components.DateCreate{})
     if err != nil {
         log.Fatal(err)
     }

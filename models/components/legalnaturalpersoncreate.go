@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // MaritalStatus - The legal marital status of an account-holder; Used in combination with state of domicile to determine qualification for account types and beneficiary exclusion rules.
 type MaritalStatus string
 
@@ -15,6 +20,27 @@ const (
 
 func (e MaritalStatus) ToPointer() *MaritalStatus {
 	return &e
+}
+func (e *MaritalStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "MARITAL_STATUS_UNSPECIFIED":
+		fallthrough
+	case "SINGLE":
+		fallthrough
+	case "MARRIED":
+		fallthrough
+	case "DIVORCED":
+		fallthrough
+	case "WIDOWED":
+		*e = MaritalStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for MaritalStatus: %v", v)
+	}
 }
 
 // NameSuffix - The suffix of a natural person; A suffix in a name is any part of the name that comes after the last name
@@ -32,6 +58,29 @@ const (
 func (e NameSuffix) ToPointer() *NameSuffix {
 	return &e
 }
+func (e *NameSuffix) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "NAME_SUFFIX_UNSPECIFIED":
+		fallthrough
+	case "SR":
+		fallthrough
+	case "JR":
+		fallthrough
+	case "III":
+		fallthrough
+	case "IV":
+		fallthrough
+	case "V":
+		*e = NameSuffix(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for NameSuffix: %v", v)
+	}
+}
 
 // TaxIDType - The nature of the U.S. Tax ID indicated in the related tax_id field; Examples include ITIN, SSN, EIN.
 type TaxIDType string
@@ -45,6 +94,25 @@ const (
 
 func (e TaxIDType) ToPointer() *TaxIDType {
 	return &e
+}
+func (e *TaxIDType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_ID_TYPE_UNSPECIFIED":
+		fallthrough
+	case "TAX_ID_TYPE_SSN":
+		fallthrough
+	case "TAX_ID_TYPE_ITIN":
+		fallthrough
+	case "TAX_ID_TYPE_EIN":
+		*e = TaxIDType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TaxIDType: %v", v)
+	}
 }
 
 // LegalNaturalPersonCreate - A legal natural person. This represents the full set of data for an individual. A Customer Identification Program (CIP) may be run on legal natural persons.

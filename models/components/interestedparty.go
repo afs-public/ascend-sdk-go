@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // InterestedPartyMailingAddress - The object containing data for the purpose of delivery physical mailings to a party; Typically used for statements, account updates, tax documents, and other postal mailings; May also be used as an alternative identity verification address to personalAddress. Required fields within the `mailing_address` object include:
 //   - `administrative_area`
 //   - `region_code` - 2 character CLDR Code
@@ -135,6 +140,25 @@ const (
 func (e InterestedPartyStatementDeliveryPreference) ToPointer() *InterestedPartyStatementDeliveryPreference {
 	return &e
 }
+func (e *InterestedPartyStatementDeliveryPreference) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DELIVERY_PREFERENCE_UNSPECIFIED":
+		fallthrough
+	case "DIGITAL":
+		fallthrough
+	case "PHYSICAL":
+		fallthrough
+	case "SUPPRESS":
+		*e = InterestedPartyStatementDeliveryPreference(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InterestedPartyStatementDeliveryPreference: %v", v)
+	}
+}
 
 // InterestedPartyTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type InterestedPartyTradeConfirmationDeliveryPreference string
@@ -148,6 +172,25 @@ const (
 
 func (e InterestedPartyTradeConfirmationDeliveryPreference) ToPointer() *InterestedPartyTradeConfirmationDeliveryPreference {
 	return &e
+}
+func (e *InterestedPartyTradeConfirmationDeliveryPreference) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DELIVERY_PREFERENCE_UNSPECIFIED":
+		fallthrough
+	case "DIGITAL":
+		fallthrough
+	case "PHYSICAL":
+		fallthrough
+	case "SUPPRESS":
+		*e = InterestedPartyTradeConfirmationDeliveryPreference(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InterestedPartyTradeConfirmationDeliveryPreference: %v", v)
+	}
 }
 
 // InterestedParty - An interested party.

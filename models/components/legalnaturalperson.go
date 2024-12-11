@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // BirthDate - The legal day, month, and year of birth for a natural person.
 type BirthDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -199,6 +204,29 @@ const (
 func (e LegalNaturalPersonEmploymentStatus) ToPointer() *LegalNaturalPersonEmploymentStatus {
 	return &e
 }
+func (e *LegalNaturalPersonEmploymentStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "STATUS_UNSPECIFIED":
+		fallthrough
+	case "EMPLOYED":
+		fallthrough
+	case "SELF_EMPLOYED":
+		fallthrough
+	case "UNEMPLOYED":
+		fallthrough
+	case "RETIRED":
+		fallthrough
+	case "STUDENT":
+		*e = LegalNaturalPersonEmploymentStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonEmploymentStatus: %v", v)
+	}
+}
 
 // Employment - Object containing information pertaining to a investor's current employer including the name, address, and duration of employment.
 type Employment struct {
@@ -337,6 +365,25 @@ const (
 
 func (e LegalNaturalPersonType) ToPointer() *LegalNaturalPersonType {
 	return &e
+}
+func (e *LegalNaturalPersonType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IDENTIFICATION_TYPE_UNSPECIFIED":
+		fallthrough
+	case "PASSPORT":
+		fallthrough
+	case "NATIONAL_ID":
+		fallthrough
+	case "DRIVERS_LICENSE":
+		*e = LegalNaturalPersonType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonType: %v", v)
+	}
 }
 
 // ForeignIdentification - Foreign identification. Must be provided if the person does not have a U.S. tax ID
@@ -589,6 +636,27 @@ const (
 func (e LegalNaturalPersonMaritalStatus) ToPointer() *LegalNaturalPersonMaritalStatus {
 	return &e
 }
+func (e *LegalNaturalPersonMaritalStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "MARITAL_STATUS_UNSPECIFIED":
+		fallthrough
+	case "SINGLE":
+		fallthrough
+	case "MARRIED":
+		fallthrough
+	case "DIVORCED":
+		fallthrough
+	case "WIDOWED":
+		*e = LegalNaturalPersonMaritalStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonMaritalStatus: %v", v)
+	}
+}
 
 // LegalNaturalPersonNameSuffix - The suffix of a natural person; A suffix in a name is any part of the name that comes after the last name
 type LegalNaturalPersonNameSuffix string
@@ -604,6 +672,29 @@ const (
 
 func (e LegalNaturalPersonNameSuffix) ToPointer() *LegalNaturalPersonNameSuffix {
 	return &e
+}
+func (e *LegalNaturalPersonNameSuffix) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "NAME_SUFFIX_UNSPECIFIED":
+		fallthrough
+	case "SR":
+		fallthrough
+	case "JR":
+		fallthrough
+	case "III":
+		fallthrough
+	case "IV":
+		fallthrough
+	case "V":
+		*e = LegalNaturalPersonNameSuffix(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonNameSuffix: %v", v)
+	}
 }
 
 // CustomerReferralSource - Customer Referral Source
@@ -760,6 +851,25 @@ const (
 func (e LegalNaturalPersonResidencyStatus) ToPointer() *LegalNaturalPersonResidencyStatus {
 	return &e
 }
+func (e *LegalNaturalPersonResidencyStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "RESIDENCY_STATUS_UNSPECIFIED":
+		fallthrough
+	case "US_PERMANENT_RESIDENT":
+		fallthrough
+	case "US_TEMPORARY_RESIDENT":
+		fallthrough
+	case "US_NON_RESIDENT":
+		*e = LegalNaturalPersonResidencyStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonResidencyStatus: %v", v)
+	}
+}
 
 // NonCitizenResidency - Facilitates non-citizen lawful US residents to open domestic accounts
 type NonCitizenResidency struct {
@@ -906,6 +1016,25 @@ const (
 func (e LegalNaturalPersonTaxIDType) ToPointer() *LegalNaturalPersonTaxIDType {
 	return &e
 }
+func (e *LegalNaturalPersonTaxIDType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_ID_TYPE_UNSPECIFIED":
+		fallthrough
+	case "TAX_ID_TYPE_SSN":
+		fallthrough
+	case "TAX_ID_TYPE_ITIN":
+		fallthrough
+	case "TAX_ID_TYPE_EIN":
+		*e = LegalNaturalPersonTaxIDType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonTaxIDType: %v", v)
+	}
+}
 
 // CNoticeDate - C Notice date.
 type CNoticeDate struct {
@@ -957,6 +1086,37 @@ const (
 func (e LegalNaturalPersonFederalTaxClassification) ToPointer() *LegalNaturalPersonFederalTaxClassification {
 	return &e
 }
+func (e *LegalNaturalPersonFederalTaxClassification) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED":
+		fallthrough
+	case "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC":
+		fallthrough
+	case "PARTNERSHIP":
+		fallthrough
+	case "C_CORPORATION":
+		fallthrough
+	case "S_CORPORATION":
+		fallthrough
+	case "TRUST_ESTATE":
+		fallthrough
+	case "LLC_TAXED_AS_C_CORP":
+		fallthrough
+	case "LLC_TAXED_AS_S_CORP":
+		fallthrough
+	case "LLC_TAXED_AS_PARTNERSHIP":
+		fallthrough
+	case "OTHER":
+		*e = LegalNaturalPersonFederalTaxClassification(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonFederalTaxClassification: %v", v)
+	}
+}
 
 // FirstBNoticeDate - Initial B Notice date.
 type FirstBNoticeDate struct {
@@ -1000,6 +1160,21 @@ const (
 func (e LegalNaturalPersonIrsFormType) ToPointer() *LegalNaturalPersonIrsFormType {
 	return &e
 }
+func (e *LegalNaturalPersonIrsFormType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IRS_FORM_TYPE_UNSPECIFIED":
+		fallthrough
+	case "W_9":
+		*e = LegalNaturalPersonIrsFormType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonIrsFormType: %v", v)
+	}
+}
 
 // ReportingEligibility - Tax reporting eligibility.
 type ReportingEligibility string
@@ -1012,6 +1187,23 @@ const (
 
 func (e ReportingEligibility) ToPointer() *ReportingEligibility {
 	return &e
+}
+func (e *ReportingEligibility) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_REPORTING_ELIGIBILITY_UNSPECIFIED":
+		fallthrough
+	case "ELIGIBLE":
+		fallthrough
+	case "INELIGIBLE":
+		*e = ReportingEligibility(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ReportingEligibility: %v", v)
+	}
 }
 
 // TaxCertificationDate - Tax Certification date.
@@ -1057,6 +1249,23 @@ const (
 func (e TaxpayerCertificationState) ToPointer() *TaxpayerCertificationState {
 	return &e
 }
+func (e *TaxpayerCertificationState) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED":
+		fallthrough
+	case "CERTIFIED":
+		fallthrough
+	case "UNCERTIFIED":
+		*e = TaxpayerCertificationState(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TaxpayerCertificationState: %v", v)
+	}
+}
 
 // LegalNaturalPersonUsTinStatus - United States Individual Taxpayer Identification Number (ITIN) status.
 type LegalNaturalPersonUsTinStatus string
@@ -1069,6 +1278,23 @@ const (
 
 func (e LegalNaturalPersonUsTinStatus) ToPointer() *LegalNaturalPersonUsTinStatus {
 	return &e
+}
+func (e *LegalNaturalPersonUsTinStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "US_TIN_STATUS_UNSPECIFIED":
+		fallthrough
+	case "PASSING":
+		fallthrough
+	case "FAILING":
+		*e = LegalNaturalPersonUsTinStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonUsTinStatus: %v", v)
+	}
 }
 
 // LegalNaturalPersonWithholdingState - B/C Notice status.
@@ -1084,6 +1310,27 @@ const (
 
 func (e LegalNaturalPersonWithholdingState) ToPointer() *LegalNaturalPersonWithholdingState {
 	return &e
+}
+func (e *LegalNaturalPersonWithholdingState) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "WITHHOLDING_STATE_UNSPECIFIED":
+		fallthrough
+	case "FIRST_B_NOTICE_RECEIVED":
+		fallthrough
+	case "SECOND_B_NOTICE_RECEIVED":
+		fallthrough
+	case "C_NOTICE_RECEIVED":
+		fallthrough
+	case "C_NOTICE_INDICATED_BY_CUSTOMER":
+		*e = LegalNaturalPersonWithholdingState(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalNaturalPersonWithholdingState: %v", v)
+	}
 }
 
 // TaxProfile - Tax-related attributes at the for the account; A tax profile with taxpayer attributes is located on the legal_natural_person or legal_entity objects elsewhere on the account record.

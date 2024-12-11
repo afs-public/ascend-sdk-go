@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // EndReason - The end reason of the LTID.
 type EndReason string
 
@@ -17,6 +22,31 @@ const (
 
 func (e EndReason) ToPointer() *EndReason {
 	return &e
+}
+func (e *EndReason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "REPORTABLE_ACCOUNT_EVENT_REASON_UNSPECIFIED":
+		fallthrough
+	case "EVENT_REASON_CREATED":
+		fallthrough
+	case "EVENT_REASON_CORRECTION":
+		fallthrough
+	case "EVENT_REASON_ENDED":
+		fallthrough
+	case "EVENT_REASON_REPLACED":
+		fallthrough
+	case "EVENT_REASON_TRANSFER":
+		fallthrough
+	case "EVENT_REASON_OTHER":
+		*e = EndReason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EndReason: %v", v)
+	}
 }
 
 // EndLargeTraderRequestCreate - The request to end a Large Trader on a Legal Natural Person/Legal Entity.

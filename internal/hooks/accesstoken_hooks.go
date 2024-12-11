@@ -15,7 +15,7 @@ import (
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type AccessTokenHook struct{}

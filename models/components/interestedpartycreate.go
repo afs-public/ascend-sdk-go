@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // StatementDeliveryPreference - Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type StatementDeliveryPreference string
 
@@ -14,6 +19,25 @@ const (
 
 func (e StatementDeliveryPreference) ToPointer() *StatementDeliveryPreference {
 	return &e
+}
+func (e *StatementDeliveryPreference) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DELIVERY_PREFERENCE_UNSPECIFIED":
+		fallthrough
+	case "DIGITAL":
+		fallthrough
+	case "PHYSICAL":
+		fallthrough
+	case "SUPPRESS":
+		*e = StatementDeliveryPreference(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for StatementDeliveryPreference: %v", v)
+	}
 }
 
 // TradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
@@ -28,6 +52,25 @@ const (
 
 func (e TradeConfirmationDeliveryPreference) ToPointer() *TradeConfirmationDeliveryPreference {
 	return &e
+}
+func (e *TradeConfirmationDeliveryPreference) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DELIVERY_PREFERENCE_UNSPECIFIED":
+		fallthrough
+	case "DIGITAL":
+		fallthrough
+	case "PHYSICAL":
+		fallthrough
+	case "SUPPRESS":
+		*e = TradeConfirmationDeliveryPreference(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TradeConfirmationDeliveryPreference: %v", v)
+	}
 }
 
 // InterestedPartyCreate - An interested party.

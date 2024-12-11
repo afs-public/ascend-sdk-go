@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // CustomerProfileUpdateAnnualIncomeRangeUsd - Annual income range; the low number is exclusive, the high number is inclusive
 type CustomerProfileUpdateAnnualIncomeRangeUsd string
 
@@ -21,6 +26,37 @@ const (
 func (e CustomerProfileUpdateAnnualIncomeRangeUsd) ToPointer() *CustomerProfileUpdateAnnualIncomeRangeUsd {
 	return &e
 }
+func (e *CustomerProfileUpdateAnnualIncomeRangeUsd) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USD_RANGE_UNSPECIFIED":
+		fallthrough
+	case "UNDER_25K":
+		fallthrough
+	case "FROM_25K_TO_50K":
+		fallthrough
+	case "FROM_50K_TO_100K":
+		fallthrough
+	case "FROM_100K_TO_200K":
+		fallthrough
+	case "FROM_200K_TO_300K":
+		fallthrough
+	case "FROM_300K_TO_500K":
+		fallthrough
+	case "FROM_500K_TO_1M":
+		fallthrough
+	case "FROM_1M_TO_5M":
+		fallthrough
+	case "OVER_5M":
+		*e = CustomerProfileUpdateAnnualIncomeRangeUsd(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomerProfileUpdateAnnualIncomeRangeUsd: %v", v)
+	}
+}
 
 // CustomerProfileUpdateInvestmentExperience - Investment experience.
 type CustomerProfileUpdateInvestmentExperience string
@@ -35,6 +71,27 @@ const (
 
 func (e CustomerProfileUpdateInvestmentExperience) ToPointer() *CustomerProfileUpdateInvestmentExperience {
 	return &e
+}
+func (e *CustomerProfileUpdateInvestmentExperience) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "INVESTMENT_EXPERIENCE_UNSPECIFIED":
+		fallthrough
+	case "NONE":
+		fallthrough
+	case "LIMITED":
+		fallthrough
+	case "GOOD":
+		fallthrough
+	case "EXTENSIVE":
+		*e = CustomerProfileUpdateInvestmentExperience(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomerProfileUpdateInvestmentExperience: %v", v)
+	}
 }
 
 // CustomerProfileUpdateLiquidNetWorthRangeUsd - Liquid net worth range; the low number is exclusive, the high number is inclusive
@@ -56,6 +113,37 @@ const (
 func (e CustomerProfileUpdateLiquidNetWorthRangeUsd) ToPointer() *CustomerProfileUpdateLiquidNetWorthRangeUsd {
 	return &e
 }
+func (e *CustomerProfileUpdateLiquidNetWorthRangeUsd) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USD_RANGE_UNSPECIFIED":
+		fallthrough
+	case "UNDER_25K":
+		fallthrough
+	case "FROM_25K_TO_50K":
+		fallthrough
+	case "FROM_50K_TO_100K":
+		fallthrough
+	case "FROM_100K_TO_200K":
+		fallthrough
+	case "FROM_200K_TO_300K":
+		fallthrough
+	case "FROM_300K_TO_500K":
+		fallthrough
+	case "FROM_500K_TO_1M":
+		fallthrough
+	case "FROM_1M_TO_5M":
+		fallthrough
+	case "OVER_5M":
+		*e = CustomerProfileUpdateLiquidNetWorthRangeUsd(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomerProfileUpdateLiquidNetWorthRangeUsd: %v", v)
+	}
+}
 
 // CustomerProfileUpdateTotalNetWorthRangeUsd - Total net worth range; the low number is exclusive, the high number is inclusive
 type CustomerProfileUpdateTotalNetWorthRangeUsd string
@@ -75,6 +163,37 @@ const (
 
 func (e CustomerProfileUpdateTotalNetWorthRangeUsd) ToPointer() *CustomerProfileUpdateTotalNetWorthRangeUsd {
 	return &e
+}
+func (e *CustomerProfileUpdateTotalNetWorthRangeUsd) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "USD_RANGE_UNSPECIFIED":
+		fallthrough
+	case "UNDER_25K":
+		fallthrough
+	case "FROM_25K_TO_50K":
+		fallthrough
+	case "FROM_50K_TO_100K":
+		fallthrough
+	case "FROM_100K_TO_200K":
+		fallthrough
+	case "FROM_200K_TO_300K":
+		fallthrough
+	case "FROM_300K_TO_500K":
+		fallthrough
+	case "FROM_500K_TO_1M":
+		fallthrough
+	case "FROM_1M_TO_5M":
+		fallthrough
+	case "OVER_5M":
+		*e = CustomerProfileUpdateTotalNetWorthRangeUsd(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustomerProfileUpdateTotalNetWorthRangeUsd: %v", v)
+	}
 }
 
 // CustomerProfileUpdate - A detailed summary of financial and personal details of an investor, to help understand the investor's financial standing, investment experience and risk tolerance.

@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // InvestigationUpdateIdentityVerification - Indicates the current state of identity verification
 type InvestigationUpdateIdentityVerification string
 
@@ -18,28 +23,76 @@ const (
 func (e InvestigationUpdateIdentityVerification) ToPointer() *InvestigationUpdateIdentityVerification {
 	return &e
 }
+func (e *InvestigationUpdateIdentityVerification) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "SCREEN_STATE_UNSPECIFIED":
+		fallthrough
+	case "PENDING":
+		fallthrough
+	case "PASSED":
+		fallthrough
+	case "FAILED":
+		fallthrough
+	case "NEEDS_REVIEW":
+		fallthrough
+	case "DEFERRED_REVIEW":
+		fallthrough
+	case "OUT_OF_SCOPE":
+		*e = InvestigationUpdateIdentityVerification(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InvestigationUpdateIdentityVerification: %v", v)
+	}
+}
 
-// InvestigationUpdateInvestigationRequestState - Current state of investigation request
-type InvestigationUpdateInvestigationRequestState string
+// InvestigationUpdateIdentityVerificationScope - Used to determine who is responsible for running identity verification checks
+type InvestigationUpdateIdentityVerificationScope string
 
 const (
-	InvestigationUpdateInvestigationRequestStateInvestigationRequestStateUnspecified InvestigationUpdateInvestigationRequestState = "INVESTIGATION_REQUEST_STATE_UNSPECIFIED"
-	InvestigationUpdateInvestigationRequestStateOpen                                 InvestigationUpdateInvestigationRequestState = "OPEN"
-	InvestigationUpdateInvestigationRequestStateClosed                               InvestigationUpdateInvestigationRequestState = "CLOSED"
+	InvestigationUpdateIdentityVerificationScopeIdentityVerificationScopeUnspecified InvestigationUpdateIdentityVerificationScope = "IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED"
+	InvestigationUpdateIdentityVerificationScopePerformedByApex                      InvestigationUpdateIdentityVerificationScope = "PERFORMED_BY_APEX"
+	InvestigationUpdateIdentityVerificationScopeProvidedByClient                     InvestigationUpdateIdentityVerificationScope = "PROVIDED_BY_CLIENT"
 )
 
-func (e InvestigationUpdateInvestigationRequestState) ToPointer() *InvestigationUpdateInvestigationRequestState {
+func (e InvestigationUpdateIdentityVerificationScope) ToPointer() *InvestigationUpdateIdentityVerificationScope {
 	return &e
+}
+func (e *InvestigationUpdateIdentityVerificationScope) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED":
+		fallthrough
+	case "PERFORMED_BY_APEX":
+		fallthrough
+	case "PROVIDED_BY_CLIENT":
+		*e = InvestigationUpdateIdentityVerificationScope(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InvestigationUpdateIdentityVerificationScope: %v", v)
+	}
 }
 
 // InvestigationUpdate - Contains investigation details of corresponding investigation
 type InvestigationUpdate struct {
 	// Comment relating to why the investigation state was updated
 	Comment *string `json:"comment,omitempty"`
+	// A unique identifier referencing a Correspondent
+	CorrespondentID *string `json:"correspondent_id,omitempty"`
+	// investigation details on an entity
+	Entity *EntityUpdate `json:"entity,omitempty"`
 	// Indicates the current state of identity verification
 	IdentityVerification *InvestigationUpdateIdentityVerification `json:"identity_verification,omitempty"`
-	// Current state of investigation request
-	InvestigationRequestState *InvestigationUpdateInvestigationRequestState `json:"investigation_request_state,omitempty"`
+	// Used to determine who is responsible for running identity verification checks
+	IdentityVerificationScope *InvestigationUpdateIdentityVerificationScope `json:"identity_verification_scope,omitempty"`
+	// investigation details on a person
+	Person *PersonUpdate `json:"person,omitempty"`
 	// A list of watchlist entries matched against the investigation
 	WatchlistMatches []WatchlistMatchUpdate `json:"watchlist_matches,omitempty"`
 }
@@ -51,6 +104,20 @@ func (o *InvestigationUpdate) GetComment() *string {
 	return o.Comment
 }
 
+func (o *InvestigationUpdate) GetCorrespondentID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CorrespondentID
+}
+
+func (o *InvestigationUpdate) GetEntity() *EntityUpdate {
+	if o == nil {
+		return nil
+	}
+	return o.Entity
+}
+
 func (o *InvestigationUpdate) GetIdentityVerification() *InvestigationUpdateIdentityVerification {
 	if o == nil {
 		return nil
@@ -58,11 +125,18 @@ func (o *InvestigationUpdate) GetIdentityVerification() *InvestigationUpdateIden
 	return o.IdentityVerification
 }
 
-func (o *InvestigationUpdate) GetInvestigationRequestState() *InvestigationUpdateInvestigationRequestState {
+func (o *InvestigationUpdate) GetIdentityVerificationScope() *InvestigationUpdateIdentityVerificationScope {
 	if o == nil {
 		return nil
 	}
-	return o.InvestigationRequestState
+	return o.IdentityVerificationScope
+}
+
+func (o *InvestigationUpdate) GetPerson() *PersonUpdate {
+	if o == nil {
+		return nil
+	}
+	return o.Person
 }
 
 func (o *InvestigationUpdate) GetWatchlistMatches() []WatchlistMatchUpdate {

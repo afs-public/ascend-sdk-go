@@ -3,6 +3,8 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -20,6 +22,25 @@ const (
 
 func (e AuditType) ToPointer() *AuditType {
 	return &e
+}
+func (e *AuditType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUDIT_TYPE_UNSPECIFIED":
+		fallthrough
+	case "INVESTIGATION_REQUEST_UPDATE":
+		fallthrough
+	case "INVESTIGATION_STATE":
+		fallthrough
+	case "COMMENT":
+		*e = AuditType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AuditType: %v", v)
+	}
 }
 
 // AuditTrail - Audit trail details
