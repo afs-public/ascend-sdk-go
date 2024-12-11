@@ -21,16 +21,16 @@ Use this endpoint to get the current state of an investigation by request refere
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -80,16 +80,16 @@ Use this endpoint to update the details of an investigation by request reference
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -101,8 +101,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Investigations.UpdateInvestigation(ctx, "01HEWVF4ZSNKYRP293J53ASJCJ", components.InvestigationUpdate{
-        Comment: ascendsdk.String("Updating Watchlist matches"),
-        CorrespondentID: ascendsdk.String("01HAT5GANHSZ8E8J0RAHQ8BK9K"),
+        Comment: ascendsdkgo.String("Updating Watchlist matches"),
+        CorrespondentID: ascendsdkgo.String("01HAT5GANHSZ8E8J0RAHQ8BK9K"),
         Entity: &components.EntityUpdate{
             DbaNames: []string{
                 "Some Company Alias",
@@ -112,28 +112,28 @@ func main() {
             },
             Identifications: []components.EntityIdentificationUpdate{
                 components.EntityIdentificationUpdate{
-                    AdministrativeArea: ascendsdk.String("TX"),
+                    AdministrativeArea: ascendsdkgo.String("TX"),
                     DocumentReferenceIds: []string{
                         "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
                     },
-                    RegionCode: ascendsdk.String("US"),
+                    RegionCode: ascendsdkgo.String("US"),
                     Type: components.EntityIdentificationUpdateTypeEin.ToPointer(),
-                    Value: ascendsdk.String("666-12-3456"),
+                    Value: ascendsdkgo.String("666-12-3456"),
                 },
             },
-            LegalName: ascendsdk.String("Enterprises, Inc"),
+            LegalName: ascendsdkgo.String("Enterprises, Inc"),
             OperatingRegionCodes: []string{
                 "US",
             },
             PhoneNumbers: []string{
                 "214-765-1010",
             },
-            RegistrationRegion: ascendsdk.String("US"),
+            RegistrationRegion: ascendsdkgo.String("US"),
         },
         IdentityVerification: components.InvestigationUpdateIdentityVerificationPassed.ToPointer(),
         IdentityVerificationScope: components.InvestigationUpdateIdentityVerificationScopePerformedByApex.ToPointer(),
         Person: &components.PersonUpdate{
-            BirthRegionCode: ascendsdk.String("US"),
+            BirthRegionCode: ascendsdkgo.String("US"),
             CitizenshipRegionCodes: []string{
                 "US",
             },
@@ -143,41 +143,41 @@ func main() {
             EmailAddresses: []string{
                 "jdough@domain.com",
             },
-            FamilyName: ascendsdk.String("Dough"),
-            GivenName: ascendsdk.String("John"),
+            FamilyName: ascendsdkgo.String("Dough"),
+            GivenName: ascendsdkgo.String("John"),
             Identifications: []components.PersonIdentificationUpdate{
                 components.PersonIdentificationUpdate{
-                    AdministrativeArea: ascendsdk.String("TX"),
+                    AdministrativeArea: ascendsdkgo.String("TX"),
                     DocumentReferenceIds: []string{
                         "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
                     },
-                    RegionCode: ascendsdk.String("US"),
+                    RegionCode: ascendsdkgo.String("US"),
                     Type: components.PersonIdentificationUpdateTypeSsn.ToPointer(),
-                    Value: ascendsdk.String("666-12-3456"),
+                    Value: ascendsdkgo.String("666-12-3456"),
                 },
             },
-            MiddleNames: ascendsdk.String("Jacob"),
+            MiddleNames: ascendsdkgo.String("Jacob"),
             NameSuffix: components.PersonUpdateNameSuffixJr.ToPointer(),
             PhoneNumbers: []string{
                 "214-765-1010",
             },
             ProvidedIdentityVerification: &components.ProvidedIdentityVerificationUpdate{
-                AddressVerified: ascendsdk.Bool(true),
-                BirthDateVerified: ascendsdk.Bool(true),
-                ExternalCaseID: ascendsdk.String("123456"),
+                AddressVerified: ascendsdkgo.Bool(true),
+                BirthDateVerified: ascendsdkgo.Bool(true),
+                ExternalCaseID: ascendsdkgo.String("123456"),
                 IdentityVerificationDocumentIds: []string{
                     "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
                 },
-                NameVerified: ascendsdk.Bool(true),
-                ProvidedIdentityVerificationID: ascendsdk.String("123456"),
-                RawVendorDataDocumentID: ascendsdk.String("123456"),
-                TaxIDVerified: ascendsdk.Bool(true),
-                Vendor: ascendsdk.String("Your identity verification Vendor"),
+                NameVerified: ascendsdkgo.Bool(true),
+                ProvidedIdentityVerificationID: ascendsdkgo.String("123456"),
+                RawVendorDataDocumentID: ascendsdkgo.String("123456"),
+                TaxIDVerified: ascendsdkgo.Bool(true),
+                Vendor: ascendsdkgo.String("Your identity verification Vendor"),
             },
         },
         WatchlistMatches: []components.WatchlistMatchUpdate{
             components.WatchlistMatchUpdate{
-                ExcludeFromScreening: ascendsdk.Bool(false),
+                ExcludeFromScreening: ascendsdkgo.Bool(false),
             },
         },
     })
@@ -220,16 +220,16 @@ Use this endpoint to retrieve a list of investigation summaries based on optiona
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -240,7 +240,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Investigations.ListInvestigations(ctx, ascendsdk.Int(100), nil, ascendsdk.String("investigation_subject.person_investigation.given_name == 'Jane' && investigation_subject.person_investigation.family_name == 'Dough'"))
+    res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(100), nil, ascendsdkgo.String("investigation_subject.person_investigation.given_name == 'Jane' && investigation_subject.person_investigation.family_name == 'Dough'"))
     if err != nil {
         log.Fatal(err)
     }
@@ -281,16 +281,16 @@ Use this endpoint to update identity verification document IDs.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -345,16 +345,16 @@ Gets the details of an investigation by watchlist type and valid watchlist id
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

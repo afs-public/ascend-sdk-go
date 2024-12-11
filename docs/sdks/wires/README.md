@@ -19,16 +19,16 @@ Creates a wire withdrawal
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -42,11 +42,11 @@ func main() {
     res, err := s.Wires.CreateWireWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.WireWithdrawalCreate{
         Beneficiary: components.WireWithdrawalBeneficiaryCreate{
             Account: "73849218650987",
-            AccountTitle: ascendsdk.String("Jane Dough"),
-            ThirdParty: ascendsdk.Bool(false),
+            AccountTitle: ascendsdkgo.String("Jane Dough"),
+            ThirdParty: ascendsdkgo.Bool(false),
         },
         ClientTransferID: "ABC-123",
-        FullDisbursement: ascendsdk.Bool(false),
+        FullDisbursement: ascendsdkgo.Bool(false),
         Intermediary: &components.WireWithdrawalIntermediaryCreate{
             Account: "NL02ABNA0123456789",
             AccountTitle: "Jane Dough",
@@ -61,7 +61,7 @@ func main() {
                 Type: components.RecipientBankBankIDCreateTypeBic,
             },
             InternationalBankDetails: &components.RecipientBankBankDetailsCreate{
-                AdditionalInfo: ascendsdk.String("Jane Dough transfer through intermediary account"),
+                AdditionalInfo: ascendsdkgo.String("Jane Dough transfer through intermediary account"),
                 Address: components.AddressCreate{},
                 BankName: "ABN AMRO BANK N.V.",
             },
@@ -106,16 +106,16 @@ Gets an existing wire withdrawal
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -166,16 +166,16 @@ Cancels an existing wire withdrawal
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -188,7 +188,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Wires.CancelWireWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.CancelWireWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319",
-        Reason: ascendsdk.String("User Request"),
+        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)

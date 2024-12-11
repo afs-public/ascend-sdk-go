@@ -28,16 +28,16 @@ Creates a Legal Natural Person.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -54,18 +54,18 @@ func main() {
             "US",
             "CA",
         },
-        ControlPersonCompanySymbols: ascendsdk.String("AAPL, GOOL"),
-        CorrespondentEmployee: ascendsdk.Bool(false),
+        ControlPersonCompanySymbols: ascendsdkgo.String("AAPL, GOOL"),
+        CorrespondentEmployee: ascendsdkgo.Bool(false),
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
         DeathDate: &components.DateCreate{},
         Employment: components.EmploymentCreate{
-            Employer: ascendsdk.String("Apex Fintech Solutions"),
+            Employer: ascendsdkgo.String("Apex Fintech Solutions"),
             EmploymentStatus: components.EmploymentStatusEmployed,
             Occupation: "Software Engineer",
-            StartYear: ascendsdk.Int(2019),
+            StartYear: ascendsdkgo.Int(2019),
         },
         FamilyName: "Doe",
-        FinraAssociatedEntity: ascendsdk.String("Entity Name"),
+        FinraAssociatedEntity: ascendsdkgo.String("Entity Name"),
         ForeignIdentification: &components.ForeignIdentificationCreate{
             ExpirationDate: &components.DateCreate{},
             Ftin: true,
@@ -85,7 +85,7 @@ func main() {
                 "6ace3020-24a2-45c4-9f3b-752101073127",
             },
             NameVerified: true,
-            RawVendorDataDocumentID: ascendsdk.String("7a63073a-e694-4a38-b6e0-552044b503f2"),
+            RawVendorDataDocumentID: ascendsdkgo.String("7a63073a-e694-4a38-b6e0-552044b503f2"),
             TaxIDVerified: true,
             Vendor: "Super Security Service",
         },
@@ -94,10 +94,10 @@ func main() {
             LargeTraderID: "123412341234",
         },
         MaritalStatus: components.MaritalStatusSingle.ToPointer(),
-        MiddleNames: ascendsdk.String("Smith"),
+        MiddleNames: ascendsdkgo.String("Smith"),
         NameSuffix: components.NameSuffixJr.ToPointer(),
         NaturalPersonFdd: &components.NaturalPersonFddCreate{
-            CustomerNonReferralSource: ascendsdk.String("Introduced through mobile app."),
+            CustomerNonReferralSource: ascendsdkgo.String("Introduced through mobile app."),
             CustomerReferralSource: &components.CustomerReferralSourceCreate{
                 Name: "John Doe",
                 RelationshipToApplicant: "Friend",
@@ -107,12 +107,12 @@ func main() {
             EmploymentAndEmployerDescription: "I am a line cook at a fine dining restaurant with 55 employees.",
             NegativeNews: components.NegativeNewsCreate{
                 NegativeNewsAgainstRelatedParties: true,
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdk.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
+                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
             },
             OtherSourcesOfWealth: components.OtherSourcesOfWealthCreate{
                 ApplicantHasOtherSourcesOfWealth: true,
-                OtherSourcesOfWealth: ascendsdk.String("I also have a small business selling handmade jewelry."),
-                OtherSourcesOfWealthVerification: ascendsdk.String("I have a business license and tax returns to verify my business."),
+                OtherSourcesOfWealth: ascendsdkgo.String("I also have a small business selling handmade jewelry."),
+                OtherSourcesOfWealthVerification: ascendsdkgo.String("I have a business license and tax returns to verify my business."),
             },
         },
         NonCitizenResidency: &components.NonCitizenResidencyCreate{
@@ -122,9 +122,9 @@ func main() {
         PoliticallyExposedImmediateFamilyNames: []string{
             "Sue Doe",
         },
-        PoliticallyExposedOrganization: ascendsdk.String("PEAK6, Apex Clearing"),
-        SubjectToBackupWithholding: ascendsdk.Bool(false),
-        TaxID: ascendsdk.String("987-65-4321"),
+        PoliticallyExposedOrganization: ascendsdkgo.String("PEAK6, Apex Clearing"),
+        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
+        TaxID: ascendsdkgo.String("987-65-4321"),
         TaxIDType: components.TaxIDTypeTaxIDTypeSsn.ToPointer(),
         TaxProfile: components.TaxProfileCreate{
             FederalTaxClassification: components.FederalTaxClassificationCCorporation,
@@ -171,16 +171,16 @@ Gets a list of Legal Natural Person records based on search criteria.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -191,7 +191,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdk.Int(25), ascendsdk.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, ascendsdk.String("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\""))
+    res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, ascendsdkgo.String("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\""))
     if err != nil {
         log.Fatal(err)
     }
@@ -233,16 +233,16 @@ Get Legal Natural Person
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -292,16 +292,16 @@ Updates a Legal Natural Person.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -317,60 +317,60 @@ func main() {
             "US",
             "CA",
         },
-        ControlPersonCompanySymbols: ascendsdk.String("AAPL, GOOL"),
-        CorrespondentEmployee: ascendsdk.Bool(false),
-        CorrespondentID: ascendsdk.String("01HPMZZM6RKMVZA1JQ63RQKJRP"),
+        ControlPersonCompanySymbols: ascendsdkgo.String("AAPL, GOOL"),
+        CorrespondentEmployee: ascendsdkgo.Bool(false),
+        CorrespondentID: ascendsdkgo.String("01HPMZZM6RKMVZA1JQ63RQKJRP"),
         Employment: &components.EmploymentUpdate{
-            Employer: ascendsdk.String("Apex Fintech Solutions"),
+            Employer: ascendsdkgo.String("Apex Fintech Solutions"),
             EmploymentStatus: components.EmploymentUpdateEmploymentStatusEmployed.ToPointer(),
-            Occupation: ascendsdk.String("Software Engineer"),
-            StartYear: ascendsdk.Int(2019),
+            Occupation: ascendsdkgo.String("Software Engineer"),
+            StartYear: ascendsdkgo.Int(2019),
         },
-        FamilyName: ascendsdk.String("Doe"),
-        FinraAssociatedEntity: ascendsdk.String("Entity Name"),
+        FamilyName: ascendsdkgo.String("Doe"),
+        FinraAssociatedEntity: ascendsdkgo.String("Entity Name"),
         ForeignIdentification: &components.ForeignIdentificationUpdate{
-            Ftin: ascendsdk.Bool(true),
-            IdentificationNumber: ascendsdk.String("M1C1W7GQSK"),
-            IssuingRegionCode: ascendsdk.String("CA"),
+            Ftin: ascendsdkgo.Bool(true),
+            IdentificationNumber: ascendsdkgo.String("M1C1W7GQSK"),
+            IssuingRegionCode: ascendsdkgo.String("CA"),
             Type: components.ForeignIdentificationUpdateTypePassport.ToPointer(),
         },
-        GivenName: ascendsdk.String("John"),
+        GivenName: ascendsdkgo.String("John"),
         IdentityVerificationResult: &components.IdentityVerificationResultUpdate{
-            AddressVerified: ascendsdk.Bool(true),
-            BirthDateVerified: ascendsdk.Bool(true),
-            ExternalCaseID: ascendsdk.String("6526280"),
+            AddressVerified: ascendsdkgo.Bool(true),
+            BirthDateVerified: ascendsdkgo.Bool(true),
+            ExternalCaseID: ascendsdkgo.String("6526280"),
             IdentityVerificationDocumentIds: []string{
                 "d257c455-f355-493d-9c8f-06f8ace5d5fd",
                 "6ace3020-24a2-45c4-9f3b-752101073127",
             },
-            NameVerified: ascendsdk.Bool(true),
-            RawVendorDataDocumentID: ascendsdk.String("7a63073a-e694-4a38-b6e0-552044b503f2"),
-            TaxIDVerified: ascendsdk.Bool(true),
-            Vendor: ascendsdk.String("Super Security Service"),
+            NameVerified: ascendsdkgo.Bool(true),
+            RawVendorDataDocumentID: ascendsdkgo.String("7a63073a-e694-4a38-b6e0-552044b503f2"),
+            TaxIDVerified: ascendsdkgo.Bool(true),
+            Vendor: ascendsdkgo.String("Super Security Service"),
         },
         LargeTrader: &components.LargeTraderUpdate{
-            LargeTraderID: ascendsdk.String("123412341234"),
+            LargeTraderID: ascendsdkgo.String("123412341234"),
         },
         MaritalStatus: components.LegalNaturalPersonUpdateMaritalStatusSingle.ToPointer(),
-        MiddleNames: ascendsdk.String("Smith"),
+        MiddleNames: ascendsdkgo.String("Smith"),
         NameSuffix: components.LegalNaturalPersonUpdateNameSuffixJr.ToPointer(),
         NaturalPersonFdd: &components.NaturalPersonFddUpdate{
-            CustomerNonReferralSource: ascendsdk.String("Introduced through mobile app."),
+            CustomerNonReferralSource: ascendsdkgo.String("Introduced through mobile app."),
             CustomerReferralSource: &components.CustomerReferralSourceUpdate{
-                Name: ascendsdk.String("John Doe"),
-                RelationshipToApplicant: ascendsdk.String("Friend"),
-                RelationshipYearsWithApplicant: ascendsdk.Int(5),
-                RelationshipYearsWithBroker: ascendsdk.Int(2),
+                Name: ascendsdkgo.String("John Doe"),
+                RelationshipToApplicant: ascendsdkgo.String("Friend"),
+                RelationshipYearsWithApplicant: ascendsdkgo.Int(5),
+                RelationshipYearsWithBroker: ascendsdkgo.Int(2),
             },
-            EmploymentAndEmployerDescription: ascendsdk.String("I am a line cook at a fine dining restaurant with 55 employees."),
+            EmploymentAndEmployerDescription: ascendsdkgo.String("I am a line cook at a fine dining restaurant with 55 employees."),
             NegativeNews: &components.NegativeNewsUpdate{
-                NegativeNewsAgainstRelatedParties: ascendsdk.Bool(true),
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdk.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
+                NegativeNewsAgainstRelatedParties: ascendsdkgo.Bool(true),
+                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
             },
             OtherSourcesOfWealth: &components.OtherSourcesOfWealthUpdate{
-                ApplicantHasOtherSourcesOfWealth: ascendsdk.Bool(true),
-                OtherSourcesOfWealth: ascendsdk.String("I also have a small business selling handmade jewelry."),
-                OtherSourcesOfWealthVerification: ascendsdk.String("I have a business license and tax returns to verify my business."),
+                ApplicantHasOtherSourcesOfWealth: ascendsdkgo.Bool(true),
+                OtherSourcesOfWealth: ascendsdkgo.String("I also have a small business selling handmade jewelry."),
+                OtherSourcesOfWealthVerification: ascendsdkgo.String("I have a business license and tax returns to verify my business."),
             },
         },
         NonCitizenResidency: &components.NonCitizenResidencyUpdate{
@@ -379,14 +379,14 @@ func main() {
         PoliticallyExposedImmediateFamilyNames: []string{
             "Sue Doe",
         },
-        PoliticallyExposedOrganization: ascendsdk.String("PEAK6, Apex Clearing"),
-        SubjectToBackupWithholding: ascendsdk.Bool(false),
-        TaxID: ascendsdk.String("987-65-4321"),
+        PoliticallyExposedOrganization: ascendsdkgo.String("PEAK6, Apex Clearing"),
+        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
+        TaxID: ascendsdkgo.String("987-65-4321"),
         TaxIDType: components.LegalNaturalPersonUpdateTaxIDTypeTaxIDTypeEin.ToPointer(),
         TaxProfile: &components.TaxProfileUpdate{
             FederalTaxClassification: components.TaxProfileUpdateFederalTaxClassificationCCorporation.ToPointer(),
             IrsFormType: components.TaxProfileUpdateIrsFormTypeIrsFormTypeUnspecified.ToPointer(),
-            LegalTaxRegionCode: ascendsdk.String("US"),
+            LegalTaxRegionCode: ascendsdkgo.String("US"),
             UsTinStatus: components.TaxProfileUpdateUsTinStatusPassing.ToPointer(),
         },
     })
@@ -429,16 +429,16 @@ Assigns a person's Large Trader ID.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -491,16 +491,16 @@ Removes a person's Large Trader ID.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -553,16 +553,16 @@ Creates a Legal Entity.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -574,9 +574,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PersonManagement.CreateLegalEntity(ctx, components.LegalEntityCreate{
-        AccreditedInvestor: ascendsdk.Bool(false),
-        Adviser: ascendsdk.Bool(false),
-        BrokerDealer: ascendsdk.Bool(false),
+        AccreditedInvestor: ascendsdkgo.Bool(false),
+        Adviser: ascendsdkgo.Bool(false),
+        BrokerDealer: ascendsdkgo.Bool(false),
         BusinessIndustrialClassification: components.BusinessIndustrialClassificationFinanceInsuranceAndRealEstate.ToPointer(),
         CorporateStructure: components.CorporateStructureCorporationCCorp.ToPointer(),
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
@@ -584,33 +584,33 @@ func main() {
             EntityIssuesBearerShares: false,
             NegativeNews: components.NegativeNewsCreate{
                 NegativeNewsAgainstRelatedParties: true,
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdk.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
+                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
             },
         },
         EntityName: "Acme, Inc.",
         EntityType: components.EntityTypeCorporation,
         ExemptCustomerReason: components.ExemptCustomerReasonNonBankListedEntity.ToPointer(),
-        ExemptVerifyingBeneficialOwners: ascendsdk.Bool(false),
-        ForTheBenefitOf: ascendsdk.String("John Dough"),
-        ForeignFinancialInstitution: ascendsdk.Bool(false),
+        ExemptVerifyingBeneficialOwners: ascendsdkgo.Bool(false),
+        ForTheBenefitOf: ascendsdkgo.String("John Dough"),
+        ForeignFinancialInstitution: ascendsdkgo.Bool(false),
         FormationDate: &components.DateCreate{},
         LargeTrader: &components.LargeTraderCreate{
             EffectiveDate: components.DateCreate{},
             LargeTraderID: "123412341234",
         },
         LegalAddress: components.PostalAddressCreate{},
-        LeiCode: ascendsdk.String("12340012345678911000"),
+        LeiCode: ascendsdkgo.String("12340012345678911000"),
         OperatingRegions: []string{
             "US",
             "CA",
         },
         RegistrationRegion: "US",
-        RegulatedInvestmentCompany: ascendsdk.Bool(false),
+        RegulatedInvestmentCompany: ascendsdkgo.Bool(false),
         RelatedDocumentIds: []string{
             "fb3f181c-f2fb-4bc2-b75a-79302c634ae5",
         },
-        RevocableTrust: ascendsdk.Bool(false),
-        SubjectToBackupWithholding: ascendsdk.Bool(false),
+        RevocableTrust: ascendsdkgo.Bool(false),
+        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
         TaxID: "987-65-4321",
         TaxIDType: components.LegalEntityCreateTaxIDTypeTaxIDTypeItin,
         TaxProfile: components.TaxProfileCreate{
@@ -658,16 +658,16 @@ Gets a list of Legal Entity records based on search criteria.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -678,7 +678,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.PersonManagement.ListLegalEntities(ctx, ascendsdk.Int(25), ascendsdk.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, nil)
+    res, err := s.PersonManagement.ListLegalEntities(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -720,16 +720,16 @@ Get Legal Entity
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -779,16 +779,16 @@ Updates a Legal Entity.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -800,46 +800,46 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PersonManagement.UpdateLegalEntity(ctx, "42567868-9373-4872-9d24-2e33f6c19b75", components.LegalEntityUpdate{
-        AccreditedInvestor: ascendsdk.Bool(false),
-        Adviser: ascendsdk.Bool(false),
-        BrokerDealer: ascendsdk.Bool(false),
+        AccreditedInvestor: ascendsdkgo.Bool(false),
+        Adviser: ascendsdkgo.Bool(false),
+        BrokerDealer: ascendsdkgo.Bool(false),
         BusinessIndustrialClassification: components.LegalEntityUpdateBusinessIndustrialClassificationFinanceInsuranceAndRealEstate.ToPointer(),
         CorporateStructure: components.LegalEntityUpdateCorporateStructureCorporationCCorp.ToPointer(),
-        CorrespondentID: ascendsdk.String("01HPMZZM6RKMVZA1JQ63RQKJRP"),
+        CorrespondentID: ascendsdkgo.String("01HPMZZM6RKMVZA1JQ63RQKJRP"),
         EntityDueDiligence: &components.EntityDueDiligenceUpdate{
-            EntityIssuesBearerShares: ascendsdk.Bool(false),
+            EntityIssuesBearerShares: ascendsdkgo.Bool(false),
             NegativeNews: &components.NegativeNewsUpdate{
-                NegativeNewsAgainstRelatedParties: ascendsdk.Bool(true),
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdk.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
+                NegativeNewsAgainstRelatedParties: ascendsdkgo.Bool(true),
+                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
             },
         },
-        EntityName: ascendsdk.String("Acme, Inc."),
+        EntityName: ascendsdkgo.String("Acme, Inc."),
         EntityType: components.LegalEntityUpdateEntityTypeCorporation.ToPointer(),
         ExemptCustomerReason: components.LegalEntityUpdateExemptCustomerReasonNonBankListedEntity.ToPointer(),
-        ExemptVerifyingBeneficialOwners: ascendsdk.Bool(false),
-        ForTheBenefitOf: ascendsdk.String("John Dough"),
-        ForeignFinancialInstitution: ascendsdk.Bool(false),
+        ExemptVerifyingBeneficialOwners: ascendsdkgo.Bool(false),
+        ForTheBenefitOf: ascendsdkgo.String("John Dough"),
+        ForeignFinancialInstitution: ascendsdkgo.Bool(false),
         LargeTrader: &components.LargeTraderUpdate{
-            LargeTraderID: ascendsdk.String("123412341234"),
+            LargeTraderID: ascendsdkgo.String("123412341234"),
         },
-        LeiCode: ascendsdk.String("12340012345678911000"),
+        LeiCode: ascendsdkgo.String("12340012345678911000"),
         OperatingRegions: []string{
             "US",
             "CA",
         },
-        RegistrationRegion: ascendsdk.String("US"),
-        RegulatedInvestmentCompany: ascendsdk.Bool(false),
+        RegistrationRegion: ascendsdkgo.String("US"),
+        RegulatedInvestmentCompany: ascendsdkgo.Bool(false),
         RelatedDocumentIds: []string{
             "fb3f181c-f2fb-4bc2-b75a-79302c634ae5",
         },
-        RevocableTrust: ascendsdk.Bool(false),
-        SubjectToBackupWithholding: ascendsdk.Bool(false),
-        TaxID: ascendsdk.String("987-65-4321"),
+        RevocableTrust: ascendsdkgo.Bool(false),
+        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
+        TaxID: ascendsdkgo.String("987-65-4321"),
         TaxIDType: components.LegalEntityUpdateTaxIDTypeTaxIDTypeEin.ToPointer(),
         TaxProfile: &components.TaxProfileUpdate{
             FederalTaxClassification: components.TaxProfileUpdateFederalTaxClassificationCCorporation.ToPointer(),
             IrsFormType: components.TaxProfileUpdateIrsFormTypeIrsFormTypeUnspecified.ToPointer(),
-            LegalTaxRegionCode: ascendsdk.String("US"),
+            LegalTaxRegionCode: ascendsdkgo.String("US"),
             UsTinStatus: components.TaxProfileUpdateUsTinStatusPassing.ToPointer(),
         },
     })
@@ -882,16 +882,16 @@ Assigns a person's Large Trader ID.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -944,16 +944,16 @@ Removes a person's Large Trader ID.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",

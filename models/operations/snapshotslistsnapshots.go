@@ -7,11 +7,13 @@ import (
 )
 
 type SnapshotsListSnapshotsRequest struct {
-	// A CEL string to filter snapshot results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information;
+	// A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:
+	//  `snapshot_id`
+	//  `process_date`
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
 	// The number of snapshots to be returned per page. Defaults to 500. Maximum is 1000.
 	PageSize *int `queryParam:"style=form,explode=true,name=page_size"`
-	// The token for retrieving the next page of snapshots, the value of which will have been returned in a previous response.
+	// The token used to retrieve a page of snapshots.
 	PageToken *string `queryParam:"style=form,explode=true,name=page_token"`
 }
 
@@ -40,7 +42,7 @@ type SnapshotsListSnapshotsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
 	ListSnapshotsResponse *components.ListSnapshotsResponse
-	// INVALID_ARGUMENT: The request is invalid.
+	// PERMISSION_DENIED: The user does not have access to the requested resource.
 	Status *components.Status
 }
 

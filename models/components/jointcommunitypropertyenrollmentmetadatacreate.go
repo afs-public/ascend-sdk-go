@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -13,6 +18,23 @@ const (
 
 func (e JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
+}
+func (e *JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
+	}
 }
 
 // JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -26,6 +48,23 @@ const (
 
 func (e JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep) ToPointer() *JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep {
 	return &e
+}
+func (e *JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep: %v", v)
+	}
 }
 
 // LegalResidencyStateOfMarriedCouple - The legal residency state of a married couple
@@ -71,6 +110,87 @@ const (
 
 func (e LegalResidencyStateOfMarriedCouple) ToPointer() *LegalResidencyStateOfMarriedCouple {
 	return &e
+}
+func (e *LegalResidencyStateOfMarriedCouple) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "LEGAL_RESIDENCY_STATE_OF_MARRIED_COUPLE_UNSPECIFIED":
+		fallthrough
+	case "AK":
+		fallthrough
+	case "AZ":
+		fallthrough
+	case "AR":
+		fallthrough
+	case "CA":
+		fallthrough
+	case "DE":
+		fallthrough
+	case "FL":
+		fallthrough
+	case "HI":
+		fallthrough
+	case "ID":
+		fallthrough
+	case "IL":
+		fallthrough
+	case "IN":
+		fallthrough
+	case "KY":
+		fallthrough
+	case "LA":
+		fallthrough
+	case "MD":
+		fallthrough
+	case "MA":
+		fallthrough
+	case "MI":
+		fallthrough
+	case "MS":
+		fallthrough
+	case "MO":
+		fallthrough
+	case "NV":
+		fallthrough
+	case "NJ":
+		fallthrough
+	case "NM":
+		fallthrough
+	case "NY":
+		fallthrough
+	case "NC":
+		fallthrough
+	case "OH":
+		fallthrough
+	case "OK":
+		fallthrough
+	case "OR":
+		fallthrough
+	case "PA":
+		fallthrough
+	case "RI":
+		fallthrough
+	case "TN":
+		fallthrough
+	case "TX":
+		fallthrough
+	case "VT":
+		fallthrough
+	case "VA":
+		fallthrough
+	case "WA":
+		fallthrough
+	case "WI":
+		fallthrough
+	case "WY":
+		*e = LegalResidencyStateOfMarriedCouple(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalResidencyStateOfMarriedCouple: %v", v)
+	}
 }
 
 // JointCommunityPropertyEnrollmentMetadataCreate - Enrollment metadata for the Joint Community Property Registration enrollment type

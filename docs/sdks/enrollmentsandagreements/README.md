@@ -23,16 +23,16 @@ Adds an Enrollment to an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -50,27 +50,27 @@ func main() {
                     components.BeneficiaryCreate{
                         BeneficiaryPercentage: 100,
                         BirthDate: &components.DateCreate{},
-                        Email: ascendsdk.String("example@email.com"),
-                        EntityName: ascendsdk.String("Acme, Inc."),
+                        Email: ascendsdkgo.String("example@email.com"),
+                        EntityName: ascendsdkgo.String("Acme, Inc."),
                         EntityType: components.BeneficiaryCreateEntityTypeCorporation.ToPointer(),
-                        FamilyName: ascendsdk.String("Smith"),
-                        GivenName: ascendsdk.String("Bob"),
-                        MiddleNames: ascendsdk.String("Robert"),
+                        FamilyName: ascendsdkgo.String("Smith"),
+                        GivenName: ascendsdkgo.String("Bob"),
+                        MiddleNames: ascendsdkgo.String("Robert"),
                         RelationType: components.BeneficiaryCreateRelationTypeSpouse.ToPointer(),
-                        TaxID: ascendsdk.String("123456789"),
+                        TaxID: ascendsdkgo.String("123456789"),
                         TaxIDType: components.BeneficiaryCreateTaxIDTypeTaxIDTypeUnspecified.ToPointer(),
                     },
                     components.BeneficiaryCreate{
                         BeneficiaryPercentage: 100,
                         BirthDate: &components.DateCreate{},
-                        Email: ascendsdk.String("example@email.com"),
-                        EntityName: ascendsdk.String("Acme, Inc."),
+                        Email: ascendsdkgo.String("example@email.com"),
+                        EntityName: ascendsdkgo.String("Acme, Inc."),
                         EntityType: components.BeneficiaryCreateEntityTypeCorporation.ToPointer(),
-                        FamilyName: ascendsdk.String("Smith"),
-                        GivenName: ascendsdk.String("Bob"),
-                        MiddleNames: ascendsdk.String("Robert"),
+                        FamilyName: ascendsdkgo.String("Smith"),
+                        GivenName: ascendsdkgo.String("Bob"),
+                        MiddleNames: ascendsdkgo.String("Robert"),
                         RelationType: components.BeneficiaryCreateRelationTypeSpouse.ToPointer(),
-                        TaxID: ascendsdk.String("123456789"),
+                        TaxID: ascendsdkgo.String("123456789"),
                         TaxIDType: components.BeneficiaryCreateTaxIDTypeTaxIDTypeUnspecified.ToPointer(),
                     },
                 },
@@ -78,40 +78,40 @@ func main() {
                     components.BeneficiaryCreate{
                         BeneficiaryPercentage: 100,
                         BirthDate: &components.DateCreate{},
-                        Email: ascendsdk.String("example@email.com"),
-                        EntityName: ascendsdk.String("Acme, Inc."),
+                        Email: ascendsdkgo.String("example@email.com"),
+                        EntityName: ascendsdkgo.String("Acme, Inc."),
                         EntityType: components.BeneficiaryCreateEntityTypeCorporation.ToPointer(),
-                        FamilyName: ascendsdk.String("Smith"),
-                        GivenName: ascendsdk.String("Bob"),
-                        MiddleNames: ascendsdk.String("Robert"),
+                        FamilyName: ascendsdkgo.String("Smith"),
+                        GivenName: ascendsdkgo.String("Bob"),
+                        MiddleNames: ascendsdkgo.String("Robert"),
                         RelationType: components.BeneficiaryCreateRelationTypeSpouse.ToPointer(),
-                        TaxID: ascendsdk.String("123456789"),
+                        TaxID: ascendsdkgo.String("123456789"),
                         TaxIDType: components.BeneficiaryCreateTaxIDTypeTaxIDTypeUnspecified.ToPointer(),
                     },
                     components.BeneficiaryCreate{
                         BeneficiaryPercentage: 100,
                         BirthDate: &components.DateCreate{},
-                        Email: ascendsdk.String("example@email.com"),
-                        EntityName: ascendsdk.String("Acme, Inc."),
+                        Email: ascendsdkgo.String("example@email.com"),
+                        EntityName: ascendsdkgo.String("Acme, Inc."),
                         EntityType: components.BeneficiaryCreateEntityTypeCorporation.ToPointer(),
-                        FamilyName: ascendsdk.String("Smith"),
-                        GivenName: ascendsdk.String("Bob"),
-                        MiddleNames: ascendsdk.String("Robert"),
+                        FamilyName: ascendsdkgo.String("Smith"),
+                        GivenName: ascendsdkgo.String("Bob"),
+                        MiddleNames: ascendsdkgo.String("Robert"),
                         RelationType: components.BeneficiaryCreateRelationTypeSpouse.ToPointer(),
-                        TaxID: ascendsdk.String("123456789"),
+                        TaxID: ascendsdkgo.String("123456789"),
                         TaxIDType: components.BeneficiaryCreateTaxIDTypeTaxIDTypeUnspecified.ToPointer(),
                     },
                     components.BeneficiaryCreate{
                         BeneficiaryPercentage: 100,
                         BirthDate: &components.DateCreate{},
-                        Email: ascendsdk.String("example@email.com"),
-                        EntityName: ascendsdk.String("Acme, Inc."),
+                        Email: ascendsdkgo.String("example@email.com"),
+                        EntityName: ascendsdkgo.String("Acme, Inc."),
                         EntityType: components.BeneficiaryCreateEntityTypeCorporation.ToPointer(),
-                        FamilyName: ascendsdk.String("Smith"),
-                        GivenName: ascendsdk.String("Bob"),
-                        MiddleNames: ascendsdk.String("Robert"),
+                        FamilyName: ascendsdkgo.String("Smith"),
+                        GivenName: ascendsdkgo.String("Bob"),
+                        MiddleNames: ascendsdkgo.String("Robert"),
                         RelationType: components.BeneficiaryCreateRelationTypeSpouse.ToPointer(),
-                        TaxID: ascendsdk.String("123456789"),
+                        TaxID: ascendsdkgo.String("123456789"),
                         TaxIDType: components.BeneficiaryCreateTaxIDTypeTaxIDTypeEin.ToPointer(),
                     },
                 },
@@ -133,7 +133,7 @@ func main() {
                         OtherAccounts: components.OtherAccountsCreate{
                             OwnerHasOtherAccountsAtApex: true,
                         },
-                        PrimarySourceOfDepositedFunds: ascendsdk.String("Corporate Income"),
+                        PrimarySourceOfDepositedFunds: ascendsdkgo.String("Corporate Income"),
                     },
                     PlannedActivity: components.PlannedActivityCreate{
                         ForeignBondTradingDetails: components.ForeignBondTradingDetailsCreate{
@@ -177,7 +177,7 @@ func main() {
                 FdicCashSweep: components.CustodialEnrollmentMetadataCreateFdicCashSweepFdicCashSweepEnroll.ToPointer(),
             },
             EstateEnrollmentMetadata: &components.EstateEnrollmentMetadataCreate{
-                CertificateOfAppointmentDocumentID: ascendsdk.String("c401f3b2-cdb5-4a6c-9f5f-aa393cf12583"),
+                CertificateOfAppointmentDocumentID: ascendsdkgo.String("c401f3b2-cdb5-4a6c-9f5f-aa393cf12583"),
                 DividendReinvestmentPlan: components.EstateEnrollmentMetadataCreateDividendReinvestmentPlanDividendReinvestmentEnroll.ToPointer(),
             },
             ForeignIndividualAccountEnrollmentMetadata: &components.ForeignIndividualAccountEnrollmentMetadataCreate{
@@ -196,7 +196,7 @@ func main() {
                         OtherAccounts: components.OtherAccountsCreate{
                             OwnerHasOtherAccountsAtApex: true,
                         },
-                        PrimarySourceOfDepositedFunds: ascendsdk.String("Corporate Income"),
+                        PrimarySourceOfDepositedFunds: ascendsdkgo.String("Corporate Income"),
                     },
                     PlannedActivity: components.PlannedActivityCreate{
                         ForeignBondTradingDetails: components.ForeignBondTradingDetailsCreate{
@@ -299,7 +299,7 @@ func main() {
                         OtherAccounts: components.OtherAccountsCreate{
                             OwnerHasOtherAccountsAtApex: true,
                         },
-                        PrimarySourceOfDepositedFunds: ascendsdk.String("Corporate Income"),
+                        PrimarySourceOfDepositedFunds: ascendsdkgo.String("Corporate Income"),
                     },
                     PlannedActivity: components.PlannedActivityCreate{
                         ForeignBondTradingDetails: components.ForeignBondTradingDetailsCreate{
@@ -339,7 +339,7 @@ func main() {
             },
             OperatingEnrollmentMetadata: &components.OperatingEnrollmentMetadataCreate{
                 OperatingPurpose: components.OperatingPurposeCustody,
-                Subtitle: ascendsdk.String("C/F Optionality Securities"),
+                Subtitle: ascendsdkgo.String("C/F Optionality Securities"),
                 TaxWithholdingMetadata: &components.TaxWithholdingMetadataCreate{
                     TaxAuthority: components.TaxAuthorityTx,
                     WithholdingType: components.WithholdingTypeBackup,
@@ -393,16 +393,16 @@ Get a list of Enrollments available for an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -413,7 +413,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListAvailableEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdk.Int(25), ascendsdk.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), ascendsdk.String("enrollment_type == \"REGISTRATION_INDIVIDUAL\""))
+    res, err := s.EnrollmentsAndAgreements.ListAvailableEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), ascendsdkgo.String("enrollment_type == \"REGISTRATION_INDIVIDUAL\""))
     if err != nil {
         log.Fatal(err)
     }
@@ -455,16 +455,16 @@ Deactivates an Account Enrollment.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -476,7 +476,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.EnrollmentsAndAgreements.DeactivateEnrollment(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.DeactivateEnrollmentRequestCreate{
-        EnrollmentID: ascendsdk.String("22951598-70e2-46f1-bb32-38e8da7a5cdb"),
+        EnrollmentID: ascendsdkgo.String("22951598-70e2-46f1-bb32-38e8da7a5cdb"),
         EnrollmentType: components.DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep.ToPointer(),
     })
     if err != nil {
@@ -518,16 +518,16 @@ Gets a list of Enrollments for an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -538,7 +538,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdk.Int(5), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.EnrollmentsAndAgreements.ListEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(5), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -579,16 +579,16 @@ Affirm Agreements for an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -643,16 +643,16 @@ Gets a list of Agreements on an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -663,7 +663,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListAgreements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdk.Int(5), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.EnrollmentsAndAgreements.ListAgreements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(5), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -704,16 +704,16 @@ Gets a list of Entitlements for an Account.
 package main
 
 import(
-	"ascend-sdk/models/components"
-	ascendsdk "ascend-sdk"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
 	"log"
 )
 
 func main() {
-    s := ascendsdk.New(
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
                 Name: "FinFirm",
@@ -724,7 +724,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListEntitlements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdk.Int(5), ascendsdk.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.EnrollmentsAndAgreements.ListEntitlements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(5), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }

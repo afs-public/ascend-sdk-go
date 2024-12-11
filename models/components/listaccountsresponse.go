@@ -8,8 +8,6 @@ type ListAccountsResponse struct {
 	Accounts []Account `json:"accounts,omitempty"`
 	// A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
 	NextPageToken *string `json:"next_page_token,omitempty"`
-	// The total number of accounts in the response. This is an estimate and may be more than the number of accounts in this response if the user is not authorized to view all accounts.
-	TotalSize *string `json:"total_size,omitempty"`
 }
 
 func (o *ListAccountsResponse) GetAccounts() []Account {
@@ -24,11 +22,4 @@ func (o *ListAccountsResponse) GetNextPageToken() *string {
 		return nil
 	}
 	return o.NextPageToken
-}
-
-func (o *ListAccountsResponse) GetTotalSize() *string {
-	if o == nil {
-		return nil
-	}
-	return o.TotalSize
 }

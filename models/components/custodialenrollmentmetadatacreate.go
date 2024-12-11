@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // CustodialType - The type of custodial account
 type CustodialType string
 
@@ -13,6 +18,23 @@ const (
 
 func (e CustodialType) ToPointer() *CustodialType {
 	return &e
+}
+func (e *CustodialType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "CUSTODIAL_TYPE_UNSPECIFIED":
+		fallthrough
+	case "UGMA":
+		fallthrough
+	case "UTMA":
+		*e = CustodialType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustodialType: %v", v)
+	}
 }
 
 // CustodialEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
@@ -27,6 +49,23 @@ const (
 func (e CustodialEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *CustodialEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
 }
+func (e *CustodialEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = CustodialEnrollmentMetadataCreateDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustodialEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
+	}
+}
 
 // CustodialEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
 type CustodialEnrollmentMetadataCreateFdicCashSweep string
@@ -39,6 +78,23 @@ const (
 
 func (e CustodialEnrollmentMetadataCreateFdicCashSweep) ToPointer() *CustodialEnrollmentMetadataCreateFdicCashSweep {
 	return &e
+}
+func (e *CustodialEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = CustodialEnrollmentMetadataCreateFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CustodialEnrollmentMetadataCreateFdicCashSweep: %v", v)
+	}
 }
 
 // CustodialEnrollmentMetadataCreate - Enrollment metadata for the CUSTODIAL enrollment type

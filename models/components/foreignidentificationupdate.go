@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // ForeignIdentificationUpdateType - Identification type
 type ForeignIdentificationUpdateType string
 
@@ -14,6 +19,25 @@ const (
 
 func (e ForeignIdentificationUpdateType) ToPointer() *ForeignIdentificationUpdateType {
 	return &e
+}
+func (e *ForeignIdentificationUpdateType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IDENTIFICATION_TYPE_UNSPECIFIED":
+		fallthrough
+	case "PASSPORT":
+		fallthrough
+	case "NATIONAL_ID":
+		fallthrough
+	case "DRIVERS_LICENSE":
+		*e = ForeignIdentificationUpdateType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ForeignIdentificationUpdateType: %v", v)
+	}
 }
 
 // ForeignIdentificationUpdate - Foreign identification

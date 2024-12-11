@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // InterestedPartyUpdateStatementDeliveryPreference - Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type InterestedPartyUpdateStatementDeliveryPreference string
 
@@ -14,6 +19,25 @@ const (
 
 func (e InterestedPartyUpdateStatementDeliveryPreference) ToPointer() *InterestedPartyUpdateStatementDeliveryPreference {
 	return &e
+}
+func (e *InterestedPartyUpdateStatementDeliveryPreference) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DELIVERY_PREFERENCE_UNSPECIFIED":
+		fallthrough
+	case "DIGITAL":
+		fallthrough
+	case "PHYSICAL":
+		fallthrough
+	case "SUPPRESS":
+		*e = InterestedPartyUpdateStatementDeliveryPreference(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InterestedPartyUpdateStatementDeliveryPreference: %v", v)
+	}
 }
 
 // InterestedPartyUpdateTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
@@ -28,6 +52,25 @@ const (
 
 func (e InterestedPartyUpdateTradeConfirmationDeliveryPreference) ToPointer() *InterestedPartyUpdateTradeConfirmationDeliveryPreference {
 	return &e
+}
+func (e *InterestedPartyUpdateTradeConfirmationDeliveryPreference) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "DELIVERY_PREFERENCE_UNSPECIFIED":
+		fallthrough
+	case "DIGITAL":
+		fallthrough
+	case "PHYSICAL":
+		fallthrough
+	case "SUPPRESS":
+		*e = InterestedPartyUpdateTradeConfirmationDeliveryPreference(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for InterestedPartyUpdateTradeConfirmationDeliveryPreference: %v", v)
+	}
 }
 
 // InterestedPartyUpdate - An interested party.

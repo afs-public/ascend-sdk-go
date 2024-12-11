@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 type LegalEntityBusinessIndustrialClassification string
 
 const (
@@ -21,6 +26,39 @@ const (
 func (e LegalEntityBusinessIndustrialClassification) ToPointer() *LegalEntityBusinessIndustrialClassification {
 	return &e
 }
+func (e *LegalEntityBusinessIndustrialClassification) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "BUSINESS_INDUSTRIAL_CLASSIFICATION_UNSPECIFIED":
+		fallthrough
+	case "AGRICULTURE_FORESTRY_AND_FISHING":
+		fallthrough
+	case "MINING":
+		fallthrough
+	case "CONSTRUCTION":
+		fallthrough
+	case "MANUFACTURING":
+		fallthrough
+	case "TRANSPORTATION_COMMUNICATIONS_ELECTRIC_GAS_AND_SANITARY_SERVICES":
+		fallthrough
+	case "WHOLESALE_TRADE":
+		fallthrough
+	case "RETAIL_TRADE":
+		fallthrough
+	case "FINANCE_INSURANCE_AND_REAL_ESTATE":
+		fallthrough
+	case "SERVICES":
+		fallthrough
+	case "PUBLIC_ADMINISTRATION":
+		*e = LegalEntityBusinessIndustrialClassification(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityBusinessIndustrialClassification: %v", v)
+	}
+}
 
 // LegalEntityCorporateStructure - Corporate structure of the entity.
 type LegalEntityCorporateStructure string
@@ -35,6 +73,27 @@ const (
 
 func (e LegalEntityCorporateStructure) ToPointer() *LegalEntityCorporateStructure {
 	return &e
+}
+func (e *LegalEntityCorporateStructure) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ENTITY_CORPORATE_STRUCTURE_UNSPECIFIED":
+		fallthrough
+	case "CORPORATION_C_CORP":
+		fallthrough
+	case "CORPORATION_S_CORP":
+		fallthrough
+	case "CORPORATION_B_CORP":
+		fallthrough
+	case "CORPORATION_NONPROFIT":
+		*e = LegalEntityCorporateStructure(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityCorporateStructure: %v", v)
+	}
 }
 
 // LegalEntityNegativeNews - Information about any negative news against related parties and entities
@@ -97,6 +156,31 @@ const (
 func (e LegalEntityEntityType) ToPointer() *LegalEntityEntityType {
 	return &e
 }
+func (e *LegalEntityEntityType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ENTITY_TYPE_UNSPECIFIED":
+		fallthrough
+	case "CORPORATION":
+		fallthrough
+	case "LIMITED_LIABILITY_COMPANY":
+		fallthrough
+	case "PARTNERSHIP":
+		fallthrough
+	case "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC":
+		fallthrough
+	case "TRUST":
+		fallthrough
+	case "ESTATE":
+		*e = LegalEntityEntityType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityEntityType: %v", v)
+	}
+}
 
 // LegalEntityExemptCustomerReason - The reason the customer is exempt from verifying beneficial owners, if applicable.
 type LegalEntityExemptCustomerReason string
@@ -118,6 +202,41 @@ const (
 
 func (e LegalEntityExemptCustomerReason) ToPointer() *LegalEntityExemptCustomerReason {
 	return &e
+}
+func (e *LegalEntityExemptCustomerReason) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "EXEMPT_REASON_UNSPECIFIED":
+		fallthrough
+	case "REGULATED_FINANCIAL_INSTITUTION":
+		fallthrough
+	case "DEPARTMENT_OR_AGENCY_OF_FEDERAL_STATE_OR_SUBDIVISION":
+		fallthrough
+	case "NON_BANK_LISTED_ENTITY":
+		fallthrough
+	case "SECTION_12_SECURITIES_EXCHANGE_ACT_1934_OR_15D":
+		fallthrough
+	case "SECTION_3_INVESTMENT_COMPANY_ACT_1940":
+		fallthrough
+	case "SECTION_202A_INVESTMENT_ADVISORS_ACT_1940":
+		fallthrough
+	case "SECTION_3_SECURITIES_EXCHANGE_ACT_1934_SECTION_6_OR_17A":
+		fallthrough
+	case "ANY_OTHER_SECURITIES_EXCHANGE_ACT_1934":
+		fallthrough
+	case "COMMODITY_FUTURES_TRADING_COMMISSION_REGISTERED":
+		fallthrough
+	case "PUBLIC_ACCOUNTING_FIRM_SECTION_102_SARBANES_OXLEY":
+		fallthrough
+	case "STATE_REGULATED_INSURANCE_COMPANY":
+		*e = LegalEntityExemptCustomerReason(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityExemptCustomerReason: %v", v)
+	}
 }
 
 // FormationDate - If the legal entity is a trust, the formation date is required.
@@ -337,6 +456,25 @@ const (
 func (e LegalEntityTaxIDType) ToPointer() *LegalEntityTaxIDType {
 	return &e
 }
+func (e *LegalEntityTaxIDType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_ID_TYPE_UNSPECIFIED":
+		fallthrough
+	case "TAX_ID_TYPE_SSN":
+		fallthrough
+	case "TAX_ID_TYPE_ITIN":
+		fallthrough
+	case "TAX_ID_TYPE_EIN":
+		*e = LegalEntityTaxIDType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityTaxIDType: %v", v)
+	}
+}
 
 // LegalEntityCNoticeDate - C Notice date.
 type LegalEntityCNoticeDate struct {
@@ -388,6 +526,37 @@ const (
 func (e LegalEntityFederalTaxClassification) ToPointer() *LegalEntityFederalTaxClassification {
 	return &e
 }
+func (e *LegalEntityFederalTaxClassification) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED":
+		fallthrough
+	case "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC":
+		fallthrough
+	case "PARTNERSHIP":
+		fallthrough
+	case "C_CORPORATION":
+		fallthrough
+	case "S_CORPORATION":
+		fallthrough
+	case "TRUST_ESTATE":
+		fallthrough
+	case "LLC_TAXED_AS_C_CORP":
+		fallthrough
+	case "LLC_TAXED_AS_S_CORP":
+		fallthrough
+	case "LLC_TAXED_AS_PARTNERSHIP":
+		fallthrough
+	case "OTHER":
+		*e = LegalEntityFederalTaxClassification(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityFederalTaxClassification: %v", v)
+	}
+}
 
 // LegalEntityFirstBNoticeDate - Initial B Notice date.
 type LegalEntityFirstBNoticeDate struct {
@@ -431,6 +600,21 @@ const (
 func (e LegalEntityIrsFormType) ToPointer() *LegalEntityIrsFormType {
 	return &e
 }
+func (e *LegalEntityIrsFormType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IRS_FORM_TYPE_UNSPECIFIED":
+		fallthrough
+	case "W_9":
+		*e = LegalEntityIrsFormType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityIrsFormType: %v", v)
+	}
+}
 
 // LegalEntityReportingEligibility - Tax reporting eligibility.
 type LegalEntityReportingEligibility string
@@ -443,6 +627,23 @@ const (
 
 func (e LegalEntityReportingEligibility) ToPointer() *LegalEntityReportingEligibility {
 	return &e
+}
+func (e *LegalEntityReportingEligibility) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAX_REPORTING_ELIGIBILITY_UNSPECIFIED":
+		fallthrough
+	case "ELIGIBLE":
+		fallthrough
+	case "INELIGIBLE":
+		*e = LegalEntityReportingEligibility(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityReportingEligibility: %v", v)
+	}
 }
 
 // LegalEntityTaxCertificationDate - Tax Certification date.
@@ -488,6 +689,23 @@ const (
 func (e LegalEntityTaxpayerCertificationState) ToPointer() *LegalEntityTaxpayerCertificationState {
 	return &e
 }
+func (e *LegalEntityTaxpayerCertificationState) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED":
+		fallthrough
+	case "CERTIFIED":
+		fallthrough
+	case "UNCERTIFIED":
+		*e = LegalEntityTaxpayerCertificationState(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityTaxpayerCertificationState: %v", v)
+	}
+}
 
 // LegalEntityUsTinStatus - United States Individual Taxpayer Identification Number (ITIN) status.
 type LegalEntityUsTinStatus string
@@ -500,6 +718,23 @@ const (
 
 func (e LegalEntityUsTinStatus) ToPointer() *LegalEntityUsTinStatus {
 	return &e
+}
+func (e *LegalEntityUsTinStatus) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "US_TIN_STATUS_UNSPECIFIED":
+		fallthrough
+	case "PASSING":
+		fallthrough
+	case "FAILING":
+		*e = LegalEntityUsTinStatus(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityUsTinStatus: %v", v)
+	}
 }
 
 // LegalEntityWithholdingState - B/C Notice status.
@@ -515,6 +750,27 @@ const (
 
 func (e LegalEntityWithholdingState) ToPointer() *LegalEntityWithholdingState {
 	return &e
+}
+func (e *LegalEntityWithholdingState) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "WITHHOLDING_STATE_UNSPECIFIED":
+		fallthrough
+	case "FIRST_B_NOTICE_RECEIVED":
+		fallthrough
+	case "SECOND_B_NOTICE_RECEIVED":
+		fallthrough
+	case "C_NOTICE_RECEIVED":
+		fallthrough
+	case "C_NOTICE_INDICATED_BY_CUSTOMER":
+		*e = LegalEntityWithholdingState(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for LegalEntityWithholdingState: %v", v)
+	}
 }
 
 // LegalEntityTaxProfile - The tax profile for the legal entity.

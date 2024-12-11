@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -13,6 +18,23 @@ const (
 
 func (e JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
+}
+func (e *JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_ENROLL":
+		fallthrough
+	case "DIVIDEND_REINVESTMENT_DECLINE":
+		*e = JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for JointTenantsByEntiretyEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
+	}
 }
 
 // JointTenantsByEntiretyEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -26,6 +48,23 @@ const (
 
 func (e JointTenantsByEntiretyEnrollmentMetadataCreateFdicCashSweep) ToPointer() *JointTenantsByEntiretyEnrollmentMetadataCreateFdicCashSweep {
 	return &e
+}
+func (e *JointTenantsByEntiretyEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
+		fallthrough
+	case "FDIC_CASH_SWEEP_ENROLL":
+		fallthrough
+	case "FDIC_CASH_SWEEP_DECLINE":
+		*e = JointTenantsByEntiretyEnrollmentMetadataCreateFdicCashSweep(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for JointTenantsByEntiretyEnrollmentMetadataCreateFdicCashSweep: %v", v)
+	}
 }
 
 // JointTenantsByEntiretyEnrollmentMetadataCreateLegalResidencyStateOfMarriedCouple - The legal residency state of a married couple
@@ -71,6 +110,87 @@ const (
 
 func (e JointTenantsByEntiretyEnrollmentMetadataCreateLegalResidencyStateOfMarriedCouple) ToPointer() *JointTenantsByEntiretyEnrollmentMetadataCreateLegalResidencyStateOfMarriedCouple {
 	return &e
+}
+func (e *JointTenantsByEntiretyEnrollmentMetadataCreateLegalResidencyStateOfMarriedCouple) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "LEGAL_RESIDENCY_STATE_OF_MARRIED_COUPLE_UNSPECIFIED":
+		fallthrough
+	case "AK":
+		fallthrough
+	case "AZ":
+		fallthrough
+	case "AR":
+		fallthrough
+	case "CA":
+		fallthrough
+	case "DE":
+		fallthrough
+	case "FL":
+		fallthrough
+	case "HI":
+		fallthrough
+	case "ID":
+		fallthrough
+	case "IL":
+		fallthrough
+	case "IN":
+		fallthrough
+	case "KY":
+		fallthrough
+	case "LA":
+		fallthrough
+	case "MD":
+		fallthrough
+	case "MA":
+		fallthrough
+	case "MI":
+		fallthrough
+	case "MS":
+		fallthrough
+	case "MO":
+		fallthrough
+	case "NV":
+		fallthrough
+	case "NJ":
+		fallthrough
+	case "NM":
+		fallthrough
+	case "NY":
+		fallthrough
+	case "NC":
+		fallthrough
+	case "OH":
+		fallthrough
+	case "OK":
+		fallthrough
+	case "OR":
+		fallthrough
+	case "PA":
+		fallthrough
+	case "RI":
+		fallthrough
+	case "TN":
+		fallthrough
+	case "TX":
+		fallthrough
+	case "VT":
+		fallthrough
+	case "VA":
+		fallthrough
+	case "WA":
+		fallthrough
+	case "WI":
+		fallthrough
+	case "WY":
+		*e = JointTenantsByEntiretyEnrollmentMetadataCreateLegalResidencyStateOfMarriedCouple(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for JointTenantsByEntiretyEnrollmentMetadataCreateLegalResidencyStateOfMarriedCouple: %v", v)
+	}
 }
 
 // JointTenantsByEntiretyEnrollmentMetadataCreate - Enrollment metadata for the Joint Tenants by Entirety Registration enrollment type

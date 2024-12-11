@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // IdentifierCreateType - The type of identifier
 type IdentifierCreateType string
 
@@ -15,6 +20,27 @@ const (
 
 func (e IdentifierCreateType) ToPointer() *IdentifierCreateType {
 	return &e
+}
+func (e *IdentifierCreateType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IDENTIFIER_TYPE_UNSPECIFIED":
+		fallthrough
+	case "ORIGINATING_ACCOUNT_ID":
+		fallthrough
+	case "ORIGINATING_FDID":
+		fallthrough
+	case "ORIGINATING_CAT_REPORTER_CRD":
+		fallthrough
+	case "CLIENT_ACCOUNT_ID":
+		*e = IdentifierCreateType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for IdentifierCreateType: %v", v)
+	}
 }
 
 // IdentifierCreate - An identifier associated with an account
