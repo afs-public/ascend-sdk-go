@@ -1,0 +1,11 @@
+# RetrieveContributionConstraintsRequestCreate
+
+Request to retrieve retirement contribution constraints
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `Mechanism`                                                                                           | [components.Mechanism](../../models/components/mechanism.md)                                          | :heavy_check_mark:                                                                                    | Cash transfer mechanism to search constraints for                                                     | ACH                                                                                                   |
+| `Name`                                                                                                | *string*                                                                                              | :heavy_check_mark:                                                                                    | Name of the account being queried, for retirement contribution constraints Format: accounts/{account} | accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                   |

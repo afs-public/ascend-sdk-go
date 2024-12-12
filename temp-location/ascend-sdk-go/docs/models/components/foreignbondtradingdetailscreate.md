@@ -1,0 +1,11 @@
+# ForeignBondTradingDetailsCreate
+
+Foreign bond trading detail
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              | Example                                                                                                  |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `ForeignBondTrading`                                                                                     | *bool*                                                                                                   | :heavy_check_mark:                                                                                       | Does the account anticipate trading in foreign bonds                                                     | true                                                                                                     |
+| `ForeignBondTradingDetail`                                                                               | [][components.ForeignBondTradingDetailCreate](../../models/components/foreignbondtradingdetailcreate.md) | :heavy_minus_sign:                                                                                       | The foreign bond trading countries details. If yes, than please provide details                          |                                                                                                          |

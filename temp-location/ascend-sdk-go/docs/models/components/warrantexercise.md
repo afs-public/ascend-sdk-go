@@ -1,0 +1,10 @@
+# WarrantExercise
+
+Object containing metadata for warrant exercises
+
+
+## Fields
+
+| Field                                                                                                                                                 | Type                                                                                                                                                  | Required                                                                                                                                              | Description                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CorporateActionGeneralInformation`                                                                                                                   | [*components.EntryWarrantExerciseCorporateActionGeneralInformation](../../models/components/entrywarrantexercisecorporateactiongeneralinformation.md) | :heavy_minus_sign:                                                                                                                                    | Common fields for corporate actions                                                                                                                   |
