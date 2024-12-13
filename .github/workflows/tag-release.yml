@@ -1,7 +1,7 @@
 name: Tag Release
 
 on:
-  pull-request:
+  pull_request:
     branches:
       - main
     types: [closed]
@@ -19,11 +19,16 @@ jobs:
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
 
-      - name: Extract Version
+      - name: Install yq
+        run: |
+          sudo snap install yq
+
+      - name: Extract Version with yq
         id: vars
         run: |
-          echo "Extract version from gen.yaml and set output"
-          version=$(cat gen.yaml | grep 'version' | awk '{print $2}')
+          version=$(yq eval '.go.version' gen.yaml)
+          echo "Extracted version: $version"
+          echo "version=$version" >> $GITHUB_ENV
           echo ::set-output name=version::$version
 
       - name: Create and Push Tag
