@@ -17,14 +17,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func getMicrodepositAmounts(sdk *ascendsdk.SDK, ctx context.Context, accountId string, bankRelationshipId string) (components.MicroDepositAmounts, error) {
-	res, err := sdk.TestSimulation.GetMicroDepositAmounts(ctx, accountId, bankRelationshipId)
-	if err != nil {
-		return components.MicroDepositAmounts{}, err
-	}
-	return *res.MicroDepositAmounts, nil
-}
-
 func TestBankRelationships(t *testing.T) {
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)

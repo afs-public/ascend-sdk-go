@@ -3,20 +3,20 @@
 In today's fast-paced digital ecosystem, developers need tools that not only streamline the development process but also unlock new possibilities for innovation and efficiency.
 
 Enter the Apex Go SDK, a cutting-edge software development kit designed to empower fintech app developers like never before.
-With our SDK, you can more easily integrate new account creation, optimize trading, and elevate your applications with realtime buying power, all through a seamless, SDK interface.
+With our SDK, you can more easily integrate new account creation, optimize trading, and elevate your applications with realtime buying power, all through a seamless SDK interface.
 
 Whether you're building complex, data-driven platforms or simplified, user-centric applications, Apex Go SDK was created to offer the flexibility, power, and ease of use to bring your visions to life faster and more effectively.
 Join us in redefining the boundaries of what your applications can achieve.
 Start your journey with Apex today.
 
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 To add the SDK as a dependency to your project:
 ```bash
-go get ascend-sdk
+go get github.com/afs-public/ascend-sdk-go
 ```
-
-<!-- No SDK Installation [installation] -->
+<!-- End SDK Installation [installation] -->
 
 ## Initializing the SDK
 
@@ -25,19 +25,19 @@ The following sample shows how to initialise the SDK, using the API Key and Serv
 package main
 
 import (
-    ascendsdk "ascend-sdk"
-    "ascend-sdk/models/components"
-    "ascend-sdk/models/operations"
-    "fmt"
-    "os"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"context"
+	"fmt"
+	"os"
 )
 
 func main() {
     ctx := context.Background()
-    s := ascendsdk.New(
-        ascendsdk.WithServerURL("https://uat.apexapis.com"),
-        ascendsdk.WithSecurity(components.Security{
-            APIKey: ascendsdk.String(os.Getenv("API_KEY")),
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
             ServiceAccountCreds: &components.ServiceAccountCreds{
                 PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
                 Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
@@ -47,8 +47,12 @@ func main() {
         }),
     )
 
-    res, _ := s.AccountCreation.GetAccount(ctx, "VALID_ACCOUNT_ID", nil)
-    fmt.Printf("Account ID: %s\n", res.Account.AccountID)
+    res, err := s.AccountCreation.GetAccount(ctx, "VALID_ACCOUNT_ID", nil)
+    if err != nil {
+        fmt.Printf("Error was: %s\n", err)
+    } else {
+        fmt.Printf("Account ID: %s\n", res.Account.AccountID)
+    }
 }
 ```
 
@@ -65,17 +69,17 @@ To change the default retry strategy for a single API call, simply provide a `re
 package main
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
-	"ascend-sdk/retry"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
+	"github.com/afs-public/ascend-sdk-go/retry"
 	"log"
 	"models/operations"
 )
 
 func main() {
-	s := ascendsdk.New()
+	s := ascendsdkgo.New()
 
 	ctx := context.Background()
 	res, err := s.Authentication.GenerateServiceAccountToken(ctx, components.GenerateServiceAccountTokenRequestCreate{
@@ -108,17 +112,17 @@ If you'd like to override the default retry strategy for all operations that sup
 package main
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
-	"ascend-sdk/retry"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
+	"github.com/afs-public/ascend-sdk-go/retry"
 	"log"
 )
 
 func main() {
-	s := ascendsdk.New(
-		ascendsdk.WithRetryConfig(
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
 				Backoff: &retry.BackoffStrategy{
@@ -168,19 +172,19 @@ For example, the `GetAccount` function may return the following errors:
 package main
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
-	"ascend-sdk/models/sdkerrors"
 	"context"
 	"errors"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
+	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"log"
 )
 
 func main() {
-	s := ascendsdk.New(
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
 				Name:         "FinFirm",
@@ -230,18 +234,18 @@ You can override the default server globally using the `WithServer` option when 
 package main
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-	s := ascendsdk.New(
-		ascendsdk.WithServer("sbx"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServer("sbx"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
 				Name:         "FinFirm",
@@ -263,6 +267,7 @@ func main() {
 
 ```
 
+
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
@@ -270,18 +275,18 @@ The default server can also be overridden globally using the `WithServerURL` opt
 package main
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
-	s := ascendsdk.New(
-		ascendsdk.WithServerURL("https://uat.apexapis.com"),
-		ascendsdk.WithSecurity(components.Security{
-			APIKey: ascendsdk.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
 				PrivateKey:   "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
 				Name:         "FinFirm",
@@ -337,8 +342,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 <!-- No Table of Contents [toc] -->
 
+<!-- No Summary -->
+
 <!-- Start Special Types [types] -->
 ## Special Types
+
 
 <!-- End Special Types [types] -->
 
@@ -469,7 +477,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 ### [Investigations](docs/sdks/investigations/README.md)
 
 * [GetInvestigation](docs/sdks/investigations/README.md#getinvestigation) - Get Investigations
-* [UpdateInvestigation](docs/sdks/investigations/README.md#updateinvestigation) - Update Investigation
+* [UpdateInvestigation](docs/sdks/investigations/README.md#updateinvestigation) - Update Investigation 
 * [ListInvestigations](docs/sdks/investigations/README.md#listinvestigations) - List Investigations
 * [LinkDocuments](docs/sdks/investigations/README.md#linkdocuments) - Link Documents
 * [GetWatchlistItem](docs/sdks/investigations/README.md#getwatchlistitem) - Get Watchlist Item
