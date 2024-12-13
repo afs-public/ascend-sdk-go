@@ -13,7 +13,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestSubscriber_SubscriberListPushSubscriptions_AssetsGetAsset1(t *testing.T) {
+func TestSubscriber_SubscriberListPushSubscriptions_ListPushSubscriptions1(t *testing.T) {
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
 		ascendsdkgo.WithSecurity(components.Security{
