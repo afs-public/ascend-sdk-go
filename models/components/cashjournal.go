@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -35,23 +33,6 @@ const (
 func (e PartyType) ToPointer() *PartyType {
 	return &e
 }
-func (e *PartyType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PARTY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FIRST_PARTY":
-		fallthrough
-	case "THIRD_PARTY":
-		*e = PartyType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyType: %v", v)
-	}
-}
 
 // CashJournalType - The type of retirement contribution.
 type CashJournalType string
@@ -72,39 +53,6 @@ const (
 
 func (e CashJournalType) ToPointer() *CashJournalType {
 	return &e
-}
-func (e *CashJournalType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = CashJournalType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CashJournalType: %v", v)
-	}
 }
 
 // CashJournalRetirementContribution - The retirement contribution details Must be provided when the destination account is a retirement account
@@ -252,53 +200,6 @@ const (
 func (e CashJournalRetirementDistributionType) ToPointer() *CashJournalRetirementDistributionType {
 	return &e
 }
-func (e *CashJournalRetirementDistributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DISTRIBUTION_TRANSFER":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DISTRIBUTION_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		*e = CashJournalRetirementDistributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CashJournalRetirementDistributionType: %v", v)
-	}
-}
 
 // CashJournalRetirementDistribution - The retirement distribution details Must be provided when the source account is a retirement account
 type CashJournalRetirementDistribution struct {
@@ -383,35 +284,6 @@ const (
 
 func (e CashJournalStateState) ToPointer() *CashJournalStateState {
 	return &e
-}
-func (e *CashJournalStateState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PROCESSING":
-		fallthrough
-	case "PENDING_REVIEW":
-		fallthrough
-	case "POSTED":
-		fallthrough
-	case "COMPLETED":
-		fallthrough
-	case "REJECTED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "RETURNED":
-		fallthrough
-	case "POSTPONED":
-		*e = CashJournalStateState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CashJournalStateState: %v", v)
-	}
 }
 
 // CashJournalState - The current state of the cash journal

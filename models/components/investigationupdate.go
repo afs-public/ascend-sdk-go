@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // InvestigationUpdateIdentityVerification - Indicates the current state of identity verification
 type InvestigationUpdateIdentityVerification string
 
@@ -23,31 +18,6 @@ const (
 func (e InvestigationUpdateIdentityVerification) ToPointer() *InvestigationUpdateIdentityVerification {
 	return &e
 }
-func (e *InvestigationUpdateIdentityVerification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SCREEN_STATE_UNSPECIFIED":
-		fallthrough
-	case "PENDING":
-		fallthrough
-	case "PASSED":
-		fallthrough
-	case "FAILED":
-		fallthrough
-	case "NEEDS_REVIEW":
-		fallthrough
-	case "DEFERRED_REVIEW":
-		fallthrough
-	case "OUT_OF_SCOPE":
-		*e = InvestigationUpdateIdentityVerification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InvestigationUpdateIdentityVerification: %v", v)
-	}
-}
 
 // InvestigationUpdateIdentityVerificationScope - Used to determine who is responsible for running identity verification checks
 type InvestigationUpdateIdentityVerificationScope string
@@ -60,23 +30,6 @@ const (
 
 func (e InvestigationUpdateIdentityVerificationScope) ToPointer() *InvestigationUpdateIdentityVerificationScope {
 	return &e
-}
-func (e *InvestigationUpdateIdentityVerificationScope) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED":
-		fallthrough
-	case "PERFORMED_BY_APEX":
-		fallthrough
-	case "PROVIDED_BY_CLIENT":
-		*e = InvestigationUpdateIdentityVerificationScope(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InvestigationUpdateIdentityVerificationScope: %v", v)
-	}
 }
 
 // InvestigationUpdate - Contains investigation details of corresponding investigation

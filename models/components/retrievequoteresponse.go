@@ -49,25 +49,6 @@ const (
 func (e RetrieveQuoteResponseAssetType) ToPointer() *RetrieveQuoteResponseAssetType {
 	return &e
 }
-func (e *RetrieveQuoteResponseAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		fallthrough
-	case "FIXED_INCOME":
-		fallthrough
-	case "MUTUAL_FUND":
-		*e = RetrieveQuoteResponseAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveQuoteResponseAssetType: %v", v)
-	}
-}
 
 // BidMinimumQuantity - The best bid minimum quantity. This will be absent if no bid information is available
 type BidMinimumQuantity struct {
@@ -106,23 +87,6 @@ const (
 
 func (e RetrieveQuoteResponseBrokerCapacity) ToPointer() *RetrieveQuoteResponseBrokerCapacity {
 	return &e
-}
-func (e *RetrieveQuoteResponseBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BROKER_CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		*e = RetrieveQuoteResponseBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveQuoteResponseBrokerCapacity: %v", v)
-	}
 }
 
 // RetrieveQuoteResponseIdentifierType - The identifier type of the asset for which the best bid and offer is returned. This will be the same value as what was sent on the request.

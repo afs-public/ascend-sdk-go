@@ -176,7 +176,6 @@ import (
 	"errors"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"log"
 )
@@ -195,7 +194,7 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
+	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
 	if err != nil {
 
 		var e *sdkerrors.Status
@@ -237,7 +236,6 @@ import (
 	"context"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -256,7 +254,7 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
+	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -278,7 +276,6 @@ import (
 	"context"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -297,7 +294,7 @@ func main() {
 	)
 
 	ctx := context.Background()
-	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
+	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
 	if err != nil {
 		log.Fatal(err)
 	}

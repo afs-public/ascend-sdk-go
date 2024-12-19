@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // PersonIdentificationUpdateType - Tax id type (e.g. ssn)
 type PersonIdentificationUpdateType string
 
@@ -18,23 +13,6 @@ const (
 
 func (e PersonIdentificationUpdateType) ToPointer() *PersonIdentificationUpdateType {
 	return &e
-}
-func (e *PersonIdentificationUpdateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "SSN":
-		fallthrough
-	case "ITIN":
-		*e = PersonIdentificationUpdateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PersonIdentificationUpdateType: %v", v)
-	}
 }
 
 // PersonIdentificationUpdate - stores various identification types

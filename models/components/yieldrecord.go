@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // YieldPercent - The yield percentage at which the transaction was effected
 type YieldPercent struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -33,27 +28,6 @@ const (
 
 func (e YieldType) ToPointer() *YieldType {
 	return &e
-}
-func (e *YieldType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "YIELD_TYPE_UNSPECIFIED":
-		fallthrough
-	case "YIELD_TO_CALL":
-		fallthrough
-	case "YIELD_TO_MATURITY":
-		fallthrough
-	case "YIELD_TO_PUT":
-		fallthrough
-	case "YIELD_TO_WORST":
-		*e = YieldType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for YieldType: %v", v)
-	}
 }
 
 type YieldRecord struct {

@@ -53,13 +53,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{
-        PageSize: ascendsdkgo.Int(25),
-        PageToken: ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
-        OrderBy: ascendsdkgo.String("state"),
-        Filter: ascendsdkgo.String("account_number == \"R9AHY8P\""),
-        View: operations.ViewFull.ToPointer(),
-    })
+    res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -118,98 +112,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountManagement.UpdateAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AccountRequestUpdate{
-        AcceptsIssuerDirectCommunication: ascendsdkgo.Bool(false),
-        Advised: ascendsdkgo.Bool(true),
-        CatAccountHolderType: components.AccountRequestUpdateCatAccountHolderTypeIIndividual.ToPointer(),
-        Identifiers: []components.IdentifierUpdate{
-            components.IdentifierUpdate{
-                Type: components.IdentifierUpdateTypeOriginatingAccountID.ToPointer(),
-            },
-        },
-        InterestedParties: []components.InterestedPartyUpdate{
-            components.InterestedPartyUpdate{
-                Recipient: ascendsdkgo.String("John Dough"),
-                StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-            components.InterestedPartyUpdate{
-                Recipient: ascendsdkgo.String("John Dough"),
-                StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-            components.InterestedPartyUpdate{
-                Recipient: ascendsdkgo.String("John Dough"),
-                StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-        },
-        InvestmentProfile: &components.InvestmentProfileUpdate{
-            AccountGoals: &components.AccountGoalsUpdate{
-                InvestmentObjective: components.AccountGoalsUpdateInvestmentObjectiveGrowth.ToPointer(),
-                LiquidityNeeds: components.AccountGoalsUpdateLiquidityNeedsVeryImportant.ToPointer(),
-                RiskTolerance: components.AccountGoalsUpdateRiskToleranceMedium.ToPointer(),
-                TimeHorizon: components.AccountGoalsUpdateTimeHorizonAverage.ToPointer(),
-            },
-            CustomerProfile: &components.CustomerProfileUpdate{
-                AnnualIncomeRangeUsd: components.CustomerProfileUpdateAnnualIncomeRangeUsdFrom100KTo200K.ToPointer(),
-                FederalTaxBracket: ascendsdkgo.Float64(1.5),
-                InvestmentExperience: components.CustomerProfileUpdateInvestmentExperienceGood.ToPointer(),
-                LiquidNetWorthRangeUsd: components.CustomerProfileUpdateLiquidNetWorthRangeUsdFrom100KTo200K.ToPointer(),
-                TotalNetWorthRangeUsd: components.CustomerProfileUpdateTotalNetWorthRangeUsdFrom100KTo200K.ToPointer(),
-            },
-        },
-        Managed: ascendsdkgo.Bool(true),
-        Parties: []components.PartyRequestUpdate{
-            components.PartyRequestUpdate{
-                EmailAddress: ascendsdkgo.String("example@domain.com"),
-                ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
-                ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
-                RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
-                StatementDeliveryPreference: components.PartyRequestUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-                TaxDocumentDeliveryPreference: components.PartyRequestUpdateTaxDocumentDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-            components.PartyRequestUpdate{
-                EmailAddress: ascendsdkgo.String("example@domain.com"),
-                ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
-                ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
-                RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
-                StatementDeliveryPreference: components.PartyRequestUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-                TaxDocumentDeliveryPreference: components.PartyRequestUpdateTaxDocumentDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-            components.PartyRequestUpdate{
-                EmailAddress: ascendsdkgo.String("example@domain.com"),
-                ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
-                ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
-                RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
-                StatementDeliveryPreference: components.PartyRequestUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-                TaxDocumentDeliveryPreference: components.PartyRequestUpdateTaxDocumentDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-        },
-        PrimaryRegisteredRepID: ascendsdkgo.String("01HB7N66WW02WG3B6B9W29K0HF"),
-        TaxProfile: &components.AccountTaxProfileUpdate{
-            CostBasisLotDisposalMethod: components.AccountTaxProfileUpdateCostBasisLotDisposalMethodCostBasisLotDisposalFifo.ToPointer(),
-            Section475Election: ascendsdkgo.Bool(true),
-        },
-        TrustedContacts: []components.TrustedContactUpdate{
-            components.TrustedContactUpdate{
-                EmailAddress: ascendsdkgo.String("example@email.com"),
-                FamilyName: ascendsdkgo.String("Doe"),
-                GivenName: ascendsdkgo.String("John"),
-                MiddleNames: ascendsdkgo.String("Larry"),
-            },
-            components.TrustedContactUpdate{
-                EmailAddress: ascendsdkgo.String("example@email.com"),
-                FamilyName: ascendsdkgo.String("Doe"),
-                GivenName: ascendsdkgo.String("John"),
-                MiddleNames: ascendsdkgo.String("Larry"),
-            },
-        },
-        WrapFeeBilled: ascendsdkgo.Bool(true),
-    })
+    res, err := s.AccountManagement.UpdateAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AccountRequestUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -270,21 +173,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.AddParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AddPartyRequestCreate{
-        AuthorizedByPartyIds: []string{
-            "8096110d-fb55-4f9d-b883-b84f0b70d3ea",
-            "8096110d-fb55-4f9d-b883-b84f0b70d3rb",
-        },
         Parent: "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK",
         Party: components.PartyRequestCreate{
             EmailAddress: "example@domain.com",
             MailingAddress: components.PostalAddressCreate{},
             PhoneNumber: components.PhoneNumberCreate{},
-            ProspectusDeliveryPreference: components.ProspectusDeliveryPreferenceDigital.ToPointer(),
-            ProxyDeliveryPreference: components.ProxyDeliveryPreferenceDigital.ToPointer(),
             RelationType: components.RelationTypePrimaryOwner,
-            StatementDeliveryPreference: components.PartyRequestCreateStatementDeliveryPreferenceDigital.ToPointer(),
-            TaxDocumentDeliveryPreference: components.TaxDocumentDeliveryPreferenceDigital.ToPointer(),
-            TradeConfirmationDeliveryPreference: components.PartyRequestCreateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
         },
     })
     if err != nil {
@@ -346,15 +240,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountManagement.UpdateParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "a58ddb02-3954-4249-a7d5-1d408def12cf", components.PartyRequestUpdate{
-        EmailAddress: ascendsdkgo.String("example@domain.com"),
-        ProspectusDeliveryPreference: components.PartyRequestUpdateProspectusDeliveryPreferenceDigital.ToPointer(),
-        ProxyDeliveryPreference: components.PartyRequestUpdateProxyDeliveryPreferenceDigital.ToPointer(),
-        RelationType: components.PartyRequestUpdateRelationTypePrimaryOwner.ToPointer(),
-        StatementDeliveryPreference: components.PartyRequestUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-        TaxDocumentDeliveryPreference: components.PartyRequestUpdateTaxDocumentDeliveryPreferenceDigital.ToPointer(),
-        TradeConfirmationDeliveryPreference: components.PartyRequestUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-    })
+    res, err := s.AccountManagement.UpdateParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "a58ddb02-3954-4249-a7d5-1d408def12cf", components.PartyRequestUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -416,21 +302,12 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.ReplaceParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.ReplacePartyRequestCreate{
-        AuthorizedByPartyIds: []string{
-            "8096110d-fb55-4f9d-b883-b84f0b70d3ea",
-            "8096110d-fb55-4f9d-b883-b84f0b70d3rb",
-        },
         Name: "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/parties/8096110d-fb55-4f9d-b883-b84f0b70d3ea",
         Party: components.PartyRequestCreate{
             EmailAddress: "example@domain.com",
             MailingAddress: components.PostalAddressCreate{},
             PhoneNumber: components.PhoneNumberCreate{},
-            ProspectusDeliveryPreference: components.ProspectusDeliveryPreferenceDigital.ToPointer(),
-            ProxyDeliveryPreference: components.ProxyDeliveryPreferenceDigital.ToPointer(),
             RelationType: components.RelationTypePrimaryOwner,
-            StatementDeliveryPreference: components.PartyRequestCreateStatementDeliveryPreferenceDigital.ToPointer(),
-            TaxDocumentDeliveryPreference: components.TaxDocumentDeliveryPreferenceDigital.ToPointer(),
-            TradeConfirmationDeliveryPreference: components.PartyRequestCreateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
         },
     })
     if err != nil {
@@ -494,10 +371,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.RemoveParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.RemovePartyRequestCreate{
-        AuthorizedByPartyIds: []string{
-            "8096110d-fb55-4f9d-b883-b84f0b70d3ea",
-            "8096110d-fb55-4f9d-b883-b84f0b70d3rb",
-        },
         Name: "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/parties/8096110d-fb55-4f9d-b883-b84f0b70d3ea",
     })
     if err != nil {
@@ -560,9 +433,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountManagement.CloseAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.CloseAccountRequestCreate{
-        ReplacedFdid: ascendsdkgo.String("JY3E1OC2J3IA"),
-    })
+    res, err := s.AccountManagement.CloseAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.CloseAccountRequestCreate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -623,10 +494,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountManagement.CreateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.TrustedContactCreate{
-        EmailAddress: ascendsdkgo.String("example@email.com"),
         FamilyName: "Doe",
         GivenName: "John",
-        MiddleNames: ascendsdkgo.String("Larry"),
     })
     if err != nil {
         log.Fatal(err)
@@ -687,12 +556,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountManagement.UpdateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.TrustedContactUpdate{
-        EmailAddress: ascendsdkgo.String("example@email.com"),
-        FamilyName: ascendsdkgo.String("Doe"),
-        GivenName: ascendsdkgo.String("John"),
-        MiddleNames: ascendsdkgo.String("Larry"),
-    })
+    res, err := s.AccountManagement.UpdateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.TrustedContactUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -816,8 +680,6 @@ func main() {
     res, err := s.AccountManagement.CreateInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.InterestedPartyCreate{
         MailingAddress: components.PostalAddressCreate{},
         Recipient: "John Dough",
-        StatementDeliveryPreference: components.StatementDeliveryPreferenceDigital.ToPointer(),
-        TradeConfirmationDeliveryPreference: components.TradeConfirmationDeliveryPreferenceDigital.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)
@@ -878,11 +740,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountManagement.UpdateInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "ecf44f2f-7030-48ed-b937-c40891ee10c8", components.InterestedPartyUpdate{
-        Recipient: ascendsdkgo.String("John Dough"),
-        StatementDeliveryPreference: components.InterestedPartyUpdateStatementDeliveryPreferenceDigital.ToPointer(),
-        TradeConfirmationDeliveryPreference: components.InterestedPartyUpdateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-    })
+    res, err := s.AccountManagement.UpdateInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "ecf44f2f-7030-48ed-b937-c40891ee10c8", components.InterestedPartyUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -1064,7 +922,6 @@ func main() {
     ctx := context.Background()
     res, err := s.AccountManagement.CreateRestriction(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.RestrictionCreate{
         CreateReason: "Some reason for creating",
-        EndedReason: ascendsdkgo.String("Some reason for removing"),
         RestrictionCode: "MARGIN_CALL_VIOLATION_REG_T",
     })
     if err != nil {

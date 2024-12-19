@@ -42,28 +42,12 @@ func main() {
     res, err := s.Wires.CreateWireWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.WireWithdrawalCreate{
         Beneficiary: components.WireWithdrawalBeneficiaryCreate{
             Account: "73849218650987",
-            AccountTitle: ascendsdkgo.String("Jane Dough"),
-            ThirdParty: ascendsdkgo.Bool(false),
         },
         ClientTransferID: "ABC-123",
-        FullDisbursement: ascendsdkgo.Bool(false),
-        Intermediary: &components.WireWithdrawalIntermediaryCreate{
-            Account: "NL02ABNA0123456789",
-            AccountTitle: "Jane Dough",
-            Address: components.AddressCreate{},
-        },
-        IraDistribution: &components.RetirementDistributionCreate{
-            Type: components.RetirementDistributionCreateTypeNormal,
-        },
         RecipientBank: components.WireWithdrawalRecipientBankCreate{
             BankID: components.RecipientBankBankIDCreate{
                 ID: "ABNANL2AXXX",
                 Type: components.RecipientBankBankIDCreateTypeBic,
-            },
-            InternationalBankDetails: &components.RecipientBankBankDetailsCreate{
-                AdditionalInfo: ascendsdkgo.String("Jane Dough transfer through intermediary account"),
-                Address: components.AddressCreate{},
-                BankName: "ABN AMRO BANK N.V.",
             },
         },
     })
@@ -188,7 +172,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Wires.CancelWireWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.CancelWireWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319",
-        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)

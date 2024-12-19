@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -146,53 +144,6 @@ const (
 func (e AchWithdrawalType) ToPointer() *AchWithdrawalType {
 	return &e
 }
-func (e *AchWithdrawalType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DISTRIBUTION_TRANSFER":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DISTRIBUTION_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		*e = AchWithdrawalType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchWithdrawalType: %v", v)
-	}
-}
 
 // RetirementDistribution - The retirement distribution details.
 type RetirementDistribution struct {
@@ -277,35 +228,6 @@ const (
 
 func (e AchWithdrawalStateState) ToPointer() *AchWithdrawalStateState {
 	return &e
-}
-func (e *AchWithdrawalStateState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PROCESSING":
-		fallthrough
-	case "PENDING_REVIEW":
-		fallthrough
-	case "POSTED":
-		fallthrough
-	case "COMPLETED":
-		fallthrough
-	case "REJECTED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "RETURNED":
-		fallthrough
-	case "POSTPONED":
-		*e = AchWithdrawalStateState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchWithdrawalStateState: %v", v)
-	}
 }
 
 // AchWithdrawalState - The current state of the ACH withdrawal.

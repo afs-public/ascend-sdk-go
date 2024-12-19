@@ -85,7 +85,7 @@ func main() {
     ctx := context.Background()
     res, err := s.Authentication.ListSigningKeys(ctx, operations.AuthenticationListSigningKeysSecurity{
         APIKeyAuth: "<YOUR_API_KEY_HERE>",
-    }, ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

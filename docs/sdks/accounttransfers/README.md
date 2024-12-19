@@ -39,39 +39,8 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountTransfers.CreateTransfer(ctx, "00000000-0000-0000-0000-000000000002", "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.TransferCreate{
-        Assets: []components.AssetCreate{
-            components.AssetCreate{
-                Identifier: "US37733W2044",
-                Position: components.PositionCreate{
-                    Quantity: components.DecimalCreate{},
-                },
-                Type: components.AssetCreateTypeCusip,
-            },
-            components.AssetCreate{
-                Identifier: "US37733W2044",
-                Position: components.PositionCreate{
-                    Quantity: components.DecimalCreate{},
-                },
-                Type: components.AssetCreateTypeCusip,
-            },
-            components.AssetCreate{
-                Identifier: "US37733W2044",
-                Position: components.PositionCreate{
-                    Quantity: components.DecimalCreate{},
-                },
-                Type: components.AssetCreateTypeCusip,
-            },
-        },
-        Comment: ascendsdkgo.String("From XYZ Brokerage"),
-        Deliverer: components.TransferAccountCreate{
-            ApexAccountID: ascendsdkgo.String("01H8FB90ZRRFWXB4XC2JPJ1D4Y"),
-            ExternalAccount: &components.ExternalAccountCreate{
-                AccountNumber: "1234567890",
-                ParticipantNumber: "987",
-            },
-        },
-        OriginalControlNumber: ascendsdkgo.String("20240201123456"),
-    }, ascendsdkgo.String("ABC-123"))
+        Deliverer: components.TransferAccountCreate{},
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

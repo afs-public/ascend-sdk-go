@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -38,31 +36,6 @@ const (
 
 func (e IctWithdrawalProgram) ToPointer() *IctWithdrawalProgram {
 	return &e
-}
-func (e *IctWithdrawalProgram) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ICT_PROGRAM_UNSPECIFIED":
-		fallthrough
-	case "BROKER_PARTNER":
-		fallthrough
-	case "DEPOSIT_ONLY":
-		fallthrough
-	case "BANKING_PARTNER":
-		fallthrough
-	case "MONEY_TRANSMITTER":
-		fallthrough
-	case "WITHDRAWAL_ONLY":
-		fallthrough
-	case "DIGITAL_PARTNER":
-		*e = IctWithdrawalProgram(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctWithdrawalProgram: %v", v)
-	}
 }
 
 // IctWithdrawalRetirementDistributionAmount - Fixed USD amount to withhold for taxes.
@@ -188,53 +161,6 @@ const (
 func (e IctWithdrawalType) ToPointer() *IctWithdrawalType {
 	return &e
 }
-func (e *IctWithdrawalType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DISTRIBUTION_TRANSFER":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DISTRIBUTION_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		*e = IctWithdrawalType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctWithdrawalType: %v", v)
-	}
-}
 
 // IctWithdrawalRetirementDistribution - Retirement distribution details for withdrawal from retirement account
 type IctWithdrawalRetirementDistribution struct {
@@ -319,35 +245,6 @@ const (
 
 func (e IctWithdrawalState) ToPointer() *IctWithdrawalState {
 	return &e
-}
-func (e *IctWithdrawalState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PROCESSING":
-		fallthrough
-	case "PENDING_REVIEW":
-		fallthrough
-	case "POSTED":
-		fallthrough
-	case "COMPLETED":
-		fallthrough
-	case "REJECTED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "RETURNED":
-		fallthrough
-	case "POSTPONED":
-		*e = IctWithdrawalState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctWithdrawalState: %v", v)
-	}
 }
 
 // IctWithdrawalTransferState - The state of the ICT withdrawal

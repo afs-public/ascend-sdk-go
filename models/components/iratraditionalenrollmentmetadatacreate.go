@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -18,23 +13,6 @@ const (
 
 func (e IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
-}
-func (e *IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_ENROLL":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_DECLINE":
-		*e = IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IRATraditionalEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
-	}
 }
 
 // IRATraditionalEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -48,23 +26,6 @@ const (
 
 func (e IRATraditionalEnrollmentMetadataCreateFdicCashSweep) ToPointer() *IRATraditionalEnrollmentMetadataCreateFdicCashSweep {
 	return &e
-}
-func (e *IRATraditionalEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
-		fallthrough
-	case "FDIC_CASH_SWEEP_ENROLL":
-		fallthrough
-	case "FDIC_CASH_SWEEP_DECLINE":
-		*e = IRATraditionalEnrollmentMetadataCreateFdicCashSweep(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IRATraditionalEnrollmentMetadataCreateFdicCashSweep: %v", v)
-	}
 }
 
 // IRATraditionalEnrollmentMetadataCreate - Enrollment metadata for Traditional IRA accounts enrollment type

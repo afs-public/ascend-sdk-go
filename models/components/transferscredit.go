@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -48,35 +46,6 @@ const (
 
 func (e TransfersCreditStateState) ToPointer() *TransfersCreditStateState {
 	return &e
-}
-func (e *TransfersCreditStateState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PROCESSING":
-		fallthrough
-	case "PENDING_REVIEW":
-		fallthrough
-	case "POSTED":
-		fallthrough
-	case "COMPLETED":
-		fallthrough
-	case "REJECTED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "RETURNED":
-		fallthrough
-	case "POSTPONED":
-		*e = TransfersCreditStateState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransfersCreditStateState: %v", v)
-	}
 }
 
 // TransfersCreditState - The current state of the credit
@@ -161,25 +130,6 @@ const (
 
 func (e TransfersCreditType) ToPointer() *TransfersCreditType {
 	return &e
-}
-func (e *TransfersCreditType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "PROMOTIONAL":
-		fallthrough
-	case "WRITE_OFF":
-		fallthrough
-	case "REIMBURSEMENT":
-		*e = TransfersCreditType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransfersCreditType: %v", v)
-	}
 }
 
 // TransfersCredit - A transfer using the CREDIT mechanism. Funds are moved from a firm account to a customer's brokerage account

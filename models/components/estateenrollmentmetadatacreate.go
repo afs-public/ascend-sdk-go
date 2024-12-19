@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // EstateEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type EstateEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -18,23 +13,6 @@ const (
 
 func (e EstateEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *EstateEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
-}
-func (e *EstateEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_ENROLL":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_DECLINE":
-		*e = EstateEnrollmentMetadataCreateDividendReinvestmentPlan(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EstateEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
-	}
 }
 
 // EstateEnrollmentMetadataCreate - Enrollment metadata for estate enrollments

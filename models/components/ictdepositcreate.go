@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Program - The name of the program the ICT deposit is associated with
 type Program string
 
@@ -22,31 +17,6 @@ const (
 
 func (e Program) ToPointer() *Program {
 	return &e
-}
-func (e *Program) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ICT_PROGRAM_UNSPECIFIED":
-		fallthrough
-	case "BROKER_PARTNER":
-		fallthrough
-	case "DEPOSIT_ONLY":
-		fallthrough
-	case "BANKING_PARTNER":
-		fallthrough
-	case "MONEY_TRANSMITTER":
-		fallthrough
-	case "WITHDRAWAL_ONLY":
-		fallthrough
-	case "DIGITAL_PARTNER":
-		*e = Program(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Program: %v", v)
-	}
 }
 
 // IctDepositCreate - An Instant Cash Transfer. Funds are moved from a configured Firm account to a customer's brokerage account.

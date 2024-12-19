@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // PersonUpdateNameSuffix - Suffix of the person's name
 type PersonUpdateNameSuffix string
 
@@ -21,29 +16,6 @@ const (
 
 func (e PersonUpdateNameSuffix) ToPointer() *PersonUpdateNameSuffix {
 	return &e
-}
-func (e *PersonUpdateNameSuffix) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "NAME_SUFFIX_UNSPECIFIED":
-		fallthrough
-	case "SR":
-		fallthrough
-	case "JR":
-		fallthrough
-	case "III":
-		fallthrough
-	case "IV":
-		fallthrough
-	case "V":
-		*e = PersonUpdateNameSuffix(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PersonUpdateNameSuffix: %v", v)
-	}
 }
 
 // PersonUpdate - investigation details on a person

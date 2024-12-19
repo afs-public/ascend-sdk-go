@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // OperatingPurpose - The purpose of the operating account.
 type OperatingPurpose string
 
@@ -35,57 +30,6 @@ const (
 
 func (e OperatingPurpose) ToPointer() *OperatingPurpose {
 	return &e
-}
-func (e *OperatingPurpose) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "OPERATING_PURPOSE_UNSPECIFIED":
-		fallthrough
-	case "CUSTODY":
-		fallthrough
-	case "SEC_FEE":
-		fallthrough
-	case "TAF_FEE":
-		fallthrough
-	case "TEFRA_WITHHOLDING":
-		fallthrough
-	case "SUSPENSE":
-		fallthrough
-	case "ALLOCATION":
-		fallthrough
-	case "ERROR":
-		fallthrough
-	case "DEPOSIT":
-		fallthrough
-	case "WRITE_OFF":
-		fallthrough
-	case "UNSECURED_RESERVE":
-		fallthrough
-	case "PAYABLE":
-		fallthrough
-	case "COMMISSION":
-		fallthrough
-	case "ESCHEATMENT":
-		fallthrough
-	case "INTEREST_REVENUE":
-		fallthrough
-	case "STREET_DEPOSITORY":
-		fallthrough
-	case "INVENTORY":
-		fallthrough
-	case "TAX_WITHHOLDING":
-		fallthrough
-	case "FEE":
-		fallthrough
-	case "PRINCIPAL_TRADING":
-		*e = OperatingPurpose(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OperatingPurpose: %v", v)
-	}
 }
 
 // OperatingEnrollmentMetadataCreate - Enrollment metadata for the REGISTRATION_OPERATING enrollment type.

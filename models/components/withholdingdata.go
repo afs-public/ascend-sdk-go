@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Rate - The rate at which monies were withheld, expressed as a value between 0-1
 type Rate struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -79,119 +74,6 @@ const (
 func (e WithholdingDataState) ToPointer() *WithholdingDataState {
 	return &e
 }
-func (e *WithholdingDataState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_STATE_UNSPECIFIED":
-		fallthrough
-	case "CA":
-		fallthrough
-	case "ME":
-		fallthrough
-	case "VT":
-		fallthrough
-	case "AL":
-		fallthrough
-	case "AK":
-		fallthrough
-	case "AZ":
-		fallthrough
-	case "AR":
-		fallthrough
-	case "CO":
-		fallthrough
-	case "CT":
-		fallthrough
-	case "DE":
-		fallthrough
-	case "FL":
-		fallthrough
-	case "GA":
-		fallthrough
-	case "HI":
-		fallthrough
-	case "ID":
-		fallthrough
-	case "IL":
-		fallthrough
-	case "IN":
-		fallthrough
-	case "IA":
-		fallthrough
-	case "KS":
-		fallthrough
-	case "KY":
-		fallthrough
-	case "LA":
-		fallthrough
-	case "MD":
-		fallthrough
-	case "MA":
-		fallthrough
-	case "MI":
-		fallthrough
-	case "MN":
-		fallthrough
-	case "MS":
-		fallthrough
-	case "MO":
-		fallthrough
-	case "MT":
-		fallthrough
-	case "NE":
-		fallthrough
-	case "NV":
-		fallthrough
-	case "NH":
-		fallthrough
-	case "NJ":
-		fallthrough
-	case "NM":
-		fallthrough
-	case "NY":
-		fallthrough
-	case "NC":
-		fallthrough
-	case "ND":
-		fallthrough
-	case "OH":
-		fallthrough
-	case "OK":
-		fallthrough
-	case "OR":
-		fallthrough
-	case "PA":
-		fallthrough
-	case "RI":
-		fallthrough
-	case "SC":
-		fallthrough
-	case "SD":
-		fallthrough
-	case "TN":
-		fallthrough
-	case "TX":
-		fallthrough
-	case "UT":
-		fallthrough
-	case "VA":
-		fallthrough
-	case "WA":
-		fallthrough
-	case "WV":
-		fallthrough
-	case "WI":
-		fallthrough
-	case "WY":
-		*e = WithholdingDataState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WithholdingDataState: %v", v)
-	}
-}
 
 // WithholdingDataType - Provides more detail on the type of the withholding (Federal, State, etc.)
 type WithholdingDataType string
@@ -208,31 +90,6 @@ const (
 
 func (e WithholdingDataType) ToPointer() *WithholdingDataType {
 	return &e
-}
-func (e *WithholdingDataType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FEDERAL":
-		fallthrough
-	case "STATE":
-		fallthrough
-	case "FOREIGN_SECURITY":
-		fallthrough
-	case "FEDERAL_IRA":
-		fallthrough
-	case "STATE_IRA":
-		fallthrough
-	case "NON_RESIDENT_ALIEN":
-		*e = WithholdingDataType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WithholdingDataType: %v", v)
-	}
 }
 
 type WithholdingData struct {

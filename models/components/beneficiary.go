@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // BeneficiaryBirthDate - The legal day, month, and year of birth for a beneficiary; Birth date is required if tax id and tax id type is not provided.
 type BeneficiaryBirthDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -53,31 +48,6 @@ const (
 
 func (e BeneficiaryEntityType) ToPointer() *BeneficiaryEntityType {
 	return &e
-}
-func (e *BeneficiaryEntityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTITY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CORPORATION":
-		fallthrough
-	case "LIMITED_LIABILITY_COMPANY":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC":
-		fallthrough
-	case "TRUST":
-		fallthrough
-	case "ESTATE":
-		*e = BeneficiaryEntityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BeneficiaryEntityType: %v", v)
-	}
 }
 
 // MailingAddress - The object containing data for the purpose of delivery physical mailings to a party; Typically used for statements, account updates, tax documents, and other postal mailings; May also be used as an alternative identity verification address to personalAddress. Required fields within the `mailing_address` object include:
@@ -281,25 +251,6 @@ const (
 func (e BeneficiaryRelationType) ToPointer() *BeneficiaryRelationType {
 	return &e
 }
-func (e *BeneficiaryRelationType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RELATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "SPOUSE":
-		fallthrough
-	case "TRUST":
-		fallthrough
-	case "OTHER":
-		*e = BeneficiaryRelationType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BeneficiaryRelationType: %v", v)
-	}
-}
 
 // BeneficiaryTaxIDType - The nature of the U.S. Tax ID indicated in the related tax_id field; Examples include ITIN, SSN, EIN. Tax id type is required if birth date is not provided.
 type BeneficiaryTaxIDType string
@@ -313,25 +264,6 @@ const (
 
 func (e BeneficiaryTaxIDType) ToPointer() *BeneficiaryTaxIDType {
 	return &e
-}
-func (e *BeneficiaryTaxIDType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TAX_ID_TYPE_SSN":
-		fallthrough
-	case "TAX_ID_TYPE_ITIN":
-		fallthrough
-	case "TAX_ID_TYPE_EIN":
-		*e = BeneficiaryTaxIDType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BeneficiaryTaxIDType: %v", v)
-	}
 }
 
 // Beneficiary - The beneficiary for transfer on death.

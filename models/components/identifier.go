@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // IdentifierType1 - The type of identifier
 type IdentifierType1 string
 
@@ -20,27 +15,6 @@ const (
 
 func (e IdentifierType1) ToPointer() *IdentifierType1 {
 	return &e
-}
-func (e *IdentifierType1) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTIFIER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ORIGINATING_ACCOUNT_ID":
-		fallthrough
-	case "ORIGINATING_FDID":
-		fallthrough
-	case "ORIGINATING_CAT_REPORTER_CRD":
-		fallthrough
-	case "CLIENT_ACCOUNT_ID":
-		*e = IdentifierType1(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IdentifierType1: %v", v)
-	}
 }
 
 // Identifier - An identifier associated with an account

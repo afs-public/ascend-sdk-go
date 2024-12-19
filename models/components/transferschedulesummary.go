@@ -32,23 +32,6 @@ const (
 func (e TransferScheduleSummaryDirection) ToPointer() *TransferScheduleSummaryDirection {
 	return &e
 }
-func (e *TransferScheduleSummaryDirection) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DIRECTION_UNSPECIFIED":
-		fallthrough
-	case "DEPOSIT":
-		fallthrough
-	case "WITHDRAWAL":
-		*e = TransferScheduleSummaryDirection(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryDirection: %v", v)
-	}
-}
 
 // TransferScheduleSummaryMechanism - The mechanism used for this transfer schedule
 type TransferScheduleSummaryMechanism string
@@ -89,23 +72,6 @@ const (
 func (e TransferScheduleSummaryTemporalTaxYear) ToPointer() *TransferScheduleSummaryTemporalTaxYear {
 	return &e
 }
-func (e *TransferScheduleSummaryTemporalTaxYear) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TEMPORAL_TAX_YEAR_UNSPECIFIED":
-		fallthrough
-	case "CURRENT_CALENDAR_YEAR":
-		fallthrough
-	case "MINIMUM_TAX_YEAR":
-		*e = TransferScheduleSummaryTemporalTaxYear(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryTemporalTaxYear: %v", v)
-	}
-}
 
 // TransferScheduleSummaryType - The type of retirement contribution.
 type TransferScheduleSummaryType string
@@ -126,39 +92,6 @@ const (
 
 func (e TransferScheduleSummaryType) ToPointer() *TransferScheduleSummaryType {
 	return &e
-}
-func (e *TransferScheduleSummaryType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = TransferScheduleSummaryType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryType: %v", v)
-	}
 }
 
 // TransferScheduleSummaryRetirementContribution - The contribution info for a retirement account
@@ -315,53 +248,6 @@ const (
 func (e TransferScheduleSummaryRetirementDistributionType) ToPointer() *TransferScheduleSummaryRetirementDistributionType {
 	return &e
 }
-func (e *TransferScheduleSummaryRetirementDistributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DISTRIBUTION_TRANSFER":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DISTRIBUTION_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		*e = TransferScheduleSummaryRetirementDistributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryRetirementDistributionType: %v", v)
-	}
-}
 
 // TransferScheduleSummaryRetirementDistribution - The distribution info for a retirement account
 type TransferScheduleSummaryRetirementDistribution struct {
@@ -464,23 +350,6 @@ const (
 func (e TransferScheduleSummaryState) ToPointer() *TransferScheduleSummaryState {
 	return &e
 }
-func (e *TransferScheduleSummaryState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTIVE":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "COMPLETED":
-		*e = TransferScheduleSummaryState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryState: %v", v)
-	}
-}
 
 // TransferScheduleSummaryTimeUnit - The time unit used to calculate the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 type TransferScheduleSummaryTimeUnit string
@@ -493,23 +362,6 @@ const (
 
 func (e TransferScheduleSummaryTimeUnit) ToPointer() *TransferScheduleSummaryTimeUnit {
 	return &e
-}
-func (e *TransferScheduleSummaryTimeUnit) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DAY":
-		fallthrough
-	case "WEEK":
-		fallthrough
-	case "MONTH":
-		*e = TransferScheduleSummaryTimeUnit(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryTimeUnit: %v", v)
-	}
 }
 
 // ScheduleProperties - Common schedule properties

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // EntityIdentificationUpdateType - Tax id type for entities (e.g. ein, lei, etc.))
 type EntityIdentificationUpdateType string
 
@@ -19,25 +14,6 @@ const (
 
 func (e EntityIdentificationUpdateType) ToPointer() *EntityIdentificationUpdateType {
 	return &e
-}
-func (e *EntityIdentificationUpdateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ID_ENTITY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EIN":
-		fallthrough
-	case "LEI":
-		fallthrough
-	case "DUNS":
-		*e = EntityIdentificationUpdateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntityIdentificationUpdateType: %v", v)
-	}
 }
 
 // EntityIdentificationUpdate - stores various Entity identification types

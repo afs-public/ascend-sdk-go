@@ -52,7 +52,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListScheduleSummaries(ctx, ascendsdkgo.String("mechanism == 'ACH' && direction == DEPOSIT && state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListScheduleSummaries(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -115,20 +115,10 @@ func main() {
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CreateAchDepositSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.AchDepositScheduleCreate{
         BankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
-        IraContribution: &components.IraContribution{
-            TaxYear: 2024,
-            Type: components.AchDepositScheduleCreateTypeRegular,
-        },
-        RetirementContribution: &components.ScheduledRetirementContributionCreate{
-            TaxYear: ascendsdkgo.Int(2024),
-            TemporalTaxYear: components.TemporalTaxYearCurrentCalendarYear.ToPointer(),
-            Type: components.ScheduledRetirementContributionCreateTypeRegular,
-        },
         ScheduleDetails: components.DepositScheduleDetailsCreate{
             Amount: components.DecimalCreate{},
             ClientScheduleID: "ABC-123",
             ScheduleProperties: components.SchedulePropertiesCreate{
-                Occurrences: ascendsdkgo.Int(12),
                 StartDate: components.DateCreate{},
                 TimeUnit: components.TimeUnitMonth,
                 UnitMultiplier: 1,
@@ -194,7 +184,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListAchDepositSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListAchDepositSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -379,7 +369,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CancelAchDepositSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelAchDepositScheduleRequestCreate{
-        Comment: ascendsdkgo.String("User Request"),
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDepositSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
     })
     if err != nil {
@@ -444,14 +433,9 @@ func main() {
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CreateAchWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.AchWithdrawalScheduleCreate{
         BankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
-        IraDistribution: &components.RetirementDistributionCreate{
-            Type: components.RetirementDistributionCreateTypeNormal,
-        },
         ScheduleDetails: components.WithdrawalScheduleDetailsCreate{
             ClientScheduleID: "ABC-123",
-            FullDisbursement: ascendsdkgo.Bool(false),
             ScheduleProperties: components.SchedulePropertiesCreate{
-                Occurrences: ascendsdkgo.Int(12),
                 StartDate: components.DateCreate{},
                 TimeUnit: components.TimeUnitMonth,
                 UnitMultiplier: 1,
@@ -517,7 +501,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListAchWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListAchWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -702,7 +686,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CancelAchWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelAchWithdrawalScheduleRequestCreate{
-        Comment: ascendsdkgo.String("User Request"),
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
     })
     if err != nil {
@@ -768,33 +751,16 @@ func main() {
     res, err := s.ScheduleTransfers.CreateWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.WireWithdrawalScheduleCreate{
         Beneficiary: components.WireWithdrawalBeneficiaryCreate{
             Account: "73849218650987",
-            AccountTitle: ascendsdkgo.String("Jane Dough"),
-            ThirdParty: ascendsdkgo.Bool(false),
-        },
-        Intermediary: &components.WireWithdrawalIntermediaryCreate{
-            Account: "NL02ABNA0123456789",
-            AccountTitle: "Jane Dough",
-            Address: components.AddressCreate{},
         },
         RecipientBank: components.WireWithdrawalRecipientBankCreate{
             BankID: components.RecipientBankBankIDCreate{
                 ID: "ABNANL2AXXX",
                 Type: components.RecipientBankBankIDCreateTypeBic,
             },
-            InternationalBankDetails: &components.RecipientBankBankDetailsCreate{
-                AdditionalInfo: ascendsdkgo.String("Jane Dough transfer through intermediary account"),
-                Address: components.AddressCreate{},
-                BankName: "ABN AMRO BANK N.V.",
-            },
-        },
-        RetirementDistribution: &components.RetirementDistributionCreate{
-            Type: components.RetirementDistributionCreateTypeNormal,
         },
         ScheduleDetails: components.WithdrawalScheduleDetailsCreate{
             ClientScheduleID: "ABC-123",
-            FullDisbursement: ascendsdkgo.Bool(false),
             ScheduleProperties: components.SchedulePropertiesCreate{
-                Occurrences: ascendsdkgo.Int(12),
                 StartDate: components.DateCreate{},
                 TimeUnit: components.TimeUnitMonth,
                 UnitMultiplier: 1,
@@ -860,7 +826,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.ListWireWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"), ascendsdkgo.Int(100), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
+    res, err := s.ScheduleTransfers.ListWireWithdrawalSchedules(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -982,7 +948,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.ScheduleTransfers.UpdateWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.WireWithdrawalScheduleUpdate{}, ascendsdkgo.String("{\"update_mask\":\"schedule_details.amount\"}"))
+    res, err := s.ScheduleTransfers.UpdateWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.WireWithdrawalScheduleUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -1045,7 +1011,6 @@ func main() {
 
     ctx := context.Background()
     res, err := s.ScheduleTransfers.CancelWireWithdrawalSchedule(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelWireWithdrawalScheduleRequestCreate{
-        Comment: ascendsdkgo.String("User Request"),
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
     })
     if err != nil {

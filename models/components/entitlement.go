@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -22,25 +20,6 @@ const (
 
 func (e EntitlementState) ToPointer() *EntitlementState {
 	return &e
-}
-func (e *EntitlementState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTITLEMENT_STATE_UNSPECIFIED":
-		fallthrough
-	case "GRANTED":
-		fallthrough
-	case "SUSPENDED":
-		fallthrough
-	case "DENIED":
-		*e = EntitlementState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EntitlementState: %v", v)
-	}
 }
 
 // An Entitlement for an Account. Defines what the account is allowed to do.

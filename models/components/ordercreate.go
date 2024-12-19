@@ -23,25 +23,6 @@ const (
 func (e AssetType) ToPointer() *AssetType {
 	return &e
 }
-func (e *AssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		fallthrough
-	case "FIXED_INCOME":
-		fallthrough
-	case "MUTUAL_FUND":
-		*e = AssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AssetType: %v", v)
-	}
-}
 
 // BrokerCapacity - Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
 type BrokerCapacity string
@@ -54,23 +35,6 @@ const (
 
 func (e BrokerCapacity) ToPointer() *BrokerCapacity {
 	return &e
-}
-func (e *BrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BROKER_CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		*e = BrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BrokerCapacity: %v", v)
-	}
 }
 
 // IdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
@@ -116,25 +80,6 @@ const (
 func (e OrderType) ToPointer() *OrderType {
 	return &e
 }
-func (e *OrderType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "LIMIT":
-		fallthrough
-	case "MARKET":
-		fallthrough
-	case "STOP":
-		*e = OrderType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderType: %v", v)
-	}
-}
 
 // Side - The side of this order.
 type Side string
@@ -147,23 +92,6 @@ const (
 
 func (e Side) ToPointer() *Side {
 	return &e
-}
-func (e *Side) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_UNSPECIFIED":
-		fallthrough
-	case "BUY":
-		fallthrough
-	case "SELL":
-		*e = Side(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Side: %v", v)
-	}
 }
 
 type SpecialReportingInstructions string
@@ -198,65 +126,6 @@ const (
 func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions {
 	return &e
 }
-func (e *SpecialReportingInstructions) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SPECIAL_REPORTING_INSTRUCTIONS_UNSPECIFIED":
-		fallthrough
-	case "CUSTOMER_DIRECTED":
-		fallthrough
-	case "WITH_DIVIDEND":
-		fallthrough
-	case "WITH_RIGHTS":
-		fallthrough
-	case "DISCRETION_EXERCISED":
-		fallthrough
-	case "DISCRETION_NOT_EXERCISED":
-		fallthrough
-	case "BROKER_DEALER_ORDER":
-		fallthrough
-	case "FULLY_REGISTERED":
-		fallthrough
-	case "ODDLOT_DIFF_ON_REQUEST":
-		fallthrough
-	case "PROSPECTUS_ENCLOSED":
-		fallthrough
-	case "PROSPECTUS_SEPARATE_MAIL":
-		fallthrough
-	case "SOLICITED":
-		fallthrough
-	case "UNSOLICITED":
-		fallthrough
-	case "X_DIVIDEND":
-		fallthrough
-	case "ACTING_AS_PRINCIPAL":
-		fallthrough
-	case "AVERAGE_PRICE":
-		fallthrough
-	case "BROKER_LIQUIDATION":
-		fallthrough
-	case "INTERNET_ORDER":
-		fallthrough
-	case "MARGIN_SELLOUT":
-		fallthrough
-	case "NEGATIVE_NET_PROCEED":
-		fallthrough
-	case "RISKLESS_PRINCIPAL":
-		fallthrough
-	case "THIRD_MARKET":
-		fallthrough
-	case "SUPPRESS_TRACE_REPORTING":
-		fallthrough
-	case "WHEN_DISTRIBUTED":
-		*e = SpecialReportingInstructions(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for SpecialReportingInstructions: %v", v)
-	}
-}
 
 // TimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type TimeInForce string
@@ -268,21 +137,6 @@ const (
 
 func (e TimeInForce) ToPointer() *TimeInForce {
 	return &e
-}
-func (e *TimeInForce) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TIME_IN_FORCE_UNSPECIFIED":
-		fallthrough
-	case "DAY":
-		*e = TimeInForce(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TimeInForce: %v", v)
-	}
 }
 
 // OrderCreate - The message describing an order
@@ -299,10 +153,14 @@ type OrderCreate struct {
 	Commission *CommissionCreate `json:"commission,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Fees that will be applied to this order.
+	Fees []FeeCreate `json:"fees,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
 	IdentifierType IdentifierType `json:"identifier_type"`
+	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
+	LetterOfIntent *LetterOfIntentCreate `json:"letter_of_intent,omitempty"`
 	// A limit price definition
 	LimitPrice *LimitPriceCreate `json:"limit_price,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
@@ -331,6 +189,8 @@ type OrderCreate struct {
 	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
 	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
 	Quantity *DecimalCreate `json:"quantity,omitempty"`
+	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
+	RightsOfAccumulation *RightsOfAccumulationCreate `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side Side `json:"side"`
 	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
@@ -394,6 +254,13 @@ func (o *OrderCreate) GetCurrencyCode() *string {
 	return o.CurrencyCode
 }
 
+func (o *OrderCreate) GetFees() []FeeCreate {
+	if o == nil {
+		return nil
+	}
+	return o.Fees
+}
+
 func (o *OrderCreate) GetIdentifier() string {
 	if o == nil {
 		return ""
@@ -406,6 +273,13 @@ func (o *OrderCreate) GetIdentifierType() IdentifierType {
 		return IdentifierType("")
 	}
 	return o.IdentifierType
+}
+
+func (o *OrderCreate) GetLetterOfIntent() *LetterOfIntentCreate {
+	if o == nil {
+		return nil
+	}
+	return o.LetterOfIntent
 }
 
 func (o *OrderCreate) GetLimitPrice() *LimitPriceCreate {
@@ -448,6 +322,13 @@ func (o *OrderCreate) GetQuantity() *DecimalCreate {
 		return nil
 	}
 	return o.Quantity
+}
+
+func (o *OrderCreate) GetRightsOfAccumulation() *RightsOfAccumulationCreate {
+	if o == nil {
+		return nil
+	}
+	return o.RightsOfAccumulation
 }
 
 func (o *OrderCreate) GetSide() Side {

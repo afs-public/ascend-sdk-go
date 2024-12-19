@@ -9,3 +9,4 @@ The type of the asset in this order
 | ------------------------------------------ | ------------------------------------------ |
 | `BasketOrderAssetTypeAssetTypeUnspecified` | ASSET_TYPE_UNSPECIFIED                     |
 | `BasketOrderAssetTypeEquity`               | EQUITY                                     |
+| `BasketOrderAssetTypeMutualFund`           | MUTUAL_FUND                                |

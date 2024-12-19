@@ -1,0 +1,10 @@
+# BasketOrderRightsOfAccumulation
+
+Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           | Example                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `Amount`                                                                                                              | [*components.BasketOrderRightsOfAccumulationAmount](../../models/components/basketorderrightsofaccumulationamount.md) | :heavy_minus_sign:                                                                                                    | The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.    | {<br/>"value": "9,999,999.99"<br/>}                                                                                   |

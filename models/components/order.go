@@ -23,25 +23,6 @@ const (
 func (e OrderAssetType) ToPointer() *OrderAssetType {
 	return &e
 }
-func (e *OrderAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		fallthrough
-	case "FIXED_INCOME":
-		fallthrough
-	case "MUTUAL_FUND":
-		*e = OrderAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderAssetType: %v", v)
-	}
-}
 
 // OrderBrokerCapacity - Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
 type OrderBrokerCapacity string
@@ -54,23 +35,6 @@ const (
 
 func (e OrderBrokerCapacity) ToPointer() *OrderBrokerCapacity {
 	return &e
-}
-func (e *OrderBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BROKER_CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		*e = OrderBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderBrokerCapacity: %v", v)
-	}
 }
 
 // CancelRejectedReason - Used to denote when a cancel request has been rejected.
@@ -91,35 +55,6 @@ const (
 func (e CancelRejectedReason) ToPointer() *CancelRejectedReason {
 	return &e
 }
-func (e *CancelRejectedReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CANCEL_REJECT_REASON_UNSPECIFIED":
-		fallthrough
-	case "TOO_LATE_TO_CANCEL":
-		fallthrough
-	case "CANCELLATION_UNKNOWN_ORDER":
-		fallthrough
-	case "BROKER_EXCHANGE_OPTION":
-		fallthrough
-	case "ORDER_ALREADY_IN_PENDING_CANCEL_OR_PENDING_REPLACE_STATUS":
-		fallthrough
-	case "DUPLICATE":
-		fallthrough
-	case "CANCELLATION_SYSTEM_ERROR":
-		fallthrough
-	case "ORDER_ALREADY_CANCELED":
-		fallthrough
-	case "CANCELLATION_MISCONFIGURED_CLIENT":
-		*e = CancelRejectedReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CancelRejectedReason: %v", v)
-	}
-}
 
 // OrderCommissionType - The type of commission value being specified. Only the type of "AMOUNT" is supported.
 type OrderCommissionType string
@@ -131,21 +66,6 @@ const (
 
 func (e OrderCommissionType) ToPointer() *OrderCommissionType {
 	return &e
-}
-func (e *OrderCommissionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "COMMISSION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "AMOUNT":
-		*e = OrderCommissionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCommissionType: %v", v)
-	}
 }
 
 // Value - The value of this commission. If type = `AMOUNT`, then this expresses a monetary value in same currency denoted on the order itself.
@@ -239,6 +159,72 @@ func (e *OrderIdentifierType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// OrderAmount - The amount of the LOI. This is a monetary value in the same currency as the order.
+type OrderAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *OrderAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// PeriodStartDate - The period start date of the LOI.
+type PeriodStartDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *PeriodStartDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *PeriodStartDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *PeriodStartDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// LetterOfIntent - Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
+type LetterOfIntent struct {
+	// The amount of the LOI. This is a monetary value in the same currency as the order.
+	Amount *OrderAmount `json:"amount,omitempty"`
+	// The period start date of the LOI.
+	PeriodStartDate *PeriodStartDate `json:"period_start_date,omitempty"`
+}
+
+func (o *LetterOfIntent) GetAmount() *OrderAmount {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
+func (o *LetterOfIntent) GetPeriodStartDate() *PeriodStartDate {
+	if o == nil {
+		return nil
+	}
+	return o.PeriodStartDate
+}
+
 // OrderPrice - The limit price which must be greater than zero if provided. For equity orders in the USD currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for prices at or below $1. For fixed income orders this is expressed as a percentage of par, which allows up to 4 decimal places in the USD currency.
 type OrderPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -263,23 +249,6 @@ const (
 
 func (e OrderLimitPriceType) ToPointer() *OrderLimitPriceType {
 	return &e
-}
-func (e *OrderLimitPriceType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "LIMIT_PRICE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRICE_PER_UNIT":
-		fallthrough
-	case "PERCENTAGE_OF_PAR":
-		*e = OrderLimitPriceType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderLimitPriceType: %v", v)
-	}
 }
 
 // LimitPrice - The limit price for this order.
@@ -405,83 +374,6 @@ const (
 func (e OrderRejectedReason) ToPointer() *OrderRejectedReason {
 	return &e
 }
-func (e *OrderRejectedReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_REJECT_REASON_UNSPECIFIED":
-		fallthrough
-	case "BROKER_OPTION":
-		fallthrough
-	case "UNKNOWN_SECURITY":
-		fallthrough
-	case "EXCHANGE_CLOSED":
-		fallthrough
-	case "ORDER_EXCEEDS_LIMIT":
-		fallthrough
-	case "TOO_LATE_TO_ENTER":
-		fallthrough
-	case "UNKNOWN_ORDER":
-		fallthrough
-	case "DUPLICATE_ORDER":
-		fallthrough
-	case "STALE_ORDER":
-		fallthrough
-	case "BELOW_NOTIONAL_MINIMUM":
-		fallthrough
-	case "ORDER_DATE_UNAVAILABLE":
-		fallthrough
-	case "AGGRESSIVE_LIMIT_PRICE":
-		fallthrough
-	case "ACCOUNT_NOT_ENTITLED":
-		fallthrough
-	case "SYSTEM_ERROR":
-		fallthrough
-	case "BLOCKING_CORPORATE_ACTION":
-		fallthrough
-	case "UNAVAILABLE_PRICE_QUOTE":
-		fallthrough
-	case "EXECUTION_MISCONFIGURED_CLIENT":
-		fallthrough
-	case "NOTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "SYMBOL_NOT_TRADEABLE":
-		fallthrough
-	case "ABOVE_NOTIONAL_MAXIMUM":
-		fallthrough
-	case "ABOVE_SHARE_MAXIMUM":
-		fallthrough
-	case "FAILED_BUYING_POWER":
-		fallthrough
-	case "INSUFFICIENT_POSITION":
-		fallthrough
-	case "MAX_SELL_QUANTITY_REQUIRED":
-		fallthrough
-	case "MAX_SELL_QUANTITY_PROHIBITED":
-		fallthrough
-	case "STOP_PRICE_EXCEEDS_MARKET_PRICE":
-		fallthrough
-	case "TRADES_DISABLED_FOR_ASSET_TYPE":
-		fallthrough
-	case "COMMISSION_NOT_ALLOWED_FOR_NON_BROKER_DEALER":
-		fallthrough
-	case "ASSET_NOT_SET_UP_TO_TRADE":
-		fallthrough
-	case "INVALID_ORDER_QUANTITY":
-		fallthrough
-	case "CLIENT_RECEIVED_TIME_REQUIRED":
-		*e = OrderRejectedReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderRejectedReason: %v", v)
-	}
-}
 
 // OrderStatus - The processing status of the order
 type OrderStatus string
@@ -502,37 +394,6 @@ const (
 func (e OrderStatus) ToPointer() *OrderStatus {
 	return &e
 }
-func (e *OrderStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PENDING_NEW":
-		fallthrough
-	case "NEW":
-		fallthrough
-	case "PENDING_QUEUED":
-		fallthrough
-	case "QUEUED":
-		fallthrough
-	case "PARTIALLY_FILLED":
-		fallthrough
-	case "FILLED":
-		fallthrough
-	case "PENDING_CANCEL":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "REJECTED":
-		*e = OrderStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderStatus: %v", v)
-	}
-}
 
 // OrderOrderType - The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 type OrderOrderType string
@@ -546,25 +407,6 @@ const (
 
 func (e OrderOrderType) ToPointer() *OrderOrderType {
 	return &e
-}
-func (e *OrderOrderType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "LIMIT":
-		fallthrough
-	case "MARKET":
-		fallthrough
-	case "STOP":
-		*e = OrderOrderType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderOrderType: %v", v)
-	}
 }
 
 // OrderPrevailingMarketPrice - The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no executions.
@@ -593,6 +435,32 @@ func (o *OrderQuantity) GetValue() *string {
 	return o.Value
 }
 
+// OrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+type OrderRightsOfAccumulationAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *OrderRightsOfAccumulationAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// RightsOfAccumulation - Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
+type RightsOfAccumulation struct {
+	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+	Amount *OrderRightsOfAccumulationAmount `json:"amount,omitempty"`
+}
+
+func (o *RightsOfAccumulation) GetAmount() *OrderRightsOfAccumulationAmount {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
 // OrderSide - The side of this order.
 type OrderSide string
 
@@ -604,23 +472,6 @@ const (
 
 func (e OrderSide) ToPointer() *OrderSide {
 	return &e
-}
-func (e *OrderSide) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_UNSPECIFIED":
-		fallthrough
-	case "BUY":
-		fallthrough
-	case "SELL":
-		*e = OrderSide(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderSide: %v", v)
-	}
 }
 
 type OrderSpecialReportingInstructions string
@@ -655,65 +506,6 @@ const (
 func (e OrderSpecialReportingInstructions) ToPointer() *OrderSpecialReportingInstructions {
 	return &e
 }
-func (e *OrderSpecialReportingInstructions) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SPECIAL_REPORTING_INSTRUCTIONS_UNSPECIFIED":
-		fallthrough
-	case "CUSTOMER_DIRECTED":
-		fallthrough
-	case "WITH_DIVIDEND":
-		fallthrough
-	case "WITH_RIGHTS":
-		fallthrough
-	case "DISCRETION_EXERCISED":
-		fallthrough
-	case "DISCRETION_NOT_EXERCISED":
-		fallthrough
-	case "BROKER_DEALER_ORDER":
-		fallthrough
-	case "FULLY_REGISTERED":
-		fallthrough
-	case "ODDLOT_DIFF_ON_REQUEST":
-		fallthrough
-	case "PROSPECTUS_ENCLOSED":
-		fallthrough
-	case "PROSPECTUS_SEPARATE_MAIL":
-		fallthrough
-	case "SOLICITED":
-		fallthrough
-	case "UNSOLICITED":
-		fallthrough
-	case "X_DIVIDEND":
-		fallthrough
-	case "ACTING_AS_PRINCIPAL":
-		fallthrough
-	case "AVERAGE_PRICE":
-		fallthrough
-	case "BROKER_LIQUIDATION":
-		fallthrough
-	case "INTERNET_ORDER":
-		fallthrough
-	case "MARGIN_SELLOUT":
-		fallthrough
-	case "NEGATIVE_NET_PROCEED":
-		fallthrough
-	case "RISKLESS_PRINCIPAL":
-		fallthrough
-	case "THIRD_MARKET":
-		fallthrough
-	case "SUPPRESS_TRACE_REPORTING":
-		fallthrough
-	case "WHEN_DISTRIBUTED":
-		*e = OrderSpecialReportingInstructions(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderSpecialReportingInstructions: %v", v)
-	}
-}
 
 // OrderStopPricePrice - The stop price which must be greater than zero if provided. For equity orders in the USD currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for prices at or below $1.
 type OrderStopPricePrice struct {
@@ -738,21 +530,6 @@ const (
 
 func (e OrderStopPriceType) ToPointer() *OrderStopPriceType {
 	return &e
-}
-func (e *OrderStopPriceType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STOP_PRICE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRICE_PER_UNIT":
-		*e = OrderStopPriceType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderStopPriceType: %v", v)
-	}
 }
 
 // StopPrice - The stop price for this order. Only allowed for equities, when the side is SELL.
@@ -787,21 +564,6 @@ const (
 
 func (e OrderTimeInForce) ToPointer() *OrderTimeInForce {
 	return &e
-}
-func (e *OrderTimeInForce) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TIME_IN_FORCE_UNSPECIFIED":
-		fallthrough
-	case "DAY":
-		*e = OrderTimeInForce(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderTimeInForce: %v", v)
-	}
 }
 
 // Order - The message describing an order
@@ -838,6 +600,8 @@ type Order struct {
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
 	Executions []Executions `json:"executions,omitempty"`
+	// Fees that will be applied to this order.
+	Fees []Fee `json:"fees,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *FilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -846,6 +610,8 @@ type Order struct {
 	IdentifierType *OrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
+	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
+	LetterOfIntent *LetterOfIntent `json:"letter_of_intent,omitempty"`
 	// The limit price for this order.
 	LimitPrice *LimitPrice `json:"limit_price,omitempty"`
 	// The maximum number of shares to be sold if this is a notional SELL order of an Equity asset type. (Prohibited for other side or asset_type inputs.)
@@ -870,6 +636,8 @@ type Order struct {
 	PrevailingMarketPrice *OrderPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
 	Quantity *OrderQuantity `json:"quantity,omitempty"`
+	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
+	RightsOfAccumulation *RightsOfAccumulation `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side *OrderSide `json:"side,omitempty"`
 	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
@@ -989,6 +757,13 @@ func (o *Order) GetExecutions() []Executions {
 	return o.Executions
 }
 
+func (o *Order) GetFees() []Fee {
+	if o == nil {
+		return nil
+	}
+	return o.Fees
+}
+
 func (o *Order) GetFilledQuantity() *FilledQuantity {
 	if o == nil {
 		return nil
@@ -1015,6 +790,13 @@ func (o *Order) GetLastUpdateTime() *time.Time {
 		return nil
 	}
 	return o.LastUpdateTime
+}
+
+func (o *Order) GetLetterOfIntent() *LetterOfIntent {
+	if o == nil {
+		return nil
+	}
+	return o.LetterOfIntent
 }
 
 func (o *Order) GetLimitPrice() *LimitPrice {
@@ -1092,6 +874,13 @@ func (o *Order) GetQuantity() *OrderQuantity {
 		return nil
 	}
 	return o.Quantity
+}
+
+func (o *Order) GetRightsOfAccumulation() *RightsOfAccumulation {
+	if o == nil {
+		return nil
+	}
+	return o.RightsOfAccumulation
 }
 
 func (o *Order) GetSide() *OrderSide {

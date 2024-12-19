@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // LimitPriceCreateType - The type of this price, which must be PRICE_PER_UNIT for equity orders, or PERCENTAGE_OF_PAR for fixed income orders.
 type LimitPriceCreateType string
 
@@ -18,23 +13,6 @@ const (
 
 func (e LimitPriceCreateType) ToPointer() *LimitPriceCreateType {
 	return &e
-}
-func (e *LimitPriceCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "LIMIT_PRICE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRICE_PER_UNIT":
-		fallthrough
-	case "PERCENTAGE_OF_PAR":
-		*e = LimitPriceCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for LimitPriceCreateType: %v", v)
-	}
 }
 
 // LimitPriceCreate - A limit price definition

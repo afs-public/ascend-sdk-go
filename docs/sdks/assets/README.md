@@ -40,7 +40,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Assets.ListAssets(ctx, ascendsdkgo.String("correspondents/1234"), ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
+    res, err := s.Assets.ListAssets(ctx, nil, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -161,7 +161,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Assets.ListAssetsCorrespondent(ctx, "1234", ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
+    res, err := s.Assets.ListAssetsCorrespondent(ctx, "1234", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

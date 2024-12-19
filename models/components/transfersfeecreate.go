@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TransfersFeeCreateType - The type of the fee being charged
 type TransfersFeeCreateType string
 
@@ -21,29 +16,6 @@ const (
 
 func (e TransfersFeeCreateType) ToPointer() *TransfersFeeCreateType {
 	return &e
-}
-func (e *TransfersFeeCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "MANAGEMENT":
-		fallthrough
-	case "ADVISORY":
-		fallthrough
-	case "EXCHANGE":
-		fallthrough
-	case "PLATFORM":
-		fallthrough
-	case "INACTIVITY":
-		*e = TransfersFeeCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransfersFeeCreateType: %v", v)
-	}
 }
 
 // TransfersFeeCreate - A transfer using the FEE mechanism. Funds are moved from a customer's brokerage account to the firm account

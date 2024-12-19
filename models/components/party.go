@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type PartyBusinessIndustrialClassification string
 
 const (
@@ -26,39 +21,6 @@ const (
 func (e PartyBusinessIndustrialClassification) ToPointer() *PartyBusinessIndustrialClassification {
 	return &e
 }
-func (e *PartyBusinessIndustrialClassification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BUSINESS_INDUSTRIAL_CLASSIFICATION_UNSPECIFIED":
-		fallthrough
-	case "AGRICULTURE_FORESTRY_AND_FISHING":
-		fallthrough
-	case "MINING":
-		fallthrough
-	case "CONSTRUCTION":
-		fallthrough
-	case "MANUFACTURING":
-		fallthrough
-	case "TRANSPORTATION_COMMUNICATIONS_ELECTRIC_GAS_AND_SANITARY_SERVICES":
-		fallthrough
-	case "WHOLESALE_TRADE":
-		fallthrough
-	case "RETAIL_TRADE":
-		fallthrough
-	case "FINANCE_INSURANCE_AND_REAL_ESTATE":
-		fallthrough
-	case "SERVICES":
-		fallthrough
-	case "PUBLIC_ADMINISTRATION":
-		*e = PartyBusinessIndustrialClassification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyBusinessIndustrialClassification: %v", v)
-	}
-}
 
 // PartyCorporateStructure - Corporate structure of the entity.
 type PartyCorporateStructure string
@@ -73,27 +35,6 @@ const (
 
 func (e PartyCorporateStructure) ToPointer() *PartyCorporateStructure {
 	return &e
-}
-func (e *PartyCorporateStructure) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTITY_CORPORATE_STRUCTURE_UNSPECIFIED":
-		fallthrough
-	case "CORPORATION_C_CORP":
-		fallthrough
-	case "CORPORATION_S_CORP":
-		fallthrough
-	case "CORPORATION_B_CORP":
-		fallthrough
-	case "CORPORATION_NONPROFIT":
-		*e = PartyCorporateStructure(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyCorporateStructure: %v", v)
-	}
 }
 
 // PartyNegativeNews - Information about any negative news against related parties and entities
@@ -156,31 +97,6 @@ const (
 func (e PartyEntityType) ToPointer() *PartyEntityType {
 	return &e
 }
-func (e *PartyEntityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENTITY_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CORPORATION":
-		fallthrough
-	case "LIMITED_LIABILITY_COMPANY":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC":
-		fallthrough
-	case "TRUST":
-		fallthrough
-	case "ESTATE":
-		*e = PartyEntityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyEntityType: %v", v)
-	}
-}
 
 // PartyExemptCustomerReason - The reason the customer is exempt from verifying beneficial owners, if applicable.
 type PartyExemptCustomerReason string
@@ -202,41 +118,6 @@ const (
 
 func (e PartyExemptCustomerReason) ToPointer() *PartyExemptCustomerReason {
 	return &e
-}
-func (e *PartyExemptCustomerReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EXEMPT_REASON_UNSPECIFIED":
-		fallthrough
-	case "REGULATED_FINANCIAL_INSTITUTION":
-		fallthrough
-	case "DEPARTMENT_OR_AGENCY_OF_FEDERAL_STATE_OR_SUBDIVISION":
-		fallthrough
-	case "NON_BANK_LISTED_ENTITY":
-		fallthrough
-	case "SECTION_12_SECURITIES_EXCHANGE_ACT_1934_OR_15D":
-		fallthrough
-	case "SECTION_3_INVESTMENT_COMPANY_ACT_1940":
-		fallthrough
-	case "SECTION_202A_INVESTMENT_ADVISORS_ACT_1940":
-		fallthrough
-	case "SECTION_3_SECURITIES_EXCHANGE_ACT_1934_SECTION_6_OR_17A":
-		fallthrough
-	case "ANY_OTHER_SECURITIES_EXCHANGE_ACT_1934":
-		fallthrough
-	case "COMMODITY_FUTURES_TRADING_COMMISSION_REGISTERED":
-		fallthrough
-	case "PUBLIC_ACCOUNTING_FIRM_SECTION_102_SARBANES_OXLEY":
-		fallthrough
-	case "STATE_REGULATED_INSURANCE_COMPANY":
-		*e = PartyExemptCustomerReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyExemptCustomerReason: %v", v)
-	}
 }
 
 // PartyFormationDate - If the legal entity is a trust, the formation date is required.
@@ -456,25 +337,6 @@ const (
 func (e PartyTaxIDType) ToPointer() *PartyTaxIDType {
 	return &e
 }
-func (e *PartyTaxIDType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TAX_ID_TYPE_SSN":
-		fallthrough
-	case "TAX_ID_TYPE_ITIN":
-		fallthrough
-	case "TAX_ID_TYPE_EIN":
-		*e = PartyTaxIDType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyTaxIDType: %v", v)
-	}
-}
 
 // PartyCNoticeDate - C Notice date.
 type PartyCNoticeDate struct {
@@ -526,37 +388,6 @@ const (
 func (e PartyFederalTaxClassification) ToPointer() *PartyFederalTaxClassification {
 	return &e
 }
-func (e *PartyFederalTaxClassification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED":
-		fallthrough
-	case "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "C_CORPORATION":
-		fallthrough
-	case "S_CORPORATION":
-		fallthrough
-	case "TRUST_ESTATE":
-		fallthrough
-	case "LLC_TAXED_AS_C_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_S_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_PARTNERSHIP":
-		fallthrough
-	case "OTHER":
-		*e = PartyFederalTaxClassification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyFederalTaxClassification: %v", v)
-	}
-}
 
 // PartyFirstBNoticeDate - Initial B Notice date.
 type PartyFirstBNoticeDate struct {
@@ -600,21 +431,6 @@ const (
 func (e PartyIrsFormType) ToPointer() *PartyIrsFormType {
 	return &e
 }
-func (e *PartyIrsFormType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IRS_FORM_TYPE_UNSPECIFIED":
-		fallthrough
-	case "W_9":
-		*e = PartyIrsFormType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyIrsFormType: %v", v)
-	}
-}
 
 // PartyReportingEligibility - Tax reporting eligibility.
 type PartyReportingEligibility string
@@ -627,23 +443,6 @@ const (
 
 func (e PartyReportingEligibility) ToPointer() *PartyReportingEligibility {
 	return &e
-}
-func (e *PartyReportingEligibility) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_REPORTING_ELIGIBILITY_UNSPECIFIED":
-		fallthrough
-	case "ELIGIBLE":
-		fallthrough
-	case "INELIGIBLE":
-		*e = PartyReportingEligibility(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyReportingEligibility: %v", v)
-	}
 }
 
 // PartyTaxCertificationDate - Tax Certification date.
@@ -689,23 +488,6 @@ const (
 func (e PartyTaxpayerCertificationState) ToPointer() *PartyTaxpayerCertificationState {
 	return &e
 }
-func (e *PartyTaxpayerCertificationState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED":
-		fallthrough
-	case "CERTIFIED":
-		fallthrough
-	case "UNCERTIFIED":
-		*e = PartyTaxpayerCertificationState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyTaxpayerCertificationState: %v", v)
-	}
-}
 
 // PartyUsTinStatus - United States Individual Taxpayer Identification Number (ITIN) status.
 type PartyUsTinStatus string
@@ -718,23 +500,6 @@ const (
 
 func (e PartyUsTinStatus) ToPointer() *PartyUsTinStatus {
 	return &e
-}
-func (e *PartyUsTinStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "US_TIN_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PASSING":
-		fallthrough
-	case "FAILING":
-		*e = PartyUsTinStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyUsTinStatus: %v", v)
-	}
 }
 
 // PartyWithholdingState - B/C Notice status.
@@ -750,27 +515,6 @@ const (
 
 func (e PartyWithholdingState) ToPointer() *PartyWithholdingState {
 	return &e
-}
-func (e *PartyWithholdingState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_STATE_UNSPECIFIED":
-		fallthrough
-	case "FIRST_B_NOTICE_RECEIVED":
-		fallthrough
-	case "SECOND_B_NOTICE_RECEIVED":
-		fallthrough
-	case "C_NOTICE_RECEIVED":
-		fallthrough
-	case "C_NOTICE_INDICATED_BY_CUSTOMER":
-		*e = PartyWithholdingState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyWithholdingState: %v", v)
-	}
 }
 
 // PartyTaxProfile - The tax profile for the legal entity.
@@ -1369,29 +1113,6 @@ const (
 func (e PartyEmploymentStatus) ToPointer() *PartyEmploymentStatus {
 	return &e
 }
-func (e *PartyEmploymentStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATUS_UNSPECIFIED":
-		fallthrough
-	case "EMPLOYED":
-		fallthrough
-	case "SELF_EMPLOYED":
-		fallthrough
-	case "UNEMPLOYED":
-		fallthrough
-	case "RETIRED":
-		fallthrough
-	case "STUDENT":
-		*e = PartyEmploymentStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyEmploymentStatus: %v", v)
-	}
-}
 
 // PartyEmployment - Object containing information pertaining to a investor's current employer including the name, address, and duration of employment.
 type PartyEmployment struct {
@@ -1530,25 +1251,6 @@ const (
 
 func (e PartyLegalNaturalPersonType) ToPointer() *PartyLegalNaturalPersonType {
 	return &e
-}
-func (e *PartyLegalNaturalPersonType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTIFICATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PASSPORT":
-		fallthrough
-	case "NATIONAL_ID":
-		fallthrough
-	case "DRIVERS_LICENSE":
-		*e = PartyLegalNaturalPersonType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonType: %v", v)
-	}
 }
 
 // PartyForeignIdentification - Foreign identification. Must be provided if the person does not have a U.S. tax ID
@@ -1801,27 +1503,6 @@ const (
 func (e PartyMaritalStatus) ToPointer() *PartyMaritalStatus {
 	return &e
 }
-func (e *PartyMaritalStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MARITAL_STATUS_UNSPECIFIED":
-		fallthrough
-	case "SINGLE":
-		fallthrough
-	case "MARRIED":
-		fallthrough
-	case "DIVORCED":
-		fallthrough
-	case "WIDOWED":
-		*e = PartyMaritalStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyMaritalStatus: %v", v)
-	}
-}
 
 // PartyNameSuffix - The suffix of a natural person; A suffix in a name is any part of the name that comes after the last name
 type PartyNameSuffix string
@@ -1837,29 +1518,6 @@ const (
 
 func (e PartyNameSuffix) ToPointer() *PartyNameSuffix {
 	return &e
-}
-func (e *PartyNameSuffix) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "NAME_SUFFIX_UNSPECIFIED":
-		fallthrough
-	case "SR":
-		fallthrough
-	case "JR":
-		fallthrough
-	case "III":
-		fallthrough
-	case "IV":
-		fallthrough
-	case "V":
-		*e = PartyNameSuffix(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyNameSuffix: %v", v)
-	}
 }
 
 // PartyCustomerReferralSource - Customer Referral Source
@@ -2016,25 +1674,6 @@ const (
 func (e PartyResidencyStatus) ToPointer() *PartyResidencyStatus {
 	return &e
 }
-func (e *PartyResidencyStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RESIDENCY_STATUS_UNSPECIFIED":
-		fallthrough
-	case "US_PERMANENT_RESIDENT":
-		fallthrough
-	case "US_TEMPORARY_RESIDENT":
-		fallthrough
-	case "US_NON_RESIDENT":
-		*e = PartyResidencyStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyResidencyStatus: %v", v)
-	}
-}
 
 // PartyNonCitizenResidency - Facilitates non-citizen lawful US residents to open domestic accounts
 type PartyNonCitizenResidency struct {
@@ -2181,25 +1820,6 @@ const (
 func (e PartyLegalNaturalPersonTaxIDType) ToPointer() *PartyLegalNaturalPersonTaxIDType {
 	return &e
 }
-func (e *PartyLegalNaturalPersonTaxIDType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_ID_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TAX_ID_TYPE_SSN":
-		fallthrough
-	case "TAX_ID_TYPE_ITIN":
-		fallthrough
-	case "TAX_ID_TYPE_EIN":
-		*e = PartyLegalNaturalPersonTaxIDType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonTaxIDType: %v", v)
-	}
-}
 
 // PartyLegalNaturalPersonCNoticeDate - C Notice date.
 type PartyLegalNaturalPersonCNoticeDate struct {
@@ -2251,37 +1871,6 @@ const (
 func (e PartyLegalNaturalPersonFederalTaxClassification) ToPointer() *PartyLegalNaturalPersonFederalTaxClassification {
 	return &e
 }
-func (e *PartyLegalNaturalPersonFederalTaxClassification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED":
-		fallthrough
-	case "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "C_CORPORATION":
-		fallthrough
-	case "S_CORPORATION":
-		fallthrough
-	case "TRUST_ESTATE":
-		fallthrough
-	case "LLC_TAXED_AS_C_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_S_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_PARTNERSHIP":
-		fallthrough
-	case "OTHER":
-		*e = PartyLegalNaturalPersonFederalTaxClassification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonFederalTaxClassification: %v", v)
-	}
-}
 
 // PartyLegalNaturalPersonFirstBNoticeDate - Initial B Notice date.
 type PartyLegalNaturalPersonFirstBNoticeDate struct {
@@ -2325,21 +1914,6 @@ const (
 func (e PartyLegalNaturalPersonIrsFormType) ToPointer() *PartyLegalNaturalPersonIrsFormType {
 	return &e
 }
-func (e *PartyLegalNaturalPersonIrsFormType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IRS_FORM_TYPE_UNSPECIFIED":
-		fallthrough
-	case "W_9":
-		*e = PartyLegalNaturalPersonIrsFormType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonIrsFormType: %v", v)
-	}
-}
 
 // PartyLegalNaturalPersonReportingEligibility - Tax reporting eligibility.
 type PartyLegalNaturalPersonReportingEligibility string
@@ -2352,23 +1926,6 @@ const (
 
 func (e PartyLegalNaturalPersonReportingEligibility) ToPointer() *PartyLegalNaturalPersonReportingEligibility {
 	return &e
-}
-func (e *PartyLegalNaturalPersonReportingEligibility) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAX_REPORTING_ELIGIBILITY_UNSPECIFIED":
-		fallthrough
-	case "ELIGIBLE":
-		fallthrough
-	case "INELIGIBLE":
-		*e = PartyLegalNaturalPersonReportingEligibility(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonReportingEligibility: %v", v)
-	}
 }
 
 // PartyLegalNaturalPersonTaxCertificationDate - Tax Certification date.
@@ -2414,23 +1971,6 @@ const (
 func (e PartyLegalNaturalPersonTaxpayerCertificationState) ToPointer() *PartyLegalNaturalPersonTaxpayerCertificationState {
 	return &e
 }
-func (e *PartyLegalNaturalPersonTaxpayerCertificationState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED":
-		fallthrough
-	case "CERTIFIED":
-		fallthrough
-	case "UNCERTIFIED":
-		*e = PartyLegalNaturalPersonTaxpayerCertificationState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonTaxpayerCertificationState: %v", v)
-	}
-}
 
 // PartyLegalNaturalPersonUsTinStatus - United States Individual Taxpayer Identification Number (ITIN) status.
 type PartyLegalNaturalPersonUsTinStatus string
@@ -2443,23 +1983,6 @@ const (
 
 func (e PartyLegalNaturalPersonUsTinStatus) ToPointer() *PartyLegalNaturalPersonUsTinStatus {
 	return &e
-}
-func (e *PartyLegalNaturalPersonUsTinStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "US_TIN_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PASSING":
-		fallthrough
-	case "FAILING":
-		*e = PartyLegalNaturalPersonUsTinStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonUsTinStatus: %v", v)
-	}
 }
 
 // PartyLegalNaturalPersonWithholdingState - B/C Notice status.
@@ -2475,27 +1998,6 @@ const (
 
 func (e PartyLegalNaturalPersonWithholdingState) ToPointer() *PartyLegalNaturalPersonWithholdingState {
 	return &e
-}
-func (e *PartyLegalNaturalPersonWithholdingState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "WITHHOLDING_STATE_UNSPECIFIED":
-		fallthrough
-	case "FIRST_B_NOTICE_RECEIVED":
-		fallthrough
-	case "SECOND_B_NOTICE_RECEIVED":
-		fallthrough
-	case "C_NOTICE_RECEIVED":
-		fallthrough
-	case "C_NOTICE_INDICATED_BY_CUSTOMER":
-		*e = PartyLegalNaturalPersonWithholdingState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyLegalNaturalPersonWithholdingState: %v", v)
-	}
 }
 
 // PartyLegalNaturalPersonTaxProfile - Tax-related attributes at the for the account; A tax profile with taxpayer attributes is located on the legal_natural_person or legal_entity objects elsewhere on the account record.
@@ -3108,25 +2610,6 @@ const (
 func (e PartyProspectusDeliveryPreference) ToPointer() *PartyProspectusDeliveryPreference {
 	return &e
 }
-func (e *PartyProspectusDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyProspectusDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyProspectusDeliveryPreference: %v", v)
-	}
-}
 
 // PartyProxyDeliveryPreference - Delivery method instruction for proxy voting for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyProxyDeliveryPreference string
@@ -3140,25 +2623,6 @@ const (
 
 func (e PartyProxyDeliveryPreference) ToPointer() *PartyProxyDeliveryPreference {
 	return &e
-}
-func (e *PartyProxyDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyProxyDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyProxyDeliveryPreference: %v", v)
-	}
 }
 
 // PartyRelationType - Conveys how a person is related to account; Located on each account Party record; Examples are `PRIMARY_OWNER`, `JOINT_OWNER`, `EXECUTOR`, etc.
@@ -3183,43 +2647,6 @@ const (
 func (e PartyRelationType) ToPointer() *PartyRelationType {
 	return &e
 }
-func (e *PartyRelationType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PARTY_RELATION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRIMARY_OWNER":
-		fallthrough
-	case "JOINT_OWNER":
-		fallthrough
-	case "CUSTODIAN":
-		fallthrough
-	case "GUARDIAN_CONSERVATOR":
-		fallthrough
-	case "POWER_OF_ATTORNEY":
-		fallthrough
-	case "EXECUTOR":
-		fallthrough
-	case "AUTHORIZED_SIGNER":
-		fallthrough
-	case "BENEFICIAL_OWNER":
-		fallthrough
-	case "CONTROL_PERSON":
-		fallthrough
-	case "AUTHORIZED_REPRESENTATIVE":
-		fallthrough
-	case "TRUSTEE":
-		fallthrough
-	case "AUTH_TRUSTEE_REP":
-		*e = PartyRelationType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyRelationType: %v", v)
-	}
-}
 
 // PartyStatementDeliveryPreference - Delivery method instruction for account statements for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyStatementDeliveryPreference string
@@ -3233,25 +2660,6 @@ const (
 
 func (e PartyStatementDeliveryPreference) ToPointer() *PartyStatementDeliveryPreference {
 	return &e
-}
-func (e *PartyStatementDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyStatementDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyStatementDeliveryPreference: %v", v)
-	}
 }
 
 // PartyTaxDocumentDeliveryPreference - Delivery method instruction for tax documents for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated; Per regulation, selected tax forms will be mailed by regulation regardless of this setting
@@ -3267,25 +2675,6 @@ const (
 func (e PartyTaxDocumentDeliveryPreference) ToPointer() *PartyTaxDocumentDeliveryPreference {
 	return &e
 }
-func (e *PartyTaxDocumentDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyTaxDocumentDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyTaxDocumentDeliveryPreference: %v", v)
-	}
-}
 
 // PartyTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 type PartyTradeConfirmationDeliveryPreference string
@@ -3299,25 +2688,6 @@ const (
 
 func (e PartyTradeConfirmationDeliveryPreference) ToPointer() *PartyTradeConfirmationDeliveryPreference {
 	return &e
-}
-func (e *PartyTradeConfirmationDeliveryPreference) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DELIVERY_PREFERENCE_UNSPECIFIED":
-		fallthrough
-	case "DIGITAL":
-		fallthrough
-	case "PHYSICAL":
-		fallthrough
-	case "SUPPRESS":
-		*e = PartyTradeConfirmationDeliveryPreference(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PartyTradeConfirmationDeliveryPreference: %v", v)
-	}
 }
 
 // Party - A single record representing an owner or manager of an Account. Contains fully populated Party Identity object.

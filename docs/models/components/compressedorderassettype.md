@@ -9,3 +9,4 @@ The type of the asset in this order
 | ---------------------------------------------- | ---------------------------------------------- |
 | `CompressedOrderAssetTypeAssetTypeUnspecified` | ASSET_TYPE_UNSPECIFIED                         |
 | `CompressedOrderAssetTypeEquity`               | EQUITY                                         |
+| `CompressedOrderAssetTypeMutualFund`           | MUTUAL_FUND                                    |

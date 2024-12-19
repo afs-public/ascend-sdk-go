@@ -1,10 +1,15 @@
 package helpers
 
 import (
-	ascendsdk "ascend-sdk"
 	"context"
 	"fmt"
+	"math/rand"
 	"os"
+	"strconv"
+	"strings"
+	"time"
+
+	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
 )
@@ -163,4 +168,86 @@ func EnrollAccountIds(s *ascendsdk.SDK, ctx context.Context, accountId string) (
 	}
 
 	return res.EnrollAccountResponse.Agreements, nil
+}
+
+func AffirmAgreements(s *ascendsdk.SDK, ctx context.Context, accountId string, agreements []components.Agreement) (err error) {
+
+	var agreementIds []string
+
+	for _, agreement := range agreements {
+		agreementIds = append(agreementIds, *agreement.AgreementID)
+	}
+
+	affirmAgreementsRequest := components.AffirmAgreementsRequestCreate{
+		AccountAgreementIds: agreementIds,
+	}
+
+	_, err = s.EnrollmentsAndAgreements.AffirmAgreements(ctx, accountId, affirmAgreementsRequest)
+
+	if err != nil {
+		return fmt.Errorf("failed to affirm agreements: %w", err)
+	}
+
+	return nil
+}
+
+func CreateBankRelationship(s *ascendsdk.SDK, ctx context.Context, accountId string) (*string, error) {
+	bankAccountNumber := generateBankAccountNumber()
+	routingNumber := "112203216"
+
+	createBankRelationshipRequest := components.BankRelationshipCreate{
+		BankAccount: &components.BankAccountCreate{
+			AccountNumber: strconv.Itoa(bankAccountNumber),
+			Owner:         "Test User",
+			RoutingNumber: routingNumber,
+			Type:          components.BankAccountCreateTypeSavings,
+		},
+		Nickname:           "ACH TEST",
+		VerificationMethod: components.VerificationMethodMicroDeposit,
+	}
+
+	res, err := s.BankRelationships.CreateBankRelationship(ctx, accountId, createBankRelationshipRequest)
+	if err != nil {
+		return nil, fmt.Errorf("failed to create bank relationship: %w", err)
+	}
+	bankRelationshipId := strings.Split(*res.BankRelationship.Name, "/")[3]
+	return &bankRelationshipId, nil
+}
+
+func GetCorrectMicroDeposits(s *ascendsdk.SDK, ctx context.Context, accountId string, bankRelationshipId string) ([]string, error) {
+	res, err := s.TestSimulation.GetMicroDepositAmounts(ctx, accountId, bankRelationshipId)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get micro deposits: %w", err)
+	}
+	return []string{*res.MicroDepositAmounts.GetAmount1().Value, *res.MicroDepositAmounts.GetAmount2().Value}, nil
+}
+
+func VerifyMicroDeposits(s *ascendsdk.SDK, ctx context.Context, accountId string, bankRelationshipId string, amounts []string) error {
+	verifyMicroDepositsRequest := components.VerifyMicroDepositsRequestCreate{
+		Amounts: components.MicroDepositAmountsCreate{
+			Amount1: components.DecimalCreate{
+				Value: ascendsdk.String(amounts[0]),
+			},
+			Amount2: components.DecimalCreate{
+				Value: ascendsdk.String(amounts[1]),
+			},
+		},
+		Name: "accounts/" + accountId + "/bankRelationships/" + bankRelationshipId,
+	}
+
+	_, err := s.BankRelationships.VerifyMicroDeposits(ctx, accountId, bankRelationshipId, verifyMicroDepositsRequest)
+	if err != nil {
+		return fmt.Errorf("failed to verify micro deposits: %w", err)
+	}
+	return nil
+}
+
+func generateBankAccountNumber() int {
+	min := 10000000
+	max := 99999999
+	return rand.Intn(max-min+1) + min
+}
+
+func Wait() {
+	time.Sleep(5 * time.Second)
 }

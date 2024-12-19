@@ -26,7 +26,6 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
@@ -46,31 +45,12 @@ func main() {
     ctx := context.Background()
     res, err := s.CreateOrder.CreateOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", components.OrderCreate{
         AssetType: components.AssetTypeEquity,
-        BrokerCapacity: components.BrokerCapacityAgency.ToPointer(),
         ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
-        ClientReceivedTime: types.MustNewTimeFromString("[object Object]"),
-        Commission: &components.CommissionCreate{
-            Type: components.CommissionCreateTypeAmount,
-            Value: components.DecimalCreate{},
-        },
-        CurrencyCode: ascendsdkgo.String("USD"),
         Identifier: "SBUX",
         IdentifierType: components.IdentifierTypeSymbol,
-        LimitPrice: &components.LimitPriceCreate{
-            Price: components.DecimalCreate{},
-            Type: components.LimitPriceCreateTypePricePerUnit,
-        },
         OrderDate: components.DateCreate{},
         OrderType: components.OrderTypeMarket,
         Side: components.SideBuy,
-        SpecialReportingInstructions: []components.SpecialReportingInstructions{
-            components.SpecialReportingInstructionsRisklessPrincipal,
-            components.SpecialReportingInstructionsWithRights,
-        },
-        StopPrice: &components.StopPriceCreate{
-            Price: components.DecimalCreate{},
-            Type: components.StopPriceCreateTypePricePerUnit,
-        },
         TimeInForce: components.TimeInForceDay,
     })
     if err != nil {

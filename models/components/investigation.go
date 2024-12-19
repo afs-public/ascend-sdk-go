@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -226,31 +224,6 @@ const (
 func (e IdentityVerification) ToPointer() *IdentityVerification {
 	return &e
 }
-func (e *IdentityVerification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SCREEN_STATE_UNSPECIFIED":
-		fallthrough
-	case "PENDING":
-		fallthrough
-	case "PASSED":
-		fallthrough
-	case "FAILED":
-		fallthrough
-	case "NEEDS_REVIEW":
-		fallthrough
-	case "DEFERRED_REVIEW":
-		fallthrough
-	case "OUT_OF_SCOPE":
-		*e = IdentityVerification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IdentityVerification: %v", v)
-	}
-}
 
 // IdentityVerificationScope - Used to determine who is responsible for running identity verification checks
 type IdentityVerificationScope string
@@ -264,23 +237,6 @@ const (
 func (e IdentityVerificationScope) ToPointer() *IdentityVerificationScope {
 	return &e
 }
-func (e *IdentityVerificationScope) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED":
-		fallthrough
-	case "PERFORMED_BY_APEX":
-		fallthrough
-	case "PROVIDED_BY_CLIENT":
-		*e = IdentityVerificationScope(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IdentityVerificationScope: %v", v)
-	}
-}
 
 // InvestigationRequestState - Current state of investigation request
 type InvestigationRequestState string
@@ -293,23 +249,6 @@ const (
 
 func (e InvestigationRequestState) ToPointer() *InvestigationRequestState {
 	return &e
-}
-func (e *InvestigationRequestState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "INVESTIGATION_REQUEST_STATE_UNSPECIFIED":
-		fallthrough
-	case "OPEN":
-		fallthrough
-	case "CLOSED":
-		*e = InvestigationRequestState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InvestigationRequestState: %v", v)
-	}
 }
 
 // InvestigationBirthDate - The legal day, month, and year of birth for a natural person Must be formatted as an ISO-8601 YYYY-MM-DD
@@ -472,29 +411,6 @@ const (
 
 func (e InvestigationNameSuffix) ToPointer() *InvestigationNameSuffix {
 	return &e
-}
-func (e *InvestigationNameSuffix) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "NAME_SUFFIX_UNSPECIFIED":
-		fallthrough
-	case "SR":
-		fallthrough
-	case "JR":
-		fallthrough
-	case "III":
-		fallthrough
-	case "IV":
-		fallthrough
-	case "V":
-		*e = InvestigationNameSuffix(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InvestigationNameSuffix: %v", v)
-	}
 }
 
 // InvestigationExecutionDate - The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD
@@ -767,31 +683,6 @@ const (
 
 func (e WatchlistScreen) ToPointer() *WatchlistScreen {
 	return &e
-}
-func (e *WatchlistScreen) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SCREEN_STATE_UNSPECIFIED":
-		fallthrough
-	case "PENDING":
-		fallthrough
-	case "PASSED":
-		fallthrough
-	case "FAILED":
-		fallthrough
-	case "NEEDS_REVIEW":
-		fallthrough
-	case "DEFERRED_REVIEW":
-		fallthrough
-	case "OUT_OF_SCOPE":
-		*e = WatchlistScreen(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WatchlistScreen: %v", v)
-	}
 }
 
 // Investigation - Contains investigation details of corresponding investigation

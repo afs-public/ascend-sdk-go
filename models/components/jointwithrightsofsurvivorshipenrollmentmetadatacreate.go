@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -18,23 +13,6 @@ const (
 
 func (e JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
-}
-func (e *JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_ENROLL":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_DECLINE":
-		*e = JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
-	}
 }
 
 // JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -48,23 +26,6 @@ const (
 
 func (e JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep) ToPointer() *JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep {
 	return &e
-}
-func (e *JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
-		fallthrough
-	case "FDIC_CASH_SWEEP_ENROLL":
-		fallthrough
-	case "FDIC_CASH_SWEEP_DECLINE":
-		*e = JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep: %v", v)
-	}
 }
 
 // JointWithRightsOfSurvivorshipEnrollmentMetadataCreate - Enrollment metadata for the With Right of Survivorship enrollment type

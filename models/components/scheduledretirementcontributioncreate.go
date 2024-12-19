@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TemporalTaxYear - A temporal tax year value. This will always evaluate to a year based on the date the transfer was initiated.
 type TemporalTaxYear string
 
@@ -18,23 +13,6 @@ const (
 
 func (e TemporalTaxYear) ToPointer() *TemporalTaxYear {
 	return &e
-}
-func (e *TemporalTaxYear) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TEMPORAL_TAX_YEAR_UNSPECIFIED":
-		fallthrough
-	case "CURRENT_CALENDAR_YEAR":
-		fallthrough
-	case "MINIMUM_TAX_YEAR":
-		*e = TemporalTaxYear(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TemporalTaxYear: %v", v)
-	}
 }
 
 // ScheduledRetirementContributionCreateType - The type of retirement contribution.
@@ -56,39 +34,6 @@ const (
 
 func (e ScheduledRetirementContributionCreateType) ToPointer() *ScheduledRetirementContributionCreateType {
 	return &e
-}
-func (e *ScheduledRetirementContributionCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = ScheduledRetirementContributionCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ScheduledRetirementContributionCreateType: %v", v)
-	}
 }
 
 // ScheduledRetirementContributionCreate - The retirement contribution details for a scheduled deposit

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // CalculateCashBalanceResponseTransferSummaryAmount - The amount of the transfer in USD. The value will be positive for deposits and negative for withdrawals.
 type CalculateCashBalanceResponseTransferSummaryAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -40,41 +35,6 @@ const (
 
 func (e CalculateCashBalanceResponseTransferSummaryMechanism) ToPointer() *CalculateCashBalanceResponseTransferSummaryMechanism {
 	return &e
-}
-func (e *CalculateCashBalanceResponseTransferSummaryMechanism) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MECHANISM_UNSPECIFIED":
-		fallthrough
-	case "ACAT":
-		fallthrough
-	case "ACH":
-		fallthrough
-	case "CASH_JOURNAL":
-		fallthrough
-	case "CHECK":
-		fallthrough
-	case "CREDIT":
-		fallthrough
-	case "FEE":
-		fallthrough
-	case "ICT":
-		fallthrough
-	case "PAYPAL":
-		fallthrough
-	case "RTP":
-		fallthrough
-	case "TPJ":
-		fallthrough
-	case "WIRE":
-		*e = CalculateCashBalanceResponseTransferSummaryMechanism(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CalculateCashBalanceResponseTransferSummaryMechanism: %v", v)
-	}
 }
 
 // CalculateCashBalanceResponseTransferSummary - A summary of a transfer.

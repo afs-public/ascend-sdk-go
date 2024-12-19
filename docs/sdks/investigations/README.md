@@ -100,87 +100,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Investigations.UpdateInvestigation(ctx, "01HEWVF4ZSNKYRP293J53ASJCJ", components.InvestigationUpdate{
-        Comment: ascendsdkgo.String("Updating Watchlist matches"),
-        CorrespondentID: ascendsdkgo.String("01HAT5GANHSZ8E8J0RAHQ8BK9K"),
-        Entity: &components.EntityUpdate{
-            DbaNames: []string{
-                "Some Company Alias",
-            },
-            EmailAddresses: []string{
-                "jdough@domain.com",
-            },
-            Identifications: []components.EntityIdentificationUpdate{
-                components.EntityIdentificationUpdate{
-                    AdministrativeArea: ascendsdkgo.String("TX"),
-                    DocumentReferenceIds: []string{
-                        "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
-                    },
-                    RegionCode: ascendsdkgo.String("US"),
-                    Type: components.EntityIdentificationUpdateTypeEin.ToPointer(),
-                    Value: ascendsdkgo.String("666-12-3456"),
-                },
-            },
-            LegalName: ascendsdkgo.String("Enterprises, Inc"),
-            OperatingRegionCodes: []string{
-                "US",
-            },
-            PhoneNumbers: []string{
-                "214-765-1010",
-            },
-            RegistrationRegion: ascendsdkgo.String("US"),
-        },
-        IdentityVerification: components.InvestigationUpdateIdentityVerificationPassed.ToPointer(),
-        IdentityVerificationScope: components.InvestigationUpdateIdentityVerificationScopePerformedByApex.ToPointer(),
-        Person: &components.PersonUpdate{
-            BirthRegionCode: ascendsdkgo.String("US"),
-            CitizenshipRegionCodes: []string{
-                "US",
-            },
-            DocumentIds: []string{
-                "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
-            },
-            EmailAddresses: []string{
-                "jdough@domain.com",
-            },
-            FamilyName: ascendsdkgo.String("Dough"),
-            GivenName: ascendsdkgo.String("John"),
-            Identifications: []components.PersonIdentificationUpdate{
-                components.PersonIdentificationUpdate{
-                    AdministrativeArea: ascendsdkgo.String("TX"),
-                    DocumentReferenceIds: []string{
-                        "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
-                    },
-                    RegionCode: ascendsdkgo.String("US"),
-                    Type: components.PersonIdentificationUpdateTypeSsn.ToPointer(),
-                    Value: ascendsdkgo.String("666-12-3456"),
-                },
-            },
-            MiddleNames: ascendsdkgo.String("Jacob"),
-            NameSuffix: components.PersonUpdateNameSuffixJr.ToPointer(),
-            PhoneNumbers: []string{
-                "214-765-1010",
-            },
-            ProvidedIdentityVerification: &components.ProvidedIdentityVerificationUpdate{
-                AddressVerified: ascendsdkgo.Bool(true),
-                BirthDateVerified: ascendsdkgo.Bool(true),
-                ExternalCaseID: ascendsdkgo.String("123456"),
-                IdentityVerificationDocumentIds: []string{
-                    "0f01ae1f-d24c-4171-8f3f-c0b820bf3044",
-                },
-                NameVerified: ascendsdkgo.Bool(true),
-                ProvidedIdentityVerificationID: ascendsdkgo.String("123456"),
-                RawVendorDataDocumentID: ascendsdkgo.String("123456"),
-                TaxIDVerified: ascendsdkgo.Bool(true),
-                Vendor: ascendsdkgo.String("Your identity verification Vendor"),
-            },
-        },
-        WatchlistMatches: []components.WatchlistMatchUpdate{
-            components.WatchlistMatchUpdate{
-                ExcludeFromScreening: ascendsdkgo.Bool(false),
-            },
-        },
-    })
+    res, err := s.Investigations.UpdateInvestigation(ctx, "01HEWVF4ZSNKYRP293J53ASJCJ", components.InvestigationUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -240,7 +160,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(100), nil, ascendsdkgo.String("investigation_subject.person_investigation.given_name == 'Jane' && investigation_subject.person_investigation.family_name == 'Dough'"))
+    res, err := s.Investigations.ListInvestigations(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

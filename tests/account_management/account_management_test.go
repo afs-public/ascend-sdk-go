@@ -1,11 +1,13 @@
 package account_management1
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/tests"
 	"context"
 	"fmt"
 	"testing"
+
+	"github.com/afs-public/ascend-sdk-go/tests/helpers"
+
+	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/models/operations"
@@ -18,7 +20,7 @@ func TestAccountManagement(t *testing.T) {
 	legalNaturalPersonId := "734b8495-b87e-4d94-9f63-4ff4294f193b"
 	legalNaturalPersonId2 := "734b8495-b87e-4d94-9f63-4ff4294f193b"
 	ctx := context.Background()
-	sdk, err := tests.SetupAscendSDK()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
 	listAccountId, ownerPartyId := testAccountManagementListAccounts(t, sdk, ctx)

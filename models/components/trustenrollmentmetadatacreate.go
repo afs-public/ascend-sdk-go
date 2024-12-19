@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TrustEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type TrustEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -18,23 +13,6 @@ const (
 
 func (e TrustEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *TrustEnrollmentMetadataCreateDividendReinvestmentPlan {
 	return &e
-}
-func (e *TrustEnrollmentMetadataCreateDividendReinvestmentPlan) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_ENROLL":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_DECLINE":
-		*e = TrustEnrollmentMetadataCreateDividendReinvestmentPlan(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TrustEnrollmentMetadataCreateDividendReinvestmentPlan: %v", v)
-	}
 }
 
 // TrustEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
@@ -49,23 +27,6 @@ const (
 func (e TrustEnrollmentMetadataCreateFdicCashSweep) ToPointer() *TrustEnrollmentMetadataCreateFdicCashSweep {
 	return &e
 }
-func (e *TrustEnrollmentMetadataCreateFdicCashSweep) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED":
-		fallthrough
-	case "FDIC_CASH_SWEEP_ENROLL":
-		fallthrough
-	case "FDIC_CASH_SWEEP_DECLINE":
-		*e = TrustEnrollmentMetadataCreateFdicCashSweep(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TrustEnrollmentMetadataCreateFdicCashSweep: %v", v)
-	}
-}
 
 // OpenedOnBehalfOf - Trust account is opened on behalf of
 type OpenedOnBehalfOf string
@@ -79,25 +40,6 @@ const (
 
 func (e OpenedOnBehalfOf) ToPointer() *OpenedOnBehalfOf {
 	return &e
-}
-func (e *OpenedOnBehalfOf) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "OPENED_ON_BEHALF_OF_UNSPECIFIED":
-		fallthrough
-	case "PERSONAL_TRUST":
-		fallthrough
-	case "BUSINESS_TRUST":
-		fallthrough
-	case "THIRD_PARTY_ADMINISTRATOR":
-		*e = OpenedOnBehalfOf(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OpenedOnBehalfOf: %v", v)
-	}
 }
 
 type TrustEnrollmentMetadataCreate struct {

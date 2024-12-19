@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -39,31 +37,6 @@ const (
 func (e IctDepositProgram) ToPointer() *IctDepositProgram {
 	return &e
 }
-func (e *IctDepositProgram) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ICT_PROGRAM_UNSPECIFIED":
-		fallthrough
-	case "BROKER_PARTNER":
-		fallthrough
-	case "DEPOSIT_ONLY":
-		fallthrough
-	case "BANKING_PARTNER":
-		fallthrough
-	case "MONEY_TRANSMITTER":
-		fallthrough
-	case "WITHDRAWAL_ONLY":
-		fallthrough
-	case "DIGITAL_PARTNER":
-		*e = IctDepositProgram(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctDepositProgram: %v", v)
-	}
-}
 
 // IctDepositType - The type of retirement contribution.
 type IctDepositType string
@@ -84,39 +57,6 @@ const (
 
 func (e IctDepositType) ToPointer() *IctDepositType {
 	return &e
-}
-func (e *IctDepositType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = IctDepositType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctDepositType: %v", v)
-	}
 }
 
 // IctDepositRetirementContribution - Retirement contribution details for deposit to retirement account
@@ -166,35 +106,6 @@ const (
 
 func (e IctDepositState) ToPointer() *IctDepositState {
 	return &e
-}
-func (e *IctDepositState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PROCESSING":
-		fallthrough
-	case "PENDING_REVIEW":
-		fallthrough
-	case "POSTED":
-		fallthrough
-	case "COMPLETED":
-		fallthrough
-	case "REJECTED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "RETURNED":
-		fallthrough
-	case "POSTPONED":
-		*e = IctDepositState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctDepositState: %v", v)
-	}
 }
 
 // TransferState - The state of the ICT deposit

@@ -54,78 +54,14 @@ func main() {
             "US",
             "CA",
         },
-        ControlPersonCompanySymbols: ascendsdkgo.String("AAPL, GOOL"),
-        CorrespondentEmployee: ascendsdkgo.Bool(false),
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
-        DeathDate: &components.DateCreate{},
         Employment: components.EmploymentCreate{
-            Employer: ascendsdkgo.String("Apex Fintech Solutions"),
             EmploymentStatus: components.EmploymentStatusEmployed,
             Occupation: "Software Engineer",
-            StartYear: ascendsdkgo.Int(2019),
         },
         FamilyName: "Doe",
-        FinraAssociatedEntity: ascendsdkgo.String("Entity Name"),
-        ForeignIdentification: &components.ForeignIdentificationCreate{
-            ExpirationDate: &components.DateCreate{},
-            Ftin: true,
-            IdentificationNumber: "M1C1W7GQSK",
-            IssueDate: &components.DateCreate{},
-            IssuingRegionCode: "CA",
-            Type: components.TypePassport.ToPointer(),
-        },
         GivenName: "John",
-        IdentityVerificationResult: &components.IdentityVerificationResultCreate{
-            AddressVerified: true,
-            BirthDateVerified: true,
-            ExecutionDate: components.DateCreate{},
-            ExternalCaseID: "6526280",
-            IdentityVerificationDocumentIds: []string{
-                "d257c455-f355-493d-9c8f-06f8ace5d5fd",
-                "6ace3020-24a2-45c4-9f3b-752101073127",
-            },
-            NameVerified: true,
-            RawVendorDataDocumentID: ascendsdkgo.String("7a63073a-e694-4a38-b6e0-552044b503f2"),
-            TaxIDVerified: true,
-            Vendor: "Super Security Service",
-        },
-        LargeTrader: &components.LargeTraderCreate{
-            EffectiveDate: components.DateCreate{},
-            LargeTraderID: "123412341234",
-        },
-        MaritalStatus: components.MaritalStatusSingle.ToPointer(),
-        MiddleNames: ascendsdkgo.String("Smith"),
-        NameSuffix: components.NameSuffixJr.ToPointer(),
-        NaturalPersonFdd: &components.NaturalPersonFddCreate{
-            CustomerNonReferralSource: ascendsdkgo.String("Introduced through mobile app."),
-            CustomerReferralSource: &components.CustomerReferralSourceCreate{
-                Name: "John Doe",
-                RelationshipToApplicant: "Friend",
-                RelationshipYearsWithApplicant: 5,
-                RelationshipYearsWithBroker: 2,
-            },
-            EmploymentAndEmployerDescription: "I am a line cook at a fine dining restaurant with 55 employees.",
-            NegativeNews: components.NegativeNewsCreate{
-                NegativeNewsAgainstRelatedParties: true,
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
-            },
-            OtherSourcesOfWealth: components.OtherSourcesOfWealthCreate{
-                ApplicantHasOtherSourcesOfWealth: true,
-                OtherSourcesOfWealth: ascendsdkgo.String("I also have a small business selling handmade jewelry."),
-                OtherSourcesOfWealthVerification: ascendsdkgo.String("I have a business license and tax returns to verify my business."),
-            },
-        },
-        NonCitizenResidency: &components.NonCitizenResidencyCreate{
-            ResidencyStatus: components.ResidencyStatusUsPermanentResident,
-        },
         PersonalAddress: components.PostalAddressCreate{},
-        PoliticallyExposedImmediateFamilyNames: []string{
-            "Sue Doe",
-        },
-        PoliticallyExposedOrganization: ascendsdkgo.String("PEAK6, Apex Clearing"),
-        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
-        TaxID: ascendsdkgo.String("987-65-4321"),
-        TaxIDType: components.TaxIDTypeTaxIDTypeSsn.ToPointer(),
         TaxProfile: components.TaxProfileCreate{
             FederalTaxClassification: components.FederalTaxClassificationCCorporation,
             IrsFormType: components.IrsFormTypeIrsFormTypeUnspecified,
@@ -191,7 +127,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, ascendsdkgo.String("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\""))
+    res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, nil, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -312,84 +248,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.PersonManagement.UpdateLegalNaturalPerson(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.LegalNaturalPersonUpdate{
-        CitizenshipCountries: []string{
-            "US",
-            "CA",
-        },
-        ControlPersonCompanySymbols: ascendsdkgo.String("AAPL, GOOL"),
-        CorrespondentEmployee: ascendsdkgo.Bool(false),
-        CorrespondentID: ascendsdkgo.String("01HPMZZM6RKMVZA1JQ63RQKJRP"),
-        Employment: &components.EmploymentUpdate{
-            Employer: ascendsdkgo.String("Apex Fintech Solutions"),
-            EmploymentStatus: components.EmploymentUpdateEmploymentStatusEmployed.ToPointer(),
-            Occupation: ascendsdkgo.String("Software Engineer"),
-            StartYear: ascendsdkgo.Int(2019),
-        },
-        FamilyName: ascendsdkgo.String("Doe"),
-        FinraAssociatedEntity: ascendsdkgo.String("Entity Name"),
-        ForeignIdentification: &components.ForeignIdentificationUpdate{
-            Ftin: ascendsdkgo.Bool(true),
-            IdentificationNumber: ascendsdkgo.String("M1C1W7GQSK"),
-            IssuingRegionCode: ascendsdkgo.String("CA"),
-            Type: components.ForeignIdentificationUpdateTypePassport.ToPointer(),
-        },
-        GivenName: ascendsdkgo.String("John"),
-        IdentityVerificationResult: &components.IdentityVerificationResultUpdate{
-            AddressVerified: ascendsdkgo.Bool(true),
-            BirthDateVerified: ascendsdkgo.Bool(true),
-            ExternalCaseID: ascendsdkgo.String("6526280"),
-            IdentityVerificationDocumentIds: []string{
-                "d257c455-f355-493d-9c8f-06f8ace5d5fd",
-                "6ace3020-24a2-45c4-9f3b-752101073127",
-            },
-            NameVerified: ascendsdkgo.Bool(true),
-            RawVendorDataDocumentID: ascendsdkgo.String("7a63073a-e694-4a38-b6e0-552044b503f2"),
-            TaxIDVerified: ascendsdkgo.Bool(true),
-            Vendor: ascendsdkgo.String("Super Security Service"),
-        },
-        LargeTrader: &components.LargeTraderUpdate{
-            LargeTraderID: ascendsdkgo.String("123412341234"),
-        },
-        MaritalStatus: components.LegalNaturalPersonUpdateMaritalStatusSingle.ToPointer(),
-        MiddleNames: ascendsdkgo.String("Smith"),
-        NameSuffix: components.LegalNaturalPersonUpdateNameSuffixJr.ToPointer(),
-        NaturalPersonFdd: &components.NaturalPersonFddUpdate{
-            CustomerNonReferralSource: ascendsdkgo.String("Introduced through mobile app."),
-            CustomerReferralSource: &components.CustomerReferralSourceUpdate{
-                Name: ascendsdkgo.String("John Doe"),
-                RelationshipToApplicant: ascendsdkgo.String("Friend"),
-                RelationshipYearsWithApplicant: ascendsdkgo.Int(5),
-                RelationshipYearsWithBroker: ascendsdkgo.Int(2),
-            },
-            EmploymentAndEmployerDescription: ascendsdkgo.String("I am a line cook at a fine dining restaurant with 55 employees."),
-            NegativeNews: &components.NegativeNewsUpdate{
-                NegativeNewsAgainstRelatedParties: ascendsdkgo.Bool(true),
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
-            },
-            OtherSourcesOfWealth: &components.OtherSourcesOfWealthUpdate{
-                ApplicantHasOtherSourcesOfWealth: ascendsdkgo.Bool(true),
-                OtherSourcesOfWealth: ascendsdkgo.String("I also have a small business selling handmade jewelry."),
-                OtherSourcesOfWealthVerification: ascendsdkgo.String("I have a business license and tax returns to verify my business."),
-            },
-        },
-        NonCitizenResidency: &components.NonCitizenResidencyUpdate{
-            ResidencyStatus: components.NonCitizenResidencyUpdateResidencyStatusUsPermanentResident.ToPointer(),
-        },
-        PoliticallyExposedImmediateFamilyNames: []string{
-            "Sue Doe",
-        },
-        PoliticallyExposedOrganization: ascendsdkgo.String("PEAK6, Apex Clearing"),
-        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
-        TaxID: ascendsdkgo.String("987-65-4321"),
-        TaxIDType: components.LegalNaturalPersonUpdateTaxIDTypeTaxIDTypeEin.ToPointer(),
-        TaxProfile: &components.TaxProfileUpdate{
-            FederalTaxClassification: components.TaxProfileUpdateFederalTaxClassificationCCorporation.ToPointer(),
-            IrsFormType: components.TaxProfileUpdateIrsFormTypeIrsFormTypeUnspecified.ToPointer(),
-            LegalTaxRegionCode: ascendsdkgo.String("US"),
-            UsTinStatus: components.TaxProfileUpdateUsTinStatusPassing.ToPointer(),
-        },
-    })
+    res, err := s.PersonManagement.UpdateLegalNaturalPerson(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.LegalNaturalPersonUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -574,43 +433,15 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PersonManagement.CreateLegalEntity(ctx, components.LegalEntityCreate{
-        AccreditedInvestor: ascendsdkgo.Bool(false),
-        Adviser: ascendsdkgo.Bool(false),
-        BrokerDealer: ascendsdkgo.Bool(false),
-        BusinessIndustrialClassification: components.BusinessIndustrialClassificationFinanceInsuranceAndRealEstate.ToPointer(),
-        CorporateStructure: components.CorporateStructureCorporationCCorp.ToPointer(),
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
-        EntityDueDiligence: &components.EntityDueDiligenceCreate{
-            EntityIssuesBearerShares: false,
-            NegativeNews: components.NegativeNewsCreate{
-                NegativeNewsAgainstRelatedParties: true,
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
-            },
-        },
         EntityName: "Acme, Inc.",
         EntityType: components.EntityTypeCorporation,
-        ExemptCustomerReason: components.ExemptCustomerReasonNonBankListedEntity.ToPointer(),
-        ExemptVerifyingBeneficialOwners: ascendsdkgo.Bool(false),
-        ForTheBenefitOf: ascendsdkgo.String("John Dough"),
-        ForeignFinancialInstitution: ascendsdkgo.Bool(false),
-        FormationDate: &components.DateCreate{},
-        LargeTrader: &components.LargeTraderCreate{
-            EffectiveDate: components.DateCreate{},
-            LargeTraderID: "123412341234",
-        },
         LegalAddress: components.PostalAddressCreate{},
-        LeiCode: ascendsdkgo.String("12340012345678911000"),
         OperatingRegions: []string{
             "US",
             "CA",
         },
         RegistrationRegion: "US",
-        RegulatedInvestmentCompany: ascendsdkgo.Bool(false),
-        RelatedDocumentIds: []string{
-            "fb3f181c-f2fb-4bc2-b75a-79302c634ae5",
-        },
-        RevocableTrust: ascendsdkgo.Bool(false),
-        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
         TaxID: "987-65-4321",
         TaxIDType: components.LegalEntityCreateTaxIDTypeTaxIDTypeItin,
         TaxProfile: components.TaxProfileCreate{
@@ -678,7 +509,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.PersonManagement.ListLegalEntities(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, nil)
+    res, err := s.PersonManagement.ListLegalEntities(ctx, nil, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -799,50 +630,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.PersonManagement.UpdateLegalEntity(ctx, "42567868-9373-4872-9d24-2e33f6c19b75", components.LegalEntityUpdate{
-        AccreditedInvestor: ascendsdkgo.Bool(false),
-        Adviser: ascendsdkgo.Bool(false),
-        BrokerDealer: ascendsdkgo.Bool(false),
-        BusinessIndustrialClassification: components.LegalEntityUpdateBusinessIndustrialClassificationFinanceInsuranceAndRealEstate.ToPointer(),
-        CorporateStructure: components.LegalEntityUpdateCorporateStructureCorporationCCorp.ToPointer(),
-        CorrespondentID: ascendsdkgo.String("01HPMZZM6RKMVZA1JQ63RQKJRP"),
-        EntityDueDiligence: &components.EntityDueDiligenceUpdate{
-            EntityIssuesBearerShares: ascendsdkgo.Bool(false),
-            NegativeNews: &components.NegativeNewsUpdate{
-                NegativeNewsAgainstRelatedParties: ascendsdkgo.Bool(true),
-                NegativeNewsAgainstRelatedPartiesDescription: ascendsdkgo.String("Juan was indicated in numerous publications but not involved with Japan's misappropriation of taxpayer funds in 2013."),
-            },
-        },
-        EntityName: ascendsdkgo.String("Acme, Inc."),
-        EntityType: components.LegalEntityUpdateEntityTypeCorporation.ToPointer(),
-        ExemptCustomerReason: components.LegalEntityUpdateExemptCustomerReasonNonBankListedEntity.ToPointer(),
-        ExemptVerifyingBeneficialOwners: ascendsdkgo.Bool(false),
-        ForTheBenefitOf: ascendsdkgo.String("John Dough"),
-        ForeignFinancialInstitution: ascendsdkgo.Bool(false),
-        LargeTrader: &components.LargeTraderUpdate{
-            LargeTraderID: ascendsdkgo.String("123412341234"),
-        },
-        LeiCode: ascendsdkgo.String("12340012345678911000"),
-        OperatingRegions: []string{
-            "US",
-            "CA",
-        },
-        RegistrationRegion: ascendsdkgo.String("US"),
-        RegulatedInvestmentCompany: ascendsdkgo.Bool(false),
-        RelatedDocumentIds: []string{
-            "fb3f181c-f2fb-4bc2-b75a-79302c634ae5",
-        },
-        RevocableTrust: ascendsdkgo.Bool(false),
-        SubjectToBackupWithholding: ascendsdkgo.Bool(false),
-        TaxID: ascendsdkgo.String("987-65-4321"),
-        TaxIDType: components.LegalEntityUpdateTaxIDTypeTaxIDTypeEin.ToPointer(),
-        TaxProfile: &components.TaxProfileUpdate{
-            FederalTaxClassification: components.TaxProfileUpdateFederalTaxClassificationCCorporation.ToPointer(),
-            IrsFormType: components.TaxProfileUpdateIrsFormTypeIrsFormTypeUnspecified.ToPointer(),
-            LegalTaxRegionCode: ascendsdkgo.String("US"),
-            UsTinStatus: components.TaxProfileUpdateUsTinStatusPassing.ToPointer(),
-        },
-    })
+    res, err := s.PersonManagement.UpdateLegalEntity(ctx, "42567868-9373-4872-9d24-2e33f6c19b75", components.LegalEntityUpdate{})
     if err != nil {
         log.Fatal(err)
     }

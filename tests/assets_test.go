@@ -28,7 +28,7 @@ func TestAssets_AssetsListAssets1_AssetsListAssets1(t *testing.T) {
 	)
 
 	ctx := context.Background()
-	res, err := s.Assets.ListAssets(ctx, ascendsdkgo.String("correspondents/1234"), ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
+	res, err := s.Assets.ListAssets(ctx, nil, nil, nil, nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

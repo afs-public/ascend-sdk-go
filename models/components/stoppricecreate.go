@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // StopPriceCreateType - The type of this price, which must PRICE_PER_UNIT for equity orders. (Fixed income and mutual fund assets do not support stop orders.)
 type StopPriceCreateType string
 
@@ -17,21 +12,6 @@ const (
 
 func (e StopPriceCreateType) ToPointer() *StopPriceCreateType {
 	return &e
-}
-func (e *StopPriceCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STOP_PRICE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRICE_PER_UNIT":
-		*e = StopPriceCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for StopPriceCreateType: %v", v)
-	}
 }
 
 // StopPriceCreate - A stop price definition

@@ -39,7 +39,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Retirements.ListContributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.Int(2), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh"))
+    res, err := s.Retirements.ListContributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil)
     if err != nil {
         log.Fatal(err)
     }

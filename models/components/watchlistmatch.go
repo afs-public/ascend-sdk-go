@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // MatchState - Match state - whether or not the match is confirmed
 type MatchState string
 
@@ -20,27 +15,6 @@ const (
 
 func (e MatchState) ToPointer() *MatchState {
 	return &e
-}
-func (e *MatchState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MATCH_UNSPECIFIED":
-		fallthrough
-	case "CONFIRMED_MATCH":
-		fallthrough
-	case "POTENTIAL_MATCH":
-		fallthrough
-	case "NO_MATCH":
-		fallthrough
-	case "INCONCLUSIVE":
-		*e = MatchState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for MatchState: %v", v)
-	}
 }
 
 // WatchlistMatch - Matched profile details

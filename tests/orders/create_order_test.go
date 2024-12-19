@@ -1,12 +1,13 @@
 package orders
 
 import (
-	ascendsdk "ascend-sdk"
 	"context"
 	"errors"
 	"fmt"
 	"testing"
 	"time"
+
+	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/google/uuid"

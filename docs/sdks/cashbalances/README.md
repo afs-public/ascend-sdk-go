@@ -20,7 +20,6 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -38,7 +37,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.CashBalances.CalculateCashBalance(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", operations.MechanismAch.ToPointer())
+    res, err := s.CashBalances.CalculateCashBalance(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil)
     if err != nil {
         log.Fatal(err)
     }

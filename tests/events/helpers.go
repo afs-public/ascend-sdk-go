@@ -1,10 +1,12 @@
 package events
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
 	"context"
 	"time"
+
+	"github.com/afs-public/ascend-sdk-go/models/components"
+
+	ascendsdk "github.com/afs-public/ascend-sdk-go"
 )
 
 func subscriberId(s *ascendsdk.SDK, ctx context.Context, correspondentId *string) (*string, error) {
