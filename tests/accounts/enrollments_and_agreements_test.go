@@ -16,12 +16,11 @@ import (
 )
 
 type Fixtures struct {
-	t                         *testing.T
-	sdk                       *ascendsdk.SDK
-	ctx                       context.Context
-	accountId                 *string
-	enrolledAgreements        []components.Agreement
-	enrollAccountDeactivateId *string
+	t                  *testing.T
+	sdk                *ascendsdk.SDK
+	ctx                context.Context
+	accountId          *string
+	enrolledAgreements []components.Agreement
 }
 
 func (f *Fixtures) AccountId() *string {
@@ -52,21 +51,6 @@ func (f *Fixtures) EnrollAccountIds() []components.Agreement {
 	time.Sleep(5 * time.Second)
 
 	return agreements
-}
-
-func (f *Fixtures) EnrollAccountDeactivateId() *string {
-	if f.enrollAccountDeactivateId != nil {
-		return f.enrollAccountDeactivateId
-	}
-
-	enrollAccountDeactivateId, err := EnrollAccountDeactivateId(f.sdk, f.ctx, *f.AccountId())
-	require.NoError(f.t, err)
-
-	f.enrollAccountDeactivateId = enrollAccountDeactivateId
-
-	time.Sleep(5 * time.Second)
-
-	return enrollAccountDeactivateId
 }
 
 func TestEnrollmentsAndAgreements(t *testing.T) {
@@ -129,8 +113,10 @@ func TestEnrollmentsAndAgreements(t *testing.T) {
 	})
 
 	t.Run("TestDeactivateEnrollment", func(t *testing.T) {
+		deactivate_enrollment_id, err := GetEnrollmentToDeactivate(sdk, ctx, *fixtures.AccountId())
+		require.NoError(t, err)
 		deactivateEnrollmentRequest := components.DeactivateEnrollmentRequestCreate{
-			EnrollmentID: fixtures.EnrollAccountDeactivateId(),
+			EnrollmentID: deactivate_enrollment_id,
 		}
 
 		res, err := sdk.EnrollmentsAndAgreements.DeactivateEnrollment(ctx, *fixtures.AccountId(), deactivateEnrollmentRequest)

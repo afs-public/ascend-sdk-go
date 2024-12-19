@@ -12,7 +12,7 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: true
 go:
-  version: 0.9.4
+  version: 1.0.0
   additionalDependencies:
     github.com/golang-jwt/jwt/v4: v4.5.0
   allowUnknownFieldsInWeakUnions: false

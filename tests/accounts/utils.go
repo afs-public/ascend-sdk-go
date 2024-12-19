@@ -4,29 +4,25 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/afs-public/ascend-sdk-go/tests/helpers"
-
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
-
-	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
-func EnrollAccountDeactivateId(sdk *ascendsdk.SDK, ctx context.Context, accountId string) (*string, error) {
-	enrollAccountRequest := components.EnrollAccountRequestCreate{
-		Enrollment: components.EnrollmentCreate{
-			PrincipalApproverID: helpers.EnrollmentPrincipalApproverID,
-			Type:                components.EnrollmentCreateTypeCashFdicCashSweep,
-		},
-	}
+func GetEnrollmentToDeactivate(sdk *ascendsdk.SDK, ctx context.Context, accountId string) (*string, error) {
+	res, err := sdk.EnrollmentsAndAgreements.ListEnrollments(ctx, accountId, nil, nil)
 
-	res, err := sdk.EnrollmentsAndAgreements.EnrollAccount(ctx, accountId, enrollAccountRequest)
 	if err != nil {
 		return nil, err
 	}
 
-	if len(res.EnrollAccountResponse.Agreements) < 1 {
-		return nil, fmt.Errorf("insufficient agreements returned")
+	enrollments := res.ListEnrollmentsResponse.Enrollments
+
+	if enrollments != nil {
+		for _, enrollment := range enrollments {
+			if *enrollment.Type == "DIVIDEND_REINVESTMENT_PLAN" {
+				return enrollment.EnrollmentID, nil
+			}
+		}
 	}
 
-	return res.EnrollAccountResponse.Agreements[0].EnrollmentID, nil
+	return nil, fmt.Errorf("no enrollment found")
 }
