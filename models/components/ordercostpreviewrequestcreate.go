@@ -43,23 +43,6 @@ const (
 func (e OrderCostPreviewRequestCreateBrokerCapacity) ToPointer() *OrderCostPreviewRequestCreateBrokerCapacity {
 	return &e
 }
-func (e *OrderCostPreviewRequestCreateBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BROKER_CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		*e = OrderCostPreviewRequestCreateBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewRequestCreateBrokerCapacity: %v", v)
-	}
-}
 
 // OrderCostPreviewRequestCreateIdentifierType - The identifier type of the asset being sought
 type OrderCostPreviewRequestCreateIdentifierType string

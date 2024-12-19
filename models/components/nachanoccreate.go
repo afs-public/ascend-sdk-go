@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Code - The notice of change reason code.
 type Code string
 
@@ -37,59 +32,6 @@ const (
 func (e Code) ToPointer() *Code {
 	return &e
 }
-func (e *Code) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CODE_UNSPECIFIED":
-		fallthrough
-	case "C01":
-		fallthrough
-	case "C02":
-		fallthrough
-	case "C03":
-		fallthrough
-	case "C04":
-		fallthrough
-	case "C05":
-		fallthrough
-	case "C06":
-		fallthrough
-	case "C07":
-		fallthrough
-	case "C08":
-		fallthrough
-	case "C09":
-		fallthrough
-	case "C13":
-		fallthrough
-	case "C14":
-		fallthrough
-	case "C61":
-		fallthrough
-	case "C62":
-		fallthrough
-	case "C63":
-		fallthrough
-	case "C64":
-		fallthrough
-	case "C65":
-		fallthrough
-	case "C66":
-		fallthrough
-	case "C67":
-		fallthrough
-	case "C68":
-		fallthrough
-	case "C69":
-		*e = Code(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Code: %v", v)
-	}
-}
 
 // UpdatedBankAccountType - The updated bank account type. Should only be set when the code is for an incorrect transaction code.
 type UpdatedBankAccountType string
@@ -102,23 +44,6 @@ const (
 
 func (e UpdatedBankAccountType) ToPointer() *UpdatedBankAccountType {
 	return &e
-}
-func (e *UpdatedBankAccountType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "CHECKING":
-		fallthrough
-	case "SAVINGS":
-		*e = UpdatedBankAccountType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UpdatedBankAccountType: %v", v)
-	}
 }
 
 // NachaNocCreate - A notice of change (NOC) on an ACH transfer from the Nacha network.

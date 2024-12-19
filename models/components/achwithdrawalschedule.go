@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // AchWithdrawalScheduleIraDistributionFederalTaxWithholdingAmount - Fixed USD amount to withhold for taxes.
 type AchWithdrawalScheduleIraDistributionFederalTaxWithholdingAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -130,53 +125,6 @@ const (
 func (e AchWithdrawalScheduleType) ToPointer() *AchWithdrawalScheduleType {
 	return &e
 }
-func (e *AchWithdrawalScheduleType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DISTRIBUTION_TRANSFER":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DISTRIBUTION_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		*e = AchWithdrawalScheduleType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchWithdrawalScheduleType: %v", v)
-	}
-}
 
 // IraDistribution - The ira distribution info for an IRA account
 type IraDistribution struct {
@@ -292,23 +240,6 @@ const (
 func (e AchWithdrawalScheduleState) ToPointer() *AchWithdrawalScheduleState {
 	return &e
 }
-func (e *AchWithdrawalScheduleState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTIVE":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "COMPLETED":
-		*e = AchWithdrawalScheduleState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchWithdrawalScheduleState: %v", v)
-	}
-}
 
 // AchWithdrawalScheduleTimeUnit - The time unit used to calculate the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 type AchWithdrawalScheduleTimeUnit string
@@ -321,23 +252,6 @@ const (
 
 func (e AchWithdrawalScheduleTimeUnit) ToPointer() *AchWithdrawalScheduleTimeUnit {
 	return &e
-}
-func (e *AchWithdrawalScheduleTimeUnit) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DAY":
-		fallthrough
-	case "WEEK":
-		fallthrough
-	case "MONTH":
-		*e = AchWithdrawalScheduleTimeUnit(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchWithdrawalScheduleTimeUnit: %v", v)
-	}
 }
 
 // AchWithdrawalScheduleScheduleProperties - Common schedule properties

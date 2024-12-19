@@ -44,14 +44,7 @@ func main() {
 
     ctx := context.Background()
     res, err := s.BankRelationships.CreateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.BankRelationshipCreate{
-        BankAccount: &components.BankAccountCreate{
-            AccountNumber: "100100123",
-            Owner: "John Doe",
-            RoutingNumber: "12345678",
-            Type: components.BankAccountCreateTypeChecking,
-        },
         Nickname: "My Primary Bank",
-        PlaidProcessorToken: ascendsdkgo.String("processor-sandbox-b03434a75-801-4000-990c-eb404cc"),
         VerificationMethod: components.VerificationMethodMicroDeposit,
     })
     if err != nil {
@@ -96,7 +89,6 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -114,7 +106,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.BankRelationships.ListBankRelationships(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.Int(100), ascendsdkgo.String("CMFRGgYQup3BhQgaCSkAQCKS7AAAAA=="), operations.StateApproved.ToPointer())
+    res, err := s.BankRelationships.ListBankRelationships(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -236,16 +228,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.BankRelationships.UpdateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.BankRelationshipUpdate{
-        BankAccount: &components.BankAccountUpdate{
-            AccountNumber: ascendsdkgo.String("100100123"),
-            Owner: ascendsdkgo.String("John Doe"),
-            RoutingNumber: ascendsdkgo.String("12345678"),
-            Type: components.BankAccountUpdateTypeChecking.ToPointer(),
-        },
-        Nickname: ascendsdkgo.String("My Primary Bank"),
-        PlaidProcessorToken: ascendsdkgo.String("processor-sandbox-b03434a75-801-4000-990c-eb404cc"),
-    }, ascendsdkgo.String("{\"update_mask\":{\"paths\":[\"nickname\"]}}"))
+    res, err := s.BankRelationships.UpdateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.BankRelationshipUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }

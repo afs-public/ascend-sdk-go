@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // FederalTaxClassification - Federal tax classification.
 type FederalTaxClassification string
 
@@ -26,37 +21,6 @@ const (
 func (e FederalTaxClassification) ToPointer() *FederalTaxClassification {
 	return &e
 }
-func (e *FederalTaxClassification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED":
-		fallthrough
-	case "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "C_CORPORATION":
-		fallthrough
-	case "S_CORPORATION":
-		fallthrough
-	case "TRUST_ESTATE":
-		fallthrough
-	case "LLC_TAXED_AS_C_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_S_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_PARTNERSHIP":
-		fallthrough
-	case "OTHER":
-		*e = FederalTaxClassification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FederalTaxClassification: %v", v)
-	}
-}
 
 // IrsFormType - IRS form type.
 type IrsFormType string
@@ -68,21 +32,6 @@ const (
 
 func (e IrsFormType) ToPointer() *IrsFormType {
 	return &e
-}
-func (e *IrsFormType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IRS_FORM_TYPE_UNSPECIFIED":
-		fallthrough
-	case "W_9":
-		*e = IrsFormType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IrsFormType: %v", v)
-	}
 }
 
 // UsTinStatus - United States Individual Taxpayer Identification Number (ITIN) status.
@@ -96,23 +45,6 @@ const (
 
 func (e UsTinStatus) ToPointer() *UsTinStatus {
 	return &e
-}
-func (e *UsTinStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "US_TIN_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PASSING":
-		fallthrough
-	case "FAILING":
-		*e = UsTinStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UsTinStatus: %v", v)
-	}
 }
 
 // TaxProfileCreate - Tax Profile pertaining to the Legal Entity or Natural Person.

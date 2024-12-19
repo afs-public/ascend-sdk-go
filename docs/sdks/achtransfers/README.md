@@ -46,11 +46,6 @@ func main() {
         Amount: components.DecimalCreate{},
         BankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
-        Memo: ascendsdkgo.String("ACH"),
-        RetirementContribution: &components.RetirementContributionCreate{
-            TaxYear: 2024,
-            Type: components.RetirementContributionCreateTypeRegular,
-        },
     })
     if err != nil {
         log.Fatal(err)
@@ -173,7 +168,6 @@ func main() {
     ctx := context.Background()
     res, err := s.ACHTransfers.CancelAchDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.CancelAchDepositRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319",
-        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)
@@ -238,11 +232,6 @@ func main() {
     res, err := s.ACHTransfers.CreateAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.AchWithdrawalCreate{
         BankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
-        FullDisbursement: ascendsdkgo.Bool(false),
-        Memo: ascendsdkgo.String("ACH"),
-        RetirementDistribution: &components.RetirementDistributionCreate{
-            Type: components.RetirementDistributionCreateTypeNormal,
-        },
     })
     if err != nil {
         log.Fatal(err)
@@ -365,7 +354,6 @@ func main() {
     ctx := context.Background()
     res, err := s.ACHTransfers.CancelAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230620500726", components.CancelAchWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726",
-        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)

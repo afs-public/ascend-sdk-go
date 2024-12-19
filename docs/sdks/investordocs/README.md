@@ -38,24 +38,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.InvestorDocs.BatchCreateUploadLinks(ctx, components.BatchCreateUploadLinksRequestCreate{
-        CreateDocumentUploadLinkRequest: []components.CreateUploadLinkRequestCreate{
-            components.CreateUploadLinkRequestCreate{
-                AccountDocumentUploadRequest: &components.AccountDocumentUploadRequestCreate{
-                    AccountID: "01HCZ4ZE2248BR4SC6DE5KFF8S",
-                    CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
-                    DocumentType: components.DocumentTypeFdicSweepProgramAgreement,
-                },
-                ClientBatchSourceID: "cda89bd0-a6bc-4acc-89da-d35bde30cbf4",
-                IDDocumentUploadRequest: &components.IDDocumentUploadRequestCreate{
-                    CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
-                    DocumentType: components.IDDocumentUploadRequestCreateDocumentTypePassport,
-                    LegalNaturalPersonID: "01HWQJYXMQ31BPM9990Y6XEYA5",
-                },
-                MimeType: "image/jpeg",
-            },
-        },
-    })
+    res, err := s.InvestorDocs.BatchCreateUploadLinks(ctx, components.BatchCreateUploadLinksRequestCreate{})
     if err != nil {
         log.Fatal(err)
     }

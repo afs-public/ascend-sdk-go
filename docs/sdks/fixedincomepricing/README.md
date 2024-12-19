@@ -41,7 +41,6 @@ func main() {
     ctx := context.Background()
     res, err := s.FixedIncomePricing.PreviewOrderCost(ctx, "<id>", components.OrderCostPreviewRequestCreate{
         AssetType: components.OrderCostPreviewRequestCreateAssetTypeFixedIncome,
-        BrokerCapacity: components.OrderCostPreviewRequestCreateBrokerCapacityAgency.ToPointer(),
         Identifier: "37833100",
         IdentifierType: components.OrderCostPreviewRequestCreateIdentifierTypeCusip,
         LimitPrice: components.LimitPriceCreate{
@@ -112,7 +111,6 @@ func main() {
     ctx := context.Background()
     res, err := s.FixedIncomePricing.RetrieveQuote(ctx, "<id>", components.RetrieveQuoteRequestCreate{
         AssetType: components.RetrieveQuoteRequestCreateAssetTypeFixedIncome,
-        BrokerCapacity: components.RetrieveQuoteRequestCreateBrokerCapacityAgency.ToPointer(),
         Identifier: "37833100",
         IdentifierType: components.RetrieveQuoteRequestCreateIdentifierTypeCusip,
         Parent: "<value>",

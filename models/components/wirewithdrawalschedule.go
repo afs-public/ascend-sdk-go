@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Address - The address of the person or entity taking receipt of the wired funds. This will be populated automatically in the case of a valid first-party wire
 type Address struct {
 	// Required: Describes the city in which the entity is located.
@@ -187,23 +182,6 @@ const (
 
 func (e WireWithdrawalScheduleRecipientBankType) ToPointer() *WireWithdrawalScheduleRecipientBankType {
 	return &e
-}
-func (e *WireWithdrawalScheduleRecipientBankType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "ABA":
-		fallthrough
-	case "BIC":
-		*e = WireWithdrawalScheduleRecipientBankType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WireWithdrawalScheduleRecipientBankType: %v", v)
-	}
 }
 
 // BankID - An identifier that represents ABA routing number for domestic wire or BIC for foreign wire
@@ -453,53 +431,6 @@ const (
 func (e WireWithdrawalScheduleType) ToPointer() *WireWithdrawalScheduleType {
 	return &e
 }
-func (e *WireWithdrawalScheduleType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DISTRIBUTION_TRANSFER":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DISTRIBUTION_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		*e = WireWithdrawalScheduleType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WireWithdrawalScheduleType: %v", v)
-	}
-}
 
 // WireWithdrawalScheduleRetirementDistribution - The distribution info for a retirement account
 type WireWithdrawalScheduleRetirementDistribution struct {
@@ -615,23 +546,6 @@ const (
 func (e WireWithdrawalScheduleState) ToPointer() *WireWithdrawalScheduleState {
 	return &e
 }
-func (e *WireWithdrawalScheduleState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTIVE":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "COMPLETED":
-		*e = WireWithdrawalScheduleState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WireWithdrawalScheduleState: %v", v)
-	}
-}
 
 // WireWithdrawalScheduleTimeUnit - The time unit used to calculate the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 type WireWithdrawalScheduleTimeUnit string
@@ -644,23 +558,6 @@ const (
 
 func (e WireWithdrawalScheduleTimeUnit) ToPointer() *WireWithdrawalScheduleTimeUnit {
 	return &e
-}
-func (e *WireWithdrawalScheduleTimeUnit) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DAY":
-		fallthrough
-	case "WEEK":
-		fallthrough
-	case "MONTH":
-		*e = WireWithdrawalScheduleTimeUnit(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for WireWithdrawalScheduleTimeUnit: %v", v)
-	}
 }
 
 // WireWithdrawalScheduleScheduleProperties - Common schedule properties

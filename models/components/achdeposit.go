@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -42,39 +40,6 @@ const (
 
 func (e AchDepositType) ToPointer() *AchDepositType {
 	return &e
-}
-func (e *AchDepositType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = AchDepositType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositType: %v", v)
-	}
 }
 
 // RetirementContribution - The retirement contribution details.
@@ -124,35 +89,6 @@ const (
 
 func (e AchDepositStateState) ToPointer() *AchDepositStateState {
 	return &e
-}
-func (e *AchDepositStateState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PROCESSING":
-		fallthrough
-	case "PENDING_REVIEW":
-		fallthrough
-	case "POSTED":
-		fallthrough
-	case "COMPLETED":
-		fallthrough
-	case "REJECTED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "RETURNED":
-		fallthrough
-	case "POSTPONED":
-		*e = AchDepositStateState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositStateState: %v", v)
-	}
 }
 
 // AchDepositState - The current state of the ACH deposit.

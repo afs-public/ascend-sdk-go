@@ -44,15 +44,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Subscriber.CreatePushSubscription(ctx, components.PushSubscriptionCreate{
-        CorrespondentID: ascendsdkgo.String("01H8MCDXH4HYJJAV921BDKCC83"),
         DisplayName: "This is an example HTTP configuration.",
         EventTypes: []string{
             "position.v1.updated",
-        },
-        HTTPCallback: &components.HTTPPushCallbackCreate{
-            ClientSecret: "mysecretkey",
-            TimeoutSeconds: ascendsdkgo.Int(30),
-            URL: "https://webhook.example.com",
         },
     })
     if err != nil {
@@ -113,7 +107,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdkgo.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
+    res, err := s.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -233,17 +227,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Subscriber.UpdatePushSubscription(ctx, "01H8MCDXH4JVH7KVNB2YY42907", components.PushSubscriptionUpdate{
-        DisplayName: ascendsdkgo.String("This is an example HTTP configuration."),
-        EventTypes: []string{
-            "position.v1.updated",
-        },
-        HTTPCallback: &components.HTTPPushCallbackUpdate{
-            ClientSecret: ascendsdkgo.String("mysecretkey"),
-            TimeoutSeconds: ascendsdkgo.Int(30),
-            URL: ascendsdkgo.String("https://webhook.example.com"),
-        },
-    }, nil)
+    res, err := s.Subscriber.UpdatePushSubscription(ctx, "01H8MCDXH4JVH7KVNB2YY42907", components.PushSubscriptionUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -423,7 +407,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Subscriber.ListPushSubscriptionDeliveries(ctx, "01H8MCDXH4JVH7KVNB2YY42907", ascendsdkgo.String("event_publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
+    res, err := s.Subscriber.ListPushSubscriptionDeliveries(ctx, "01H8MCDXH4JVH7KVNB2YY42907", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

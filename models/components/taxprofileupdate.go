@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TaxProfileUpdateFederalTaxClassification - Federal tax classification.
 type TaxProfileUpdateFederalTaxClassification string
 
@@ -26,37 +21,6 @@ const (
 func (e TaxProfileUpdateFederalTaxClassification) ToPointer() *TaxProfileUpdateFederalTaxClassification {
 	return &e
 }
-func (e *TaxProfileUpdateFederalTaxClassification) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED":
-		fallthrough
-	case "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC":
-		fallthrough
-	case "PARTNERSHIP":
-		fallthrough
-	case "C_CORPORATION":
-		fallthrough
-	case "S_CORPORATION":
-		fallthrough
-	case "TRUST_ESTATE":
-		fallthrough
-	case "LLC_TAXED_AS_C_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_S_CORP":
-		fallthrough
-	case "LLC_TAXED_AS_PARTNERSHIP":
-		fallthrough
-	case "OTHER":
-		*e = TaxProfileUpdateFederalTaxClassification(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TaxProfileUpdateFederalTaxClassification: %v", v)
-	}
-}
 
 // TaxProfileUpdateIrsFormType - IRS form type.
 type TaxProfileUpdateIrsFormType string
@@ -68,21 +32,6 @@ const (
 
 func (e TaxProfileUpdateIrsFormType) ToPointer() *TaxProfileUpdateIrsFormType {
 	return &e
-}
-func (e *TaxProfileUpdateIrsFormType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IRS_FORM_TYPE_UNSPECIFIED":
-		fallthrough
-	case "W_9":
-		*e = TaxProfileUpdateIrsFormType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TaxProfileUpdateIrsFormType: %v", v)
-	}
 }
 
 // TaxProfileUpdateUsTinStatus - United States Individual Taxpayer Identification Number (ITIN) status.
@@ -96,23 +45,6 @@ const (
 
 func (e TaxProfileUpdateUsTinStatus) ToPointer() *TaxProfileUpdateUsTinStatus {
 	return &e
-}
-func (e *TaxProfileUpdateUsTinStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "US_TIN_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PASSING":
-		fallthrough
-	case "FAILING":
-		*e = TaxProfileUpdateUsTinStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TaxProfileUpdateUsTinStatus: %v", v)
-	}
 }
 
 // TaxProfileUpdate - Tax Profile pertaining to the Legal Entity or Natural Person.

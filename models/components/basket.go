@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -25,31 +23,6 @@ const (
 
 func (e BasketState) ToPointer() *BasketState {
 	return &e
-}
-func (e *BasketState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "NEW":
-		fallthrough
-	case "SUBMITTED":
-		fallthrough
-	case "EXECUTING":
-		fallthrough
-	case "ALLOCATING":
-		fallthrough
-	case "DONE":
-		fallthrough
-	case "REJECTED":
-		*e = BasketState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketState: %v", v)
-	}
 }
 
 // Basket - The message describing a basket

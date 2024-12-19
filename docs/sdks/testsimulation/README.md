@@ -119,9 +119,6 @@ func main() {
     res, err := s.TestSimulation.ForceNocAchDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceNocAchDepositRequestCreate{
         NachaNoc: components.NachaNocCreate{
             Code: components.CodeC01,
-            UpdatedBankAccountNumber: ascendsdkgo.String("12345678"),
-            UpdatedBankAccountType: components.UpdatedBankAccountTypeSavings.ToPointer(),
-            UpdatedBankRoutingNumber: ascendsdkgo.String("100100123"),
         },
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319",
     })
@@ -380,9 +377,6 @@ func main() {
     res, err := s.TestSimulation.ForceNocAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230620500726", components.ForceNocAchWithdrawalRequestCreate{
         NachaNoc: components.NachaNocCreate{
             Code: components.CodeC01,
-            UpdatedBankAccountNumber: ascendsdkgo.String("12345678"),
-            UpdatedBankAccountType: components.UpdatedBankAccountTypeSavings.ToPointer(),
-            UpdatedBankRoutingNumber: ascendsdkgo.String("100100123"),
         },
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726",
     })
@@ -952,7 +946,6 @@ func main() {
     ctx := context.Background()
     res, err := s.TestSimulation.ForceRejectWireWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceRejectWireWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireWithdrawals/20230817000319",
-        Reason: ascendsdkgo.String("Simulate a rejected transfer"),
     })
     if err != nil {
         log.Fatal(err)
@@ -1078,7 +1071,6 @@ func main() {
     ctx := context.Background()
     res, err := s.TestSimulation.ForceRejectCashJournal(ctx, "20230817000319", components.ForceRejectCashJournalRequestCreate{
         Name: "cashJournals/20230817000319",
-        Reason: ascendsdkgo.String("Forced rejection test"),
     })
     if err != nil {
         log.Fatal(err)

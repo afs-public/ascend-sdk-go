@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: c1a3d48d3ee34eea7a4b837fc7ea8248
-  docVersion: v1:20241209:uat:89366f24223f
+  docChecksum: e1546a68619a3d1f9d9cfe7c1c7c20b2
+  docVersion: v1:20241218:uat:042b450a53e8
   speakeasyVersion: 1.414.1
   generationVersion: 2.437.1
-  releaseVersion: 0.9.3
-  configChecksum: ffeb4a2ed4eea431575ea7a753cd606f
+  releaseVersion: 0.9.4
+  configChecksum: 5d516ef9e51f96254040bd01d5f6448d
 features:
   go:
     additionalDependencies: 0.1.0
@@ -153,6 +153,7 @@ generatedFiles:
   - /models/components/executions.go
   - /models/components/externalaccountcreate.go
   - /models/components/fee.go
+  - /models/components/feecreate.go
   - /models/components/financialprofilecreate.go
   - /models/components/forceapproveachdepositrequestcreate.go
   - /models/components/forceapproveachwithdrawalrequestcreate.go
@@ -228,6 +229,7 @@ generatedFiles:
   - /models/components/legalnaturalperson.go
   - /models/components/legalnaturalpersoncreate.go
   - /models/components/legalnaturalpersonupdate.go
+  - /models/components/letterofintentcreate.go
   - /models/components/limitpricecreate.go
   - /models/components/linkdocumentsrequestcreate.go
   - /models/components/linkdocumentsresponse.go
@@ -325,6 +327,7 @@ generatedFiles:
   - /models/components/retrievefixedincomemarksresponseassetmark.go
   - /models/components/retrievequoterequestcreate.go
   - /models/components/retrievequoteresponse.go
+  - /models/components/rightsofaccumulationcreate.go
   - /models/components/roledetail.go
   - /models/components/sanctionslistdetail.go
   - /models/components/scheduledretirementcontributioncreate.go
@@ -853,6 +856,7 @@ generatedFiles:
   - docs/models/components/basket.md
   - docs/models/components/basketcreate.md
   - docs/models/components/basketorder.md
+  - docs/models/components/basketorderamount.md
   - docs/models/components/basketorderassettype.md
   - docs/models/components/basketordercreate.md
   - docs/models/components/basketordercreateassettype.md
@@ -863,10 +867,15 @@ generatedFiles:
   - docs/models/components/basketordercumulativenotionalvalue.md
   - docs/models/components/basketorderfilledquantity.md
   - docs/models/components/basketorderidentifiertype.md
+  - docs/models/components/basketorderletterofintent.md
+  - docs/models/components/basketordernotionalvalue.md
   - docs/models/components/basketorderorderrejectedreason.md
   - docs/models/components/basketorderorderstatus.md
   - docs/models/components/basketorderordertype.md
+  - docs/models/components/basketorderperiodstartdate.md
   - docs/models/components/basketorderquantity.md
+  - docs/models/components/basketorderrightsofaccumulation.md
+  - docs/models/components/basketorderrightsofaccumulationamount.md
   - docs/models/components/basketorderside.md
   - docs/models/components/basketordertimeinforce.md
   - docs/models/components/basketstate.md
@@ -941,14 +950,20 @@ generatedFiles:
   - docs/models/components/commissioncreate.md
   - docs/models/components/commissioncreatetype.md
   - docs/models/components/compressedorder.md
+  - docs/models/components/compressedorderamount.md
   - docs/models/components/compressedorderassettype.md
   - docs/models/components/compressedordercumulativenotionalvalue.md
   - docs/models/components/compressedorderfilledquantity.md
   - docs/models/components/compressedorderidentifiertype.md
+  - docs/models/components/compressedorderletterofintent.md
+  - docs/models/components/compressedordernotionalvalue.md
   - docs/models/components/compressedorderorderrejectedreason.md
   - docs/models/components/compressedorderorderstatus.md
   - docs/models/components/compressedorderordertype.md
+  - docs/models/components/compressedorderperiodstartdate.md
   - docs/models/components/compressedorderquantity.md
+  - docs/models/components/compressedorderrightsofaccumulation.md
+  - docs/models/components/compressedorderrightsofaccumulationamount.md
   - docs/models/components/compressedorderside.md
   - docs/models/components/compressedordertimeinforce.md
   - docs/models/components/consentmethod.md
@@ -1288,6 +1303,8 @@ generatedFiles:
   - docs/models/components/federaltaxwithholding.md
   - docs/models/components/fee.md
   - docs/models/components/feeamount.md
+  - docs/models/components/feecreate.md
+  - docs/models/components/feecreatetype.md
   - docs/models/components/feetype.md
   - docs/models/components/file.md
   - docs/models/components/filledquantity.md
@@ -1546,6 +1563,8 @@ generatedFiles:
   - docs/models/components/legalnaturalpersonustinstatus.md
   - docs/models/components/legalnaturalpersonwithholdingstate.md
   - docs/models/components/legalresidencystateofmarriedcouple.md
+  - docs/models/components/letterofintent.md
+  - docs/models/components/letterofintentcreate.md
   - docs/models/components/limitprice.md
   - docs/models/components/limitpricecreate.md
   - docs/models/components/limitpricecreatetype.md
@@ -1642,6 +1661,7 @@ generatedFiles:
   - docs/models/components/operatingenrollmentmetadatacreate.md
   - docs/models/components/operatingpurpose.md
   - docs/models/components/order.md
+  - docs/models/components/orderamount.md
   - docs/models/components/orderassettype.md
   - docs/models/components/orderbrokercapacity.md
   - docs/models/components/ordercommission.md
@@ -1667,6 +1687,7 @@ generatedFiles:
   - docs/models/components/orderprice.md
   - docs/models/components/orderquantity.md
   - docs/models/components/orderrejectedreason.md
+  - docs/models/components/orderrightsofaccumulationamount.md
   - docs/models/components/orderside.md
   - docs/models/components/orderspecialreportinginstructions.md
   - docs/models/components/orderstatus.md
@@ -1769,6 +1790,7 @@ generatedFiles:
   - docs/models/components/pendingoutgoingacat.md
   - docs/models/components/pendingwithdrawal.md
   - docs/models/components/percentage.md
+  - docs/models/components/periodstartdate.md
   - docs/models/components/person.md
   - docs/models/components/personaladdress.md
   - docs/models/components/personidentification.md
@@ -1870,6 +1892,8 @@ generatedFiles:
   - docs/models/components/reversestocksplit.md
   - docs/models/components/review.md
   - docs/models/components/rightsdistribution.md
+  - docs/models/components/rightsofaccumulation.md
+  - docs/models/components/rightsofaccumulationcreate.md
   - docs/models/components/rightssubscription.md
   - docs/models/components/risktolerance.md
   - docs/models/components/roledetail.md

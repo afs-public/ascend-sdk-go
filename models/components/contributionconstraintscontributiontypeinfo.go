@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // ContributionConstraintsContributionTypeInfoType - Retirement contribution type
 type ContributionConstraintsContributionTypeInfoType string
 
@@ -26,39 +21,6 @@ const (
 
 func (e ContributionConstraintsContributionTypeInfoType) ToPointer() *ContributionConstraintsContributionTypeInfoType {
 	return &e
-}
-func (e *ContributionConstraintsContributionTypeInfoType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = ContributionConstraintsContributionTypeInfoType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ContributionConstraintsContributionTypeInfoType: %v", v)
-	}
 }
 
 // ContributionConstraintsContributionTypeInfo - Retirement contribution type info

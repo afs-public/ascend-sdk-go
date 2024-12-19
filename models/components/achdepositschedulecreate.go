@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // AchDepositScheduleCreateType - The type of retirement contribution.
 type AchDepositScheduleCreateType string
 
@@ -26,39 +21,6 @@ const (
 
 func (e AchDepositScheduleCreateType) ToPointer() *AchDepositScheduleCreateType {
 	return &e
-}
-func (e *AchDepositScheduleCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = AchDepositScheduleCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositScheduleCreateType: %v", v)
-	}
 }
 
 // IraContribution - The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details

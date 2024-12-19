@@ -16,25 +16,11 @@ type CompressedOrderAssetType string
 const (
 	CompressedOrderAssetTypeAssetTypeUnspecified CompressedOrderAssetType = "ASSET_TYPE_UNSPECIFIED"
 	CompressedOrderAssetTypeEquity               CompressedOrderAssetType = "EQUITY"
+	CompressedOrderAssetTypeMutualFund           CompressedOrderAssetType = "MUTUAL_FUND"
 )
 
 func (e CompressedOrderAssetType) ToPointer() *CompressedOrderAssetType {
 	return &e
-}
-func (e *CompressedOrderAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		*e = CompressedOrderAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderAssetType: %v", v)
-	}
 }
 
 // CompressedOrderCumulativeNotionalValue - The product of order quantity & price, summed across all fills, reported in the currency specified in the order. (This will be rounded to 2 decimal places for USD currencies). Will be absent if an order has no fill information.
@@ -93,6 +79,85 @@ func (e *CompressedOrderIdentifierType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CompressedOrderAmount - The amount of the LOI. This is a monetary value in the same currency as the order.
+type CompressedOrderAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *CompressedOrderAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// CompressedOrderPeriodStartDate - The period start date of the LOI.
+type CompressedOrderPeriodStartDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *CompressedOrderPeriodStartDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *CompressedOrderPeriodStartDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *CompressedOrderPeriodStartDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// CompressedOrderLetterOfIntent - Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months. Either ROA or LOI may be specified, but not both.
+type CompressedOrderLetterOfIntent struct {
+	// The amount of the LOI. This is a monetary value in the same currency as the order.
+	Amount *CompressedOrderAmount `json:"amount,omitempty"`
+	// The period start date of the LOI.
+	PeriodStartDate *CompressedOrderPeriodStartDate `json:"period_start_date,omitempty"`
+}
+
+func (o *CompressedOrderLetterOfIntent) GetAmount() *CompressedOrderAmount {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
+func (o *CompressedOrderLetterOfIntent) GetPeriodStartDate() *CompressedOrderPeriodStartDate {
+	if o == nil {
+		return nil
+	}
+	return o.PeriodStartDate
+}
+
+// CompressedOrderNotionalValue - Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. Either a quantity or notional_value MUST be specified (but not both). For Equities: currently not supported yet For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified.
+type CompressedOrderNotionalValue struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *CompressedOrderNotionalValue) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // CompressedOrderOrderRejectedReason - When an order has the REJECTED status, this will be populated with a system code describing the rejection.
 type CompressedOrderOrderRejectedReason string
 
@@ -126,65 +191,6 @@ const (
 func (e CompressedOrderOrderRejectedReason) ToPointer() *CompressedOrderOrderRejectedReason {
 	return &e
 }
-func (e *CompressedOrderOrderRejectedReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_REJECT_REASON_UNSPECIFIED":
-		fallthrough
-	case "BROKER_OPTION":
-		fallthrough
-	case "UNKNOWN_SECURITY":
-		fallthrough
-	case "EXCHANGE_CLOSED":
-		fallthrough
-	case "TOO_LATE_TO_ENTER":
-		fallthrough
-	case "UNKNOWN_ORDER":
-		fallthrough
-	case "DUPLICATE_ORDER":
-		fallthrough
-	case "STALE_ORDER":
-		fallthrough
-	case "BELOW_NOTIONAL_MINIMUM":
-		fallthrough
-	case "ACCOUNT_NOT_ENTITLED":
-		fallthrough
-	case "SYSTEM_ERROR":
-		fallthrough
-	case "BLOCKING_CORPORATE_ACTION":
-		fallthrough
-	case "UNAVAILABLE_PRICE_QUOTE":
-		fallthrough
-	case "EXECUTION_MISCONFIGURED_CLIENT":
-		fallthrough
-	case "FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "SYMBOL_NOT_TRADEABLE":
-		fallthrough
-	case "ABOVE_NOTIONAL_MAXIMUM":
-		fallthrough
-	case "ABOVE_SHARE_MAXIMUM":
-		fallthrough
-	case "MAX_SELL_QUANTITY_REQUIRED":
-		fallthrough
-	case "MAX_SELL_QUANTITY_PROHIBITED":
-		fallthrough
-	case "STOCK_TRADES_DISABLED":
-		fallthrough
-	case "ASSET_NOT_SET_UP_TO_TRADE":
-		fallthrough
-	case "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS":
-		*e = CompressedOrderOrderRejectedReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderOrderRejectedReason: %v", v)
-	}
-}
 
 // CompressedOrderOrderStatus - The processing status of the order
 type CompressedOrderOrderStatus string
@@ -201,29 +207,6 @@ const (
 func (e CompressedOrderOrderStatus) ToPointer() *CompressedOrderOrderStatus {
 	return &e
 }
-func (e *CompressedOrderOrderStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PENDING_NEW":
-		fallthrough
-	case "NEW":
-		fallthrough
-	case "PARTIALLY_FILLED":
-		fallthrough
-	case "FILLED":
-		fallthrough
-	case "REJECTED":
-		*e = CompressedOrderOrderStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderOrderStatus: %v", v)
-	}
-}
 
 // CompressedOrderOrderType - The execution type of this order. Only MARKET is supported.
 type CompressedOrderOrderType string
@@ -236,23 +219,8 @@ const (
 func (e CompressedOrderOrderType) ToPointer() *CompressedOrderOrderType {
 	return &e
 }
-func (e *CompressedOrderOrderType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "MARKET":
-		*e = CompressedOrderOrderType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderOrderType: %v", v)
-	}
-}
 
-// CompressedOrderQuantity - Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. Either a quantity or notional_value MUST be specified (but not both).
+// CompressedOrderQuantity - Numeric quantity of the order. Either a quantity or notional_value MUST be specified (but not both). For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places.
 type CompressedOrderQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -263,6 +231,32 @@ func (o *CompressedOrderQuantity) GetValue() *string {
 		return nil
 	}
 	return o.Value
+}
+
+// CompressedOrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+type CompressedOrderRightsOfAccumulationAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *CompressedOrderRightsOfAccumulationAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// CompressedOrderRightsOfAccumulation - Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
+type CompressedOrderRightsOfAccumulation struct {
+	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+	Amount *CompressedOrderRightsOfAccumulationAmount `json:"amount,omitempty"`
+}
+
+func (o *CompressedOrderRightsOfAccumulation) GetAmount() *CompressedOrderRightsOfAccumulationAmount {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
 }
 
 // CompressedOrderSide - The side of this order.
@@ -277,23 +271,6 @@ const (
 func (e CompressedOrderSide) ToPointer() *CompressedOrderSide {
 	return &e
 }
-func (e *CompressedOrderSide) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_UNSPECIFIED":
-		fallthrough
-	case "BUY":
-		fallthrough
-	case "SELL":
-		*e = CompressedOrderSide(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderSide: %v", v)
-	}
-}
 
 // CompressedOrderTimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type CompressedOrderTimeInForce string
@@ -305,21 +282,6 @@ const (
 
 func (e CompressedOrderTimeInForce) ToPointer() *CompressedOrderTimeInForce {
 	return &e
-}
-func (e *CompressedOrderTimeInForce) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TIME_IN_FORCE_UNSPECIFIED":
-		fallthrough
-	case "DAY":
-		*e = CompressedOrderTimeInForce(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderTimeInForce: %v", v)
-	}
 }
 
 // CompressedOrder - The message describing an orders that have been compressed into a single order
@@ -340,8 +302,12 @@ type CompressedOrder struct {
 	CreateTime *time.Time `json:"create_time,omitempty"`
 	// The product of order quantity & price, summed across all fills, reported in the currency specified in the order. (This will be rounded to 2 decimal places for USD currencies). Will be absent if an order has no fill information.
 	CumulativeNotionalValue *CompressedOrderCumulativeNotionalValue `json:"cumulative_notional_value,omitempty"`
+	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
+	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
 	Executions []Executions `json:"executions,omitempty"`
+	// Fees that will be applied to this order.
+	Fees []Fee `json:"fees,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *CompressedOrderFilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -350,16 +316,22 @@ type CompressedOrder struct {
 	IdentifierType *CompressedOrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
+	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months. Either ROA or LOI may be specified, but not both.
+	LetterOfIntent *CompressedOrderLetterOfIntent `json:"letter_of_intent,omitempty"`
 	// System generated name of the order.
 	Name *string `json:"name,omitempty"`
+	// Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. Either a quantity or notional_value MUST be specified (but not both). For Equities: currently not supported yet For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified.
+	NotionalValue *CompressedOrderNotionalValue `json:"notional_value,omitempty"`
 	// When an order has the REJECTED status, this will be populated with a system code describing the rejection.
 	OrderRejectedReason *CompressedOrderOrderRejectedReason `json:"order_rejected_reason,omitempty"`
 	// The processing status of the order
 	OrderStatus *CompressedOrderOrderStatus `json:"order_status,omitempty"`
 	// The execution type of this order. Only MARKET is supported.
 	OrderType *CompressedOrderOrderType `json:"order_type,omitempty"`
-	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. Either a quantity or notional_value MUST be specified (but not both).
+	// Numeric quantity of the order. Either a quantity or notional_value MUST be specified (but not both). For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places.
 	Quantity *CompressedOrderQuantity `json:"quantity,omitempty"`
+	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
+	RightsOfAccumulation *CompressedOrderRightsOfAccumulation `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side *CompressedOrderSide `json:"side,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
@@ -426,11 +398,25 @@ func (o *CompressedOrder) GetCumulativeNotionalValue() *CompressedOrderCumulativ
 	return o.CumulativeNotionalValue
 }
 
+func (o *CompressedOrder) GetCurrencyCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CurrencyCode
+}
+
 func (o *CompressedOrder) GetExecutions() []Executions {
 	if o == nil {
 		return nil
 	}
 	return o.Executions
+}
+
+func (o *CompressedOrder) GetFees() []Fee {
+	if o == nil {
+		return nil
+	}
+	return o.Fees
 }
 
 func (o *CompressedOrder) GetFilledQuantity() *CompressedOrderFilledQuantity {
@@ -461,11 +447,25 @@ func (o *CompressedOrder) GetLastUpdateTime() *time.Time {
 	return o.LastUpdateTime
 }
 
+func (o *CompressedOrder) GetLetterOfIntent() *CompressedOrderLetterOfIntent {
+	if o == nil {
+		return nil
+	}
+	return o.LetterOfIntent
+}
+
 func (o *CompressedOrder) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
+}
+
+func (o *CompressedOrder) GetNotionalValue() *CompressedOrderNotionalValue {
+	if o == nil {
+		return nil
+	}
+	return o.NotionalValue
 }
 
 func (o *CompressedOrder) GetOrderRejectedReason() *CompressedOrderOrderRejectedReason {
@@ -494,6 +494,13 @@ func (o *CompressedOrder) GetQuantity() *CompressedOrderQuantity {
 		return nil
 	}
 	return o.Quantity
+}
+
+func (o *CompressedOrder) GetRightsOfAccumulation() *CompressedOrderRightsOfAccumulation {
+	if o == nil {
+		return nil
+	}
+	return o.RightsOfAccumulation
 }
 
 func (o *CompressedOrder) GetSide() *CompressedOrderSide {

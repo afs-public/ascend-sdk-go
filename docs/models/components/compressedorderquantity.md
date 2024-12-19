@@ -1,6 +1,6 @@
 # CompressedOrderQuantity
 
-Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. Either a quantity or notional_value MUST be specified (but not both).
+Numeric quantity of the order. Either a quantity or notional_value MUST be specified (but not both). For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places.
 
 
 ## Fields

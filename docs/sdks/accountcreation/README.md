@@ -39,85 +39,22 @@ func main() {
 
     ctx := context.Background()
     res, err := s.AccountCreation.CreateAccount(ctx, components.AccountRequestCreate{
-        AcceptsIssuerDirectCommunication: ascendsdkgo.Bool(false),
         AccountGroupID: "01ARZ3NDEKTSV4RRFFQ69G5FAV",
-        Advised: ascendsdkgo.Bool(true),
-        CatAccountHolderType: components.CatAccountHolderTypeIIndividual.ToPointer(),
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
-        Identifiers: []components.IdentifierCreate{
-            components.IdentifierCreate{
-                Type: components.IdentifierCreateTypeOriginatingAccountID,
-                Value: "12345678",
-            },
-        },
-        InterestedParties: []components.InterestedPartyCreate{
-            components.InterestedPartyCreate{
-                MailingAddress: components.PostalAddressCreate{},
-                Recipient: "John Dough",
-                StatementDeliveryPreference: components.StatementDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.TradeConfirmationDeliveryPreferenceDigital.ToPointer(),
-            },
-        },
-        InvestmentProfile: &components.InvestmentProfileCreate{
-            AccountGoals: &components.AccountGoalsCreate{
-                InvestmentObjective: components.InvestmentObjectiveGrowth.ToPointer(),
-                LiquidityNeeds: components.LiquidityNeedsVeryImportant.ToPointer(),
-                RiskTolerance: components.RiskToleranceMedium.ToPointer(),
-                TimeHorizon: components.TimeHorizonAverage.ToPointer(),
-            },
-            CustomerProfile: &components.CustomerProfileCreate{
-                AnnualIncomeRangeUsd: components.AnnualIncomeRangeUsdFrom100KTo200K.ToPointer(),
-                FederalTaxBracket: ascendsdkgo.Float64(1.5),
-                InvestmentExperience: components.InvestmentExperienceGood.ToPointer(),
-                LiquidNetWorthRangeUsd: components.LiquidNetWorthRangeUsdFrom100KTo200K.ToPointer(),
-                TotalNetWorthRangeUsd: components.TotalNetWorthRangeUsdFrom100KTo200K.ToPointer(),
-            },
-        },
-        Managed: ascendsdkgo.Bool(true),
         Parties: []components.PartyRequestCreate{
             components.PartyRequestCreate{
                 EmailAddress: "example@domain.com",
                 MailingAddress: components.PostalAddressCreate{},
                 PhoneNumber: components.PhoneNumberCreate{},
-                ProspectusDeliveryPreference: components.ProspectusDeliveryPreferenceDigital.ToPointer(),
-                ProxyDeliveryPreference: components.ProxyDeliveryPreferenceDigital.ToPointer(),
                 RelationType: components.RelationTypePrimaryOwner,
-                StatementDeliveryPreference: components.PartyRequestCreateStatementDeliveryPreferenceDigital.ToPointer(),
-                TaxDocumentDeliveryPreference: components.TaxDocumentDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.PartyRequestCreateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
             components.PartyRequestCreate{
                 EmailAddress: "example@domain.com",
                 MailingAddress: components.PostalAddressCreate{},
                 PhoneNumber: components.PhoneNumberCreate{},
-                ProspectusDeliveryPreference: components.ProspectusDeliveryPreferenceDigital.ToPointer(),
-                ProxyDeliveryPreference: components.ProxyDeliveryPreferenceDigital.ToPointer(),
                 RelationType: components.RelationTypePrimaryOwner,
-                StatementDeliveryPreference: components.PartyRequestCreateStatementDeliveryPreferenceDigital.ToPointer(),
-                TaxDocumentDeliveryPreference: components.TaxDocumentDeliveryPreferenceDigital.ToPointer(),
-                TradeConfirmationDeliveryPreference: components.PartyRequestCreateTradeConfirmationDeliveryPreferenceDigital.ToPointer(),
             },
         },
-        PrimaryRegisteredRepID: ascendsdkgo.String("01HB7N66WW02WG3B6B9W29K0HF"),
-        TaxProfile: &components.AccountTaxProfileCreate{
-            CostBasisLotDisposalMethod: components.CostBasisLotDisposalMethodCostBasisLotDisposalFifo.ToPointer(),
-            Section475Election: ascendsdkgo.Bool(true),
-        },
-        TrustedContacts: []components.TrustedContactCreate{
-            components.TrustedContactCreate{
-                EmailAddress: ascendsdkgo.String("example@email.com"),
-                FamilyName: "Doe",
-                GivenName: "John",
-                MiddleNames: ascendsdkgo.String("Larry"),
-            },
-            components.TrustedContactCreate{
-                EmailAddress: ascendsdkgo.String("example@email.com"),
-                FamilyName: "Doe",
-                GivenName: "John",
-                MiddleNames: ascendsdkgo.String("Larry"),
-            },
-        },
-        WrapFeeBilled: ascendsdkgo.Bool(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -160,7 +97,6 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -178,7 +114,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
+    res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
     if err != nil {
         log.Fatal(err)
     }

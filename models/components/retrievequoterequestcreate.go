@@ -17,19 +17,6 @@ const (
 func (e RetrieveQuoteRequestCreateAssetType) ToPointer() *RetrieveQuoteRequestCreateAssetType {
 	return &e
 }
-func (e *RetrieveQuoteRequestCreateAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FIXED_INCOME":
-		*e = RetrieveQuoteRequestCreateAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveQuoteRequestCreateAssetType: %v", v)
-	}
-}
 
 // RetrieveQuoteRequestCreateBrokerCapacity - Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
 type RetrieveQuoteRequestCreateBrokerCapacity string
@@ -42,23 +29,6 @@ const (
 
 func (e RetrieveQuoteRequestCreateBrokerCapacity) ToPointer() *RetrieveQuoteRequestCreateBrokerCapacity {
 	return &e
-}
-func (e *RetrieveQuoteRequestCreateBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BROKER_CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		*e = RetrieveQuoteRequestCreateBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveQuoteRequestCreateBrokerCapacity: %v", v)
-	}
 }
 
 // RetrieveQuoteRequestCreateIdentifierType - The identifier type of the asset being sought

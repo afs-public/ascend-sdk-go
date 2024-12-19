@@ -38,7 +38,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.Reader.ListEventMessages(ctx, ascendsdkgo.String("publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
+    res, err := s.Reader.ListEventMessages(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

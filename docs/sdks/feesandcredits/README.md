@@ -45,7 +45,6 @@ func main() {
     res, err := s.FeesAndCredits.CreateFee(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.TransfersFeeCreate{
         Amount: components.DecimalCreate{},
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
-        Description: ascendsdkgo.String("Fee charged for platform access"),
         Type: components.TransfersFeeCreateTypePlatform,
     })
     if err != nil {
@@ -169,7 +168,6 @@ func main() {
     ctx := context.Background()
     res, err := s.FeesAndCredits.CancelFee(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230823123456", components.CancelFeeRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/fees/20230823123456",
-        Reason: ascendsdkgo.String("Reverse fee charge"),
     })
     if err != nil {
         log.Fatal(err)
@@ -234,7 +232,6 @@ func main() {
     res, err := s.FeesAndCredits.CreateCredit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.TransfersCreditCreate{
         Amount: components.DecimalCreate{},
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
-        Description: ascendsdkgo.String("Credit given as promotion"),
         Type: components.TransfersCreditCreateTypePromotional,
     })
     if err != nil {
@@ -358,7 +355,6 @@ func main() {
     ctx := context.Background()
     res, err := s.FeesAndCredits.CancelCredit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230823123456", components.CancelCreditRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/credits/20230823123456",
-        Reason: ascendsdkgo.String("Reverse previous credit"),
     })
     if err != nil {
         log.Fatal(err)

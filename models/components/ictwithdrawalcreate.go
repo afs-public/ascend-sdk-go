@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // IctWithdrawalCreateProgram - The name of the program that the ICT withdrawal is associated with.
 type IctWithdrawalCreateProgram string
 
@@ -22,31 +17,6 @@ const (
 
 func (e IctWithdrawalCreateProgram) ToPointer() *IctWithdrawalCreateProgram {
 	return &e
-}
-func (e *IctWithdrawalCreateProgram) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ICT_PROGRAM_UNSPECIFIED":
-		fallthrough
-	case "BROKER_PARTNER":
-		fallthrough
-	case "DEPOSIT_ONLY":
-		fallthrough
-	case "BANKING_PARTNER":
-		fallthrough
-	case "MONEY_TRANSMITTER":
-		fallthrough
-	case "WITHDRAWAL_ONLY":
-		fallthrough
-	case "DIGITAL_PARTNER":
-		*e = IctWithdrawalCreateProgram(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IctWithdrawalCreateProgram: %v", v)
-	}
 }
 
 // IctWithdrawalCreate - An Instant Cash Transfer. Funds are moved from a customer's brokerage account to a configured Firm account.

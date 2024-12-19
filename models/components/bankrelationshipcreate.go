@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // VerificationMethod - The verification method of the bank relationship.
 type VerificationMethod string
 
@@ -27,41 +22,6 @@ const (
 
 func (e VerificationMethod) ToPointer() *VerificationMethod {
 	return &e
-}
-func (e *VerificationMethod) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "VERIFICATION_METHOD_UNSPECIFIED":
-		fallthrough
-	case "MICRO_DEPOSIT":
-		fallthrough
-	case "YODLEE":
-		fallthrough
-	case "QUOVO":
-		fallthrough
-	case "GIACT":
-		fallthrough
-	case "SYNAPSE":
-		fallthrough
-	case "SOPHTRON":
-		fallthrough
-	case "USE_EXISTING":
-		fallthrough
-	case "INTERNAL_BANK":
-		fallthrough
-	case "MX":
-		fallthrough
-	case "FISERV":
-		fallthrough
-	case "PLAID_TOKEN":
-		*e = VerificationMethod(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for VerificationMethod: %v", v)
-	}
 }
 
 // BankRelationshipCreate - A relationship between a bank account and an Apex account.

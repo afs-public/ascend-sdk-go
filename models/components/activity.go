@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -47,29 +45,6 @@ const (
 func (e ActivityAccountMemo) ToPointer() *ActivityAccountMemo {
 	return &e
 }
-func (e *ActivityAccountMemo) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MEMO_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FULLY_PAID_STOCK_LOAN":
-		fallthrough
-	case "FREE":
-		fallthrough
-	case "PENDING_OUTGOING_ACAT":
-		fallthrough
-	case "PENDING_DRIP":
-		fallthrough
-	case "PENDING_WITHDRAWAL":
-		*e = ActivityAccountMemo(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityAccountMemo: %v", v)
-	}
-}
 
 // ActivityAction - Denotes whether the shares are incoming or outgoing
 type ActivityAction string
@@ -84,25 +59,6 @@ const (
 func (e ActivityAction) ToPointer() *ActivityAction {
 	return &e
 }
-func (e *ActivityAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityAction: %v", v)
-	}
-}
 
 // ActivityMethod - The method used for the account transfer
 type ActivityMethod string
@@ -116,25 +72,6 @@ const (
 
 func (e ActivityMethod) ToPointer() *ActivityMethod {
 	return &e
-}
-func (e *ActivityMethod) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACCOUNT_TRANSFER_METHOD_UNSPECIFIED":
-		fallthrough
-	case "ACATS":
-		fallthrough
-	case "INTERNAL":
-		fallthrough
-	case "MANUAL":
-		*e = ActivityMethod(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityMethod: %v", v)
-	}
 }
 
 // ActivityAccountTransfer - Object containing metadata for account transfer movements
@@ -684,83 +621,6 @@ const (
 func (e ActivitySubtype) ToPointer() *ActivitySubtype {
 	return &e
 }
-func (e *ActivitySubtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CORPORATEACTIONSUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "ADDITIONAL_DIVIDEND":
-		fallthrough
-	case "APPROXIMATE_RATE":
-		fallthrough
-	case "DIVIDEND_ARREARS":
-		fallthrough
-	case "DIVIDEND_CANCELLED":
-		fallthrough
-	case "DIVIDEND_PAYMENT_TAX_CLASSIFICATIONS":
-		fallthrough
-	case "DIVIDEND_RESCINDED":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "EXTRA_DIVIDEND":
-		fallthrough
-	case "EXTRA_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "FINAL_PAYMENT_TRANSFER_BOOKS_ARE_CLOSED":
-		fallthrough
-	case "GROSS_RATE":
-		fallthrough
-	case "INITIAL_DIVIDEND":
-		fallthrough
-	case "INITIAL_DIVIDEND_LONG_PERIOD":
-		fallthrough
-	case "INITIAL_DIVIDEND_SHORT_PERIOD":
-		fallthrough
-	case "LIMITED_PARTNERSHIP_DISTRIBUTION":
-		fallthrough
-	case "LIQUIDATION":
-		fallthrough
-	case "NET_RATE":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "PROCEEDS_FROM_SALE_OF_RIGHTS":
-		fallthrough
-	case "REGULAR_DIVIDEND":
-		fallthrough
-	case "RETURN_OF_CAPITAL":
-		fallthrough
-	case "RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "SPECIAL_DIVIDEND":
-		fallthrough
-	case "SPECIAL_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "YEAR_END_DIVIDEND":
-		fallthrough
-	case "YEAR_END_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "PARTIAL":
-		fallthrough
-	case "FULL":
-		fallthrough
-	case "MATURITY":
-		fallthrough
-	case "TERMINATION":
-		fallthrough
-	case "REDEMPTION_OF_WARRANTS":
-		*e = ActivitySubtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivitySubtype: %v", v)
-	}
-}
 
 // ActivityCashDividend - Object containing for cash dividends
 type ActivityCashDividend struct {
@@ -993,25 +853,6 @@ const (
 func (e ActivityConversionType) ToPointer() *ActivityConversionType {
 	return &e
 }
-func (e *ActivityConversionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EVENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "STOCK":
-		fallthrough
-	case "CASH_AND_STOCK":
-		*e = ActivityConversionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityConversionType: %v", v)
-	}
-}
 
 // ActivityConversion - Object containing metadata for conversions
 type ActivityConversion struct {
@@ -1091,31 +932,6 @@ const (
 func (e ActivityCreditType) ToPointer() *ActivityCreditType {
 	return &e
 }
-func (e *ActivityCreditType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CREDIT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FULLY_PAID_STOCK_LOAN":
-		fallthrough
-	case "WRITE_OFF":
-		fallthrough
-	case "REIMBURSEMENT":
-		fallthrough
-	case "PROMOTIONAL":
-		fallthrough
-	case "FDIC_INSURED_DEPOSIT_PROGRAM":
-		fallthrough
-	case "ACCOUNT_TRANSFER_ADJUSTMENT":
-		*e = ActivityCreditType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityCreditType: %v", v)
-	}
-}
 
 // ActivityCredit - Object containing more information about the credit being paid
 type ActivityCredit struct {
@@ -1169,41 +985,6 @@ const (
 func (e ActivityContributionType) ToPointer() *ActivityContributionType {
 	return &e
 }
-func (e *ActivityContributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CONTRIBUTION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		fallthrough
-	case "CONTRIBUTION_NON_REPORTABLE":
-		*e = ActivityContributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityContributionType: %v", v)
-	}
-}
 
 // ActivityDepositType - The mechanism by which funds were deposited
 type ActivityDepositType string
@@ -1221,33 +1002,6 @@ const (
 
 func (e ActivityDepositType) ToPointer() *ActivityDepositType {
 	return &e
-}
-func (e *ActivityDepositType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EXTERNAL_MOVEMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ACH":
-		fallthrough
-	case "CHECK":
-		fallthrough
-	case "WIRE":
-		fallthrough
-	case "PAYPAL":
-		fallthrough
-	case "RTP":
-		fallthrough
-	case "ICT":
-		fallthrough
-	case "JOURNAL":
-		*e = ActivityDepositType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityDepositType: %v", v)
-	}
 }
 
 // ActivityDeposit - Object containing more information about a deposit
@@ -1319,23 +1073,6 @@ const (
 
 func (e ActivityDripAction) ToPointer() *ActivityDripAction {
 	return &e
-}
-func (e *ActivityDripAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DRIP_ACTION_UNSPECIFIED":
-		fallthrough
-	case "DRIP_PENDING":
-		fallthrough
-	case "DRIP_COMPLETE":
-		*e = ActivityDripAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityDripAction: %v", v)
-	}
 }
 
 // ActivityDrip - Object containing more information about the drip allocations
@@ -1457,25 +1194,6 @@ const (
 func (e ActivityExchangeType) ToPointer() *ActivityExchangeType {
 	return &e
 }
-func (e *ActivityExchangeType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EVENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "STOCK":
-		fallthrough
-	case "CASH_AND_STOCK":
-		*e = ActivityExchangeType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityExchangeType: %v", v)
-	}
-}
 
 // ActivityExchange - The exchange where the trade was executed
 type ActivityExchange struct {
@@ -1541,23 +1259,6 @@ const (
 
 func (e ActivityFpslAction) ToPointer() *ActivityFpslAction {
 	return &e
-}
-func (e *ActivityFpslAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FPSL_ACTION_UNSPECIFIED":
-		fallthrough
-	case "ALLOCATE":
-		fallthrough
-	case "DEALLOCATE":
-		*e = ActivityFpslAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityFpslAction: %v", v)
-	}
 }
 
 // ActivityFpsl - Object containing more information about the fpsl allocations
@@ -1658,23 +1359,6 @@ const (
 
 func (e ActivityInterestType) ToPointer() *ActivityInterestType {
 	return &e
-}
-func (e *ActivityInterestType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "INTEREST_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CREDIT":
-		fallthrough
-	case "DEBIT":
-		*e = ActivityInterestType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityInterestType: %v", v)
-	}
 }
 
 // ActivityInterest - Object containing metadata for margin interest
@@ -1924,25 +1608,6 @@ const (
 func (e ActivityLiquidationAction) ToPointer() *ActivityLiquidationAction {
 	return &e
 }
-func (e *ActivityLiquidationAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityLiquidationAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityLiquidationAction: %v", v)
-	}
-}
 
 // ActivityLiquidationCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type ActivityLiquidationCashRate struct {
@@ -2184,83 +1849,6 @@ const (
 
 func (e ActivityLiquidationSubtype) ToPointer() *ActivityLiquidationSubtype {
 	return &e
-}
-func (e *ActivityLiquidationSubtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CORPORATEACTIONSUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "ADDITIONAL_DIVIDEND":
-		fallthrough
-	case "APPROXIMATE_RATE":
-		fallthrough
-	case "DIVIDEND_ARREARS":
-		fallthrough
-	case "DIVIDEND_CANCELLED":
-		fallthrough
-	case "DIVIDEND_PAYMENT_TAX_CLASSIFICATIONS":
-		fallthrough
-	case "DIVIDEND_RESCINDED":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "EXTRA_DIVIDEND":
-		fallthrough
-	case "EXTRA_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "FINAL_PAYMENT_TRANSFER_BOOKS_ARE_CLOSED":
-		fallthrough
-	case "GROSS_RATE":
-		fallthrough
-	case "INITIAL_DIVIDEND":
-		fallthrough
-	case "INITIAL_DIVIDEND_LONG_PERIOD":
-		fallthrough
-	case "INITIAL_DIVIDEND_SHORT_PERIOD":
-		fallthrough
-	case "LIMITED_PARTNERSHIP_DISTRIBUTION":
-		fallthrough
-	case "LIQUIDATION":
-		fallthrough
-	case "NET_RATE":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "PROCEEDS_FROM_SALE_OF_RIGHTS":
-		fallthrough
-	case "REGULAR_DIVIDEND":
-		fallthrough
-	case "RETURN_OF_CAPITAL":
-		fallthrough
-	case "RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "SPECIAL_DIVIDEND":
-		fallthrough
-	case "SPECIAL_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "YEAR_END_DIVIDEND":
-		fallthrough
-	case "YEAR_END_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "PARTIAL":
-		fallthrough
-	case "FULL":
-		fallthrough
-	case "MATURITY":
-		fallthrough
-	case "TERMINATION":
-		fallthrough
-	case "REDEMPTION_OF_WARRANTS":
-		*e = ActivityLiquidationSubtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityLiquidationSubtype: %v", v)
-	}
 }
 
 // ActivityLiquidation - Object containing metadata for liquidations
@@ -2525,25 +2113,6 @@ const (
 func (e ActivityMergerAction) ToPointer() *ActivityMergerAction {
 	return &e
 }
-func (e *ActivityMergerAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityMergerAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityMergerAction: %v", v)
-	}
-}
 
 // ActivityMergerCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type ActivityMergerCashRate struct {
@@ -2695,25 +2264,6 @@ const (
 func (e ActivityMergerType) ToPointer() *ActivityMergerType {
 	return &e
 }
-func (e *ActivityMergerType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EVENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CASH":
-		fallthrough
-	case "STOCK":
-		fallthrough
-	case "CASH_AND_STOCK":
-		*e = ActivityMergerType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityMergerType: %v", v)
-	}
-}
 
 // ActivityMerger - Object containing metadata for merger events
 type ActivityMerger struct {
@@ -2794,25 +2344,6 @@ const (
 
 func (e ActivityNameChangeAction) ToPointer() *ActivityNameChangeAction {
 	return &e
-}
-func (e *ActivityNameChangeAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityNameChangeAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityNameChangeAction: %v", v)
-	}
 }
 
 // ActivityNameChangeCorporateActionGeneralInformation - Common fields for corporate actions
@@ -3319,25 +2850,6 @@ const (
 func (e ActivityRedemptionFullAction) ToPointer() *ActivityRedemptionFullAction {
 	return &e
 }
-func (e *ActivityRedemptionFullAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityRedemptionFullAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityRedemptionFullAction: %v", v)
-	}
-}
 
 // ActivityRedemptionFullCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type ActivityRedemptionFullCashRate struct {
@@ -3505,83 +3017,6 @@ const (
 func (e ActivityRedemptionFullSubtype) ToPointer() *ActivityRedemptionFullSubtype {
 	return &e
 }
-func (e *ActivityRedemptionFullSubtype) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CORPORATEACTIONSUBTYPE_UNSPECIFIED":
-		fallthrough
-	case "ADDITIONAL_DIVIDEND":
-		fallthrough
-	case "APPROXIMATE_RATE":
-		fallthrough
-	case "DIVIDEND_ARREARS":
-		fallthrough
-	case "DIVIDEND_CANCELLED":
-		fallthrough
-	case "DIVIDEND_PAYMENT_TAX_CLASSIFICATIONS":
-		fallthrough
-	case "DIVIDEND_RESCINDED":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL":
-		fallthrough
-	case "ESTIMATED_RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "EXTRA_DIVIDEND":
-		fallthrough
-	case "EXTRA_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "FINAL_PAYMENT_TRANSFER_BOOKS_ARE_CLOSED":
-		fallthrough
-	case "GROSS_RATE":
-		fallthrough
-	case "INITIAL_DIVIDEND":
-		fallthrough
-	case "INITIAL_DIVIDEND_LONG_PERIOD":
-		fallthrough
-	case "INITIAL_DIVIDEND_SHORT_PERIOD":
-		fallthrough
-	case "LIMITED_PARTNERSHIP_DISTRIBUTION":
-		fallthrough
-	case "LIQUIDATION":
-		fallthrough
-	case "NET_RATE":
-		fallthrough
-	case "OTHER":
-		fallthrough
-	case "PROCEEDS_FROM_SALE_OF_RIGHTS":
-		fallthrough
-	case "REGULAR_DIVIDEND":
-		fallthrough
-	case "RETURN_OF_CAPITAL":
-		fallthrough
-	case "RETURN_OF_CAPITAL_PLUS_INCOME":
-		fallthrough
-	case "SPECIAL_DIVIDEND":
-		fallthrough
-	case "SPECIAL_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "YEAR_END_DIVIDEND":
-		fallthrough
-	case "YEAR_END_DIVIDEND_PLUS_INCOME":
-		fallthrough
-	case "PARTIAL":
-		fallthrough
-	case "FULL":
-		fallthrough
-	case "MATURITY":
-		fallthrough
-	case "TERMINATION":
-		fallthrough
-	case "REDEMPTION_OF_WARRANTS":
-		*e = ActivityRedemptionFullSubtype(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityRedemptionFullSubtype: %v", v)
-	}
-}
 
 // ActivityRedemptionFull - Object containing more information about a redemption
 type ActivityRedemptionFull struct {
@@ -3653,25 +3088,6 @@ const (
 
 func (e ActivityRedemptionPartialAction) ToPointer() *ActivityRedemptionPartialAction {
 	return &e
-}
-func (e *ActivityRedemptionPartialAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityRedemptionPartialAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityRedemptionPartialAction: %v", v)
-	}
 }
 
 // ActivityRedemptionPartialCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
@@ -3859,25 +3275,6 @@ const (
 
 func (e ActivityReverseStockSplitAction) ToPointer() *ActivityReverseStockSplitAction {
 	return &e
-}
-func (e *ActivityReverseStockSplitAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTION_UNSPECIFIED":
-		fallthrough
-	case "INCOMING":
-		fallthrough
-	case "OUTGOING":
-		fallthrough
-	case "CASH_IN_LIEU":
-		*e = ActivityReverseStockSplitAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityReverseStockSplitAction: %v", v)
-	}
 }
 
 // ActivityReverseStockSplitCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
@@ -4632,23 +4029,6 @@ const (
 func (e ActivitySide) ToPointer() *ActivitySide {
 	return &e
 }
-func (e *ActivitySide) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_UNSPECIFIED":
-		fallthrough
-	case "BUY":
-		fallthrough
-	case "SELL":
-		*e = ActivitySide(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivitySide: %v", v)
-	}
-}
 
 // ActivitySpinoffCorporateActionGeneralInformation - Common fields for corporate actions
 type ActivitySpinoffCorporateActionGeneralInformation struct {
@@ -4847,31 +4227,6 @@ const (
 
 func (e ActivityState) ToPointer() *ActivityState {
 	return &e
-}
-func (e *ActivityState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTIVITY_STATE_UNSPECIFIED":
-		fallthrough
-	case "PENDING":
-		fallthrough
-	case "CURRENT":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "REBOOKED":
-		fallthrough
-	case "REBOOK":
-		fallthrough
-	case "CANCEL":
-		*e = ActivityState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityState: %v", v)
-	}
 }
 
 // ActivityStockDividendCorporateActionGeneralInformation - Common fields for corporate actions
@@ -5316,23 +4671,6 @@ const (
 func (e ActivitySweepAction) ToPointer() *ActivitySweepAction {
 	return &e
 }
-func (e *ActivitySweepAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SWEEP_ACTION_UNSPECIFIED":
-		fallthrough
-	case "PURCHASE":
-		fallthrough
-	case "REDEMPTION":
-		*e = ActivitySweepAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivitySweepAction: %v", v)
-	}
-}
 
 // ActivitySweepType - Sweep program that cash is being swept to/ from
 type ActivitySweepType string
@@ -5345,23 +4683,6 @@ const (
 
 func (e ActivitySweepType) ToPointer() *ActivitySweepType {
 	return &e
-}
-func (e *ActivitySweepType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SWEEP_TYPE_UNSPECIFIED":
-		fallthrough
-	case "FDIC":
-		fallthrough
-	case "MONEY_MARKET":
-		*e = ActivitySweepType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivitySweepType: %v", v)
-	}
 }
 
 // ActivitySweep - Object containing metadata for sweeps
@@ -5510,25 +4831,6 @@ const (
 func (e ActivityBrokerCapacity) ToPointer() *ActivityBrokerCapacity {
 	return &e
 }
-func (e *ActivityBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		fallthrough
-	case "MIXED":
-		*e = ActivityBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityBrokerCapacity: %v", v)
-	}
-}
 
 // ActivityPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
 type ActivityPrevailingMarketPrice struct {
@@ -5581,25 +4883,6 @@ const (
 
 func (e ActivityPriceAdjustmentType) ToPointer() *ActivityPriceAdjustmentType {
 	return &e
-}
-func (e *ActivityPriceAdjustmentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "MARKUP":
-		fallthrough
-	case "MARKDOWN":
-		fallthrough
-	case "SALES_LOAD":
-		*e = ActivityPriceAdjustmentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityPriceAdjustmentType: %v", v)
-	}
 }
 
 // ActivityPriceAdjustmentRecord - Information about any price adjustments applied to the security
@@ -5876,27 +5159,6 @@ const (
 func (e ActivityTransferType) ToPointer() *ActivityTransferType {
 	return &e
 }
-func (e *ActivityTransferType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TRANSFER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "TRANSFER_CONVERSION":
-		fallthrough
-	case "DECONVERSION":
-		fallthrough
-	case "MIGRATION":
-		fallthrough
-	case "MANUAL_ADJUSTMENT":
-		*e = ActivityTransferType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityTransferType: %v", v)
-	}
-}
 
 // ActivityTransfer - Object containing metadata for transfers
 type ActivityTransfer struct {
@@ -5942,27 +5204,6 @@ const (
 
 func (e ActivityType) ToPointer() *ActivityType {
 	return &e
-}
-func (e *ActivityType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "TRADE":
-		fallthrough
-	case "MOVEMENT":
-		fallthrough
-	case "MEMO":
-		fallthrough
-	case "CORPORATE_ACTION":
-		*e = ActivityType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityType: %v", v)
-	}
 }
 
 // ActivityUnitSplitCorporateActionGeneralInformation - Common fields for corporate actions
@@ -6177,59 +5418,6 @@ const (
 func (e ActivityDistributionType) ToPointer() *ActivityDistributionType {
 	return &e
 }
-func (e *ActivityDistributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DISTRIBUTION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PREMATURE":
-		fallthrough
-	case "DISABILITY":
-		fallthrough
-	case "DEATH":
-		fallthrough
-	case "NORMAL":
-		fallthrough
-	case "SOSEPP":
-		fallthrough
-	case "ROLLOVER_TO_QUALIFIED_PLAN":
-		fallthrough
-	case "ROLLOVER_TO_IRA":
-		fallthrough
-	case "DIST_TRANSFER":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE":
-		fallthrough
-	case "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE":
-		fallthrough
-	case "RECHARACTERIZATION_PRIOR_YEAR":
-		fallthrough
-	case "RECHARACTERIZATION_CURRENT_YEAR":
-		fallthrough
-	case "DIST_CONVERSION":
-		fallthrough
-	case "MANAGEMENT_FEE":
-		fallthrough
-	case "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS":
-		fallthrough
-	case "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS":
-		fallthrough
-	case "PLAN_LOAN_401K":
-		fallthrough
-	case "NET_INCOME_ATTRIBUTABLE":
-		fallthrough
-	case "REVOCATION":
-		fallthrough
-	case "NON_REPORTABLE":
-		*e = ActivityDistributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityDistributionType: %v", v)
-	}
-}
 
 // ActivityRetirementType - The type of retirement account the withdrawal is being made from
 type ActivityRetirementType string
@@ -6248,33 +5436,6 @@ const (
 func (e ActivityRetirementType) ToPointer() *ActivityRetirementType {
 	return &e
 }
-func (e *ActivityRetirementType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "RETIREMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "IRA":
-		fallthrough
-	case "SEP":
-		fallthrough
-	case "SIMPLE":
-		fallthrough
-	case "KEOGH":
-		fallthrough
-	case "ROTH":
-		fallthrough
-	case "QP":
-		fallthrough
-	case "ROLLOVER_IRA":
-		*e = ActivityRetirementType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityRetirementType: %v", v)
-	}
-}
 
 // ActivityWithdrawalType - The mechanism by which the funds will be withdrawn
 type ActivityWithdrawalType string
@@ -6292,33 +5453,6 @@ const (
 
 func (e ActivityWithdrawalType) ToPointer() *ActivityWithdrawalType {
 	return &e
-}
-func (e *ActivityWithdrawalType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "EXTERNAL_MOVEMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "ACH":
-		fallthrough
-	case "CHECK":
-		fallthrough
-	case "WIRE":
-		fallthrough
-	case "PAYPAL":
-		fallthrough
-	case "RTP":
-		fallthrough
-	case "ICT":
-		fallthrough
-	case "JOURNAL":
-		*e = ActivityWithdrawalType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityWithdrawalType: %v", v)
-	}
 }
 
 // ActivityWithdrawal - Object containing metadata for withdrawals
@@ -6480,23 +5614,6 @@ const (
 
 func (e ActivityReview) ToPointer() *ActivityReview {
 	return &e
-}
-func (e *ActivityReview) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "REVIEW_STATE_UNSPECIFIED":
-		fallthrough
-	case "REVIEW_STATE_PENDING":
-		fallthrough
-	case "REVIEW_STATE_COMPLETE":
-		*e = ActivityReview(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ActivityReview: %v", v)
-	}
 }
 
 // ActivityWithdrawalPendingReview - Object containing metadata for withdrawals pending review

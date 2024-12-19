@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // EnrollmentType - The enrollment type.
 type EnrollmentType string
 
@@ -40,67 +35,6 @@ const (
 
 func (e EnrollmentType) ToPointer() *EnrollmentType {
 	return &e
-}
-func (e *EnrollmentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ENROLLMENT_TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGISTRATION_INDIVIDUAL":
-		fallthrough
-	case "LENDING_LIMITED_PURPOSE_MARGIN":
-		fallthrough
-	case "LENDING_FULLY_PAID_STOCK_LOAN":
-		fallthrough
-	case "BENEFICIARY_DESIGNATION":
-		fallthrough
-	case "REGISTRATION_JOINT_WROS":
-		fallthrough
-	case "REGISTRATION_JOINT_TIC":
-		fallthrough
-	case "REGISTRATION_JOINT_TBE":
-		fallthrough
-	case "REGISTRATION_JOINT_CP":
-		fallthrough
-	case "REGISTRATION_ESTATE":
-		fallthrough
-	case "REGISTRATION_IRA_TRADITIONAL":
-		fallthrough
-	case "REGISTRATION_IRA_SIMPLE":
-		fallthrough
-	case "REGISTRATION_IRA_SEP":
-		fallthrough
-	case "REGISTRATION_IRA_ROTH":
-		fallthrough
-	case "REGISTRATION_IRA_ROLLOVER":
-		fallthrough
-	case "REGISTRATION_TRUST":
-		fallthrough
-	case "REGISTRATION_CORPORATION":
-		fallthrough
-	case "CASH_FDIC_CASH_SWEEP":
-		fallthrough
-	case "MARGINS_PDT_RESET":
-		fallthrough
-	case "RETIREMENT_BENEFICIARY_DESIGNATION":
-		fallthrough
-	case "DIVIDEND_REINVESTMENT_PLAN":
-		fallthrough
-	case "REGISTRATION_IRA_BENEFICIARY_TRADITIONAL":
-		fallthrough
-	case "REGISTRATION_IRA_BENEFICIARY_ROTH":
-		fallthrough
-	case "REGISTRATION_CUSTODIAL":
-		fallthrough
-	case "REG_T_MARGIN":
-		*e = EnrollmentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EnrollmentType: %v", v)
-	}
 }
 
 // AvailableEnrollment - Available Enrollment on an Account.

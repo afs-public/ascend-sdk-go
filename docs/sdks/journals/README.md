@@ -42,14 +42,6 @@ func main() {
     res, err := s.Journals.CreateCashJournal(ctx, components.CashJournalCreate{
         ClientTransferID: "113bw03-49f8-4525-934c-560fb39dg2kd",
         DestinationAccount: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
-        FullDisbursement: ascendsdkgo.Bool(false),
-        RetirementContribution: &components.RetirementContributionCreate{
-            TaxYear: 2024,
-            Type: components.RetirementContributionCreateTypeRegular,
-        },
-        RetirementDistribution: &components.RetirementDistributionCreate{
-            Type: components.RetirementDistributionCreateTypeNormal,
-        },
         SourceAccount: "accounts/01H8FM6EXVH77SAW3TC8KAWMES",
     })
     if err != nil {
@@ -171,7 +163,6 @@ func main() {
     ctx := context.Background()
     res, err := s.Journals.CancelCashJournal(ctx, "20240717000319", components.CancelCashJournalRequestCreate{
         Name: "cashJournals/20240717000319",
-        Reason: ascendsdkgo.String("Cancel journal"),
     })
     if err != nil {
         log.Fatal(err)

@@ -23,25 +23,6 @@ const (
 func (e OrderCostPreviewResponseAssetType) ToPointer() *OrderCostPreviewResponseAssetType {
 	return &e
 }
-func (e *OrderCostPreviewResponseAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		fallthrough
-	case "FIXED_INCOME":
-		fallthrough
-	case "MUTUAL_FUND":
-		*e = OrderCostPreviewResponseAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewResponseAssetType: %v", v)
-	}
-}
 
 // OrderCostPreviewResponseBrokerCapacity - Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
 type OrderCostPreviewResponseBrokerCapacity string
@@ -54,23 +35,6 @@ const (
 
 func (e OrderCostPreviewResponseBrokerCapacity) ToPointer() *OrderCostPreviewResponseBrokerCapacity {
 	return &e
-}
-func (e *OrderCostPreviewResponseBrokerCapacity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "BROKER_CAPACITY_UNSPECIFIED":
-		fallthrough
-	case "AGENCY":
-		fallthrough
-	case "PRINCIPAL":
-		*e = OrderCostPreviewResponseBrokerCapacity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewResponseBrokerCapacity: %v", v)
-	}
 }
 
 // EstimatedAccruedInterest - The estimated total of accrued interest that would be exchanged in an order of the given quantity
@@ -179,23 +143,6 @@ const (
 
 func (e OrderCostPreviewResponseType) ToPointer() *OrderCostPreviewResponseType {
 	return &e
-}
-func (e *OrderCostPreviewResponseType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "LIMIT_PRICE_TYPE_UNSPECIFIED":
-		fallthrough
-	case "PRICE_PER_UNIT":
-		fallthrough
-	case "PERCENTAGE_OF_PAR":
-		*e = OrderCostPreviewResponseType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewResponseType: %v", v)
-	}
 }
 
 // OrderCostPreviewResponseLimitPrice - The limit price to use in calculating costs. Only PERCENTAGE_OF_PAR will be accepted and returned.

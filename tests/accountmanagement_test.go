@@ -29,13 +29,7 @@ func TestAccountManagement_AccountsListAccounts_ListAccounts1(t *testing.T) {
 	)
 
 	ctx := context.Background()
-	res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{
-		PageSize:  ascendsdkgo.Int(25),
-		PageToken: ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
-		OrderBy:   ascendsdkgo.String("state"),
-		Filter:    ascendsdkgo.String("account_number == \"R9AHY8P\""),
-		View:      operations.ViewFull.ToPointer(),
-	})
+	res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{})
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

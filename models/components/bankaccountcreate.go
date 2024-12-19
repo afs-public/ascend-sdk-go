@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // BankAccountCreateType - The bank account type.
 type BankAccountCreateType string
 
@@ -18,23 +13,6 @@ const (
 
 func (e BankAccountCreateType) ToPointer() *BankAccountCreateType {
 	return &e
-}
-func (e *BankAccountCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "CHECKING":
-		fallthrough
-	case "SAVINGS":
-		*e = BankAccountCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BankAccountCreateType: %v", v)
-	}
 }
 
 // BankAccountCreate - A representation of a bank account.

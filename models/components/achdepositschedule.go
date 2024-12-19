@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // AchDepositScheduleType - The type of retirement contribution.
 type AchDepositScheduleType string
 
@@ -26,39 +21,6 @@ const (
 
 func (e AchDepositScheduleType) ToPointer() *AchDepositScheduleType {
 	return &e
-}
-func (e *AchDepositScheduleType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = AchDepositScheduleType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositScheduleType: %v", v)
-	}
 }
 
 // AchDepositScheduleIraContribution - The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
@@ -97,23 +59,6 @@ const (
 func (e AchDepositScheduleTemporalTaxYear) ToPointer() *AchDepositScheduleTemporalTaxYear {
 	return &e
 }
-func (e *AchDepositScheduleTemporalTaxYear) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TEMPORAL_TAX_YEAR_UNSPECIFIED":
-		fallthrough
-	case "CURRENT_CALENDAR_YEAR":
-		fallthrough
-	case "MINIMUM_TAX_YEAR":
-		*e = AchDepositScheduleTemporalTaxYear(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositScheduleTemporalTaxYear: %v", v)
-	}
-}
 
 // AchDepositScheduleRetirementContributionType - The type of retirement contribution.
 type AchDepositScheduleRetirementContributionType string
@@ -134,39 +79,6 @@ const (
 
 func (e AchDepositScheduleRetirementContributionType) ToPointer() *AchDepositScheduleRetirementContributionType {
 	return &e
-}
-func (e *AchDepositScheduleRetirementContributionType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "REGULAR":
-		fallthrough
-	case "EMPLOYEE":
-		fallthrough
-	case "EMPLOYER":
-		fallthrough
-	case "RECHARACTERIZATION":
-		fallthrough
-	case "ROLLOVER_60_DAY":
-		fallthrough
-	case "ROLLOVER_DIRECT":
-		fallthrough
-	case "TRANSFER":
-		fallthrough
-	case "TRUSTEE_FEE":
-		fallthrough
-	case "CONVERSION":
-		fallthrough
-	case "REPAYMENT":
-		*e = AchDepositScheduleRetirementContributionType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositScheduleRetirementContributionType: %v", v)
-	}
 }
 
 // AchDepositScheduleRetirementContribution - The contribution info for a retirement account
@@ -256,23 +168,6 @@ const (
 func (e AchDepositScheduleState) ToPointer() *AchDepositScheduleState {
 	return &e
 }
-func (e *AchDepositScheduleState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACTIVE":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "COMPLETED":
-		*e = AchDepositScheduleState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositScheduleState: %v", v)
-	}
-}
 
 // AchDepositScheduleTimeUnit - The time unit used to calculate the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 type AchDepositScheduleTimeUnit string
@@ -285,23 +180,6 @@ const (
 
 func (e AchDepositScheduleTimeUnit) ToPointer() *AchDepositScheduleTimeUnit {
 	return &e
-}
-func (e *AchDepositScheduleTimeUnit) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DAY":
-		fallthrough
-	case "WEEK":
-		fallthrough
-	case "MONTH":
-		*e = AchDepositScheduleTimeUnit(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AchDepositScheduleTimeUnit: %v", v)
-	}
 }
 
 // AchDepositScheduleScheduleProperties - Common schedule properties

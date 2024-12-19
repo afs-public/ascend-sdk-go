@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TimeUnit - The time unit used to calculate the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 type TimeUnit string
 
@@ -18,23 +13,6 @@ const (
 
 func (e TimeUnit) ToPointer() *TimeUnit {
 	return &e
-}
-func (e *TimeUnit) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "DAY":
-		fallthrough
-	case "WEEK":
-		fallthrough
-	case "MONTH":
-		*e = TimeUnit(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TimeUnit: %v", v)
-	}
 }
 
 // SchedulePropertiesCreate - Properties common to all transfer schedules

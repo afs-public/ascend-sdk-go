@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TransfersCreditCreateType - The type of the credit being issued
 type TransfersCreditCreateType string
 
@@ -19,25 +14,6 @@ const (
 
 func (e TransfersCreditCreateType) ToPointer() *TransfersCreditCreateType {
 	return &e
-}
-func (e *TransfersCreditCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "PROMOTIONAL":
-		fallthrough
-	case "WRITE_OFF":
-		fallthrough
-	case "REIMBURSEMENT":
-		*e = TransfersCreditCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransfersCreditCreateType: %v", v)
-	}
 }
 
 // TransfersCreditCreate - A transfer using the CREDIT mechanism. Funds are moved from a firm account to a customer's brokerage account

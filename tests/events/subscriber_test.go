@@ -1,17 +1,18 @@
 package events
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/models/components"
-	"ascend-sdk/models/operations"
-	"ascend-sdk/tests/helpers"
 	"context"
 	"fmt"
 	"os"
 	"testing"
 	"time"
 
+	"github.com/afs-public/ascend-sdk-go/tests/helpers"
+
+	ascendsdk "github.com/afs-public/ascend-sdk-go"
+
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

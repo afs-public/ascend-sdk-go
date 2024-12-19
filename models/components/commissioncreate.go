@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // CommissionCreateType - The type of commission value being specified. Only the type of "AMOUNT" is supported.
 type CommissionCreateType string
 
@@ -17,21 +12,6 @@ const (
 
 func (e CommissionCreateType) ToPointer() *CommissionCreateType {
 	return &e
-}
-func (e *CommissionCreateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "COMMISSION_TYPE_UNSPECIFIED":
-		fallthrough
-	case "AMOUNT":
-		*e = CommissionCreateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CommissionCreateType: %v", v)
-	}
 }
 
 // CommissionCreate - A custom commission applied to an order

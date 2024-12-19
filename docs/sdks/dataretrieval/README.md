@@ -37,7 +37,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String("snapshot_id==\"daily_accounts\"&&process_date==date(\"2023-09-30\")"), ascendsdkgo.Int(5000), ascendsdkgo.String("ZXhhbXBsZQo"))
+    res, err := s.DataRetrieval.ListSnapshots(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

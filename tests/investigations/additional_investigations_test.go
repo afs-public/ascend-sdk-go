@@ -1,10 +1,12 @@
 package tests
 
 import (
-	ascendsdk "ascend-sdk"
-	"ascend-sdk/tests/helpers"
 	"context"
 	"testing"
+
+	"github.com/afs-public/ascend-sdk-go/tests/helpers"
+
+	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
 

@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -21,23 +19,6 @@ const (
 
 func (e BankRelationshipType) ToPointer() *BankRelationshipType {
 	return &e
-}
-func (e *BankRelationshipType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "CHECKING":
-		fallthrough
-	case "SAVINGS":
-		*e = BankRelationshipType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BankRelationshipType: %v", v)
-	}
 }
 
 // BankAccount - The bank account for the relationship. This field must be set on create requests **except** when using the `PLAID_TOKEN` verification method. In which case, the bank account will be retrieved by the service based on the `plaid_processor_token`.
@@ -93,27 +74,6 @@ const (
 
 func (e BankRelationshipStateState) ToPointer() *BankRelationshipStateState {
 	return &e
-}
-func (e *BankRelationshipStateState) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "STATE_UNSPECIFIED":
-		fallthrough
-	case "PENDING":
-		fallthrough
-	case "APPROVED":
-		fallthrough
-	case "CANCELED":
-		fallthrough
-	case "REJECTED":
-		*e = BankRelationshipStateState(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BankRelationshipStateState: %v", v)
-	}
 }
 
 // BankRelationshipState - The state of the bank relationship.
@@ -189,41 +149,6 @@ const (
 
 func (e BankRelationshipVerificationMethod) ToPointer() *BankRelationshipVerificationMethod {
 	return &e
-}
-func (e *BankRelationshipVerificationMethod) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "VERIFICATION_METHOD_UNSPECIFIED":
-		fallthrough
-	case "MICRO_DEPOSIT":
-		fallthrough
-	case "YODLEE":
-		fallthrough
-	case "QUOVO":
-		fallthrough
-	case "GIACT":
-		fallthrough
-	case "SYNAPSE":
-		fallthrough
-	case "SOPHTRON":
-		fallthrough
-	case "USE_EXISTING":
-		fallthrough
-	case "INTERNAL_BANK":
-		fallthrough
-	case "MX":
-		fallthrough
-	case "FISERV":
-		fallthrough
-	case "PLAID_TOKEN":
-		*e = BankRelationshipVerificationMethod(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BankRelationshipVerificationMethod: %v", v)
-	}
 }
 
 // BankRelationship - A relationship between a bank account and an Apex account.

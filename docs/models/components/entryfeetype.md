@@ -37,3 +37,4 @@ Enum providing additional information about the type of fee being charged
 | `EntryFeeTypeDomesticWireWithdrawalFee`      | DOMESTIC_WIRE_WITHDRAWAL_FEE                 |
 | `EntryFeeTypeInternationalWireDepositFee`    | INTERNATIONAL_WIRE_DEPOSIT_FEE               |
 | `EntryFeeTypeInternationalWireWithdrawalFee` | INTERNATIONAL_WIRE_WITHDRAWAL_FEE            |
+| `EntryFeeTypeBrokerFee`                      | BROKER_FEE                                   |

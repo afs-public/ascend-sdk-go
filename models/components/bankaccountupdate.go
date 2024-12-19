@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // BankAccountUpdateType - The bank account type.
 type BankAccountUpdateType string
 
@@ -18,23 +13,6 @@ const (
 
 func (e BankAccountUpdateType) ToPointer() *BankAccountUpdateType {
 	return &e
-}
-func (e *BankAccountUpdateType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TYPE_UNSPECIFIED":
-		fallthrough
-	case "CHECKING":
-		fallthrough
-	case "SAVINGS":
-		*e = BankAccountUpdateType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BankAccountUpdateType: %v", v)
-	}
 }
 
 // BankAccountUpdate - A representation of a bank account.

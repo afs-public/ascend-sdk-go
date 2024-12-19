@@ -37,3 +37,4 @@ The type of fee being assessed
 | `FeeTypeDomesticWireWithdrawalFee`      | DOMESTIC_WIRE_WITHDRAWAL_FEE            |
 | `FeeTypeInternationalWireDepositFee`    | INTERNATIONAL_WIRE_DEPOSIT_FEE          |
 | `FeeTypeInternationalWireWithdrawalFee` | INTERNATIONAL_WIRE_WITHDRAWAL_FEE       |
+| `FeeTypeBrokerFee`                      | BROKER_FEE                              |

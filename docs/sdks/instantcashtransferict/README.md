@@ -47,35 +47,7 @@ func main() {
         Amount: components.DecimalCreate{},
         ClientTransferID: "ABC-123",
         Program: components.ProgramDepositOnly,
-        RetirementContribution: &components.RetirementContributionCreate{
-            TaxYear: 2024,
-            Type: components.RetirementContributionCreateTypeRegular,
-        },
         TravelRule: components.IctDepositTravelRuleCreate{
-            EntityOriginatingParty: &components.TravelRuleEntityPartyCreate{
-                Address: components.PostalAddressCreate{},
-                TaxID: ascendsdkgo.String("987-65-4321"),
-                Title: "Acme, Inc.",
-            },
-            EntityRecipientParty: &components.TravelRuleEntityPartyCreate{
-                Address: components.PostalAddressCreate{},
-                TaxID: ascendsdkgo.String("987-65-4321"),
-                Title: "Acme, Inc.",
-            },
-            IndividualOriginatingParty: &components.TravelRulePartyCreate{
-                Address: components.PostalAddressCreate{},
-                FamilyName: "Dough",
-                GivenNames: []string{
-                    "Jane",
-                },
-            },
-            IndividualRecipientParty: &components.TravelRulePartyCreate{
-                Address: components.PostalAddressCreate{},
-                FamilyName: "Dough",
-                GivenNames: []string{
-                    "Jane",
-                },
-            },
             OriginatingInstitution: components.InstitutionCreate{
                 AccountID: "<id>",
                 Title: "<value>",
@@ -203,7 +175,6 @@ func main() {
     ctx := context.Background()
     res, err := s.InstantCashTransferICT.CancelIctDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472", components.CancelIctDepositRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472",
-        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)
@@ -267,11 +238,7 @@ func main() {
     ctx := context.Background()
     res, err := s.InstantCashTransferICT.CreateIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.IctWithdrawalCreate{
         ClientTransferID: "20230817000319",
-        FullDisbursement: ascendsdkgo.Bool(true),
         Program: components.IctWithdrawalCreateProgramBrokerPartner,
-        RetirementDistribution: &components.RetirementDistributionCreate{
-            Type: components.RetirementDistributionCreateTypeNormal,
-        },
         TravelRule: components.IctWithdrawalTravelRuleCreate{
             RecipientInstitution: components.InstitutionCreate{
                 AccountID: "<id>",
@@ -400,7 +367,6 @@ func main() {
     ctx := context.Background()
     res, err := s.InstantCashTransferICT.CancelIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472", components.CancelIctWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472",
-        Reason: ascendsdkgo.String("User Request"),
     })
     if err != nil {
         log.Fatal(err)
@@ -445,7 +411,6 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -463,7 +428,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.InstantCashTransferICT.LocateIctReport(ctx, "01H8MCDXH4HYJJAV921BDKCC83", ascendsdkgo.String("24114.108.2b2c1.001"), operations.ProgramDateFilterProgramBrokerPartner.ToPointer(), &components.DateCreate{})
+    res, err := s.InstantCashTransferICT.LocateIctReport(ctx, "01H8MCDXH4HYJJAV921BDKCC83", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

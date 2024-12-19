@@ -28,7 +28,7 @@ func TestSubscriber_SubscriberListPushSubscriptions_ListPushSubscriptions1(t *te
 	)
 
 	ctx := context.Background()
-	res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdkgo.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
+	res, err := s.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

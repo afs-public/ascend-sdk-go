@@ -16,25 +16,11 @@ type BasketOrderAssetType string
 const (
 	BasketOrderAssetTypeAssetTypeUnspecified BasketOrderAssetType = "ASSET_TYPE_UNSPECIFIED"
 	BasketOrderAssetTypeEquity               BasketOrderAssetType = "EQUITY"
+	BasketOrderAssetTypeMutualFund           BasketOrderAssetType = "MUTUAL_FUND"
 )
 
 func (e BasketOrderAssetType) ToPointer() *BasketOrderAssetType {
 	return &e
-}
-func (e *BasketOrderAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_TYPE_UNSPECIFIED":
-		fallthrough
-	case "EQUITY":
-		*e = BasketOrderAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderAssetType: %v", v)
-	}
 }
 
 // BasketOrderCumulativeNotionalValue - The product of order quantity & price, summed across all fills, reported in the currency specified in the order. (This will be rounded to 2 decimal places for USD currencies). Will be absent if an order has no fill information.
@@ -63,7 +49,7 @@ func (o *BasketOrderFilledQuantity) GetValue() *string {
 	return o.Value
 }
 
-// BasketOrderIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported
+// BasketOrderIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported
 type BasketOrderIdentifierType string
 
 const (
@@ -91,6 +77,85 @@ func (e *BasketOrderIdentifierType) UnmarshalJSON(data []byte) error {
 	default:
 		return fmt.Errorf("invalid value for BasketOrderIdentifierType: %v", v)
 	}
+}
+
+// BasketOrderAmount - The amount of the LOI. This is a monetary value in the same currency as the order.
+type BasketOrderAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *BasketOrderAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// BasketOrderPeriodStartDate - The period start date of the LOI.
+type BasketOrderPeriodStartDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *BasketOrderPeriodStartDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *BasketOrderPeriodStartDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *BasketOrderPeriodStartDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// BasketOrderLetterOfIntent - Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months. Either ROA or LOI may be specified, but not both.
+type BasketOrderLetterOfIntent struct {
+	// The amount of the LOI. This is a monetary value in the same currency as the order.
+	Amount *BasketOrderAmount `json:"amount,omitempty"`
+	// The period start date of the LOI.
+	PeriodStartDate *BasketOrderPeriodStartDate `json:"period_start_date,omitempty"`
+}
+
+func (o *BasketOrderLetterOfIntent) GetAmount() *BasketOrderAmount {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
+}
+
+func (o *BasketOrderLetterOfIntent) GetPeriodStartDate() *BasketOrderPeriodStartDate {
+	if o == nil {
+		return nil
+	}
+	return o.PeriodStartDate
+}
+
+// BasketOrderNotionalValue - Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. Either a quantity or notional_value MUST be specified (but not both). For Equities: currently not supported yet For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified.
+type BasketOrderNotionalValue struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *BasketOrderNotionalValue) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
 }
 
 // BasketOrderOrderRejectedReason - When an order has the REJECTED status, this will be populated with a system code describing the rejection.
@@ -126,65 +191,6 @@ const (
 func (e BasketOrderOrderRejectedReason) ToPointer() *BasketOrderOrderRejectedReason {
 	return &e
 }
-func (e *BasketOrderOrderRejectedReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_REJECT_REASON_UNSPECIFIED":
-		fallthrough
-	case "BROKER_OPTION":
-		fallthrough
-	case "UNKNOWN_SECURITY":
-		fallthrough
-	case "EXCHANGE_CLOSED":
-		fallthrough
-	case "TOO_LATE_TO_ENTER":
-		fallthrough
-	case "UNKNOWN_ORDER":
-		fallthrough
-	case "DUPLICATE_ORDER":
-		fallthrough
-	case "STALE_ORDER":
-		fallthrough
-	case "BELOW_NOTIONAL_MINIMUM":
-		fallthrough
-	case "ACCOUNT_NOT_ENTITLED":
-		fallthrough
-	case "SYSTEM_ERROR":
-		fallthrough
-	case "BLOCKING_CORPORATE_ACTION":
-		fallthrough
-	case "UNAVAILABLE_PRICE_QUOTE":
-		fallthrough
-	case "EXECUTION_MISCONFIGURED_CLIENT":
-		fallthrough
-	case "FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY":
-		fallthrough
-	case "SYMBOL_NOT_TRADEABLE":
-		fallthrough
-	case "ABOVE_NOTIONAL_MAXIMUM":
-		fallthrough
-	case "ABOVE_SHARE_MAXIMUM":
-		fallthrough
-	case "MAX_SELL_QUANTITY_REQUIRED":
-		fallthrough
-	case "MAX_SELL_QUANTITY_PROHIBITED":
-		fallthrough
-	case "STOCK_TRADES_DISABLED":
-		fallthrough
-	case "ASSET_NOT_SET_UP_TO_TRADE":
-		fallthrough
-	case "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS":
-		*e = BasketOrderOrderRejectedReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderOrderRejectedReason: %v", v)
-	}
-}
 
 // BasketOrderOrderStatus - The processing status of the order
 type BasketOrderOrderStatus string
@@ -201,29 +207,6 @@ const (
 func (e BasketOrderOrderStatus) ToPointer() *BasketOrderOrderStatus {
 	return &e
 }
-func (e *BasketOrderOrderStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_STATUS_UNSPECIFIED":
-		fallthrough
-	case "PENDING_NEW":
-		fallthrough
-	case "NEW":
-		fallthrough
-	case "PARTIALLY_FILLED":
-		fallthrough
-	case "FILLED":
-		fallthrough
-	case "REJECTED":
-		*e = BasketOrderOrderStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderOrderStatus: %v", v)
-	}
-}
 
 // BasketOrderOrderType - The execution type of this order.
 type BasketOrderOrderType string
@@ -236,23 +219,8 @@ const (
 func (e BasketOrderOrderType) ToPointer() *BasketOrderOrderType {
 	return &e
 }
-func (e *BasketOrderOrderType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ORDER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "MARKET":
-		*e = BasketOrderOrderType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderOrderType: %v", v)
-	}
-}
 
-// BasketOrderQuantity - Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places.
+// BasketOrderQuantity - Numeric quantity of the order. Either a quantity or notional_value MUST be specified (but not both). For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places.
 type BasketOrderQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -263,6 +231,32 @@ func (o *BasketOrderQuantity) GetValue() *string {
 		return nil
 	}
 	return o.Value
+}
+
+// BasketOrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+type BasketOrderRightsOfAccumulationAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *BasketOrderRightsOfAccumulationAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// BasketOrderRightsOfAccumulation - Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
+type BasketOrderRightsOfAccumulation struct {
+	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+	Amount *BasketOrderRightsOfAccumulationAmount `json:"amount,omitempty"`
+}
+
+func (o *BasketOrderRightsOfAccumulation) GetAmount() *BasketOrderRightsOfAccumulationAmount {
+	if o == nil {
+		return nil
+	}
+	return o.Amount
 }
 
 // BasketOrderSide - The side of this order.
@@ -277,23 +271,6 @@ const (
 func (e BasketOrderSide) ToPointer() *BasketOrderSide {
 	return &e
 }
-func (e *BasketOrderSide) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SIDE_UNSPECIFIED":
-		fallthrough
-	case "BUY":
-		fallthrough
-	case "SELL":
-		*e = BasketOrderSide(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderSide: %v", v)
-	}
-}
 
 // BasketOrderTimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type BasketOrderTimeInForce string
@@ -305,21 +282,6 @@ const (
 
 func (e BasketOrderTimeInForce) ToPointer() *BasketOrderTimeInForce {
 	return &e
-}
-func (e *BasketOrderTimeInForce) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "TIME_IN_FORCE_UNSPECIFIED":
-		fallthrough
-	case "DAY":
-		*e = BasketOrderTimeInForce(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderTimeInForce: %v", v)
-	}
 }
 
 // BasketOrder - The message describing an order that has been added to a basket
@@ -344,24 +306,34 @@ type BasketOrder struct {
 	CreateTime *time.Time `json:"create_time,omitempty"`
 	// The product of order quantity & price, summed across all fills, reported in the currency specified in the order. (This will be rounded to 2 decimal places for USD currencies). Will be absent if an order has no fill information.
 	CumulativeNotionalValue *BasketOrderCumulativeNotionalValue `json:"cumulative_notional_value,omitempty"`
+	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
+	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Fees that will be applied to this order.
+	Fees []Fee `json:"fees,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *BasketOrderFilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier *string `json:"identifier,omitempty"`
-	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported
+	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported
 	IdentifierType *BasketOrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
+	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months. Either ROA or LOI may be specified, but not both.
+	LetterOfIntent *BasketOrderLetterOfIntent `json:"letter_of_intent,omitempty"`
 	// System generated name of the basket order.
 	Name *string `json:"name,omitempty"`
+	// Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. Either a quantity or notional_value MUST be specified (but not both). For Equities: currently not supported yet For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified.
+	NotionalValue *BasketOrderNotionalValue `json:"notional_value,omitempty"`
 	// When an order has the REJECTED status, this will be populated with a system code describing the rejection.
 	OrderRejectedReason *BasketOrderOrderRejectedReason `json:"order_rejected_reason,omitempty"`
 	// The processing status of the order
 	OrderStatus *BasketOrderOrderStatus `json:"order_status,omitempty"`
 	// The execution type of this order.
 	OrderType *BasketOrderOrderType `json:"order_type,omitempty"`
-	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places.
+	// Numeric quantity of the order. Either a quantity or notional_value MUST be specified (but not both). For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places.
 	Quantity *BasketOrderQuantity `json:"quantity,omitempty"`
+	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
+	RightsOfAccumulation *BasketOrderRightsOfAccumulation `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side *BasketOrderSide `json:"side,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
@@ -442,6 +414,20 @@ func (o *BasketOrder) GetCumulativeNotionalValue() *BasketOrderCumulativeNotiona
 	return o.CumulativeNotionalValue
 }
 
+func (o *BasketOrder) GetCurrencyCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CurrencyCode
+}
+
+func (o *BasketOrder) GetFees() []Fee {
+	if o == nil {
+		return nil
+	}
+	return o.Fees
+}
+
 func (o *BasketOrder) GetFilledQuantity() *BasketOrderFilledQuantity {
 	if o == nil {
 		return nil
@@ -470,11 +456,25 @@ func (o *BasketOrder) GetLastUpdateTime() *time.Time {
 	return o.LastUpdateTime
 }
 
+func (o *BasketOrder) GetLetterOfIntent() *BasketOrderLetterOfIntent {
+	if o == nil {
+		return nil
+	}
+	return o.LetterOfIntent
+}
+
 func (o *BasketOrder) GetName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Name
+}
+
+func (o *BasketOrder) GetNotionalValue() *BasketOrderNotionalValue {
+	if o == nil {
+		return nil
+	}
+	return o.NotionalValue
 }
 
 func (o *BasketOrder) GetOrderRejectedReason() *BasketOrderOrderRejectedReason {
@@ -503,6 +503,13 @@ func (o *BasketOrder) GetQuantity() *BasketOrderQuantity {
 		return nil
 	}
 	return o.Quantity
+}
+
+func (o *BasketOrder) GetRightsOfAccumulation() *BasketOrderRightsOfAccumulation {
+	if o == nil {
+		return nil
+	}
+	return o.RightsOfAccumulation
 }
 
 func (o *BasketOrder) GetSide() *BasketOrderSide {

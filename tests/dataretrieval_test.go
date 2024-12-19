@@ -28,7 +28,7 @@ func TestDataRetrieval_SnapshotsListSnapshots_ListSnapshots1(t *testing.T) {
 	)
 
 	ctx := context.Background()
-	res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String("snapshot_id==\"daily_accounts\"&&process_date==date(\"2023-09-30\")"), ascendsdkgo.Int(10), ascendsdkgo.String("ZXhhbXBsZQo"))
+	res, err := s.DataRetrieval.ListSnapshots(ctx, nil, nil, nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

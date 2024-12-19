@@ -65,23 +65,6 @@ const (
 func (e MarkAbsenceReason) ToPointer() *MarkAbsenceReason {
 	return &e
 }
-func (e *MarkAbsenceReason) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "MARK_ABSENCE_REASON_UNSPECIFIED":
-		fallthrough
-	case "NOT_PRICED":
-		fallthrough
-	case "NOT_TRADABLE":
-		*e = MarkAbsenceReason(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for MarkAbsenceReason: %v", v)
-	}
-}
 
 // RetrieveFixedIncomeMarksResponseAssetMark - Mark data for a specific asset
 type RetrieveFixedIncomeMarksResponseAssetMark struct {

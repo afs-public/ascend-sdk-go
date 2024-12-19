@@ -92,7 +92,6 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
@@ -116,7 +115,6 @@ func main() {
                 AccountID: "01HBRQ5BW6ZAY4BNWP4GWRD80X",
                 AssetType: components.BasketOrderCreateAssetTypeEquity,
                 ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
-                ClientOrderReceivedTime: types.MustNewTimeFromString("[object Object]"),
                 Identifier: "SBUX",
                 IdentifierType: components.BasketOrderCreateIdentifierTypeSymbol,
                 OrderType: components.BasketOrderCreateOrderTypeMarket,
@@ -127,7 +125,6 @@ func main() {
                 AccountID: "01HBRQ5BW6ZAY4BNWP4GWRD80X",
                 AssetType: components.BasketOrderCreateAssetTypeEquity,
                 ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
-                ClientOrderReceivedTime: types.MustNewTimeFromString("[object Object]"),
                 Identifier: "SBUX",
                 IdentifierType: components.BasketOrderCreateIdentifierTypeSymbol,
                 OrderType: components.BasketOrderCreateOrderTypeMarket,
@@ -326,7 +323,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.BasketOrders.ListBasketOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"))
+    res, err := s.BasketOrders.ListBasketOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -390,7 +387,7 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.BasketOrders.ListCompressedOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"))
+    res, err := s.BasketOrders.ListCompressedOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", nil, nil)
     if err != nil {
         log.Fatal(err)
     }

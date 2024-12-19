@@ -28,7 +28,7 @@ func TestPersonManagement_AccountsListLegalNaturalPersons_ListLegalNaturalPerson
 	)
 
 	ctx := context.Background()
-	res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, ascendsdkgo.String("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\""))
+	res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, nil, nil, nil, nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }
@@ -48,7 +48,7 @@ func TestPersonManagement_AccountsListLegalEntities_ListLegalEntities1(t *testin
 	)
 
 	ctx := context.Background()
-	res, err := s.PersonManagement.ListLegalEntities(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, nil)
+	res, err := s.PersonManagement.ListLegalEntities(ctx, nil, nil, nil, nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

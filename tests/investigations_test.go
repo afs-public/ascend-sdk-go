@@ -48,7 +48,7 @@ func TestInvestigations_InvestigationServiceListInvestigations_ListInvestigation
 	)
 
 	ctx := context.Background()
-	res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(100), nil, ascendsdkgo.String("investigation_subject.person_investigation.given_name == 'Jane' && investigation_subject.person_investigation.family_name == 'Dough'"))
+	res, err := s.Investigations.ListInvestigations(ctx, nil, nil, nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }
