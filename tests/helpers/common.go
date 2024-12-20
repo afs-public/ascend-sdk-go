@@ -7,10 +7,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
-	"testing"
 	"time"
-
-	"github.com/stretchr/testify/require"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
@@ -253,20 +250,4 @@ func generateBankAccountNumber() int {
 
 func Wait() {
 	time.Sleep(5 * time.Second)
-}
-
-func CreateEnrolledAccount(sdk *ascendsdk.SDK, ctx context.Context, t *testing.T) (*string, error) {
-	accountId, err := CreateAccountId(sdk, ctx)
-	require.NoError(t, err)
-	Wait()
-
-	agg, err := EnrollAccountIds(sdk, ctx, *accountId)
-	require.NoError(t, err)
-	Wait()
-
-	err = AffirmAgreements(sdk, ctx, *accountId, agg)
-	require.NoError(t, err)
-	Wait()
-
-	return accountId, nil
 }

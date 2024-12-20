@@ -2,9 +2,8 @@ package orders
 
 import (
 	"context"
-	"fmt"
+	"os"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -21,24 +20,13 @@ func TestFixedIncomePricing(t *testing.T) {
 	require.NoError(t, err)
 
 	ctx := context.Background()
-	accountId, accountIdError := helpers.CreateAccountId(sdk, ctx)
-	require.NoError(t, accountIdError)
+	accountId := os.Getenv("account_id")
 
-	fmt.Println("accountId", *accountId)
-
-	agreements, enrollErr := helpers.EnrollAccountIds(sdk, ctx, *accountId)
-	if enrollErr != nil {
-		t.Fatalf("Error enrolling account: %v", enrollErr)
-	}
-	helpers.AffirmAgreements(sdk, ctx, *accountId, agreements)
-
-	time.Sleep(5 * time.Second)
-	testPreviewOrderCost(t, sdk, ctx, *accountId)
-	testRetrieveQuote(t, sdk, ctx, *accountId)
+	testPreviewOrderCost(t, sdk, ctx, accountId)
+	testRetrieveQuote(t, sdk, ctx, accountId)
 }
 
 func testPreviewOrderCost(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) {
-
 	previewCreate := components.OrderCostPreviewRequestCreate{
 		AssetType:      components.OrderCostPreviewRequestCreateAssetTypeFixedIncome,
 		Identifier:     "912810SX7",

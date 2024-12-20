@@ -23,13 +23,8 @@ func TestInstantCashTransfer(t *testing.T) {
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 	ctx := context.Background()
-	accountIdPtr, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
-	require.NoError(t, err)
-	accountId := *accountIdPtr
-	account, err := sdk.AccountCreation.GetAccount(ctx, accountId, operations.QueryParamViewFull.ToPointer())
-	require.NoError(t, err)
-
-	ictDepositId := testInstantCashTransfer_TransfersCreateIctDeposit_CreateIctDeposit1(t, sdk, ctx, account.Account)
+	accountId := "01J7XASQ2EGHNVENARVENT2HTG"
+	ictDepositId := testInstantCashTransfer_TransfersCreateIctDeposit_CreateIctDeposit1(t, sdk, ctx, accountId)
 	testInstantCashTransfer_TransfersGetIctDeposit_GetIctDeposit1(t, *sdk, ctx, accountId, ictDepositId)
 	testInstantCashTransfer_TransfersCancelIctDeposit_CancelIctDeposit1(t, *sdk, ctx, accountId, ictDepositId)
 	ictWithdrawalId := CreateIctWithdrawal(t, sdk, ctx, accountId)
@@ -39,34 +34,17 @@ func TestInstantCashTransfer(t *testing.T) {
 }
 
 func testInstantCashTransfer_TransfersCreateIctDeposit_CreateIctDeposit1(t *testing.T,
-	s *ascendsdk.SDK, ctx context.Context, account *components.Account) string {
-	request := createIctDepositRequest(account)
-	resp, err := s.InstantCashTransferICT.CreateIctDeposit(ctx, *account.AccountID, request)
+	s *ascendsdk.SDK, ctx context.Context, accountId string) string {
+	resp, err := s.InstantCashTransferICT.CreateIctDeposit(ctx, accountId, createIctDepositRequest(accountId))
 	require.NoError(t, err)
 
-	assert.Equal(t, 200, resp.HTTPMeta.Response.StatusCode)
-
+	assert.Equal(t, 200, resp.GetStatus().GetCode())
 	ictDepositName := resp.IctDeposit.Name
 	ictDepositNameList := strings.Split(*ictDepositName, "/")
 	return ictDepositNameList[3]
 }
 
-func createIctDepositRequest(account *components.Account) components.IctDepositCreate {
-	address := account.Parties[0].MailingAddress
-	person := account.Parties[0].LegalNaturalPerson
-
-	party := &components.TravelRulePartyCreate{
-		Address: components.PostalAddressCreate{
-			AddressLines:       address.AddressLines,
-			RegionCode:         address.RegionCode,
-			PostalCode:         address.PostalCode,
-			AdministrativeArea: address.AdministrativeArea,
-			Locality:           address.Locality,
-		},
-		FamilyName: *person.FamilyName,
-		GivenNames: []string{*person.GivenName},
-	}
-
+func createIctDepositRequest(accountId string) components.IctDepositCreate {
 	return components.IctDepositCreate{
 		Amount: components.DecimalCreate{
 			Value: ascendsdk.String("1000.00"),
@@ -74,10 +52,19 @@ func createIctDepositRequest(account *components.Account) components.IctDepositC
 		ClientTransferID: GenerateGuid(),
 		Program:          components.ProgramBrokerPartner,
 		TravelRule: components.IctDepositTravelRuleCreate{
-			IndividualOriginatingParty: party,
-			IndividualRecipientParty:   party,
+			IndividualRecipientParty: &components.TravelRulePartyCreate{
+				Address: components.PostalAddressCreate{
+					AddressLines:       []string{"1 Main Street"},
+					RegionCode:         ascendsdk.String("US"),
+					PostalCode:         ascendsdk.String("12345"),
+					AdministrativeArea: ascendsdk.String("NY"),
+					Locality:           ascendsdk.String("New York"),
+				},
+				FamilyName: "Dough",
+				GivenNames: []string{"Jane"},
+			},
 			OriginatingInstitution: components.InstitutionCreate{
-				AccountID: "09673049",
+				AccountID: accountId,
 				Title:     *ascendsdk.String("Default Bank"),
 			},
 		},

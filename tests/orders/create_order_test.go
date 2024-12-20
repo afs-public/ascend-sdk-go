@@ -50,7 +50,7 @@ func CreateOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolled
 
 	// Fund Account with Credit
 	transfersCreditCreate := components.TransfersCreditCreate{
-		Amount:           components.DecimalCreate{Value: ascendsdk.String("1000000.00")},
+		Amount:           components.DecimalCreate{Value: ascendsdk.String("10000.00")},
 		ClientTransferID: uuid.New().String(),
 		Description:      ascendsdk.String("Credit given as promotion"),
 		Type:             components.TransfersCreditCreateTypePromotional,
@@ -102,19 +102,6 @@ func TestOrderService(t *testing.T) {
 		sdk: sdk,
 		ctx: ctx,
 	}
-	accountId, err := helpers.CreateAccountId(fixtures.sdk, fixtures.ctx)
-	if err != nil {
-		t.Fatalf("Error creating account: %v", err)
-	}
-	fmt.Println("accountId", *accountId)
-	fixtures.accountId = *accountId
-
-	agreements, enrollErr := helpers.EnrollAccountIds(sdk, ctx, *accountId)
-	if enrollErr != nil {
-		t.Fatalf("Error enrolling account: %v", enrollErr)
-	}
-
-	helpers.AffirmAgreements(sdk, ctx, *accountId, agreements)
 
 	t.Run("CreateOrder", func(t *testing.T) {
 		assert.NotNil(t, fixtures.OrderId(t))
