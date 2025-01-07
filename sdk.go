@@ -190,9 +190,9 @@ func New(opts ...SDKOption) *SDK {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "v1:20241218:uat:042b450a53e8",
-			SDKVersion:        "1.0.0",
+			SDKVersion:        "1.0.1",
 			GenVersion:        "2.437.1",
-			UserAgent:         "speakeasy-sdk/go 1.0.0 2.437.1 v1:20241218:uat:042b450a53e8 github.com/afs-public/ascend-sdk-go",
+			UserAgent:         "speakeasy-sdk/go 1.0.1 2.437.1 v1:20241218:uat:042b450a53e8 github.com/afs-public/ascend-sdk-go",
 			Hooks:             hooks.New(),
 		},
 	}
