@@ -83,7 +83,6 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 	return ServerList[c.Server], nil
 }
 
-// SDK - Ascend OpenAPI: Combined Ascend OpenAPI spec for SDK generation
 type SDK struct {
 	Authentication           *Authentication
 	Reader                   *Reader
@@ -94,16 +93,6 @@ type SDK struct {
 	EnrollmentsAndAgreements *EnrollmentsAndAgreements
 	Investigations           *Investigations
 	AccountTransfers         *AccountTransfers
-	BankRelationships        *BankRelationships
-	ACHTransfers             *ACHTransfers
-	InstantCashTransferICT   *InstantCashTransferICT
-	Retirements              *Retirements
-	ScheduleTransfers        *ScheduleTransfers
-	Wires                    *Wires
-	Journals                 *Journals
-	CashBalances             *CashBalances
-	FeesAndCredits           *FeesAndCredits
-	TestSimulation           *TestSimulation
 	CreateOrder              *CreateOrder
 	FixedIncomePricing       *FixedIncomePricing
 	BasketOrders             *BasketOrders
@@ -112,6 +101,16 @@ type SDK struct {
 	InvestorDocs             *InvestorDocs
 	DataRetrieval            *DataRetrieval
 	Margins                  *Margins
+	BankRelationships        *BankRelationships
+	ACHTransfers             *ACHTransfers
+	InstantCashTransferICT   *InstantCashTransferICT
+	Retirements              *Retirements
+	Journals                 *Journals
+	ScheduleTransfers        *ScheduleTransfers
+	Wires                    *Wires
+	CashBalances             *CashBalances
+	FeesAndCredits           *FeesAndCredits
+	TestSimulation           *TestSimulation
 
 	sdkConfiguration sdkConfiguration
 }
@@ -189,10 +188,10 @@ func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "v1:20241218:uat:042b450a53e8",
-			SDKVersion:        "1.0.1",
+			OpenAPIDocVersion: "v1:20250314:uat:ca7557d0f350",
+			SDKVersion:        "1.0.2",
 			GenVersion:        "2.437.1",
-			UserAgent:         "speakeasy-sdk/go 1.0.1 2.437.1 v1:20241218:uat:042b450a53e8 github.com/afs-public/ascend-sdk-go",
+			UserAgent:         "speakeasy-sdk/go 1.0.2 2.437.1 v1:20250314:uat:ca7557d0f350 github.com/afs-public/ascend-sdk-go",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -230,26 +229,6 @@ func New(opts ...SDKOption) *SDK {
 
 	sdk.AccountTransfers = newAccountTransfers(sdk.sdkConfiguration)
 
-	sdk.BankRelationships = newBankRelationships(sdk.sdkConfiguration)
-
-	sdk.ACHTransfers = newACHTransfers(sdk.sdkConfiguration)
-
-	sdk.InstantCashTransferICT = newInstantCashTransferICT(sdk.sdkConfiguration)
-
-	sdk.Retirements = newRetirements(sdk.sdkConfiguration)
-
-	sdk.ScheduleTransfers = newScheduleTransfers(sdk.sdkConfiguration)
-
-	sdk.Wires = newWires(sdk.sdkConfiguration)
-
-	sdk.Journals = newJournals(sdk.sdkConfiguration)
-
-	sdk.CashBalances = newCashBalances(sdk.sdkConfiguration)
-
-	sdk.FeesAndCredits = newFeesAndCredits(sdk.sdkConfiguration)
-
-	sdk.TestSimulation = newTestSimulation(sdk.sdkConfiguration)
-
 	sdk.CreateOrder = newCreateOrder(sdk.sdkConfiguration)
 
 	sdk.FixedIncomePricing = newFixedIncomePricing(sdk.sdkConfiguration)
@@ -265,6 +244,26 @@ func New(opts ...SDKOption) *SDK {
 	sdk.DataRetrieval = newDataRetrieval(sdk.sdkConfiguration)
 
 	sdk.Margins = newMargins(sdk.sdkConfiguration)
+
+	sdk.BankRelationships = newBankRelationships(sdk.sdkConfiguration)
+
+	sdk.ACHTransfers = newACHTransfers(sdk.sdkConfiguration)
+
+	sdk.InstantCashTransferICT = newInstantCashTransferICT(sdk.sdkConfiguration)
+
+	sdk.Retirements = newRetirements(sdk.sdkConfiguration)
+
+	sdk.Journals = newJournals(sdk.sdkConfiguration)
+
+	sdk.ScheduleTransfers = newScheduleTransfers(sdk.sdkConfiguration)
+
+	sdk.Wires = newWires(sdk.sdkConfiguration)
+
+	sdk.CashBalances = newCashBalances(sdk.sdkConfiguration)
+
+	sdk.FeesAndCredits = newFeesAndCredits(sdk.sdkConfiguration)
+
+	sdk.TestSimulation = newTestSimulation(sdk.sdkConfiguration)
 
 	return sdk
 }

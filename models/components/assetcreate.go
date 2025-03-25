@@ -11,6 +11,7 @@ const (
 	AssetCreateTypeCusip                     AssetCreateType = "CUSIP"
 	AssetCreateTypeSymbol                    AssetCreateType = "SYMBOL"
 	AssetCreateTypeIsin                      AssetCreateType = "ISIN"
+	AssetCreateTypeAssetID                   AssetCreateType = "ASSET_ID"
 )
 
 func (e AssetCreateType) ToPointer() *AssetCreateType {

@@ -12,3 +12,4 @@ The asset identifier type
 | `AcatsAssetTypeCusip`                     | CUSIP                                     |
 | `AcatsAssetTypeSymbol`                    | SYMBOL                                    |
 | `AcatsAssetTypeIsin`                      | ISIN                                      |
+| `AcatsAssetTypeAssetID`                   | ASSET_ID                                  |

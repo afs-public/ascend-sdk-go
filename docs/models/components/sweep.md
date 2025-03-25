@@ -1,6 +1,6 @@
 # Sweep
 
-Object containing metadata for sweeps
+Used to record sweeps from a cash balance to an alternative asset or vice versa and details related to the sweep
 
 
 ## Fields

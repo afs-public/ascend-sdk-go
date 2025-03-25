@@ -6,13 +6,12 @@ package components
 type BeneficiaryCreateEntityType string
 
 const (
-	BeneficiaryCreateEntityTypeEntityTypeUnspecified               BeneficiaryCreateEntityType = "ENTITY_TYPE_UNSPECIFIED"
-	BeneficiaryCreateEntityTypeCorporation                         BeneficiaryCreateEntityType = "CORPORATION"
-	BeneficiaryCreateEntityTypeLimitedLiabilityCompany             BeneficiaryCreateEntityType = "LIMITED_LIABILITY_COMPANY"
-	BeneficiaryCreateEntityTypePartnership                         BeneficiaryCreateEntityType = "PARTNERSHIP"
-	BeneficiaryCreateEntityTypeSoleProprietorshipOrSingleMemberLlc BeneficiaryCreateEntityType = "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC"
-	BeneficiaryCreateEntityTypeTrust                               BeneficiaryCreateEntityType = "TRUST"
-	BeneficiaryCreateEntityTypeEstate                              BeneficiaryCreateEntityType = "ESTATE"
+	BeneficiaryCreateEntityTypeEntityTypeUnspecified   BeneficiaryCreateEntityType = "ENTITY_TYPE_UNSPECIFIED"
+	BeneficiaryCreateEntityTypeCorporation             BeneficiaryCreateEntityType = "CORPORATION"
+	BeneficiaryCreateEntityTypeLimitedLiabilityCompany BeneficiaryCreateEntityType = "LIMITED_LIABILITY_COMPANY"
+	BeneficiaryCreateEntityTypePartnership             BeneficiaryCreateEntityType = "PARTNERSHIP"
+	BeneficiaryCreateEntityTypeTrust                   BeneficiaryCreateEntityType = "TRUST"
+	BeneficiaryCreateEntityTypeEstate                  BeneficiaryCreateEntityType = "ESTATE"
 )
 
 func (e BeneficiaryCreateEntityType) ToPointer() *BeneficiaryCreateEntityType {
@@ -95,7 +94,7 @@ type BeneficiaryCreate struct {
 	//   - https://github.com/google/libphonenumber
 	PhoneNumber *PhoneNumberCreate `json:"phone_number,omitempty"`
 	// The relationship of the beneficiary to the account owner
-	RelationType *BeneficiaryCreateRelationType `json:"relation_type,omitempty"`
+	RelationType BeneficiaryCreateRelationType `json:"relation_type"`
 	// The full U.S. tax ID for a related person; Tax ID is required if birth date is not provided.
 	TaxID *string `json:"tax_id,omitempty"`
 	// The nature of the U.S. Tax ID indicated in the related tax_id field; Examples include ITIN, SSN, EIN. Tax id type is required if birth date is not provided.
@@ -172,9 +171,9 @@ func (o *BeneficiaryCreate) GetPhoneNumber() *PhoneNumberCreate {
 	return o.PhoneNumber
 }
 
-func (o *BeneficiaryCreate) GetRelationType() *BeneficiaryCreateRelationType {
+func (o *BeneficiaryCreate) GetRelationType() BeneficiaryCreateRelationType {
 	if o == nil {
-		return nil
+		return BeneficiaryCreateRelationType("")
 	}
 	return o.RelationType
 }

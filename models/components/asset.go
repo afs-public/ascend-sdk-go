@@ -827,6 +827,7 @@ const (
 	AssetType1FdicSynthetic   AssetType1 = "FDIC_SYNTHETIC"
 	AssetType1FixedIncome     AssetType1 = "FIXED_INCOME"
 	AssetType1MutualFund      AssetType1 = "MUTUAL_FUND"
+	AssetType1AltInvestment   AssetType1 = "ALT_INVESTMENT"
 )
 
 func (e AssetType1) ToPointer() *AssetType1 {

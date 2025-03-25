@@ -8,7 +8,6 @@ type DeactivateEnrollmentRequestCreateEnrollmentType string
 const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeEnrollmentTypeUnspecified             DeactivateEnrollmentRequestCreateEnrollmentType = "ENROLLMENT_TYPE_UNSPECIFIED"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividual                DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_INDIVIDUAL"
-	DeactivateEnrollmentRequestCreateEnrollmentTypeLendingLimitedPurposeMargin           DeactivateEnrollmentRequestCreateEnrollmentType = "LENDING_LIMITED_PURPOSE_MARGIN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeLendingFullyPaidStockLoan             DeactivateEnrollmentRequestCreateEnrollmentType = "LENDING_FULLY_PAID_STOCK_LOAN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeBeneficiaryDesignation                DeactivateEnrollmentRequestCreateEnrollmentType = "BENEFICIARY_DESIGNATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointWros                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_JOINT_WROS"
@@ -24,13 +23,12 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationTrust                     DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_TRUST"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCorporation               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CORPORATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep                     DeactivateEnrollmentRequestCreateEnrollmentType = "CASH_FDIC_CASH_SWEEP"
-	DeactivateEnrollmentRequestCreateEnrollmentTypeMarginsPdtReset                       DeactivateEnrollmentRequestCreateEnrollmentType = "MARGINS_PDT_RESET"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRetirementBeneficiaryDesignation      DeactivateEnrollmentRequestCreateEnrollmentType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeDividendReinvestmentPlan              DeactivateEnrollmentRequestCreateEnrollmentType = "DIVIDEND_REINVESTMENT_PLAN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryTraditional DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_BENEFICIARY_TRADITIONAL"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryRoth        DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividualForeign         DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CUSTODIAL"
-	DeactivateEnrollmentRequestCreateEnrollmentTypeRegTMargin                            DeactivateEnrollmentRequestCreateEnrollmentType = "REG_T_MARGIN"
 )
 
 func (e DeactivateEnrollmentRequestCreateEnrollmentType) ToPointer() *DeactivateEnrollmentRequestCreateEnrollmentType {

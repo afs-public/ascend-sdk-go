@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -34,23 +32,6 @@ const (
 
 func (e RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType) ToPointer() *RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType {
 	return &e
-}
-func (e *RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_ID":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveFixedIncomeMarksResponseAssetMarkIdentifierType: %v", v)
-	}
 }
 
 // MarkAbsenceReason - When marks are found and returned, this will be unspecified. If the asset was found, but no pricing data is returned, then: this will denote the reason, the marks[] list will be empty, and the accrued_interest_amount will not be present.

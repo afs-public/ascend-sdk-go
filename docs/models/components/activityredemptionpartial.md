@@ -1,6 +1,6 @@
 # ActivityRedemptionPartial
 
-Object containing metadata for partial redemption
+Used when securities are redeemed by the issuer for cash, in part, before their scheduled maturity date and details related to the redemption. The outstanding amount of securities will be proportionally reduced based on a specific percentage of holding
 
 
 ## Fields

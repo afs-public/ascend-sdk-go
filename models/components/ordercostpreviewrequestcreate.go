@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // OrderCostPreviewRequestCreateAssetType - The type of asset being evaluated in cost calculations.
 type OrderCostPreviewRequestCreateAssetType string
 
@@ -16,19 +11,6 @@ const (
 
 func (e OrderCostPreviewRequestCreateAssetType) ToPointer() *OrderCostPreviewRequestCreateAssetType {
 	return &e
-}
-func (e *OrderCostPreviewRequestCreateAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "FIXED_INCOME":
-		*e = OrderCostPreviewRequestCreateAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewRequestCreateAssetType: %v", v)
-	}
 }
 
 // OrderCostPreviewRequestCreateBrokerCapacity - Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
@@ -55,23 +37,6 @@ const (
 
 func (e OrderCostPreviewRequestCreateIdentifierType) ToPointer() *OrderCostPreviewRequestCreateIdentifierType {
 	return &e
-}
-func (e *OrderCostPreviewRequestCreateIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_ID":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = OrderCostPreviewRequestCreateIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewRequestCreateIdentifierType: %v", v)
-	}
 }
 
 // OrderCostPreviewRequestCreate - Request object for retrieving fixed income costs

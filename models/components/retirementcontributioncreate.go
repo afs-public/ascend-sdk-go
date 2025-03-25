@@ -6,17 +6,18 @@ package components
 type RetirementContributionCreateType string
 
 const (
-	RetirementContributionCreateTypeTypeUnspecified    RetirementContributionCreateType = "TYPE_UNSPECIFIED"
-	RetirementContributionCreateTypeRegular            RetirementContributionCreateType = "REGULAR"
-	RetirementContributionCreateTypeEmployee           RetirementContributionCreateType = "EMPLOYEE"
-	RetirementContributionCreateTypeEmployer           RetirementContributionCreateType = "EMPLOYER"
-	RetirementContributionCreateTypeRecharacterization RetirementContributionCreateType = "RECHARACTERIZATION"
-	RetirementContributionCreateTypeRollover60Day      RetirementContributionCreateType = "ROLLOVER_60_DAY"
-	RetirementContributionCreateTypeRolloverDirect     RetirementContributionCreateType = "ROLLOVER_DIRECT"
-	RetirementContributionCreateTypeTransfer           RetirementContributionCreateType = "TRANSFER"
-	RetirementContributionCreateTypeTrusteeFee         RetirementContributionCreateType = "TRUSTEE_FEE"
-	RetirementContributionCreateTypeConversion         RetirementContributionCreateType = "CONVERSION"
-	RetirementContributionCreateTypeRepayment          RetirementContributionCreateType = "REPAYMENT"
+	RetirementContributionCreateTypeTypeUnspecified           RetirementContributionCreateType = "TYPE_UNSPECIFIED"
+	RetirementContributionCreateTypeRegular                   RetirementContributionCreateType = "REGULAR"
+	RetirementContributionCreateTypeEmployee                  RetirementContributionCreateType = "EMPLOYEE"
+	RetirementContributionCreateTypeEmployer                  RetirementContributionCreateType = "EMPLOYER"
+	RetirementContributionCreateTypeRecharacterization        RetirementContributionCreateType = "RECHARACTERIZATION"
+	RetirementContributionCreateTypeRollover60Day             RetirementContributionCreateType = "ROLLOVER_60_DAY"
+	RetirementContributionCreateTypeRolloverDirect            RetirementContributionCreateType = "ROLLOVER_DIRECT"
+	RetirementContributionCreateTypeTransfer                  RetirementContributionCreateType = "TRANSFER"
+	RetirementContributionCreateTypeTrusteeFee                RetirementContributionCreateType = "TRUSTEE_FEE"
+	RetirementContributionCreateTypeConversion                RetirementContributionCreateType = "CONVERSION"
+	RetirementContributionCreateTypeRepayment                 RetirementContributionCreateType = "REPAYMENT"
+	RetirementContributionCreateTypeContributionNonReportable RetirementContributionCreateType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e RetirementContributionCreateType) ToPointer() *RetirementContributionCreateType {

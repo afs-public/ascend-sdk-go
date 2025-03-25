@@ -1,6 +1,6 @@
 # OrderRightsOfAccumulationAmount
 
-The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 
 
 ## Fields

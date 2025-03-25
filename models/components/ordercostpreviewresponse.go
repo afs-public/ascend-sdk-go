@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -100,23 +98,6 @@ const (
 
 func (e OrderCostPreviewResponseIdentifierType) ToPointer() *OrderCostPreviewResponseIdentifierType {
 	return &e
-}
-func (e *OrderCostPreviewResponseIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_ID":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = OrderCostPreviewResponseIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderCostPreviewResponseIdentifierType: %v", v)
-	}
 }
 
 // OrderCostPreviewResponsePrice - The limit price which must be greater than zero if provided. For equity orders in the USD currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for prices at or below $1. For fixed income orders this is expressed as a percentage of par, which allows up to 4 decimal places in the USD currency.

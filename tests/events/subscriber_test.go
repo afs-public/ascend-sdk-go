@@ -36,7 +36,7 @@ func (f *Fixtures) CorrespondentId() (correspondentId *string) {
 }
 
 func (f *Fixtures) FixedSubscriberId() *string {
-	return ascendsdk.String("01JBF2P1DGVY9XGHF7780AFCPT")
+	return ascendsdk.String("01JJYZ16TVYZM6A6BDJ8RJRMTQ")
 }
 
 func (f *Fixtures) SubscriberId() *string {
@@ -54,6 +54,23 @@ func (f *Fixtures) SubscriberId() *string {
 	time.Sleep(5 * time.Second)
 
 	return subscriberId
+}
+
+func (f *Fixtures) DeliveryId() *string {
+	if f.deliveryId != nil {
+		return f.deliveryId
+	}
+
+	deliveryId, err := deliveryID(f.sdk, f.ctx, f.FixedSubscriberId())
+
+	fmt.Println("DeliveryID", deliveryId)
+	require.NoError(f.t, err)
+
+	f.deliveryId = deliveryId
+
+	time.Sleep(5 * time.Second)
+
+	return deliveryId
 }
 
 func TestSubscriber(t *testing.T) {
@@ -83,8 +100,6 @@ func TestSubscriber(t *testing.T) {
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 		assert.NotNil(t, res.ListPushSubscriptionsResponse.PushSubscriptions)
-
-		fixtures.listPushSubId = res.ListPushSubscriptionsResponse.PushSubscriptions[0].SubscriptionID
 	})
 
 	t.Run("UpdatePushSubscription", func(t *testing.T) {
@@ -96,7 +111,7 @@ func TestSubscriber(t *testing.T) {
 		}
 
 		var status *operations.SubscriberGetPushSubscriptionResponse
-		for i := 0; i < 10; i++ {
+		for i := 0; i < 12; i++ {
 			status, err = sdk.Subscriber.GetPushSubscription(ctx, *fixtures.SubscriberId())
 			require.NoError(t, err)
 
@@ -120,26 +135,18 @@ func TestSubscriber(t *testing.T) {
 	})
 
 	t.Run("ListPushSubscriptionDeliveries", func(t *testing.T) {
-		res, err := sdk.Subscriber.ListPushSubscriptionDeliveries(ctx, *fixtures.FixedSubscriberId(), nil, nil, nil)
-		require.NoError(t, err)
-		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-		assert.NotEmpty(t, res.ListPushSubscriptionDeliveriesResponse.PushSubscriptionDeliveries)
-
-		fixtures.deliveryId = res.ListPushSubscriptionDeliveriesResponse.PushSubscriptionDeliveries[0].DeliveryID
+		assert.NotNil(t, fixtures.DeliveryId())
 	})
 
 	t.Run("GetPushSubscriptionDelivery", func(t *testing.T) {
-		require.NotNil(t, fixtures.deliveryId, "deliveryId is nil and is required for GetPushSubscriptionDelivery")
-
-		res, err := sdk.Subscriber.GetPushSubscriptionDelivery(ctx, *fixtures.FixedSubscriberId(), *fixtures.deliveryId)
+		res, err := sdk.Subscriber.GetPushSubscriptionDelivery(ctx, *fixtures.FixedSubscriberId(), *fixtures.DeliveryId())
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
 
 	t.Run("DeletePushSubscription", func(t *testing.T) {
-		require.NotNil(t, fixtures.listPushSubId, "listPushSubId is nil and is required for DeletePushSubscription")
-
-		res, err := sdk.Subscriber.DeletePushSubscription(ctx, *fixtures.listPushSubId)
+		time.Sleep(5 * time.Second)
+		res, err := sdk.Subscriber.DeletePushSubscription(ctx, *fixtures.SubscriberId())
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})

@@ -38,6 +38,7 @@ const (
 	ConsentMethodEsignature                ConsentMethod = "ESIGNATURE"
 	ConsentMethodWetSignature              ConsentMethod = "WET_SIGNATURE"
 	ConsentMethodNegativeConsentConversion ConsentMethod = "NEGATIVE_CONSENT_CONVERSION"
+	ConsentMethodInternalConversion        ConsentMethod = "INTERNAL_CONVERSION"
 )
 
 func (e ConsentMethod) ToPointer() *ConsentMethod {
@@ -417,19 +418,6 @@ func (o *CorporationEnrollmentMetadata) GetFdicCashSweep() *EnrollmentCorporatio
 	return o.FdicCashSweep
 }
 
-// EnrollmentCustodialType - The type of custodial account
-type EnrollmentCustodialType string
-
-const (
-	EnrollmentCustodialTypeCustodialTypeUnspecified EnrollmentCustodialType = "CUSTODIAL_TYPE_UNSPECIFIED"
-	EnrollmentCustodialTypeUgma                     EnrollmentCustodialType = "UGMA"
-	EnrollmentCustodialTypeUtma                     EnrollmentCustodialType = "UTMA"
-)
-
-func (e EnrollmentCustodialType) ToPointer() *EnrollmentCustodialType {
-	return &e
-}
-
 // EnrollmentDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type EnrollmentDividendReinvestmentPlan string
 
@@ -458,19 +446,10 @@ func (e EnrollmentFdicCashSweep) ToPointer() *EnrollmentFdicCashSweep {
 
 // CustodialEnrollmentMetadata - Metadata for the REGISTRATION_CUSTODIAL type
 type CustodialEnrollmentMetadata struct {
-	// The type of custodial account
-	CustodialType *EnrollmentCustodialType `json:"custodial_type,omitempty"`
 	// Option to auto-enroll in Dividend Reinvestment; defaults to true
 	DividendReinvestmentPlan *EnrollmentDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
 	// Option to auto-enroll in FDIC cash sweep; defaults to true
 	FdicCashSweep *EnrollmentFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
-}
-
-func (o *CustodialEnrollmentMetadata) GetCustodialType() *EnrollmentCustodialType {
-	if o == nil {
-		return nil
-	}
-	return o.CustodialType
 }
 
 func (o *CustodialEnrollmentMetadata) GetDividendReinvestmentPlan() *EnrollmentDividendReinvestmentPlan {
@@ -2263,7 +2242,6 @@ type EnrollmentType1 string
 const (
 	EnrollmentType1EnrollmentTypeUnspecified             EnrollmentType1 = "ENROLLMENT_TYPE_UNSPECIFIED"
 	EnrollmentType1RegistrationIndividual                EnrollmentType1 = "REGISTRATION_INDIVIDUAL"
-	EnrollmentType1LendingLimitedPurposeMargin           EnrollmentType1 = "LENDING_LIMITED_PURPOSE_MARGIN"
 	EnrollmentType1LendingFullyPaidStockLoan             EnrollmentType1 = "LENDING_FULLY_PAID_STOCK_LOAN"
 	EnrollmentType1BeneficiaryDesignation                EnrollmentType1 = "BENEFICIARY_DESIGNATION"
 	EnrollmentType1RegistrationJointWros                 EnrollmentType1 = "REGISTRATION_JOINT_WROS"
@@ -2279,13 +2257,12 @@ const (
 	EnrollmentType1RegistrationTrust                     EnrollmentType1 = "REGISTRATION_TRUST"
 	EnrollmentType1RegistrationCorporation               EnrollmentType1 = "REGISTRATION_CORPORATION"
 	EnrollmentType1CashFdicCashSweep                     EnrollmentType1 = "CASH_FDIC_CASH_SWEEP"
-	EnrollmentType1MarginsPdtReset                       EnrollmentType1 = "MARGINS_PDT_RESET"
 	EnrollmentType1RetirementBeneficiaryDesignation      EnrollmentType1 = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	EnrollmentType1DividendReinvestmentPlan              EnrollmentType1 = "DIVIDEND_REINVESTMENT_PLAN"
 	EnrollmentType1RegistrationIraBeneficiaryTraditional EnrollmentType1 = "REGISTRATION_IRA_BENEFICIARY_TRADITIONAL"
 	EnrollmentType1RegistrationIraBeneficiaryRoth        EnrollmentType1 = "REGISTRATION_IRA_BENEFICIARY_ROTH"
+	EnrollmentType1RegistrationIndividualForeign         EnrollmentType1 = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentType1RegistrationCustodial                 EnrollmentType1 = "REGISTRATION_CUSTODIAL"
-	EnrollmentType1RegTMargin                            EnrollmentType1 = "REG_T_MARGIN"
 )
 
 func (e EnrollmentType1) ToPointer() *EnrollmentType1 {

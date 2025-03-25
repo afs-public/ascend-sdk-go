@@ -2,6 +2,19 @@
 
 package components
 
+// ContributionLimit - The max retirement contribution that can be made for the tax year, inclusive of catch-up contributions. Value is dependent on the account's registration type and account holder's age
+type ContributionLimit struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ContributionLimit) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // RegularAmount - Summed contribution amounts throughout the year
 type RegularAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -30,7 +43,9 @@ func (o *RolloverAmount) GetValue() *string {
 
 // ContributionSummary - Regular and rollover contribution amounts for one tax year
 type ContributionSummary struct {
-	// Retirement account id these contribution amounts are for
+	// The max retirement contribution that can be made for the tax year, inclusive of catch-up contributions. Value is dependent on the account's registration type and account holder's age
+	ContributionLimit *ContributionLimit `json:"contribution_limit,omitempty"`
+	// The resource name of the contribution summary
 	Name *string `json:"name,omitempty"`
 	// Summed contribution amounts throughout the year
 	RegularAmount *RegularAmount `json:"regular_amount,omitempty"`
@@ -38,6 +53,13 @@ type ContributionSummary struct {
 	RolloverAmount *RolloverAmount `json:"rollover_amount,omitempty"`
 	// Tax year these contribution amounts are for
 	TaxYear *int `json:"tax_year,omitempty"`
+}
+
+func (o *ContributionSummary) GetContributionLimit() *ContributionLimit {
+	if o == nil {
+		return nil
+	}
+	return o.ContributionLimit
 }
 
 func (o *ContributionSummary) GetName() *string {

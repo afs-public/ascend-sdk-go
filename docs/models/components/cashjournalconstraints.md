@@ -1,0 +1,11 @@
+# CashJournalConstraints
+
+Retirement constraints for cash journal transfers
+
+
+## Fields
+
+| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `ContributionConstraints`                                                                                                             | [*components.CashJournalConstraintsContributionConstraints](../../models/components/cashjournalconstraintscontributionconstraints.md) | :heavy_minus_sign:                                                                                                                    | Contribution constraints for the destination account                                                                                  |
+| `DistributionConstraints`                                                                                                             | [*components.CashJournalConstraintsDistributionConstraints](../../models/components/cashjournalconstraintsdistributionconstraints.md) | :heavy_minus_sign:                                                                                                                    | Distribution constraints for the source account                                                                                       |

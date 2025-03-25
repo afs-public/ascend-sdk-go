@@ -1,6 +1,6 @@
 # ActivityLiquidation
 
-Object containing metadata for liquidations
+Used to record the dismantling of a business by an issuer, paying off debts in order of priority and distributing the remaining assets in cash and/or securities to the owners of the securities and details related to the liquidation
 
 
 ## Fields

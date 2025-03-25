@@ -1,6 +1,6 @@
 # EntryWithholding
 
-Object containing metadata for tax withholdings
+Used to record tax withholdings and details related to the withholding
 
 
 ## Fields

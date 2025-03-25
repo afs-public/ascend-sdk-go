@@ -3,6 +3,8 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -221,6 +223,35 @@ const (
 
 func (e TransferType) ToPointer() *TransferType {
 	return &e
+}
+func (e *TransferType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "TRANSFER_TYPE_UNSPECIFIED":
+		fallthrough
+	case "FAIL_REVERSAL_BROKER_TO_BROKER_ONLY":
+		fallthrough
+	case "FULL_TRANSFER":
+		fallthrough
+	case "MUTUAL_FUND_CLEANUP":
+		fallthrough
+	case "PARTIAL_TRANSFER_DELIVERER":
+		fallthrough
+	case "PARTIAL_TRANSFER_RECEIVER":
+		fallthrough
+	case "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY":
+		fallthrough
+	case "RECLAIM":
+		fallthrough
+	case "RESIDUAL_CREDIT":
+		*e = TransferType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TransferType: %v", v)
+	}
 }
 
 // AcatsTransfer - An account transfer which contains the receiving and delivering party information, assets being transferred, NSCC status information, etc.

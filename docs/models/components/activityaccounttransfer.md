@@ -1,6 +1,6 @@
 # ActivityAccountTransfer
 
-Object containing metadata for account transfer movements
+Used to record the movement of funds or shares during the bookkeeping phase of an account transfer and details related to the account transfer
 
 
 ## Fields

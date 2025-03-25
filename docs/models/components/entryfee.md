@@ -1,6 +1,6 @@
 # EntryFee
 
-Object containing more information about the fee being charged
+Used to record Fees that have been assessed to account and capture details related to the fee
 
 
 ## Fields

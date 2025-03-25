@@ -1,6 +1,6 @@
 # ActivityRightsSubscription
 
-Object containing metadata for rights subscriptions
+Used to record the purchase of new or additional securities and details related to the subscription. Rights are often tradable in a secondary market
 
 
 ## Fields

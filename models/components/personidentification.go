@@ -9,6 +9,10 @@ const (
 	PersonIdentificationTypeIDTypeUnspecified PersonIdentificationType = "ID_TYPE_UNSPECIFIED"
 	PersonIdentificationTypeSsn               PersonIdentificationType = "SSN"
 	PersonIdentificationTypeItin              PersonIdentificationType = "ITIN"
+	PersonIdentificationTypeFtin              PersonIdentificationType = "FTIN"
+	PersonIdentificationTypeNationalID        PersonIdentificationType = "NATIONAL_ID"
+	PersonIdentificationTypePassport          PersonIdentificationType = "PASSPORT"
+	PersonIdentificationTypeDrivingLicense    PersonIdentificationType = "DRIVING_LICENSE"
 )
 
 func (e PersonIdentificationType) ToPointer() *PersonIdentificationType {

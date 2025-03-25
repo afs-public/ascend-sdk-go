@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -61,23 +59,6 @@ const (
 func (e BasketOrderIdentifierType) ToPointer() *BasketOrderIdentifierType {
 	return &e
 }
-func (e *BasketOrderIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SYMBOL":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = BasketOrderIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderIdentifierType: %v", v)
-	}
-}
 
 // BasketOrderAmount - The amount of the LOI. This is a monetary value in the same currency as the order.
 type BasketOrderAmount struct {
@@ -92,7 +73,7 @@ func (o *BasketOrderAmount) GetValue() *string {
 	return o.Value
 }
 
-// BasketOrderPeriodStartDate - The period start date of the LOI.
+// BasketOrderPeriodStartDate - The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 type BasketOrderPeriodStartDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -127,7 +108,7 @@ func (o *BasketOrderPeriodStartDate) GetYear() *int {
 type BasketOrderLetterOfIntent struct {
 	// The amount of the LOI. This is a monetary value in the same currency as the order.
 	Amount *BasketOrderAmount `json:"amount,omitempty"`
-	// The period start date of the LOI.
+	// The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 	PeriodStartDate *BasketOrderPeriodStartDate `json:"period_start_date,omitempty"`
 }
 
@@ -233,7 +214,7 @@ func (o *BasketOrderQuantity) GetValue() *string {
 	return o.Value
 }
 
-// BasketOrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+// BasketOrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 type BasketOrderRightsOfAccumulationAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -248,7 +229,7 @@ func (o *BasketOrderRightsOfAccumulationAmount) GetValue() *string {
 
 // BasketOrderRightsOfAccumulation - Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
 type BasketOrderRightsOfAccumulation struct {
-	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 	Amount *BasketOrderRightsOfAccumulationAmount `json:"amount,omitempty"`
 }
 
@@ -300,7 +281,7 @@ type BasketOrder struct {
 	BasketOrderID *string `json:"basket_order_id,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// Time the order request was received by the client
+	// Time the order request was received by the client. Must be in the past, and must be less than 24 hours old.
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Time of the order creation
 	CreateTime *time.Time `json:"create_time,omitempty"`

@@ -12,3 +12,4 @@ Provides more granular detail on the purpose of transfer
 | `ActivityTransferTypeDeconversion`            | DECONVERSION                                  |
 | `ActivityTransferTypeMigration`               | MIGRATION                                     |
 | `ActivityTransferTypeManualAdjustment`        | MANUAL_ADJUSTMENT                             |
+| `ActivityTransferTypeInternalConversion`      | INTERNAL_CONVERSION                           |

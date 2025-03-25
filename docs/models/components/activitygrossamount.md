@@ -1,6 +1,6 @@
 # ActivityGrossAmount
 
-The monetary value of an activity, exclusive of any fees (First money)
+The monetary value of an activity, exclusive of any fees, withholdings, accrued_interest, or commissions (First money)
 
 
 ## Fields

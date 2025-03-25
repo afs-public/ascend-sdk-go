@@ -7,6 +7,7 @@
 
 * [ListContributionSummaries](#listcontributionsummaries) - List Contribution Summaries
 * [RetrieveContributionConstraints](#retrievecontributionconstraints) - Retrieve Contribution Constraints
+* [ListDistributionSummaries](#listdistributionsummaries) - List Distribution Summaries
 * [RetrieveDistributionConstraints](#retrievedistributionconstraints) - Retrieve Distribution Constraints
 
 ## ListContributionSummaries
@@ -125,6 +126,67 @@ func main() {
 ### Response
 
 **[*operations.RetirementConstraintsRetrieveContributionConstraintsResponse](../../models/operations/retirementconstraintsretrievecontributionconstraintsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ListDistributionSummaries
+
+Lists the aggregated retirement distribution summaries by tax year
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"context"
+	"log"
+)
+
+func main() {
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    ctx := context.Background()
+    res, err := s.Retirements.ListDistributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListDistributionSummariesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                     | :heavy_check_mark:                                                                                                        | The context to use for the request.                                                                                       |                                                                                                                           |
+| `accountID`                                                                                                               | *string*                                                                                                                  | :heavy_check_mark:                                                                                                        | The account id.                                                                                                           | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                                |
+| `pageSize`                                                                                                                | **int*                                                                                                                    | :heavy_minus_sign:                                                                                                        | Number of distribution summaries to get (partitioned by tax year) Default = 2 (current year and prior year), maximum = 10 | 2                                                                                                                         |
+| `pageToken`                                                                                                               | **string*                                                                                                                 | :heavy_minus_sign:                                                                                                        | When paginating, this is used to retrieve a specific page from the overall response                                       | AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh                                                                  |
+| `opts`                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                  | :heavy_minus_sign:                                                                                                        | The options for this request.                                                                                             |                                                                                                                           |
+
+### Response
+
+**[*operations.RetirementConstraintsListDistributionSummariesResponse](../../models/operations/retirementconstraintslistdistributionsummariesresponse.md), error**
 
 ### Errors
 

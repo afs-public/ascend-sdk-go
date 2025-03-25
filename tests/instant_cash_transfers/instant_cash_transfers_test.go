@@ -173,8 +173,6 @@ func GenerateGuid() string {
 	return GUID.String()
 }
 
-var clientBatchSourceID = GenerateGuid()
-
 func testInstantCashTransfer_TransfersLocateIctReport_LocateIctReport1(
 	t *testing.T, s ascendsdk.SDK, ctx context.Context) {
 
@@ -182,9 +180,9 @@ func testInstantCashTransfer_TransfersLocateIctReport_LocateIctReport1(
 	res, err := s.InstantCashTransferICT.LocateIctReport(
 		ctx,
 		os.Getenv("CORRESPONDENT_ID"),
-		&clientBatchSourceID,
+		nil,
 		operations.ProgramDateFilterProgramBrokerPartner.ToPointer(),
-		&components.DateCreate{Day: ascendsdk.Int(1), Month: ascendsdk.Int(1), Year: ascendsdk.Int(2021)})
+		nil)
 	assert.NoError(t, err)
 	assert.NotNil(t, res.HTTPMeta)
 	assert.NotNil(t, res.HTTPMeta.Response)

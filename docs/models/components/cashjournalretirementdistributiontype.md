@@ -25,3 +25,6 @@ The type of retirement distribution.
 | `CashJournalRetirementDistributionTypePlanLoan401K`                               | PLAN_LOAN_401K                                                                    |
 | `CashJournalRetirementDistributionTypePrematureSimpleIraLessThan2Years`           | PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS                                            |
 | `CashJournalRetirementDistributionTypeNormalRothIraGreaterThan5Years`             | NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS                                              |
+| `CashJournalRetirementDistributionTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                           |
+| `CashJournalRetirementDistributionTypeRevocation`                                 | REVOCATION                                                                        |
+| `CashJournalRetirementDistributionTypeNonReportable`                              | NON_REPORTABLE                                                                    |

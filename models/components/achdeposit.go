@@ -8,13 +8,13 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// Amount - The amount to deposit in USD.
-type Amount struct {
+// AchDepositAmount - The amount to deposit in USD.
+type AchDepositAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *Amount) GetValue() *string {
+func (o *AchDepositAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -25,17 +25,18 @@ func (o *Amount) GetValue() *string {
 type AchDepositType string
 
 const (
-	AchDepositTypeTypeUnspecified    AchDepositType = "TYPE_UNSPECIFIED"
-	AchDepositTypeRegular            AchDepositType = "REGULAR"
-	AchDepositTypeEmployee           AchDepositType = "EMPLOYEE"
-	AchDepositTypeEmployer           AchDepositType = "EMPLOYER"
-	AchDepositTypeRecharacterization AchDepositType = "RECHARACTERIZATION"
-	AchDepositTypeRollover60Day      AchDepositType = "ROLLOVER_60_DAY"
-	AchDepositTypeRolloverDirect     AchDepositType = "ROLLOVER_DIRECT"
-	AchDepositTypeTransfer           AchDepositType = "TRANSFER"
-	AchDepositTypeTrusteeFee         AchDepositType = "TRUSTEE_FEE"
-	AchDepositTypeConversion         AchDepositType = "CONVERSION"
-	AchDepositTypeRepayment          AchDepositType = "REPAYMENT"
+	AchDepositTypeTypeUnspecified           AchDepositType = "TYPE_UNSPECIFIED"
+	AchDepositTypeRegular                   AchDepositType = "REGULAR"
+	AchDepositTypeEmployee                  AchDepositType = "EMPLOYEE"
+	AchDepositTypeEmployer                  AchDepositType = "EMPLOYER"
+	AchDepositTypeRecharacterization        AchDepositType = "RECHARACTERIZATION"
+	AchDepositTypeRollover60Day             AchDepositType = "ROLLOVER_60_DAY"
+	AchDepositTypeRolloverDirect            AchDepositType = "ROLLOVER_DIRECT"
+	AchDepositTypeTransfer                  AchDepositType = "TRANSFER"
+	AchDepositTypeTrusteeFee                AchDepositType = "TRUSTEE_FEE"
+	AchDepositTypeConversion                AchDepositType = "CONVERSION"
+	AchDepositTypeRepayment                 AchDepositType = "REPAYMENT"
+	AchDepositTypeContributionNonReportable AchDepositType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e AchDepositType) ToPointer() *AchDepositType {
@@ -164,7 +165,7 @@ func (o *AchDepositState) GetUpdateTime() *time.Time {
 // AchDeposit - A deposit transfer using the ACH mechanism.
 type AchDeposit struct {
 	// The amount to deposit in USD.
-	Amount *Amount `json:"amount,omitempty"`
+	Amount *AchDepositAmount `json:"amount,omitempty"`
 	// The bank relationship to be used for the ACH deposit.
 	BankRelationship *string `json:"bank_relationship,omitempty"`
 	// The external identifier supplied by the API caller. Each request must have a unique pairing of `client_transfer_id` and `account`.
@@ -179,7 +180,7 @@ type AchDeposit struct {
 	State *AchDepositState `json:"state,omitempty"`
 }
 
-func (o *AchDeposit) GetAmount() *Amount {
+func (o *AchDeposit) GetAmount() *AchDepositAmount {
 	if o == nil {
 		return nil
 	}

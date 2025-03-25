@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -17,17 +18,35 @@ import (
 )
 
 func TestAccountManagement(t *testing.T) {
-	legalNaturalPersonId := "734b8495-b87e-4d94-9f63-4ff4294f193b"
-	legalNaturalPersonId2 := "734b8495-b87e-4d94-9f63-4ff4294f193b"
 	ctx := context.Background()
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
-	listAccountId, ownerPartyId := testAccountManagementListAccounts(t, sdk, ctx)
+	legalNaturalPersonId, err := helpers.CreateLegalNaturalPersonId(sdk, ctx)
+	require.NoError(t, err)
+
+	accountId, err := helpers.CreateAccountId(sdk, ctx)
+	require.NoError(t, err)
+
+	agreements, err := helpers.EnrollAccountIds(sdk, ctx, *accountId)
+	require.NoError(t, err)
+
+	err = helpers.AffirmAgreements(sdk, ctx, *accountId, agreements)
+	require.NoError(t, err)
+
+	time.Sleep(5 * time.Second)
+
+	listAccountId := accountId
+	response, err := sdk.AccountCreation.GetAccount(ctx, *listAccountId, operations.QueryParamViewFull.ToPointer())
+	require.NoError(t, err)
+
+	ownerPartyId := response.Account.Parties[0].PartyID
+
+	testAccountManagementListAccounts(t, sdk, ctx)
 	testAccountManagementUpdateAccount(t, sdk, ctx, *listAccountId)
-	partyId := testAccountManagementAddParty(t, sdk, ctx, *listAccountId, *ownerPartyId, legalNaturalPersonId)
+	partyId := testAccountManagementAddParty(t, sdk, ctx, *listAccountId, *ownerPartyId, *legalNaturalPersonId)
 	testAccountManagementUpdateParty(t, sdk, ctx, *listAccountId, *partyId)
-	replacedPartyId := testAccountManagementReplaceParty(t, sdk, ctx, *listAccountId, *partyId, legalNaturalPersonId2, *ownerPartyId)
+	replacedPartyId := testAccountManagementReplaceParty(t, sdk, ctx, *listAccountId, *partyId, *legalNaturalPersonId, *ownerPartyId)
 	testAccountManagementRemoveParty(t, sdk, ctx, *listAccountId, *replacedPartyId, *ownerPartyId)
 	trustedContactId := testAccountManagementCreateTrustedContact(t, sdk, ctx, *listAccountId)
 	testAccountManagementUpdateTrustedContact(t, sdk, ctx, *listAccountId, *trustedContactId)
@@ -68,7 +87,7 @@ func testAccountManagementUpdateAccount(t *testing.T, sdk *ascendsdk.SDK, ctx co
 		CatAccountHolderType: components.AccountRequestUpdateCatAccountHolderTypeIIndividual.ToPointer(),
 	}
 
-	res, err := sdk.AccountManagement.UpdateAccount(ctx, accountId, accountRequestUpdateCreate)
+	res, err := sdk.AccountManagement.UpdateAccount(ctx, accountId, accountRequestUpdateCreate, nil)
 	require.NoError(t, err)
 	assert.NotNil(t, res.Account)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -115,7 +134,7 @@ func testAccountManagementUpdateParty(t *testing.T, sdk *ascendsdk.SDK, ctx cont
 	partyRequestUpdateCreate := components.PartyRequestUpdate{
 		EmailAddress: ascendsdk.String("updatedexample@domain.com"),
 	}
-	res, err := sdk.AccountManagement.UpdateParty(ctx, accountId, partyId, partyRequestUpdateCreate)
+	res, err := sdk.AccountManagement.UpdateParty(ctx, accountId, partyId, partyRequestUpdateCreate, nil)
 	require.NoError(t, err)
 	assert.NotNil(t, res.Party)
 	assert.Equal(t, "updatedexample@domain.com", *res.Party.EmailAddress)
@@ -185,7 +204,7 @@ func testAccountManagementUpdateTrustedContact(t *testing.T, sdk *ascendsdk.SDK,
 	trustedContactUpdate := components.TrustedContactUpdate{
 		EmailAddress: ascendsdk.String("updatedexample@email.com"),
 	}
-	res, err := sdk.AccountManagement.UpdateTrustedContact(ctx, accountId, trustedContactId, trustedContactUpdate)
+	res, err := sdk.AccountManagement.UpdateTrustedContact(ctx, accountId, trustedContactId, trustedContactUpdate, nil)
 	require.NoError(t, err)
 	assert.NotNil(t, res.TrustedContact)
 	assert.Equal(t, "updatedexample@email.com", *res.TrustedContact.EmailAddress)
@@ -222,7 +241,7 @@ func testAccountManagementUpdateInterestedParty(t *testing.T, sdk *ascendsdk.SDK
 	interestedPartyUpdate := components.InterestedPartyUpdate{
 		Recipient: ascendsdk.String("John Doe"),
 	}
-	res, err := sdk.AccountManagement.UpdateInterestedParty(ctx, accountId, interestedPartyId, interestedPartyUpdate)
+	res, err := sdk.AccountManagement.UpdateInterestedParty(ctx, accountId, interestedPartyId, interestedPartyUpdate, nil)
 	require.NoError(t, err)
 	assert.NotNil(t, res.InterestedParty)
 	assert.Equal(t, "John Doe", *res.InterestedParty.Recipient)
@@ -247,7 +266,7 @@ func testAccountManagementCreateRestriction(t *testing.T, sdk *ascendsdk.SDK, ct
 	restrictionCreate := components.RestrictionCreate{
 		CreateReason:    "Some reason for adding",
 		EndedReason:     ascendsdk.String("Some reason for removing"),
-		RestrictionCode: "ACAT_FULL_OUTBOUND",
+		RestrictionCode: "TRADING_LIQUIDATION_ONLY_BY_CORRESPONDENT",
 	}
 	res, err := sdk.AccountManagement.CreateRestriction(ctx, accountId, restrictionCreate)
 	require.NoError(t, err)

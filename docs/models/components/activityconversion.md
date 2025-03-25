@@ -1,6 +1,6 @@
 # ActivityConversion
 
-Object containing metadata for conversions
+Used to record the conversion of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price or rate and details related to the conversion
 
 
 ## Fields

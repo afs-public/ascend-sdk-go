@@ -41,13 +41,12 @@ func (e LegalEntityUpdateCorporateStructure) ToPointer() *LegalEntityUpdateCorpo
 type LegalEntityUpdateEntityType string
 
 const (
-	LegalEntityUpdateEntityTypeEntityTypeUnspecified               LegalEntityUpdateEntityType = "ENTITY_TYPE_UNSPECIFIED"
-	LegalEntityUpdateEntityTypeCorporation                         LegalEntityUpdateEntityType = "CORPORATION"
-	LegalEntityUpdateEntityTypeLimitedLiabilityCompany             LegalEntityUpdateEntityType = "LIMITED_LIABILITY_COMPANY"
-	LegalEntityUpdateEntityTypePartnership                         LegalEntityUpdateEntityType = "PARTNERSHIP"
-	LegalEntityUpdateEntityTypeSoleProprietorshipOrSingleMemberLlc LegalEntityUpdateEntityType = "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC"
-	LegalEntityUpdateEntityTypeTrust                               LegalEntityUpdateEntityType = "TRUST"
-	LegalEntityUpdateEntityTypeEstate                              LegalEntityUpdateEntityType = "ESTATE"
+	LegalEntityUpdateEntityTypeEntityTypeUnspecified   LegalEntityUpdateEntityType = "ENTITY_TYPE_UNSPECIFIED"
+	LegalEntityUpdateEntityTypeCorporation             LegalEntityUpdateEntityType = "CORPORATION"
+	LegalEntityUpdateEntityTypeLimitedLiabilityCompany LegalEntityUpdateEntityType = "LIMITED_LIABILITY_COMPANY"
+	LegalEntityUpdateEntityTypePartnership             LegalEntityUpdateEntityType = "PARTNERSHIP"
+	LegalEntityUpdateEntityTypeTrust                   LegalEntityUpdateEntityType = "TRUST"
+	LegalEntityUpdateEntityTypeEstate                  LegalEntityUpdateEntityType = "ESTATE"
 )
 
 func (e LegalEntityUpdateEntityType) ToPointer() *LegalEntityUpdateEntityType {

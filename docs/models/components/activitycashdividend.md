@@ -1,6 +1,6 @@
 # ActivityCashDividend
 
-Object containing for cash dividends
+Used to record the distribution of cash to shareholders, paid by the issuer, usually based upon current earnings and/or accumulated profits as declared by the board of directors and details related to the cash dividend
 
 
 ## Fields

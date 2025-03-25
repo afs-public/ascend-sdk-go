@@ -8,11 +8,11 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// File - The file containing the snapshot data.
+// File - The details of file containing the snapshot data. This contains the download uri and uri expiry time.
 type File struct {
-	// The signed download uri for the file.
+	// The signed download uri for the file. This allows the client to download the file.
 	DownloadURI *string `json:"download_uri,omitempty"`
-	// The timestamp at which the download uri expires.
+	// The timestamp at which the download uri expires in UTC. This is set to 1 hour after the request time.
 	URIExpiryTime *time.Time `json:"uri_expiry_time,omitempty"`
 }
 
@@ -41,7 +41,7 @@ func (o *File) GetURIExpiryTime() *time.Time {
 	return o.URIExpiryTime
 }
 
-// SnapshotProcessDate - The process date of the snapshot.
+// SnapshotProcessDate - The process date of the snapshot. This date corresponds to the underlying data within the snapshot.
 type SnapshotProcessDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -72,17 +72,17 @@ func (o *SnapshotProcessDate) GetYear() *int {
 	return o.Year
 }
 
-// Snapshot - A snapshot containing the snapshot information and a file download link.
+// Snapshot - A snapshot of the data at a specific point in time. This contains the snapshot details and the download_uri of the file containing the snapshot data.
 type Snapshot struct {
-	// The timestamp at which the snapshot was created at.
+	// The timestamp at which the snapshot was created at in UTC.
 	CreateTime *time.Time `json:"create_time,omitempty"`
-	// The file containing the snapshot data.
+	// The details of file containing the snapshot data. This contains the download uri and uri expiry time.
 	File *File `json:"file,omitempty"`
 	// The name of the resource.
 	Name *string `json:"name,omitempty"`
-	// The process date of the snapshot.
+	// The process date of the snapshot. This date corresponds to the underlying data within the snapshot.
 	ProcessDate *SnapshotProcessDate `json:"process_date,omitempty"`
-	// Unique id of the snapshot file.
+	// The unique identifier of the snapshot file.
 	SnapshotID *string `json:"snapshot_id,omitempty"`
 	// The type of the snapshot.
 	SnapshotType *string `json:"snapshot_type,omitempty"`

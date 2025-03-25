@@ -1,6 +1,6 @@
 # CompressedOrderPeriodStartDate
 
-The period start date of the LOI.
+The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 
 
 ## Fields

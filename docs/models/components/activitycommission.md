@@ -1,6 +1,6 @@
 # ActivityCommission
 
-Contains information on the commissions charged by brokers or financial intermediaries for executing trades on behalf of clients
+Used to record commission charged by brokers or financial intermediaries for executing financial transactions on behalf of clients
 
 
 ## Fields

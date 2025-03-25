@@ -1,6 +1,6 @@
 # ActivityDrip
 
-Object containing more information about the drip allocations
+Used to record the movement of funds to/ from the pending_drip memo location
 
 
 ## Fields

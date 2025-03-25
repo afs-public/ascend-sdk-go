@@ -1,6 +1,6 @@
 # ActivityStockDividend
 
-Object containing metadata for stock dividends
+Used to record a dividend paid to shareholders in the form of shares of stock in either the issuing company or in another company and details related to the stock dividend
 
 
 ## Fields

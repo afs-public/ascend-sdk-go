@@ -1,6 +1,6 @@
 # ActivityNameChange
 
-Object containing metadata for name changes
+Used to record changes in the name of a security/securities by the issuer which result in surrendering physical securities or the assigning of a new security identifier which result in new securities being issued and details related to the name changes
 
 
 ## Fields

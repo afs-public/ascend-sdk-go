@@ -1,6 +1,6 @@
 # EntryFlipPrevailingMarketPrice
 
-The price for the instrument that is prevailing in the market.
+The price for the instrument that is prevailing in the market
 
 
 ## Fields

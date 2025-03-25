@@ -1,6 +1,6 @@
 # ActivityWarrantExercise
 
-Object containing metadata for warrant exercises
+Used to record the exchange of warrants for shares and details related to the warrant exercise. The exercise will commonly require a payment based upon a pre-determined value and time and details related to the warrant exercise
 
 
 ## Fields

@@ -37,3 +37,10 @@ Describes the contents of a document and how it is used; Required for all identi
 | `IDDocumentUploadRequestCreateDocumentTypeDivorceDecree`                      | DIVORCE_DECREE                                                                |
 | `IDDocumentUploadRequestCreateDocumentTypeProofOfResidence`                   | PROOF_OF_RESIDENCE                                                            |
 | `IDDocumentUploadRequestCreateDocumentTypeBoReportingExemptionProof`          | BO_REPORTING_EXEMPTION_PROOF                                                  |
+| `IDDocumentUploadRequestCreateDocumentTypeOperatingAgreement`                 | OPERATING_AGREEMENT                                                           |
+| `IDDocumentUploadRequestCreateDocumentTypeRegisterOfMembers`                  | REGISTER_OF_MEMBERS                                                           |
+| `IDDocumentUploadRequestCreateDocumentTypeBoardResolution`                    | BOARD_RESOLUTION                                                              |
+| `IDDocumentUploadRequestCreateDocumentTypeTrustDeedsAgreement`                | TRUST_DEEDS_AGREEMENT                                                         |
+| `IDDocumentUploadRequestCreateDocumentTypeCorporateBylaws`                    | CORPORATE_BYLAWS                                                              |
+| `IDDocumentUploadRequestCreateDocumentTypeShareholderAgreement`               | SHAREHOLDER_AGREEMENT                                                         |
+| `IDDocumentUploadRequestCreateDocumentTypeCorporateRecords`                   | CORPORATE_RECORDS                                                             |

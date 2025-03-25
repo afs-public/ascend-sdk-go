@@ -1,6 +1,6 @@
 # TenderOffer
 
-Object containing metadata for tender offers
+Used to record the sale of securities for a specified price due to an offer from the issuer or a third party and details related to the tender offer
 
 
 ## Fields

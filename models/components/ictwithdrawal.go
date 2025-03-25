@@ -156,6 +156,9 @@ const (
 	IctWithdrawalTypePlanLoan401K                               IctWithdrawalType = "PLAN_LOAN_401K"
 	IctWithdrawalTypePrematureSimpleIraLessThan2Years           IctWithdrawalType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	IctWithdrawalTypeNormalRothIraGreaterThan5Years             IctWithdrawalType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	IctWithdrawalTypeNetIncomeAttributable                      IctWithdrawalType = "NET_INCOME_ATTRIBUTABLE"
+	IctWithdrawalTypeRevocation                                 IctWithdrawalType = "REVOCATION"
+	IctWithdrawalTypeNonReportable                              IctWithdrawalType = "NON_REPORTABLE"
 )
 
 func (e IctWithdrawalType) ToPointer() *IctWithdrawalType {

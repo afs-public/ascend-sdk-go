@@ -30,6 +30,7 @@ func (e YieldType) ToPointer() *YieldType {
 	return &e
 }
 
+// YieldRecord - Contains details about the yields associated with a trade in fixed income instruments
 type YieldRecord struct {
 	// The yield percentage at which the transaction was effected
 	YieldPercent *YieldPercent `json:"yield_percent,omitempty"`

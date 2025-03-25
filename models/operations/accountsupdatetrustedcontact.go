@@ -10,7 +10,9 @@ type AccountsUpdateTrustedContactRequest struct {
 	// The account id.
 	AccountID string `pathParam:"style=simple,explode=false,name=account_id"`
 	// The trustedContact id.
-	TrustedContactID     string                          `pathParam:"style=simple,explode=false,name=trustedContact_id"`
+	TrustedContactID string `pathParam:"style=simple,explode=false,name=trustedContact_id"`
+	// The list of fields to update. Updatable Fields  `given_name`  `middle_names`  `family_name`  `phone_number`  `email_address`  `mailing_address.region_code`  `mailing_address.postal_code`  `mailing_address.administrative_area`  `mailing_address.locality`  `mailing_address.address_lines`
+	UpdateMask           *string                         `queryParam:"style=form,explode=true,name=update_mask"`
 	TrustedContactUpdate components.TrustedContactUpdate `request:"mediaType=application/json"`
 }
 
@@ -26,6 +28,13 @@ func (o *AccountsUpdateTrustedContactRequest) GetTrustedContactID() string {
 		return ""
 	}
 	return o.TrustedContactID
+}
+
+func (o *AccountsUpdateTrustedContactRequest) GetUpdateMask() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateMask
 }
 
 func (o *AccountsUpdateTrustedContactRequest) GetTrustedContactUpdate() components.TrustedContactUpdate {

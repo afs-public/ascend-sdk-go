@@ -10,7 +10,9 @@ type AccountsUpdatePartyRequest struct {
 	// The account id.
 	AccountID string `pathParam:"style=simple,explode=false,name=account_id"`
 	// The party id.
-	PartyID            string                        `pathParam:"style=simple,explode=false,name=party_id"`
+	PartyID string `pathParam:"style=simple,explode=false,name=party_id"`
+	// The list of fields to update. Updatable Fields  `phone_number`  `email_address`  `statement_delivery_preference`  `trade_confirmation_delivery_preference`  `tax_document_delivery_preference`  `proxy_delivery_preference`  `prospectus_delivery_preference`  `mailing_address.region_code`  `mailing_address.postal_code`  `mailing_address.administrative_area`  `mailing_address.locality`  `mailing_address.address_lines`
+	UpdateMask         *string                       `queryParam:"style=form,explode=true,name=update_mask"`
 	PartyRequestUpdate components.PartyRequestUpdate `request:"mediaType=application/json"`
 }
 
@@ -26,6 +28,13 @@ func (o *AccountsUpdatePartyRequest) GetPartyID() string {
 		return ""
 	}
 	return o.PartyID
+}
+
+func (o *AccountsUpdatePartyRequest) GetUpdateMask() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateMask
 }
 
 func (o *AccountsUpdatePartyRequest) GetPartyRequestUpdate() components.PartyRequestUpdate {

@@ -28,7 +28,7 @@ func TestInvestigations_InvestigationServiceGetInvestigation_GetInvestigation1(t
 	)
 
 	ctx := context.Background()
-	res, err := s.Investigations.GetInvestigation(ctx, "b90a7bb5-de15-49ee-8af8-0f30a29e8c72")
+	res, err := s.Investigations.GetInvestigation(ctx, "01JHGRJG62CZ0TV805CSWYHJ31")
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

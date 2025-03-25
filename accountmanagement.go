@@ -259,7 +259,7 @@ func (s *AccountManagement) ListAccounts(ctx context.Context, request operations
 
 // UpdateAccount - Update Account
 // UPDATE Updates an Account.
-func (s *AccountManagement) UpdateAccount(ctx context.Context, accountID string, accountRequestUpdate components.AccountRequestUpdate, opts ...operations.Option) (*operations.AccountsUpdateAccountResponse, error) {
+func (s *AccountManagement) UpdateAccount(ctx context.Context, accountID string, accountRequestUpdate components.AccountRequestUpdate, updateMask *string, opts ...operations.Option) (*operations.AccountsUpdateAccountResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "Accounts_UpdateAccount",
@@ -269,6 +269,7 @@ func (s *AccountManagement) UpdateAccount(ctx context.Context, accountID string,
 
 	request := operations.AccountsUpdateAccountRequest{
 		AccountID:            accountID,
+		UpdateMask:           updateMask,
 		AccountRequestUpdate: accountRequestUpdate,
 	}
 
@@ -313,6 +314,10 @@ func (s *AccountManagement) UpdateAccount(ctx context.Context, accountID string,
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -737,7 +742,7 @@ func (s *AccountManagement) AddParty(ctx context.Context, accountID string, addP
 
 // UpdateParty - Update Party
 // Updates a Party.
-func (s *AccountManagement) UpdateParty(ctx context.Context, accountID string, partyID string, partyRequestUpdate components.PartyRequestUpdate, opts ...operations.Option) (*operations.AccountsUpdatePartyResponse, error) {
+func (s *AccountManagement) UpdateParty(ctx context.Context, accountID string, partyID string, partyRequestUpdate components.PartyRequestUpdate, updateMask *string, opts ...operations.Option) (*operations.AccountsUpdatePartyResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "Accounts_UpdateParty",
@@ -748,6 +753,7 @@ func (s *AccountManagement) UpdateParty(ctx context.Context, accountID string, p
 	request := operations.AccountsUpdatePartyRequest{
 		AccountID:          accountID,
 		PartyID:            partyID,
+		UpdateMask:         updateMask,
 		PartyRequestUpdate: partyRequestUpdate,
 	}
 
@@ -792,6 +798,10 @@ func (s *AccountManagement) UpdateParty(ctx context.Context, accountID string, p
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1915,7 +1925,7 @@ func (s *AccountManagement) CreateTrustedContact(ctx context.Context, accountID 
 
 // UpdateTrustedContact - Update Trusted Contact
 // Updates a Trusted Contact.
-func (s *AccountManagement) UpdateTrustedContact(ctx context.Context, accountID string, trustedContactID string, trustedContactUpdate components.TrustedContactUpdate, opts ...operations.Option) (*operations.AccountsUpdateTrustedContactResponse, error) {
+func (s *AccountManagement) UpdateTrustedContact(ctx context.Context, accountID string, trustedContactID string, trustedContactUpdate components.TrustedContactUpdate, updateMask *string, opts ...operations.Option) (*operations.AccountsUpdateTrustedContactResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "Accounts_UpdateTrustedContact",
@@ -1926,6 +1936,7 @@ func (s *AccountManagement) UpdateTrustedContact(ctx context.Context, accountID 
 	request := operations.AccountsUpdateTrustedContactRequest{
 		AccountID:            accountID,
 		TrustedContactID:     trustedContactID,
+		UpdateMask:           updateMask,
 		TrustedContactUpdate: trustedContactUpdate,
 	}
 
@@ -1970,6 +1981,10 @@ func (s *AccountManagement) UpdateTrustedContact(ctx context.Context, accountID 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2607,7 +2622,7 @@ func (s *AccountManagement) CreateInterestedParty(ctx context.Context, accountID
 
 // UpdateInterestedParty - Update Interested Party
 // Updates an Interested Party.
-func (s *AccountManagement) UpdateInterestedParty(ctx context.Context, accountID string, interestedPartyID string, interestedPartyUpdate components.InterestedPartyUpdate, opts ...operations.Option) (*operations.AccountsUpdateInterestedPartyResponse, error) {
+func (s *AccountManagement) UpdateInterestedParty(ctx context.Context, accountID string, interestedPartyID string, interestedPartyUpdate components.InterestedPartyUpdate, updateMask *string, opts ...operations.Option) (*operations.AccountsUpdateInterestedPartyResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "Accounts_UpdateInterestedParty",
@@ -2618,6 +2633,7 @@ func (s *AccountManagement) UpdateInterestedParty(ctx context.Context, accountID
 	request := operations.AccountsUpdateInterestedPartyRequest{
 		AccountID:             accountID,
 		InterestedPartyID:     interestedPartyID,
+		UpdateMask:            updateMask,
 		InterestedPartyUpdate: interestedPartyUpdate,
 	}
 
@@ -2662,6 +2678,10 @@ func (s *AccountManagement) UpdateInterestedParty(ctx context.Context, accountID
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

@@ -1,6 +1,6 @@
 # ActivityExchange
 
-The exchange where the trade was executed
+Used to record the exchange of certificates for a new security or cash and details related to the exchange
 
 
 ## Fields

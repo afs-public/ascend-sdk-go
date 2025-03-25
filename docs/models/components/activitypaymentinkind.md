@@ -1,6 +1,6 @@
 # ActivityPaymentInKind
 
-Object containing metadata for payment in kind
+Used to record payments on interest-bearing securities where the payment is made in additional securities rather than cash and details related to the payment
 
 
 ## Fields

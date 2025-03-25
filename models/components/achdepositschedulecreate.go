@@ -6,17 +6,18 @@ package components
 type AchDepositScheduleCreateType string
 
 const (
-	AchDepositScheduleCreateTypeTypeUnspecified    AchDepositScheduleCreateType = "TYPE_UNSPECIFIED"
-	AchDepositScheduleCreateTypeRegular            AchDepositScheduleCreateType = "REGULAR"
-	AchDepositScheduleCreateTypeEmployee           AchDepositScheduleCreateType = "EMPLOYEE"
-	AchDepositScheduleCreateTypeEmployer           AchDepositScheduleCreateType = "EMPLOYER"
-	AchDepositScheduleCreateTypeRecharacterization AchDepositScheduleCreateType = "RECHARACTERIZATION"
-	AchDepositScheduleCreateTypeRollover60Day      AchDepositScheduleCreateType = "ROLLOVER_60_DAY"
-	AchDepositScheduleCreateTypeRolloverDirect     AchDepositScheduleCreateType = "ROLLOVER_DIRECT"
-	AchDepositScheduleCreateTypeTransfer           AchDepositScheduleCreateType = "TRANSFER"
-	AchDepositScheduleCreateTypeTrusteeFee         AchDepositScheduleCreateType = "TRUSTEE_FEE"
-	AchDepositScheduleCreateTypeConversion         AchDepositScheduleCreateType = "CONVERSION"
-	AchDepositScheduleCreateTypeRepayment          AchDepositScheduleCreateType = "REPAYMENT"
+	AchDepositScheduleCreateTypeTypeUnspecified           AchDepositScheduleCreateType = "TYPE_UNSPECIFIED"
+	AchDepositScheduleCreateTypeRegular                   AchDepositScheduleCreateType = "REGULAR"
+	AchDepositScheduleCreateTypeEmployee                  AchDepositScheduleCreateType = "EMPLOYEE"
+	AchDepositScheduleCreateTypeEmployer                  AchDepositScheduleCreateType = "EMPLOYER"
+	AchDepositScheduleCreateTypeRecharacterization        AchDepositScheduleCreateType = "RECHARACTERIZATION"
+	AchDepositScheduleCreateTypeRollover60Day             AchDepositScheduleCreateType = "ROLLOVER_60_DAY"
+	AchDepositScheduleCreateTypeRolloverDirect            AchDepositScheduleCreateType = "ROLLOVER_DIRECT"
+	AchDepositScheduleCreateTypeTransfer                  AchDepositScheduleCreateType = "TRANSFER"
+	AchDepositScheduleCreateTypeTrusteeFee                AchDepositScheduleCreateType = "TRUSTEE_FEE"
+	AchDepositScheduleCreateTypeConversion                AchDepositScheduleCreateType = "CONVERSION"
+	AchDepositScheduleCreateTypeRepayment                 AchDepositScheduleCreateType = "REPAYMENT"
+	AchDepositScheduleCreateTypeContributionNonReportable AchDepositScheduleCreateType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e AchDepositScheduleCreateType) ToPointer() *AchDepositScheduleCreateType {

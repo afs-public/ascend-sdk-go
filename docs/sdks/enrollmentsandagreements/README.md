@@ -7,6 +7,7 @@
 
 * [EnrollAccount](#enrollaccount) - Enroll Account
 * [ListAvailableEnrollments](#listavailableenrollments) - List Available Enrollments
+* [AccountsListAvailableEnrollmentsByAccountGroup](#accountslistavailableenrollmentsbyaccountgroup) - List Available Enrollments (by Account Group)
 * [DeactivateEnrollment](#deactivateenrollment) - Deactivate Enrollment
 * [ListEnrollments](#listenrollments) - List Account Enrollments
 * [AffirmAgreements](#affirmagreements) - Affirm Agreements
@@ -132,6 +133,68 @@ func main() {
 ### Response
 
 **[*operations.AccountsListAvailableEnrollmentsResponse](../../models/operations/accountslistavailableenrollmentsresponse.md), error**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
+| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+
+## AccountsListAvailableEnrollmentsByAccountGroup
+
+Get a list of Enrollments available for an Account.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"context"
+	"log"
+)
+
+func main() {
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    ctx := context.Background()
+    res, err := s.EnrollmentsAndAgreements.AccountsListAvailableEnrollmentsByAccountGroup(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil, nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListAvailableEnrollmentsResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                              | Type                                                                                                                                                                                                                                                   | Required                                                                                                                                                                                                                                               | Description                                                                                                                                                                                                                                            | Example                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                  | :heavy_check_mark:                                                                                                                                                                                                                                     | The context to use for the request.                                                                                                                                                                                                                    |                                                                                                                                                                                                                                                        |
+| `accountGroupID`                                                                                                                                                                                                                                       | *string*                                                                                                                                                                                                                                               | :heavy_check_mark:                                                                                                                                                                                                                                     | The accountGroup id.                                                                                                                                                                                                                                   | 01HC3MAQ4DR9QN1V8MJ4CN1HMK                                                                                                                                                                                                                             |
+| `pageSize`                                                                                                                                                                                                                                             | **int*                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                     | The maximum number of available enrollments to return. The service may return fewer than this value. The maximum value is 100; values above 100 will be coerced to 100.                                                                                | 25                                                                                                                                                                                                                                                     |
+| `pageToken`                                                                                                                                                                                                                                            | **string*                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                     | A page token, received from a previous `ListAvailableEnrollments` call. Provide this to retrieve the subsequent page.<br/><br/> When paginating, all other parameters provided to `ListAvailableEnrollments` must match the call that provided the page token. | AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h                                                                                                                                                                                               |
+| `filter`                                                                                                                                                                                                                                               | **string*                                                                                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                                     | A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:<br/> `enrollment_type`                                    | enrollment_type == "REGISTRATION_INDIVIDUAL"                                                                                                                                                                                                           |
+| `opts`                                                                                                                                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                                     | The options for this request.                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                        |
+
+### Response
+
+**[*operations.AccountsListAvailableEnrollments1Response](../../models/operations/accountslistavailableenrollments1response.md), error**
 
 ### Errors
 

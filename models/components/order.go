@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -141,23 +139,6 @@ const (
 func (e OrderIdentifierType) ToPointer() *OrderIdentifierType {
 	return &e
 }
-func (e *OrderIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SYMBOL":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = OrderIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderIdentifierType: %v", v)
-	}
-}
 
 // OrderAmount - The amount of the LOI. This is a monetary value in the same currency as the order.
 type OrderAmount struct {
@@ -172,7 +153,7 @@ func (o *OrderAmount) GetValue() *string {
 	return o.Value
 }
 
-// PeriodStartDate - The period start date of the LOI.
+// PeriodStartDate - The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 type PeriodStartDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -207,7 +188,7 @@ func (o *PeriodStartDate) GetYear() *int {
 type LetterOfIntent struct {
 	// The amount of the LOI. This is a monetary value in the same currency as the order.
 	Amount *OrderAmount `json:"amount,omitempty"`
-	// The period start date of the LOI.
+	// The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 	PeriodStartDate *PeriodStartDate `json:"period_start_date,omitempty"`
 }
 
@@ -435,7 +416,7 @@ func (o *OrderQuantity) GetValue() *string {
 	return o.Value
 }
 
-// OrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+// OrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 type OrderRightsOfAccumulationAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -450,7 +431,7 @@ func (o *OrderRightsOfAccumulationAmount) GetValue() *string {
 
 // RightsOfAccumulation - Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
 type RightsOfAccumulation struct {
-	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 	Amount *OrderRightsOfAccumulationAmount `json:"amount,omitempty"`
 }
 
@@ -606,6 +587,8 @@ type Order struct {
 	FilledQuantity *FilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier *string `json:"identifier,omitempty"`
+	// A string attribute denoting the country of issuance or where the asset is trading. Only available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field must be provided Complies with ISO-3166 Alpha-2 Codes
+	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
 	IdentifierType *OrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
@@ -776,6 +759,13 @@ func (o *Order) GetIdentifier() *string {
 		return nil
 	}
 	return o.Identifier
+}
+
+func (o *Order) GetIdentifierIssuingRegionCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdentifierIssuingRegionCode
 }
 
 func (o *Order) GetIdentifierType() *OrderIdentifierType {

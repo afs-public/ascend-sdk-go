@@ -1,6 +1,6 @@
 # AcatsAssetQuantity
 
-The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position Fractional amounts only supported for certain asset types
+The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position or a DEBIT cash balance. Fractional amounts only supported for certain asset types
 
 
 ## Fields

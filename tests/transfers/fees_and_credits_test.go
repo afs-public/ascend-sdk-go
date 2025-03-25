@@ -2,39 +2,45 @@ package transfers
 
 import (
 	"context"
-	"os"
+	"errors"
+	"fmt"
 	"strings"
 	"testing"
-
-	"github.com/afs-public/ascend-sdk-go/tests/helpers"
+	"time"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
-
 	"github.com/afs-public/ascend-sdk-go/models/components"
-
+	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/google/uuid"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func TestFeesAndCredits(t *testing.T) {
-	sdk, err := helpers.SetupAscendSDK()
-	require.NoError(t, err)
-	accountId := os.Getenv("account_id")
-
-	ctx := context.Background()
-
-	feeId := testCreateFee(t, sdk, ctx, accountId)
-	testGetFee(t, sdk, ctx, accountId, feeId)
-	testCancelFee(t, sdk, ctx, accountId, feeId)
-
-	creditId := testCreateCredit(t, sdk, ctx, accountId)
-	testGetCredit(t, sdk, ctx, accountId, creditId)
-	testCancelCredit(t, sdk, ctx, accountId, creditId)
+func (f *Fixtures) FeeId(t *testing.T) *string {
+	if f.feeId != nil {
+		return f.feeId
+	}
+	feeId, err := CreateFee(t, f.sdk, f.ctx, f.accountId)
+	fmt.Println("feeId:", feeId)
+	require.NoError(f.t, err)
+	f.feeId = &feeId
+	time.Sleep(5 * time.Second)
+	return &feeId
 }
 
-func testCreateFee(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) string {
+func (f *Fixtures) CreditId(t *testing.T) *string {
+	if f.creditId != nil {
+		return f.creditId
+	}
+	creditId, err := CreateCredit(t, f.sdk, f.ctx, f.accountId)
+	fmt.Println("creditId: ", creditId)
+	require.NoError(f.t, err)
+	f.creditId = &creditId
+	time.Sleep(3 * time.Second)
+	return &creditId
+}
+
+func CreateFee(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolledAccountId string) (string, error) {
 	feeCreate := components.TransfersFeeCreate{
 		Amount: components.DecimalCreate{
 			Value: ascendsdk.String("10.00"),
@@ -43,73 +49,88 @@ func testCreateFee(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accoun
 		Description:      ascendsdk.String("Fee charged"),
 		Type:             components.TransfersFeeCreateType("MANAGEMENT"),
 	}
-
-	res, err := sdk.FeesAndCredits.CreateFee(ctx, accountId, feeCreate)
+	time.Sleep(5 * time.Second)
+	res, err := sdk.FeesAndCredits.CreateFee(ctx, enrolledAccountId, feeCreate)
 	require.NoError(t, err)
-	assert.NotNil(t, res)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	feeId := strings.Split(*res.TransfersFee.Name, "/")[3]
-	return feeId
+	if res.HTTPMeta.Response.StatusCode == 200 {
+		return feeId, nil
+	} else {
+		return "", errors.New("Error creating fee")
+	}
 }
 
-func testGetFee(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string, feeId string) {
-	if feeId == "" {
-		t.Fatalf("expected a valid feeId, but got an empty string")
-	}
-
-	res, err := sdk.FeesAndCredits.GetFee(ctx, accountId, feeId)
-	require.NoError(t, err)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-}
-
-func testCancelFee(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string, feeId string) {
-	if feeId == "" {
-		t.Fatalf("expected a valid feeId, but got an empty string")
-	}
-
-	req := components.CancelFeeRequestCreate{
-		Name: "accounts/" + accountId + "/feesAndCredits/" + feeId,
-	}
-	res, err := sdk.FeesAndCredits.CancelFee(ctx, accountId, feeId, req)
-	require.NoError(t, err)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-}
-
-func testCreateCredit(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) string {
+func CreateCredit(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolledAccountId string) (string, error) {
 	creditCreate := components.TransfersCreditCreate{
 		Amount: components.DecimalCreate{
 			Value: ascendsdk.String("10.00"),
 		},
 		ClientTransferID: uuid.New().String(),
-		Description:      ascendsdk.String("Fee charged"),
+		Description:      ascendsdk.String("Credit awarded"),
 		Type:             components.TransfersCreditCreateTypePromotional,
 	}
-
-	res, err := sdk.FeesAndCredits.CreateCredit(ctx, accountId, creditCreate)
-	require.NoError(t, err)
-	assert.NotNil(t, res)
-	feeId := strings.Split(*res.TransfersCredit.Name, "/")[3]
-	return feeId
-}
-
-func testGetCredit(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string, creditId string) {
-	if creditId == "" {
-		t.Fatalf("expected a valid creditId, but got an empty string")
-	}
-
-	res, err := sdk.FeesAndCredits.GetCredit(ctx, accountId, creditId)
+	time.Sleep(3 * time.Second)
+	res, err := sdk.FeesAndCredits.CreateCredit(ctx, enrolledAccountId, creditCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	creditId := strings.Split(*res.TransfersCredit.Name, "/")[3]
+	if res.HTTPMeta.Response.StatusCode == 200 {
+		return creditId, nil
+	} else {
+		return "", errors.New("Error creating credit")
+	}
 }
 
-func testCancelCredit(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string, creditId string) {
-	if creditId == "" {
-		t.Fatalf("expected a valid creditId, but got an empty string")
-	}
-
-	req := components.CancelCreditRequestCreate{
-		Name: "accounts/" + accountId + "/feesAndCredits/" + creditId,
-	}
-	res, err := sdk.FeesAndCredits.CancelCredit(ctx, accountId, creditId, req)
+func TestFeesAndCredits(t *testing.T) {
+	ctx := context.Background()
+	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	fixtures := &Fixtures{
+		t:   t,
+		sdk: sdk,
+		ctx: ctx,
+	}
+	accountId, err := helpers.CreateAccountId(fixtures.sdk, fixtures.ctx)
+	if err != nil {
+		t.Fatalf("Error creating account: %v", err)
+	}
+	fixtures.accountId = *accountId
+	print("accountId:", fixtures.accountId)
+
+	t.Run("CreateFee", func(t *testing.T) {
+		assert.NotNil(t, fixtures.FeeId(t))
+	})
+	t.Run("GetFee", func(t *testing.T) {
+		res, err := sdk.FeesAndCredits.GetFee(ctx, fixtures.accountId, *fixtures.FeeId(t))
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	})
+	t.Run("CancelFee", func(t *testing.T) {
+		request := components.CancelFeeRequestCreate{
+			Name: "accounts/" + fixtures.accountId + "/feesAndCredits/" + *fixtures.FeeId(t),
+		}
+		res, err := sdk.FeesAndCredits.CancelFee(ctx, fixtures.accountId, *fixtures.FeeId(t), request)
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+		assert.NotNil(t, res)
+	})
+
+	t.Run("CreateCredit", func(t *testing.T) {
+		assert.NotNil(t, fixtures.CreditId(t))
+	})
+	t.Run("GetCredit", func(t *testing.T) {
+		res, err := sdk.FeesAndCredits.GetCredit(ctx, fixtures.accountId, *fixtures.CreditId(t))
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	})
+	t.Run("CancelCredit", func(t *testing.T) {
+		request := components.CancelCreditRequestCreate{
+			Name: "accounts/" + fixtures.accountId + "/feesAndCredits/" + *fixtures.CreditId(t),
+		}
+		res, err := sdk.FeesAndCredits.CancelCredit(ctx, fixtures.accountId, *fixtures.CreditId(t), request)
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+		assert.NotNil(t, res)
+	})
 }

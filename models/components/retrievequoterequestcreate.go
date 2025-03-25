@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // RetrieveQuoteRequestCreateAssetType - The type of asset being evaluated in cost calculations
 type RetrieveQuoteRequestCreateAssetType string
 
@@ -42,23 +37,6 @@ const (
 
 func (e RetrieveQuoteRequestCreateIdentifierType) ToPointer() *RetrieveQuoteRequestCreateIdentifierType {
 	return &e
-}
-func (e *RetrieveQuoteRequestCreateIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_ID":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = RetrieveQuoteRequestCreateIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveQuoteRequestCreateIdentifierType: %v", v)
-	}
 }
 
 // RetrieveQuoteRequestCreate - Request object for retrieving fixed income quotes

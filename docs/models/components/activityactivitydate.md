@@ -1,6 +1,6 @@
 # ActivityActivityDate
 
-The calendar date an activity took place
+The activity date refers to the specific calendar day on which a financial transaction, such as a trade at an exchange or a deposit at a bank, was executed. This date is specific to the institution where the transaction took place, capturing the exact day on which the institution formally records and effects the transaction
 
 
 ## Fields

@@ -3,6 +3,7 @@ package orders
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -35,6 +36,7 @@ func TestFixedIncomePricing(t *testing.T) {
 	time.Sleep(5 * time.Second)
 	testPreviewOrderCost(t, sdk, ctx, *accountId)
 	testRetrieveQuote(t, sdk, ctx, *accountId)
+	testRetrieveFixedIncomeMarks(t, sdk, ctx)
 }
 
 func testPreviewOrderCost(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) {
@@ -63,6 +65,21 @@ func testRetrieveQuote(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, ac
 		Parent:         "accounts/" + accountId,
 	}
 	res, err := sdk.FixedIncomePricing.RetrieveQuote(ctx, accountId, retrieveQuoteCreate)
+	require.NoError(t, err)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+}
+
+func testRetrieveFixedIncomeMarks(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context) {
+	retrieveMarksCreate := components.RetrieveFixedIncomeMarksRequestCreate{
+		Parent: "correspondents/" + os.Getenv("CORRESPONDENT_ID"),
+		SecurityIdentifiers: []components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate{
+			{
+				Identifier:     "912810SX7",
+				IdentifierType: components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierTypeCusip,
+			},
+		},
+	}
+	res, err := sdk.FixedIncomePricing.RetrieveFixedIncomeMarks(ctx, os.Getenv("CORRESPONDENT_ID"), retrieveMarksCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

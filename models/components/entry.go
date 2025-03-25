@@ -8,7 +8,7 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// AcatsPendingOut - Object containing metadata for pending outgoing acats
+// AcatsPendingOut - Used to record the movement of funds or shares to/ from the pending_acats memo location
 type AcatsPendingOut struct {
 	// the unique transfer Identifier assigned by NSCC
 	AcatsControlNumber *string `json:"acats_control_number,omitempty"`
@@ -74,7 +74,7 @@ func (e Method) ToPointer() *Method {
 	return &e
 }
 
-// AccountTransfer - Object containing metadata for account transfers
+// AccountTransfer - Used to record the movement of funds or shares during the bookkeeping phase of an account transfer and details related to the account transfer
 type AccountTransfer struct {
 	// sequence number assigned by the DTCC ACATS transfer system for each asset transferred
 	AcatsAssetSequenceNumber *string `json:"acats_asset_sequence_number,omitempty"`
@@ -156,19 +156,19 @@ type EntryAccruedInterest struct {
 
 // CorporateActionGeneralInformation - Common fields for corporate actions
 type CorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -234,7 +234,7 @@ func (o *Acquisition) GetCorporateActionGeneralInformation() *CorporateActionGen
 	return o.CorporateActionGeneralInformation
 }
 
-// ActivityDate - The calendar date an activity took place For Trade entries, the activity date reflects the trade date of the market in which the trade was executed For Cash entries, this reflects the banking day the cash will be moved
+// ActivityDate - The activity date refers to the specific calendar day on which a financial transaction, such as a trade at an exchange or a deposit at a bank, was executed. This date is specific to the institution where the transaction took place, capturing the exact day on which the institution formally records and effects the transaction
 type ActivityDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -280,19 +280,19 @@ func (o *CashRate) GetValue() *string {
 
 // EntryCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -345,7 +345,7 @@ func (o *EntryCorporateActionGeneralInformation) GetTargetSymbolDescription() *s
 	return o.TargetSymbolDescription
 }
 
-// PaymentDate - The anticipated payment date at the depository.
+// PaymentDate - The anticipated payment date at the depository
 type PaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -420,7 +420,7 @@ func (o *RecordDate) GetYear() *int {
 	return o.Year
 }
 
-// CapitalGains - Object containing metadata for capital gains
+// CapitalGains - Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
 type CapitalGains struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *CashRate `json:"cash_rate,omitempty"`
@@ -428,9 +428,9 @@ type CapitalGains struct {
 	CorporateActionGeneralInformation *EntryCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
 	// Corresponds to corporateactions.announcement.capital_gains
 	LongTermGain *bool `json:"long_term_gain,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *PaymentDate `json:"payment_date,omitempty"`
-	// Identifies whether dividend income is potentially qualified for the lower maximum individual federal tax rate under the Jobs and Growth Tax Relief Reconciliation Act of 2003.
+	// Identifies whether dividend income is potentially qualified for the lower maximum individual federal tax rate under the Jobs and Growth Tax Relief Reconciliation Act of 2003
 	Qualified *bool `json:"qualified,omitempty"`
 	// Corresponds to the position's trade quantity
 	Quantity *EntryCapitalGainsQuantity `json:"quantity,omitempty"`
@@ -511,19 +511,19 @@ func (o *EntryCashRate) GetValue() *string {
 
 // EntryCashDividendCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryCashDividendCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -602,7 +602,7 @@ func (o *EntryFree) GetValue() *string {
 	return o.Value
 }
 
-// EntryPaymentDate - The anticipated payment date at the depository.
+// EntryPaymentDate - The anticipated payment date at the depository
 type EntryPaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -733,7 +733,7 @@ func (e Subtype) ToPointer() *Subtype {
 	return &e
 }
 
-// CashDividend - Object containing for cash dividends
+// CashDividend - Used to record the distribution of cash to shareholders, paid by the issuer, usually based upon current earnings and/or accumulated profits as declared by the board of directors and details related to the cash dividend
 type CashDividend struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntryCashRate `json:"cash_rate,omitempty"`
@@ -745,9 +745,9 @@ type CashDividend struct {
 	Free *EntryFree `json:"free,omitempty"`
 	// Corresponds to corporateactions.announcement.capital_gains
 	LongTermGain *bool `json:"long_term_gain,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *EntryPaymentDate `json:"payment_date,omitempty"`
-	// Identifies whether dividend income is potentially qualified for the lower maximum individual federal tax rate under the Jobs and Growth Tax Relief Reconciliation Act of 2003.
+	// Identifies whether dividend income is potentially qualified for the lower maximum individual federal tax rate under the Jobs and Growth Tax Relief Reconciliation Act of 2003
 	Qualified *bool `json:"qualified,omitempty"`
 	// When ex-date occurs before the record date, quantity will equal the settled date position balance on the position date of the event When ex-date occurs after the record date, quantity will equal the trade date position balance on the position date of the event
 	Quantity *EntryCashDividendQuantity `json:"quantity,omitempty"`
@@ -873,19 +873,19 @@ func (o *EntryConversionCashRate) GetValue() *string {
 
 // EntryConversionCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryConversionCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -965,7 +965,7 @@ func (e EntryConversionType) ToPointer() *EntryConversionType {
 	return &e
 }
 
-// Conversion - Object containing metadata for conversions (Conversion of securities into another form of securities)
+// Conversion - Used to record the conversion of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price or rate and details related to the conversion
 type Conversion struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntryConversionCashRate `json:"cash_rate,omitempty"`
@@ -1044,7 +1044,7 @@ func (e CreditType) ToPointer() *CreditType {
 	return &e
 }
 
-// Credit - Object containing more information about the credit being paid
+// Credit - Used to disburse funds into a customer's account, typically for purposes such as refunds, interest payments, or rewards from enrolled programs and details related to the credit
 type Credit struct {
 	// Free form text field providing additional information about a transaction
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
@@ -1077,19 +1077,19 @@ func (o *Credit) GetTaxable() *bool {
 
 // EntryDeliveryCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryDeliveryCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -1195,7 +1195,7 @@ func (e EntryDepositType) ToPointer() *EntryDepositType {
 	return &e
 }
 
-// Deposit - Object containing more information about a deposit
+// Deposit - Used to record deposits of funds into an account and capture details related to the deposit
 type Deposit struct {
 	// Free form text field providing additional information about a transaction
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
@@ -1266,7 +1266,7 @@ func (e EntryAction) ToPointer() *EntryAction {
 	return &e
 }
 
-// Drip - Object containing metadata for reserving cash until the DRIP trades are executed
+// Drip - Used to record the movement of funds to/ from the pending_drip memo location
 type Drip struct {
 	// Indicates whether the drip memo activity is reserving cash (DRIP_PENDING) or removing the reservation after a successful reinvestment trade
 	Action *EntryAction `json:"action,omitempty"`
@@ -1294,19 +1294,19 @@ func (o *EntryExchangeCashRate) GetValue() *string {
 
 // EntryExchangeCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryExchangeCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -1386,7 +1386,7 @@ func (e EntryExchangeType) ToPointer() *EntryExchangeType {
 	return &e
 }
 
-// Exchange - Object containing metadata for exchanges
+// Exchange - Used to record the exchange of certificates for a new security or cash and details related to the exchange
 type Exchange struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntryExchangeCashRate `json:"cash_rate,omitempty"`
@@ -1467,7 +1467,7 @@ func (e EntryFeeType) ToPointer() *EntryFeeType {
 	return &e
 }
 
-// EntryFee - Object containing more information about the fee being charged
+// EntryFee - Used to record Fees that have been assessed to account and capture details related to the fee
 type EntryFee struct {
 	// Free form text field providing additional information about a transaction
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
@@ -1503,7 +1503,7 @@ func (e EntryFlipBrokerCapacity) ToPointer() *EntryFlipBrokerCapacity {
 	return &e
 }
 
-// EntryFlipPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
+// EntryFlipPrevailingMarketPrice - The price for the instrument that is prevailing in the market
 type EntryFlipPrevailingMarketPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -1542,7 +1542,7 @@ func (o *EntryPriceAdjustmentPercent) GetValue() *string {
 	return o.Value
 }
 
-// EntryPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security.
+// EntryPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
 type EntryPriceAdjustmentType string
 
 const (
@@ -1562,7 +1562,7 @@ type EntryPriceAdjustmentRecord struct {
 	PriceAdjustmentAmount *EntryPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
 	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
 	PriceAdjustmentPercent *EntryPriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
-	// The type of price adjustment being applied by the broker to the net price of the security.
+	// The type of price adjustment being applied by the broker to the net price of the security
 	PriceAdjustmentType *EntryPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
 }
 
@@ -1629,7 +1629,7 @@ type Detail struct {
 	Market *string `json:"market,omitempty"`
 	// Max Length 50 characters. Internally generated order id that is returned to client on exec reports
 	OrderID *string `json:"order_id,omitempty"`
-	// The price for the instrument that is prevailing in the market.
+	// The price for the instrument that is prevailing in the market
 	PrevailingMarketPrice *EntryFlipPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// Information about any price adjustments applied to the security
 	PriceAdjustmentRecord *EntryPriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
@@ -1639,7 +1639,7 @@ type Detail struct {
 	SpecialInstructions []string `json:"special_instructions,omitempty"`
 	// Indicates the trade was executed in a security that is not currently listed. When-issued securities are bought and sold before they are officially issued, allowing investors to speculate on their future value
 	WhenIssued *bool `json:"when_issued,omitempty"`
-	// The yields associated with a fixed income trade. Only valid if the SecurityType is FIXED_INCOME
+	// The yields associated with a fixed income trade Only valid if the SecurityType is FIXED_INCOME
 	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
 }
 
@@ -1851,7 +1851,7 @@ func (e EntryFpslAction) ToPointer() *EntryFpslAction {
 	return &e
 }
 
-// Fpsl - Object containing metadata for fully paid stock lending entries
+// Fpsl - Used to record the movements of shares to/ from the fpsl memo location and details related to the fpsl memo
 type Fpsl struct {
 	// Indicates whether shares are being allocated or deallocated
 	Action *EntryFpslAction `json:"action,omitempty"`
@@ -1951,7 +1951,7 @@ func (e InterestType) ToPointer() *InterestType {
 	return &e
 }
 
-// Interest - Object containing metadata for Margin interest
+// Interest - Used to record the payment of interest to accounts that have maintained a cash balance or the charging of interest to accounts that have used margin and details related to the interest
 type Interest struct {
 	// Date on which interest accrues before the calculation is made for payment or charge
 	InterestAccrualEndDate *InterestAccrualEndDate `json:"interest_accrual_end_date,omitempty"`
@@ -1996,19 +1996,19 @@ func (o *EntryInterestPaymentCashRate) GetValue() *string {
 
 // EntryInterestPaymentCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryInterestPaymentCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -2136,7 +2136,7 @@ func (o *EntrySettled) GetValue() *string {
 	return o.Value
 }
 
-// InterestPayment - Object containing metadata for interest payments
+// InterestPayment - Used to record the The payment of an obligation an issuer has agreed to make to holders of an interest-bearing security and details related to the interest payment. Usually, the payment is made in cash and on a scheduled basis
 type InterestPayment struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntryInterestPaymentCashRate `json:"cash_rate,omitempty"`
@@ -2214,19 +2214,19 @@ func (o *EntryLiquidationCashRate) GetValue() *string {
 
 // EntryLiquidationCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryLiquidationCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -2310,7 +2310,7 @@ func (o *EntryEffectiveDate) GetYear() *int {
 	return o.Year
 }
 
-// EntryLiquidationPaymentDate - The anticipated payment date at the depository.
+// EntryLiquidationPaymentDate - The anticipated payment date at the depository
 type EntryLiquidationPaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -2441,7 +2441,7 @@ func (e EntrySubtype) ToPointer() *EntrySubtype {
 	return &e
 }
 
-// Liquidation - Object containing metadata for liquidations
+// Liquidation - Used to record the dismantling of a business by an issuer, paying off debts in order of priority and distributing the remaining assets in cash and/or securities to the owners of the securities and details related to the liquidation
 type Liquidation struct {
 	// Corresponds to whether the entry is incoming outgoing
 	Action *EntryLiquidationAction `json:"action,omitempty"`
@@ -2451,7 +2451,7 @@ type Liquidation struct {
 	CorporateActionGeneralInformation *EntryLiquidationCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
 	// Effective date as declared by the primary exchange that generally coincides with cessation of trading in the old security and commencement of trading in the new security
 	EffectiveDate *EntryEffectiveDate `json:"effective_date,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *EntryLiquidationPaymentDate `json:"payment_date,omitempty"`
 	// Corresponds to the position's trade quantity
 	Quantity *EntryLiquidationQuantity `json:"quantity,omitempty"`
@@ -2541,19 +2541,19 @@ func (o *EntryMaturityCashRate) GetValue() *string {
 
 // EntryMaturityCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryMaturityCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -2606,7 +2606,7 @@ func (o *EntryMaturityCorporateActionGeneralInformation) GetTargetSymbolDescript
 	return o.TargetSymbolDescription
 }
 
-// EntryMaturityPaymentDate - The anticipated payment date at the depository.
+// EntryMaturityPaymentDate - The anticipated payment date at the depository
 type EntryMaturityPaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -2650,13 +2650,13 @@ func (o *EntryMaturityQuantity) GetValue() *string {
 	return o.Value
 }
 
-// Maturity - Object containing metadata for maturity events
+// Maturity - Used to record he final repayment, usually in cash, by an issuer for the entire issue, or remaining outstanding securities of a specific security on a specified date and details related to the maturity
 type Maturity struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntryMaturityCashRate `json:"cash_rate,omitempty"`
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryMaturityCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *EntryMaturityPaymentDate `json:"payment_date,omitempty"`
 	// The trade position quantity used to calculate the disbursed amount
 	Quantity *EntryMaturityQuantity `json:"quantity,omitempty"`
@@ -2719,19 +2719,19 @@ func (o *EntryMergerCashRate) GetValue() *string {
 
 // EntryMergerCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryMergerCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -2855,7 +2855,7 @@ func (e EntryMergerType) ToPointer() *EntryMergerType {
 	return &e
 }
 
-// Merger - Object containing metadata for merger events
+// Merger - Used to record the exchange of one company's security for another company's security, cash, or a combination of cash and securities and details related to the merger
 type Merger struct {
 	// Corresponds to whether the entry is incoming outgoing
 	Action *EntryMergerAction `json:"action,omitempty"`
@@ -2938,19 +2938,19 @@ func (e EntryNameChangeAction) ToPointer() *EntryNameChangeAction {
 
 // EntryNameChangeCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryNameChangeCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -3047,7 +3047,7 @@ func (o *EntryNameChangeQuantity) GetValue() *string {
 	return o.Value
 }
 
-// NameChange - Object containing metadata for name changes
+// NameChange - Used to record changes in the name of a security/securities by the issuer which result in surrendering physical securities or the assigning of a new security identifier which result in new securities being issued and details related to the name changes
 type NameChange struct {
 	// Corresponds to whether the entry is incoming outgoing
 	Action *EntryNameChangeAction `json:"action,omitempty"`
@@ -3120,19 +3120,19 @@ func (o *OriginalProcessDate) GetYear() *int {
 
 // EntryPaymentInKindCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryPaymentInKindCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -3273,7 +3273,7 @@ func (o *EntryPaymentInKindStockRate) GetValue() *string {
 	return o.Value
 }
 
-// PaymentInKind - Object containing metadata for PaymentInKind
+// PaymentInKind - Used to record payments on interest-bearing securities where the payment is made in additional securities rather than cash and details related to the payment
 type PaymentInKind struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryPaymentInKindCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
@@ -3335,8 +3335,8 @@ func (o *EntryPrice) GetValue() *string {
 	return o.Value
 }
 
-// EntryProcessDate - The date that the entry was booked on
-type EntryProcessDate struct {
+// ProcessDate - The date that the entry was booked on
+type ProcessDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
@@ -3345,21 +3345,21 @@ type EntryProcessDate struct {
 	Year *int `json:"year,omitempty"`
 }
 
-func (o *EntryProcessDate) GetDay() *int {
+func (o *ProcessDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Day
 }
 
-func (o *EntryProcessDate) GetMonth() *int {
+func (o *ProcessDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Month
 }
 
-func (o *EntryProcessDate) GetYear() *int {
+func (o *ProcessDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
@@ -3412,19 +3412,19 @@ func (o *EntryRedemptionFullCashRate) GetValue() *string {
 
 // EntryRedemptionFullCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryRedemptionFullCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -3477,7 +3477,7 @@ func (o *EntryRedemptionFullCorporateActionGeneralInformation) GetTargetSymbolDe
 	return o.TargetSymbolDescription
 }
 
-// EntryRedemptionFullPaymentDate - The anticipated payment date at the depository.
+// EntryRedemptionFullPaymentDate - The anticipated payment date at the depository
 type EntryRedemptionFullPaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -3564,7 +3564,7 @@ func (e EntryRedemptionFullSubtype) ToPointer() *EntryRedemptionFullSubtype {
 	return &e
 }
 
-// RedemptionFull - Object containing more information about a redemption
+// RedemptionFull - Used to record the redemption of a security for cash in its entirety for which the holders receive the principal amount of the security and details related to the redemption
 type RedemptionFull struct {
 	// Corresponds to whether the entry is incoming outgoing
 	Action *EntryRedemptionFullAction `json:"action,omitempty"`
@@ -3572,7 +3572,7 @@ type RedemptionFull struct {
 	CashRate *EntryRedemptionFullCashRate `json:"cash_rate,omitempty"`
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryRedemptionFullCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *EntryRedemptionFullPaymentDate `json:"payment_date,omitempty"`
 	// Corresponds to the position's trade quantity
 	Quantity *EntryRedemptionFullQuantity `json:"quantity,omitempty"`
@@ -3651,19 +3651,19 @@ func (o *EntryRedemptionPartialCashRate) GetValue() *string {
 
 // EntryRedemptionPartialCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryRedemptionPartialCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -3760,7 +3760,7 @@ func (o *EntryRedemptionPartialQuantity) GetValue() *string {
 	return o.Value
 }
 
-// RedemptionPartial - Object containing metadata for partial redemption
+// RedemptionPartial - Used when securities are redeemed by the issuer for cash, in part, before their scheduled maturity date and details related to the redemption. The outstanding amount of securities will be proportionally reduced based on a specific percentage of holding
 type RedemptionPartial struct {
 	// Corresponds to whether the entry is incoming or outgoing
 	Action *EntryRedemptionPartialAction `json:"action,omitempty"`
@@ -3825,19 +3825,19 @@ func (e EntryReverseStockSplitAction) ToPointer() *EntryReverseStockSplitAction 
 
 // EntryReverseStockSplitCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryReverseStockSplitCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -3973,7 +3973,7 @@ func (o *EntryReverseStockSplitStockRate) GetValue() *string {
 	return o.Value
 }
 
-// ReverseStockSplit - Object containing metadata for a reverse_stock_split
+// ReverseStockSplit - Used to record the exchange of a company's security for the same company's new security at a preset rate and details related to the reverse stock split
 type ReverseStockSplit struct {
 	// Corresponds to whether the entry is incoming or outgoing
 	Action *EntryReverseStockSplitAction `json:"action,omitempty"`
@@ -4042,19 +4042,19 @@ func (o *ReverseStockSplit) GetStockRate() *EntryReverseStockSplitStockRate {
 
 // EntryRightsDistributionCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryRightsDistributionCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -4107,7 +4107,7 @@ func (o *EntryRightsDistributionCorporateActionGeneralInformation) GetTargetSymb
 	return o.TargetSymbolDescription
 }
 
-// EntryRightsDistributionPaymentDate - The anticipated payment date at the depository.
+// EntryRightsDistributionPaymentDate - The anticipated payment date at the depository
 type EntryRightsDistributionPaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -4182,11 +4182,11 @@ func (o *EntryRightsDistributionSettled) GetValue() *string {
 	return o.Value
 }
 
-// RightsDistribution - Object containing more information about a rights distribution
+// RightsDistribution - Used to record distributions to common stock holders of a company that grant the option to purchase new or additional securities of the same company during a predetermined time period at a predetermined price and details related to the rights distribution
 type RightsDistribution struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryRightsDistributionCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *EntryRightsDistributionPaymentDate `json:"payment_date,omitempty"`
 	// The date on which positions are recorded in order to calculate entitlement
 	RecordDate *EntryRightsDistributionRecordDate `json:"record_date,omitempty"`
@@ -4224,19 +4224,19 @@ func (o *RightsDistribution) GetSettled() *EntryRightsDistributionSettled {
 
 // EntryRightsSubscriptionCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryRightsSubscriptionCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -4289,7 +4289,7 @@ func (o *EntryRightsSubscriptionCorporateActionGeneralInformation) GetTargetSymb
 	return o.TargetSymbolDescription
 }
 
-// RightsSubscription - Object containing metadata for rights subscriptions
+// RightsSubscription - Used to record the purchase of new or additional securities and details related to the subscription. Rights are often tradable in a secondary market
 type RightsSubscription struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryRightsSubscriptionCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
@@ -4302,7 +4302,7 @@ func (o *RightsSubscription) GetCorporateActionGeneralInformation() *EntryRights
 	return o.CorporateActionGeneralInformation
 }
 
-// RoundingAdjustment - Object containing metadata for rounding
+// RoundingAdjustment - Used to record rounding adjustments when the sum(price x quantity) of all entries for a given activity do not equal the price x quantity of the fully formed activity record
 type RoundingAdjustment struct {
 	// Free form text field providing reason for rounding
 	RoundingReason *string `json:"rounding_reason,omitempty"`
@@ -4330,19 +4330,19 @@ func (o *EntrySaleOfRightsCashRate) GetValue() *string {
 
 // EntrySaleOfRightsCorporateActionGeneralInformation - Common fields for corporate actions
 type EntrySaleOfRightsCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -4395,7 +4395,7 @@ func (o *EntrySaleOfRightsCorporateActionGeneralInformation) GetTargetSymbolDesc
 	return o.TargetSymbolDescription
 }
 
-// EntrySaleOfRightsPaymentDate - The anticipated payment date at the depository.
+// EntrySaleOfRightsPaymentDate - The anticipated payment date at the depository
 type EntrySaleOfRightsPaymentDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -4470,13 +4470,13 @@ func (o *EntrySaleOfRightsSettled) GetValue() *string {
 	return o.Value
 }
 
-// SaleOfRights - Object containing more information about a sale_of_rights
+// SaleOfRights - Used to record payments made by the issuer to security holders when the security is subject to redemptions other than full and partial calls (e.g., early CD redemptions) and details related to the sale of rights
 type SaleOfRights struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntrySaleOfRightsCashRate `json:"cash_rate,omitempty"`
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntrySaleOfRightsCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PaymentDate *EntrySaleOfRightsPaymentDate `json:"payment_date,omitempty"`
 	// The date on which positions are recorded in order to calculate entitlement
 	RecordDate *EntrySaleOfRightsRecordDate `json:"record_date,omitempty"`
@@ -4581,19 +4581,19 @@ func (e SideModifier) ToPointer() *SideModifier {
 
 // EntrySpinOffCorporateActionGeneralInformation - Common fields for corporate actions
 type EntrySpinOffCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -4646,7 +4646,7 @@ func (o *EntrySpinOffCorporateActionGeneralInformation) GetTargetSymbolDescripti
 	return o.TargetSymbolDescription
 }
 
-// PayDate - The anticipated payment date at the depository.
+// PayDate - The anticipated payment date at the depository
 type PayDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -4734,11 +4734,11 @@ func (o *EntrySpinOffRecordDate) GetYear() *int {
 	return o.Year
 }
 
-// SpinOff - Object containing metadata for spinoffs
+// SpinOff - Used to record a distribution of subsidiary securities to the shareholders of the parent company without a surrender of securities or payment and details related to the spinoff. A spin-off represents a form of divestiture resulting in an independent company
 type SpinOff struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntrySpinOffCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PayDate *PayDate `json:"pay_date,omitempty"`
 	// Corresponds to the position's settled quantity
 	Quantity *EntrySpinOffQuantity `json:"quantity,omitempty"`
@@ -4799,19 +4799,19 @@ func (e EntryState) ToPointer() *EntryState {
 
 // EntryStockDividendCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryStockDividendCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -4864,7 +4864,7 @@ func (o *EntryStockDividendCorporateActionGeneralInformation) GetTargetSymbolDes
 	return o.TargetSymbolDescription
 }
 
-// EntryPayDate - The anticipated payment date at the depository.
+// EntryPayDate - The anticipated payment date at the depository
 type EntryPayDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -4952,11 +4952,11 @@ func (o *EntryStockDividendRecordDate) GetYear() *int {
 	return o.Year
 }
 
-// StockDividend - Object containing metadata for stock dividends
+// StockDividend - Used to record a dividend paid to shareholders in the form of shares of stock in either the issuing company or in another company and details related to the stock dividend
 type StockDividend struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryStockDividendCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PayDate *EntryPayDate `json:"pay_date,omitempty"`
 	// Corresponds to the position's settled quantity
 	Quantity *EntryStockDividendQuantity `json:"quantity,omitempty"`
@@ -5003,19 +5003,19 @@ func (o *StockDividend) GetRecordDate() *EntryStockDividendRecordDate {
 
 // EntryStockSplitCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryStockSplitCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -5094,7 +5094,7 @@ func (o *EntryFactorNumerator) GetValue() *string {
 	return o.Value
 }
 
-// EntryStockSplitPayDate - The anticipated payment date at the depository.
+// EntryStockSplitPayDate - The anticipated payment date at the depository
 type EntryStockSplitPayDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -5169,7 +5169,7 @@ func (o *EntryStockSplitRecordDate) GetYear() *int {
 	return o.Year
 }
 
-// StockSplit - Object containing metadata for stock splits
+// StockSplit - Used to record the increase in a company's number of outstanding shares of stock without any change in the shareholder's equity or the aggregate market value at the time of the split and details related to the stock split
 type StockSplit struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryStockSplitCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
@@ -5177,7 +5177,7 @@ type StockSplit struct {
 	FactorDenominator *EntryFactorDenominator `json:"factor_denominator,omitempty"`
 	// The rate of the security distribution
 	FactorNumerator *EntryFactorNumerator `json:"factor_numerator,omitempty"`
-	// The anticipated payment date at the depository.
+	// The anticipated payment date at the depository
 	PayDate *EntryStockSplitPayDate `json:"pay_date,omitempty"`
 	// Corresponds to the position's trade quantity
 	Quantity *EntryStockSplitQuantity `json:"quantity,omitempty"`
@@ -5253,7 +5253,7 @@ func (e EntrySweepType) ToPointer() *EntrySweepType {
 	return &e
 }
 
-// Sweep - Object containing metadata for sweeps
+// Sweep - Used to record sweeps from a cash balance to an alternative asset or vice versa and details related to the sweep
 type Sweep struct {
 	// Indicates purchase or redemption of the sweep asset
 	Action *EntrySweepAction `json:"action,omitempty"`
@@ -5299,19 +5299,19 @@ func (o *EntryTenderOfferCashRate) GetValue() *string {
 
 // EntryTenderOfferCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryTenderOfferCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -5364,7 +5364,7 @@ func (o *EntryTenderOfferCorporateActionGeneralInformation) GetTargetSymbolDescr
 	return o.TargetSymbolDescription
 }
 
-// TenderOffer - Object containing metadata for tender offers
+// TenderOffer - Used to record the sale of securities for a specified price due to an offer from the issuer or a third party and details related to the tender offer
 type TenderOffer struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *EntryTenderOfferCashRate `json:"cash_rate,omitempty"`
@@ -5400,7 +5400,7 @@ func (e EntryBrokerCapacity) ToPointer() *EntryBrokerCapacity {
 	return &e
 }
 
-// EntryPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
+// EntryPrevailingMarketPrice - The price for the instrument that is prevailing in the market
 type EntryPrevailingMarketPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -5439,7 +5439,7 @@ func (o *PriceAdjustmentPercent) GetValue() *string {
 	return o.Value
 }
 
-// PriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security.
+// PriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
 type PriceAdjustmentType string
 
 const (
@@ -5459,7 +5459,7 @@ type PriceAdjustmentRecord struct {
 	PriceAdjustmentAmount *PriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
 	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
 	PriceAdjustmentPercent *PriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
-	// The type of price adjustment being applied by the broker to the net price of the security.
+	// The type of price adjustment being applied by the broker to the net price of the security
 	PriceAdjustmentType *PriceAdjustmentType `json:"price_adjustment_type,omitempty"`
 }
 
@@ -5484,7 +5484,7 @@ func (o *PriceAdjustmentRecord) GetPriceAdjustmentType() *PriceAdjustmentType {
 	return o.PriceAdjustmentType
 }
 
-// Trade - Object containing metadata for trades
+// Trade - Used to record the the execution of a buy or sell transaction resulting in the transfer of securities and corresponding payment and details related to the trade
 type Trade struct {
 	// To be populated by the submitter of the trade detail
 	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
@@ -5526,7 +5526,7 @@ type Trade struct {
 	Market *string `json:"market,omitempty"`
 	// Max Length 50 characters. Internally generated order id that is returned to client on exec reports
 	OrderID *string `json:"order_id,omitempty"`
-	// The price for the instrument that is prevailing in the market.
+	// The price for the instrument that is prevailing in the market
 	PrevailingMarketPrice *EntryPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// Information about any price adjustments applied to the security
 	PriceAdjustmentRecord *PriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
@@ -5536,7 +5536,7 @@ type Trade struct {
 	SpecialInstructions []string `json:"special_instructions,omitempty"`
 	// Indicates the trade was executed in a security that is not currently listed. When-issued securities are bought and sold before they are officially issued, allowing investors to speculate on their future value
 	WhenIssued *bool `json:"when_issued,omitempty"`
-	// The yields associated with a fixed income trade. Only valid if the SecurityType is FIXED_INCOME
+	// The yields associated with a fixed income trade Only valid if the SecurityType is FIXED_INCOME
 	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
 }
 
@@ -5731,13 +5731,14 @@ const (
 	EntryTransferTypeDeconversion            EntryTransferType = "DECONVERSION"
 	EntryTransferTypeMigration               EntryTransferType = "MIGRATION"
 	EntryTransferTypeManualAdjustment        EntryTransferType = "MANUAL_ADJUSTMENT"
+	EntryTransferTypeInternalConversion      EntryTransferType = "INTERNAL_CONVERSION"
 )
 
 func (e EntryTransferType) ToPointer() *EntryTransferType {
 	return &e
 }
 
-// Transfer - Object containing metadata for transfers
+// Transfer - Used to record more generic transfers of funds or securities and details related to the transfer. The transfer type and activity_description can be used to provide more specific context
 type Transfer struct {
 	// Free form text field
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
@@ -5785,19 +5786,19 @@ func (e EntryType) ToPointer() *EntryType {
 
 // EntryUnitSplitCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryUnitSplitCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -5863,7 +5864,7 @@ func (o *EntryUnitSplitStockRate) GetValue() *string {
 	return o.Value
 }
 
-// UnitSplit - Object containing metadata for unit splits
+// UnitSplit - Used to record increases in the number of units outstanding through the issuing of more units to current shareholders and details related to the unit split
 type UnitSplit struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryUnitSplitCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
@@ -5887,19 +5888,19 @@ func (o *UnitSplit) GetStockRate() *EntryUnitSplitStockRate {
 
 // EntryWarrantExerciseCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryWarrantExerciseCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -5952,7 +5953,7 @@ func (o *EntryWarrantExerciseCorporateActionGeneralInformation) GetTargetSymbolD
 	return o.TargetSymbolDescription
 }
 
-// WarrantExercise - Object containing metadata for warrant exercises
+// WarrantExercise - Used to record the exchange of warrants for shares and details related to the warrant exercise. The exercise will commonly require a payment based upon a pre-determined value and time and details related to the warrant exercise
 type WarrantExercise struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryWarrantExerciseCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
@@ -6032,7 +6033,7 @@ func (e EntryWithdrawalType) ToPointer() *EntryWithdrawalType {
 	return &e
 }
 
-// Withdrawal - Object containing metadata for withdrawals
+// Withdrawal - Used to record withdrawals of funds from an account and capture details related to the withdrawal
 type Withdrawal struct {
 	// Free form text field
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
@@ -6147,7 +6148,7 @@ func (e Review) ToPointer() *Review {
 	return &e
 }
 
-// WithdrawalPendingReview - Object containing metadata about withdrawals that have been requested, but have not posted
+// WithdrawalPendingReview - Used to record the movement of funds to/ from the pending_withdrawal memo location
 type WithdrawalPendingReview struct {
 	// Indicates the state of the withdrawal review
 	Review *Review `json:"review,omitempty"`
@@ -6250,7 +6251,7 @@ func (e EntryWithholdingType) ToPointer() *EntryWithholdingType {
 	return &e
 }
 
-// EntryWithholding - Object containing metadata for tax withholdings
+// EntryWithholding - Used to record tax withholdings and details related to the withholding
 type EntryWithholding struct {
 	// the rate will be converted to a percentage in the activity description
 	Rate *EntryWithholdingRate `json:"rate,omitempty"`
@@ -6300,19 +6301,19 @@ func (o *EntryWithholding) GetType() *EntryWithholdingType {
 
 // EntryWorthlessCorporateActionGeneralInformation - Common fields for corporate actions
 type EntryWorthlessCorporateActionGeneralInformation struct {
-	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event.
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
 	CorporateActionID *string `json:"corporate_action_id,omitempty"`
-	// Asset Id of the new security after the corporate action event is processed.
+	// Asset Id of the new security after the corporate action event is processed
 	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
-	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed.
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
 	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
-	// Asset Id of the existing security before the corporate action event is processed.
+	// Asset Id of the existing security before the corporate action event is processed
 	TargetAssetID *string `json:"target_asset_id,omitempty"`
-	// External Identifier of the existing security before the corporate action event is processed.
+	// External Identifier of the existing security before the corporate action event is processed
 	TargetCusip *string `json:"target_cusip,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed.
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
 	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
 }
 
@@ -6427,7 +6428,7 @@ func (o *EntryWorthlessPaymentDate) GetYear() *int {
 	return o.Year
 }
 
-// Worthless - Object containing metadata for worthless events
+// Worthless - Used to record the removal of positions in a given security when the DTC has received formal notice that the security is worthless and details related to the worthless event
 type Worthless struct {
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *EntryWorthlessCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
@@ -6460,103 +6461,103 @@ func (o *Worthless) GetPaymentDate() *EntryWorthlessPaymentDate {
 
 // Entry is a single sided ledger booking that serves as the core ledger component; it is sparsely populated based on the entry type and the goal of the entry
 type Entry struct {
-	// Object containing metadata for pending outgoing acats
+	// Used to record the movement of funds or shares to/ from the pending_acats memo location
 	AcatsPendingOut *AcatsPendingOut `json:"acats_pending_out,omitempty"`
 	// A globally unique identifier referencing a single account; this is the main identifier for an account used for machine-to-machine interactions
 	AccountID *string `json:"account_id,omitempty"`
 	// Indicates the memo location impacted by an entry
 	AccountMemo *AccountMemo `json:"account_memo,omitempty"`
-	// Object containing metadata for account transfers
+	// Used to record the movement of funds or shares during the bookkeeping phase of an account transfer and details related to the account transfer
 	AccountTransfer *AccountTransfer `json:"account_transfer,omitempty"`
 	// Indicates that the entry references accrued interest that has been earned but not yet paid between the last interest payment and the date of the trade
 	AccruedInterest *EntryAccruedInterest `json:"accrued_interest,omitempty"`
 	// Object containing metadata for acquisition events
 	Acquisition *Acquisition `json:"acquisition,omitempty"`
-	// The calendar date an activity took place For Trade entries, the activity date reflects the trade date of the market in which the trade was executed For Cash entries, this reflects the banking day the cash will be moved
+	// The activity date refers to the specific calendar day on which a financial transaction, such as a trade at an exchange or a deposit at a bank, was executed. This date is specific to the institution where the transaction took place, capturing the exact day on which the institution formally records and effects the transaction
 	ActivityDate *ActivityDate `json:"activity_date,omitempty"`
 	// Apex-generated unique activity identifier
 	ActivityID *string `json:"activity_id,omitempty"`
-	// The time when the entry occurred as reported to Apex
+	// Activity time refers to the precise moment, recorded in Coordinated Universal Time (UTC), when a financial transaction is executed as reported to Apex
 	ActivityTime *time.Time `json:"activity_time,omitempty"`
-	// An Apex-provided, global identifier created on a per asset bases which provides connectivity across all areas Required, except for currency movements which should instead have a currency_asset_id.
+	// An Apex-provided, global identifier created on a per asset bases which provides connectivity across all areas Required, except for currency movements which should instead have a currency_asset_id
 	AssetID *string `json:"asset_id,omitempty"`
-	// Object containing metadata for capital gains
+	// Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
 	CapitalGains *CapitalGains `json:"capital_gains,omitempty"`
-	// Object containing for cash dividends
+	// Used to record the distribution of cash to shareholders, paid by the issuer, usually based upon current earnings and/or accumulated profits as declared by the board of directors and details related to the cash dividend
 	CashDividend *CashDividend `json:"cash_dividend,omitempty"`
 	// Indicates that the entry references commission charged by brokers or financial intermediaries for executing financial transactions on behalf of clients
 	Commission *EntryCommission `json:"commission,omitempty"`
-	// Object containing metadata for conversions (Conversion of securities into another form of securities)
+	// Used to record the conversion of securities (generally convertible bonds or preferred shares) into another form of securities (usually common shares) at a pre-stated price or rate and details related to the conversion
 	Conversion *Conversion `json:"conversion,omitempty"`
 	// Object containing metadata for memo locations that have been adjusted due to a corporate action
 	CorporateActionMemoAdjustment *CorporateActionMemoAdjustment `json:"corporate_action_memo_adjustment,omitempty"`
-	// Object containing more information about the credit being paid
+	// Used to disburse funds into a customer's account, typically for purposes such as refunds, interest payments, or rewards from enrolled programs and details related to the credit
 	Credit *Credit `json:"credit,omitempty"`
 	// The asset_id of the currency that all monetary values relate to Required for currency movements
 	CurrencyAssetID *string `json:"currency_asset_id,omitempty"`
 	// Object containing metadata for delivery events
 	Delivery *Delivery `json:"delivery,omitempty"`
-	// Object containing more information about a deposit
+	// Used to record deposits of funds into an account and capture details related to the deposit
 	Deposit *Deposit `json:"deposit,omitempty"`
 	// A plain text description of the entry; will not be available to search on or build other features off of
 	Description *string `json:"description,omitempty"`
-	// Object containing metadata for reserving cash until the DRIP trades are executed
+	// Used to record the movement of funds to/ from the pending_drip memo location
 	Drip *Drip `json:"drip,omitempty"`
 	// The unique id of the entry
 	EntryID *string `json:"entry_id,omitempty"`
-	// Object containing metadata for exchanges
+	// Used to record the exchange of certificates for a new security or cash and details related to the exchange
 	Exchange *Exchange `json:"exchange,omitempty"`
-	// Object containing more information about the fee being charged
+	// Used to record Fees that have been assessed to account and capture details related to the fee
 	Fee *EntryFee `json:"fee,omitempty"`
 	// Object containing metadata for a Flip
 	Flip *Flip `json:"flip,omitempty"`
-	// Object containing metadata for fully paid stock lending entries
+	// Used to record the movements of shares to/ from the fpsl memo location and details related to the fpsl memo
 	Fpsl *Fpsl `json:"fpsl,omitempty"`
 	// The monetary value of an activity, exclusive of any fees (First money)
 	GrossAmount *GrossAmount `json:"gross_amount,omitempty"`
-	// Object containing metadata for Margin interest
+	// Used to record the payment of interest to accounts that have maintained a cash balance or the charging of interest to accounts that have used margin and details related to the interest
 	Interest *Interest `json:"interest,omitempty"`
-	// Object containing metadata for interest payments
+	// Used to record the The payment of an obligation an issuer has agreed to make to holders of an interest-bearing security and details related to the interest payment. Usually, the payment is made in cash and on a scheduled basis
 	InterestPayment *InterestPayment `json:"interest_payment,omitempty"`
-	// Object containing metadata for liquidations
+	// Used to record the dismantling of a business by an issuer, paying off debts in order of priority and distributing the remaining assets in cash and/or securities to the owners of the securities and details related to the liquidation
 	Liquidation *Liquidation `json:"liquidation,omitempty"`
-	// Object containing metadata for maturity events
+	// Used to record he final repayment, usually in cash, by an issuer for the entire issue, or remaining outstanding securities of a specific security on a specified date and details related to the maturity
 	Maturity *Maturity `json:"maturity,omitempty"`
-	// Object containing metadata for merger events
+	// Used to record the exchange of one company's security for another company's security, cash, or a combination of cash and securities and details related to the merger
 	Merger *Merger `json:"merger,omitempty"`
 	// accounts/{account_id}/entries/{entry_id}
 	Name *string `json:"name,omitempty"`
-	// Object containing metadata for name changes
+	// Used to record changes in the name of a security/securities by the issuer which result in surrendering physical securities or the assigning of a new security identifier which result in new securities being issued and details related to the name changes
 	NameChange *NameChange `json:"name_change,omitempty"`
 	// The original entry id; stable across reversals and corrections; use for maintaining lineage of entries through multiple corrections/reversals
 	OriginalID *string `json:"original_id,omitempty"`
 	// The original entry process date; stable across reversals and corrections; use for maintaining lineage of entries through multiple corrections/reversals
 	OriginalProcessDate *OriginalProcessDate `json:"original_process_date,omitempty"`
-	// Object containing metadata for PaymentInKind
+	// Used to record payments on interest-bearing securities where the payment is made in additional securities rather than cash and details related to the payment
 	PaymentInKind *PaymentInKind `json:"payment_in_kind,omitempty"`
 	// The monetary value paid for a given security in a trade Required, except for currency movements
 	Price *EntryPrice `json:"price,omitempty"`
 	// The date that the entry was booked on
-	ProcessDate *EntryProcessDate `json:"process_date,omitempty"`
+	ProcessDate *ProcessDate `json:"process_date,omitempty"`
 	// The quantity of shares bought, sold, or moved. For entries/ activities involving Fixed Income assets, quantity is expressed as par value Required for trades and memos, optional for movements.
 	Quantity *EntryQuantity `json:"quantity,omitempty"`
 	// Object containing metadata for receive events
 	Receive *Receive `json:"receive,omitempty"`
-	// Object containing more information about a redemption
+	// Used to record the redemption of a security for cash in its entirety for which the holders receive the principal amount of the security and details related to the redemption
 	RedemptionFull *RedemptionFull `json:"redemption_full,omitempty"`
-	// Object containing metadata for partial redemption
+	// Used when securities are redeemed by the issuer for cash, in part, before their scheduled maturity date and details related to the redemption. The outstanding amount of securities will be proportionally reduced based on a specific percentage of holding
 	RedemptionPartial *RedemptionPartial `json:"redemption_partial,omitempty"`
-	// Object containing metadata for a reverse_stock_split
+	// Used to record the exchange of a company's security for the same company's new security at a preset rate and details related to the reverse stock split
 	ReverseStockSplit *ReverseStockSplit `json:"reverse_stock_split,omitempty"`
 	// The entry_id of the original entry; only populated on entries with a status of "Reversal"
 	ReversedEntryID *string `json:"reversed_entry_id,omitempty"`
-	// Object containing more information about a rights distribution
+	// Used to record distributions to common stock holders of a company that grant the option to purchase new or additional securities of the same company during a predetermined time period at a predetermined price and details related to the rights distribution
 	RightsDistribution *RightsDistribution `json:"rights_distribution,omitempty"`
-	// Object containing metadata for rights subscriptions
+	// Used to record the purchase of new or additional securities and details related to the subscription. Rights are often tradable in a secondary market
 	RightsSubscription *RightsSubscription `json:"rights_subscription,omitempty"`
-	// Object containing metadata for rounding
+	// Used to record rounding adjustments when the sum(price x quantity) of all entries for a given activity do not equal the price x quantity of the fully formed activity record
 	RoundingAdjustment *RoundingAdjustment `json:"rounding_adjustment,omitempty"`
-	// Object containing more information about a sale_of_rights
+	// Used to record payments made by the issuer to security holders when the security is subject to redemptions other than full and partial calls (e.g., early CD redemptions) and details related to the sale of rights
 	SaleOfRights *SaleOfRights `json:"sale_of_rights,omitempty"`
 	// The date a given entry/ activity will officially settle
 	SettleDate *SettleDate `json:"settle_date,omitempty"`
@@ -6564,37 +6565,37 @@ type Entry struct {
 	Side *EntrySide `json:"side,omitempty"`
 	// Additional information about a trade Should be populated if possible for trades; the side modifier for the trade
 	SideModifier *SideModifier `json:"side_modifier,omitempty"`
-	// Object containing metadata for spinoffs
+	// Used to record a distribution of subsidiary securities to the shareholders of the parent company without a surrender of securities or payment and details related to the spinoff. A spin-off represents a form of divestiture resulting in an independent company
 	SpinOff *SpinOff `json:"spin_off,omitempty"`
 	// Set to be NEW for BookEntries, other statuses will be assigned via ModifyActivities; the state of the entry
 	State *EntryState `json:"state,omitempty"`
-	// Object containing metadata for stock dividends
+	// Used to record a dividend paid to shareholders in the form of shares of stock in either the issuing company or in another company and details related to the stock dividend
 	StockDividend *StockDividend `json:"stock_dividend,omitempty"`
-	// Object containing metadata for stock splits
+	// Used to record the increase in a company's number of outstanding shares of stock without any change in the shareholder's equity or the aggregate market value at the time of the split and details related to the stock split
 	StockSplit *StockSplit `json:"stock_split,omitempty"`
 	// String representation of the metadata object containing more information about an entry/activity
 	SubtypeCategory *string `json:"subtype_category,omitempty"`
-	// Object containing metadata for sweeps
+	// Used to record sweeps from a cash balance to an alternative asset or vice versa and details related to the sweep
 	Sweep *Sweep `json:"sweep,omitempty"`
-	// Object containing metadata for tender offers
+	// Used to record the sale of securities for a specified price due to an offer from the issuer or a third party and details related to the tender offer
 	TenderOffer *TenderOffer `json:"tender_offer,omitempty"`
-	// Object containing metadata for trades
+	// Used to record the the execution of a buy or sell transaction resulting in the transfer of securities and corresponding payment and details related to the trade
 	Trade *Trade `json:"trade,omitempty"`
-	// Object containing metadata for transfers
+	// Used to record more generic transfers of funds or securities and details related to the transfer. The transfer type and activity_description can be used to provide more specific context
 	Transfer *Transfer `json:"transfer,omitempty"`
 	// The Type of the entry; determines the set of mandatory fields as well as informing downstream processes how to handle this record
 	Type *EntryType `json:"type,omitempty"`
-	// Object containing metadata for unit splits
+	// Used to record increases in the number of units outstanding through the issuing of more units to current shareholders and details related to the unit split
 	UnitSplit *UnitSplit `json:"unit_split,omitempty"`
-	// Object containing metadata for warrant exercises
+	// Used to record the exchange of warrants for shares and details related to the warrant exercise. The exercise will commonly require a payment based upon a pre-determined value and time and details related to the warrant exercise
 	WarrantExercise *WarrantExercise `json:"warrant_exercise,omitempty"`
-	// Object containing metadata for withdrawals
+	// Used to record withdrawals of funds from an account and capture details related to the withdrawal
 	Withdrawal *Withdrawal `json:"withdrawal,omitempty"`
-	// Object containing metadata about withdrawals that have been requested, but have not posted
+	// Used to record the movement of funds to/ from the pending_withdrawal memo location
 	WithdrawalPendingReview *WithdrawalPendingReview `json:"withdrawal_pending_review,omitempty"`
-	// Object containing metadata for tax withholdings
+	// Used to record tax withholdings and details related to the withholding
 	Withholding *EntryWithholding `json:"withholding,omitempty"`
-	// Object containing metadata for worthless events
+	// Used to record the removal of positions in a given security when the DTC has received formal notice that the security is worthless and details related to the worthless event
 	Worthless *Worthless `json:"worthless,omitempty"`
 }
 
@@ -6875,7 +6876,7 @@ func (o *Entry) GetPrice() *EntryPrice {
 	return o.Price
 }
 
-func (o *Entry) GetProcessDate() *EntryProcessDate {
+func (o *Entry) GetProcessDate() *ProcessDate {
 	if o == nil {
 		return nil
 	}

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TransferScheduleSummaryAmount - A cash amount in the format of decimal value. An unset or empty value represents a full disbursement
 type TransferScheduleSummaryAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -44,21 +39,6 @@ const (
 func (e TransferScheduleSummaryMechanism) ToPointer() *TransferScheduleSummaryMechanism {
 	return &e
 }
-func (e *TransferScheduleSummaryMechanism) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACH":
-		fallthrough
-	case "WIRE":
-		*e = TransferScheduleSummaryMechanism(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransferScheduleSummaryMechanism: %v", v)
-	}
-}
 
 // TransferScheduleSummaryTemporalTaxYear - A temporal tax year value. This will always evaluate to a year based on the date the transfer was initiated.
 type TransferScheduleSummaryTemporalTaxYear string
@@ -77,17 +57,18 @@ func (e TransferScheduleSummaryTemporalTaxYear) ToPointer() *TransferScheduleSum
 type TransferScheduleSummaryType string
 
 const (
-	TransferScheduleSummaryTypeTypeUnspecified    TransferScheduleSummaryType = "TYPE_UNSPECIFIED"
-	TransferScheduleSummaryTypeRegular            TransferScheduleSummaryType = "REGULAR"
-	TransferScheduleSummaryTypeEmployee           TransferScheduleSummaryType = "EMPLOYEE"
-	TransferScheduleSummaryTypeEmployer           TransferScheduleSummaryType = "EMPLOYER"
-	TransferScheduleSummaryTypeRecharacterization TransferScheduleSummaryType = "RECHARACTERIZATION"
-	TransferScheduleSummaryTypeRollover60Day      TransferScheduleSummaryType = "ROLLOVER_60_DAY"
-	TransferScheduleSummaryTypeRolloverDirect     TransferScheduleSummaryType = "ROLLOVER_DIRECT"
-	TransferScheduleSummaryTypeTransfer           TransferScheduleSummaryType = "TRANSFER"
-	TransferScheduleSummaryTypeTrusteeFee         TransferScheduleSummaryType = "TRUSTEE_FEE"
-	TransferScheduleSummaryTypeConversion         TransferScheduleSummaryType = "CONVERSION"
-	TransferScheduleSummaryTypeRepayment          TransferScheduleSummaryType = "REPAYMENT"
+	TransferScheduleSummaryTypeTypeUnspecified           TransferScheduleSummaryType = "TYPE_UNSPECIFIED"
+	TransferScheduleSummaryTypeRegular                   TransferScheduleSummaryType = "REGULAR"
+	TransferScheduleSummaryTypeEmployee                  TransferScheduleSummaryType = "EMPLOYEE"
+	TransferScheduleSummaryTypeEmployer                  TransferScheduleSummaryType = "EMPLOYER"
+	TransferScheduleSummaryTypeRecharacterization        TransferScheduleSummaryType = "RECHARACTERIZATION"
+	TransferScheduleSummaryTypeRollover60Day             TransferScheduleSummaryType = "ROLLOVER_60_DAY"
+	TransferScheduleSummaryTypeRolloverDirect            TransferScheduleSummaryType = "ROLLOVER_DIRECT"
+	TransferScheduleSummaryTypeTransfer                  TransferScheduleSummaryType = "TRANSFER"
+	TransferScheduleSummaryTypeTrusteeFee                TransferScheduleSummaryType = "TRUSTEE_FEE"
+	TransferScheduleSummaryTypeConversion                TransferScheduleSummaryType = "CONVERSION"
+	TransferScheduleSummaryTypeRepayment                 TransferScheduleSummaryType = "REPAYMENT"
+	TransferScheduleSummaryTypeContributionNonReportable TransferScheduleSummaryType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e TransferScheduleSummaryType) ToPointer() *TransferScheduleSummaryType {
@@ -243,6 +224,9 @@ const (
 	TransferScheduleSummaryRetirementDistributionTypePlanLoan401K                               TransferScheduleSummaryRetirementDistributionType = "PLAN_LOAN_401K"
 	TransferScheduleSummaryRetirementDistributionTypePrematureSimpleIraLessThan2Years           TransferScheduleSummaryRetirementDistributionType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	TransferScheduleSummaryRetirementDistributionTypeNormalRothIraGreaterThan5Years             TransferScheduleSummaryRetirementDistributionType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	TransferScheduleSummaryRetirementDistributionTypeNetIncomeAttributable                      TransferScheduleSummaryRetirementDistributionType = "NET_INCOME_ATTRIBUTABLE"
+	TransferScheduleSummaryRetirementDistributionTypeRevocation                                 TransferScheduleSummaryRetirementDistributionType = "REVOCATION"
+	TransferScheduleSummaryRetirementDistributionTypeNonReportable                              TransferScheduleSummaryRetirementDistributionType = "NON_REPORTABLE"
 )
 
 func (e TransferScheduleSummaryRetirementDistributionType) ToPointer() *TransferScheduleSummaryRetirementDistributionType {

@@ -1,6 +1,6 @@
 # EntrySaleOfRightsPaymentDate
 
-The anticipated payment date at the depository.
+The anticipated payment date at the depository
 
 
 ## Fields

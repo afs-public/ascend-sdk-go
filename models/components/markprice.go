@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // MarkPricePrice - The price value
 type MarkPricePrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -32,25 +27,6 @@ const (
 
 func (e MarkPriceType) ToPointer() *MarkPriceType {
 	return &e
-}
-func (e *MarkPriceType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PERCENTAGE_OF_PAR":
-		fallthrough
-	case "DIRTY_PERCENTAGE_OF_PAR":
-		fallthrough
-	case "YIELD_TO_WORST":
-		fallthrough
-	case "YIELD_TO_MATURITY":
-		*e = MarkPriceType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for MarkPriceType: %v", v)
-	}
 }
 
 // MarkPrice - The definition of a price value and its calculation method as returned in mark data

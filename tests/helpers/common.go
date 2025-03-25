@@ -19,6 +19,8 @@ import (
 
 var EnrollmentPrincipalApproverID = "01HMESE8WMDNTTWJ2BAEG3TZWA"
 
+const WITHDRAWAL_ACCOUNT_ID = "01JHGTEPC6ZTAHCFRH2MD3VJJT"
+
 func SetupAscendSDK() (*ascendsdk.SDK, error) {
 	privateKey := os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY")
 	apiKey := os.Getenv("API_KEY")

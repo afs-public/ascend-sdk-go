@@ -2,6 +2,7 @@ package accounts
 
 import (
 	"context"
+	"os"
 	"testing"
 	"time"
 
@@ -120,6 +121,13 @@ func TestEnrollmentsAndAgreements(t *testing.T) {
 		}
 
 		res, err := sdk.EnrollmentsAndAgreements.DeactivateEnrollment(ctx, *fixtures.AccountId(), deactivateEnrollmentRequest)
+		assert.NoError(t, err)
+		assert.NotNil(t, res)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	})
+
+	t.Run("TestAccounts_ListAvailableEnrollmentsByAccountGroup", func(t *testing.T) {
+		res, err := sdk.EnrollmentsAndAgreements.AccountsListAvailableEnrollmentsByAccountGroup(ctx, os.Getenv("ACCOUNT_GROUP_ID"), nil, nil, nil)
 		assert.NoError(t, err)
 		assert.NotNil(t, res)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

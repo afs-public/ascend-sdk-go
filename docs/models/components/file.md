@@ -1,11 +1,11 @@
 # File
 
-The file containing the snapshot data.
+The details of file containing the snapshot data. This contains the download uri and uri expiry time.
 
 
 ## Fields
 
-| Field                                            | Type                                             | Required                                         | Description                                      |
-| ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
-| `DownloadURI`                                    | **string*                                        | :heavy_minus_sign:                               | The signed download uri for the file.            |
-| `URIExpiryTime`                                  | [*time.Time](https://pkg.go.dev/time#Time)       | :heavy_minus_sign:                               | The timestamp at which the download uri expires. |
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `DownloadURI`                                                                                         | **string*                                                                                             | :heavy_minus_sign:                                                                                    | The signed download uri for the file. This allows the client to download the file.                    | https://storage.googleapis.com/download_link                                                          |
+| `URIExpiryTime`                                                                                       | [*time.Time](https://pkg.go.dev/time#Time)                                                            | :heavy_minus_sign:                                                                                    | The timestamp at which the download uri expires in UTC. This is set to 1 hour after the request time. | 2023-09-30 01:00:00 +0000 UTC                                                                         |

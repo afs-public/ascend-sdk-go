@@ -2,13 +2,13 @@
 
 package components
 
-// NetAmount - The net amount of the trade in USD. This value is always positive.
-type NetAmount struct {
+// CalculateCashBalanceResponseTradeSummaryNetAmount - The net amount of the trade in USD. This value is always positive.
+type CalculateCashBalanceResponseTradeSummaryNetAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *NetAmount) GetValue() *string {
+func (o *CalculateCashBalanceResponseTradeSummaryNetAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -22,7 +22,7 @@ type CalculateCashBalanceResponseTradeSummary struct {
 	// The asset that was traded.
 	Asset *string `json:"asset,omitempty"`
 	// The net amount of the trade in USD. This value is always positive.
-	NetAmount *NetAmount `json:"net_amount,omitempty"`
+	NetAmount *CalculateCashBalanceResponseTradeSummaryNetAmount `json:"net_amount,omitempty"`
 }
 
 func (o *CalculateCashBalanceResponseTradeSummary) GetActivity() *string {
@@ -39,7 +39,7 @@ func (o *CalculateCashBalanceResponseTradeSummary) GetAsset() *string {
 	return o.Asset
 }
 
-func (o *CalculateCashBalanceResponseTradeSummary) GetNetAmount() *NetAmount {
+func (o *CalculateCashBalanceResponseTradeSummary) GetNetAmount() *CalculateCashBalanceResponseTradeSummaryNetAmount {
 	if o == nil {
 		return nil
 	}

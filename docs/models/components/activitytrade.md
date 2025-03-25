@@ -1,6 +1,6 @@
 # ActivityTrade
 
-Object containing metadata for a trade
+Used to record the the execution of a buy or sell transaction resulting in the transfer of securities and corresponding payment and details related to the trade
 
 
 ## Fields

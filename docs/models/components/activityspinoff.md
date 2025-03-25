@@ -1,6 +1,6 @@
 # ActivitySpinoff
 
-Object containing metadata for spinoffs
+Used to record a distribution of subsidiary securities to the shareholders of the parent company without a surrender of securities or payment and details related to the spinoff. A spin-off represents a form of divestiture resulting in an independent company
 
 
 ## Fields

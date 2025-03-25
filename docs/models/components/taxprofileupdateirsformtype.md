@@ -9,3 +9,4 @@ IRS form type.
 | --------------------------------------------------- | --------------------------------------------------- |
 | `TaxProfileUpdateIrsFormTypeIrsFormTypeUnspecified` | IRS_FORM_TYPE_UNSPECIFIED                           |
 | `TaxProfileUpdateIrsFormTypeW9`                     | W_9                                                 |
+| `TaxProfileUpdateIrsFormTypeW8Ben`                  | W_8BEN                                              |

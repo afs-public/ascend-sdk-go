@@ -10,6 +10,7 @@ const (
 	EnrollmentCreateConsentMethodEsignature                EnrollmentCreateConsentMethod = "ESIGNATURE"
 	EnrollmentCreateConsentMethodWetSignature              EnrollmentCreateConsentMethod = "WET_SIGNATURE"
 	EnrollmentCreateConsentMethodNegativeConsentConversion EnrollmentCreateConsentMethod = "NEGATIVE_CONSENT_CONVERSION"
+	EnrollmentCreateConsentMethodInternalConversion        EnrollmentCreateConsentMethod = "INTERNAL_CONVERSION"
 )
 
 func (e EnrollmentCreateConsentMethod) ToPointer() *EnrollmentCreateConsentMethod {
@@ -22,7 +23,6 @@ type EnrollmentCreateType string
 const (
 	EnrollmentCreateTypeEnrollmentTypeUnspecified             EnrollmentCreateType = "ENROLLMENT_TYPE_UNSPECIFIED"
 	EnrollmentCreateTypeRegistrationIndividual                EnrollmentCreateType = "REGISTRATION_INDIVIDUAL"
-	EnrollmentCreateTypeLendingLimitedPurposeMargin           EnrollmentCreateType = "LENDING_LIMITED_PURPOSE_MARGIN"
 	EnrollmentCreateTypeLendingFullyPaidStockLoan             EnrollmentCreateType = "LENDING_FULLY_PAID_STOCK_LOAN"
 	EnrollmentCreateTypeBeneficiaryDesignation                EnrollmentCreateType = "BENEFICIARY_DESIGNATION"
 	EnrollmentCreateTypeRegistrationJointWros                 EnrollmentCreateType = "REGISTRATION_JOINT_WROS"
@@ -38,13 +38,12 @@ const (
 	EnrollmentCreateTypeRegistrationTrust                     EnrollmentCreateType = "REGISTRATION_TRUST"
 	EnrollmentCreateTypeRegistrationCorporation               EnrollmentCreateType = "REGISTRATION_CORPORATION"
 	EnrollmentCreateTypeCashFdicCashSweep                     EnrollmentCreateType = "CASH_FDIC_CASH_SWEEP"
-	EnrollmentCreateTypeMarginsPdtReset                       EnrollmentCreateType = "MARGINS_PDT_RESET"
 	EnrollmentCreateTypeRetirementBeneficiaryDesignation      EnrollmentCreateType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	EnrollmentCreateTypeDividendReinvestmentPlan              EnrollmentCreateType = "DIVIDEND_REINVESTMENT_PLAN"
 	EnrollmentCreateTypeRegistrationIraBeneficiaryTraditional EnrollmentCreateType = "REGISTRATION_IRA_BENEFICIARY_TRADITIONAL"
 	EnrollmentCreateTypeRegistrationIraBeneficiaryRoth        EnrollmentCreateType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
+	EnrollmentCreateTypeRegistrationIndividualForeign         EnrollmentCreateType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentCreateTypeRegistrationCustodial                 EnrollmentCreateType = "REGISTRATION_CUSTODIAL"
-	EnrollmentCreateTypeRegTMargin                            EnrollmentCreateType = "REG_T_MARGIN"
 )
 
 func (e EnrollmentCreateType) ToPointer() *EnrollmentCreateType {

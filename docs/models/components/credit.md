@@ -1,6 +1,6 @@
 # Credit
 
-Object containing more information about the credit being paid
+Used to disburse funds into a customer's account, typically for purposes such as refunds, interest payments, or rewards from enrolled programs and details related to the credit
 
 
 ## Fields

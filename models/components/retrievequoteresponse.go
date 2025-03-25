@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -100,23 +98,6 @@ const (
 
 func (e RetrieveQuoteResponseIdentifierType) ToPointer() *RetrieveQuoteResponseIdentifierType {
 	return &e
-}
-func (e *RetrieveQuoteResponseIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_ID":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = RetrieveQuoteResponseIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveQuoteResponseIdentifierType: %v", v)
-	}
 }
 
 // MinimumQuantity - The minimum quantity specified in the request (if any). For Fixed Income: Expressed in the par (face-value) amount and may not exceed two decimal places for USD-based currencies.
