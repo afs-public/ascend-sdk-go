@@ -28,6 +28,7 @@ type IrsFormType string
 const (
 	IrsFormTypeIrsFormTypeUnspecified IrsFormType = "IRS_FORM_TYPE_UNSPECIFIED"
 	IrsFormTypeW9                     IrsFormType = "W_9"
+	IrsFormTypeW8Ben                  IrsFormType = "W_8BEN"
 )
 
 func (e IrsFormType) ToPointer() *IrsFormType {

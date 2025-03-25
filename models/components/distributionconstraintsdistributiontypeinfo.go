@@ -24,6 +24,9 @@ const (
 	DistributionConstraintsDistributionTypeInfoTypePlanLoan401K                               DistributionConstraintsDistributionTypeInfoType = "PLAN_LOAN_401K"
 	DistributionConstraintsDistributionTypeInfoTypePrematureSimpleIraLessThan2Years           DistributionConstraintsDistributionTypeInfoType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	DistributionConstraintsDistributionTypeInfoTypeNormalRothIraGreaterThan5Years             DistributionConstraintsDistributionTypeInfoType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	DistributionConstraintsDistributionTypeInfoTypeNetIncomeAttributable                      DistributionConstraintsDistributionTypeInfoType = "NET_INCOME_ATTRIBUTABLE"
+	DistributionConstraintsDistributionTypeInfoTypeRevocation                                 DistributionConstraintsDistributionTypeInfoType = "REVOCATION"
+	DistributionConstraintsDistributionTypeInfoTypeNonReportable                              DistributionConstraintsDistributionTypeInfoType = "NON_REPORTABLE"
 )
 
 func (e DistributionConstraintsDistributionTypeInfoType) ToPointer() *DistributionConstraintsDistributionTypeInfoType {

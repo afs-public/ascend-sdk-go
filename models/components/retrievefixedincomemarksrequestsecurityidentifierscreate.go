@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType - The identifier type of the asset being sought
 type RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType string
 
@@ -18,23 +13,6 @@ const (
 
 func (e RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType) ToPointer() *RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType {
 	return &e
-}
-func (e *RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ASSET_ID":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreateIdentifierType: %v", v)
-	}
 }
 
 // RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate - The identifier for the asset.

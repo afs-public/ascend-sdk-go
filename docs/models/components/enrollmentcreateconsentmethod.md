@@ -11,3 +11,4 @@ The consent method for the enrollment. Defaults to ESIGNATURE.
 | `EnrollmentCreateConsentMethodEsignature`                | ESIGNATURE                                               |
 | `EnrollmentCreateConsentMethodWetSignature`              | WET_SIGNATURE                                            |
 | `EnrollmentCreateConsentMethodNegativeConsentConversion` | NEGATIVE_CONSENT_CONVERSION                              |
+| `EnrollmentCreateConsentMethodInternalConversion`        | INTERNAL_CONVERSION                                      |

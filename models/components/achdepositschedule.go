@@ -6,17 +6,18 @@ package components
 type AchDepositScheduleType string
 
 const (
-	AchDepositScheduleTypeTypeUnspecified    AchDepositScheduleType = "TYPE_UNSPECIFIED"
-	AchDepositScheduleTypeRegular            AchDepositScheduleType = "REGULAR"
-	AchDepositScheduleTypeEmployee           AchDepositScheduleType = "EMPLOYEE"
-	AchDepositScheduleTypeEmployer           AchDepositScheduleType = "EMPLOYER"
-	AchDepositScheduleTypeRecharacterization AchDepositScheduleType = "RECHARACTERIZATION"
-	AchDepositScheduleTypeRollover60Day      AchDepositScheduleType = "ROLLOVER_60_DAY"
-	AchDepositScheduleTypeRolloverDirect     AchDepositScheduleType = "ROLLOVER_DIRECT"
-	AchDepositScheduleTypeTransfer           AchDepositScheduleType = "TRANSFER"
-	AchDepositScheduleTypeTrusteeFee         AchDepositScheduleType = "TRUSTEE_FEE"
-	AchDepositScheduleTypeConversion         AchDepositScheduleType = "CONVERSION"
-	AchDepositScheduleTypeRepayment          AchDepositScheduleType = "REPAYMENT"
+	AchDepositScheduleTypeTypeUnspecified           AchDepositScheduleType = "TYPE_UNSPECIFIED"
+	AchDepositScheduleTypeRegular                   AchDepositScheduleType = "REGULAR"
+	AchDepositScheduleTypeEmployee                  AchDepositScheduleType = "EMPLOYEE"
+	AchDepositScheduleTypeEmployer                  AchDepositScheduleType = "EMPLOYER"
+	AchDepositScheduleTypeRecharacterization        AchDepositScheduleType = "RECHARACTERIZATION"
+	AchDepositScheduleTypeRollover60Day             AchDepositScheduleType = "ROLLOVER_60_DAY"
+	AchDepositScheduleTypeRolloverDirect            AchDepositScheduleType = "ROLLOVER_DIRECT"
+	AchDepositScheduleTypeTransfer                  AchDepositScheduleType = "TRANSFER"
+	AchDepositScheduleTypeTrusteeFee                AchDepositScheduleType = "TRUSTEE_FEE"
+	AchDepositScheduleTypeConversion                AchDepositScheduleType = "CONVERSION"
+	AchDepositScheduleTypeRepayment                 AchDepositScheduleType = "REPAYMENT"
+	AchDepositScheduleTypeContributionNonReportable AchDepositScheduleType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e AchDepositScheduleType) ToPointer() *AchDepositScheduleType {
@@ -64,17 +65,18 @@ func (e AchDepositScheduleTemporalTaxYear) ToPointer() *AchDepositScheduleTempor
 type AchDepositScheduleRetirementContributionType string
 
 const (
-	AchDepositScheduleRetirementContributionTypeTypeUnspecified    AchDepositScheduleRetirementContributionType = "TYPE_UNSPECIFIED"
-	AchDepositScheduleRetirementContributionTypeRegular            AchDepositScheduleRetirementContributionType = "REGULAR"
-	AchDepositScheduleRetirementContributionTypeEmployee           AchDepositScheduleRetirementContributionType = "EMPLOYEE"
-	AchDepositScheduleRetirementContributionTypeEmployer           AchDepositScheduleRetirementContributionType = "EMPLOYER"
-	AchDepositScheduleRetirementContributionTypeRecharacterization AchDepositScheduleRetirementContributionType = "RECHARACTERIZATION"
-	AchDepositScheduleRetirementContributionTypeRollover60Day      AchDepositScheduleRetirementContributionType = "ROLLOVER_60_DAY"
-	AchDepositScheduleRetirementContributionTypeRolloverDirect     AchDepositScheduleRetirementContributionType = "ROLLOVER_DIRECT"
-	AchDepositScheduleRetirementContributionTypeTransfer           AchDepositScheduleRetirementContributionType = "TRANSFER"
-	AchDepositScheduleRetirementContributionTypeTrusteeFee         AchDepositScheduleRetirementContributionType = "TRUSTEE_FEE"
-	AchDepositScheduleRetirementContributionTypeConversion         AchDepositScheduleRetirementContributionType = "CONVERSION"
-	AchDepositScheduleRetirementContributionTypeRepayment          AchDepositScheduleRetirementContributionType = "REPAYMENT"
+	AchDepositScheduleRetirementContributionTypeTypeUnspecified           AchDepositScheduleRetirementContributionType = "TYPE_UNSPECIFIED"
+	AchDepositScheduleRetirementContributionTypeRegular                   AchDepositScheduleRetirementContributionType = "REGULAR"
+	AchDepositScheduleRetirementContributionTypeEmployee                  AchDepositScheduleRetirementContributionType = "EMPLOYEE"
+	AchDepositScheduleRetirementContributionTypeEmployer                  AchDepositScheduleRetirementContributionType = "EMPLOYER"
+	AchDepositScheduleRetirementContributionTypeRecharacterization        AchDepositScheduleRetirementContributionType = "RECHARACTERIZATION"
+	AchDepositScheduleRetirementContributionTypeRollover60Day             AchDepositScheduleRetirementContributionType = "ROLLOVER_60_DAY"
+	AchDepositScheduleRetirementContributionTypeRolloverDirect            AchDepositScheduleRetirementContributionType = "ROLLOVER_DIRECT"
+	AchDepositScheduleRetirementContributionTypeTransfer                  AchDepositScheduleRetirementContributionType = "TRANSFER"
+	AchDepositScheduleRetirementContributionTypeTrusteeFee                AchDepositScheduleRetirementContributionType = "TRUSTEE_FEE"
+	AchDepositScheduleRetirementContributionTypeConversion                AchDepositScheduleRetirementContributionType = "CONVERSION"
+	AchDepositScheduleRetirementContributionTypeRepayment                 AchDepositScheduleRetirementContributionType = "REPAYMENT"
+	AchDepositScheduleRetirementContributionTypeContributionNonReportable AchDepositScheduleRetirementContributionType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e AchDepositScheduleRetirementContributionType) ToPointer() *AchDepositScheduleRetirementContributionType {

@@ -85,13 +85,12 @@ func (o *PartyEntityDueDiligence) GetNegativeNews() *PartyNegativeNews {
 type PartyEntityType string
 
 const (
-	PartyEntityTypeEntityTypeUnspecified               PartyEntityType = "ENTITY_TYPE_UNSPECIFIED"
-	PartyEntityTypeCorporation                         PartyEntityType = "CORPORATION"
-	PartyEntityTypeLimitedLiabilityCompany             PartyEntityType = "LIMITED_LIABILITY_COMPANY"
-	PartyEntityTypePartnership                         PartyEntityType = "PARTNERSHIP"
-	PartyEntityTypeSoleProprietorshipOrSingleMemberLlc PartyEntityType = "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC"
-	PartyEntityTypeTrust                               PartyEntityType = "TRUST"
-	PartyEntityTypeEstate                              PartyEntityType = "ESTATE"
+	PartyEntityTypeEntityTypeUnspecified   PartyEntityType = "ENTITY_TYPE_UNSPECIFIED"
+	PartyEntityTypeCorporation             PartyEntityType = "CORPORATION"
+	PartyEntityTypeLimitedLiabilityCompany PartyEntityType = "LIMITED_LIABILITY_COMPANY"
+	PartyEntityTypePartnership             PartyEntityType = "PARTNERSHIP"
+	PartyEntityTypeTrust                   PartyEntityType = "TRUST"
+	PartyEntityTypeEstate                  PartyEntityType = "ESTATE"
 )
 
 func (e PartyEntityType) ToPointer() *PartyEntityType {
@@ -426,6 +425,7 @@ type PartyIrsFormType string
 const (
 	PartyIrsFormTypeIrsFormTypeUnspecified PartyIrsFormType = "IRS_FORM_TYPE_UNSPECIFIED"
 	PartyIrsFormTypeW9                     PartyIrsFormType = "W_9"
+	PartyIrsFormTypeW8Ben                  PartyIrsFormType = "W_8BEN"
 )
 
 func (e PartyIrsFormType) ToPointer() *PartyIrsFormType {
@@ -1909,6 +1909,7 @@ type PartyLegalNaturalPersonIrsFormType string
 const (
 	PartyLegalNaturalPersonIrsFormTypeIrsFormTypeUnspecified PartyLegalNaturalPersonIrsFormType = "IRS_FORM_TYPE_UNSPECIFIED"
 	PartyLegalNaturalPersonIrsFormTypeW9                     PartyLegalNaturalPersonIrsFormType = "W_9"
+	PartyLegalNaturalPersonIrsFormTypeW8Ben                  PartyLegalNaturalPersonIrsFormType = "W_8BEN"
 )
 
 func (e PartyLegalNaturalPersonIrsFormType) ToPointer() *PartyLegalNaturalPersonIrsFormType {

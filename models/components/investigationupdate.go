@@ -19,16 +19,16 @@ func (e InvestigationUpdateIdentityVerification) ToPointer() *InvestigationUpdat
 	return &e
 }
 
-// InvestigationUpdateIdentityVerificationScope - Used to determine who is responsible for running identity verification checks
-type InvestigationUpdateIdentityVerificationScope string
+// InvestigationUpdateInvestigationRequestState - Current state of investigation request
+type InvestigationUpdateInvestigationRequestState string
 
 const (
-	InvestigationUpdateIdentityVerificationScopeIdentityVerificationScopeUnspecified InvestigationUpdateIdentityVerificationScope = "IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED"
-	InvestigationUpdateIdentityVerificationScopePerformedByApex                      InvestigationUpdateIdentityVerificationScope = "PERFORMED_BY_APEX"
-	InvestigationUpdateIdentityVerificationScopeProvidedByClient                     InvestigationUpdateIdentityVerificationScope = "PROVIDED_BY_CLIENT"
+	InvestigationUpdateInvestigationRequestStateInvestigationRequestStateUnspecified InvestigationUpdateInvestigationRequestState = "INVESTIGATION_REQUEST_STATE_UNSPECIFIED"
+	InvestigationUpdateInvestigationRequestStateOpen                                 InvestigationUpdateInvestigationRequestState = "OPEN"
+	InvestigationUpdateInvestigationRequestStateClosed                               InvestigationUpdateInvestigationRequestState = "CLOSED"
 )
 
-func (e InvestigationUpdateIdentityVerificationScope) ToPointer() *InvestigationUpdateIdentityVerificationScope {
+func (e InvestigationUpdateInvestigationRequestState) ToPointer() *InvestigationUpdateInvestigationRequestState {
 	return &e
 }
 
@@ -36,16 +36,10 @@ func (e InvestigationUpdateIdentityVerificationScope) ToPointer() *Investigation
 type InvestigationUpdate struct {
 	// Comment relating to why the investigation state was updated
 	Comment *string `json:"comment,omitempty"`
-	// A unique identifier referencing a Correspondent
-	CorrespondentID *string `json:"correspondent_id,omitempty"`
-	// investigation details on an entity
-	Entity *EntityUpdate `json:"entity,omitempty"`
 	// Indicates the current state of identity verification
 	IdentityVerification *InvestigationUpdateIdentityVerification `json:"identity_verification,omitempty"`
-	// Used to determine who is responsible for running identity verification checks
-	IdentityVerificationScope *InvestigationUpdateIdentityVerificationScope `json:"identity_verification_scope,omitempty"`
-	// investigation details on a person
-	Person *PersonUpdate `json:"person,omitempty"`
+	// Current state of investigation request
+	InvestigationRequestState *InvestigationUpdateInvestigationRequestState `json:"investigation_request_state,omitempty"`
 	// A list of watchlist entries matched against the investigation
 	WatchlistMatches []WatchlistMatchUpdate `json:"watchlist_matches,omitempty"`
 }
@@ -57,20 +51,6 @@ func (o *InvestigationUpdate) GetComment() *string {
 	return o.Comment
 }
 
-func (o *InvestigationUpdate) GetCorrespondentID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.CorrespondentID
-}
-
-func (o *InvestigationUpdate) GetEntity() *EntityUpdate {
-	if o == nil {
-		return nil
-	}
-	return o.Entity
-}
-
 func (o *InvestigationUpdate) GetIdentityVerification() *InvestigationUpdateIdentityVerification {
 	if o == nil {
 		return nil
@@ -78,18 +58,11 @@ func (o *InvestigationUpdate) GetIdentityVerification() *InvestigationUpdateIden
 	return o.IdentityVerification
 }
 
-func (o *InvestigationUpdate) GetIdentityVerificationScope() *InvestigationUpdateIdentityVerificationScope {
+func (o *InvestigationUpdate) GetInvestigationRequestState() *InvestigationUpdateInvestigationRequestState {
 	if o == nil {
 		return nil
 	}
-	return o.IdentityVerificationScope
-}
-
-func (o *InvestigationUpdate) GetPerson() *PersonUpdate {
-	if o == nil {
-		return nil
-	}
-	return o.Person
+	return o.InvestigationRequestState
 }
 
 func (o *InvestigationUpdate) GetWatchlistMatches() []WatchlistMatchUpdate {

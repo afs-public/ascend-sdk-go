@@ -1,6 +1,6 @@
 # ActivityTransfer
 
-Object containing metadata for transfers
+Used to record more generic transfers of funds or securities and details related to the transfer. The transfer type and activity_description can be used to provide more specific context
 
 
 ## Fields

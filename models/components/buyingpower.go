@@ -15,13 +15,26 @@ func (o *AccountEquityAmount) GetValue() *string {
 	return o.Value
 }
 
-// BuyingPowerAmount - The buying power in USD returned from the request.
+// BuyingPowerAmount - The buying_power of the account in USD returned from the request.
 type BuyingPowerAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
 func (o *BuyingPowerAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// DayTradeBuyingPowerAmount - The day_trade_buying_power_issued_amount is the day trade buying power of the account in USD, returned from the request. If the is_day_trade_buying_power_allowed boolean is true this will be set from day_trade_buying_power_issued value returned from the margins calculator, or else if it is false it will be set from buying_power_issued value returned from the margins calculator.
+type DayTradeBuyingPowerAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *DayTradeBuyingPowerAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -41,18 +54,87 @@ func (o *PositionMarketValueAmount) GetValue() *string {
 	return o.Value
 }
 
+// TotalExcessAmount - The total_excess_amount is the total equity in the account minus the requirements in USD, returned from the request.
+type TotalExcessAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *TotalExcessAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// TotalRequirementsAmount - The total_requirements_amount is the total requirement amount for positions held in the account in USD, returned from the request.
+type TotalRequirementsAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *TotalRequirementsAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// Margin Requirements fields returned from the request.
+type Requirements struct {
+	// The total_excess_amount is the total equity in the account minus the requirements in USD, returned from the request.
+	TotalExcessAmount *TotalExcessAmount `json:"total_excess_amount,omitempty"`
+	// The total_requirements_amount is the total requirement amount for positions held in the account in USD, returned from the request.
+	TotalRequirementsAmount *TotalRequirementsAmount `json:"total_requirements_amount,omitempty"`
+}
+
+func (o *Requirements) GetTotalExcessAmount() *TotalExcessAmount {
+	if o == nil {
+		return nil
+	}
+	return o.TotalExcessAmount
+}
+
+func (o *Requirements) GetTotalRequirementsAmount() *TotalRequirementsAmount {
+	if o == nil {
+		return nil
+	}
+	return o.TotalRequirementsAmount
+}
+
+// SmaAmount - The sma_amount is the special memorandum account amount in USD, returned from the request. This will only be populated for margin accounts and is the margin equity minus the RegT requirements.
+type SmaAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *SmaAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // BuyingPower - Response for GetBuyingPower
 type BuyingPower struct {
 	// The account_equity in USD returned from the request.
 	AccountEquityAmount *AccountEquityAmount `json:"account_equity_amount,omitempty"`
 	// The account ID returned from the request.
 	AccountID *string `json:"account_id,omitempty"`
-	// The buying power in USD returned from the request.
+	// The buying_power of the account in USD returned from the request.
 	BuyingPowerAmount *BuyingPowerAmount `json:"buying_power_amount,omitempty"`
+	// The day_trade_buying_power_issued_amount is the day trade buying power of the account in USD, returned from the request. If the is_day_trade_buying_power_allowed boolean is true this will be set from day_trade_buying_power_issued value returned from the margins calculator, or else if it is false it will be set from buying_power_issued value returned from the margins calculator.
+	DayTradeBuyingPowerAmount *DayTradeBuyingPowerAmount `json:"day_trade_buying_power_amount,omitempty"`
+	// The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account, PDT is true and SOD Account equity >= $25,000, otherwise it will be false.
+	IsDayTradeBuyingPowerAllowed *bool `json:"is_day_trade_buying_power_allowed,omitempty"`
 	// The service generated name of the BuyingPower Format: accounts/{account_id}/buyingPower
 	Name *string `json:"name,omitempty"`
 	// The position_market_value in USD returned from the request.
 	PositionMarketValueAmount *PositionMarketValueAmount `json:"position_market_value_amount,omitempty"`
+	// Margin Requirements fields returned from the request.
+	Requirements *Requirements `json:"requirements,omitempty"`
+	// The sma_amount is the special memorandum account amount in USD, returned from the request. This will only be populated for margin accounts and is the margin equity minus the RegT requirements.
+	SmaAmount *SmaAmount `json:"sma_amount,omitempty"`
 }
 
 func (o *BuyingPower) GetAccountEquityAmount() *AccountEquityAmount {
@@ -76,6 +158,20 @@ func (o *BuyingPower) GetBuyingPowerAmount() *BuyingPowerAmount {
 	return o.BuyingPowerAmount
 }
 
+func (o *BuyingPower) GetDayTradeBuyingPowerAmount() *DayTradeBuyingPowerAmount {
+	if o == nil {
+		return nil
+	}
+	return o.DayTradeBuyingPowerAmount
+}
+
+func (o *BuyingPower) GetIsDayTradeBuyingPowerAllowed() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsDayTradeBuyingPowerAllowed
+}
+
 func (o *BuyingPower) GetName() *string {
 	if o == nil {
 		return nil
@@ -88,4 +184,18 @@ func (o *BuyingPower) GetPositionMarketValueAmount() *PositionMarketValueAmount 
 		return nil
 	}
 	return o.PositionMarketValueAmount
+}
+
+func (o *BuyingPower) GetRequirements() *Requirements {
+	if o == nil {
+		return nil
+	}
+	return o.Requirements
+}
+
+func (o *BuyingPower) GetSmaAmount() *SmaAmount {
+	if o == nil {
+		return nil
+	}
+	return o.SmaAmount
 }

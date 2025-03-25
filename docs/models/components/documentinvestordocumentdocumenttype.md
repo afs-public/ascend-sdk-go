@@ -20,3 +20,6 @@ Describes the contents of a document and how it is used
 | `DocumentInvestorDocumentDocumentTypeForm5498`                        | FORM_5498                                                             |
 | `DocumentInvestorDocumentDocumentTypeStatementMonthly`                | STATEMENT_MONTHLY                                                     |
 | `DocumentInvestorDocumentDocumentTypeStatementQuarterly`              | STATEMENT_QUARTERLY                                                   |
+| `DocumentInvestorDocumentDocumentTypeForm1099C`                       | FORM_1099_C                                                           |
+| `DocumentInvestorDocumentDocumentTypeForm4806D`                       | FORM_480_6D                                                           |
+| `DocumentInvestorDocumentDocumentTypeForm5498Esa`                     | FORM_5498_ESA                                                         |

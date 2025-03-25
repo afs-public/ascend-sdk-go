@@ -10,7 +10,9 @@ type AccountsUpdateInterestedPartyRequest struct {
 	// The account id.
 	AccountID string `pathParam:"style=simple,explode=false,name=account_id"`
 	// The interestedParty id.
-	InterestedPartyID     string                           `pathParam:"style=simple,explode=false,name=interestedParty_id"`
+	InterestedPartyID string `pathParam:"style=simple,explode=false,name=interestedParty_id"`
+	// The list of fields to update. Updatable Fields  `recipient`  `statement_delivery_preference`  `trade_confirmation_delivery_preference`  `mailing_address.region_code`  `mailing_address.postal_code`  `mailing_address.administrative_area`  `mailing_address.locality`  `mailing_address.address_lines`
+	UpdateMask            *string                          `queryParam:"style=form,explode=true,name=update_mask"`
 	InterestedPartyUpdate components.InterestedPartyUpdate `request:"mediaType=application/json"`
 }
 
@@ -26,6 +28,13 @@ func (o *AccountsUpdateInterestedPartyRequest) GetInterestedPartyID() string {
 		return ""
 	}
 	return o.InterestedPartyID
+}
+
+func (o *AccountsUpdateInterestedPartyRequest) GetUpdateMask() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateMask
 }
 
 func (o *AccountsUpdateInterestedPartyRequest) GetInterestedPartyUpdate() components.InterestedPartyUpdate {

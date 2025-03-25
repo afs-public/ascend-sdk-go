@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -61,23 +59,6 @@ const (
 func (e CompressedOrderIdentifierType) ToPointer() *CompressedOrderIdentifierType {
 	return &e
 }
-func (e *CompressedOrderIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SYMBOL":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = CompressedOrderIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CompressedOrderIdentifierType: %v", v)
-	}
-}
 
 // CompressedOrderAmount - The amount of the LOI. This is a monetary value in the same currency as the order.
 type CompressedOrderAmount struct {
@@ -92,7 +73,7 @@ func (o *CompressedOrderAmount) GetValue() *string {
 	return o.Value
 }
 
-// CompressedOrderPeriodStartDate - The period start date of the LOI.
+// CompressedOrderPeriodStartDate - The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 type CompressedOrderPeriodStartDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -127,7 +108,7 @@ func (o *CompressedOrderPeriodStartDate) GetYear() *int {
 type CompressedOrderLetterOfIntent struct {
 	// The amount of the LOI. This is a monetary value in the same currency as the order.
 	Amount *CompressedOrderAmount `json:"amount,omitempty"`
-	// The period start date of the LOI.
+	// The period start date, specific to the US Eastern Time Zone, of the LOI. Date range: 90 days in the past and 13 months in the future from the order_date.
 	PeriodStartDate *CompressedOrderPeriodStartDate `json:"period_start_date,omitempty"`
 }
 
@@ -233,7 +214,7 @@ func (o *CompressedOrderQuantity) GetValue() *string {
 	return o.Value
 }
 
-// CompressedOrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+// CompressedOrderRightsOfAccumulationAmount - The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 type CompressedOrderRightsOfAccumulationAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -248,7 +229,7 @@ func (o *CompressedOrderRightsOfAccumulationAmount) GetValue() *string {
 
 // CompressedOrderRightsOfAccumulation - Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available. Either ROA or LOI may be specified, but not both.
 type CompressedOrderRightsOfAccumulation struct {
-	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9,999,999.99 is supported.
+	// The amount of the ROA. This is a monetary value in the same currency as the order. Only 9999999.99 is supported.
 	Amount *CompressedOrderRightsOfAccumulationAmount `json:"amount,omitempty"`
 }
 

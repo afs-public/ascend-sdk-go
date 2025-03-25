@@ -1,6 +1,6 @@
 # ActivitySaleOfRights
 
-Object containing more information about a sale_of_rights
+Used to record payments made by the issuer to security holders when the security is subject to redemptions other than full and partial calls (e.g., early CD redemptions) and details related to the sale of rights
 
 
 ## Fields

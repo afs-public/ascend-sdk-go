@@ -2,19 +2,6 @@
 
 package components
 
-// CustodialType - The type of custodial account
-type CustodialType string
-
-const (
-	CustodialTypeCustodialTypeUnspecified CustodialType = "CUSTODIAL_TYPE_UNSPECIFIED"
-	CustodialTypeUgma                     CustodialType = "UGMA"
-	CustodialTypeUtma                     CustodialType = "UTMA"
-)
-
-func (e CustodialType) ToPointer() *CustodialType {
-	return &e
-}
-
 // CustodialEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
 type CustodialEnrollmentMetadataCreateDividendReinvestmentPlan string
 
@@ -43,19 +30,10 @@ func (e CustodialEnrollmentMetadataCreateFdicCashSweep) ToPointer() *CustodialEn
 
 // CustodialEnrollmentMetadataCreate - Enrollment metadata for the CUSTODIAL enrollment type
 type CustodialEnrollmentMetadataCreate struct {
-	// The type of custodial account
-	CustodialType CustodialType `json:"custodial_type"`
 	// Option to auto-enroll in Dividend Reinvestment; defaults to true
 	DividendReinvestmentPlan *CustodialEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
 	// Option to auto-enroll in FDIC cash sweep; defaults to true
 	FdicCashSweep *CustodialEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
-}
-
-func (o *CustodialEnrollmentMetadataCreate) GetCustodialType() CustodialType {
-	if o == nil {
-		return CustodialType("")
-	}
-	return o.CustodialType
 }
 
 func (o *CustodialEnrollmentMetadataCreate) GetDividendReinvestmentPlan() *CustodialEnrollmentMetadataCreateDividendReinvestmentPlan {

@@ -19,6 +19,7 @@ const (
 	BasketStateAllocating       BasketState = "ALLOCATING"
 	BasketStateDone             BasketState = "DONE"
 	BasketStateRejected         BasketState = "REJECTED"
+	BasketStatePartiallyFilled  BasketState = "PARTIALLY_FILLED"
 )
 
 func (e BasketState) ToPointer() *BasketState {

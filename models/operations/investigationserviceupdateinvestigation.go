@@ -8,7 +8,17 @@ import (
 
 type InvestigationServiceUpdateInvestigationRequest struct {
 	// The investigation id.
-	InvestigationID     string                         `pathParam:"style=simple,explode=false,name=investigation_id"`
+	InvestigationID string `pathParam:"style=simple,explode=false,name=investigation_id"`
+	// The list of fields to update. Updatable Fields:
+	//   - identity_verification
+	//   - investigation_request_state
+	//   - watchlist_matches
+	//    - watchlist_id
+	//    - watchlist_item_id
+	//    - match_state
+	//    - exclude_from_screening
+	//   - comment
+	UpdateMask          *string                        `queryParam:"style=form,explode=true,name=update_mask"`
 	InvestigationUpdate components.InvestigationUpdate `request:"mediaType=application/json"`
 }
 
@@ -17,6 +27,13 @@ func (o *InvestigationServiceUpdateInvestigationRequest) GetInvestigationID() st
 		return ""
 	}
 	return o.InvestigationID
+}
+
+func (o *InvestigationServiceUpdateInvestigationRequest) GetUpdateMask() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateMask
 }
 
 func (o *InvestigationServiceUpdateInvestigationRequest) GetInvestigationUpdate() components.InvestigationUpdate {

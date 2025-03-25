@@ -1,6 +1,6 @@
 # SnapshotProcessDate
 
-The process date of the snapshot.
+The process date of the snapshot. This date corresponds to the underlying data within the snapshot.
 
 
 ## Fields

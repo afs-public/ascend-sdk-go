@@ -1,6 +1,6 @@
 # ActivityCapitalGains
 
-Object containing metadata for capital gains
+Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
 
 
 ## Fields

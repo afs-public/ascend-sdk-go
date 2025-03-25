@@ -25,3 +25,6 @@ The type of retirement distribution.
 | `TransferScheduleSummaryRetirementDistributionTypePlanLoan401K`                               | PLAN_LOAN_401K                                                                                |
 | `TransferScheduleSummaryRetirementDistributionTypePrematureSimpleIraLessThan2Years`           | PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS                                                        |
 | `TransferScheduleSummaryRetirementDistributionTypeNormalRothIraGreaterThan5Years`             | NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS                                                          |
+| `TransferScheduleSummaryRetirementDistributionTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                                       |
+| `TransferScheduleSummaryRetirementDistributionTypeRevocation`                                 | REVOCATION                                                                                    |
+| `TransferScheduleSummaryRetirementDistributionTypeNonReportable`                              | NON_REPORTABLE                                                                                |

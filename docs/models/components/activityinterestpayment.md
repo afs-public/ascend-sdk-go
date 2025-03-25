@@ -1,6 +1,6 @@
 # ActivityInterestPayment
 
-Object containing metadata for interest payments
+Used to record the The payment of an obligation an issuer has agreed to make to holders of an interest-bearing security and details related to the interest payment. Usually, the payment is made in cash and on a scheduled basis
 
 
 ## Fields

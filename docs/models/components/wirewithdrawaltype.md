@@ -25,3 +25,6 @@ The type of retirement distribution.
 | `WireWithdrawalTypePlanLoan401K`                               | PLAN_LOAN_401K                                                 |
 | `WireWithdrawalTypePrematureSimpleIraLessThan2Years`           | PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS                         |
 | `WireWithdrawalTypeNormalRothIraGreaterThan5Years`             | NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS                           |
+| `WireWithdrawalTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                        |
+| `WireWithdrawalTypeRevocation`                                 | REVOCATION                                                     |
+| `WireWithdrawalTypeNonReportable`                              | NON_REPORTABLE                                                 |

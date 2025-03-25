@@ -431,6 +431,7 @@ const (
 	RegistrationTypeOperatingRegistration                     RegistrationType = "OPERATING_REGISTRATION"
 	RegistrationTypeIraBeneficiaryTraditionalRegistration     RegistrationType = "IRA_BENEFICIARY_TRADITIONAL_REGISTRATION"
 	RegistrationTypeIraBeneficiaryRothRegistration            RegistrationType = "IRA_BENEFICIARY_ROTH_REGISTRATION"
+	RegistrationTypeForeignIndividualRegistration             RegistrationType = "FOREIGN_INDIVIDUAL_REGISTRATION"
 	RegistrationTypeCustodialRegistration                     RegistrationType = "CUSTODIAL_REGISTRATION"
 )
 

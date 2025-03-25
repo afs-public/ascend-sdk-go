@@ -1,6 +1,6 @@
 # ActivityReverseStockSplit
 
-Object containing metadata for a reverse_stock_split
+Used to record the exchange of a company's security for the same company's new security at a preset rate and details related to the reverse stock split
 
 
 ## Fields

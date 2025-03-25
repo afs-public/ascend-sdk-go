@@ -1,6 +1,6 @@
 # ActivityRightsDistribution
 
-Object containing more information about a rights distribution
+Used to record distributions to common stock holders of a company that grant the option to purchase new or additional securities of the same company during a predetermined time period at a predetermined price and details related to the rights distribution
 
 
 ## Fields

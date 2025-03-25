@@ -120,6 +120,9 @@ const (
 	AchWithdrawalScheduleTypePlanLoan401K                               AchWithdrawalScheduleType = "PLAN_LOAN_401K"
 	AchWithdrawalScheduleTypePrematureSimpleIraLessThan2Years           AchWithdrawalScheduleType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	AchWithdrawalScheduleTypeNormalRothIraGreaterThan5Years             AchWithdrawalScheduleType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	AchWithdrawalScheduleTypeNetIncomeAttributable                      AchWithdrawalScheduleType = "NET_INCOME_ATTRIBUTABLE"
+	AchWithdrawalScheduleTypeRevocation                                 AchWithdrawalScheduleType = "REVOCATION"
+	AchWithdrawalScheduleTypeNonReportable                              AchWithdrawalScheduleType = "NON_REPORTABLE"
 )
 
 func (e AchWithdrawalScheduleType) ToPointer() *AchWithdrawalScheduleType {

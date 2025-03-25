@@ -1,6 +1,6 @@
 # ActivityWithholding
 
-Object containing metadata for a withholding
+Used to record tax withholdings and details related to the withholding
 
 
 ## Fields

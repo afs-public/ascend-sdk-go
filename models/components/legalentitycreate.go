@@ -41,13 +41,12 @@ func (e CorporateStructure) ToPointer() *CorporateStructure {
 type EntityType string
 
 const (
-	EntityTypeEntityTypeUnspecified               EntityType = "ENTITY_TYPE_UNSPECIFIED"
-	EntityTypeCorporation                         EntityType = "CORPORATION"
-	EntityTypeLimitedLiabilityCompany             EntityType = "LIMITED_LIABILITY_COMPANY"
-	EntityTypePartnership                         EntityType = "PARTNERSHIP"
-	EntityTypeSoleProprietorshipOrSingleMemberLlc EntityType = "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC"
-	EntityTypeTrust                               EntityType = "TRUST"
-	EntityTypeEstate                              EntityType = "ESTATE"
+	EntityTypeEntityTypeUnspecified   EntityType = "ENTITY_TYPE_UNSPECIFIED"
+	EntityTypeCorporation             EntityType = "CORPORATION"
+	EntityTypeLimitedLiabilityCompany EntityType = "LIMITED_LIABILITY_COMPANY"
+	EntityTypePartnership             EntityType = "PARTNERSHIP"
+	EntityTypeTrust                   EntityType = "TRUST"
+	EntityTypeEstate                  EntityType = "ESTATE"
 )
 
 func (e EntityType) ToPointer() *EntityType {

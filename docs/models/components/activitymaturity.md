@@ -1,6 +1,6 @@
 # ActivityMaturity
 
-Object containing metadata for maturity events
+Used to record he final repayment, usually in cash, by an issuer for the entire issue, or remaining outstanding securities of a specific security on a specified date and details related to the maturity
 
 
 ## Fields

@@ -28,6 +28,7 @@ type TaxProfileUpdateIrsFormType string
 const (
 	TaxProfileUpdateIrsFormTypeIrsFormTypeUnspecified TaxProfileUpdateIrsFormType = "IRS_FORM_TYPE_UNSPECIFIED"
 	TaxProfileUpdateIrsFormTypeW9                     TaxProfileUpdateIrsFormType = "W_9"
+	TaxProfileUpdateIrsFormTypeW8Ben                  TaxProfileUpdateIrsFormType = "W_8BEN"
 )
 
 func (e TaxProfileUpdateIrsFormType) ToPointer() *TaxProfileUpdateIrsFormType {

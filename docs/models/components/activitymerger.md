@@ -1,6 +1,6 @@
 # ActivityMerger
 
-Object containing metadata for merger events
+Used to record the exchange of one company's security for another company's security, cash, or a combination of cash and securities and details related to the merger
 
 
 ## Fields

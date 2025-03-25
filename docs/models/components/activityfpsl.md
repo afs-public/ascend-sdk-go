@@ -1,6 +1,6 @@
 # ActivityFpsl
 
-Object containing more information about the fpsl allocations
+Used to record the movements of shares to/ from the fpsl memo location and details related to the fpsl memo
 
 
 ## Fields

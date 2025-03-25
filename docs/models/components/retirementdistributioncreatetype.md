@@ -25,3 +25,6 @@ The type of retirement distribution.
 | `RetirementDistributionCreateTypePlanLoan401K`                               | PLAN_LOAN_401K                                                               |
 | `RetirementDistributionCreateTypePrematureSimpleIraLessThan2Years`           | PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS                                       |
 | `RetirementDistributionCreateTypeNormalRothIraGreaterThan5Years`             | NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS                                         |
+| `RetirementDistributionCreateTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                      |
+| `RetirementDistributionCreateTypeRevocation`                                 | REVOCATION                                                                   |
+| `RetirementDistributionCreateTypeNonReportable`                              | NON_REPORTABLE                                                               |

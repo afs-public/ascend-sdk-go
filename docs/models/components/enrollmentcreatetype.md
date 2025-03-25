@@ -9,7 +9,6 @@ Describes the name of the enrollment; Expressed as an enum
 | ----------------------------------------------------------- | ----------------------------------------------------------- |
 | `EnrollmentCreateTypeEnrollmentTypeUnspecified`             | ENROLLMENT_TYPE_UNSPECIFIED                                 |
 | `EnrollmentCreateTypeRegistrationIndividual`                | REGISTRATION_INDIVIDUAL                                     |
-| `EnrollmentCreateTypeLendingLimitedPurposeMargin`           | LENDING_LIMITED_PURPOSE_MARGIN                              |
 | `EnrollmentCreateTypeLendingFullyPaidStockLoan`             | LENDING_FULLY_PAID_STOCK_LOAN                               |
 | `EnrollmentCreateTypeBeneficiaryDesignation`                | BENEFICIARY_DESIGNATION                                     |
 | `EnrollmentCreateTypeRegistrationJointWros`                 | REGISTRATION_JOINT_WROS                                     |
@@ -25,10 +24,9 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentCreateTypeRegistrationTrust`                     | REGISTRATION_TRUST                                          |
 | `EnrollmentCreateTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                                    |
 | `EnrollmentCreateTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                        |
-| `EnrollmentCreateTypeMarginsPdtReset`                       | MARGINS_PDT_RESET                                           |
 | `EnrollmentCreateTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                          |
 | `EnrollmentCreateTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                                  |
 | `EnrollmentCreateTypeRegistrationIraBeneficiaryTraditional` | REGISTRATION_IRA_BENEFICIARY_TRADITIONAL                    |
 | `EnrollmentCreateTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                           |
+| `EnrollmentCreateTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                             |
 | `EnrollmentCreateTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                      |
-| `EnrollmentCreateTypeRegTMargin`                            | REG_T_MARGIN                                                |

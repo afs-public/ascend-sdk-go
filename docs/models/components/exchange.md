@@ -1,6 +1,6 @@
 # Exchange
 
-Object containing metadata for exchanges
+Used to record the exchange of certificates for a new security or cash and details related to the exchange
 
 
 ## Fields

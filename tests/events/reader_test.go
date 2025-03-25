@@ -23,8 +23,7 @@ func TestReader(t *testing.T) {
 }
 
 func testListEventMessages(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context) string {
-	filter, pageSize, pageToken := getListEventParams()
-	res, err := sdk.Reader.ListEventMessages(ctx, &filter, &pageSize, &pageToken)
+	res, err := sdk.Reader.ListEventMessages(ctx, nil, nil, nil)
 
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -40,8 +39,4 @@ func testGetEventMessage(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, 
 	res, err := sdk.Reader.GetEventMessage(ctx, messageID)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-}
-
-func getListEventParams() (filter string, pageSize int, pageToken string) {
-	return "", 1, ""
 }

@@ -1,5 +1,7 @@
 # YieldRecord
 
+Contains details about the yields associated with a trade in fixed income instruments
+
 
 ## Fields
 

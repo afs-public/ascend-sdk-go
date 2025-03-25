@@ -1,6 +1,6 @@
 # Withdrawal
 
-Object containing metadata for withdrawals
+Used to record withdrawals of funds from an account and capture details related to the withdrawal
 
 
 ## Fields

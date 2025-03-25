@@ -2,21 +2,53 @@
 
 package components
 
+// PreviousYearDeadline - The deadline for a previous year contribution. Previous year contributions are allowed when requested on or before this deadline. This field will be unset when previous year contributions are not allowed.
+type PreviousYearDeadline struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *PreviousYearDeadline) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *PreviousYearDeadline) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *PreviousYearDeadline) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // ContributionConstraintsContributionTypeInfoType - Retirement contribution type
 type ContributionConstraintsContributionTypeInfoType string
 
 const (
-	ContributionConstraintsContributionTypeInfoTypeTypeUnspecified    ContributionConstraintsContributionTypeInfoType = "TYPE_UNSPECIFIED"
-	ContributionConstraintsContributionTypeInfoTypeRegular            ContributionConstraintsContributionTypeInfoType = "REGULAR"
-	ContributionConstraintsContributionTypeInfoTypeEmployee           ContributionConstraintsContributionTypeInfoType = "EMPLOYEE"
-	ContributionConstraintsContributionTypeInfoTypeEmployer           ContributionConstraintsContributionTypeInfoType = "EMPLOYER"
-	ContributionConstraintsContributionTypeInfoTypeRecharacterization ContributionConstraintsContributionTypeInfoType = "RECHARACTERIZATION"
-	ContributionConstraintsContributionTypeInfoTypeRollover60Day      ContributionConstraintsContributionTypeInfoType = "ROLLOVER_60_DAY"
-	ContributionConstraintsContributionTypeInfoTypeRolloverDirect     ContributionConstraintsContributionTypeInfoType = "ROLLOVER_DIRECT"
-	ContributionConstraintsContributionTypeInfoTypeTransfer           ContributionConstraintsContributionTypeInfoType = "TRANSFER"
-	ContributionConstraintsContributionTypeInfoTypeTrusteeFee         ContributionConstraintsContributionTypeInfoType = "TRUSTEE_FEE"
-	ContributionConstraintsContributionTypeInfoTypeConversion         ContributionConstraintsContributionTypeInfoType = "CONVERSION"
-	ContributionConstraintsContributionTypeInfoTypeRepayment          ContributionConstraintsContributionTypeInfoType = "REPAYMENT"
+	ContributionConstraintsContributionTypeInfoTypeTypeUnspecified           ContributionConstraintsContributionTypeInfoType = "TYPE_UNSPECIFIED"
+	ContributionConstraintsContributionTypeInfoTypeRegular                   ContributionConstraintsContributionTypeInfoType = "REGULAR"
+	ContributionConstraintsContributionTypeInfoTypeEmployee                  ContributionConstraintsContributionTypeInfoType = "EMPLOYEE"
+	ContributionConstraintsContributionTypeInfoTypeEmployer                  ContributionConstraintsContributionTypeInfoType = "EMPLOYER"
+	ContributionConstraintsContributionTypeInfoTypeRecharacterization        ContributionConstraintsContributionTypeInfoType = "RECHARACTERIZATION"
+	ContributionConstraintsContributionTypeInfoTypeRollover60Day             ContributionConstraintsContributionTypeInfoType = "ROLLOVER_60_DAY"
+	ContributionConstraintsContributionTypeInfoTypeRolloverDirect            ContributionConstraintsContributionTypeInfoType = "ROLLOVER_DIRECT"
+	ContributionConstraintsContributionTypeInfoTypeTransfer                  ContributionConstraintsContributionTypeInfoType = "TRANSFER"
+	ContributionConstraintsContributionTypeInfoTypeTrusteeFee                ContributionConstraintsContributionTypeInfoType = "TRUSTEE_FEE"
+	ContributionConstraintsContributionTypeInfoTypeConversion                ContributionConstraintsContributionTypeInfoType = "CONVERSION"
+	ContributionConstraintsContributionTypeInfoTypeRepayment                 ContributionConstraintsContributionTypeInfoType = "REPAYMENT"
+	ContributionConstraintsContributionTypeInfoTypeContributionNonReportable ContributionConstraintsContributionTypeInfoType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e ContributionConstraintsContributionTypeInfoType) ToPointer() *ContributionConstraintsContributionTypeInfoType {
@@ -27,6 +59,8 @@ func (e ContributionConstraintsContributionTypeInfoType) ToPointer() *Contributi
 type ContributionConstraintsContributionTypeInfo struct {
 	// Whether this specific retirement contribution may be allowed for the previous year, without consideration of the tax deadline
 	PreviousYearAllowed *bool `json:"previous_year_allowed,omitempty"`
+	// The deadline for a previous year contribution. Previous year contributions are allowed when requested on or before this deadline. This field will be unset when previous year contributions are not allowed.
+	PreviousYearDeadline *PreviousYearDeadline `json:"previous_year_deadline,omitempty"`
 	// Retirement contribution type
 	Type *ContributionConstraintsContributionTypeInfoType `json:"type,omitempty"`
 }
@@ -36,6 +70,13 @@ func (o *ContributionConstraintsContributionTypeInfo) GetPreviousYearAllowed() *
 		return nil
 	}
 	return o.PreviousYearAllowed
+}
+
+func (o *ContributionConstraintsContributionTypeInfo) GetPreviousYearDeadline() *PreviousYearDeadline {
+	if o == nil {
+		return nil
+	}
+	return o.PreviousYearDeadline
 }
 
 func (o *ContributionConstraintsContributionTypeInfo) GetType() *ContributionConstraintsContributionTypeInfoType {

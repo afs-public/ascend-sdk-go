@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -34,23 +32,6 @@ const (
 
 func (e BasketOrderCreateIdentifierType) ToPointer() *BasketOrderCreateIdentifierType {
 	return &e
-}
-func (e *BasketOrderCreateIdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SYMBOL":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = BasketOrderCreateIdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BasketOrderCreateIdentifierType: %v", v)
-	}
 }
 
 // BasketOrderCreateOrderType - The execution type of this order.
@@ -98,7 +79,7 @@ type BasketOrderCreate struct {
 	AssetType BasketOrderCreateAssetType `json:"asset_type"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID string `json:"client_order_id"`
-	// Time the order request was received by the client
+	// Time the order request was received by the client. Must be in the past, and must be less than 24 hours old.
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`

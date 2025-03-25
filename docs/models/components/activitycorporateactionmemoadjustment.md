@@ -1,6 +1,6 @@
 # ActivityCorporateActionMemoAdjustment
 
-Object containing information about corporate action memo adjustments
+Used to record memo location adjustments initiated by the corporate action system due to reorg events
 
 
 ## Fields

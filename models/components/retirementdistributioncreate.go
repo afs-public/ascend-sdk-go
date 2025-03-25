@@ -24,6 +24,9 @@ const (
 	RetirementDistributionCreateTypePlanLoan401K                               RetirementDistributionCreateType = "PLAN_LOAN_401K"
 	RetirementDistributionCreateTypePrematureSimpleIraLessThan2Years           RetirementDistributionCreateType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	RetirementDistributionCreateTypeNormalRothIraGreaterThan5Years             RetirementDistributionCreateType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	RetirementDistributionCreateTypeNetIncomeAttributable                      RetirementDistributionCreateType = "NET_INCOME_ATTRIBUTABLE"
+	RetirementDistributionCreateTypeRevocation                                 RetirementDistributionCreateType = "REVOCATION"
+	RetirementDistributionCreateTypeNonReportable                              RetirementDistributionCreateType = "NON_REPORTABLE"
 )
 
 func (e RetirementDistributionCreateType) ToPointer() *RetirementDistributionCreateType {

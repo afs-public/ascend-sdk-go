@@ -2,6 +2,28 @@
 
 package components
 
+import (
+	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
+)
+
+type MatchAttributes string
+
+const (
+	MatchAttributesMatchAttributeUnspecified MatchAttributes = "MATCH_ATTRIBUTE_UNSPECIFIED"
+	MatchAttributesName                      MatchAttributes = "NAME"
+	MatchAttributesPhoneNumber               MatchAttributes = "PHONE_NUMBER"
+	MatchAttributesBirthDate                 MatchAttributes = "BIRTH_DATE"
+	MatchAttributesIdentification            MatchAttributes = "IDENTIFICATION"
+	MatchAttributesEmail                     MatchAttributes = "EMAIL"
+	MatchAttributesAddress                   MatchAttributes = "ADDRESS"
+)
+
+func (e MatchAttributes) ToPointer() *MatchAttributes {
+	return &e
+}
+
 // MatchState - Match state - whether or not the match is confirmed
 type MatchState string
 
@@ -21,14 +43,31 @@ func (e MatchState) ToPointer() *MatchState {
 type WatchlistMatch struct {
 	// Identifies if the entry is active or not
 	Active *bool `json:"active,omitempty"`
+	// The time the watchlist match was created
+	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Identifies that a confirmed watchlist match can be excluded when calculating the related screen state
 	ExcludeFromScreening *bool `json:"exclude_from_screening,omitempty"`
+	// The attributes used to identify this watchlist match
+	MatchAttributes []MatchAttributes `json:"match_attributes,omitempty"`
 	// Match state - whether or not the match is confirmed
 	MatchState *MatchState `json:"match_state,omitempty"`
+	// The time the watchlist match was last updated
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// Indicates the watchlist source for a given match
 	WatchlistID *string `json:"watchlist_id,omitempty"`
 	// Identification number for the watchlist item that was matched
 	WatchlistItemID *int `json:"watchlist_item_id,omitempty"`
+}
+
+func (w WatchlistMatch) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(w, "", false)
+}
+
+func (w *WatchlistMatch) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *WatchlistMatch) GetActive() *bool {
@@ -38,6 +77,13 @@ func (o *WatchlistMatch) GetActive() *bool {
 	return o.Active
 }
 
+func (o *WatchlistMatch) GetCreatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CreatedAt
+}
+
 func (o *WatchlistMatch) GetExcludeFromScreening() *bool {
 	if o == nil {
 		return nil
@@ -45,11 +91,25 @@ func (o *WatchlistMatch) GetExcludeFromScreening() *bool {
 	return o.ExcludeFromScreening
 }
 
+func (o *WatchlistMatch) GetMatchAttributes() []MatchAttributes {
+	if o == nil {
+		return nil
+	}
+	return o.MatchAttributes
+}
+
 func (o *WatchlistMatch) GetMatchState() *MatchState {
 	if o == nil {
 		return nil
 	}
 	return o.MatchState
+}
+
+func (o *WatchlistMatch) GetUpdatedAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
 }
 
 func (o *WatchlistMatch) GetWatchlistID() *string {

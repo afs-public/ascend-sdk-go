@@ -9,3 +9,4 @@ IRS form type.
 | ---------------------------------------------- | ---------------------------------------------- |
 | `LegalEntityIrsFormTypeIrsFormTypeUnspecified` | IRS_FORM_TYPE_UNSPECIFIED                      |
 | `LegalEntityIrsFormTypeW9`                     | W_9                                            |
+| `LegalEntityIrsFormTypeW8Ben`                  | W_8BEN                                         |

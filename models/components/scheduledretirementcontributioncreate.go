@@ -19,17 +19,18 @@ func (e TemporalTaxYear) ToPointer() *TemporalTaxYear {
 type ScheduledRetirementContributionCreateType string
 
 const (
-	ScheduledRetirementContributionCreateTypeTypeUnspecified    ScheduledRetirementContributionCreateType = "TYPE_UNSPECIFIED"
-	ScheduledRetirementContributionCreateTypeRegular            ScheduledRetirementContributionCreateType = "REGULAR"
-	ScheduledRetirementContributionCreateTypeEmployee           ScheduledRetirementContributionCreateType = "EMPLOYEE"
-	ScheduledRetirementContributionCreateTypeEmployer           ScheduledRetirementContributionCreateType = "EMPLOYER"
-	ScheduledRetirementContributionCreateTypeRecharacterization ScheduledRetirementContributionCreateType = "RECHARACTERIZATION"
-	ScheduledRetirementContributionCreateTypeRollover60Day      ScheduledRetirementContributionCreateType = "ROLLOVER_60_DAY"
-	ScheduledRetirementContributionCreateTypeRolloverDirect     ScheduledRetirementContributionCreateType = "ROLLOVER_DIRECT"
-	ScheduledRetirementContributionCreateTypeTransfer           ScheduledRetirementContributionCreateType = "TRANSFER"
-	ScheduledRetirementContributionCreateTypeTrusteeFee         ScheduledRetirementContributionCreateType = "TRUSTEE_FEE"
-	ScheduledRetirementContributionCreateTypeConversion         ScheduledRetirementContributionCreateType = "CONVERSION"
-	ScheduledRetirementContributionCreateTypeRepayment          ScheduledRetirementContributionCreateType = "REPAYMENT"
+	ScheduledRetirementContributionCreateTypeTypeUnspecified           ScheduledRetirementContributionCreateType = "TYPE_UNSPECIFIED"
+	ScheduledRetirementContributionCreateTypeRegular                   ScheduledRetirementContributionCreateType = "REGULAR"
+	ScheduledRetirementContributionCreateTypeEmployee                  ScheduledRetirementContributionCreateType = "EMPLOYEE"
+	ScheduledRetirementContributionCreateTypeEmployer                  ScheduledRetirementContributionCreateType = "EMPLOYER"
+	ScheduledRetirementContributionCreateTypeRecharacterization        ScheduledRetirementContributionCreateType = "RECHARACTERIZATION"
+	ScheduledRetirementContributionCreateTypeRollover60Day             ScheduledRetirementContributionCreateType = "ROLLOVER_60_DAY"
+	ScheduledRetirementContributionCreateTypeRolloverDirect            ScheduledRetirementContributionCreateType = "ROLLOVER_DIRECT"
+	ScheduledRetirementContributionCreateTypeTransfer                  ScheduledRetirementContributionCreateType = "TRANSFER"
+	ScheduledRetirementContributionCreateTypeTrusteeFee                ScheduledRetirementContributionCreateType = "TRUSTEE_FEE"
+	ScheduledRetirementContributionCreateTypeConversion                ScheduledRetirementContributionCreateType = "CONVERSION"
+	ScheduledRetirementContributionCreateTypeRepayment                 ScheduledRetirementContributionCreateType = "REPAYMENT"
+	ScheduledRetirementContributionCreateTypeContributionNonReportable ScheduledRetirementContributionCreateType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e ScheduledRetirementContributionCreateType) ToPointer() *ScheduledRetirementContributionCreateType {

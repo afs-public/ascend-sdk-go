@@ -8,7 +8,6 @@ type EnrollmentType string
 const (
 	EnrollmentTypeEnrollmentTypeUnspecified             EnrollmentType = "ENROLLMENT_TYPE_UNSPECIFIED"
 	EnrollmentTypeRegistrationIndividual                EnrollmentType = "REGISTRATION_INDIVIDUAL"
-	EnrollmentTypeLendingLimitedPurposeMargin           EnrollmentType = "LENDING_LIMITED_PURPOSE_MARGIN"
 	EnrollmentTypeLendingFullyPaidStockLoan             EnrollmentType = "LENDING_FULLY_PAID_STOCK_LOAN"
 	EnrollmentTypeBeneficiaryDesignation                EnrollmentType = "BENEFICIARY_DESIGNATION"
 	EnrollmentTypeRegistrationJointWros                 EnrollmentType = "REGISTRATION_JOINT_WROS"
@@ -24,13 +23,12 @@ const (
 	EnrollmentTypeRegistrationTrust                     EnrollmentType = "REGISTRATION_TRUST"
 	EnrollmentTypeRegistrationCorporation               EnrollmentType = "REGISTRATION_CORPORATION"
 	EnrollmentTypeCashFdicCashSweep                     EnrollmentType = "CASH_FDIC_CASH_SWEEP"
-	EnrollmentTypeMarginsPdtReset                       EnrollmentType = "MARGINS_PDT_RESET"
 	EnrollmentTypeRetirementBeneficiaryDesignation      EnrollmentType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	EnrollmentTypeDividendReinvestmentPlan              EnrollmentType = "DIVIDEND_REINVESTMENT_PLAN"
 	EnrollmentTypeRegistrationIraBeneficiaryTraditional EnrollmentType = "REGISTRATION_IRA_BENEFICIARY_TRADITIONAL"
 	EnrollmentTypeRegistrationIraBeneficiaryRoth        EnrollmentType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
+	EnrollmentTypeRegistrationIndividualForeign         EnrollmentType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentTypeRegistrationCustodial                 EnrollmentType = "REGISTRATION_CUSTODIAL"
-	EnrollmentTypeRegTMargin                            EnrollmentType = "REG_T_MARGIN"
 )
 
 func (e EnrollmentType) ToPointer() *EnrollmentType {

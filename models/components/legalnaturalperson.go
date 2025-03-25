@@ -995,6 +995,7 @@ type LegalNaturalPersonIrsFormType string
 const (
 	LegalNaturalPersonIrsFormTypeIrsFormTypeUnspecified LegalNaturalPersonIrsFormType = "IRS_FORM_TYPE_UNSPECIFIED"
 	LegalNaturalPersonIrsFormTypeW9                     LegalNaturalPersonIrsFormType = "W_9"
+	LegalNaturalPersonIrsFormTypeW8Ben                  LegalNaturalPersonIrsFormType = "W_8BEN"
 )
 
 func (e LegalNaturalPersonIrsFormType) ToPointer() *LegalNaturalPersonIrsFormType {

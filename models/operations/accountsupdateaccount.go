@@ -8,7 +8,9 @@ import (
 
 type AccountsUpdateAccountRequest struct {
 	// The account id.
-	AccountID            string                          `pathParam:"style=simple,explode=false,name=account_id"`
+	AccountID string `pathParam:"style=simple,explode=false,name=account_id"`
+	// The list of fields to update. Updatable Fields  `advised`  `cat_account_holder_type`  `primary_registered_rep_id`  `investment_profile.account_goals.investment_objective`  `investment_profile.account_goals.risk_tolerance`  `investment_profile.account_goals.liquidity_needs`  `investment_profile.account_goals.time_horizon`  `investment_profile.customer_profile.annual_income_range_usd`  `investment_profile.customer_profile.liquid_net_worth_range_usd`  `investment_profile.customer_profile.total_net_worth_range_usd`  `investment_profile.customer_profile.federal_tax_bracket`  `wrap_fee_billed`  `managed`
+	UpdateMask           *string                         `queryParam:"style=form,explode=true,name=update_mask"`
 	AccountRequestUpdate components.AccountRequestUpdate `request:"mediaType=application/json"`
 }
 
@@ -17,6 +19,13 @@ func (o *AccountsUpdateAccountRequest) GetAccountID() string {
 		return ""
 	}
 	return o.AccountID
+}
+
+func (o *AccountsUpdateAccountRequest) GetUpdateMask() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateMask
 }
 
 func (o *AccountsUpdateAccountRequest) GetAccountRequestUpdate() components.AccountRequestUpdate {

@@ -1,6 +1,6 @@
 # BuyingPowerAmount
 
-The buying power in USD returned from the request.
+The buying_power of the account in USD returned from the request.
 
 
 ## Fields

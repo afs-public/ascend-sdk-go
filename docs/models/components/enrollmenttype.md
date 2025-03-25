@@ -9,7 +9,6 @@ The enrollment type.
 | ----------------------------------------------------- | ----------------------------------------------------- |
 | `EnrollmentTypeEnrollmentTypeUnspecified`             | ENROLLMENT_TYPE_UNSPECIFIED                           |
 | `EnrollmentTypeRegistrationIndividual`                | REGISTRATION_INDIVIDUAL                               |
-| `EnrollmentTypeLendingLimitedPurposeMargin`           | LENDING_LIMITED_PURPOSE_MARGIN                        |
 | `EnrollmentTypeLendingFullyPaidStockLoan`             | LENDING_FULLY_PAID_STOCK_LOAN                         |
 | `EnrollmentTypeBeneficiaryDesignation`                | BENEFICIARY_DESIGNATION                               |
 | `EnrollmentTypeRegistrationJointWros`                 | REGISTRATION_JOINT_WROS                               |
@@ -25,10 +24,9 @@ The enrollment type.
 | `EnrollmentTypeRegistrationTrust`                     | REGISTRATION_TRUST                                    |
 | `EnrollmentTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                              |
 | `EnrollmentTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                  |
-| `EnrollmentTypeMarginsPdtReset`                       | MARGINS_PDT_RESET                                     |
 | `EnrollmentTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                    |
 | `EnrollmentTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                            |
 | `EnrollmentTypeRegistrationIraBeneficiaryTraditional` | REGISTRATION_IRA_BENEFICIARY_TRADITIONAL              |
 | `EnrollmentTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                     |
+| `EnrollmentTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                       |
 | `EnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                |
-| `EnrollmentTypeRegTMargin`                            | REG_T_MARGIN                                          |

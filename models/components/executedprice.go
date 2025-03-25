@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // Price - The limit price which must be greater than zero if provided. For equity orders in the USD currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for prices at or below $1. For fixed income orders this is expressed as a percentage of par, which allows up to 5 decimal places in the USD currency.
 type Price struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -32,25 +27,6 @@ const (
 
 func (e ExecutedPriceType) ToPointer() *ExecutedPriceType {
 	return &e
-}
-func (e *ExecutedPriceType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PRICE_PER_UNIT":
-		fallthrough
-	case "PERCENTAGE_OF_PAR":
-		fallthrough
-	case "YIELD_TO_WORST":
-		fallthrough
-	case "YIELD_TO_MATURITY":
-		*e = ExecutedPriceType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ExecutedPriceType: %v", v)
-	}
 }
 
 // ExecutedPrice - An average price definition

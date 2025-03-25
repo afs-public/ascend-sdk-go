@@ -1,6 +1,6 @@
 # ActivityWorthless
 
-Object containing metadata for worthless events
+Used to record the removal of positions in a given security when the DTC has received formal notice that the security is worthless and details related to the worthless event
 
 
 ## Fields

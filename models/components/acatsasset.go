@@ -2,6 +2,11 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
 // AssetCategory - The NSCC asset category
 type AssetCategory string
 
@@ -37,7 +42,7 @@ func (e AssetCategory) ToPointer() *AssetCategory {
 	return &e
 }
 
-// AcatsAssetQuantity - The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position Fractional amounts only supported for certain asset types
+// AcatsAssetQuantity - The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position or a DEBIT cash balance. Fractional amounts only supported for certain asset types
 type AcatsAssetQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -52,7 +57,7 @@ func (o *AcatsAssetQuantity) GetValue() *string {
 
 // AcatsAssetPosition - The position or amount of the asset
 type AcatsAssetPosition struct {
-	// The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position Fractional amounts only supported for certain asset types
+	// The quantity of the asset, or the amount if the asset is cash; negative quantity denotes short position or a DEBIT cash balance. Fractional amounts only supported for certain asset types
 	Quantity *AcatsAssetQuantity `json:"quantity,omitempty"`
 }
 
@@ -72,10 +77,34 @@ const (
 	AcatsAssetTypeCusip                     AcatsAssetType = "CUSIP"
 	AcatsAssetTypeSymbol                    AcatsAssetType = "SYMBOL"
 	AcatsAssetTypeIsin                      AcatsAssetType = "ISIN"
+	AcatsAssetTypeAssetID                   AcatsAssetType = "ASSET_ID"
 )
 
 func (e AcatsAssetType) ToPointer() *AcatsAssetType {
 	return &e
+}
+func (e *AcatsAssetType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "IDENTIFIER_TYPE_UNSPECIFIED":
+		fallthrough
+	case "CURRENCY_CODE":
+		fallthrough
+	case "CUSIP":
+		fallthrough
+	case "SYMBOL":
+		fallthrough
+	case "ISIN":
+		fallthrough
+	case "ASSET_ID":
+		*e = AcatsAssetType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for AcatsAssetType: %v", v)
+	}
 }
 
 // AcatsAsset - The asset being transferred If cash, the asset_id is the currency code (e.g. USD) and the position is the amount

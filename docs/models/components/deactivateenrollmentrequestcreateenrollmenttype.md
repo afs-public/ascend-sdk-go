@@ -9,7 +9,6 @@ Describes the name of the enrollment; Expressed as an enum
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeEnrollmentTypeUnspecified`             | ENROLLMENT_TYPE_UNSPECIFIED                                                            |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividual`                | REGISTRATION_INDIVIDUAL                                                                |
-| `DeactivateEnrollmentRequestCreateEnrollmentTypeLendingLimitedPurposeMargin`           | LENDING_LIMITED_PURPOSE_MARGIN                                                         |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeLendingFullyPaidStockLoan`             | LENDING_FULLY_PAID_STOCK_LOAN                                                          |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeBeneficiaryDesignation`                | BENEFICIARY_DESIGNATION                                                                |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointWros`                 | REGISTRATION_JOINT_WROS                                                                |
@@ -25,10 +24,9 @@ Describes the name of the enrollment; Expressed as an enum
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationTrust`                     | REGISTRATION_TRUST                                                                     |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                                                               |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                                                   |
-| `DeactivateEnrollmentRequestCreateEnrollmentTypeMarginsPdtReset`                       | MARGINS_PDT_RESET                                                                      |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                                                     |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                                                             |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryTraditional` | REGISTRATION_IRA_BENEFICIARY_TRADITIONAL                                               |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                                                      |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                                                        |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                                                 |
-| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegTMargin`                            | REG_T_MARGIN                                                                           |

@@ -1,6 +1,6 @@
 # ActivityRedemptionFull
 
-Object containing more information about a redemption
+Used to record the redemption of a security for cash in its entirety for which the holders receive the principal amount of the security and details related to the redemption
 
 
 ## Fields

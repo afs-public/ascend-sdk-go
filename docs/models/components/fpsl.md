@@ -1,6 +1,6 @@
 # Fpsl
 
-Object containing metadata for fully paid stock lending entries
+Used to record the movements of shares to/ from the fpsl memo location and details related to the fpsl memo
 
 
 ## Fields

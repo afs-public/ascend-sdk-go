@@ -37,13 +37,12 @@ func (o *BeneficiaryBirthDate) GetYear() *int {
 type BeneficiaryEntityType string
 
 const (
-	BeneficiaryEntityTypeEntityTypeUnspecified               BeneficiaryEntityType = "ENTITY_TYPE_UNSPECIFIED"
-	BeneficiaryEntityTypeCorporation                         BeneficiaryEntityType = "CORPORATION"
-	BeneficiaryEntityTypeLimitedLiabilityCompany             BeneficiaryEntityType = "LIMITED_LIABILITY_COMPANY"
-	BeneficiaryEntityTypePartnership                         BeneficiaryEntityType = "PARTNERSHIP"
-	BeneficiaryEntityTypeSoleProprietorshipOrSingleMemberLlc BeneficiaryEntityType = "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC"
-	BeneficiaryEntityTypeTrust                               BeneficiaryEntityType = "TRUST"
-	BeneficiaryEntityTypeEstate                              BeneficiaryEntityType = "ESTATE"
+	BeneficiaryEntityTypeEntityTypeUnspecified   BeneficiaryEntityType = "ENTITY_TYPE_UNSPECIFIED"
+	BeneficiaryEntityTypeCorporation             BeneficiaryEntityType = "CORPORATION"
+	BeneficiaryEntityTypeLimitedLiabilityCompany BeneficiaryEntityType = "LIMITED_LIABILITY_COMPANY"
+	BeneficiaryEntityTypePartnership             BeneficiaryEntityType = "PARTNERSHIP"
+	BeneficiaryEntityTypeTrust                   BeneficiaryEntityType = "TRUST"
+	BeneficiaryEntityTypeEstate                  BeneficiaryEntityType = "ESTATE"
 )
 
 func (e BeneficiaryEntityType) ToPointer() *BeneficiaryEntityType {

@@ -37,3 +37,10 @@ Describes the contents of a document and how it is used
 | `DocumentIDDocumentDocumentTypeDivorceDecree`                      | DIVORCE_DECREE                                                     |
 | `DocumentIDDocumentDocumentTypeProofOfResidence`                   | PROOF_OF_RESIDENCE                                                 |
 | `DocumentIDDocumentDocumentTypeBoReportingExemptionProof`          | BO_REPORTING_EXEMPTION_PROOF                                       |
+| `DocumentIDDocumentDocumentTypeOperatingAgreement`                 | OPERATING_AGREEMENT                                                |
+| `DocumentIDDocumentDocumentTypeRegisterOfMembers`                  | REGISTER_OF_MEMBERS                                                |
+| `DocumentIDDocumentDocumentTypeBoardResolution`                    | BOARD_RESOLUTION                                                   |
+| `DocumentIDDocumentDocumentTypeTrustDeedsAgreement`                | TRUST_DEEDS_AGREEMENT                                              |
+| `DocumentIDDocumentDocumentTypeCorporateBylaws`                    | CORPORATE_BYLAWS                                                   |
+| `DocumentIDDocumentDocumentTypeShareholderAgreement`               | SHAREHOLDER_AGREEMENT                                              |
+| `DocumentIDDocumentDocumentTypeCorporateRecords`                   | CORPORATE_RECORDS                                                  |

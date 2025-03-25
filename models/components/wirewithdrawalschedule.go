@@ -426,6 +426,9 @@ const (
 	WireWithdrawalScheduleTypePlanLoan401K                               WireWithdrawalScheduleType = "PLAN_LOAN_401K"
 	WireWithdrawalScheduleTypePrematureSimpleIraLessThan2Years           WireWithdrawalScheduleType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	WireWithdrawalScheduleTypeNormalRothIraGreaterThan5Years             WireWithdrawalScheduleType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	WireWithdrawalScheduleTypeNetIncomeAttributable                      WireWithdrawalScheduleType = "NET_INCOME_ATTRIBUTABLE"
+	WireWithdrawalScheduleTypeRevocation                                 WireWithdrawalScheduleType = "REVOCATION"
+	WireWithdrawalScheduleTypeNonReportable                              WireWithdrawalScheduleType = "NON_REPORTABLE"
 )
 
 func (e WireWithdrawalScheduleType) ToPointer() *WireWithdrawalScheduleType {

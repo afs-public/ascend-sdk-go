@@ -85,13 +85,12 @@ func (o *EntityDueDiligence) GetNegativeNews() *LegalEntityNegativeNews {
 type LegalEntityEntityType string
 
 const (
-	LegalEntityEntityTypeEntityTypeUnspecified               LegalEntityEntityType = "ENTITY_TYPE_UNSPECIFIED"
-	LegalEntityEntityTypeCorporation                         LegalEntityEntityType = "CORPORATION"
-	LegalEntityEntityTypeLimitedLiabilityCompany             LegalEntityEntityType = "LIMITED_LIABILITY_COMPANY"
-	LegalEntityEntityTypePartnership                         LegalEntityEntityType = "PARTNERSHIP"
-	LegalEntityEntityTypeSoleProprietorshipOrSingleMemberLlc LegalEntityEntityType = "SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC"
-	LegalEntityEntityTypeTrust                               LegalEntityEntityType = "TRUST"
-	LegalEntityEntityTypeEstate                              LegalEntityEntityType = "ESTATE"
+	LegalEntityEntityTypeEntityTypeUnspecified   LegalEntityEntityType = "ENTITY_TYPE_UNSPECIFIED"
+	LegalEntityEntityTypeCorporation             LegalEntityEntityType = "CORPORATION"
+	LegalEntityEntityTypeLimitedLiabilityCompany LegalEntityEntityType = "LIMITED_LIABILITY_COMPANY"
+	LegalEntityEntityTypePartnership             LegalEntityEntityType = "PARTNERSHIP"
+	LegalEntityEntityTypeTrust                   LegalEntityEntityType = "TRUST"
+	LegalEntityEntityTypeEstate                  LegalEntityEntityType = "ESTATE"
 )
 
 func (e LegalEntityEntityType) ToPointer() *LegalEntityEntityType {
@@ -426,6 +425,7 @@ type LegalEntityIrsFormType string
 const (
 	LegalEntityIrsFormTypeIrsFormTypeUnspecified LegalEntityIrsFormType = "IRS_FORM_TYPE_UNSPECIFIED"
 	LegalEntityIrsFormTypeW9                     LegalEntityIrsFormType = "W_9"
+	LegalEntityIrsFormTypeW8Ben                  LegalEntityIrsFormType = "W_8BEN"
 )
 
 func (e LegalEntityIrsFormType) ToPointer() *LegalEntityIrsFormType {

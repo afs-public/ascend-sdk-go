@@ -28,7 +28,7 @@ func TestMargins_MarginsRealTimeGetBuyingPower_GetBuyingPower1(t *testing.T) {
 	)
 
 	ctx := context.Background()
-	res, err := s.Margins.GetBuyingPower(ctx, "01JAGNNKW99FRD20C7Y987Z30B")
+	res, err := s.Margins.GetBuyingPower(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT")
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

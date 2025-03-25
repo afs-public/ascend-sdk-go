@@ -1,6 +1,6 @@
 # ActivityAcatsPendingOut
 
-Object containing metadata for pending outgoing acats memos
+Used to record the movement of funds or shares to/ from the pending_acats memo location
 
 
 ## Fields

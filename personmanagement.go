@@ -730,7 +730,7 @@ func (s *PersonManagement) GetLegalNaturalPerson(ctx context.Context, legalNatur
 
 // UpdateLegalNaturalPerson - Update Legal Natural Person
 // Updates a Legal Natural Person.
-func (s *PersonManagement) UpdateLegalNaturalPerson(ctx context.Context, legalNaturalPersonID string, legalNaturalPersonUpdate components.LegalNaturalPersonUpdate, opts ...operations.Option) (*operations.AccountsUpdateLegalNaturalPersonResponse, error) {
+func (s *PersonManagement) UpdateLegalNaturalPerson(ctx context.Context, legalNaturalPersonID string, legalNaturalPersonUpdate components.LegalNaturalPersonUpdate, updateMask *string, opts ...operations.Option) (*operations.AccountsUpdateLegalNaturalPersonResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "Accounts_UpdateLegalNaturalPerson",
@@ -740,6 +740,7 @@ func (s *PersonManagement) UpdateLegalNaturalPerson(ctx context.Context, legalNa
 
 	request := operations.AccountsUpdateLegalNaturalPersonRequest{
 		LegalNaturalPersonID:     legalNaturalPersonID,
+		UpdateMask:               updateMask,
 		LegalNaturalPersonUpdate: legalNaturalPersonUpdate,
 	}
 
@@ -784,6 +785,10 @@ func (s *PersonManagement) UpdateLegalNaturalPerson(ctx context.Context, legalNa
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2128,7 +2133,7 @@ func (s *PersonManagement) GetLegalEntity(ctx context.Context, legalEntityID str
 
 // UpdateLegalEntity - Update Legal Entity
 // Updates a Legal Entity.
-func (s *PersonManagement) UpdateLegalEntity(ctx context.Context, legalEntityID string, legalEntityUpdate components.LegalEntityUpdate, opts ...operations.Option) (*operations.AccountsUpdateLegalEntityResponse, error) {
+func (s *PersonManagement) UpdateLegalEntity(ctx context.Context, legalEntityID string, legalEntityUpdate components.LegalEntityUpdate, updateMask *string, opts ...operations.Option) (*operations.AccountsUpdateLegalEntityResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "Accounts_UpdateLegalEntity",
@@ -2138,6 +2143,7 @@ func (s *PersonManagement) UpdateLegalEntity(ctx context.Context, legalEntityID 
 
 	request := operations.AccountsUpdateLegalEntityRequest{
 		LegalEntityID:     legalEntityID,
+		UpdateMask:        updateMask,
 		LegalEntityUpdate: legalEntityUpdate,
 	}
 
@@ -2182,6 +2188,10 @@ func (s *PersonManagement) UpdateLegalEntity(ctx context.Context, legalEntityID 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

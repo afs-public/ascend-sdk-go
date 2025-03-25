@@ -1,6 +1,6 @@
 # Drip
 
-Object containing metadata for reserving cash until the DRIP trades are executed
+Used to record the movement of funds to/ from the pending_drip memo location
 
 
 ## Fields

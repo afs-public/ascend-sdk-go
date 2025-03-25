@@ -1,6 +1,6 @@
 # ActivityInterest
 
-Object containing metadata for margin interest
+Used to record the payment of interest to accounts that have maintained a cash balance or the charging of interest to accounts that have used margin and details related to the interest
 
 
 ## Fields

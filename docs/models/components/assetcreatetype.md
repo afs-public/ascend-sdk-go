@@ -12,3 +12,4 @@ The asset identifier type
 | `AssetCreateTypeCusip`                     | CUSIP                                      |
 | `AssetCreateTypeSymbol`                    | SYMBOL                                     |
 | `AssetCreateTypeIsin`                      | ISIN                                       |
+| `AssetCreateTypeAssetID`                   | ASSET_ID                                   |

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // BidAskPricePrice - The price value
 type BidAskPricePrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -31,23 +26,6 @@ const (
 
 func (e BidAskPriceType) ToPointer() *BidAskPriceType {
 	return &e
-}
-func (e *BidAskPriceType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "PERCENTAGE_OF_PAR":
-		fallthrough
-	case "YIELD_TO_WORST":
-		fallthrough
-	case "YIELD_TO_MATURITY":
-		*e = BidAskPriceType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for BidAskPriceType: %v", v)
-	}
 }
 
 // BidAskPrice - The definition of a price value and its calculation method as returned in quote data

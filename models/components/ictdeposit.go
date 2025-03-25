@@ -42,17 +42,18 @@ func (e IctDepositProgram) ToPointer() *IctDepositProgram {
 type IctDepositType string
 
 const (
-	IctDepositTypeTypeUnspecified    IctDepositType = "TYPE_UNSPECIFIED"
-	IctDepositTypeRegular            IctDepositType = "REGULAR"
-	IctDepositTypeEmployee           IctDepositType = "EMPLOYEE"
-	IctDepositTypeEmployer           IctDepositType = "EMPLOYER"
-	IctDepositTypeRecharacterization IctDepositType = "RECHARACTERIZATION"
-	IctDepositTypeRollover60Day      IctDepositType = "ROLLOVER_60_DAY"
-	IctDepositTypeRolloverDirect     IctDepositType = "ROLLOVER_DIRECT"
-	IctDepositTypeTransfer           IctDepositType = "TRANSFER"
-	IctDepositTypeTrusteeFee         IctDepositType = "TRUSTEE_FEE"
-	IctDepositTypeConversion         IctDepositType = "CONVERSION"
-	IctDepositTypeRepayment          IctDepositType = "REPAYMENT"
+	IctDepositTypeTypeUnspecified           IctDepositType = "TYPE_UNSPECIFIED"
+	IctDepositTypeRegular                   IctDepositType = "REGULAR"
+	IctDepositTypeEmployee                  IctDepositType = "EMPLOYEE"
+	IctDepositTypeEmployer                  IctDepositType = "EMPLOYER"
+	IctDepositTypeRecharacterization        IctDepositType = "RECHARACTERIZATION"
+	IctDepositTypeRollover60Day             IctDepositType = "ROLLOVER_60_DAY"
+	IctDepositTypeRolloverDirect            IctDepositType = "ROLLOVER_DIRECT"
+	IctDepositTypeTransfer                  IctDepositType = "TRANSFER"
+	IctDepositTypeTrusteeFee                IctDepositType = "TRUSTEE_FEE"
+	IctDepositTypeConversion                IctDepositType = "CONVERSION"
+	IctDepositTypeRepayment                 IctDepositType = "REPAYMENT"
+	IctDepositTypeContributionNonReportable IctDepositType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e IctDepositType) ToPointer() *IctDepositType {

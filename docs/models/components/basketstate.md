@@ -14,3 +14,4 @@ The processing status of the basket
 | `BasketStateAllocating`       | ALLOCATING                    |
 | `BasketStateDone`             | DONE                          |
 | `BasketStateRejected`         | REJECTED                      |
+| `BasketStatePartiallyFilled`  | PARTIALLY_FILLED              |

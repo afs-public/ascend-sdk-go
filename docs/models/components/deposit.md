@@ -1,6 +1,6 @@
 # Deposit
 
-Object containing more information about a deposit
+Used to record deposits of funds into an account and capture details related to the deposit
 
 
 ## Fields

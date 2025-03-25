@@ -1,6 +1,6 @@
 # WithdrawalPendingReview
 
-Object containing metadata about withdrawals that have been requested, but have not posted
+Used to record the movement of funds to/ from the pending_withdrawal memo location
 
 
 ## Fields

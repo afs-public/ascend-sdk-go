@@ -28,7 +28,7 @@ func newDataRetrieval(sdkConfig sdkConfiguration) *DataRetrieval {
 }
 
 // ListSnapshots - List Snapshots
-// Returns details of a list of snapshots
+// Returns details of a list of snapshots.
 func (s *DataRetrieval) ListSnapshots(ctx context.Context, filter *string, pageSize *int, pageToken *string, opts ...operations.Option) (*operations.SnapshotsListSnapshotsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
@@ -157,7 +157,7 @@ func (s *DataRetrieval) ListSnapshots(ctx context.Context, filter *string, pageS
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"403", "4XX", "500", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "403", "4XX", "500", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -201,6 +201,8 @@ func (s *DataRetrieval) ListSnapshots(ctx context.Context, filter *string, pageS
 			}
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 400:
+		fallthrough
 	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 500:

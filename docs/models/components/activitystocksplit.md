@@ -1,6 +1,6 @@
 # ActivityStockSplit
 
-Object containing metadata for stock splits
+Used to record the increase in a company's number of outstanding shares of stock without any change in the shareholder's equity or the aggregate market value at the time of the split and details related to the stock split
 
 
 ## Fields

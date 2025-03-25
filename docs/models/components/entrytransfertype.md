@@ -12,3 +12,4 @@ Provides more detail on the type of transfer
 | `EntryTransferTypeDeconversion`            | DECONVERSION                               |
 | `EntryTransferTypeMigration`               | MIGRATION                                  |
 | `EntryTransferTypeManualAdjustment`        | MANUAL_ADJUSTMENT                          |
+| `EntryTransferTypeInternalConversion`      | INTERNAL_CONVERSION                        |

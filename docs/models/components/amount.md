@@ -1,6 +1,6 @@
 # Amount
 
-The amount to deposit in USD.
+Monetary amount associated with the fee
 
 
 ## Fields

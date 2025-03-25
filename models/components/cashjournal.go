@@ -38,17 +38,18 @@ func (e PartyType) ToPointer() *PartyType {
 type CashJournalType string
 
 const (
-	CashJournalTypeTypeUnspecified    CashJournalType = "TYPE_UNSPECIFIED"
-	CashJournalTypeRegular            CashJournalType = "REGULAR"
-	CashJournalTypeEmployee           CashJournalType = "EMPLOYEE"
-	CashJournalTypeEmployer           CashJournalType = "EMPLOYER"
-	CashJournalTypeRecharacterization CashJournalType = "RECHARACTERIZATION"
-	CashJournalTypeRollover60Day      CashJournalType = "ROLLOVER_60_DAY"
-	CashJournalTypeRolloverDirect     CashJournalType = "ROLLOVER_DIRECT"
-	CashJournalTypeTransfer           CashJournalType = "TRANSFER"
-	CashJournalTypeTrusteeFee         CashJournalType = "TRUSTEE_FEE"
-	CashJournalTypeConversion         CashJournalType = "CONVERSION"
-	CashJournalTypeRepayment          CashJournalType = "REPAYMENT"
+	CashJournalTypeTypeUnspecified           CashJournalType = "TYPE_UNSPECIFIED"
+	CashJournalTypeRegular                   CashJournalType = "REGULAR"
+	CashJournalTypeEmployee                  CashJournalType = "EMPLOYEE"
+	CashJournalTypeEmployer                  CashJournalType = "EMPLOYER"
+	CashJournalTypeRecharacterization        CashJournalType = "RECHARACTERIZATION"
+	CashJournalTypeRollover60Day             CashJournalType = "ROLLOVER_60_DAY"
+	CashJournalTypeRolloverDirect            CashJournalType = "ROLLOVER_DIRECT"
+	CashJournalTypeTransfer                  CashJournalType = "TRANSFER"
+	CashJournalTypeTrusteeFee                CashJournalType = "TRUSTEE_FEE"
+	CashJournalTypeConversion                CashJournalType = "CONVERSION"
+	CashJournalTypeRepayment                 CashJournalType = "REPAYMENT"
+	CashJournalTypeContributionNonReportable CashJournalType = "CONTRIBUTION_NON_REPORTABLE"
 )
 
 func (e CashJournalType) ToPointer() *CashJournalType {
@@ -195,6 +196,9 @@ const (
 	CashJournalRetirementDistributionTypePlanLoan401K                               CashJournalRetirementDistributionType = "PLAN_LOAN_401K"
 	CashJournalRetirementDistributionTypePrematureSimpleIraLessThan2Years           CashJournalRetirementDistributionType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
 	CashJournalRetirementDistributionTypeNormalRothIraGreaterThan5Years             CashJournalRetirementDistributionType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	CashJournalRetirementDistributionTypeNetIncomeAttributable                      CashJournalRetirementDistributionType = "NET_INCOME_ATTRIBUTABLE"
+	CashJournalRetirementDistributionTypeRevocation                                 CashJournalRetirementDistributionType = "REVOCATION"
+	CashJournalRetirementDistributionTypeNonReportable                              CashJournalRetirementDistributionType = "NON_REPORTABLE"
 )
 
 func (e CashJournalRetirementDistributionType) ToPointer() *CashJournalRetirementDistributionType {

@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -48,23 +46,6 @@ const (
 
 func (e IdentifierType) ToPointer() *IdentifierType {
 	return &e
-}
-func (e *IdentifierType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "SYMBOL":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "ISIN":
-		*e = IdentifierType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for IdentifierType: %v", v)
-	}
 }
 
 // OrderType - The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
@@ -157,6 +138,8 @@ type OrderCreate struct {
 	Fees []FeeCreate `json:"fees,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`
+	// A string attribute denoting the country of issuance or where the asset is trading. Only available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field must be provided Complies with ISO-3166 Alpha-2 Codes
+	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
 	IdentifierType IdentifierType `json:"identifier_type"`
 	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
@@ -266,6 +249,13 @@ func (o *OrderCreate) GetIdentifier() string {
 		return ""
 	}
 	return o.Identifier
+}
+
+func (o *OrderCreate) GetIdentifierIssuingRegionCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdentifierIssuingRegionCode
 }
 
 func (o *OrderCreate) GetIdentifierType() IdentifierType {

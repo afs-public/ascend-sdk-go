@@ -1,6 +1,6 @@
 # ActivityRoundingAdjustment
 
-Object containing metadata for standalone rounding adjustments
+Used to record rounding adjustments when the sum(price x quantity) of all entries for a given activity do not equal the price x quantity of the fully formed activity record
 
 
 ## Fields

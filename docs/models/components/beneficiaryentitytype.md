@@ -5,12 +5,11 @@ The entity type of the beneficiary; Required if the beneficiary is a legal entit
 
 ## Values
 
-| Name                                                       | Value                                                      |
-| ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `BeneficiaryEntityTypeEntityTypeUnspecified`               | ENTITY_TYPE_UNSPECIFIED                                    |
-| `BeneficiaryEntityTypeCorporation`                         | CORPORATION                                                |
-| `BeneficiaryEntityTypeLimitedLiabilityCompany`             | LIMITED_LIABILITY_COMPANY                                  |
-| `BeneficiaryEntityTypePartnership`                         | PARTNERSHIP                                                |
-| `BeneficiaryEntityTypeSoleProprietorshipOrSingleMemberLlc` | SOLE_PROPRIETORSHIP_OR_SINGLE_MEMBER_LLC                   |
-| `BeneficiaryEntityTypeTrust`                               | TRUST                                                      |
-| `BeneficiaryEntityTypeEstate`                              | ESTATE                                                     |
+| Name                                           | Value                                          |
+| ---------------------------------------------- | ---------------------------------------------- |
+| `BeneficiaryEntityTypeEntityTypeUnspecified`   | ENTITY_TYPE_UNSPECIFIED                        |
+| `BeneficiaryEntityTypeCorporation`             | CORPORATION                                    |
+| `BeneficiaryEntityTypeLimitedLiabilityCompany` | LIMITED_LIABILITY_COMPANY                      |
+| `BeneficiaryEntityTypePartnership`             | PARTNERSHIP                                    |
+| `BeneficiaryEntityTypeTrust`                   | TRUST                                          |
+| `BeneficiaryEntityTypeEstate`                  | ESTATE                                         |

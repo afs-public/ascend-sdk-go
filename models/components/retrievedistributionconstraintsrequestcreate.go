@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // RetrieveDistributionConstraintsRequestCreateMechanism - Cash transfer mechanism to search constraints for
 type RetrieveDistributionConstraintsRequestCreateMechanism string
 
@@ -17,21 +12,6 @@ const (
 
 func (e RetrieveDistributionConstraintsRequestCreateMechanism) ToPointer() *RetrieveDistributionConstraintsRequestCreateMechanism {
 	return &e
-}
-func (e *RetrieveDistributionConstraintsRequestCreateMechanism) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ACH":
-		fallthrough
-	case "ICT":
-		*e = RetrieveDistributionConstraintsRequestCreateMechanism(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RetrieveDistributionConstraintsRequestCreateMechanism: %v", v)
-	}
 }
 
 // RetrieveDistributionConstraintsRequestCreate - Request to retrieve retirement distribution constraints

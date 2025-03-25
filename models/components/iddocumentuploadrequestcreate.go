@@ -36,6 +36,13 @@ const (
 	IDDocumentUploadRequestCreateDocumentTypeDivorceDecree                      IDDocumentUploadRequestCreateDocumentType = "DIVORCE_DECREE"
 	IDDocumentUploadRequestCreateDocumentTypeProofOfResidence                   IDDocumentUploadRequestCreateDocumentType = "PROOF_OF_RESIDENCE"
 	IDDocumentUploadRequestCreateDocumentTypeBoReportingExemptionProof          IDDocumentUploadRequestCreateDocumentType = "BO_REPORTING_EXEMPTION_PROOF"
+	IDDocumentUploadRequestCreateDocumentTypeOperatingAgreement                 IDDocumentUploadRequestCreateDocumentType = "OPERATING_AGREEMENT"
+	IDDocumentUploadRequestCreateDocumentTypeRegisterOfMembers                  IDDocumentUploadRequestCreateDocumentType = "REGISTER_OF_MEMBERS"
+	IDDocumentUploadRequestCreateDocumentTypeBoardResolution                    IDDocumentUploadRequestCreateDocumentType = "BOARD_RESOLUTION"
+	IDDocumentUploadRequestCreateDocumentTypeTrustDeedsAgreement                IDDocumentUploadRequestCreateDocumentType = "TRUST_DEEDS_AGREEMENT"
+	IDDocumentUploadRequestCreateDocumentTypeCorporateBylaws                    IDDocumentUploadRequestCreateDocumentType = "CORPORATE_BYLAWS"
+	IDDocumentUploadRequestCreateDocumentTypeShareholderAgreement               IDDocumentUploadRequestCreateDocumentType = "SHAREHOLDER_AGREEMENT"
+	IDDocumentUploadRequestCreateDocumentTypeCorporateRecords                   IDDocumentUploadRequestCreateDocumentType = "CORPORATE_RECORDS"
 )
 
 func (e IDDocumentUploadRequestCreateDocumentType) ToPointer() *IDDocumentUploadRequestCreateDocumentType {

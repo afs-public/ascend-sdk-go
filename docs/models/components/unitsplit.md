@@ -1,6 +1,6 @@
 # UnitSplit
 
-Object containing metadata for unit splits
+Used to record increases in the number of units outstanding through the issuing of more units to current shareholders and details related to the unit split
 
 
 ## Fields
