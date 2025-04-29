@@ -214,7 +214,7 @@ func getWireWithdrawalId(accountId string, fixture Fixtures) (*string, error) {
 				State:         ascendsdk.String("OR"),
 				StreetAddress: []string{"123 Main St"},
 			},
-			ThirdParty: ascendsdk.Bool(false),
+			ThirdParty: ascendsdk.Bool(true),
 		},
 		RecipientBank: components.WireWithdrawalRecipientBankCreate{
 			BankID: components.RecipientBankBankIDCreate{

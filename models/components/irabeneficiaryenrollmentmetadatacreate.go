@@ -2,7 +2,7 @@
 
 package components
 
-// IRABeneficiaryEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in dividend reinvestment; defaults to true
+// IRABeneficiaryEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type IRABeneficiaryEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e IRABeneficiaryEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointe
 	return &e
 }
 
-// IRABeneficiaryEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// IRABeneficiaryEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type IRABeneficiaryEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -30,9 +30,9 @@ func (e IRABeneficiaryEnrollmentMetadataCreateFdicCashSweep) ToPointer() *IRABen
 
 // IRABeneficiaryEnrollmentMetadataCreate - Enrollment metadata for beneficiary IRA accounts enrollment type
 type IRABeneficiaryEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in dividend reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *IRABeneficiaryEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *IRABeneficiaryEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//

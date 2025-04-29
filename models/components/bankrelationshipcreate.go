@@ -13,7 +13,6 @@ const (
 	VerificationMethodGiact                         VerificationMethod = "GIACT"
 	VerificationMethodSynapse                       VerificationMethod = "SYNAPSE"
 	VerificationMethodSophtron                      VerificationMethod = "SOPHTRON"
-	VerificationMethodUseExisting                   VerificationMethod = "USE_EXISTING"
 	VerificationMethodInternalBank                  VerificationMethod = "INTERNAL_BANK"
 	VerificationMethodMx                            VerificationMethod = "MX"
 	VerificationMethodFiserv                        VerificationMethod = "FISERV"

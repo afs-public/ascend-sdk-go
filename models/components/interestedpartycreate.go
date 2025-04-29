@@ -2,28 +2,24 @@
 
 package components
 
-// StatementDeliveryPreference - Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+// StatementDeliveryPreference - Delivery method instruction for account statements for a given Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type StatementDeliveryPreference string
 
 const (
-	StatementDeliveryPreferenceDeliveryPreferenceUnspecified StatementDeliveryPreference = "DELIVERY_PREFERENCE_UNSPECIFIED"
-	StatementDeliveryPreferenceDigital                       StatementDeliveryPreference = "DIGITAL"
-	StatementDeliveryPreferencePhysical                      StatementDeliveryPreference = "PHYSICAL"
-	StatementDeliveryPreferenceSuppress                      StatementDeliveryPreference = "SUPPRESS"
+	StatementDeliveryPreferencePhysical StatementDeliveryPreference = "PHYSICAL"
+	StatementDeliveryPreferenceSuppress StatementDeliveryPreference = "SUPPRESS"
 )
 
 func (e StatementDeliveryPreference) ToPointer() *StatementDeliveryPreference {
 	return &e
 }
 
-// TradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+// TradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type TradeConfirmationDeliveryPreference string
 
 const (
-	TradeConfirmationDeliveryPreferenceDeliveryPreferenceUnspecified TradeConfirmationDeliveryPreference = "DELIVERY_PREFERENCE_UNSPECIFIED"
-	TradeConfirmationDeliveryPreferenceDigital                       TradeConfirmationDeliveryPreference = "DIGITAL"
-	TradeConfirmationDeliveryPreferencePhysical                      TradeConfirmationDeliveryPreference = "PHYSICAL"
-	TradeConfirmationDeliveryPreferenceSuppress                      TradeConfirmationDeliveryPreference = "SUPPRESS"
+	TradeConfirmationDeliveryPreferencePhysical TradeConfirmationDeliveryPreference = "PHYSICAL"
+	TradeConfirmationDeliveryPreferenceSuppress TradeConfirmationDeliveryPreference = "SUPPRESS"
 )
 
 func (e TradeConfirmationDeliveryPreference) ToPointer() *TradeConfirmationDeliveryPreference {
@@ -42,9 +38,9 @@ type InterestedPartyCreate struct {
 	MailingAddress PostalAddressCreate `json:"mailing_address"`
 	// The sending address name for mailings to Interested Parties The name of an Interested Party; Used for envelope/communication addressing
 	Recipient string `json:"recipient"`
-	// Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+	// Delivery method instruction for account statements for a given Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 	StatementDeliveryPreference *StatementDeliveryPreference `json:"statement_delivery_preference,omitempty"`
-	// Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+	// Delivery method instruction for trade confirmations for a given Interested Party record; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 	TradeConfirmationDeliveryPreference *TradeConfirmationDeliveryPreference `json:"trade_confirmation_delivery_preference,omitempty"`
 }
 

@@ -14,7 +14,6 @@ The verification method of the bank relationship.
 | `VerificationMethodGiact`                         | GIACT                                             |
 | `VerificationMethodSynapse`                       | SYNAPSE                                           |
 | `VerificationMethodSophtron`                      | SOPHTRON                                          |
-| `VerificationMethodUseExisting`                   | USE_EXISTING                                      |
 | `VerificationMethodInternalBank`                  | INTERNAL_BANK                                     |
 | `VerificationMethodMx`                            | MX                                                |
 | `VerificationMethodFiserv`                        | FISERV                                            |

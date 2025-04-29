@@ -122,28 +122,24 @@ func (o *InterestedPartyMailingAddress) GetSublocality() *string {
 	return o.Sublocality
 }
 
-// InterestedPartyStatementDeliveryPreference - Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+// InterestedPartyStatementDeliveryPreference - Delivery method instruction for account statements for a given Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type InterestedPartyStatementDeliveryPreference string
 
 const (
-	InterestedPartyStatementDeliveryPreferenceDeliveryPreferenceUnspecified InterestedPartyStatementDeliveryPreference = "DELIVERY_PREFERENCE_UNSPECIFIED"
-	InterestedPartyStatementDeliveryPreferenceDigital                       InterestedPartyStatementDeliveryPreference = "DIGITAL"
-	InterestedPartyStatementDeliveryPreferencePhysical                      InterestedPartyStatementDeliveryPreference = "PHYSICAL"
-	InterestedPartyStatementDeliveryPreferenceSuppress                      InterestedPartyStatementDeliveryPreference = "SUPPRESS"
+	InterestedPartyStatementDeliveryPreferencePhysical InterestedPartyStatementDeliveryPreference = "PHYSICAL"
+	InterestedPartyStatementDeliveryPreferenceSuppress InterestedPartyStatementDeliveryPreference = "SUPPRESS"
 )
 
 func (e InterestedPartyStatementDeliveryPreference) ToPointer() *InterestedPartyStatementDeliveryPreference {
 	return &e
 }
 
-// InterestedPartyTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+// InterestedPartyTradeConfirmationDeliveryPreference - Delivery method instruction for trade confirmations for a given Interested Party record; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 type InterestedPartyTradeConfirmationDeliveryPreference string
 
 const (
-	InterestedPartyTradeConfirmationDeliveryPreferenceDeliveryPreferenceUnspecified InterestedPartyTradeConfirmationDeliveryPreference = "DELIVERY_PREFERENCE_UNSPECIFIED"
-	InterestedPartyTradeConfirmationDeliveryPreferenceDigital                       InterestedPartyTradeConfirmationDeliveryPreference = "DIGITAL"
-	InterestedPartyTradeConfirmationDeliveryPreferencePhysical                      InterestedPartyTradeConfirmationDeliveryPreference = "PHYSICAL"
-	InterestedPartyTradeConfirmationDeliveryPreferenceSuppress                      InterestedPartyTradeConfirmationDeliveryPreference = "SUPPRESS"
+	InterestedPartyTradeConfirmationDeliveryPreferencePhysical InterestedPartyTradeConfirmationDeliveryPreference = "PHYSICAL"
+	InterestedPartyTradeConfirmationDeliveryPreferenceSuppress InterestedPartyTradeConfirmationDeliveryPreference = "SUPPRESS"
 )
 
 func (e InterestedPartyTradeConfirmationDeliveryPreference) ToPointer() *InterestedPartyTradeConfirmationDeliveryPreference {
@@ -165,9 +161,9 @@ type InterestedParty struct {
 	Name *string `json:"name,omitempty"`
 	// The sending address name for mailings to Interested Parties The name of an Interested Party; Used for envelope/communication addressing
 	Recipient *string `json:"recipient,omitempty"`
-	// Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+	// Delivery method instruction for account statements for a given Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 	StatementDeliveryPreference *InterestedPartyStatementDeliveryPreference `json:"statement_delivery_preference,omitempty"`
-	// Delivery method instruction for trade confirmations for a given Interested Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+	// Delivery method instruction for trade confirmations for a given Interested Party record; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 	TradeConfirmationDeliveryPreference *InterestedPartyTradeConfirmationDeliveryPreference `json:"trade_confirmation_delivery_preference,omitempty"`
 }
 

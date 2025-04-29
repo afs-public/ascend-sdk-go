@@ -35,8 +35,18 @@ func (f *Fixtures) CorrespondentId() (correspondentId *string) {
 	return
 }
 
-func (f *Fixtures) FixedSubscriberId() *string {
-	return ascendsdk.String("01JJYZ16TVYZM6A6BDJ8RJRMTQ")
+func (f *Fixtures) SubscriptionId() *string {
+	s := f.sdk
+	ctx := f.ctx
+
+	res, err := s.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
+	if err != nil {
+		return nil
+	}
+	subscriptions := res.ListPushSubscriptionsResponse.PushSubscriptions
+	subscription_id := subscriptions[0].SubscriptionID
+
+	return subscription_id
 }
 
 func (f *Fixtures) SubscriberId() *string {
@@ -61,7 +71,7 @@ func (f *Fixtures) DeliveryId() *string {
 		return f.deliveryId
 	}
 
-	deliveryId, err := deliveryID(f.sdk, f.ctx, f.FixedSubscriberId())
+	deliveryId, err := deliveryID(f.sdk, f.ctx, f.SubscriptionId())
 
 	fmt.Println("DeliveryID", deliveryId)
 	require.NoError(f.t, err)
@@ -139,7 +149,7 @@ func TestSubscriber(t *testing.T) {
 	})
 
 	t.Run("GetPushSubscriptionDelivery", func(t *testing.T) {
-		res, err := sdk.Subscriber.GetPushSubscriptionDelivery(ctx, *fixtures.FixedSubscriberId(), *fixtures.DeliveryId())
+		res, err := sdk.Subscriber.GetPushSubscriptionDelivery(ctx, *fixtures.SubscriptionId(), *fixtures.DeliveryId())
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})

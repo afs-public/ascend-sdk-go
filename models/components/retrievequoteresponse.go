@@ -42,6 +42,7 @@ const (
 	RetrieveQuoteResponseAssetTypeEquity               RetrieveQuoteResponseAssetType = "EQUITY"
 	RetrieveQuoteResponseAssetTypeFixedIncome          RetrieveQuoteResponseAssetType = "FIXED_INCOME"
 	RetrieveQuoteResponseAssetTypeMutualFund           RetrieveQuoteResponseAssetType = "MUTUAL_FUND"
+	RetrieveQuoteResponseAssetTypeOption               RetrieveQuoteResponseAssetType = "OPTION"
 )
 
 func (e RetrieveQuoteResponseAssetType) ToPointer() *RetrieveQuoteResponseAssetType {

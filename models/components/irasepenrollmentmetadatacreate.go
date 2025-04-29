@@ -2,7 +2,7 @@
 
 package components
 
-// IRASEPEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// IRASEPEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type IRASEPEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e IRASEPEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *IRA
 	return &e
 }
 
-// IRASEPEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// IRASEPEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type IRASEPEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -30,9 +30,9 @@ func (e IRASEPEnrollmentMetadataCreateFdicCashSweep) ToPointer() *IRASEPEnrollme
 
 // IRASEPEnrollmentMetadataCreate - Enrollment metadata for IRA SEP_IRA accounts enrollment type
 type IRASEPEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *IRASEPEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *IRASEPEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 }
 

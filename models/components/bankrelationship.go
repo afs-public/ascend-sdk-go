@@ -140,7 +140,6 @@ const (
 	BankRelationshipVerificationMethodGiact                         BankRelationshipVerificationMethod = "GIACT"
 	BankRelationshipVerificationMethodSynapse                       BankRelationshipVerificationMethod = "SYNAPSE"
 	BankRelationshipVerificationMethodSophtron                      BankRelationshipVerificationMethod = "SOPHTRON"
-	BankRelationshipVerificationMethodUseExisting                   BankRelationshipVerificationMethod = "USE_EXISTING"
 	BankRelationshipVerificationMethodInternalBank                  BankRelationshipVerificationMethod = "INTERNAL_BANK"
 	BankRelationshipVerificationMethodMx                            BankRelationshipVerificationMethod = "MX"
 	BankRelationshipVerificationMethodFiserv                        BankRelationshipVerificationMethod = "FISERV"

@@ -1,6 +1,6 @@
 # YieldType
 
-Characterization of a yield percentage
+The type of yield.
 
 
 ## Values

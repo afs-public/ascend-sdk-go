@@ -8,14 +8,15 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// OrderAssetType - The type of the asset in this order
+// OrderAssetType - The type of the asset in this order, which must be one of the following:
+//
+//	EQUITY, MUTUAL_FUND, and FIXED_INCOME.
 type OrderAssetType string
 
 const (
-	OrderAssetTypeAssetTypeUnspecified OrderAssetType = "ASSET_TYPE_UNSPECIFIED"
-	OrderAssetTypeEquity               OrderAssetType = "EQUITY"
-	OrderAssetTypeFixedIncome          OrderAssetType = "FIXED_INCOME"
-	OrderAssetTypeMutualFund           OrderAssetType = "MUTUAL_FUND"
+	OrderAssetTypeEquity      OrderAssetType = "EQUITY"
+	OrderAssetTypeFixedIncome OrderAssetType = "FIXED_INCOME"
+	OrderAssetTypeMutualFund  OrderAssetType = "MUTUAL_FUND"
 )
 
 func (e OrderAssetType) ToPointer() *OrderAssetType {
@@ -553,7 +554,8 @@ type Order struct {
 	AccountID *string `json:"account_id,omitempty"`
 	// Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response and will be available after an order completes validation. If the provided identifier does not match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
 	AssetID *string `json:"asset_id,omitempty"`
-	// The type of the asset in this order
+	// The type of the asset in this order, which must be one of the following:
+	//  EQUITY, MUTUAL_FUND, and FIXED_INCOME.
 	AssetType *OrderAssetType `json:"asset_type,omitempty"`
 	// The average prices, as weighted averages, across all executions in this order. Will be absent if an order has no executions.
 	//
@@ -581,7 +583,7 @@ type Order struct {
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
 	Executions []Executions `json:"executions,omitempty"`
-	// Fees that will be applied to this order.
+	// Fees that will be applied to this order. Only the BROKER_FEE type is supported.
 	Fees []Fee `json:"fees,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *FilledQuantity `json:"filled_quantity,omitempty"`

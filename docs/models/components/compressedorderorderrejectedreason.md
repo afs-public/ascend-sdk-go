@@ -31,3 +31,5 @@ When an order has the REJECTED status, this will be populated with a system code
 | `CompressedOrderOrderRejectedReasonStockTradesDisabled`                               | STOCK_TRADES_DISABLED                                                                 |
 | `CompressedOrderOrderRejectedReasonAssetNotSetUpToTrade`                              | ASSET_NOT_SET_UP_TO_TRADE                                                             |
 | `CompressedOrderOrderRejectedReasonAnotherBasketOrderForAccountHasFailedRiskChecks`   | ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS                               |
+| `CompressedOrderOrderRejectedReasonInsufficientPosition`                              | INSUFFICIENT_POSITION                                                                 |
+| `CompressedOrderOrderRejectedReasonFailedBuyingPower`                                 | FAILED_BUYING_POWER                                                                   |

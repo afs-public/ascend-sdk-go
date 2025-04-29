@@ -6,6 +6,8 @@ package components
 type ForceRejectIctWithdrawalRequestCreate struct {
 	// Full name of the ICT withdrawal resource to force a rejection on. Contains account id and ICT withdrawal id.
 	Name string `json:"name"`
+	// Reason why the ICT withdrawal is being rejected
+	Reason *string `json:"reason,omitempty"`
 }
 
 func (o *ForceRejectIctWithdrawalRequestCreate) GetName() string {
@@ -13,4 +15,11 @@ func (o *ForceRejectIctWithdrawalRequestCreate) GetName() string {
 		return ""
 	}
 	return o.Name
+}
+
+func (o *ForceRejectIctWithdrawalRequestCreate) GetReason() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Reason
 }

@@ -15,16 +15,16 @@ func (o *TransferScheduleSummaryAmount) GetValue() *string {
 	return o.Value
 }
 
-// TransferScheduleSummaryDirection - Flag indicating whether this is a deposit or withdrawal transfer
-type TransferScheduleSummaryDirection string
+// Direction - Flag indicating whether this is a deposit or withdrawal transfer
+type Direction string
 
 const (
-	TransferScheduleSummaryDirectionDirectionUnspecified TransferScheduleSummaryDirection = "DIRECTION_UNSPECIFIED"
-	TransferScheduleSummaryDirectionDeposit              TransferScheduleSummaryDirection = "DEPOSIT"
-	TransferScheduleSummaryDirectionWithdrawal           TransferScheduleSummaryDirection = "WITHDRAWAL"
+	DirectionDirectionUnspecified Direction = "DIRECTION_UNSPECIFIED"
+	DirectionDeposit              Direction = "DEPOSIT"
+	DirectionWithdrawal           Direction = "WITHDRAWAL"
 )
 
-func (e TransferScheduleSummaryDirection) ToPointer() *TransferScheduleSummaryDirection {
+func (e Direction) ToPointer() *Direction {
 	return &e
 }
 
@@ -404,7 +404,7 @@ type TransferScheduleSummary struct {
 	// External identifier supplied by the API caller. Each request must have a unique pairing of client_schedule_id and account
 	ClientScheduleID *string `json:"client_schedule_id,omitempty"`
 	// Flag indicating whether this is a deposit or withdrawal transfer
-	Direction *TransferScheduleSummaryDirection `json:"direction,omitempty"`
+	Direction *Direction `json:"direction,omitempty"`
 	// The mechanism used for this transfer schedule
 	Mechanism *TransferScheduleSummaryMechanism `json:"mechanism,omitempty"`
 	// The contribution info for a retirement account
@@ -431,7 +431,7 @@ func (o *TransferScheduleSummary) GetClientScheduleID() *string {
 	return o.ClientScheduleID
 }
 
-func (o *TransferScheduleSummary) GetDirection() *TransferScheduleSummaryDirection {
+func (o *TransferScheduleSummary) GetDirection() *Direction {
 	if o == nil {
 		return nil
 	}

@@ -2,7 +2,7 @@
 
 package components
 
-// LLCEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to `DIVIDEND_REINVESTMENT_ENROLL`
+// LLCEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type LLCEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e LLCEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *LLCEnr
 	return &e
 }
 
-// LLCEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to `FDIC_CASH_SWEEP_ENROLL`
+// LLCEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type LLCEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -29,11 +29,11 @@ func (e LLCEnrollmentMetadataCreateFdicCashSweep) ToPointer() *LLCEnrollmentMeta
 }
 
 type LLCEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to `DIVIDEND_REINVESTMENT_ENROLL`
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *LLCEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
 	// Enrollment metadata for Entity Accounts
 	EddAccountEnrollmentMetadata *EddAccountEnrollmentMetadataCreate `json:"edd_account_enrollment_metadata,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to `FDIC_CASH_SWEEP_ENROLL`
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *LLCEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 }
 

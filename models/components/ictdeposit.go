@@ -82,7 +82,7 @@ func (o *IctDepositRetirementContribution) GetType() *IctDepositType {
 	return o.Type
 }
 
-// IctDepositState - The high level state of a transfer, one of:
+// IctDepositStateState - The high level state of a transfer, one of:
 // - `PROCESSING` - The transfer is being processed and will be posted if successful.
 // - `PENDING_REVIEW` - The transfer is pending review and will continue processing if approved.
 // - `POSTED` - The transfer has been posted to the ledger and will be completed at the end of the processing window if not canceled first.
@@ -91,25 +91,124 @@ func (o *IctDepositRetirementContribution) GetType() *IctDepositType {
 // - `CANCELED` - The transfer was canceled.
 // - `RETURNED` - The transfer was returned.
 // - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
-type IctDepositState string
+type IctDepositStateState string
 
 const (
-	IctDepositStateStateUnspecified IctDepositState = "STATE_UNSPECIFIED"
-	IctDepositStateProcessing       IctDepositState = "PROCESSING"
-	IctDepositStatePendingReview    IctDepositState = "PENDING_REVIEW"
-	IctDepositStatePosted           IctDepositState = "POSTED"
-	IctDepositStateCompleted        IctDepositState = "COMPLETED"
-	IctDepositStateRejected         IctDepositState = "REJECTED"
-	IctDepositStateCanceled         IctDepositState = "CANCELED"
-	IctDepositStateReturned         IctDepositState = "RETURNED"
-	IctDepositStatePostponed        IctDepositState = "POSTPONED"
+	IctDepositStateStateStateUnspecified IctDepositStateState = "STATE_UNSPECIFIED"
+	IctDepositStateStateProcessing       IctDepositStateState = "PROCESSING"
+	IctDepositStateStatePendingReview    IctDepositStateState = "PENDING_REVIEW"
+	IctDepositStateStatePosted           IctDepositStateState = "POSTED"
+	IctDepositStateStateCompleted        IctDepositStateState = "COMPLETED"
+	IctDepositStateStateRejected         IctDepositStateState = "REJECTED"
+	IctDepositStateStateCanceled         IctDepositStateState = "CANCELED"
+	IctDepositStateStateReturned         IctDepositStateState = "RETURNED"
+	IctDepositStateStatePostponed        IctDepositStateState = "POSTPONED"
 )
 
-func (e IctDepositState) ToPointer() *IctDepositState {
+func (e IctDepositStateState) ToPointer() *IctDepositStateState {
 	return &e
 }
 
-// TransferState - The state of the ICT deposit
+// IctDepositState - The state of the ICT deposit
+type IctDepositState struct {
+	// The user or service that triggered the state update.
+	Actor *string `json:"actor,omitempty"`
+	// Additional description of the transfer state.
+	Message *string `json:"message,omitempty"`
+	// Additional metadata relating to the transfer state. Included data depends on the state, e.g.:
+	//  - Rejection reasons are included when the `state` is `REJECTED`
+	//  - Reason and comment are included when `state` is `CANCELED`
+	Metadata map[string]any `json:"metadata,omitempty"`
+	// The high level state of a transfer, one of:
+	// - `PROCESSING` - The transfer is being processed and will be posted if successful.
+	// - `PENDING_REVIEW` - The transfer is pending review and will continue processing if approved.
+	// - `POSTED` - The transfer has been posted to the ledger and will be completed at the end of the processing window if not canceled first.
+	// - `COMPLETED` - The transfer has been batched and completed.
+	// - `REJECTED` - The transfer was rejected.
+	// - `CANCELED` - The transfer was canceled.
+	// - `RETURNED` - The transfer was returned.
+	// - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
+	State *IctDepositStateState `json:"state,omitempty"`
+	// The time of the state update.
+	UpdateTime *time.Time `json:"update_time,omitempty"`
+}
+
+func (i IctDepositState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *IctDepositState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *IctDepositState) GetActor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Actor
+}
+
+func (o *IctDepositState) GetMessage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Message
+}
+
+func (o *IctDepositState) GetMetadata() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *IctDepositState) GetState() *IctDepositStateState {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
+func (o *IctDepositState) GetUpdateTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateTime
+}
+
+// IctDepositTransferStateState - The high level state of a transfer, one of:
+// - `PROCESSING` - The transfer is being processed and will be posted if successful.
+// - `PENDING_REVIEW` - The transfer is pending review and will continue processing if approved.
+// - `POSTED` - The transfer has been posted to the ledger and will be completed at the end of the processing window if not canceled first.
+// - `COMPLETED` - The transfer has been batched and completed.
+// - `REJECTED` - The transfer was rejected.
+// - `CANCELED` - The transfer was canceled.
+// - `RETURNED` - The transfer was returned.
+// - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
+type IctDepositTransferStateState string
+
+const (
+	IctDepositTransferStateStateStateUnspecified IctDepositTransferStateState = "STATE_UNSPECIFIED"
+	IctDepositTransferStateStateProcessing       IctDepositTransferStateState = "PROCESSING"
+	IctDepositTransferStateStatePendingReview    IctDepositTransferStateState = "PENDING_REVIEW"
+	IctDepositTransferStateStatePosted           IctDepositTransferStateState = "POSTED"
+	IctDepositTransferStateStateCompleted        IctDepositTransferStateState = "COMPLETED"
+	IctDepositTransferStateStateRejected         IctDepositTransferStateState = "REJECTED"
+	IctDepositTransferStateStateCanceled         IctDepositTransferStateState = "CANCELED"
+	IctDepositTransferStateStateReturned         IctDepositTransferStateState = "RETURNED"
+	IctDepositTransferStateStatePostponed        IctDepositTransferStateState = "POSTPONED"
+)
+
+func (e IctDepositTransferStateState) ToPointer() *IctDepositTransferStateState {
+	return &e
+}
+
+// TransferState - Deprecated, use state instead
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type TransferState struct {
 	// The user or service that triggered the state update.
 	Actor *string `json:"actor,omitempty"`
@@ -128,7 +227,7 @@ type TransferState struct {
 	// - `CANCELED` - The transfer was canceled.
 	// - `RETURNED` - The transfer was returned.
 	// - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
-	State *IctDepositState `json:"state,omitempty"`
+	State *IctDepositTransferStateState `json:"state,omitempty"`
 	// The time of the state update.
 	UpdateTime *time.Time `json:"update_time,omitempty"`
 }
@@ -165,7 +264,7 @@ func (o *TransferState) GetMetadata() map[string]any {
 	return o.Metadata
 }
 
-func (o *TransferState) GetState() *IctDepositState {
+func (o *TransferState) GetState() *IctDepositTransferStateState {
 	if o == nil {
 		return nil
 	}
@@ -878,6 +977,10 @@ type IctDeposit struct {
 	// Retirement contribution details for deposit to retirement account
 	RetirementContribution *IctDepositRetirementContribution `json:"retirement_contribution,omitempty"`
 	// The state of the ICT deposit
+	State *IctDepositState `json:"state,omitempty"`
+	// Deprecated, use state instead
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	TransferState *TransferState `json:"transfer_state,omitempty"`
 	// The travel rule information for the ICT deposit
 	TravelRule *TravelRule `json:"travel_rule,omitempty"`
@@ -916,6 +1019,13 @@ func (o *IctDeposit) GetRetirementContribution() *IctDepositRetirementContributi
 		return nil
 	}
 	return o.RetirementContribution
+}
+
+func (o *IctDeposit) GetState() *IctDepositState {
+	if o == nil {
+		return nil
+	}
+	return o.State
 }
 
 func (o *IctDeposit) GetTransferState() *TransferState {

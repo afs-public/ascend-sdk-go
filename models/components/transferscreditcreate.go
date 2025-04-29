@@ -28,6 +28,8 @@ type TransfersCreditCreate struct {
 	ClientTransferID string `json:"client_transfer_id"`
 	// Optional description information that will attach to this transaction
 	Description *string `json:"description,omitempty"`
+	// Optional account field to denote where the credit amount should be withdrawn from. If provided, the account must be a fee operating account. In the case of multiple fee operating accounts under the same correspondent, this field must be provided. If not provided, this will be looked up asynchronously (therefore will not be in the initial response)
+	FeeOperatingAccount *string `json:"fee_operating_account,omitempty"`
 	// The type of the credit being issued
 	Type TransfersCreditCreateType `json:"type"`
 }
@@ -51,6 +53,13 @@ func (o *TransfersCreditCreate) GetDescription() *string {
 		return nil
 	}
 	return o.Description
+}
+
+func (o *TransfersCreditCreate) GetFeeOperatingAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FeeOperatingAccount
 }
 
 func (o *TransfersCreditCreate) GetType() TransfersCreditCreateType {

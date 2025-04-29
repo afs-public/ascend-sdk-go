@@ -11,8 +11,6 @@ Conveys how a person is related to account; Located on each account Party record
 | `RelationTypePrimaryOwner`                 | PRIMARY_OWNER                              |
 | `RelationTypeJointOwner`                   | JOINT_OWNER                                |
 | `RelationTypeCustodian`                    | CUSTODIAN                                  |
-| `RelationTypeGuardianConservator`          | GUARDIAN_CONSERVATOR                       |
-| `RelationTypePowerOfAttorney`              | POWER_OF_ATTORNEY                          |
 | `RelationTypeExecutor`                     | EXECUTOR                                   |
 | `RelationTypeAuthorizedSigner`             | AUTHORIZED_SIGNER                          |
 | `RelationTypeBeneficialOwner`              | BENEFICIAL_OWNER                           |

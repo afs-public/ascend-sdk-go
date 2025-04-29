@@ -223,7 +223,7 @@ func (o *IctWithdrawalRetirementDistribution) GetType() *IctWithdrawalType {
 	return o.Type
 }
 
-// IctWithdrawalState - The high level state of a transfer, one of:
+// IctWithdrawalStateState - The high level state of a transfer, one of:
 // - `PROCESSING` - The transfer is being processed and will be posted if successful.
 // - `PENDING_REVIEW` - The transfer is pending review and will continue processing if approved.
 // - `POSTED` - The transfer has been posted to the ledger and will be completed at the end of the processing window if not canceled first.
@@ -232,25 +232,124 @@ func (o *IctWithdrawalRetirementDistribution) GetType() *IctWithdrawalType {
 // - `CANCELED` - The transfer was canceled.
 // - `RETURNED` - The transfer was returned.
 // - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
-type IctWithdrawalState string
+type IctWithdrawalStateState string
 
 const (
-	IctWithdrawalStateStateUnspecified IctWithdrawalState = "STATE_UNSPECIFIED"
-	IctWithdrawalStateProcessing       IctWithdrawalState = "PROCESSING"
-	IctWithdrawalStatePendingReview    IctWithdrawalState = "PENDING_REVIEW"
-	IctWithdrawalStatePosted           IctWithdrawalState = "POSTED"
-	IctWithdrawalStateCompleted        IctWithdrawalState = "COMPLETED"
-	IctWithdrawalStateRejected         IctWithdrawalState = "REJECTED"
-	IctWithdrawalStateCanceled         IctWithdrawalState = "CANCELED"
-	IctWithdrawalStateReturned         IctWithdrawalState = "RETURNED"
-	IctWithdrawalStatePostponed        IctWithdrawalState = "POSTPONED"
+	IctWithdrawalStateStateStateUnspecified IctWithdrawalStateState = "STATE_UNSPECIFIED"
+	IctWithdrawalStateStateProcessing       IctWithdrawalStateState = "PROCESSING"
+	IctWithdrawalStateStatePendingReview    IctWithdrawalStateState = "PENDING_REVIEW"
+	IctWithdrawalStateStatePosted           IctWithdrawalStateState = "POSTED"
+	IctWithdrawalStateStateCompleted        IctWithdrawalStateState = "COMPLETED"
+	IctWithdrawalStateStateRejected         IctWithdrawalStateState = "REJECTED"
+	IctWithdrawalStateStateCanceled         IctWithdrawalStateState = "CANCELED"
+	IctWithdrawalStateStateReturned         IctWithdrawalStateState = "RETURNED"
+	IctWithdrawalStateStatePostponed        IctWithdrawalStateState = "POSTPONED"
 )
 
-func (e IctWithdrawalState) ToPointer() *IctWithdrawalState {
+func (e IctWithdrawalStateState) ToPointer() *IctWithdrawalStateState {
 	return &e
 }
 
-// IctWithdrawalTransferState - The state of the ICT withdrawal
+// IctWithdrawalState - The state of the ICT withdrawal
+type IctWithdrawalState struct {
+	// The user or service that triggered the state update.
+	Actor *string `json:"actor,omitempty"`
+	// Additional description of the transfer state.
+	Message *string `json:"message,omitempty"`
+	// Additional metadata relating to the transfer state. Included data depends on the state, e.g.:
+	//  - Rejection reasons are included when the `state` is `REJECTED`
+	//  - Reason and comment are included when `state` is `CANCELED`
+	Metadata map[string]any `json:"metadata,omitempty"`
+	// The high level state of a transfer, one of:
+	// - `PROCESSING` - The transfer is being processed and will be posted if successful.
+	// - `PENDING_REVIEW` - The transfer is pending review and will continue processing if approved.
+	// - `POSTED` - The transfer has been posted to the ledger and will be completed at the end of the processing window if not canceled first.
+	// - `COMPLETED` - The transfer has been batched and completed.
+	// - `REJECTED` - The transfer was rejected.
+	// - `CANCELED` - The transfer was canceled.
+	// - `RETURNED` - The transfer was returned.
+	// - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
+	State *IctWithdrawalStateState `json:"state,omitempty"`
+	// The time of the state update.
+	UpdateTime *time.Time `json:"update_time,omitempty"`
+}
+
+func (i IctWithdrawalState) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *IctWithdrawalState) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *IctWithdrawalState) GetActor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Actor
+}
+
+func (o *IctWithdrawalState) GetMessage() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Message
+}
+
+func (o *IctWithdrawalState) GetMetadata() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Metadata
+}
+
+func (o *IctWithdrawalState) GetState() *IctWithdrawalStateState {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
+func (o *IctWithdrawalState) GetUpdateTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.UpdateTime
+}
+
+// IctWithdrawalTransferStateState - The high level state of a transfer, one of:
+// - `PROCESSING` - The transfer is being processed and will be posted if successful.
+// - `PENDING_REVIEW` - The transfer is pending review and will continue processing if approved.
+// - `POSTED` - The transfer has been posted to the ledger and will be completed at the end of the processing window if not canceled first.
+// - `COMPLETED` - The transfer has been batched and completed.
+// - `REJECTED` - The transfer was rejected.
+// - `CANCELED` - The transfer was canceled.
+// - `RETURNED` - The transfer was returned.
+// - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
+type IctWithdrawalTransferStateState string
+
+const (
+	IctWithdrawalTransferStateStateStateUnspecified IctWithdrawalTransferStateState = "STATE_UNSPECIFIED"
+	IctWithdrawalTransferStateStateProcessing       IctWithdrawalTransferStateState = "PROCESSING"
+	IctWithdrawalTransferStateStatePendingReview    IctWithdrawalTransferStateState = "PENDING_REVIEW"
+	IctWithdrawalTransferStateStatePosted           IctWithdrawalTransferStateState = "POSTED"
+	IctWithdrawalTransferStateStateCompleted        IctWithdrawalTransferStateState = "COMPLETED"
+	IctWithdrawalTransferStateStateRejected         IctWithdrawalTransferStateState = "REJECTED"
+	IctWithdrawalTransferStateStateCanceled         IctWithdrawalTransferStateState = "CANCELED"
+	IctWithdrawalTransferStateStateReturned         IctWithdrawalTransferStateState = "RETURNED"
+	IctWithdrawalTransferStateStatePostponed        IctWithdrawalTransferStateState = "POSTPONED"
+)
+
+func (e IctWithdrawalTransferStateState) ToPointer() *IctWithdrawalTransferStateState {
+	return &e
+}
+
+// IctWithdrawalTransferState - Deprecated, use state instead
+//
+// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
 type IctWithdrawalTransferState struct {
 	// The user or service that triggered the state update.
 	Actor *string `json:"actor,omitempty"`
@@ -269,7 +368,7 @@ type IctWithdrawalTransferState struct {
 	// - `CANCELED` - The transfer was canceled.
 	// - `RETURNED` - The transfer was returned.
 	// - `POSTPONED` - The transfer is postponed and will resume processing during the next processing window.
-	State *IctWithdrawalState `json:"state,omitempty"`
+	State *IctWithdrawalTransferStateState `json:"state,omitempty"`
 	// The time of the state update.
 	UpdateTime *time.Time `json:"update_time,omitempty"`
 }
@@ -306,7 +405,7 @@ func (o *IctWithdrawalTransferState) GetMetadata() map[string]any {
 	return o.Metadata
 }
 
-func (o *IctWithdrawalTransferState) GetState() *IctWithdrawalState {
+func (o *IctWithdrawalTransferState) GetState() *IctWithdrawalTransferStateState {
 	if o == nil {
 		return nil
 	}
@@ -1019,6 +1118,10 @@ type IctWithdrawal struct {
 	// Retirement distribution details for withdrawal from retirement account
 	RetirementDistribution *IctWithdrawalRetirementDistribution `json:"retirement_distribution,omitempty"`
 	// The state of the ICT withdrawal
+	State *IctWithdrawalState `json:"state,omitempty"`
+	// Deprecated, use state instead
+	//
+	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
 	TransferState *IctWithdrawalTransferState `json:"transfer_state,omitempty"`
 	// The travel rule information for the ICT withdrawal
 	TravelRule *IctWithdrawalTravelRule `json:"travel_rule,omitempty"`
@@ -1057,6 +1160,13 @@ func (o *IctWithdrawal) GetRetirementDistribution() *IctWithdrawalRetirementDist
 		return nil
 	}
 	return o.RetirementDistribution
+}
+
+func (o *IctWithdrawal) GetState() *IctWithdrawalState {
+	if o == nil {
+		return nil
+	}
+	return o.State
 }
 
 func (o *IctWithdrawal) GetTransferState() *IctWithdrawalTransferState {

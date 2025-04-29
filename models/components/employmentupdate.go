@@ -32,7 +32,7 @@ type EmploymentUpdate struct {
 	EmployerAddress *PostalAddressUpdate `json:"employer_address,omitempty"`
 	// Classifies in what capacity (or if) the underlying natural person holds a job
 	EmploymentStatus *EmploymentUpdateEmploymentStatus `json:"employment_status,omitempty"`
-	// The nature of work performed at an investor's place of employment.
+	// The nature of work performed at an investor's place of employment. Required if the employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
 	Occupation *string `json:"occupation,omitempty"`
 	// The start year of employment related to a person's stated employer Must be from birth year to current year, or 0 to clear start year value
 	StartYear *int `json:"start_year,omitempty"`

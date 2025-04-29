@@ -32,8 +32,8 @@ type EmploymentCreate struct {
 	EmployerAddress *PostalAddressCreate `json:"employer_address,omitempty"`
 	// Classifies in what capacity (or if) the underlying natural person holds a job
 	EmploymentStatus EmploymentStatus `json:"employment_status"`
-	// The nature of work performed at an investor's place of employment.
-	Occupation string `json:"occupation"`
+	// The nature of work performed at an investor's place of employment. Required if the employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+	Occupation *string `json:"occupation,omitempty"`
 	// The start year of employment related to a person's stated employer Must be from birth year to current year, or 0 to clear start year value
 	StartYear *int `json:"start_year,omitempty"`
 }
@@ -59,9 +59,9 @@ func (o *EmploymentCreate) GetEmploymentStatus() EmploymentStatus {
 	return o.EmploymentStatus
 }
 
-func (o *EmploymentCreate) GetOccupation() string {
+func (o *EmploymentCreate) GetOccupation() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Occupation
 }

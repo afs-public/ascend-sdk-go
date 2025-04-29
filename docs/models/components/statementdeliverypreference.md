@@ -1,13 +1,11 @@
 # StatementDeliveryPreference
 
-Delivery method instruction for account statements for a given Interested Party; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
+Delivery method instruction for account statements for a given Interested Party; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 
 
 ## Values
 
-| Name                                                       | Value                                                      |
-| ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `StatementDeliveryPreferenceDeliveryPreferenceUnspecified` | DELIVERY_PREFERENCE_UNSPECIFIED                            |
-| `StatementDeliveryPreferenceDigital`                       | DIGITAL                                                    |
-| `StatementDeliveryPreferencePhysical`                      | PHYSICAL                                                   |
-| `StatementDeliveryPreferenceSuppress`                      | SUPPRESS                                                   |
+| Name                                  | Value                                 |
+| ------------------------------------- | ------------------------------------- |
+| `StatementDeliveryPreferencePhysical` | PHYSICAL                              |
+| `StatementDeliveryPreferenceSuppress` | SUPPRESS                              |

@@ -8,8 +8,8 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// LocateIctReportResponseProcessDate - The process date of the batch associated with the report.
-type LocateIctReportResponseProcessDate struct {
+// ProcessDate - The process date of the batch associated with the report.
+type ProcessDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
@@ -18,21 +18,21 @@ type LocateIctReportResponseProcessDate struct {
 	Year *int `json:"year,omitempty"`
 }
 
-func (o *LocateIctReportResponseProcessDate) GetDay() *int {
+func (o *ProcessDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Day
 }
 
-func (o *LocateIctReportResponseProcessDate) GetMonth() *int {
+func (o *ProcessDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Month
 }
 
-func (o *LocateIctReportResponseProcessDate) GetYear() *int {
+func (o *ProcessDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
@@ -65,7 +65,7 @@ type LocateIctReportResponse struct {
 	// The signed file download uri. The link will expire after a set period of time.
 	DownloadURI *string `json:"download_uri,omitempty"`
 	// The process date of the batch associated with the report.
-	ProcessDate *LocateIctReportResponseProcessDate `json:"process_date,omitempty"`
+	ProcessDate *ProcessDate `json:"process_date,omitempty"`
 	// The ICT program associated with the report.
 	Program *LocateIctReportResponseProgram `json:"program,omitempty"`
 }
@@ -102,7 +102,7 @@ func (o *LocateIctReportResponse) GetDownloadURI() *string {
 	return o.DownloadURI
 }
 
-func (o *LocateIctReportResponse) GetProcessDate() *LocateIctReportResponseProcessDate {
+func (o *LocateIctReportResponse) GetProcessDate() *ProcessDate {
 	if o == nil {
 		return nil
 	}

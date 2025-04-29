@@ -19,3 +19,4 @@ The mechanism of the transfer.
 | `CalculateCashBalanceResponseTransferSummaryMechanismRtp`                  | RTP                                                                        |
 | `CalculateCashBalanceResponseTransferSummaryMechanismTpj`                  | TPJ                                                                        |
 | `CalculateCashBalanceResponseTransferSummaryMechanismWire`                 | WIRE                                                                       |
+| `CalculateCashBalanceResponseTransferSummaryMechanismExternalAch`          | EXTERNAL_ACH                                                               |

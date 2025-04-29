@@ -2,13 +2,13 @@
 
 package components
 
-// Amount - Monetary amount associated with the fee
-type Amount struct {
+// FeeAmount - Monetary amount associated with the fee
+type FeeAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *Amount) GetValue() *string {
+func (o *FeeAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -58,12 +58,12 @@ func (e FeeType) ToPointer() *FeeType {
 
 type Fee struct {
 	// Monetary amount associated with the fee
-	Amount *Amount `json:"amount,omitempty"`
+	Amount *FeeAmount `json:"amount,omitempty"`
 	// The type of fee being assessed
 	Type *FeeType `json:"type,omitempty"`
 }
 
-func (o *Fee) GetAmount() *Amount {
+func (o *Fee) GetAmount() *FeeAmount {
 	if o == nil {
 		return nil
 	}

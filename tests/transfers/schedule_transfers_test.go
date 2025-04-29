@@ -360,9 +360,7 @@ func TestScheduleTransfers(t *testing.T) {
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})
 
-	// Skipped because list schedule summaries endpoint doesn't work
 	t.Run("Test Schedule Transfers Transfers List Schedule Summaries", func(t *testing.T) {
-		t.Skip("Skipping ListScheduleSummaries!")
 
 		filter, pageToken, pageSize := "", "", 10
 		result, err := sdk.ScheduleTransfers.ListScheduleSummaries(fixtures.ctx, &filter, &pageSize, &pageToken)

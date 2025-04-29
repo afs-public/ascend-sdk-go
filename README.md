@@ -583,6 +583,25 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ForceApproveCashJournal](docs/sdks/testsimulation/README.md#forceapprovecashjournal) - Force Approve Cash Journal
 * [ForceRejectCashJournal](docs/sdks/testsimulation/README.md#forcerejectcashjournal) - Force Reject Cash Journal
 
+### [TradeAllocation](docs/sdks/tradeallocation/README.md)
+
+* [CreateTradeAllocation](docs/sdks/tradeallocation/README.md#createtradeallocation) - Create Trade Allocation
+* [GetTradeAllocation](docs/sdks/tradeallocation/README.md#gettradeallocation) - Get Trade Allocation
+* [CancelTradeAllocation](docs/sdks/tradeallocation/README.md#canceltradeallocation) - Cancel Trade Allocation
+* [RebookTradeAllocation](docs/sdks/tradeallocation/README.md#rebooktradeallocation) - Rebook Trade Allocation
+
+### [TradeBooking](docs/sdks/tradebooking/README.md)
+
+* [CreateTrade](docs/sdks/tradebooking/README.md#createtrade) - Create Trade
+* [GetTrade](docs/sdks/tradebooking/README.md#gettrade) - Get Trade
+* [CompleteTrade](docs/sdks/tradebooking/README.md#completetrade) - Complete Trade
+* [CancelTrade](docs/sdks/tradebooking/README.md#canceltrade) - Cancel Trade
+* [RebookTrade](docs/sdks/tradebooking/README.md#rebooktrade) - Rebook Trade
+* [CreateExecution](docs/sdks/tradebooking/README.md#createexecution) - Create Execution
+* [GetExecution](docs/sdks/tradebooking/README.md#getexecution) - Get Execution
+* [CancelExecution](docs/sdks/tradebooking/README.md#cancelexecution) - Cancel Execution
+* [RebookExecution](docs/sdks/tradebooking/README.md#rebookexecution) - Rebook Execution
+
 ### [Wires](docs/sdks/wires/README.md)
 
 * [GetWireDeposit](docs/sdks/wires/README.md#getwiredeposit) - Get Wire Deposit

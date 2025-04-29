@@ -8,13 +8,13 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// AchDepositAmount - The amount to deposit in USD.
-type AchDepositAmount struct {
+// Amount - The amount to deposit in USD.
+type Amount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *AchDepositAmount) GetValue() *string {
+func (o *Amount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -165,7 +165,7 @@ func (o *AchDepositState) GetUpdateTime() *time.Time {
 // AchDeposit - A deposit transfer using the ACH mechanism.
 type AchDeposit struct {
 	// The amount to deposit in USD.
-	Amount *AchDepositAmount `json:"amount,omitempty"`
+	Amount *Amount `json:"amount,omitempty"`
 	// The bank relationship to be used for the ACH deposit.
 	BankRelationship *string `json:"bank_relationship,omitempty"`
 	// The external identifier supplied by the API caller. Each request must have a unique pairing of `client_transfer_id` and `account`.
@@ -180,7 +180,7 @@ type AchDeposit struct {
 	State *AchDepositState `json:"state,omitempty"`
 }
 
-func (o *AchDeposit) GetAmount() *AchDepositAmount {
+func (o *AchDeposit) GetAmount() *Amount {
 	if o == nil {
 		return nil
 	}

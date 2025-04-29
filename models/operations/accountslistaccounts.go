@@ -62,6 +62,7 @@ type AccountsListAccountsRequest struct {
 	//  `margin_group_id`
 	//  `account_group_id`
 	//  `registration_type`
+	//  `reserve_class`
 	//  `parties.legal_natural_person.legal_natural_person_id`
 	//  `parties.legal_natural_person.given_name`
 	//  `parties.legal_natural_person.family_name`

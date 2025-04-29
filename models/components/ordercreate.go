@@ -8,14 +8,15 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// AssetType - The type of the asset in this order
+// AssetType - The type of the asset in this order, which must be one of the following:
+//
+//	EQUITY, MUTUAL_FUND, and FIXED_INCOME.
 type AssetType string
 
 const (
-	AssetTypeAssetTypeUnspecified AssetType = "ASSET_TYPE_UNSPECIFIED"
-	AssetTypeEquity               AssetType = "EQUITY"
-	AssetTypeFixedIncome          AssetType = "FIXED_INCOME"
-	AssetTypeMutualFund           AssetType = "MUTUAL_FUND"
+	AssetTypeEquity      AssetType = "EQUITY"
+	AssetTypeFixedIncome AssetType = "FIXED_INCOME"
+	AssetTypeMutualFund  AssetType = "MUTUAL_FUND"
 )
 
 func (e AssetType) ToPointer() *AssetType {
@@ -122,7 +123,8 @@ func (e TimeInForce) ToPointer() *TimeInForce {
 
 // OrderCreate - The message describing an order
 type OrderCreate struct {
-	// The type of the asset in this order
+	// The type of the asset in this order, which must be one of the following:
+	//  EQUITY, MUTUAL_FUND, and FIXED_INCOME.
 	AssetType AssetType `json:"asset_type"`
 	// Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
 	BrokerCapacity *BrokerCapacity `json:"broker_capacity,omitempty"`
@@ -134,7 +136,7 @@ type OrderCreate struct {
 	Commission *CommissionCreate `json:"commission,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
-	// Fees that will be applied to this order.
+	// Fees that will be applied to this order. Only the BROKER_FEE type is supported.
 	Fees []FeeCreate `json:"fees,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`

@@ -37,6 +37,7 @@ const (
 	EnrollmentCreateTypeRegistrationIraRollover               EnrollmentCreateType = "REGISTRATION_IRA_ROLLOVER"
 	EnrollmentCreateTypeRegistrationTrust                     EnrollmentCreateType = "REGISTRATION_TRUST"
 	EnrollmentCreateTypeRegistrationCorporation               EnrollmentCreateType = "REGISTRATION_CORPORATION"
+	EnrollmentCreateTypeRegistrationLlc                       EnrollmentCreateType = "REGISTRATION_LLC"
 	EnrollmentCreateTypeCashFdicCashSweep                     EnrollmentCreateType = "CASH_FDIC_CASH_SWEEP"
 	EnrollmentCreateTypeRetirementBeneficiaryDesignation      EnrollmentCreateType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	EnrollmentCreateTypeDividendReinvestmentPlan              EnrollmentCreateType = "DIVIDEND_REINVESTMENT_PLAN"
@@ -44,6 +45,7 @@ const (
 	EnrollmentCreateTypeRegistrationIraBeneficiaryRoth        EnrollmentCreateType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
 	EnrollmentCreateTypeRegistrationIndividualForeign         EnrollmentCreateType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentCreateTypeRegistrationCustodial                 EnrollmentCreateType = "REGISTRATION_CUSTODIAL"
+	EnrollmentCreateTypeVirtualAccountNumber                  EnrollmentCreateType = "VIRTUAL_ACCOUNT_NUMBER"
 )
 
 func (e EnrollmentCreateType) ToPointer() *EnrollmentCreateType {
@@ -62,6 +64,8 @@ type EnrollmentCreate struct {
 	// Enrollment metadata for estate enrollments
 	EstateEnrollmentMetadata                   *EstateEnrollmentMetadataCreate                   `json:"estate_enrollment_metadata,omitempty"`
 	ForeignIndividualAccountEnrollmentMetadata *ForeignIndividualAccountEnrollmentMetadataCreate `json:"foreign_individual_account_enrollment_metadata,omitempty"`
+	// Enrollment metadata for the FOREIGN_JOINT_WROS enrollment type
+	ForeignJointAccountEnrollmentMetadata *ForeignJointAccountEnrollmentMetadataCreate `json:"foreign_joint_account_enrollment_metadata,omitempty"`
 	// Percentages for FPSL Enrollment, must equal 100
 	FpslEnrollmentMetadata *FPSLEnrollmentMetaDataCreate `json:"fpsl_enrollment_metadata,omitempty"`
 	// Enrollment metadata for Individual accounts enrollment type
@@ -89,11 +93,15 @@ type EnrollmentCreate struct {
 	LlcEnrollmentMetadata                           *LLCEnrollmentMetadataCreate                           `json:"llc_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the REGISTRATION_OPERATING enrollment type.
 	OperatingEnrollmentMetadata *OperatingEnrollmentMetadataCreate `json:"operating_enrollment_metadata,omitempty"`
+	// Enrollment metadata for the ORDERS_OPTIONS_TRADING enrollment type
+	OrdersOptionsTradingEnrollmentMetadata *OrdersOptionsTradingEnrollmentMetadataCreate `json:"orders_options_trading_enrollment_metadata,omitempty"`
 	// The ULID is associated with the approver of a given enrollment. The approver you create will contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID associated with Apex's approver.
 	PrincipalApproverID     string                         `json:"principal_approver_id"`
 	TrustEnrollmentMetadata *TrustEnrollmentMetadataCreate `json:"trust_enrollment_metadata,omitempty"`
 	// Describes the name of the enrollment; Expressed as an enum
 	Type EnrollmentCreateType `json:"type"`
+	// Enrollment metadata for the VIRTUAL_ACCOUNT_NUMBER enrollment type
+	VirtualAccountNumberEnrollmentMetadata *VirtualAccountNumberEnrollmentMetadataCreate `json:"virtual_account_number_enrollment_metadata,omitempty"`
 }
 
 func (o *EnrollmentCreate) GetBeneficiaryEnrollmentMetadata() *BeneficiaryEnrollmentMetadataCreate {
@@ -136,6 +144,13 @@ func (o *EnrollmentCreate) GetForeignIndividualAccountEnrollmentMetadata() *Fore
 		return nil
 	}
 	return o.ForeignIndividualAccountEnrollmentMetadata
+}
+
+func (o *EnrollmentCreate) GetForeignJointAccountEnrollmentMetadata() *ForeignJointAccountEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.ForeignJointAccountEnrollmentMetadata
 }
 
 func (o *EnrollmentCreate) GetFpslEnrollmentMetadata() *FPSLEnrollmentMetaDataCreate {
@@ -236,6 +251,13 @@ func (o *EnrollmentCreate) GetOperatingEnrollmentMetadata() *OperatingEnrollment
 	return o.OperatingEnrollmentMetadata
 }
 
+func (o *EnrollmentCreate) GetOrdersOptionsTradingEnrollmentMetadata() *OrdersOptionsTradingEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.OrdersOptionsTradingEnrollmentMetadata
+}
+
 func (o *EnrollmentCreate) GetPrincipalApproverID() string {
 	if o == nil {
 		return ""
@@ -255,4 +277,11 @@ func (o *EnrollmentCreate) GetType() EnrollmentCreateType {
 		return EnrollmentCreateType("")
 	}
 	return o.Type
+}
+
+func (o *EnrollmentCreate) GetVirtualAccountNumberEnrollmentMetadata() *VirtualAccountNumberEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.VirtualAccountNumberEnrollmentMetadata
 }

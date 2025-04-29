@@ -54,6 +54,19 @@ func (o *PriorYearEndAccountBalance) GetValue() *string {
 	return o.Value
 }
 
+// RemainingDistributionRequired - The remaining amount required to be distributed for the tax year. Calculated as the difference between the RMD for the account and its regular distribution total to date. This will return zero if the account is not required to make a distribution during the tax year or has already met its distribution requirement.
+type RemainingDistributionRequired struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *RemainingDistributionRequired) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // RequiredMinimumDistribution - The required minimum distribution (RMD). Will be unset if the account is not required to make a distribution during the tax year. Distributions are only required for some account registrations and when the account owner reaches a certain age.
 type RequiredMinimumDistribution struct {
 	// The required annual distribution amount in USD. This value is calculated as `prior_year_end_account_balance / life_expectancy_factor`.
@@ -62,6 +75,8 @@ type RequiredMinimumDistribution struct {
 	LifeExpectancyFactor *LifeExpectancyFactor `json:"life_expectancy_factor,omitempty"`
 	// The account balance at the end of the prior year in USD. This value is used to calculate the RMD amount.
 	PriorYearEndAccountBalance *PriorYearEndAccountBalance `json:"prior_year_end_account_balance,omitempty"`
+	// The remaining amount required to be distributed for the tax year. Calculated as the difference between the RMD for the account and its regular distribution total to date. This will return zero if the account is not required to make a distribution during the tax year or has already met its distribution requirement.
+	RemainingDistributionRequired *RemainingDistributionRequired `json:"remaining_distribution_required,omitempty"`
 }
 
 func (o *RequiredMinimumDistribution) GetAmount() *DistributionSummaryAmount {
@@ -83,6 +98,13 @@ func (o *RequiredMinimumDistribution) GetPriorYearEndAccountBalance() *PriorYear
 		return nil
 	}
 	return o.PriorYearEndAccountBalance
+}
+
+func (o *RequiredMinimumDistribution) GetRemainingDistributionRequired() *RemainingDistributionRequired {
+	if o == nil {
+		return nil
+	}
+	return o.RemainingDistributionRequired
 }
 
 // DistributionSummaryRolloverAmount - Rollover distribution amount
