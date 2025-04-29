@@ -2,7 +2,7 @@
 
 package components
 
-// TrustEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// TrustEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type TrustEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e TrustEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *Trus
 	return &e
 }
 
-// TrustEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// TrustEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type TrustEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -43,9 +43,9 @@ func (e OpenedOnBehalfOf) ToPointer() *OpenedOnBehalfOf {
 }
 
 type TrustEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *TrustEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *TrustEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 	// Trust account is opened on behalf of
 	OpenedOnBehalfOf OpenedOnBehalfOf `json:"opened_on_behalf_of"`

@@ -2497,13 +2497,13 @@ func (o *ActivityNameChange) GetQuantity() *ActivityNameChangeQuantity {
 	return o.Quantity
 }
 
-// NetAmount - The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second Money)
-type NetAmount struct {
+// ActivityNetAmount - The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second Money)
+type ActivityNetAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *NetAmount) GetValue() *string {
+func (o *ActivityNetAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -5882,7 +5882,7 @@ type Activity struct {
 	// Used to record changes in the name of a security/securities by the issuer which result in surrendering physical securities or the assigning of a new security identifier which result in new securities being issued and details related to the name changes
 	NameChange *ActivityNameChange `json:"name_change,omitempty"`
 	// The monetary value of an activity, inclusive of fees, withholding, commisions, etc (Second Money)
-	NetAmount *NetAmount `json:"net_amount,omitempty"`
+	NetAmount *ActivityNetAmount `json:"net_amount,omitempty"`
 	// can be an empty string if there is no next activity is populated when there is a modification resulting in a new activity
 	NextActivityID *string `json:"next_activity_id,omitempty"`
 	// the process date of the next activity(nil if the next_activity_id is an empty string)
@@ -6238,7 +6238,7 @@ func (o *Activity) GetNameChange() *ActivityNameChange {
 	return o.NameChange
 }
 
-func (o *Activity) GetNetAmount() *NetAmount {
+func (o *Activity) GetNetAmount() *ActivityNetAmount {
 	if o == nil {
 		return nil
 	}

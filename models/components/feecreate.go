@@ -2,40 +2,59 @@
 
 package components
 
-// FeeCreateType - The type of fee being specified. Only the type of "BROKER_FEE" is supported.
+// FeeCreateType - The type of fee
 type FeeCreateType string
 
 const (
-	FeeCreateTypeFeeTypeUnspecified FeeCreateType = "FEE_TYPE_UNSPECIFIED"
-	FeeCreateTypeBrokerFee          FeeCreateType = "BROKER_FEE"
+	FeeCreateTypeFeeTypeUnspecified      FeeCreateType = "FEE_TYPE_UNSPECIFIED"
+	FeeCreateTypeClientClearing          FeeCreateType = "CLIENT_CLEARING"
+	FeeCreateTypeLiquidity               FeeCreateType = "LIQUIDITY"
+	FeeCreateTypeTradeActivity           FeeCreateType = "TRADE_ACTIVITY"
+	FeeCreateTypeFinancialTransactionTax FeeCreateType = "FINANCIAL_TRANSACTION_TAX"
+	FeeCreateTypeIndexOptionFee          FeeCreateType = "INDEX_OPTION_FEE"
+	FeeCreateTypeSecFee                  FeeCreateType = "SEC_FEE"
+	FeeCreateTypeOptionsRegulatory       FeeCreateType = "OPTIONS_REGULATORY"
+	FeeCreateTypeGeneralPurposeFee       FeeCreateType = "GENERAL_PURPOSE_FEE"
+	FeeCreateTypeBrokerFee               FeeCreateType = "BROKER_FEE"
+	FeeCreateTypeContractFee             FeeCreateType = "CONTRACT_FEE"
+	FeeCreateTypeOccFee                  FeeCreateType = "OCC_FEE"
 )
 
 func (e FeeCreateType) ToPointer() *FeeCreateType {
 	return &e
 }
 
-// FeeCreate - A fee that applies to an order
+// FeeCreate - Fee message includes both fee type as well as the fee amount
 type FeeCreate struct {
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
 	//  [BigDecimal]:
 	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
 	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
-	Amount DecimalCreate `json:"amount"`
-	// The type of fee being specified. Only the type of "BROKER_FEE" is supported.
-	Type FeeCreateType `json:"type"`
+	Amount *DecimalCreate `json:"amount,omitempty"`
+	// Indicates whether to explicitly suppress this fee type. If the trade would normally calculate fees (e.g., for TRADE_ACTIVITY), the client can add a fee with this boolean value set to true, and the Booking Service will not calculate or assess that fee on the trade.
+	SuppressFee *bool `json:"suppress_fee,omitempty"`
+	// The type of fee
+	Type *FeeCreateType `json:"type,omitempty"`
 }
 
-func (o *FeeCreate) GetAmount() DecimalCreate {
+func (o *FeeCreate) GetAmount() *DecimalCreate {
 	if o == nil {
-		return DecimalCreate{}
+		return nil
 	}
 	return o.Amount
 }
 
-func (o *FeeCreate) GetType() FeeCreateType {
+func (o *FeeCreate) GetSuppressFee() *bool {
 	if o == nil {
-		return FeeCreateType("")
+		return nil
+	}
+	return o.SuppressFee
+}
+
+func (o *FeeCreate) GetType() *FeeCreateType {
+	if o == nil {
+		return nil
 	}
 	return o.Type
 }

@@ -2,7 +2,7 @@
 
 package components
 
-// JointTenantsInCommonEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// JointTenantsInCommonEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type JointTenantsInCommonEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e JointTenantsInCommonEnrollmentMetadataCreateDividendReinvestmentPlan) To
 	return &e
 }
 
-// JointTenantsInCommonEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// JointTenantsInCommonEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type JointTenantsInCommonEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -30,9 +30,9 @@ func (e JointTenantsInCommonEnrollmentMetadataCreateFdicCashSweep) ToPointer() *
 
 // JointTenantsInCommonEnrollmentMetadataCreate - Enrollment metadata for the Joint Tenants In Common enrollment type
 type JointTenantsInCommonEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *JointTenantsInCommonEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *JointTenantsInCommonEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 }
 

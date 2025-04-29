@@ -15,18 +15,18 @@ func (o *YieldPercent) GetValue() *string {
 	return o.Value
 }
 
-// YieldType - Characterization of a yield percentage
-type YieldType string
+// YieldRecordYieldType - Characterization of a yield percentage
+type YieldRecordYieldType string
 
 const (
-	YieldTypeYieldTypeUnspecified YieldType = "YIELD_TYPE_UNSPECIFIED"
-	YieldTypeYieldToCall          YieldType = "YIELD_TO_CALL"
-	YieldTypeYieldToMaturity      YieldType = "YIELD_TO_MATURITY"
-	YieldTypeYieldToPut           YieldType = "YIELD_TO_PUT"
-	YieldTypeYieldToWorst         YieldType = "YIELD_TO_WORST"
+	YieldRecordYieldTypeYieldTypeUnspecified YieldRecordYieldType = "YIELD_TYPE_UNSPECIFIED"
+	YieldRecordYieldTypeYieldToCall          YieldRecordYieldType = "YIELD_TO_CALL"
+	YieldRecordYieldTypeYieldToMaturity      YieldRecordYieldType = "YIELD_TO_MATURITY"
+	YieldRecordYieldTypeYieldToPut           YieldRecordYieldType = "YIELD_TO_PUT"
+	YieldRecordYieldTypeYieldToWorst         YieldRecordYieldType = "YIELD_TO_WORST"
 )
 
-func (e YieldType) ToPointer() *YieldType {
+func (e YieldRecordYieldType) ToPointer() *YieldRecordYieldType {
 	return &e
 }
 
@@ -35,7 +35,7 @@ type YieldRecord struct {
 	// The yield percentage at which the transaction was effected
 	YieldPercent *YieldPercent `json:"yield_percent,omitempty"`
 	// Characterization of a yield percentage
-	YieldType *YieldType `json:"yield_type,omitempty"`
+	YieldType *YieldRecordYieldType `json:"yield_type,omitempty"`
 }
 
 func (o *YieldRecord) GetYieldPercent() *YieldPercent {
@@ -45,7 +45,7 @@ func (o *YieldRecord) GetYieldPercent() *YieldPercent {
 	return o.YieldPercent
 }
 
-func (o *YieldRecord) GetYieldType() *YieldType {
+func (o *YieldRecord) GetYieldType() *YieldRecordYieldType {
 	if o == nil {
 		return nil
 	}

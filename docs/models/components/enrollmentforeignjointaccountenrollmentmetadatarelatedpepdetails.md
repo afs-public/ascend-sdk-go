@@ -1,0 +1,11 @@
+# EnrollmentForeignJointAccountEnrollmentMetadataRelatedPepDetails
+
+Information about the related politically exposed persons
+
+
+## Fields
+
+| Field                                                                                                 | Type                                                                                                  | Required                                                                                              | Description                                                                                           | Example                                                                                               |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `DirectOrIndirectRelatedPeps`                                                                         | **bool*                                                                                               | :heavy_minus_sign:                                                                                    | Indication as to whether or not an account has direct or indirect related politically exposed persons | true                                                                                                  |
+| `RelatedPeps`                                                                                         | [][components.RelatedPep](../../models/components/relatedpep.md)                                      | :heavy_minus_sign:                                                                                    | Related Peps                                                                                          |                                                                                                       |

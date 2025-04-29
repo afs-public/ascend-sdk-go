@@ -2,7 +2,7 @@
 
 package components
 
-// CustodialEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// CustodialEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type CustodialEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e CustodialEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *
 	return &e
 }
 
-// CustodialEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// CustodialEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type CustodialEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -30,9 +30,9 @@ func (e CustodialEnrollmentMetadataCreateFdicCashSweep) ToPointer() *CustodialEn
 
 // CustodialEnrollmentMetadataCreate - Enrollment metadata for the CUSTODIAL enrollment type
 type CustodialEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *CustodialEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *CustodialEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 }
 

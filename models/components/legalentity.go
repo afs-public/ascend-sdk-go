@@ -634,7 +634,7 @@ type LegalEntity struct {
 	EntityType *LegalEntityEntityType `json:"entity_type,omitempty"`
 	// The reason the customer is exempt from verifying beneficial owners, if applicable.
 	ExemptCustomerReason *LegalEntityExemptCustomerReason `json:"exempt_customer_reason,omitempty"`
-	// Indicates whether the entity is exempt from verifying beneficial owners. By default, this is set to `false`.
+	// Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due Diligence. By default, this is set to `false`
 	ExemptVerifyingBeneficialOwners *bool `json:"exempt_verifying_beneficial_owners,omitempty"`
 	// If the legal entity is a trust, they may set this field to convey ownership and value to a trustee.
 	ForTheBenefitOf *string `json:"for_the_benefit_of,omitempty"`

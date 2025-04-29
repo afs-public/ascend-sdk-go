@@ -31,6 +31,7 @@ const (
 	CalculateCashBalanceResponseTransferSummaryMechanismRtp                  CalculateCashBalanceResponseTransferSummaryMechanism = "RTP"
 	CalculateCashBalanceResponseTransferSummaryMechanismTpj                  CalculateCashBalanceResponseTransferSummaryMechanism = "TPJ"
 	CalculateCashBalanceResponseTransferSummaryMechanismWire                 CalculateCashBalanceResponseTransferSummaryMechanism = "WIRE"
+	CalculateCashBalanceResponseTransferSummaryMechanismExternalAch          CalculateCashBalanceResponseTransferSummaryMechanism = "EXTERNAL_ACH"
 )
 
 func (e CalculateCashBalanceResponseTransferSummaryMechanism) ToPointer() *CalculateCashBalanceResponseTransferSummaryMechanism {

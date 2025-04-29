@@ -23,6 +23,7 @@ The enrollment type.
 | `EnrollmentTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                             |
 | `EnrollmentTypeRegistrationTrust`                     | REGISTRATION_TRUST                                    |
 | `EnrollmentTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                              |
+| `EnrollmentTypeRegistrationLlc`                       | REGISTRATION_LLC                                      |
 | `EnrollmentTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                  |
 | `EnrollmentTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                    |
 | `EnrollmentTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                            |
@@ -30,3 +31,4 @@ The enrollment type.
 | `EnrollmentTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                     |
 | `EnrollmentTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                       |
 | `EnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                |
+| `EnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                |

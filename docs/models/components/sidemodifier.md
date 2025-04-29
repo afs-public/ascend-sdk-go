@@ -1,6 +1,6 @@
 # SideModifier
 
-Additional information about a trade Should be populated if possible for trades; the side modifier for the trade
+Side modifier for the trade.
 
 
 ## Values

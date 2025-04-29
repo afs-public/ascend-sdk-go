@@ -2,7 +2,7 @@
 
 package components
 
-// JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan) 
 	return &e
 }
 
-// JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -75,9 +75,9 @@ func (e LegalResidencyStateOfMarriedCouple) ToPointer() *LegalResidencyStateOfMa
 
 // JointCommunityPropertyEnrollmentMetadataCreate - Enrollment metadata for the Joint Community Property Registration enrollment type
 type JointCommunityPropertyEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *JointCommunityPropertyEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *JointCommunityPropertyEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 	// The legal residency state of a married couple
 	LegalResidencyStateOfMarriedCouple LegalResidencyStateOfMarriedCouple `json:"legal_residency_state_of_married_couple"`

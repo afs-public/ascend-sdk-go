@@ -16,6 +16,7 @@ const (
 	OrderCostPreviewResponseAssetTypeEquity               OrderCostPreviewResponseAssetType = "EQUITY"
 	OrderCostPreviewResponseAssetTypeFixedIncome          OrderCostPreviewResponseAssetType = "FIXED_INCOME"
 	OrderCostPreviewResponseAssetTypeMutualFund           OrderCostPreviewResponseAssetType = "MUTUAL_FUND"
+	OrderCostPreviewResponseAssetTypeOption               OrderCostPreviewResponseAssetType = "OPTION"
 )
 
 func (e OrderCostPreviewResponseAssetType) ToPointer() *OrderCostPreviewResponseAssetType {

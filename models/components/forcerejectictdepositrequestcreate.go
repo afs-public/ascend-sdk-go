@@ -6,6 +6,8 @@ package components
 type ForceRejectIctDepositRequestCreate struct {
 	// Full name of the ICT deposit resource to force a rejection on. Contains account id and ICT deposit id.
 	Name string `json:"name"`
+	// Reason why the ICT deposit is being rejected
+	Reason *string `json:"reason,omitempty"`
 }
 
 func (o *ForceRejectIctDepositRequestCreate) GetName() string {
@@ -13,4 +15,11 @@ func (o *ForceRejectIctDepositRequestCreate) GetName() string {
 		return ""
 	}
 	return o.Name
+}
+
+func (o *ForceRejectIctDepositRequestCreate) GetReason() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Reason
 }

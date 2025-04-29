@@ -142,6 +142,8 @@ type TransfersFee struct {
 	ClientTransferID *string `json:"client_transfer_id,omitempty"`
 	// Optional description information that will attach to this transaction
 	Description *string `json:"description,omitempty"`
+	// Optional account field to denote where the fee amount should be deposited into. If provided, the account must be a fee operating account. In the case of multiple fee operating accounts under the same correspondent, this field must be provided. If not provided, this will be looked up asynchronously (therefore will not be in the initial response)
+	FeeOperatingAccount *string `json:"fee_operating_account,omitempty"`
 	// Full name of the fee resource, which contains account id and fee transaction id
 	Name *string `json:"name,omitempty"`
 	// The current state of the fee
@@ -169,6 +171,13 @@ func (o *TransfersFee) GetDescription() *string {
 		return nil
 	}
 	return o.Description
+}
+
+func (o *TransfersFee) GetFeeOperatingAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FeeOperatingAccount
 }
 
 func (o *TransfersFee) GetName() *string {

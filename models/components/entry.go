@@ -1516,71 +1516,71 @@ func (o *EntryFlipPrevailingMarketPrice) GetValue() *string {
 	return o.Value
 }
 
-// EntryPriceAdjustmentAmount - Total monetary value of the price_adjustment
-type EntryPriceAdjustmentAmount struct {
+// EntryFlipPriceAdjustmentAmount - Total monetary value of the price_adjustment
+type EntryFlipPriceAdjustmentAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *EntryPriceAdjustmentAmount) GetValue() *string {
+func (o *EntryFlipPriceAdjustmentAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// EntryPriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type EntryPriceAdjustmentPercent struct {
+// EntryFlipPriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
+type EntryFlipPriceAdjustmentPercent struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *EntryPriceAdjustmentPercent) GetValue() *string {
+func (o *EntryFlipPriceAdjustmentPercent) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// EntryPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type EntryPriceAdjustmentType string
+// EntryFlipPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
+type EntryFlipPriceAdjustmentType string
 
 const (
-	EntryPriceAdjustmentTypePriceAdjustmentTypeUnspecified EntryPriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	EntryPriceAdjustmentTypeMarkup                         EntryPriceAdjustmentType = "MARKUP"
-	EntryPriceAdjustmentTypeMarkdown                       EntryPriceAdjustmentType = "MARKDOWN"
-	EntryPriceAdjustmentTypeSalesLoad                      EntryPriceAdjustmentType = "SALES_LOAD"
+	EntryFlipPriceAdjustmentTypePriceAdjustmentTypeUnspecified EntryFlipPriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
+	EntryFlipPriceAdjustmentTypeMarkup                         EntryFlipPriceAdjustmentType = "MARKUP"
+	EntryFlipPriceAdjustmentTypeMarkdown                       EntryFlipPriceAdjustmentType = "MARKDOWN"
+	EntryFlipPriceAdjustmentTypeSalesLoad                      EntryFlipPriceAdjustmentType = "SALES_LOAD"
 )
 
-func (e EntryPriceAdjustmentType) ToPointer() *EntryPriceAdjustmentType {
+func (e EntryFlipPriceAdjustmentType) ToPointer() *EntryFlipPriceAdjustmentType {
 	return &e
 }
 
-// EntryPriceAdjustmentRecord - Information about any price adjustments applied to the security
-type EntryPriceAdjustmentRecord struct {
+// EntryFlipPriceAdjustmentRecord - Information about any price adjustments applied to the security
+type EntryFlipPriceAdjustmentRecord struct {
 	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *EntryPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
+	PriceAdjustmentAmount *EntryFlipPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
 	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *EntryPriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
+	PriceAdjustmentPercent *EntryFlipPriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
 	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *EntryPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+	PriceAdjustmentType *EntryFlipPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
 }
 
-func (o *EntryPriceAdjustmentRecord) GetPriceAdjustmentAmount() *EntryPriceAdjustmentAmount {
+func (o *EntryFlipPriceAdjustmentRecord) GetPriceAdjustmentAmount() *EntryFlipPriceAdjustmentAmount {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentAmount
 }
 
-func (o *EntryPriceAdjustmentRecord) GetPriceAdjustmentPercent() *EntryPriceAdjustmentPercent {
+func (o *EntryFlipPriceAdjustmentRecord) GetPriceAdjustmentPercent() *EntryFlipPriceAdjustmentPercent {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentPercent
 }
 
-func (o *EntryPriceAdjustmentRecord) GetPriceAdjustmentType() *EntryPriceAdjustmentType {
+func (o *EntryFlipPriceAdjustmentRecord) GetPriceAdjustmentType() *EntryFlipPriceAdjustmentType {
 	if o == nil {
 		return nil
 	}
@@ -1632,7 +1632,7 @@ type Detail struct {
 	// The price for the instrument that is prevailing in the market
 	PrevailingMarketPrice *EntryFlipPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *EntryPriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
+	PriceAdjustmentRecord *EntryFlipPriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
 	// The execution route Apex used for this trade
 	Route *string `json:"route,omitempty"`
 	// Special instructions for the trade
@@ -1790,7 +1790,7 @@ func (o *Detail) GetPrevailingMarketPrice() *EntryFlipPrevailingMarketPrice {
 	return o.PrevailingMarketPrice
 }
 
-func (o *Detail) GetPriceAdjustmentRecord() *EntryPriceAdjustmentRecord {
+func (o *Detail) GetPriceAdjustmentRecord() *EntryFlipPriceAdjustmentRecord {
 	if o == nil {
 		return nil
 	}
@@ -1864,13 +1864,13 @@ func (o *Fpsl) GetAction() *EntryFpslAction {
 	return o.Action
 }
 
-// GrossAmount - The monetary value of an activity, exclusive of any fees (First money)
-type GrossAmount struct {
+// EntryGrossAmount - The monetary value of an activity, exclusive of any fees (First money)
+type EntryGrossAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *GrossAmount) GetValue() *string {
+func (o *EntryGrossAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -3335,8 +3335,8 @@ func (o *EntryPrice) GetValue() *string {
 	return o.Value
 }
 
-// ProcessDate - The date that the entry was booked on
-type ProcessDate struct {
+// EntryProcessDate - The date that the entry was booked on
+type EntryProcessDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
@@ -3345,21 +3345,21 @@ type ProcessDate struct {
 	Year *int `json:"year,omitempty"`
 }
 
-func (o *ProcessDate) GetDay() *int {
+func (o *EntryProcessDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Day
 }
 
-func (o *ProcessDate) GetMonth() *int {
+func (o *EntryProcessDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Month
 }
 
-func (o *ProcessDate) GetYear() *int {
+func (o *EntryProcessDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
@@ -4563,19 +4563,19 @@ func (e EntrySide) ToPointer() *EntrySide {
 	return &e
 }
 
-// SideModifier - Additional information about a trade Should be populated if possible for trades; the side modifier for the trade
-type SideModifier string
+// EntrySideModifier - Additional information about a trade Should be populated if possible for trades; the side modifier for the trade
+type EntrySideModifier string
 
 const (
-	SideModifierSideModifierUnspecified SideModifier = "SIDE_MODIFIER_UNSPECIFIED"
-	SideModifierShort                   SideModifier = "SHORT"
-	SideModifierShortExempt             SideModifier = "SHORT_EXEMPT"
-	SideModifierShortCover              SideModifier = "SHORT_COVER"
-	SideModifierOpen                    SideModifier = "OPEN"
-	SideModifierClose                   SideModifier = "CLOSE"
+	EntrySideModifierSideModifierUnspecified EntrySideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	EntrySideModifierShort                   EntrySideModifier = "SHORT"
+	EntrySideModifierShortExempt             EntrySideModifier = "SHORT_EXEMPT"
+	EntrySideModifierShortCover              EntrySideModifier = "SHORT_COVER"
+	EntrySideModifierOpen                    EntrySideModifier = "OPEN"
+	EntrySideModifierClose                   EntrySideModifier = "CLOSE"
 )
 
-func (e SideModifier) ToPointer() *SideModifier {
+func (e EntrySideModifier) ToPointer() *EntrySideModifier {
 	return &e
 }
 
@@ -5413,79 +5413,79 @@ func (o *EntryPrevailingMarketPrice) GetValue() *string {
 	return o.Value
 }
 
-// PriceAdjustmentAmount - Total monetary value of the price_adjustment
-type PriceAdjustmentAmount struct {
+// EntryPriceAdjustmentAmount - Total monetary value of the price_adjustment
+type EntryPriceAdjustmentAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *PriceAdjustmentAmount) GetValue() *string {
+func (o *EntryPriceAdjustmentAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// PriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type PriceAdjustmentPercent struct {
+// EntryPriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
+type EntryPriceAdjustmentPercent struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *PriceAdjustmentPercent) GetValue() *string {
+func (o *EntryPriceAdjustmentPercent) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// PriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type PriceAdjustmentType string
+// EntryPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
+type EntryPriceAdjustmentType string
 
 const (
-	PriceAdjustmentTypePriceAdjustmentTypeUnspecified PriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	PriceAdjustmentTypeMarkup                         PriceAdjustmentType = "MARKUP"
-	PriceAdjustmentTypeMarkdown                       PriceAdjustmentType = "MARKDOWN"
-	PriceAdjustmentTypeSalesLoad                      PriceAdjustmentType = "SALES_LOAD"
+	EntryPriceAdjustmentTypePriceAdjustmentTypeUnspecified EntryPriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
+	EntryPriceAdjustmentTypeMarkup                         EntryPriceAdjustmentType = "MARKUP"
+	EntryPriceAdjustmentTypeMarkdown                       EntryPriceAdjustmentType = "MARKDOWN"
+	EntryPriceAdjustmentTypeSalesLoad                      EntryPriceAdjustmentType = "SALES_LOAD"
 )
 
-func (e PriceAdjustmentType) ToPointer() *PriceAdjustmentType {
+func (e EntryPriceAdjustmentType) ToPointer() *EntryPriceAdjustmentType {
 	return &e
 }
 
-// PriceAdjustmentRecord - Information about any price adjustments applied to the security
-type PriceAdjustmentRecord struct {
+// EntryPriceAdjustmentRecord - Information about any price adjustments applied to the security
+type EntryPriceAdjustmentRecord struct {
 	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *PriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
+	PriceAdjustmentAmount *EntryPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
 	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *PriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
+	PriceAdjustmentPercent *EntryPriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
 	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *PriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+	PriceAdjustmentType *EntryPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
 }
 
-func (o *PriceAdjustmentRecord) GetPriceAdjustmentAmount() *PriceAdjustmentAmount {
+func (o *EntryPriceAdjustmentRecord) GetPriceAdjustmentAmount() *EntryPriceAdjustmentAmount {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentAmount
 }
 
-func (o *PriceAdjustmentRecord) GetPriceAdjustmentPercent() *PriceAdjustmentPercent {
+func (o *EntryPriceAdjustmentRecord) GetPriceAdjustmentPercent() *EntryPriceAdjustmentPercent {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentPercent
 }
 
-func (o *PriceAdjustmentRecord) GetPriceAdjustmentType() *PriceAdjustmentType {
+func (o *EntryPriceAdjustmentRecord) GetPriceAdjustmentType() *EntryPriceAdjustmentType {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentType
 }
 
-// Trade - Used to record the the execution of a buy or sell transaction resulting in the transfer of securities and corresponding payment and details related to the trade
-type Trade struct {
+// EntryTrade - Used to record the the execution of a buy or sell transaction resulting in the transfer of securities and corresponding payment and details related to the trade
+type EntryTrade struct {
 	// To be populated by the submitter of the trade detail
 	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
 	// Max Length 50 characters. Alternate order id from the street used for FRAC trades
@@ -5529,7 +5529,7 @@ type Trade struct {
 	// The price for the instrument that is prevailing in the market
 	PrevailingMarketPrice *EntryPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *PriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
+	PriceAdjustmentRecord *EntryPriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
 	// The execution route Apex used for this trade
 	Route *string `json:"route,omitempty"`
 	// Special instructions for the trade
@@ -5540,182 +5540,182 @@ type Trade struct {
 	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
 }
 
-func (o *Trade) GetAdditionalInstructions() []string {
+func (o *EntryTrade) GetAdditionalInstructions() []string {
 	if o == nil {
 		return nil
 	}
 	return o.AdditionalInstructions
 }
 
-func (o *Trade) GetAlternateOrderID() *string {
+func (o *EntryTrade) GetAlternateOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AlternateOrderID
 }
 
-func (o *Trade) GetBookingAPIBookingExecutionID() *string {
+func (o *EntryTrade) GetBookingAPIBookingExecutionID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.BookingAPIBookingExecutionID
 }
 
-func (o *Trade) GetBookingAPITradeAllocationID() *string {
+func (o *EntryTrade) GetBookingAPITradeAllocationID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.BookingAPITradeAllocationID
 }
 
-func (o *Trade) GetBookingAPITradeID() *string {
+func (o *EntryTrade) GetBookingAPITradeID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.BookingAPITradeID
 }
 
-func (o *Trade) GetBroker() *string {
+func (o *EntryTrade) GetBroker() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Broker
 }
 
-func (o *Trade) GetBrokerCapacity() *EntryBrokerCapacity {
+func (o *EntryTrade) GetBrokerCapacity() *EntryBrokerCapacity {
 	if o == nil {
 		return nil
 	}
 	return o.BrokerCapacity
 }
 
-func (o *Trade) GetClientMemo() *string {
+func (o *EntryTrade) GetClientMemo() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClientMemo
 }
 
-func (o *Trade) GetClientOrderID() *string {
+func (o *EntryTrade) GetClientOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClientOrderID
 }
 
-func (o *Trade) GetExchange() *string {
+func (o *EntryTrade) GetExchange() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Exchange
 }
 
-func (o *Trade) GetExecutionID() *string {
+func (o *EntryTrade) GetExecutionID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ExecutionID
 }
 
-func (o *Trade) GetExecutionOnly() *bool {
+func (o *EntryTrade) GetExecutionOnly() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.ExecutionOnly
 }
 
-func (o *Trade) GetExternalID() *string {
+func (o *EntryTrade) GetExternalID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ExternalID
 }
 
-func (o *Trade) GetFundConfirmationNumber() *string {
+func (o *EntryTrade) GetFundConfirmationNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.FundConfirmationNumber
 }
 
-func (o *Trade) GetGatewayClientOrderID() *string {
+func (o *EntryTrade) GetGatewayClientOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.GatewayClientOrderID
 }
 
-func (o *Trade) GetInternalError() *bool {
+func (o *EntryTrade) GetInternalError() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.InternalError
 }
 
-func (o *Trade) GetIsWriteoff() *bool {
+func (o *EntryTrade) GetIsWriteoff() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.IsWriteoff
 }
 
-func (o *Trade) GetLots() []Lot {
+func (o *EntryTrade) GetLots() []Lot {
 	if o == nil {
 		return nil
 	}
 	return o.Lots
 }
 
-func (o *Trade) GetMarket() *string {
+func (o *EntryTrade) GetMarket() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Market
 }
 
-func (o *Trade) GetOrderID() *string {
+func (o *EntryTrade) GetOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.OrderID
 }
 
-func (o *Trade) GetPrevailingMarketPrice() *EntryPrevailingMarketPrice {
+func (o *EntryTrade) GetPrevailingMarketPrice() *EntryPrevailingMarketPrice {
 	if o == nil {
 		return nil
 	}
 	return o.PrevailingMarketPrice
 }
 
-func (o *Trade) GetPriceAdjustmentRecord() *PriceAdjustmentRecord {
+func (o *EntryTrade) GetPriceAdjustmentRecord() *EntryPriceAdjustmentRecord {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentRecord
 }
 
-func (o *Trade) GetRoute() *string {
+func (o *EntryTrade) GetRoute() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Route
 }
 
-func (o *Trade) GetSpecialInstructions() []string {
+func (o *EntryTrade) GetSpecialInstructions() []string {
 	if o == nil {
 		return nil
 	}
 	return o.SpecialInstructions
 }
 
-func (o *Trade) GetWhenIssued() *bool {
+func (o *EntryTrade) GetWhenIssued() *bool {
 	if o == nil {
 		return nil
 	}
 	return o.WhenIssued
 }
 
-func (o *Trade) GetYieldRecords() []YieldRecord {
+func (o *EntryTrade) GetYieldRecords() []YieldRecord {
 	if o == nil {
 		return nil
 	}
@@ -6514,7 +6514,7 @@ type Entry struct {
 	// Used to record the movements of shares to/ from the fpsl memo location and details related to the fpsl memo
 	Fpsl *Fpsl `json:"fpsl,omitempty"`
 	// The monetary value of an activity, exclusive of any fees (First money)
-	GrossAmount *GrossAmount `json:"gross_amount,omitempty"`
+	GrossAmount *EntryGrossAmount `json:"gross_amount,omitempty"`
 	// Used to record the payment of interest to accounts that have maintained a cash balance or the charging of interest to accounts that have used margin and details related to the interest
 	Interest *Interest `json:"interest,omitempty"`
 	// Used to record the The payment of an obligation an issuer has agreed to make to holders of an interest-bearing security and details related to the interest payment. Usually, the payment is made in cash and on a scheduled basis
@@ -6538,7 +6538,7 @@ type Entry struct {
 	// The monetary value paid for a given security in a trade Required, except for currency movements
 	Price *EntryPrice `json:"price,omitempty"`
 	// The date that the entry was booked on
-	ProcessDate *ProcessDate `json:"process_date,omitempty"`
+	ProcessDate *EntryProcessDate `json:"process_date,omitempty"`
 	// The quantity of shares bought, sold, or moved. For entries/ activities involving Fixed Income assets, quantity is expressed as par value Required for trades and memos, optional for movements.
 	Quantity *EntryQuantity `json:"quantity,omitempty"`
 	// Object containing metadata for receive events
@@ -6564,7 +6564,7 @@ type Entry struct {
 	// Denotes whether the trade is a buy or sell
 	Side *EntrySide `json:"side,omitempty"`
 	// Additional information about a trade Should be populated if possible for trades; the side modifier for the trade
-	SideModifier *SideModifier `json:"side_modifier,omitempty"`
+	SideModifier *EntrySideModifier `json:"side_modifier,omitempty"`
 	// Used to record a distribution of subsidiary securities to the shareholders of the parent company without a surrender of securities or payment and details related to the spinoff. A spin-off represents a form of divestiture resulting in an independent company
 	SpinOff *SpinOff `json:"spin_off,omitempty"`
 	// Set to be NEW for BookEntries, other statuses will be assigned via ModifyActivities; the state of the entry
@@ -6580,7 +6580,7 @@ type Entry struct {
 	// Used to record the sale of securities for a specified price due to an offer from the issuer or a third party and details related to the tender offer
 	TenderOffer *TenderOffer `json:"tender_offer,omitempty"`
 	// Used to record the the execution of a buy or sell transaction resulting in the transfer of securities and corresponding payment and details related to the trade
-	Trade *Trade `json:"trade,omitempty"`
+	Trade *EntryTrade `json:"trade,omitempty"`
 	// Used to record more generic transfers of funds or securities and details related to the transfer. The transfer type and activity_description can be used to provide more specific context
 	Transfer *Transfer `json:"transfer,omitempty"`
 	// The Type of the entry; determines the set of mandatory fields as well as informing downstream processes how to handle this record
@@ -6792,7 +6792,7 @@ func (o *Entry) GetFpsl() *Fpsl {
 	return o.Fpsl
 }
 
-func (o *Entry) GetGrossAmount() *GrossAmount {
+func (o *Entry) GetGrossAmount() *EntryGrossAmount {
 	if o == nil {
 		return nil
 	}
@@ -6876,7 +6876,7 @@ func (o *Entry) GetPrice() *EntryPrice {
 	return o.Price
 }
 
-func (o *Entry) GetProcessDate() *ProcessDate {
+func (o *Entry) GetProcessDate() *EntryProcessDate {
 	if o == nil {
 		return nil
 	}
@@ -6967,7 +6967,7 @@ func (o *Entry) GetSide() *EntrySide {
 	return o.Side
 }
 
-func (o *Entry) GetSideModifier() *SideModifier {
+func (o *Entry) GetSideModifier() *EntrySideModifier {
 	if o == nil {
 		return nil
 	}
@@ -7023,7 +7023,7 @@ func (o *Entry) GetTenderOffer() *TenderOffer {
 	return o.TenderOffer
 }
 
-func (o *Entry) GetTrade() *Trade {
+func (o *Entry) GetTrade() *EntryTrade {
 	if o == nil {
 		return nil
 	}

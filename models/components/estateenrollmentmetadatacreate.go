@@ -2,7 +2,7 @@
 
 package components
 
-// EstateEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// EstateEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type EstateEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -19,7 +19,7 @@ func (e EstateEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *Est
 type EstateEnrollmentMetadataCreate struct {
 	// The document id for the certificate of appointment
 	CertificateOfAppointmentDocumentID *string `json:"certificate_of_appointment_document_id,omitempty"`
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *EstateEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
 }
 

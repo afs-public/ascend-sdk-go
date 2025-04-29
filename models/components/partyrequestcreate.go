@@ -38,8 +38,6 @@ const (
 	RelationTypePrimaryOwner                 RelationType = "PRIMARY_OWNER"
 	RelationTypeJointOwner                   RelationType = "JOINT_OWNER"
 	RelationTypeCustodian                    RelationType = "CUSTODIAN"
-	RelationTypeGuardianConservator          RelationType = "GUARDIAN_CONSERVATOR"
-	RelationTypePowerOfAttorney              RelationType = "POWER_OF_ATTORNEY"
 	RelationTypeExecutor                     RelationType = "EXECUTOR"
 	RelationTypeAuthorizedSigner             RelationType = "AUTHORIZED_SIGNER"
 	RelationTypeBeneficialOwner              RelationType = "BENEFICIAL_OWNER"

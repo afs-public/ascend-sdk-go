@@ -2,13 +2,13 @@
 
 package components
 
-// CommissionAmount - Monetary amount associated with the commission
-type CommissionAmount struct {
+// CommissionAmount1 - Monetary amount associated with the commission
+type CommissionAmount1 struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *CommissionAmount) GetValue() *string {
+func (o *CommissionAmount1) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -17,10 +17,10 @@ func (o *CommissionAmount) GetValue() *string {
 
 type Commission struct {
 	// Monetary amount associated with the commission
-	Amount *CommissionAmount `json:"amount,omitempty"`
+	Amount *CommissionAmount1 `json:"amount,omitempty"`
 }
 
-func (o *Commission) GetAmount() *CommissionAmount {
+func (o *Commission) GetAmount() *CommissionAmount1 {
 	if o == nil {
 		return nil
 	}

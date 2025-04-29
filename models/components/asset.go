@@ -815,6 +815,440 @@ func (o *MutualFund) GetShareClass() *string {
 	return o.ShareClass
 }
 
+// CallPut - Indicates whether the option is a Call or a Put. A Put entitles the holder to sell shares at the specified strike_price, while a Call entitles the holder to buy shares at the specified strike_price.
+type CallPut string
+
+const (
+	CallPutCallPutUnspecified CallPut = "CALL_PUT_UNSPECIFIED"
+	CallPutCall               CallPut = "CALL"
+	CallPutPut                CallPut = "PUT"
+)
+
+func (e CallPut) ToPointer() *CallPut {
+	return &e
+}
+
+// ExerciseStyle - Indicates how and when an option can be exercised, either American (exercise any time before expiration) or European (exercise only at expiration).
+type ExerciseStyle string
+
+const (
+	ExerciseStyleExerciseStyleUnspecified ExerciseStyle = "EXERCISE_STYLE_UNSPECIFIED"
+	ExerciseStyleAmerican                 ExerciseStyle = "AMERICAN"
+	ExerciseStyleEuropean                 ExerciseStyle = "EUROPEAN"
+)
+
+func (e ExerciseStyle) ToPointer() *ExerciseStyle {
+	return &e
+}
+
+// AssetExpirationDate - The date when the option contract expires. This will typically match the series_date but can vary when the option expiration is accelerated for a given series. This field will represent the actual expiration date.
+type AssetExpirationDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *AssetExpirationDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *AssetExpirationDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *AssetExpirationDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// Classification is the category of option that the option falls into These are based on how the contract was written. Only STANDARD is supported at this time.
+type Classification string
+
+const (
+	ClassificationClassificationUnspecified Classification = "CLASSIFICATION_UNSPECIFIED"
+	ClassificationStandard                  Classification = "STANDARD"
+	ClassificationFlex                      Classification = "FLEX"
+)
+
+func (e Classification) ToPointer() *Classification {
+	return &e
+}
+
+// PennyPilotIndicator - The penny pilot indicator of the option
+type PennyPilotIndicator string
+
+const (
+	PennyPilotIndicatorPennyPilotIndicatorUnspecified PennyPilotIndicator = "PENNY_PILOT_INDICATOR_UNSPECIFIED"
+	PennyPilotIndicatorPennyPilot                     PennyPilotIndicator = "PENNY_PILOT"
+	PennyPilotIndicatorNonPennyPilot                  PennyPilotIndicator = "NON_PENNY_PILOT"
+)
+
+func (e PennyPilotIndicator) ToPointer() *PennyPilotIndicator {
+	return &e
+}
+
+// PositionLimit - The position Limit for a given option set at the OCC.
+type PositionLimit struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *PositionLimit) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// SettlementStyle - Indicates whether the option is designated to settle at the market's opening price on the expiration date.
+type SettlementStyle string
+
+const (
+	SettlementStyleSettlementStyleUnspecified SettlementStyle = "SETTLEMENT_STYLE_UNSPECIFIED"
+	SettlementStyleSettleOnOpen               SettlementStyle = "SETTLE_ON_OPEN"
+	SettlementStyleSettleOnClose              SettlementStyle = "SETTLE_ON_CLOSE"
+)
+
+func (e SettlementStyle) ToPointer() *SettlementStyle {
+	return &e
+}
+
+// StrikeMultiplier - A number that identifies where the decimal for a strike price should be within the OSI.  For example, in the OSI: AAPL 210416C00120000,   a strike_multiplier of 1 indicates that the strike price is $120.000 and a strike_multiplier of .1 indicates that the strike price is $12.00.
+//
+//	strike_multiplier is: always 1.0 for Equity Options, usually 1.0 for Index Options, but is 0.1 for “half-point” Index Options.
+type StrikeMultiplier struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *StrikeMultiplier) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// StrikePriceMultiplier - A number defined as 1 unit of strike value.  For example, if the strike price multiplier = 100, then a strike of $17 equals $1,700. This field is used for  calculating extended strike values.  The number of units represented by the Strike Price Multiplier is comprised of:
+//  1. Number of shares for Equity Options
+//  2. A dollar amount for Index Options
+//     The typical value of this multiplier for Equity and Index options is 100
+//     For mini options the typical value is 10
+type StrikePriceMultiplier struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *StrikePriceMultiplier) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// TradeValueMultiplier - A number defined as 1 unit of trade premium value.  For example, if the multiplier = 100, then a premium of $1.50 equals $150. This field is used for calculating premium money extensions.  The number of units represented by the multiplier is comprised of:
+//  1. Number of shares for Equity Options
+//  2. A dollar amount for Index Options
+//     The typical value of this multiplier for Equity and Index options is 100. In the majority of cases,
+//     the Trade Premium has to be extended to the same base as the Strike Price. Therefore, the
+//     Trade Value is usually the same as the Strike Value.
+//     For mini options the typical value is 10
+type TradeValueMultiplier struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *TradeValueMultiplier) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// OptionRoot - The full option root information
+type OptionRoot struct {
+	// Classification is the category of option that the option falls into These are based on how the contract was written. Only STANDARD is supported at this time.
+	Classification *Classification `json:"classification,omitempty"`
+	// deliverables is the deliverables of the option More than 20 deliverable assets are not supported.
+	Deliverables []OptionDeliverable `json:"deliverables,omitempty"`
+	// The penny pilot indicator of the option
+	PennyPilotIndicator *PennyPilotIndicator `json:"penny_pilot_indicator,omitempty"`
+	// The position Limit for a given option set at the OCC.
+	PositionLimit *PositionLimit `json:"position_limit,omitempty"`
+	// Unique identifier for the underlying asset and its associated option contracts, which reflects any changes to the underlying asset caused by corporate actions such as mergers, splits, or spin-offs by updating the root with a numerical value to reflect the adjusted terms or entity.
+	RootSymbol *string `json:"root_symbol,omitempty"`
+	// Indicates whether the option is designated to settle at the market's opening price on the expiration date.
+	SettlementStyle *SettlementStyle `json:"settlement_style,omitempty"`
+	// A number that identifies where the decimal for a strike price should be within the OSI.  For example, in the OSI: AAPL 210416C00120000,   a strike_multiplier of 1 indicates that the strike price is $120.000 and a strike_multiplier of .1 indicates that the strike price is $12.00.
+	//
+	//  strike_multiplier is: always 1.0 for Equity Options, usually 1.0 for Index Options, but is 0.1 for “half-point” Index Options.
+	StrikeMultiplier *StrikeMultiplier `json:"strike_multiplier,omitempty"`
+	// A number defined as 1 unit of strike value.  For example, if the strike price multiplier = 100, then a strike of $17 equals $1,700. This field is used for  calculating extended strike values.  The number of units represented by the Strike Price Multiplier is comprised of:
+	//    1) Number of shares for Equity Options
+	//    2) A dollar amount for Index Options
+	//  The typical value of this multiplier for Equity and Index options is 100
+	//  For mini options the typical value is 10
+	StrikePriceMultiplier *StrikePriceMultiplier `json:"strike_price_multiplier,omitempty"`
+	// A number defined as 1 unit of trade premium value.  For example, if the multiplier = 100, then a premium of $1.50 equals $150. This field is used for calculating premium money extensions.  The number of units represented by the multiplier is comprised of:
+	//   1) Number of shares for Equity Options
+	//   2) A dollar amount for Index Options
+	//  The typical value of this multiplier for Equity and Index options is 100. In the majority of cases,
+	//  the Trade Premium has to be extended to the same base as the Strike Price. Therefore, the
+	//   Trade Value is usually the same as the Strike Value.
+	//  For mini options the typical value is 10
+	TradeValueMultiplier *TradeValueMultiplier `json:"trade_value_multiplier,omitempty"`
+}
+
+func (o *OptionRoot) GetClassification() *Classification {
+	if o == nil {
+		return nil
+	}
+	return o.Classification
+}
+
+func (o *OptionRoot) GetDeliverables() []OptionDeliverable {
+	if o == nil {
+		return nil
+	}
+	return o.Deliverables
+}
+
+func (o *OptionRoot) GetPennyPilotIndicator() *PennyPilotIndicator {
+	if o == nil {
+		return nil
+	}
+	return o.PennyPilotIndicator
+}
+
+func (o *OptionRoot) GetPositionLimit() *PositionLimit {
+	if o == nil {
+		return nil
+	}
+	return o.PositionLimit
+}
+
+func (o *OptionRoot) GetRootSymbol() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RootSymbol
+}
+
+func (o *OptionRoot) GetSettlementStyle() *SettlementStyle {
+	if o == nil {
+		return nil
+	}
+	return o.SettlementStyle
+}
+
+func (o *OptionRoot) GetStrikeMultiplier() *StrikeMultiplier {
+	if o == nil {
+		return nil
+	}
+	return o.StrikeMultiplier
+}
+
+func (o *OptionRoot) GetStrikePriceMultiplier() *StrikePriceMultiplier {
+	if o == nil {
+		return nil
+	}
+	return o.StrikePriceMultiplier
+}
+
+func (o *OptionRoot) GetTradeValueMultiplier() *TradeValueMultiplier {
+	if o == nil {
+		return nil
+	}
+	return o.TradeValueMultiplier
+}
+
+// OptionType - Type of deliverable asset the option is set to deliver upon expiry.
+type OptionType string
+
+const (
+	OptionTypeOptionTypeUnspecified OptionType = "OPTION_TYPE_UNSPECIFIED"
+	OptionTypeEquity                OptionType = "EQUITY"
+	OptionTypeIndex                 OptionType = "INDEX"
+)
+
+func (e OptionType) ToPointer() *OptionType {
+	return &e
+}
+
+// SeriesDate - The date of the option contract this is the value in the OSI and is typically the same as the expiration_date but can vary when the option expiration is accelerated.
+type SeriesDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *SeriesDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *SeriesDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *SeriesDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// SettlementMethod - Specifies how an option is settled at expiration, either Physical (delivery of the underlying asset) or Cash (payment of the cash difference).
+type SettlementMethod string
+
+const (
+	SettlementMethodSettlementMethodUnspecified SettlementMethod = "SETTLEMENT_METHOD_UNSPECIFIED"
+	SettlementMethodCash                        SettlementMethod = "CASH"
+	SettlementMethodPhysical                    SettlementMethod = "PHYSICAL"
+)
+
+func (e SettlementMethod) ToPointer() *SettlementMethod {
+	return &e
+}
+
+// SettlementType - Indicates whether an option follows Standard settlement terms or has Non-Standard terms, often due to adjustments like corporate actions.
+type SettlementType string
+
+const (
+	SettlementTypeSettlementTypeUnspecified SettlementType = "SETTLEMENT_TYPE_UNSPECIFIED"
+	SettlementTypeStandard                  SettlementType = "STANDARD"
+	SettlementTypeNonStandard               SettlementType = "NON_STANDARD"
+)
+
+func (e SettlementType) ToPointer() *SettlementType {
+	return &e
+}
+
+// StrikePrice - The price at which the option holder can buy or sell the deliverable asset(s)
+type StrikePrice struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *StrikePrice) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// Option specific asset details
+type Option struct {
+	// Indicates whether the option is a Call or a Put. A Put entitles the holder to sell shares at the specified strike_price, while a Call entitles the holder to buy shares at the specified strike_price.
+	CallPut *CallPut `json:"call_put,omitempty"`
+	// Indicates how and when an option can be exercised, either American (exercise any time before expiration) or European (exercise only at expiration).
+	ExerciseStyle *ExerciseStyle `json:"exercise_style,omitempty"`
+	// The date when the option contract expires. This will typically match the series_date but can vary when the option expiration is accelerated for a given series. This field will represent the actual expiration date.
+	ExpirationDate *AssetExpirationDate `json:"expiration_date,omitempty"`
+	// The full option root information
+	OptionRoot *OptionRoot `json:"option_root,omitempty"`
+	// Type of deliverable asset the option is set to deliver upon expiry.
+	OptionType *OptionType `json:"option_type,omitempty"`
+	// The leading segment of the OSI, which is typically the original deliverable symbol of the option. There are frequent exceptions to this rule, such as when there are multiple deliverables or the deliverable goes through a corporate action.
+	RootSymbol *string `json:"root_symbol,omitempty"`
+	// The date of the option contract this is the value in the OSI and is typically the same as the expiration_date but can vary when the option expiration is accelerated.
+	SeriesDate *SeriesDate `json:"series_date,omitempty"`
+	// Specifies how an option is settled at expiration, either Physical (delivery of the underlying asset) or Cash (payment of the cash difference).
+	SettlementMethod *SettlementMethod `json:"settlement_method,omitempty"`
+	// Indicates whether an option follows Standard settlement terms or has Non-Standard terms, often due to adjustments like corporate actions.
+	SettlementType *SettlementType `json:"settlement_type,omitempty"`
+	// The price at which the option holder can buy or sell the deliverable asset(s)
+	StrikePrice *StrikePrice `json:"strike_price,omitempty"`
+}
+
+func (o *Option) GetCallPut() *CallPut {
+	if o == nil {
+		return nil
+	}
+	return o.CallPut
+}
+
+func (o *Option) GetExerciseStyle() *ExerciseStyle {
+	if o == nil {
+		return nil
+	}
+	return o.ExerciseStyle
+}
+
+func (o *Option) GetExpirationDate() *AssetExpirationDate {
+	if o == nil {
+		return nil
+	}
+	return o.ExpirationDate
+}
+
+func (o *Option) GetOptionRoot() *OptionRoot {
+	if o == nil {
+		return nil
+	}
+	return o.OptionRoot
+}
+
+func (o *Option) GetOptionType() *OptionType {
+	if o == nil {
+		return nil
+	}
+	return o.OptionType
+}
+
+func (o *Option) GetRootSymbol() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RootSymbol
+}
+
+func (o *Option) GetSeriesDate() *SeriesDate {
+	if o == nil {
+		return nil
+	}
+	return o.SeriesDate
+}
+
+func (o *Option) GetSettlementMethod() *SettlementMethod {
+	if o == nil {
+		return nil
+	}
+	return o.SettlementMethod
+}
+
+func (o *Option) GetSettlementType() *SettlementType {
+	if o == nil {
+		return nil
+	}
+	return o.SettlementType
+}
+
+func (o *Option) GetStrikePrice() *StrikePrice {
+	if o == nil {
+		return nil
+	}
+	return o.StrikePrice
+}
+
 // AssetType1 - The type or category of the asset
 type AssetType1 string
 
@@ -827,7 +1261,6 @@ const (
 	AssetType1FdicSynthetic   AssetType1 = "FDIC_SYNTHETIC"
 	AssetType1FixedIncome     AssetType1 = "FIXED_INCOME"
 	AssetType1MutualFund      AssetType1 = "MUTUAL_FUND"
-	AssetType1AltInvestment   AssetType1 = "ALT_INVESTMENT"
 )
 
 func (e AssetType1) ToPointer() *AssetType1 {
@@ -856,6 +1289,8 @@ type Asset struct {
 	MutualFund *MutualFund `json:"mutual_fund,omitempty"`
 	// assets/{asset_id}
 	Name *string `json:"name,omitempty"`
+	// Option specific asset details
+	Option *Option `json:"option,omitempty"`
 	// ISO code identifying the region in which the entity was incorporated
 	OriginatingRegionCode *string `json:"originating_region_code,omitempty"`
 	// An arrangement of characters—usually letters and or numbers — usually representing securities on an exchange
@@ -934,6 +1369,13 @@ func (o *Asset) GetName() *string {
 		return nil
 	}
 	return o.Name
+}
+
+func (o *Asset) GetOption() *Option {
+	if o == nil {
+		return nil
+	}
+	return o.Option
 }
 
 func (o *Asset) GetOriginatingRegionCode() *string {

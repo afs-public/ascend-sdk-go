@@ -28,6 +28,19 @@ func (o *RegularAmount) GetValue() *string {
 	return o.Value
 }
 
+// RemainingContributionAllowed - The remaining regular contribution amount allowed for the tax year. Calculated as the difference between the contribution limit for the account and its regular contribution total to date. This will return zero if the account has no contribution limit.
+type RemainingContributionAllowed struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *RemainingContributionAllowed) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // RolloverAmount - Rollover contribution amount
 type RolloverAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -49,6 +62,8 @@ type ContributionSummary struct {
 	Name *string `json:"name,omitempty"`
 	// Summed contribution amounts throughout the year
 	RegularAmount *RegularAmount `json:"regular_amount,omitempty"`
+	// The remaining regular contribution amount allowed for the tax year. Calculated as the difference between the contribution limit for the account and its regular contribution total to date. This will return zero if the account has no contribution limit.
+	RemainingContributionAllowed *RemainingContributionAllowed `json:"remaining_contribution_allowed,omitempty"`
 	// Rollover contribution amount
 	RolloverAmount *RolloverAmount `json:"rollover_amount,omitempty"`
 	// Tax year these contribution amounts are for
@@ -74,6 +89,13 @@ func (o *ContributionSummary) GetRegularAmount() *RegularAmount {
 		return nil
 	}
 	return o.RegularAmount
+}
+
+func (o *ContributionSummary) GetRemainingContributionAllowed() *RemainingContributionAllowed {
+	if o == nil {
+		return nil
+	}
+	return o.RemainingContributionAllowed
 }
 
 func (o *ContributionSummary) GetRolloverAmount() *RolloverAmount {

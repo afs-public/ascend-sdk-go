@@ -25,6 +25,7 @@ const (
 	MechanismRtp                  Mechanism = "RTP"
 	MechanismTpj                  Mechanism = "TPJ"
 	MechanismWire                 Mechanism = "WIRE"
+	MechanismExternalAch          Mechanism = "EXTERNAL_ACH"
 )
 
 func (e Mechanism) ToPointer() *Mechanism {
@@ -59,6 +60,8 @@ func (e *Mechanism) UnmarshalJSON(data []byte) error {
 	case "TPJ":
 		fallthrough
 	case "WIRE":
+		fallthrough
+	case "EXTERNAL_ACH":
 		*e = Mechanism(v)
 		return nil
 	default:

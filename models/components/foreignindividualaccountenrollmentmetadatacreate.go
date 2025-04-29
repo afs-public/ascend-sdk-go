@@ -2,7 +2,7 @@
 
 package components
 
-// ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan
 	return &e
 }
 
-// ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -29,9 +29,9 @@ func (e ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep) ToPointer
 }
 
 type ForeignIndividualAccountEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 	// Enrollment metadata for Accounts that have a foreign Legal Natural Person owner.
 	ForeignNaturalPersonAccountEnrollmentMetadata ForeignNaturalPersonAccountEnrollmentMetadataCreate `json:"foreign_natural_person_account_enrollment_metadata"`

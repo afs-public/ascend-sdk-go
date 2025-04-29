@@ -6,6 +6,8 @@ package components
 type ForceRejectAchWithdrawalRequestCreate struct {
 	// The name of the ACH withdrawal to force reject.
 	Name string `json:"name"`
+	// Reason why the ACH withdrawal is being rejected.
+	Reason *string `json:"reason,omitempty"`
 }
 
 func (o *ForceRejectAchWithdrawalRequestCreate) GetName() string {
@@ -13,4 +15,11 @@ func (o *ForceRejectAchWithdrawalRequestCreate) GetName() string {
 		return ""
 	}
 	return o.Name
+}
+
+func (o *ForceRejectAchWithdrawalRequestCreate) GetReason() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Reason
 }

@@ -2,7 +2,7 @@
 
 package components
 
-// DividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// DividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type DividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e DividendReinvestmentPlan) ToPointer() *DividendReinvestmentPlan {
 	return &e
 }
 
-// FdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// FdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type FdicCashSweep string
 
 const (
@@ -29,11 +29,11 @@ func (e FdicCashSweep) ToPointer() *FdicCashSweep {
 }
 
 type CorporationEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *DividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
 	// Enrollment metadata for Entity Accounts
 	EddAccountEnrollmentMetadata *EddAccountEnrollmentMetadataCreate `json:"edd_account_enrollment_metadata,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *FdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 }
 

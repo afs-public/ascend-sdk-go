@@ -38,8 +38,6 @@ const (
 	PartyRequestUpdateRelationTypePrimaryOwner                 PartyRequestUpdateRelationType = "PRIMARY_OWNER"
 	PartyRequestUpdateRelationTypeJointOwner                   PartyRequestUpdateRelationType = "JOINT_OWNER"
 	PartyRequestUpdateRelationTypeCustodian                    PartyRequestUpdateRelationType = "CUSTODIAN"
-	PartyRequestUpdateRelationTypeGuardianConservator          PartyRequestUpdateRelationType = "GUARDIAN_CONSERVATOR"
-	PartyRequestUpdateRelationTypePowerOfAttorney              PartyRequestUpdateRelationType = "POWER_OF_ATTORNEY"
 	PartyRequestUpdateRelationTypeExecutor                     PartyRequestUpdateRelationType = "EXECUTOR"
 	PartyRequestUpdateRelationTypeAuthorizedSigner             PartyRequestUpdateRelationType = "AUTHORIZED_SIGNER"
 	PartyRequestUpdateRelationTypeBeneficialOwner              PartyRequestUpdateRelationType = "BENEFICIAL_OWNER"

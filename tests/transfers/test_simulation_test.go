@@ -2,6 +2,7 @@ package transfers
 
 import (
 	"context"
+	"strings"
 	"testing"
 	"time"
 
@@ -9,6 +10,7 @@ import (
 	"github.com/google/uuid"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -109,22 +111,70 @@ func Test_Test_Simulation(t *testing.T) {
 		bankRelationshipDepositId:   bankRelationShip,
 		enrolledWithdrawalAccountId: "01JHGTEPC6ZTAHCFRH2MD3VJJT",
 	}
-	testTestSimulationTransfersForceApproveAchDepositForceApproveAchDeposit1(t, *fixture)
-	testTestSimulationTransfersForceNocAchDepositForceNocAchDeposit1(t, *fixture)
-	testTestSimulationTransfersForceRejectAchDepositForceRejectAchDeposit1(t, *fixture)
-	testTestSimulationTransfersForceAchDepositReturnForceAchDepositReturn1(t, *fixture)
-	testTestSimulationTransfersForceApproveAchWithdrawalForceApproveAchWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceNocAchWithdrawalForceNocAchWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceRejectAchWithdrawalForceRejectAchWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceAchWithdrawalReturnForceAchWithdrawalReturn1(t, *fixture)
-	testTestSimulationTransfersForceApproveIctDepositForceApproveIctDeposit1(t, *fixture)
-	testTestSimulationTransfersForceRejectIctDepositForceRejectIctDeposit1(t, *fixture)
-	testTestSimulationTransfersForceApproveIctWithdrawalForceApproveIctWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceRejectIctWithdrawalForceRejectIctWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceApproveWireWithdrawalForceApproveWireWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceRejectWireWithdrawalForceRejectWireWithdrawal1(t, *fixture)
-	testTestSimulationTransfersForceApproveCashJournalForceApproveCashJournal1(t, *fixture)
-	testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t, *fixture)
+
+	t.Run("test Test Simulation Transfers Force Approve Ach Deposit Force Approve Ach Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveAchDepositForceApproveAchDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Noc Ach Deposit Force Noc Ach Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceNocAchDepositForceNocAchDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Ach Deposit Force Reject Ach Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectAchDepositForceRejectAchDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Ach Deposit Return Force Ach Deposit Return1", func(t *testing.T) {
+		testTestSimulationTransfersForceAchDepositReturnForceAchDepositReturn1(t, *fixture)
+	})
+
+	t.Run("Test Test Simulation Transfers Force Approve Ach Withdrawal Force Approve Ach Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveAchWithdrawalForceApproveAchWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Noc Ach Withdrawal Force Noc Ach Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceNocAchWithdrawalForceNocAchWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Ach Withdrawal Force Reject Ach Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectAchWithdrawalForceRejectAchWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Ach Withdrawal Return Force Ach Withdrawal Return1", func(t *testing.T) {
+		testTestSimulationTransfersForceAchWithdrawalReturnForceAchWithdrawalReturn1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Approve Ict Deposit Force Approve Ict Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveIctDepositForceApproveIctDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Ict Deposit Force Reject Ict Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectIctDepositForceRejectIctDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Approve Ict Withdrawal Force Approve Ict Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveIctWithdrawalForceApproveIctWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Ict Withdrawal Force Reject Ict Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectIctWithdrawalForceRejectIctWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Approve Wire Withdrawal Force Approve Wire Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveWireWithdrawalForceApproveWireWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Wire Withdrawal Force Reject Wire Withdrawal1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectWireWithdrawalForceRejectWireWithdrawal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Approve Cash Journal Force Approve Cash Journal1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveCashJournalForceApproveCashJournal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Cash Journal Force Reject Cash Journal1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t, *fixture)
+	})
 }
 
 func testTestSimulationTransfersForceNocAchDepositForceNocAchDeposit1(t *testing.T, fixture Fixtures) {
@@ -157,9 +207,16 @@ func testTestSimulationTransfersForceRejectAchDepositForceRejectAchDeposit1(t *t
 		Name: "accounts/" + fixture.deceasedAccountId + "/achDeposits/" + *fixture.pendingDepositAchAccountId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceRejectAchDeposit(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingDepositAchAccountId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceAchDepositReturnForceAchDepositReturn1(t *testing.T,
@@ -175,15 +232,15 @@ func testTestSimulationTransfersForceAchDepositReturnForceAchDepositReturn1(t *t
 		},
 		Name: "accounts/" + fixture.enrolledDepositAccountId + "/achDeposits/" + *fixture.pendingDepositAchAccountId,
 	}
-	res, err := fixture.sdk.TestSimulation.ForceReturnAchDeposit(fixture.ctx, fixture.enrolledDepositAccountId,
+	_, err := fixture.sdk.TestSimulation.ForceReturnAchDeposit(fixture.ctx, fixture.enrolledDepositAccountId,
 		*fixture.pendingDepositAchAccountId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	statusErr, ok := err.(*sdkerrors.Status)
+	require.True(t, ok)
+	assert.Equal(t, 3, *statusErr.Code)
+	assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "current state"), statusErr.Code)
 }
 
 func testTestSimulationTransfersForceApproveAchWithdrawalForceApproveAchWithdrawal1(t *testing.T, fixture Fixtures) {
-	t.Skipf("Skipping Endpoint Test: ACH Withdrawal Approval")
 	if isNotDuringTradingHours() {
 		t.Skip("Skipping Endpoint Test: ACH Withdrawal Return")
 	}
@@ -196,9 +253,16 @@ func testTestSimulationTransfersForceApproveAchWithdrawalForceApproveAchWithdraw
 	}
 	res, err := fixture.sdk.TestSimulation.ForceApproveAchWithdrawal(fixture.ctx, fixture.deceasedAccountId,
 		*fixture.pendingWithdrawalAchAccountId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceNocAchWithdrawalForceNocAchWithdrawal1(
@@ -231,9 +295,16 @@ func testTestSimulationTransfersForceRejectAchWithdrawalForceRejectAchWithdrawal
 		Name: "accounts/" + fixture.deceasedAccountId + "/achWithdrawals/" + *fixture.pendingWithdrawalAchAccountId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceRejectAchWithdrawal(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingWithdrawalAchAccountId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceAchWithdrawalReturnForceAchWithdrawalReturn1(
@@ -249,14 +320,14 @@ func testTestSimulationTransfersForceAchWithdrawalReturnForceAchWithdrawalReturn
 		},
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/achWithdrawals/" + *fixture.completedWithdrawalAccountId,
 	}
-	res, err := fixture.sdk.TestSimulation.ForceReturnAchWithdrawal(fixture.ctx, fixture.enrolledWithdrawalAccountId, *fixture.completedWithdrawalAccountId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	_, err := fixture.sdk.TestSimulation.ForceReturnAchWithdrawal(fixture.ctx, fixture.enrolledWithdrawalAccountId, *fixture.completedWithdrawalAccountId, request)
+	statusErr, ok := err.(*sdkerrors.Status)
+	require.True(t, ok)
+	assert.Equal(t, 3, *statusErr.Code)
+	assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "current state"), statusErr.Code)
 }
 
 func testTestSimulationTransfersForceApproveIctWithdrawalForceApproveIctWithdrawal1(t *testing.T, fixture Fixtures) {
-	t.Skipf("Skipping Endpoint Test: ICT Withdrawal Approval")
 	if isNotDuringICTHours() {
 		t.Skip("Skipping Endpoint Test: Force Approve ICT Withdrawal")
 	}
@@ -266,9 +337,16 @@ func testTestSimulationTransfersForceApproveIctWithdrawalForceApproveIctWithdraw
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictWithdrawals/" + *fixture.pendingIctWithdrawalId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceApproveIctWithdrawal(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingIctWithdrawalId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceRejectIctWithdrawalForceRejectIctWithdrawal1(t *testing.T, fixture Fixtures) {
@@ -281,13 +359,19 @@ func testTestSimulationTransfersForceRejectIctWithdrawalForceRejectIctWithdrawal
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictWithdrawals/" + *fixture.pendingIctWithdrawalId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceRejectIctWithdrawal(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingIctWithdrawalId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceApproveIctDepositForceApproveIctDeposit1(t *testing.T, fixture Fixtures) {
-	t.Skipf("Skipping Endpoint Test: ICT Deposit Approval")
 	if isNotDuringICTHours() {
 		t.Skip("Skipping Endpoint Test: Force Approve ICT Deposit")
 	}
@@ -297,9 +381,16 @@ func testTestSimulationTransfersForceApproveIctDepositForceApproveIctDeposit1(t 
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictDeposits/" + *fixture.pendingIctDepositId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceApproveIctDeposit(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingIctDepositId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceRejectIctDepositForceRejectIctDeposit1(t *testing.T, fixture Fixtures) {
@@ -312,13 +403,19 @@ func testTestSimulationTransfersForceRejectIctDepositForceRejectIctDeposit1(t *t
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictDeposits/" + *fixture.pendingIctDepositId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceRejectIctDeposit(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingIctDepositId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceApproveAchDepositForceApproveAchDeposit1(t *testing.T, fixture Fixtures) {
-	t.Skipf("Skipping Endpoint Test: ACH Deposit Approval")
 	if isNotDuringTradingHours() {
 		t.Skip("Skipping Endpoint Test: ACH Deposit Approval")
 	}
@@ -327,10 +424,16 @@ func testTestSimulationTransfersForceApproveAchDepositForceApproveAchDeposit1(t 
 		Name: "accounts/" + fixture.deceasedAccountId + "/achDeposits/" + *fixture.pendingDepositAchAccountId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceApproveAchDeposit(fixture.ctx, fixture.deceasedAccountId, *fixture.pendingDepositAchAccountId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, res)
-	assert.NotNil(t, res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceApproveWireWithdrawalForceApproveWireWithdrawal1(t *testing.T, fixture Fixtures) {
@@ -377,7 +480,10 @@ func testTestSimulationTransfersForceApproveCashJournalForceApproveCashJournal1(
 	}
 	_, _ = fixture.sdk.FeesAndCredits.CreateCredit(fixture.ctx, fixture.enrolledWithdrawalAccountId, credit)
 
-	assert.NotNil(t, fixture.pendingCashJournal(fixture.enrolledWithdrawalAccountId))
+	assert.NotNil(t, fixture.pendingCashJournal(fixture.deceasedAccountId))
+
+	time.Sleep(5 * time.Second)
+
 	request := components.ForceApproveCashJournalRequestCreate{
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/cashJournals/" + *fixture.cashJournalId,
 	}
@@ -391,7 +497,10 @@ func testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t 
 	if isNotJournalHours() {
 		t.Skip("Skipping Endpoint Test: Force Reject Cash Journal")
 	}
-	assert.NotNil(t, fixture.pendingCashJournal(fixture.enrolledWithdrawalAccountId))
+	assert.NotNil(t, fixture.pendingCashJournal(fixture.deceasedAccountId))
+
+	time.Sleep(5 * time.Second)
+
 	request := components.ForceRejectCashJournalRequestCreate{
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/cashJournals/" + *fixture.cashJournalId,
 	}

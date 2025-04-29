@@ -63,16 +63,16 @@ func (o *Deliverer) GetExternalAccount() *ExternalAccount {
 	return o.ExternalAccount
 }
 
-// Direction - The direction of the transfer
-type Direction string
+// AcatsTransferDirection - The direction of the transfer
+type AcatsTransferDirection string
 
 const (
-	DirectionDirectionUnspecified Direction = "DIRECTION_UNSPECIFIED"
-	DirectionOutgoing             Direction = "OUTGOING"
-	DirectionIncoming             Direction = "INCOMING"
+	AcatsTransferDirectionDirectionUnspecified AcatsTransferDirection = "DIRECTION_UNSPECIFIED"
+	AcatsTransferDirectionOutgoing             AcatsTransferDirection = "OUTGOING"
+	AcatsTransferDirectionIncoming             AcatsTransferDirection = "INCOMING"
 )
 
-func (e Direction) ToPointer() *Direction {
+func (e AcatsTransferDirection) ToPointer() *AcatsTransferDirection {
 	return &e
 }
 
@@ -267,7 +267,7 @@ type AcatsTransfer struct {
 	// The delivering party information
 	Deliverer *Deliverer `json:"deliverer,omitempty"`
 	// The direction of the transfer
-	Direction *Direction `json:"direction,omitempty"`
+	Direction *AcatsTransferDirection `json:"direction,omitempty"`
 	// The service generated name of the transfer. Format: correspondents/{correspondent_id}/accounts/{account_id}/transfers/{transfer_id}
 	Name *string `json:"name,omitempty"`
 	// The NSCC transfer status
@@ -330,7 +330,7 @@ func (o *AcatsTransfer) GetDeliverer() *Deliverer {
 	return o.Deliverer
 }
 
-func (o *AcatsTransfer) GetDirection() *Direction {
+func (o *AcatsTransfer) GetDirection() *AcatsTransferDirection {
 	if o == nil {
 		return nil
 	}

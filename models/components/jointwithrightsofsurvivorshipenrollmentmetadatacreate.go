@@ -2,7 +2,7 @@
 
 package components
 
-// JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to true
+// JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 type JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan string
 
 const (
@@ -15,7 +15,7 @@ func (e JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmen
 	return &e
 }
 
-// JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to true
+// JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 type JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep string
 
 const (
@@ -30,9 +30,9 @@ func (e JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep) ToPo
 
 // JointWithRightsOfSurvivorshipEnrollmentMetadataCreate - Enrollment metadata for the With Right of Survivorship enrollment type
 type JointWithRightsOfSurvivorshipEnrollmentMetadataCreate struct {
-	// Option to auto-enroll in Dividend Reinvestment; defaults to true
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *JointWithRightsOfSurvivorshipEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in FDIC cash sweep; defaults to true
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *JointWithRightsOfSurvivorshipEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 }
 

@@ -22,6 +22,7 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRollover               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_ROLLOVER"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationTrust                     DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_TRUST"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCorporation               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CORPORATION"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationLlc                       DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_LLC"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep                     DeactivateEnrollmentRequestCreateEnrollmentType = "CASH_FDIC_CASH_SWEEP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRetirementBeneficiaryDesignation      DeactivateEnrollmentRequestCreateEnrollmentType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeDividendReinvestmentPlan              DeactivateEnrollmentRequestCreateEnrollmentType = "DIVIDEND_REINVESTMENT_PLAN"
@@ -29,6 +30,7 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryRoth        DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividualForeign         DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CUSTODIAL"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber                  DeactivateEnrollmentRequestCreateEnrollmentType = "VIRTUAL_ACCOUNT_NUMBER"
 )
 
 func (e DeactivateEnrollmentRequestCreateEnrollmentType) ToPointer() *DeactivateEnrollmentRequestCreateEnrollmentType {

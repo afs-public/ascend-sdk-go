@@ -1,6 +1,6 @@
 # Direction
 
-The direction of the transfer
+Flag indicating whether this is a deposit or withdrawal transfer
 
 
 ## Values
@@ -8,5 +8,5 @@ The direction of the transfer
 | Name                            | Value                           |
 | ------------------------------- | ------------------------------- |
 | `DirectionDirectionUnspecified` | DIRECTION_UNSPECIFIED           |
-| `DirectionOutgoing`             | OUTGOING                        |
-| `DirectionIncoming`             | INCOMING                        |
+| `DirectionDeposit`              | DEPOSIT                         |
+| `DirectionWithdrawal`           | WITHDRAWAL                      |

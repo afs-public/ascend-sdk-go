@@ -75,7 +75,7 @@ func CreateLegalNaturalPersonId(s *ascendsdk.SDK, ctx context.Context) (*string,
 			LegalTaxRegionCode:       "US",
 		},
 		Employment: components.EmploymentCreate{
-			Occupation:       "Software Engineer",
+			Occupation:       ascendsdk.String("Software Engineer"),
 			EmploymentStatus: components.EmploymentStatusEmployed,
 			EmployerAddress: &components.PostalAddressCreate{
 				AdministrativeArea: ascendsdk.String("OR"),

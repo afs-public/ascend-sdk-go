@@ -634,7 +634,7 @@ type PartyLegalEntity struct {
 	EntityType *PartyEntityType `json:"entity_type,omitempty"`
 	// The reason the customer is exempt from verifying beneficial owners, if applicable.
 	ExemptCustomerReason *PartyExemptCustomerReason `json:"exempt_customer_reason,omitempty"`
-	// Indicates whether the entity is exempt from verifying beneficial owners. By default, this is set to `false`.
+	// Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due Diligence. By default, this is set to `false`
 	ExemptVerifyingBeneficialOwners *bool `json:"exempt_verifying_beneficial_owners,omitempty"`
 	// If the legal entity is a trust, they may set this field to convey ownership and value to a trustee.
 	ForTheBenefitOf *string `json:"for_the_benefit_of,omitempty"`
@@ -1129,7 +1129,7 @@ type PartyEmployment struct {
 	EmploymentID *string `json:"employment_id,omitempty"`
 	// Classifies in what capacity (or if) the underlying natural person holds a job
 	EmploymentStatus *PartyEmploymentStatus `json:"employment_status,omitempty"`
-	// The nature of work performed at an investor's place of employment.
+	// The nature of work performed at an investor's place of employment. Required if the employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
 	Occupation *string `json:"occupation,omitempty"`
 	// The start year of employment related to a person's stated employer Must be from birth year to current year, or 0 to clear start year value
 	StartYear *int `json:"start_year,omitempty"`
@@ -2634,8 +2634,6 @@ const (
 	PartyRelationTypePrimaryOwner                 PartyRelationType = "PRIMARY_OWNER"
 	PartyRelationTypeJointOwner                   PartyRelationType = "JOINT_OWNER"
 	PartyRelationTypeCustodian                    PartyRelationType = "CUSTODIAN"
-	PartyRelationTypeGuardianConservator          PartyRelationType = "GUARDIAN_CONSERVATOR"
-	PartyRelationTypePowerOfAttorney              PartyRelationType = "POWER_OF_ATTORNEY"
 	PartyRelationTypeExecutor                     PartyRelationType = "EXECUTOR"
 	PartyRelationTypeAuthorizedSigner             PartyRelationType = "AUTHORIZED_SIGNER"
 	PartyRelationTypeBeneficialOwner              PartyRelationType = "BENEFICIAL_OWNER"

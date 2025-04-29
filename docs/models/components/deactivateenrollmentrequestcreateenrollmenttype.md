@@ -23,6 +23,7 @@ Describes the name of the enrollment; Expressed as an enum
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                                                              |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationTrust`                     | REGISTRATION_TRUST                                                                     |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                                                               |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationLlc`                       | REGISTRATION_LLC                                                                       |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                                                   |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                                                     |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                                                             |
@@ -30,3 +31,4 @@ Describes the name of the enrollment; Expressed as an enum
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                                                      |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                                                        |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                                                 |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                                                 |

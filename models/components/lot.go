@@ -15,22 +15,22 @@ func (o *LotPrice) GetValue() *string {
 	return o.Value
 }
 
-// Money - Object containing currency/ price information for the trade lot
-type Money struct {
+// LotMoney - Object containing currency/ price information for the trade lot
+type LotMoney struct {
 	// Currency code of the price
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// Price of the trade lot
 	Price *LotPrice `json:"price,omitempty"`
 }
 
-func (o *Money) GetCurrencyCode() *string {
+func (o *LotMoney) GetCurrencyCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CurrencyCode
 }
 
-func (o *Money) GetPrice() *LotPrice {
+func (o *LotMoney) GetPrice() *LotPrice {
 	if o == nil {
 		return nil
 	}
@@ -85,7 +85,7 @@ type Lot struct {
 	// Client supplied id
 	ID *string `json:"id,omitempty"`
 	// Object containing currency/ price information for the trade lot
-	Money *Money `json:"money,omitempty"`
+	Money *LotMoney `json:"money,omitempty"`
 	// Quantity of the trade lot
 	Quantity *LotQuantity `json:"quantity,omitempty"`
 	// Trade date of the trade lot
@@ -99,7 +99,7 @@ func (o *Lot) GetID() *string {
 	return o.ID
 }
 
-func (o *Lot) GetMoney() *Money {
+func (o *Lot) GetMoney() *LotMoney {
 	if o == nil {
 		return nil
 	}

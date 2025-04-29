@@ -23,6 +23,7 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentCreateTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                                   |
 | `EnrollmentCreateTypeRegistrationTrust`                     | REGISTRATION_TRUST                                          |
 | `EnrollmentCreateTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                                    |
+| `EnrollmentCreateTypeRegistrationLlc`                       | REGISTRATION_LLC                                            |
 | `EnrollmentCreateTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                        |
 | `EnrollmentCreateTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                          |
 | `EnrollmentCreateTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                                  |
@@ -30,3 +31,4 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentCreateTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                           |
 | `EnrollmentCreateTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                             |
 | `EnrollmentCreateTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                      |
+| `EnrollmentCreateTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                      |

@@ -83,14 +83,10 @@ type BasketOrderCreate struct {
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
-	// Fees that will be applied to this order.
-	Fees []FeeCreate `json:"fees,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported
 	IdentifierType BasketOrderCreateIdentifierType `json:"identifier_type"`
-	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
-	LetterOfIntent *LetterOfIntentCreate `json:"letter_of_intent,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
 	//  [BigDecimal]:
@@ -105,8 +101,6 @@ type BasketOrderCreate struct {
 	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
 	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
 	Quantity *DecimalCreate `json:"quantity,omitempty"`
-	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
-	RightsOfAccumulation *RightsOfAccumulationCreate `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side BasketOrderCreateSide `json:"side"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
@@ -159,13 +153,6 @@ func (o *BasketOrderCreate) GetCurrencyCode() *string {
 	return o.CurrencyCode
 }
 
-func (o *BasketOrderCreate) GetFees() []FeeCreate {
-	if o == nil {
-		return nil
-	}
-	return o.Fees
-}
-
 func (o *BasketOrderCreate) GetIdentifier() string {
 	if o == nil {
 		return ""
@@ -178,13 +165,6 @@ func (o *BasketOrderCreate) GetIdentifierType() BasketOrderCreateIdentifierType 
 		return BasketOrderCreateIdentifierType("")
 	}
 	return o.IdentifierType
-}
-
-func (o *BasketOrderCreate) GetLetterOfIntent() *LetterOfIntentCreate {
-	if o == nil {
-		return nil
-	}
-	return o.LetterOfIntent
 }
 
 func (o *BasketOrderCreate) GetNotionalValue() *DecimalCreate {
@@ -206,13 +186,6 @@ func (o *BasketOrderCreate) GetQuantity() *DecimalCreate {
 		return nil
 	}
 	return o.Quantity
-}
-
-func (o *BasketOrderCreate) GetRightsOfAccumulation() *RightsOfAccumulationCreate {
-	if o == nil {
-		return nil
-	}
-	return o.RightsOfAccumulation
 }
 
 func (o *BasketOrderCreate) GetSide() BasketOrderCreateSide {
