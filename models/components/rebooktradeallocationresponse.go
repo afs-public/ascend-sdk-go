@@ -343,7 +343,7 @@ type NewTradeAllocation struct {
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
-	Fees []Fee `json:"fees,omitempty"`
+	Fees []BookingFee `json:"fees,omitempty"`
 	// The ULID formatted account_id that the positions will be moved from.
 	FromAccountID *string `json:"from_account_id,omitempty"`
 	// The current activity_id of the trade allocation that positions will be moved from in the Ledger.
@@ -357,7 +357,7 @@ type NewTradeAllocation struct {
 	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
 	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
 	// One or many lot matching instructions for the trade allocation.
-	LotMatchingInstructions []Lot `json:"lot_matching_instructions,omitempty"`
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
 	// Caller provided but can be used for booking-service to note original trade details when booking into the error account or using the error asset.
 	Memo *string `json:"memo,omitempty"`
 	// The resource name of the trade allocation.
@@ -459,7 +459,7 @@ func (o *NewTradeAllocation) GetExecutionTime() *time.Time {
 	return o.ExecutionTime
 }
 
-func (o *NewTradeAllocation) GetFees() []Fee {
+func (o *NewTradeAllocation) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
@@ -508,7 +508,7 @@ func (o *NewTradeAllocation) GetIssuingRegionCode() *string {
 	return o.IssuingRegionCode
 }
 
-func (o *NewTradeAllocation) GetLotMatchingInstructions() []Lot {
+func (o *NewTradeAllocation) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}
@@ -962,7 +962,7 @@ type OriginalTradeAllocation struct {
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
-	Fees []Fee `json:"fees,omitempty"`
+	Fees []BookingFee `json:"fees,omitempty"`
 	// The ULID formatted account_id that the positions will be moved from.
 	FromAccountID *string `json:"from_account_id,omitempty"`
 	// The current activity_id of the trade allocation that positions will be moved from in the Ledger.
@@ -976,7 +976,7 @@ type OriginalTradeAllocation struct {
 	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
 	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
 	// One or many lot matching instructions for the trade allocation.
-	LotMatchingInstructions []Lot `json:"lot_matching_instructions,omitempty"`
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
 	// Caller provided but can be used for booking-service to note original trade details when booking into the error account or using the error asset.
 	Memo *string `json:"memo,omitempty"`
 	// The resource name of the trade allocation.
@@ -1078,7 +1078,7 @@ func (o *OriginalTradeAllocation) GetExecutionTime() *time.Time {
 	return o.ExecutionTime
 }
 
-func (o *OriginalTradeAllocation) GetFees() []Fee {
+func (o *OriginalTradeAllocation) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
@@ -1127,7 +1127,7 @@ func (o *OriginalTradeAllocation) GetIssuingRegionCode() *string {
 	return o.IssuingRegionCode
 }
 
-func (o *OriginalTradeAllocation) GetLotMatchingInstructions() []Lot {
+func (o *OriginalTradeAllocation) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}

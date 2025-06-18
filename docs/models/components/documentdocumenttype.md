@@ -117,3 +117,5 @@ Describes the contents of a document and how it is used
 | `DocumentDocumentTypeWireRequestForm`                         | WIRE_REQUEST_FORM                                             |
 | `DocumentDocumentTypeWorthlessSecurities`                     | WORTHLESS_SECURITIES                                          |
 | `DocumentDocumentTypeChangeOfAddressRequest`                  | CHANGE_OF_ADDRESS_REQUEST                                     |
+| `DocumentDocumentTypeOptionsAgreement`                        | OPTIONS_AGREEMENT                                             |
+| `DocumentDocumentTypeStateWaiverForm`                         | STATE_WAIVER_FORM                                             |

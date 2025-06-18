@@ -12,7 +12,6 @@ The type of fee being assessed
 | `FeeTypeLiquidity`                      | LIQUIDITY                               |
 | `FeeTypeGeneralPurpose`                 | GENERAL_PURPOSE                         |
 | `FeeTypeCommission`                     | COMMISSION                              |
-| `FeeTypeOrf`                            | ORF                                     |
 | `FeeTypeTaf`                            | TAF                                     |
 | `FeeTypeSec`                            | SEC                                     |
 | `FeeTypeAccountClosing`                 | ACCOUNT_CLOSING                         |
@@ -38,3 +37,7 @@ The type of fee being assessed
 | `FeeTypeInternationalWireDepositFee`    | INTERNATIONAL_WIRE_DEPOSIT_FEE          |
 | `FeeTypeInternationalWireWithdrawalFee` | INTERNATIONAL_WIRE_WITHDRAWAL_FEE       |
 | `FeeTypeBrokerFee`                      | BROKER_FEE                              |
+| `FeeTypeOccFee`                         | OCC_FEE                                 |
+| `FeeTypeContractFee`                    | CONTRACT_FEE                            |
+| `FeeTypeOptionsRegulatory`              | OPTIONS_REGULATORY                      |
+| `FeeTypeFinancialTransactionTax`        | FINANCIAL_TRANSACTION_TAX               |

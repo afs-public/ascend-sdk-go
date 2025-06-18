@@ -6,8 +6,8 @@ package components
 type OptionsLevel string
 
 const (
-	OptionsLevelOptionsLevelUnspecified      OptionsLevel = "OPTIONS_LEVEL_UNSPECIFIED"
-	OptionsLevelLevel1BasicDirectionalTrades OptionsLevel = "LEVEL_1_BASIC_DIRECTIONAL_TRADES"
+	OptionsLevelOptionsLevelUnspecified  OptionsLevel = "OPTIONS_LEVEL_UNSPECIFIED"
+	OptionsLevelOptionsLevel2LongOptions OptionsLevel = "OPTIONS_LEVEL_2_LONG_OPTIONS"
 )
 
 func (e OptionsLevel) ToPointer() *OptionsLevel {

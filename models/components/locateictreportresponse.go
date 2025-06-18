@@ -47,7 +47,6 @@ const (
 	LocateIctReportResponseProgramBrokerPartner         LocateIctReportResponseProgram = "BROKER_PARTNER"
 	LocateIctReportResponseProgramDepositOnly           LocateIctReportResponseProgram = "DEPOSIT_ONLY"
 	LocateIctReportResponseProgramBankingPartner        LocateIctReportResponseProgram = "BANKING_PARTNER"
-	LocateIctReportResponseProgramMoneyTransmitter      LocateIctReportResponseProgram = "MONEY_TRANSMITTER"
 	LocateIctReportResponseProgramWithdrawalOnly        LocateIctReportResponseProgram = "WITHDRAWAL_ONLY"
 	LocateIctReportResponseProgramDigitalPartner        LocateIctReportResponseProgram = "DIGITAL_PARTNER"
 )

@@ -748,6 +748,10 @@ func (o *FixedIncome) GetUnderlyingSymbol() *string {
 	return o.UnderlyingSymbol
 }
 
+// Index specific asset details
+type Index struct {
+}
+
 // LargeOrderNotificationAmount - The threshold at which Apex would need to notify the fund family of an incoming large order.
 type LargeOrderNotificationAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -1261,6 +1265,7 @@ const (
 	AssetType1FdicSynthetic   AssetType1 = "FDIC_SYNTHETIC"
 	AssetType1FixedIncome     AssetType1 = "FIXED_INCOME"
 	AssetType1MutualFund      AssetType1 = "MUTUAL_FUND"
+	AssetType1Index           AssetType1 = "INDEX"
 )
 
 func (e AssetType1) ToPointer() *AssetType1 {
@@ -1281,6 +1286,8 @@ type Asset struct {
 	Equity *Equity `json:"equity,omitempty"`
 	// FixedIncome specific asset details
 	FixedIncome *FixedIncome `json:"fixed_income,omitempty"`
+	// Index specific asset details
+	Index *Index `json:"index,omitempty"`
 	// isin is the International Securities Identification Number
 	Isin *string `json:"isin,omitempty"`
 	// A string attribute denoting the country of issuance or where the asset is trading.
@@ -1341,6 +1348,13 @@ func (o *Asset) GetFixedIncome() *FixedIncome {
 		return nil
 	}
 	return o.FixedIncome
+}
+
+func (o *Asset) GetIndex() *Index {
+	if o == nil {
+		return nil
+	}
+	return o.Index
 }
 
 func (o *Asset) GetIsin() *string {

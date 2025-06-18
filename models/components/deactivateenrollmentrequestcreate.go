@@ -2,7 +2,11 @@
 
 package components
 
-// DeactivateEnrollmentRequestCreateEnrollmentType - Describes the name of the enrollment; Expressed as an enum
+// DeactivateEnrollmentRequestCreateEnrollmentType - **Field Dependencies:**
+//
+// Required if `enrollment_id` is not present.
+//
+// Otherwise, must be empty.
 type DeactivateEnrollmentRequestCreateEnrollmentType string
 
 const (
@@ -39,9 +43,17 @@ func (e DeactivateEnrollmentRequestCreateEnrollmentType) ToPointer() *Deactivate
 
 // DeactivateEnrollmentRequestCreate - The request for deactivating an Enrollment on an account.
 type DeactivateEnrollmentRequestCreate struct {
-	// A system-generated unique identifier referencing a single instance of an enrollment;
+	// **Field Dependencies:**
+	//
+	// Required if `enrollment_type` is not present.
+	//
+	// Otherwise, must be empty.
 	EnrollmentID *string `json:"enrollment_id,omitempty"`
-	// Describes the name of the enrollment; Expressed as an enum
+	// **Field Dependencies:**
+	//
+	// Required if `enrollment_id` is not present.
+	//
+	// Otherwise, must be empty.
 	EnrollmentType *DeactivateEnrollmentRequestCreateEnrollmentType `json:"enrollment_type,omitempty"`
 }
 

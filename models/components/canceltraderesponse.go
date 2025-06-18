@@ -2,7 +2,20 @@
 
 package components
 
-// CancelTradeResponseBrokerCapacity - Used to calculate broadridge blotter code
+// CancelTradeResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+type CancelTradeResponseAssetType string
+
+const (
+	CancelTradeResponseAssetTypeAssetTypeUnspecified CancelTradeResponseAssetType = "ASSET_TYPE_UNSPECIFIED"
+	CancelTradeResponseAssetTypeEquity               CancelTradeResponseAssetType = "EQUITY"
+	CancelTradeResponseAssetTypeFixedIncome          CancelTradeResponseAssetType = "FIXED_INCOME"
+)
+
+func (e CancelTradeResponseAssetType) ToPointer() *CancelTradeResponseAssetType {
+	return &e
+}
+
+// CancelTradeResponseBrokerCapacity - Broker capacity for the trade.
 type CancelTradeResponseBrokerCapacity string
 
 const (
@@ -16,145 +29,309 @@ func (e CancelTradeResponseBrokerCapacity) ToPointer() *CancelTradeResponseBroke
 	return &e
 }
 
-// CancelTradeResponsePrevailingMarketPrice - The price for the instrument that is prevailing in the market.
-type CancelTradeResponsePrevailingMarketPrice struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *CancelTradeResponsePrevailingMarketPrice) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// CancelTradeResponsePriceAdjustmentAmount - Total monetary value of the price_adjustment
-type CancelTradeResponsePriceAdjustmentAmount struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *CancelTradeResponsePriceAdjustmentAmount) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// CancelTradeResponsePriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type CancelTradeResponsePriceAdjustmentPercent struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *CancelTradeResponsePriceAdjustmentPercent) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// CancelTradeResponsePriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type CancelTradeResponsePriceAdjustmentType string
+// CancelTradeResponseIdentifierType - Identifier type for the asset being traded.
+type CancelTradeResponseIdentifierType string
 
 const (
-	CancelTradeResponsePriceAdjustmentTypePriceAdjustmentTypeUnspecified CancelTradeResponsePriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	CancelTradeResponsePriceAdjustmentTypeMarkup                         CancelTradeResponsePriceAdjustmentType = "MARKUP"
-	CancelTradeResponsePriceAdjustmentTypeMarkdown                       CancelTradeResponsePriceAdjustmentType = "MARKDOWN"
-	CancelTradeResponsePriceAdjustmentTypeSalesLoad                      CancelTradeResponsePriceAdjustmentType = "SALES_LOAD"
+	CancelTradeResponseIdentifierTypeIdentifierTypeUnspecified CancelTradeResponseIdentifierType = "IDENTIFIER_TYPE_UNSPECIFIED"
+	CancelTradeResponseIdentifierTypeAssetID                   CancelTradeResponseIdentifierType = "ASSET_ID"
+	CancelTradeResponseIdentifierTypeSymbol                    CancelTradeResponseIdentifierType = "SYMBOL"
+	CancelTradeResponseIdentifierTypeCusip                     CancelTradeResponseIdentifierType = "CUSIP"
+	CancelTradeResponseIdentifierTypeIsin                      CancelTradeResponseIdentifierType = "ISIN"
 )
 
-func (e CancelTradeResponsePriceAdjustmentType) ToPointer() *CancelTradeResponsePriceAdjustmentType {
+func (e CancelTradeResponseIdentifierType) ToPointer() *CancelTradeResponseIdentifierType {
 	return &e
 }
 
-// CancelTradeResponsePriceAdjustmentRecord - Information about any price adjustments applied to the security
-type CancelTradeResponsePriceAdjustmentRecord struct {
-	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *CancelTradeResponsePriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
-	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *CancelTradeResponsePriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
-	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *CancelTradeResponsePriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+// CancelTradeResponseLocalMarketTradeDate - Date field to support extended trading hours.
+type CancelTradeResponseLocalMarketTradeDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
 }
 
-func (o *CancelTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentAmount() *CancelTradeResponsePriceAdjustmentAmount {
+func (o *CancelTradeResponseLocalMarketTradeDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentAmount
+	return o.Day
 }
 
-func (o *CancelTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentPercent() *CancelTradeResponsePriceAdjustmentPercent {
+func (o *CancelTradeResponseLocalMarketTradeDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentPercent
+	return o.Month
 }
 
-func (o *CancelTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentType() *CancelTradeResponsePriceAdjustmentType {
+func (o *CancelTradeResponseLocalMarketTradeDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentType
+	return o.Year
+}
+
+// CancelTradeResponseRouteType - Route type for the trade.
+type CancelTradeResponseRouteType string
+
+const (
+	CancelTradeResponseRouteTypeRouteTypeUnspecified CancelTradeResponseRouteType = "ROUTE_TYPE_UNSPECIFIED"
+	CancelTradeResponseRouteTypeDma                  CancelTradeResponseRouteType = "DMA"
+	CancelTradeResponseRouteTypeMngd                 CancelTradeResponseRouteType = "MNGD"
+	CancelTradeResponseRouteTypeQuik                 CancelTradeResponseRouteType = "QUIK"
+	CancelTradeResponseRouteTypeAlgo                 CancelTradeResponseRouteType = "ALGO"
+	CancelTradeResponseRouteTypeAway                 CancelTradeResponseRouteType = "AWAY"
+	CancelTradeResponseRouteTypeCorr                 CancelTradeResponseRouteType = "CORR"
+	CancelTradeResponseRouteTypeBoats                CancelTradeResponseRouteType = "BOATS"
+)
+
+func (e CancelTradeResponseRouteType) ToPointer() *CancelTradeResponseRouteType {
+	return &e
+}
+
+// CancelTradeResponseSettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+type CancelTradeResponseSettlementDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *CancelTradeResponseSettlementDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *CancelTradeResponseSettlementDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *CancelTradeResponseSettlementDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// CancelTradeResponseSide - Denotes if the trade is a SELL or a BUY.
+type CancelTradeResponseSide string
+
+const (
+	CancelTradeResponseSideSideUnspecified CancelTradeResponseSide = "SIDE_UNSPECIFIED"
+	CancelTradeResponseSideBuy             CancelTradeResponseSide = "BUY"
+	CancelTradeResponseSideSell            CancelTradeResponseSide = "SELL"
+)
+
+func (e CancelTradeResponseSide) ToPointer() *CancelTradeResponseSide {
+	return &e
+}
+
+// CancelTradeResponseSideModifier - Side modifier for the trade.
+type CancelTradeResponseSideModifier string
+
+const (
+	CancelTradeResponseSideModifierSideModifierUnspecified CancelTradeResponseSideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	CancelTradeResponseSideModifierShort                   CancelTradeResponseSideModifier = "SHORT"
+	CancelTradeResponseSideModifierShortExempt             CancelTradeResponseSideModifier = "SHORT_EXEMPT"
+	CancelTradeResponseSideModifierShortCover              CancelTradeResponseSideModifier = "SHORT_COVER"
+	CancelTradeResponseSideModifierOpen                    CancelTradeResponseSideModifier = "OPEN"
+	CancelTradeResponseSideModifierClose                   CancelTradeResponseSideModifier = "CLOSE"
+)
+
+func (e CancelTradeResponseSideModifier) ToPointer() *CancelTradeResponseSideModifier {
+	return &e
+}
+
+type CancelTradeResponseSpecialInstructions string
+
+const (
+	CancelTradeResponseSpecialInstructionsSpecialInstructionsUnspecified CancelTradeResponseSpecialInstructions = "SPECIAL_INSTRUCTIONS_UNSPECIFIED"
+	CancelTradeResponseSpecialInstructionsRule144                        CancelTradeResponseSpecialInstructions = "RULE_144"
+	CancelTradeResponseSpecialInstructionsWithDividend                   CancelTradeResponseSpecialInstructions = "WITH_DIVIDEND"
+	CancelTradeResponseSpecialInstructionsWithRights                     CancelTradeResponseSpecialInstructions = "WITH_RIGHTS"
+	CancelTradeResponseSpecialInstructionsCloseContract                  CancelTradeResponseSpecialInstructions = "CLOSE_CONTRACT"
+	CancelTradeResponseSpecialInstructionsCoverShort                     CancelTradeResponseSpecialInstructions = "COVER_SHORT"
+	CancelTradeResponseSpecialInstructionsCrossTrade                     CancelTradeResponseSpecialInstructions = "CROSS_TRADE"
+	CancelTradeResponseSpecialInstructionsOpenContractCovered            CancelTradeResponseSpecialInstructions = "OPEN_CONTRACT_COVERED"
+	CancelTradeResponseSpecialInstructionsDiscretionExercised            CancelTradeResponseSpecialInstructions = "DISCRETION_EXERCISED"
+	CancelTradeResponseSpecialInstructionsDiscretionNotExercised         CancelTradeResponseSpecialInstructions = "DISCRETION_NOT_EXERCISED"
+	CancelTradeResponseSpecialInstructionsOptionAssignment               CancelTradeResponseSpecialInstructions = "OPTION_ASSIGNMENT"
+	CancelTradeResponseSpecialInstructionsEmployeeStockOption            CancelTradeResponseSpecialInstructions = "EMPLOYEE_STOCK_OPTION"
+	CancelTradeResponseSpecialInstructionsInvestmentBanking              CancelTradeResponseSpecialInstructions = "INVESTMENT_BANKING"
+	CancelTradeResponseSpecialInstructionsBrokerDealerOrder              CancelTradeResponseSpecialInstructions = "BROKER_DEALER_ORDER"
+	CancelTradeResponseSpecialInstructionsMakeMarketInSecurity           CancelTradeResponseSpecialInstructions = "MAKE_MARKET_IN_SECURITY"
+	CancelTradeResponseSpecialInstructionsMakeMarketSolicited            CancelTradeResponseSpecialInstructions = "MAKE_MARKET_SOLICITED"
+	CancelTradeResponseSpecialInstructionsMakeMarketUnsolicited          CancelTradeResponseSpecialInstructions = "MAKE_MARKET_UNSOLICITED"
+	CancelTradeResponseSpecialInstructionsCustomerDirected               CancelTradeResponseSpecialInstructions = "CUSTOMER_DIRECTED"
+	CancelTradeResponseSpecialInstructionsFullyRegistered                CancelTradeResponseSpecialInstructions = "FULLY_REGISTERED"
+	CancelTradeResponseSpecialInstructionsOpenContract                   CancelTradeResponseSpecialInstructions = "OPEN_CONTRACT"
+	CancelTradeResponseSpecialInstructionsOddlotDiffOnRequest            CancelTradeResponseSpecialInstructions = "ODDLOT_DIFF_ON_REQUEST"
+	CancelTradeResponseSpecialInstructionsProspectusEnclosed             CancelTradeResponseSpecialInstructions = "PROSPECTUS_ENCLOSED"
+	CancelTradeResponseSpecialInstructionsProspectusSeparateMail         CancelTradeResponseSpecialInstructions = "PROSPECTUS_SEPARATE_MAIL"
+	CancelTradeResponseSpecialInstructionsSolicited                      CancelTradeResponseSpecialInstructions = "SOLICITED"
+	CancelTradeResponseSpecialInstructionsUnsolicited                    CancelTradeResponseSpecialInstructions = "UNSOLICITED"
+	CancelTradeResponseSpecialInstructionsXDividend                      CancelTradeResponseSpecialInstructions = "X_DIVIDEND"
+	CancelTradeResponseSpecialInstructionsActingAsPrincipal              CancelTradeResponseSpecialInstructions = "ACTING_AS_PRINCIPAL"
+	CancelTradeResponseSpecialInstructionsAveragePrice                   CancelTradeResponseSpecialInstructions = "AVERAGE_PRICE"
+	CancelTradeResponseSpecialInstructionsBrokerLiquidation              CancelTradeResponseSpecialInstructions = "BROKER_LIQUIDATION"
+	CancelTradeResponseSpecialInstructionsCouponBooks                    CancelTradeResponseSpecialInstructions = "COUPON_BOOKS"
+	CancelTradeResponseSpecialInstructionsHasPostageFee                  CancelTradeResponseSpecialInstructions = "HAS_POSTAGE_FEE"
+	CancelTradeResponseSpecialInstructionsInternetOrder                  CancelTradeResponseSpecialInstructions = "INTERNET_ORDER"
+	CancelTradeResponseSpecialInstructionsMarginSellout                  CancelTradeResponseSpecialInstructions = "MARGIN_SELLOUT"
+	CancelTradeResponseSpecialInstructionsMarketMakersAsPrincipal        CancelTradeResponseSpecialInstructions = "MARKET_MAKERS_AS_PRINCIPAL"
+	CancelTradeResponseSpecialInstructionsNegativeNetProceed             CancelTradeResponseSpecialInstructions = "NEGATIVE_NET_PROCEED"
+	CancelTradeResponseSpecialInstructionsPreFigIndicator                CancelTradeResponseSpecialInstructions = "PRE_FIG_INDICATOR"
+	CancelTradeResponseSpecialInstructionsRisklessPrincipalInstruction   CancelTradeResponseSpecialInstructions = "RISKLESS_PRINCIPAL_INSTRUCTION"
+	CancelTradeResponseSpecialInstructionsShortInstruction               CancelTradeResponseSpecialInstructions = "SHORT_INSTRUCTION"
+	CancelTradeResponseSpecialInstructionsThirdMarket                    CancelTradeResponseSpecialInstructions = "THIRD_MARKET"
+	CancelTradeResponseSpecialInstructionsSuppressMsrbTransmission       CancelTradeResponseSpecialInstructions = "SUPPRESS_MSRB_TRANSMISSION"
+	CancelTradeResponseSpecialInstructionsSuppressTraceReporting         CancelTradeResponseSpecialInstructions = "SUPPRESS_TRACE_REPORTING"
+	CancelTradeResponseSpecialInstructionsSuppressEmailNotification      CancelTradeResponseSpecialInstructions = "SUPPRESS_EMAIL_NOTIFICATION"
+	CancelTradeResponseSpecialInstructionsStockReward                    CancelTradeResponseSpecialInstructions = "STOCK_REWARD"
+	CancelTradeResponseSpecialInstructionsSuppressRegFees                CancelTradeResponseSpecialInstructions = "SUPPRESS_REG_FEES"
+	CancelTradeResponseSpecialInstructionsSuppressSecFee                 CancelTradeResponseSpecialInstructions = "SUPPRESS_SEC_FEE"
+	CancelTradeResponseSpecialInstructionsSuppressTafFee                 CancelTradeResponseSpecialInstructions = "SUPPRESS_TAF_FEE"
+	CancelTradeResponseSpecialInstructionsDividendReinvestment           CancelTradeResponseSpecialInstructions = "DIVIDEND_REINVESTMENT"
+)
+
+func (e CancelTradeResponseSpecialInstructions) ToPointer() *CancelTradeResponseSpecialInstructions {
+	return &e
+}
+
+// CancelTradeResponseVenue - Exchange venue
+type CancelTradeResponseVenue string
+
+const (
+	CancelTradeResponseVenueExchangeVenueUnspecified CancelTradeResponseVenue = "EXCHANGE_VENUE_UNSPECIFIED"
+	CancelTradeResponseVenueAmex                     CancelTradeResponseVenue = "AMEX"
+	CancelTradeResponseVenueArca                     CancelTradeResponseVenue = "ARCA"
+	CancelTradeResponseVenueBats                     CancelTradeResponseVenue = "BATS"
+	CancelTradeResponseVenueBatsByx                  CancelTradeResponseVenue = "BATS_BYX"
+	CancelTradeResponseVenueBoston                   CancelTradeResponseVenue = "BOSTON"
+	CancelTradeResponseVenueBox                      CancelTradeResponseVenue = "BOX"
+	CancelTradeResponseVenueBzx                      CancelTradeResponseVenue = "BZX"
+	CancelTradeResponseVenueC2                       CancelTradeResponseVenue = "C2"
+	CancelTradeResponseVenueCboe                     CancelTradeResponseVenue = "CBOE"
+	CancelTradeResponseVenueChicago                  CancelTradeResponseVenue = "CHICAGO"
+	CancelTradeResponseVenueCincinnati               CancelTradeResponseVenue = "CINCINNATI"
+	CancelTradeResponseVenueEdga                     CancelTradeResponseVenue = "EDGA"
+	CancelTradeResponseVenueEdgx                     CancelTradeResponseVenue = "EDGX"
+	CancelTradeResponseVenueExclearing               CancelTradeResponseVenue = "EXCLEARING"
+	CancelTradeResponseVenueIex                      CancelTradeResponseVenue = "IEX"
+	CancelTradeResponseVenueIse                      CancelTradeResponseVenue = "ISE"
+	CancelTradeResponseVenueIseGemini                CancelTradeResponseVenue = "ISE_GEMINI"
+	CancelTradeResponseVenueMiax                     CancelTradeResponseVenue = "MIAX"
+	CancelTradeResponseVenueNasdaq                   CancelTradeResponseVenue = "NASDAQ"
+	CancelTradeResponseVenueNasdaqOmxBx              CancelTradeResponseVenue = "NASDAQ_OMX_BX"
+	CancelTradeResponseVenueNyse                     CancelTradeResponseVenue = "NYSE"
+	CancelTradeResponseVenuePhlx                     CancelTradeResponseVenue = "PHLX"
+	CancelTradeResponseVenueOtc                      CancelTradeResponseVenue = "OTC"
+	CancelTradeResponseVenueQsr                      CancelTradeResponseVenue = "QSR"
+)
+
+func (e CancelTradeResponseVenue) ToPointer() *CancelTradeResponseVenue {
+	return &e
+}
+
+// CancelTradeResponseWhenIssued - Denotes that this trade was either when_issued or when_distributed.
+type CancelTradeResponseWhenIssued string
+
+const (
+	CancelTradeResponseWhenIssuedWhenIssuedTypeUnspecified CancelTradeResponseWhenIssued = "WHEN_ISSUED_TYPE_UNSPECIFIED"
+	CancelTradeResponseWhenIssuedWhenIssued                CancelTradeResponseWhenIssued = "WHEN_ISSUED"
+	CancelTradeResponseWhenIssuedWhenDistributed           CancelTradeResponseWhenIssued = "WHEN_DISTRIBUTED"
+)
+
+func (e CancelTradeResponseWhenIssued) ToPointer() *CancelTradeResponseWhenIssued {
+	return &e
 }
 
 // CancelTradeResponseTrade - The trade that was canceled.
 type CancelTradeResponseTrade struct {
-	// Free form text field containing additional information for a trade
-	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
-	// Max Length 100 characters. Alternate order id from the street used for FRAC trades
+	// A globally unique identifier referencing a single account.
+	AccountID *string `json:"account_id,omitempty"`
+	// The current activity_id of this trade in the Ledger.
+	ActivityID *string `json:"activity_id,omitempty"`
+	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
+	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
+	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// uuid assigned by the Booking API if a trade belongs to an allocation
-	BookingAPITradeAllocationID *string `json:"booking_api_trade_allocation_id,omitempty"`
-	// uuid assigned by the Booking API to all trades
-	BookingAPITradeID *string `json:"booking_api_trade_id,omitempty"`
-	// Executing broker of the trade
-	Broker *string `json:"broker,omitempty"`
-	// Used to calculate broadridge blotter code
+	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	AssetType *CancelTradeResponseAssetType `json:"asset_type,omitempty"`
+	// Broker capacity for the trade.
 	BrokerCapacity *CancelTradeResponseBrokerCapacity `json:"broker_capacity,omitempty"`
-	// Free form text submitted by the client for internal purposes
-	ClientMemos []string `json:"client_memos,omitempty"`
-	// 32 characters. The client order ID from the order submitted
+	// The unique identifier that is associated with an order. Must be unique by date per trade per client.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// MIC code for the exchange
-	Exchange *string `json:"exchange,omitempty"`
-	// Execution id from the street
-	ExecutionID *string `json:"execution_id,omitempty"`
-	// Indicates whether Apex is the clearing broker for this trade. When false, indicates Apex is the clearing broker
-	ExecutionOnly *bool `json:"execution_only,omitempty"`
-	// Max Length 100 characters. External system id provided by a client
-	ExternalID *string `json:"external_id,omitempty"`
-	// The confirmation number associated with a mutual fund trade
-	FundConfirmationNumber *string `json:"fund_confirmation_number,omitempty"`
-	// Max length 100 characters. Order id generated by trading-gateway (Trade-Ex) to uniquely identify all orders in their system. Used as the client_order_id on new order singles sent downstream of the trading-gateway
-	GatewayClientOrderID *string `json:"gateway_client_order_id,omitempty"`
-	// If set to true, indicates the trade should be omitted from client billing
-	InternalError *bool `json:"internal_error,omitempty"`
-	// Set on penny-for-the-lot trades
-	IsWriteoff *bool `json:"is_writeoff,omitempty"`
-	// Repeated record containing information about the tax lots, if specified
-	Lots []Lot `json:"lots,omitempty"`
-	// Max Length 100 characters. Internally generated order id that is returned to client on exec reports
+	// Executing broker of the trade.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
+	// The executions (sometimes referred to as partial-fills) that comprise the trade.
+	Executions []Execution `json:"executions,omitempty"`
+	// Any client calculated fees associated with the trade. Only allowed if trade.open = false. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
+	Fees []BookingFee `json:"fees,omitempty"`
+	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
+	Identifier *string `json:"identifier,omitempty"`
+	// Identifier type for the asset being traded.
+	IdentifierType *CancelTradeResponseIdentifierType `json:"identifier_type,omitempty"`
+	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
+	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
+	// Date field to support extended trading hours.
+	LocalMarketTradeDate *CancelTradeResponseLocalMarketTradeDate `json:"local_market_trade_date,omitempty"`
+	// One or many lot matching instructions for the trade.
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
+	// Market Identifier Code
+	MicCode *string `json:"mic_code,omitempty"`
+	// The resource name of the trade.
+	Name *string `json:"name,omitempty"`
+	// State of this trade's completeness in filling. True: trade is not done filling and can append more executions onto the trade False: trade is done filling and cannot append more executions onto the trade By default, trades are closed when they are created. An open trade can later be closed by calling the CompleteTrade endpoint. Additional executions can be appended to an open trade by calling the CreateExecution endpoint. Trades that are left open will be automatically closed nightly before Ledger's EOD.
+	Open *bool `json:"open,omitempty"`
+	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
-	// The price for the instrument that is prevailing in the market.
-	PrevailingMarketPrice *CancelTradeResponsePrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
-	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *CancelTradeResponsePriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
-	// Used to calculate broadridge blotter code
-	Route *string `json:"route,omitempty"`
-	// The special instructions for a trade
-	SpecialInstructions []string `json:"special_instructions,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the particular issue
-	SymbolDescription *string `json:"symbol_description,omitempty"`
-	// Indicates the trade was executed in a security that is not currently listed. When-issued securities are bought and sold before they are officially issued, allowing investors to speculate on their future value
-	WhenIssued *bool `json:"when_issued,omitempty"`
-	// The yields associated with a fixed income trade. only valid if the SecurityType is FIXED_INCOME.
-	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
+	// Route type for the trade.
+	RouteType *CancelTradeResponseRouteType `json:"route_type,omitempty"`
+	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+	SettlementDate *CancelTradeResponseSettlementDate `json:"settlement_date,omitempty"`
+	// Denotes if the trade is a SELL or a BUY.
+	Side *CancelTradeResponseSide `json:"side,omitempty"`
+	// Side modifier for the trade.
+	SideModifier *CancelTradeResponseSideModifier `json:"side_modifier,omitempty"`
+	// The source of the submission.
+	SourceApplication *string `json:"source_application,omitempty"`
+	// An enumerated list of values used to indicate certain attributes about a trade (E.g. DISCRETION_EXERCISED, BROKER_LIQUIDATION) and/or trigger downstream processing rules (e.g. SUPPRESS_TRACE_REPORTING)
+	SpecialInstructions []CancelTradeResponseSpecialInstructions `json:"special_instructions,omitempty"`
+	// A ULID to uniquely identify the trade globally.
+	TradeID *string `json:"trade_id,omitempty"`
+	// Exchange venue
+	Venue *CancelTradeResponseVenue `json:"venue,omitempty"`
+	// Denotes that this trade was either when_issued or when_distributed.
+	WhenIssued *CancelTradeResponseWhenIssued `json:"when_issued,omitempty"`
 }
 
-func (o *CancelTradeResponseTrade) GetAdditionalInstructions() []string {
+func (o *CancelTradeResponseTrade) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *CancelTradeResponseTrade) GetActivityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActivityID
+}
+
+func (o *CancelTradeResponseTrade) GetAdditionalInstructions() *string {
 	if o == nil {
 		return nil
 	}
@@ -168,25 +345,11 @@ func (o *CancelTradeResponseTrade) GetAlternateOrderID() *string {
 	return o.AlternateOrderID
 }
 
-func (o *CancelTradeResponseTrade) GetBookingAPITradeAllocationID() *string {
+func (o *CancelTradeResponseTrade) GetAssetType() *CancelTradeResponseAssetType {
 	if o == nil {
 		return nil
 	}
-	return o.BookingAPITradeAllocationID
-}
-
-func (o *CancelTradeResponseTrade) GetBookingAPITradeID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.BookingAPITradeID
-}
-
-func (o *CancelTradeResponseTrade) GetBroker() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Broker
+	return o.AssetType
 }
 
 func (o *CancelTradeResponseTrade) GetBrokerCapacity() *CancelTradeResponseBrokerCapacity {
@@ -196,13 +359,6 @@ func (o *CancelTradeResponseTrade) GetBrokerCapacity() *CancelTradeResponseBroke
 	return o.BrokerCapacity
 }
 
-func (o *CancelTradeResponseTrade) GetClientMemos() []string {
-	if o == nil {
-		return nil
-	}
-	return o.ClientMemos
-}
-
 func (o *CancelTradeResponseTrade) GetClientOrderID() *string {
 	if o == nil {
 		return nil
@@ -210,67 +366,81 @@ func (o *CancelTradeResponseTrade) GetClientOrderID() *string {
 	return o.ClientOrderID
 }
 
-func (o *CancelTradeResponseTrade) GetExchange() *string {
+func (o *CancelTradeResponseTrade) GetExecutingBroker() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Exchange
+	return o.ExecutingBroker
 }
 
-func (o *CancelTradeResponseTrade) GetExecutionID() *string {
+func (o *CancelTradeResponseTrade) GetExecutions() []Execution {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionID
+	return o.Executions
 }
 
-func (o *CancelTradeResponseTrade) GetExecutionOnly() *bool {
+func (o *CancelTradeResponseTrade) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionOnly
+	return o.Fees
 }
 
-func (o *CancelTradeResponseTrade) GetExternalID() *string {
+func (o *CancelTradeResponseTrade) GetIdentifier() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ExternalID
+	return o.Identifier
 }
 
-func (o *CancelTradeResponseTrade) GetFundConfirmationNumber() *string {
+func (o *CancelTradeResponseTrade) GetIdentifierType() *CancelTradeResponseIdentifierType {
 	if o == nil {
 		return nil
 	}
-	return o.FundConfirmationNumber
+	return o.IdentifierType
 }
 
-func (o *CancelTradeResponseTrade) GetGatewayClientOrderID() *string {
+func (o *CancelTradeResponseTrade) GetIssuingRegionCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.GatewayClientOrderID
+	return o.IssuingRegionCode
 }
 
-func (o *CancelTradeResponseTrade) GetInternalError() *bool {
+func (o *CancelTradeResponseTrade) GetLocalMarketTradeDate() *CancelTradeResponseLocalMarketTradeDate {
 	if o == nil {
 		return nil
 	}
-	return o.InternalError
+	return o.LocalMarketTradeDate
 }
 
-func (o *CancelTradeResponseTrade) GetIsWriteoff() *bool {
+func (o *CancelTradeResponseTrade) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}
-	return o.IsWriteoff
+	return o.LotMatchingInstructions
 }
 
-func (o *CancelTradeResponseTrade) GetLots() []Lot {
+func (o *CancelTradeResponseTrade) GetMicCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Lots
+	return o.MicCode
+}
+
+func (o *CancelTradeResponseTrade) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *CancelTradeResponseTrade) GetOpen() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Open
 }
 
 func (o *CancelTradeResponseTrade) GetOrderID() *string {
@@ -280,53 +450,67 @@ func (o *CancelTradeResponseTrade) GetOrderID() *string {
 	return o.OrderID
 }
 
-func (o *CancelTradeResponseTrade) GetPrevailingMarketPrice() *CancelTradeResponsePrevailingMarketPrice {
+func (o *CancelTradeResponseTrade) GetRouteType() *CancelTradeResponseRouteType {
 	if o == nil {
 		return nil
 	}
-	return o.PrevailingMarketPrice
+	return o.RouteType
 }
 
-func (o *CancelTradeResponseTrade) GetPriceAdjustmentRecord() *CancelTradeResponsePriceAdjustmentRecord {
+func (o *CancelTradeResponseTrade) GetSettlementDate() *CancelTradeResponseSettlementDate {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentRecord
+	return o.SettlementDate
 }
 
-func (o *CancelTradeResponseTrade) GetRoute() *string {
+func (o *CancelTradeResponseTrade) GetSide() *CancelTradeResponseSide {
 	if o == nil {
 		return nil
 	}
-	return o.Route
+	return o.Side
 }
 
-func (o *CancelTradeResponseTrade) GetSpecialInstructions() []string {
+func (o *CancelTradeResponseTrade) GetSideModifier() *CancelTradeResponseSideModifier {
+	if o == nil {
+		return nil
+	}
+	return o.SideModifier
+}
+
+func (o *CancelTradeResponseTrade) GetSourceApplication() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceApplication
+}
+
+func (o *CancelTradeResponseTrade) GetSpecialInstructions() []CancelTradeResponseSpecialInstructions {
 	if o == nil {
 		return nil
 	}
 	return o.SpecialInstructions
 }
 
-func (o *CancelTradeResponseTrade) GetSymbolDescription() *string {
+func (o *CancelTradeResponseTrade) GetTradeID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.SymbolDescription
+	return o.TradeID
 }
 
-func (o *CancelTradeResponseTrade) GetWhenIssued() *bool {
+func (o *CancelTradeResponseTrade) GetVenue() *CancelTradeResponseVenue {
+	if o == nil {
+		return nil
+	}
+	return o.Venue
+}
+
+func (o *CancelTradeResponseTrade) GetWhenIssued() *CancelTradeResponseWhenIssued {
 	if o == nil {
 		return nil
 	}
 	return o.WhenIssued
-}
-
-func (o *CancelTradeResponseTrade) GetYieldRecords() []YieldRecord {
-	if o == nil {
-		return nil
-	}
-	return o.YieldRecords
 }
 
 // CancelTradeResponse - A response for the cancel trade method.

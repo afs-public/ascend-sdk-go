@@ -28,7 +28,6 @@ const (
 	IDDocumentUploadRequestCreateDocumentTypeExecutorCertification              IDDocumentUploadRequestCreateDocumentType = "EXECUTOR_CERTIFICATION"
 	IDDocumentUploadRequestCreateDocumentTypeTrusteeCertification               IDDocumentUploadRequestCreateDocumentType = "TRUSTEE_CERTIFICATION"
 	IDDocumentUploadRequestCreateDocumentTypeSelfie                             IDDocumentUploadRequestCreateDocumentType = "SELFIE"
-	IDDocumentUploadRequestCreateDocumentTypeArticlesOfOrganisation             IDDocumentUploadRequestCreateDocumentType = "ARTICLES_OF_ORGANISATION"
 	IDDocumentUploadRequestCreateDocumentTypeCertOfSoleOfficer                  IDDocumentUploadRequestCreateDocumentType = "CERT_OF_SOLE_OFFICER"
 	IDDocumentUploadRequestCreateDocumentTypeCertificationCorrespondentAccounts IDDocumentUploadRequestCreateDocumentType = "CERTIFICATION_CORRESPONDENT_ACCOUNTS"
 	IDDocumentUploadRequestCreateDocumentTypeCertificationForeignBanks          IDDocumentUploadRequestCreateDocumentType = "CERTIFICATION_FOREIGN_BANKS"
@@ -43,6 +42,7 @@ const (
 	IDDocumentUploadRequestCreateDocumentTypeCorporateBylaws                    IDDocumentUploadRequestCreateDocumentType = "CORPORATE_BYLAWS"
 	IDDocumentUploadRequestCreateDocumentTypeShareholderAgreement               IDDocumentUploadRequestCreateDocumentType = "SHAREHOLDER_AGREEMENT"
 	IDDocumentUploadRequestCreateDocumentTypeCorporateRecords                   IDDocumentUploadRequestCreateDocumentType = "CORPORATE_RECORDS"
+	IDDocumentUploadRequestCreateDocumentTypeArticlesOfOrganization             IDDocumentUploadRequestCreateDocumentType = "ARTICLES_OF_ORGANIZATION"
 )
 
 func (e IDDocumentUploadRequestCreateDocumentType) ToPointer() *IDDocumentUploadRequestCreateDocumentType {
@@ -55,7 +55,7 @@ type IDDocumentUploadRequestCreate struct {
 	CorrespondentID string `json:"correspondent_id"`
 	// Describes the contents of a document and how it is used; Required for all identity documents
 	DocumentType IDDocumentUploadRequestCreateDocumentType `json:"document_type"`
-	// Identifies the legal natural person relevant to the document
+	// Identifies the legal natural person or legal entity relevant to the document
 	LegalNaturalPersonID string `json:"legal_natural_person_id"`
 }
 

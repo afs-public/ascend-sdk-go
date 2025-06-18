@@ -1428,19 +1428,12 @@ func (s *InstantCashTransferICT) CancelIctWithdrawal(ctx context.Context, accoun
 
 // LocateIctReport - Locate ICT Report
 // Returns a signed link pointing to a recon report file for a specific ICT batch.
-func (s *InstantCashTransferICT) LocateIctReport(ctx context.Context, correspondentID string, batchID *string, programDateFilterProgram *operations.ProgramDateFilterProgram, programDateFilterProcessDate *components.DateCreate, opts ...operations.Option) (*operations.IctReconReportsLocateIctReportResponse, error) {
+func (s *InstantCashTransferICT) LocateIctReport(ctx context.Context, request operations.IctReconReportsLocateIctReportRequest, opts ...operations.Option) (*operations.IctReconReportsLocateIctReportResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "IctReconReports_LocateIctReport",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
-	}
-
-	request := operations.IctReconReportsLocateIctReportRequest{
-		CorrespondentID:              correspondentID,
-		BatchID:                      batchID,
-		ProgramDateFilterProgram:     programDateFilterProgram,
-		ProgramDateFilterProcessDate: programDateFilterProcessDate,
 	}
 
 	o := operations.Options{}

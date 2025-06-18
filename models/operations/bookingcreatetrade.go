@@ -29,7 +29,7 @@ func (o *BookingCreateTradeRequest) GetTradeCreate() components.TradeCreate {
 type BookingCreateTradeResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	Trade *components.Trade
+	BookingTrade *components.BookingTrade
 	// FAILED_PRECONDITION: The operation was rejected because the system is not in a state required for the operation's processing.
 	// INVALID_ARGUMENT: The request is not valid.
 	Status *components.Status
@@ -42,11 +42,11 @@ func (o *BookingCreateTradeResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *BookingCreateTradeResponse) GetTrade() *components.Trade {
+func (o *BookingCreateTradeResponse) GetBookingTrade() *components.BookingTrade {
 	if o == nil {
 		return nil
 	}
-	return o.Trade
+	return o.BookingTrade
 }
 
 func (o *BookingCreateTradeResponse) GetStatus() *components.Status {

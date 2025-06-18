@@ -175,7 +175,7 @@ type TradeAllocationCreate struct {
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
-	Fees []FeeCreate `json:"fees,omitempty"`
+	Fees []BookingFeeCreate `json:"fees,omitempty"`
 	// The ULID formatted account_id that the positions will be moved from.
 	FromAccountID string `json:"from_account_id"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
@@ -301,7 +301,7 @@ func (o *TradeAllocationCreate) GetExecutionTime() *time.Time {
 	return o.ExecutionTime
 }
 
-func (o *TradeAllocationCreate) GetFees() []FeeCreate {
+func (o *TradeAllocationCreate) GetFees() []BookingFeeCreate {
 	if o == nil {
 		return nil
 	}

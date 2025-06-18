@@ -73,13 +73,13 @@ func (o *ExecutionPrice) GetValue() *string {
 	return o.Value
 }
 
-// ExecutionPriceAdjustmentAmount - Total monetary value of the price_adjustment
-type ExecutionPriceAdjustmentAmount struct {
+// PriceAdjustmentAmount - Total monetary value of the price_adjustment
+type PriceAdjustmentAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *ExecutionPriceAdjustmentAmount) GetValue() *string {
+func (o *PriceAdjustmentAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -103,12 +103,12 @@ func (e ExecutionPriceAdjustmentType) ToPointer() *ExecutionPriceAdjustmentType 
 // PriceAdjustment - Price adjustment that will be applied to the net price of the security.
 type PriceAdjustment struct {
 	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *ExecutionPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
+	PriceAdjustmentAmount *PriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
 	// The type of price adjustment being applied by the broker to the net price of the security.
 	PriceAdjustmentType *ExecutionPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
 }
 
-func (o *PriceAdjustment) GetPriceAdjustmentAmount() *ExecutionPriceAdjustmentAmount {
+func (o *PriceAdjustment) GetPriceAdjustmentAmount() *PriceAdjustmentAmount {
 	if o == nil {
 		return nil
 	}

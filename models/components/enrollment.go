@@ -2334,26 +2334,28 @@ func (o *LlcEnrollmentMetadata) GetFdicCashSweep() *EnrollmentLlcEnrollmentMetad
 type EnrollmentOperatingPurpose string
 
 const (
-	EnrollmentOperatingPurposeOperatingPurposeUnspecified EnrollmentOperatingPurpose = "OPERATING_PURPOSE_UNSPECIFIED"
-	EnrollmentOperatingPurposeCustody                     EnrollmentOperatingPurpose = "CUSTODY"
-	EnrollmentOperatingPurposeSecFee                      EnrollmentOperatingPurpose = "SEC_FEE"
-	EnrollmentOperatingPurposeTafFee                      EnrollmentOperatingPurpose = "TAF_FEE"
-	EnrollmentOperatingPurposeTefraWithholding            EnrollmentOperatingPurpose = "TEFRA_WITHHOLDING"
-	EnrollmentOperatingPurposeSuspense                    EnrollmentOperatingPurpose = "SUSPENSE"
-	EnrollmentOperatingPurposeAllocation                  EnrollmentOperatingPurpose = "ALLOCATION"
-	EnrollmentOperatingPurposeError                       EnrollmentOperatingPurpose = "ERROR"
-	EnrollmentOperatingPurposeDeposit                     EnrollmentOperatingPurpose = "DEPOSIT"
-	EnrollmentOperatingPurposeWriteOff                    EnrollmentOperatingPurpose = "WRITE_OFF"
-	EnrollmentOperatingPurposeUnsecuredReserve            EnrollmentOperatingPurpose = "UNSECURED_RESERVE"
-	EnrollmentOperatingPurposePayable                     EnrollmentOperatingPurpose = "PAYABLE"
-	EnrollmentOperatingPurposeCommission                  EnrollmentOperatingPurpose = "COMMISSION"
-	EnrollmentOperatingPurposeEscheatment                 EnrollmentOperatingPurpose = "ESCHEATMENT"
-	EnrollmentOperatingPurposeInterestRevenue             EnrollmentOperatingPurpose = "INTEREST_REVENUE"
-	EnrollmentOperatingPurposeStreetDepository            EnrollmentOperatingPurpose = "STREET_DEPOSITORY"
-	EnrollmentOperatingPurposeInventory                   EnrollmentOperatingPurpose = "INVENTORY"
-	EnrollmentOperatingPurposeTaxWithholding              EnrollmentOperatingPurpose = "TAX_WITHHOLDING"
-	EnrollmentOperatingPurposeFee                         EnrollmentOperatingPurpose = "FEE"
-	EnrollmentOperatingPurposePrincipalTrading            EnrollmentOperatingPurpose = "PRINCIPAL_TRADING"
+	EnrollmentOperatingPurposeOperatingPurposeUnspecified   EnrollmentOperatingPurpose = "OPERATING_PURPOSE_UNSPECIFIED"
+	EnrollmentOperatingPurposeCustody                       EnrollmentOperatingPurpose = "CUSTODY"
+	EnrollmentOperatingPurposeSecFee                        EnrollmentOperatingPurpose = "SEC_FEE"
+	EnrollmentOperatingPurposeTafFee                        EnrollmentOperatingPurpose = "TAF_FEE"
+	EnrollmentOperatingPurposeTefraWithholding              EnrollmentOperatingPurpose = "TEFRA_WITHHOLDING"
+	EnrollmentOperatingPurposeSuspense                      EnrollmentOperatingPurpose = "SUSPENSE"
+	EnrollmentOperatingPurposeAllocation                    EnrollmentOperatingPurpose = "ALLOCATION"
+	EnrollmentOperatingPurposeError                         EnrollmentOperatingPurpose = "ERROR"
+	EnrollmentOperatingPurposeDeposit                       EnrollmentOperatingPurpose = "DEPOSIT"
+	EnrollmentOperatingPurposeWriteOff                      EnrollmentOperatingPurpose = "WRITE_OFF"
+	EnrollmentOperatingPurposeUnsecuredReserve              EnrollmentOperatingPurpose = "UNSECURED_RESERVE"
+	EnrollmentOperatingPurposePayable                       EnrollmentOperatingPurpose = "PAYABLE"
+	EnrollmentOperatingPurposeCommission                    EnrollmentOperatingPurpose = "COMMISSION"
+	EnrollmentOperatingPurposeEscheatment                   EnrollmentOperatingPurpose = "ESCHEATMENT"
+	EnrollmentOperatingPurposeInterestRevenue               EnrollmentOperatingPurpose = "INTEREST_REVENUE"
+	EnrollmentOperatingPurposeStreetDepository              EnrollmentOperatingPurpose = "STREET_DEPOSITORY"
+	EnrollmentOperatingPurposeInventory                     EnrollmentOperatingPurpose = "INVENTORY"
+	EnrollmentOperatingPurposeTaxWithholding                EnrollmentOperatingPurpose = "TAX_WITHHOLDING"
+	EnrollmentOperatingPurposeFee                           EnrollmentOperatingPurpose = "FEE"
+	EnrollmentOperatingPurposePrincipalTrading              EnrollmentOperatingPurpose = "PRINCIPAL_TRADING"
+	EnrollmentOperatingPurposeSafekeepingBookEntityDomestic EnrollmentOperatingPurpose = "SAFEKEEPING_BOOK_ENTITY_DOMESTIC"
+	EnrollmentOperatingPurposeFail                          EnrollmentOperatingPurpose = "FAIL"
 )
 
 func (e EnrollmentOperatingPurpose) ToPointer() *EnrollmentOperatingPurpose {
@@ -2579,8 +2581,8 @@ func (o *InvestmentVehicleExperience) GetTaxSheltersAverageAnnualTradeCount() *i
 type EnrollmentOptionsLevel string
 
 const (
-	EnrollmentOptionsLevelOptionsLevelUnspecified      EnrollmentOptionsLevel = "OPTIONS_LEVEL_UNSPECIFIED"
-	EnrollmentOptionsLevelLevel1BasicDirectionalTrades EnrollmentOptionsLevel = "LEVEL_1_BASIC_DIRECTIONAL_TRADES"
+	EnrollmentOptionsLevelOptionsLevelUnspecified  EnrollmentOptionsLevel = "OPTIONS_LEVEL_UNSPECIFIED"
+	EnrollmentOptionsLevelOptionsLevel2LongOptions EnrollmentOptionsLevel = "OPTIONS_LEVEL_2_LONG_OPTIONS"
 )
 
 func (e EnrollmentOptionsLevel) ToPointer() *EnrollmentOptionsLevel {

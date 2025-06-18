@@ -29,7 +29,6 @@ Describes the contents of a document and how it is used
 | `DocumentIDDocumentDocumentTypeExecutorCertification`              | EXECUTOR_CERTIFICATION                                             |
 | `DocumentIDDocumentDocumentTypeTrusteeCertification`               | TRUSTEE_CERTIFICATION                                              |
 | `DocumentIDDocumentDocumentTypeSelfie`                             | SELFIE                                                             |
-| `DocumentIDDocumentDocumentTypeArticlesOfOrganisation`             | ARTICLES_OF_ORGANISATION                                           |
 | `DocumentIDDocumentDocumentTypeCertOfSoleOfficer`                  | CERT_OF_SOLE_OFFICER                                               |
 | `DocumentIDDocumentDocumentTypeCertificationCorrespondentAccounts` | CERTIFICATION_CORRESPONDENT_ACCOUNTS                               |
 | `DocumentIDDocumentDocumentTypeCertificationForeignBanks`          | CERTIFICATION_FOREIGN_BANKS                                        |
@@ -44,3 +43,4 @@ Describes the contents of a document and how it is used
 | `DocumentIDDocumentDocumentTypeCorporateBylaws`                    | CORPORATE_BYLAWS                                                   |
 | `DocumentIDDocumentDocumentTypeShareholderAgreement`               | SHAREHOLDER_AGREEMENT                                              |
 | `DocumentIDDocumentDocumentTypeCorporateRecords`                   | CORPORATE_RECORDS                                                  |
+| `DocumentIDDocumentDocumentTypeArticlesOfOrganization`             | ARTICLES_OF_ORGANIZATION                                           |

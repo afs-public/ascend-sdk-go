@@ -343,7 +343,7 @@ type CancelTradeAllocationResponseTradeAllocation struct {
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
-	Fees []Fee `json:"fees,omitempty"`
+	Fees []BookingFee `json:"fees,omitempty"`
 	// The ULID formatted account_id that the positions will be moved from.
 	FromAccountID *string `json:"from_account_id,omitempty"`
 	// The current activity_id of the trade allocation that positions will be moved from in the Ledger.
@@ -357,7 +357,7 @@ type CancelTradeAllocationResponseTradeAllocation struct {
 	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
 	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
 	// One or many lot matching instructions for the trade allocation.
-	LotMatchingInstructions []Lot `json:"lot_matching_instructions,omitempty"`
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
 	// Caller provided but can be used for booking-service to note original trade details when booking into the error account or using the error asset.
 	Memo *string `json:"memo,omitempty"`
 	// The resource name of the trade allocation.
@@ -459,7 +459,7 @@ func (o *CancelTradeAllocationResponseTradeAllocation) GetExecutionTime() *time.
 	return o.ExecutionTime
 }
 
-func (o *CancelTradeAllocationResponseTradeAllocation) GetFees() []Fee {
+func (o *CancelTradeAllocationResponseTradeAllocation) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
@@ -508,7 +508,7 @@ func (o *CancelTradeAllocationResponseTradeAllocation) GetIssuingRegionCode() *s
 	return o.IssuingRegionCode
 }
 
-func (o *CancelTradeAllocationResponseTradeAllocation) GetLotMatchingInstructions() []Lot {
+func (o *CancelTradeAllocationResponseTradeAllocation) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}

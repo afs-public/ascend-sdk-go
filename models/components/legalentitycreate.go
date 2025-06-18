@@ -53,7 +53,13 @@ func (e EntityType) ToPointer() *EntityType {
 	return &e
 }
 
-// ExemptCustomerReason - The reason the customer is exempt from verifying beneficial owners, if applicable.
+// ExemptCustomerReason - **Field Dependencies:**
+//
+// Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an `exempt_customer_reason` on the owner record.
+//
+// Required if `exempt_verifying_beneficial_owners` is `true`.
+//
+// Otherwise, must be empty.
 type ExemptCustomerReason string
 
 const (
@@ -110,7 +116,13 @@ type LegalEntityCreate struct {
 	EntityName string `json:"entity_name"`
 	// The entity type.
 	EntityType EntityType `json:"entity_type"`
-	// The reason the customer is exempt from verifying beneficial owners, if applicable.
+	// **Field Dependencies:**
+	//
+	// Exempt entities must set `exempt_verifying_beneficial_owners` to `true` and provide an `exempt_customer_reason` on the owner record.
+	//
+	// Required if `exempt_verifying_beneficial_owners` is `true`.
+	//
+	// Otherwise, must be empty.
 	ExemptCustomerReason *ExemptCustomerReason `json:"exempt_customer_reason,omitempty"`
 	// Indicates whether the entity is exempt from verifying beneficial owners and Enhanced Due Diligence. By default, this is set to `false`
 	ExemptVerifyingBeneficialOwners *bool `json:"exempt_verifying_beneficial_owners,omitempty"`

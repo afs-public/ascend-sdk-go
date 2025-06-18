@@ -411,6 +411,7 @@ import(
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
@@ -428,7 +429,9 @@ func main() {
     )
 
     ctx := context.Background()
-    res, err := s.InstantCashTransferICT.LocateIctReport(ctx, "01H8MCDXH4HYJJAV921BDKCC83", nil, nil, nil)
+    res, err := s.InstantCashTransferICT.LocateIctReport(ctx, operations.IctReconReportsLocateIctReportRequest{
+        CorrespondentID: "01H8MCDXH4HYJJAV921BDKCC83",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -440,14 +443,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 | Example                                                                                     |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                       | [context.Context](https://pkg.go.dev/context#Context)                                       | :heavy_check_mark:                                                                          | The context to use for the request.                                                         |                                                                                             |
-| `correspondentID`                                                                           | *string*                                                                                    | :heavy_check_mark:                                                                          | The correspondent id.                                                                       | 01H8MCDXH4HYJJAV921BDKCC83                                                                  |
-| `batchID`                                                                                   | **string*                                                                                   | :heavy_minus_sign:                                                                          | The id of the ICT batch for which to locate the report.                                     | 24114.108.2b2c1.001                                                                         |
-| `programDateFilterProgram`                                                                  | [*operations.ProgramDateFilterProgram](../../models/operations/programdatefilterprogram.md) | :heavy_minus_sign:                                                                          | The ICT program for which to locate the report.                                             | BROKER_PARTNER                                                                              |
-| `programDateFilterProcessDate`                                                              | [*components.DateCreate](../../models/components/datecreate.md)                             | :heavy_minus_sign:                                                                          | The process date for which to locate the report.                                            | {<br/>"process_date": {<br/>"day": 30,<br/>"month": 9,<br/>"year": 2023<br/>}<br/>}         |
-| `opts`                                                                                      | [][operations.Option](../../models/operations/option.md)                                    | :heavy_minus_sign:                                                                          | The options for this request.                                                               |                                                                                             |
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
+| `request`                                                                                                            | [operations.IctReconReportsLocateIctReportRequest](../../models/operations/ictreconreportslocateictreportrequest.md) | :heavy_check_mark:                                                                                                   | The request object to use for the request.                                                                           |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
 
 ### Response
 

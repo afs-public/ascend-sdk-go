@@ -2,7 +2,20 @@
 
 package components
 
-// CompleteTradeResponseBrokerCapacity - Used to calculate broadridge blotter code
+// CompleteTradeResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+type CompleteTradeResponseAssetType string
+
+const (
+	CompleteTradeResponseAssetTypeAssetTypeUnspecified CompleteTradeResponseAssetType = "ASSET_TYPE_UNSPECIFIED"
+	CompleteTradeResponseAssetTypeEquity               CompleteTradeResponseAssetType = "EQUITY"
+	CompleteTradeResponseAssetTypeFixedIncome          CompleteTradeResponseAssetType = "FIXED_INCOME"
+)
+
+func (e CompleteTradeResponseAssetType) ToPointer() *CompleteTradeResponseAssetType {
+	return &e
+}
+
+// CompleteTradeResponseBrokerCapacity - Broker capacity for the trade.
 type CompleteTradeResponseBrokerCapacity string
 
 const (
@@ -16,326 +29,497 @@ func (e CompleteTradeResponseBrokerCapacity) ToPointer() *CompleteTradeResponseB
 	return &e
 }
 
-// CompleteTradeResponsePrevailingMarketPrice - The price for the instrument that is prevailing in the market.
-type CompleteTradeResponsePrevailingMarketPrice struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *CompleteTradeResponsePrevailingMarketPrice) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// CompleteTradeResponsePriceAdjustmentAmount - Total monetary value of the price_adjustment
-type CompleteTradeResponsePriceAdjustmentAmount struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *CompleteTradeResponsePriceAdjustmentAmount) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// CompleteTradeResponsePriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type CompleteTradeResponsePriceAdjustmentPercent struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *CompleteTradeResponsePriceAdjustmentPercent) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// CompleteTradeResponsePriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type CompleteTradeResponsePriceAdjustmentType string
+// CompleteTradeResponseIdentifierType - Identifier type for the asset being traded.
+type CompleteTradeResponseIdentifierType string
 
 const (
-	CompleteTradeResponsePriceAdjustmentTypePriceAdjustmentTypeUnspecified CompleteTradeResponsePriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	CompleteTradeResponsePriceAdjustmentTypeMarkup                         CompleteTradeResponsePriceAdjustmentType = "MARKUP"
-	CompleteTradeResponsePriceAdjustmentTypeMarkdown                       CompleteTradeResponsePriceAdjustmentType = "MARKDOWN"
-	CompleteTradeResponsePriceAdjustmentTypeSalesLoad                      CompleteTradeResponsePriceAdjustmentType = "SALES_LOAD"
+	CompleteTradeResponseIdentifierTypeIdentifierTypeUnspecified CompleteTradeResponseIdentifierType = "IDENTIFIER_TYPE_UNSPECIFIED"
+	CompleteTradeResponseIdentifierTypeAssetID                   CompleteTradeResponseIdentifierType = "ASSET_ID"
+	CompleteTradeResponseIdentifierTypeSymbol                    CompleteTradeResponseIdentifierType = "SYMBOL"
+	CompleteTradeResponseIdentifierTypeCusip                     CompleteTradeResponseIdentifierType = "CUSIP"
+	CompleteTradeResponseIdentifierTypeIsin                      CompleteTradeResponseIdentifierType = "ISIN"
 )
 
-func (e CompleteTradeResponsePriceAdjustmentType) ToPointer() *CompleteTradeResponsePriceAdjustmentType {
+func (e CompleteTradeResponseIdentifierType) ToPointer() *CompleteTradeResponseIdentifierType {
 	return &e
 }
 
-// CompleteTradeResponsePriceAdjustmentRecord - Information about any price adjustments applied to the security
-type CompleteTradeResponsePriceAdjustmentRecord struct {
-	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *CompleteTradeResponsePriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
-	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *CompleteTradeResponsePriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
-	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *CompleteTradeResponsePriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+// CompleteTradeResponseLocalMarketTradeDate - Date field to support extended trading hours.
+type CompleteTradeResponseLocalMarketTradeDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
 }
 
-func (o *CompleteTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentAmount() *CompleteTradeResponsePriceAdjustmentAmount {
+func (o *CompleteTradeResponseLocalMarketTradeDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentAmount
+	return o.Day
 }
 
-func (o *CompleteTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentPercent() *CompleteTradeResponsePriceAdjustmentPercent {
+func (o *CompleteTradeResponseLocalMarketTradeDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentPercent
+	return o.Month
 }
 
-func (o *CompleteTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentType() *CompleteTradeResponsePriceAdjustmentType {
+func (o *CompleteTradeResponseLocalMarketTradeDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentType
+	return o.Year
 }
 
-// CompleteTradeResponseTrade - The completed trade.
-type CompleteTradeResponseTrade struct {
-	// Free form text field containing additional information for a trade
-	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
-	// Max Length 100 characters. Alternate order id from the street used for FRAC trades
+// CompleteTradeResponseRouteType - Route type for the trade.
+type CompleteTradeResponseRouteType string
+
+const (
+	CompleteTradeResponseRouteTypeRouteTypeUnspecified CompleteTradeResponseRouteType = "ROUTE_TYPE_UNSPECIFIED"
+	CompleteTradeResponseRouteTypeDma                  CompleteTradeResponseRouteType = "DMA"
+	CompleteTradeResponseRouteTypeMngd                 CompleteTradeResponseRouteType = "MNGD"
+	CompleteTradeResponseRouteTypeQuik                 CompleteTradeResponseRouteType = "QUIK"
+	CompleteTradeResponseRouteTypeAlgo                 CompleteTradeResponseRouteType = "ALGO"
+	CompleteTradeResponseRouteTypeAway                 CompleteTradeResponseRouteType = "AWAY"
+	CompleteTradeResponseRouteTypeCorr                 CompleteTradeResponseRouteType = "CORR"
+	CompleteTradeResponseRouteTypeBoats                CompleteTradeResponseRouteType = "BOATS"
+)
+
+func (e CompleteTradeResponseRouteType) ToPointer() *CompleteTradeResponseRouteType {
+	return &e
+}
+
+// CompleteTradeResponseSettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+type CompleteTradeResponseSettlementDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *CompleteTradeResponseSettlementDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *CompleteTradeResponseSettlementDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *CompleteTradeResponseSettlementDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// CompleteTradeResponseSide - Denotes if the trade is a SELL or a BUY.
+type CompleteTradeResponseSide string
+
+const (
+	CompleteTradeResponseSideSideUnspecified CompleteTradeResponseSide = "SIDE_UNSPECIFIED"
+	CompleteTradeResponseSideBuy             CompleteTradeResponseSide = "BUY"
+	CompleteTradeResponseSideSell            CompleteTradeResponseSide = "SELL"
+)
+
+func (e CompleteTradeResponseSide) ToPointer() *CompleteTradeResponseSide {
+	return &e
+}
+
+// CompleteTradeResponseSideModifier - Side modifier for the trade.
+type CompleteTradeResponseSideModifier string
+
+const (
+	CompleteTradeResponseSideModifierSideModifierUnspecified CompleteTradeResponseSideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	CompleteTradeResponseSideModifierShort                   CompleteTradeResponseSideModifier = "SHORT"
+	CompleteTradeResponseSideModifierShortExempt             CompleteTradeResponseSideModifier = "SHORT_EXEMPT"
+	CompleteTradeResponseSideModifierShortCover              CompleteTradeResponseSideModifier = "SHORT_COVER"
+	CompleteTradeResponseSideModifierOpen                    CompleteTradeResponseSideModifier = "OPEN"
+	CompleteTradeResponseSideModifierClose                   CompleteTradeResponseSideModifier = "CLOSE"
+)
+
+func (e CompleteTradeResponseSideModifier) ToPointer() *CompleteTradeResponseSideModifier {
+	return &e
+}
+
+type CompleteTradeResponseSpecialInstructions string
+
+const (
+	CompleteTradeResponseSpecialInstructionsSpecialInstructionsUnspecified CompleteTradeResponseSpecialInstructions = "SPECIAL_INSTRUCTIONS_UNSPECIFIED"
+	CompleteTradeResponseSpecialInstructionsRule144                        CompleteTradeResponseSpecialInstructions = "RULE_144"
+	CompleteTradeResponseSpecialInstructionsWithDividend                   CompleteTradeResponseSpecialInstructions = "WITH_DIVIDEND"
+	CompleteTradeResponseSpecialInstructionsWithRights                     CompleteTradeResponseSpecialInstructions = "WITH_RIGHTS"
+	CompleteTradeResponseSpecialInstructionsCloseContract                  CompleteTradeResponseSpecialInstructions = "CLOSE_CONTRACT"
+	CompleteTradeResponseSpecialInstructionsCoverShort                     CompleteTradeResponseSpecialInstructions = "COVER_SHORT"
+	CompleteTradeResponseSpecialInstructionsCrossTrade                     CompleteTradeResponseSpecialInstructions = "CROSS_TRADE"
+	CompleteTradeResponseSpecialInstructionsOpenContractCovered            CompleteTradeResponseSpecialInstructions = "OPEN_CONTRACT_COVERED"
+	CompleteTradeResponseSpecialInstructionsDiscretionExercised            CompleteTradeResponseSpecialInstructions = "DISCRETION_EXERCISED"
+	CompleteTradeResponseSpecialInstructionsDiscretionNotExercised         CompleteTradeResponseSpecialInstructions = "DISCRETION_NOT_EXERCISED"
+	CompleteTradeResponseSpecialInstructionsOptionAssignment               CompleteTradeResponseSpecialInstructions = "OPTION_ASSIGNMENT"
+	CompleteTradeResponseSpecialInstructionsEmployeeStockOption            CompleteTradeResponseSpecialInstructions = "EMPLOYEE_STOCK_OPTION"
+	CompleteTradeResponseSpecialInstructionsInvestmentBanking              CompleteTradeResponseSpecialInstructions = "INVESTMENT_BANKING"
+	CompleteTradeResponseSpecialInstructionsBrokerDealerOrder              CompleteTradeResponseSpecialInstructions = "BROKER_DEALER_ORDER"
+	CompleteTradeResponseSpecialInstructionsMakeMarketInSecurity           CompleteTradeResponseSpecialInstructions = "MAKE_MARKET_IN_SECURITY"
+	CompleteTradeResponseSpecialInstructionsMakeMarketSolicited            CompleteTradeResponseSpecialInstructions = "MAKE_MARKET_SOLICITED"
+	CompleteTradeResponseSpecialInstructionsMakeMarketUnsolicited          CompleteTradeResponseSpecialInstructions = "MAKE_MARKET_UNSOLICITED"
+	CompleteTradeResponseSpecialInstructionsCustomerDirected               CompleteTradeResponseSpecialInstructions = "CUSTOMER_DIRECTED"
+	CompleteTradeResponseSpecialInstructionsFullyRegistered                CompleteTradeResponseSpecialInstructions = "FULLY_REGISTERED"
+	CompleteTradeResponseSpecialInstructionsOpenContract                   CompleteTradeResponseSpecialInstructions = "OPEN_CONTRACT"
+	CompleteTradeResponseSpecialInstructionsOddlotDiffOnRequest            CompleteTradeResponseSpecialInstructions = "ODDLOT_DIFF_ON_REQUEST"
+	CompleteTradeResponseSpecialInstructionsProspectusEnclosed             CompleteTradeResponseSpecialInstructions = "PROSPECTUS_ENCLOSED"
+	CompleteTradeResponseSpecialInstructionsProspectusSeparateMail         CompleteTradeResponseSpecialInstructions = "PROSPECTUS_SEPARATE_MAIL"
+	CompleteTradeResponseSpecialInstructionsSolicited                      CompleteTradeResponseSpecialInstructions = "SOLICITED"
+	CompleteTradeResponseSpecialInstructionsUnsolicited                    CompleteTradeResponseSpecialInstructions = "UNSOLICITED"
+	CompleteTradeResponseSpecialInstructionsXDividend                      CompleteTradeResponseSpecialInstructions = "X_DIVIDEND"
+	CompleteTradeResponseSpecialInstructionsActingAsPrincipal              CompleteTradeResponseSpecialInstructions = "ACTING_AS_PRINCIPAL"
+	CompleteTradeResponseSpecialInstructionsAveragePrice                   CompleteTradeResponseSpecialInstructions = "AVERAGE_PRICE"
+	CompleteTradeResponseSpecialInstructionsBrokerLiquidation              CompleteTradeResponseSpecialInstructions = "BROKER_LIQUIDATION"
+	CompleteTradeResponseSpecialInstructionsCouponBooks                    CompleteTradeResponseSpecialInstructions = "COUPON_BOOKS"
+	CompleteTradeResponseSpecialInstructionsHasPostageFee                  CompleteTradeResponseSpecialInstructions = "HAS_POSTAGE_FEE"
+	CompleteTradeResponseSpecialInstructionsInternetOrder                  CompleteTradeResponseSpecialInstructions = "INTERNET_ORDER"
+	CompleteTradeResponseSpecialInstructionsMarginSellout                  CompleteTradeResponseSpecialInstructions = "MARGIN_SELLOUT"
+	CompleteTradeResponseSpecialInstructionsMarketMakersAsPrincipal        CompleteTradeResponseSpecialInstructions = "MARKET_MAKERS_AS_PRINCIPAL"
+	CompleteTradeResponseSpecialInstructionsNegativeNetProceed             CompleteTradeResponseSpecialInstructions = "NEGATIVE_NET_PROCEED"
+	CompleteTradeResponseSpecialInstructionsPreFigIndicator                CompleteTradeResponseSpecialInstructions = "PRE_FIG_INDICATOR"
+	CompleteTradeResponseSpecialInstructionsRisklessPrincipalInstruction   CompleteTradeResponseSpecialInstructions = "RISKLESS_PRINCIPAL_INSTRUCTION"
+	CompleteTradeResponseSpecialInstructionsShortInstruction               CompleteTradeResponseSpecialInstructions = "SHORT_INSTRUCTION"
+	CompleteTradeResponseSpecialInstructionsThirdMarket                    CompleteTradeResponseSpecialInstructions = "THIRD_MARKET"
+	CompleteTradeResponseSpecialInstructionsSuppressMsrbTransmission       CompleteTradeResponseSpecialInstructions = "SUPPRESS_MSRB_TRANSMISSION"
+	CompleteTradeResponseSpecialInstructionsSuppressTraceReporting         CompleteTradeResponseSpecialInstructions = "SUPPRESS_TRACE_REPORTING"
+	CompleteTradeResponseSpecialInstructionsSuppressEmailNotification      CompleteTradeResponseSpecialInstructions = "SUPPRESS_EMAIL_NOTIFICATION"
+	CompleteTradeResponseSpecialInstructionsStockReward                    CompleteTradeResponseSpecialInstructions = "STOCK_REWARD"
+	CompleteTradeResponseSpecialInstructionsSuppressRegFees                CompleteTradeResponseSpecialInstructions = "SUPPRESS_REG_FEES"
+	CompleteTradeResponseSpecialInstructionsSuppressSecFee                 CompleteTradeResponseSpecialInstructions = "SUPPRESS_SEC_FEE"
+	CompleteTradeResponseSpecialInstructionsSuppressTafFee                 CompleteTradeResponseSpecialInstructions = "SUPPRESS_TAF_FEE"
+	CompleteTradeResponseSpecialInstructionsDividendReinvestment           CompleteTradeResponseSpecialInstructions = "DIVIDEND_REINVESTMENT"
+)
+
+func (e CompleteTradeResponseSpecialInstructions) ToPointer() *CompleteTradeResponseSpecialInstructions {
+	return &e
+}
+
+// CompleteTradeResponseVenue - Exchange venue
+type CompleteTradeResponseVenue string
+
+const (
+	CompleteTradeResponseVenueExchangeVenueUnspecified CompleteTradeResponseVenue = "EXCHANGE_VENUE_UNSPECIFIED"
+	CompleteTradeResponseVenueAmex                     CompleteTradeResponseVenue = "AMEX"
+	CompleteTradeResponseVenueArca                     CompleteTradeResponseVenue = "ARCA"
+	CompleteTradeResponseVenueBats                     CompleteTradeResponseVenue = "BATS"
+	CompleteTradeResponseVenueBatsByx                  CompleteTradeResponseVenue = "BATS_BYX"
+	CompleteTradeResponseVenueBoston                   CompleteTradeResponseVenue = "BOSTON"
+	CompleteTradeResponseVenueBox                      CompleteTradeResponseVenue = "BOX"
+	CompleteTradeResponseVenueBzx                      CompleteTradeResponseVenue = "BZX"
+	CompleteTradeResponseVenueC2                       CompleteTradeResponseVenue = "C2"
+	CompleteTradeResponseVenueCboe                     CompleteTradeResponseVenue = "CBOE"
+	CompleteTradeResponseVenueChicago                  CompleteTradeResponseVenue = "CHICAGO"
+	CompleteTradeResponseVenueCincinnati               CompleteTradeResponseVenue = "CINCINNATI"
+	CompleteTradeResponseVenueEdga                     CompleteTradeResponseVenue = "EDGA"
+	CompleteTradeResponseVenueEdgx                     CompleteTradeResponseVenue = "EDGX"
+	CompleteTradeResponseVenueExclearing               CompleteTradeResponseVenue = "EXCLEARING"
+	CompleteTradeResponseVenueIex                      CompleteTradeResponseVenue = "IEX"
+	CompleteTradeResponseVenueIse                      CompleteTradeResponseVenue = "ISE"
+	CompleteTradeResponseVenueIseGemini                CompleteTradeResponseVenue = "ISE_GEMINI"
+	CompleteTradeResponseVenueMiax                     CompleteTradeResponseVenue = "MIAX"
+	CompleteTradeResponseVenueNasdaq                   CompleteTradeResponseVenue = "NASDAQ"
+	CompleteTradeResponseVenueNasdaqOmxBx              CompleteTradeResponseVenue = "NASDAQ_OMX_BX"
+	CompleteTradeResponseVenueNyse                     CompleteTradeResponseVenue = "NYSE"
+	CompleteTradeResponseVenuePhlx                     CompleteTradeResponseVenue = "PHLX"
+	CompleteTradeResponseVenueOtc                      CompleteTradeResponseVenue = "OTC"
+	CompleteTradeResponseVenueQsr                      CompleteTradeResponseVenue = "QSR"
+)
+
+func (e CompleteTradeResponseVenue) ToPointer() *CompleteTradeResponseVenue {
+	return &e
+}
+
+// CompleteTradeResponseWhenIssued - Denotes that this trade was either when_issued or when_distributed.
+type CompleteTradeResponseWhenIssued string
+
+const (
+	CompleteTradeResponseWhenIssuedWhenIssuedTypeUnspecified CompleteTradeResponseWhenIssued = "WHEN_ISSUED_TYPE_UNSPECIFIED"
+	CompleteTradeResponseWhenIssuedWhenIssued                CompleteTradeResponseWhenIssued = "WHEN_ISSUED"
+	CompleteTradeResponseWhenIssuedWhenDistributed           CompleteTradeResponseWhenIssued = "WHEN_DISTRIBUTED"
+)
+
+func (e CompleteTradeResponseWhenIssued) ToPointer() *CompleteTradeResponseWhenIssued {
+	return &e
+}
+
+// Trade - The completed trade.
+type Trade struct {
+	// A globally unique identifier referencing a single account.
+	AccountID *string `json:"account_id,omitempty"`
+	// The current activity_id of this trade in the Ledger.
+	ActivityID *string `json:"activity_id,omitempty"`
+	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
+	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
+	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// uuid assigned by the Booking API if a trade belongs to an allocation
-	BookingAPITradeAllocationID *string `json:"booking_api_trade_allocation_id,omitempty"`
-	// uuid assigned by the Booking API to all trades
-	BookingAPITradeID *string `json:"booking_api_trade_id,omitempty"`
-	// Executing broker of the trade
-	Broker *string `json:"broker,omitempty"`
-	// Used to calculate broadridge blotter code
+	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	AssetType *CompleteTradeResponseAssetType `json:"asset_type,omitempty"`
+	// Broker capacity for the trade.
 	BrokerCapacity *CompleteTradeResponseBrokerCapacity `json:"broker_capacity,omitempty"`
-	// Free form text submitted by the client for internal purposes
-	ClientMemos []string `json:"client_memos,omitempty"`
-	// 32 characters. The client order ID from the order submitted
+	// The unique identifier that is associated with an order. Must be unique by date per trade per client.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// MIC code for the exchange
-	Exchange *string `json:"exchange,omitempty"`
-	// Execution id from the street
-	ExecutionID *string `json:"execution_id,omitempty"`
-	// Indicates whether Apex is the clearing broker for this trade. When false, indicates Apex is the clearing broker
-	ExecutionOnly *bool `json:"execution_only,omitempty"`
-	// Max Length 100 characters. External system id provided by a client
-	ExternalID *string `json:"external_id,omitempty"`
-	// The confirmation number associated with a mutual fund trade
-	FundConfirmationNumber *string `json:"fund_confirmation_number,omitempty"`
-	// Max length 100 characters. Order id generated by trading-gateway (Trade-Ex) to uniquely identify all orders in their system. Used as the client_order_id on new order singles sent downstream of the trading-gateway
-	GatewayClientOrderID *string `json:"gateway_client_order_id,omitempty"`
-	// If set to true, indicates the trade should be omitted from client billing
-	InternalError *bool `json:"internal_error,omitempty"`
-	// Set on penny-for-the-lot trades
-	IsWriteoff *bool `json:"is_writeoff,omitempty"`
-	// Repeated record containing information about the tax lots, if specified
-	Lots []Lot `json:"lots,omitempty"`
-	// Max Length 100 characters. Internally generated order id that is returned to client on exec reports
+	// Executing broker of the trade.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
+	// The executions (sometimes referred to as partial-fills) that comprise the trade.
+	Executions []Execution `json:"executions,omitempty"`
+	// Any client calculated fees associated with the trade. Only allowed if trade.open = false. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
+	Fees []BookingFee `json:"fees,omitempty"`
+	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
+	Identifier *string `json:"identifier,omitempty"`
+	// Identifier type for the asset being traded.
+	IdentifierType *CompleteTradeResponseIdentifierType `json:"identifier_type,omitempty"`
+	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
+	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
+	// Date field to support extended trading hours.
+	LocalMarketTradeDate *CompleteTradeResponseLocalMarketTradeDate `json:"local_market_trade_date,omitempty"`
+	// One or many lot matching instructions for the trade.
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
+	// Market Identifier Code
+	MicCode *string `json:"mic_code,omitempty"`
+	// The resource name of the trade.
+	Name *string `json:"name,omitempty"`
+	// State of this trade's completeness in filling. True: trade is not done filling and can append more executions onto the trade False: trade is done filling and cannot append more executions onto the trade By default, trades are closed when they are created. An open trade can later be closed by calling the CompleteTrade endpoint. Additional executions can be appended to an open trade by calling the CreateExecution endpoint. Trades that are left open will be automatically closed nightly before Ledger's EOD.
+	Open *bool `json:"open,omitempty"`
+	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
-	// The price for the instrument that is prevailing in the market.
-	PrevailingMarketPrice *CompleteTradeResponsePrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
-	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *CompleteTradeResponsePriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
-	// Used to calculate broadridge blotter code
-	Route *string `json:"route,omitempty"`
-	// The special instructions for a trade
-	SpecialInstructions []string `json:"special_instructions,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the particular issue
-	SymbolDescription *string `json:"symbol_description,omitempty"`
-	// Indicates the trade was executed in a security that is not currently listed. When-issued securities are bought and sold before they are officially issued, allowing investors to speculate on their future value
-	WhenIssued *bool `json:"when_issued,omitempty"`
-	// The yields associated with a fixed income trade. only valid if the SecurityType is FIXED_INCOME.
-	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
+	// Route type for the trade.
+	RouteType *CompleteTradeResponseRouteType `json:"route_type,omitempty"`
+	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+	SettlementDate *CompleteTradeResponseSettlementDate `json:"settlement_date,omitempty"`
+	// Denotes if the trade is a SELL or a BUY.
+	Side *CompleteTradeResponseSide `json:"side,omitempty"`
+	// Side modifier for the trade.
+	SideModifier *CompleteTradeResponseSideModifier `json:"side_modifier,omitempty"`
+	// The source of the submission.
+	SourceApplication *string `json:"source_application,omitempty"`
+	// An enumerated list of values used to indicate certain attributes about a trade (E.g. DISCRETION_EXERCISED, BROKER_LIQUIDATION) and/or trigger downstream processing rules (e.g. SUPPRESS_TRACE_REPORTING)
+	SpecialInstructions []CompleteTradeResponseSpecialInstructions `json:"special_instructions,omitempty"`
+	// A ULID to uniquely identify the trade globally.
+	TradeID *string `json:"trade_id,omitempty"`
+	// Exchange venue
+	Venue *CompleteTradeResponseVenue `json:"venue,omitempty"`
+	// Denotes that this trade was either when_issued or when_distributed.
+	WhenIssued *CompleteTradeResponseWhenIssued `json:"when_issued,omitempty"`
 }
 
-func (o *CompleteTradeResponseTrade) GetAdditionalInstructions() []string {
+func (o *Trade) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *Trade) GetActivityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActivityID
+}
+
+func (o *Trade) GetAdditionalInstructions() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AdditionalInstructions
 }
 
-func (o *CompleteTradeResponseTrade) GetAlternateOrderID() *string {
+func (o *Trade) GetAlternateOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AlternateOrderID
 }
 
-func (o *CompleteTradeResponseTrade) GetBookingAPITradeAllocationID() *string {
+func (o *Trade) GetAssetType() *CompleteTradeResponseAssetType {
 	if o == nil {
 		return nil
 	}
-	return o.BookingAPITradeAllocationID
+	return o.AssetType
 }
 
-func (o *CompleteTradeResponseTrade) GetBookingAPITradeID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.BookingAPITradeID
-}
-
-func (o *CompleteTradeResponseTrade) GetBroker() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Broker
-}
-
-func (o *CompleteTradeResponseTrade) GetBrokerCapacity() *CompleteTradeResponseBrokerCapacity {
+func (o *Trade) GetBrokerCapacity() *CompleteTradeResponseBrokerCapacity {
 	if o == nil {
 		return nil
 	}
 	return o.BrokerCapacity
 }
 
-func (o *CompleteTradeResponseTrade) GetClientMemos() []string {
-	if o == nil {
-		return nil
-	}
-	return o.ClientMemos
-}
-
-func (o *CompleteTradeResponseTrade) GetClientOrderID() *string {
+func (o *Trade) GetClientOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClientOrderID
 }
 
-func (o *CompleteTradeResponseTrade) GetExchange() *string {
+func (o *Trade) GetExecutingBroker() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Exchange
+	return o.ExecutingBroker
 }
 
-func (o *CompleteTradeResponseTrade) GetExecutionID() *string {
+func (o *Trade) GetExecutions() []Execution {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionID
+	return o.Executions
 }
 
-func (o *CompleteTradeResponseTrade) GetExecutionOnly() *bool {
+func (o *Trade) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionOnly
+	return o.Fees
 }
 
-func (o *CompleteTradeResponseTrade) GetExternalID() *string {
+func (o *Trade) GetIdentifier() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ExternalID
+	return o.Identifier
 }
 
-func (o *CompleteTradeResponseTrade) GetFundConfirmationNumber() *string {
+func (o *Trade) GetIdentifierType() *CompleteTradeResponseIdentifierType {
 	if o == nil {
 		return nil
 	}
-	return o.FundConfirmationNumber
+	return o.IdentifierType
 }
 
-func (o *CompleteTradeResponseTrade) GetGatewayClientOrderID() *string {
+func (o *Trade) GetIssuingRegionCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.GatewayClientOrderID
+	return o.IssuingRegionCode
 }
 
-func (o *CompleteTradeResponseTrade) GetInternalError() *bool {
+func (o *Trade) GetLocalMarketTradeDate() *CompleteTradeResponseLocalMarketTradeDate {
 	if o == nil {
 		return nil
 	}
-	return o.InternalError
+	return o.LocalMarketTradeDate
 }
 
-func (o *CompleteTradeResponseTrade) GetIsWriteoff() *bool {
+func (o *Trade) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}
-	return o.IsWriteoff
+	return o.LotMatchingInstructions
 }
 
-func (o *CompleteTradeResponseTrade) GetLots() []Lot {
+func (o *Trade) GetMicCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Lots
+	return o.MicCode
 }
 
-func (o *CompleteTradeResponseTrade) GetOrderID() *string {
+func (o *Trade) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *Trade) GetOpen() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Open
+}
+
+func (o *Trade) GetOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.OrderID
 }
 
-func (o *CompleteTradeResponseTrade) GetPrevailingMarketPrice() *CompleteTradeResponsePrevailingMarketPrice {
+func (o *Trade) GetRouteType() *CompleteTradeResponseRouteType {
 	if o == nil {
 		return nil
 	}
-	return o.PrevailingMarketPrice
+	return o.RouteType
 }
 
-func (o *CompleteTradeResponseTrade) GetPriceAdjustmentRecord() *CompleteTradeResponsePriceAdjustmentRecord {
+func (o *Trade) GetSettlementDate() *CompleteTradeResponseSettlementDate {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentRecord
+	return o.SettlementDate
 }
 
-func (o *CompleteTradeResponseTrade) GetRoute() *string {
+func (o *Trade) GetSide() *CompleteTradeResponseSide {
 	if o == nil {
 		return nil
 	}
-	return o.Route
+	return o.Side
 }
 
-func (o *CompleteTradeResponseTrade) GetSpecialInstructions() []string {
+func (o *Trade) GetSideModifier() *CompleteTradeResponseSideModifier {
+	if o == nil {
+		return nil
+	}
+	return o.SideModifier
+}
+
+func (o *Trade) GetSourceApplication() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceApplication
+}
+
+func (o *Trade) GetSpecialInstructions() []CompleteTradeResponseSpecialInstructions {
 	if o == nil {
 		return nil
 	}
 	return o.SpecialInstructions
 }
 
-func (o *CompleteTradeResponseTrade) GetSymbolDescription() *string {
+func (o *Trade) GetTradeID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.SymbolDescription
+	return o.TradeID
 }
 
-func (o *CompleteTradeResponseTrade) GetWhenIssued() *bool {
+func (o *Trade) GetVenue() *CompleteTradeResponseVenue {
+	if o == nil {
+		return nil
+	}
+	return o.Venue
+}
+
+func (o *Trade) GetWhenIssued() *CompleteTradeResponseWhenIssued {
 	if o == nil {
 		return nil
 	}
 	return o.WhenIssued
 }
 
-func (o *CompleteTradeResponseTrade) GetYieldRecords() []YieldRecord {
-	if o == nil {
-		return nil
-	}
-	return o.YieldRecords
-}
-
 // CompleteTradeResponse - A response to the complete trade method.
 type CompleteTradeResponse struct {
 	// The completed trade.
-	Trade *CompleteTradeResponseTrade `json:"trade,omitempty"`
+	Trade *Trade `json:"trade,omitempty"`
 }
 
-func (o *CompleteTradeResponse) GetTrade() *CompleteTradeResponseTrade {
+func (o *CompleteTradeResponse) GetTrade() *Trade {
 	if o == nil {
 		return nil
 	}

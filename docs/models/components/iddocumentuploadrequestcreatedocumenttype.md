@@ -29,7 +29,6 @@ Describes the contents of a document and how it is used; Required for all identi
 | `IDDocumentUploadRequestCreateDocumentTypeExecutorCertification`              | EXECUTOR_CERTIFICATION                                                        |
 | `IDDocumentUploadRequestCreateDocumentTypeTrusteeCertification`               | TRUSTEE_CERTIFICATION                                                         |
 | `IDDocumentUploadRequestCreateDocumentTypeSelfie`                             | SELFIE                                                                        |
-| `IDDocumentUploadRequestCreateDocumentTypeArticlesOfOrganisation`             | ARTICLES_OF_ORGANISATION                                                      |
 | `IDDocumentUploadRequestCreateDocumentTypeCertOfSoleOfficer`                  | CERT_OF_SOLE_OFFICER                                                          |
 | `IDDocumentUploadRequestCreateDocumentTypeCertificationCorrespondentAccounts` | CERTIFICATION_CORRESPONDENT_ACCOUNTS                                          |
 | `IDDocumentUploadRequestCreateDocumentTypeCertificationForeignBanks`          | CERTIFICATION_FOREIGN_BANKS                                                   |
@@ -44,3 +43,4 @@ Describes the contents of a document and how it is used; Required for all identi
 | `IDDocumentUploadRequestCreateDocumentTypeCorporateBylaws`                    | CORPORATE_BYLAWS                                                              |
 | `IDDocumentUploadRequestCreateDocumentTypeShareholderAgreement`               | SHAREHOLDER_AGREEMENT                                                         |
 | `IDDocumentUploadRequestCreateDocumentTypeCorporateRecords`                   | CORPORATE_RECORDS                                                             |
+| `IDDocumentUploadRequestCreateDocumentTypeArticlesOfOrganization`             | ARTICLES_OF_ORGANIZATION                                                      |

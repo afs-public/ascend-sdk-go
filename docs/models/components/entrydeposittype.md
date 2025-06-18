@@ -15,3 +15,4 @@ The mechanism by which funds were deposited
 | `EntryDepositTypeRtp`                             | RTP                                               |
 | `EntryDepositTypeIct`                             | ICT                                               |
 | `EntryDepositTypeJournal`                         | JOURNAL                                           |
+| `EntryDepositTypeExternalAch`                     | EXTERNAL_ACH                                      |

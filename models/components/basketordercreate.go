@@ -59,6 +59,19 @@ func (e BasketOrderCreateSide) ToPointer() *BasketOrderCreateSide {
 	return &e
 }
 
+type BasketOrderCreateSpecialReportingInstructions string
+
+const (
+	BasketOrderCreateSpecialReportingInstructionsSpecialReportingInstructionsUnspecified BasketOrderCreateSpecialReportingInstructions = "SPECIAL_REPORTING_INSTRUCTIONS_UNSPECIFIED"
+	BasketOrderCreateSpecialReportingInstructionsSolicited                               BasketOrderCreateSpecialReportingInstructions = "SOLICITED"
+	BasketOrderCreateSpecialReportingInstructionsUnsolicited                             BasketOrderCreateSpecialReportingInstructions = "UNSOLICITED"
+	BasketOrderCreateSpecialReportingInstructionsRoundUp                                 BasketOrderCreateSpecialReportingInstructions = "ROUND_UP"
+)
+
+func (e BasketOrderCreateSpecialReportingInstructions) ToPointer() *BasketOrderCreateSpecialReportingInstructions {
+	return &e
+}
+
 // BasketOrderCreateTimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type BasketOrderCreateTimeInForce string
 
@@ -103,6 +116,8 @@ type BasketOrderCreate struct {
 	Quantity *DecimalCreate `json:"quantity,omitempty"`
 	// The side of this order.
 	Side BasketOrderCreateSide `json:"side"`
+	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+	SpecialReportingInstructions []BasketOrderCreateSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce BasketOrderCreateTimeInForce `json:"time_in_force"`
 }
@@ -193,6 +208,13 @@ func (o *BasketOrderCreate) GetSide() BasketOrderCreateSide {
 		return BasketOrderCreateSide("")
 	}
 	return o.Side
+}
+
+func (o *BasketOrderCreate) GetSpecialReportingInstructions() []BasketOrderCreateSpecialReportingInstructions {
+	if o == nil {
+		return nil
+	}
+	return o.SpecialReportingInstructions
 }
 
 func (o *BasketOrderCreate) GetTimeInForce() BasketOrderCreateTimeInForce {

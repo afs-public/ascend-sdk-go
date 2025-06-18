@@ -13,7 +13,7 @@ type Status struct {
 	// The code field contains an enum value of google.rpc.Code.
 	Code *int `json:"code,omitempty"`
 	// The details field contains one or more technical error details.
-	Details []components.GoogleProtobufAny `json:"details,omitempty"`
+	Details []components.Any `json:"details,omitempty"`
 	// The message field contains human-friendly messages about the error.
 	Message *string `json:"message,omitempty"`
 }

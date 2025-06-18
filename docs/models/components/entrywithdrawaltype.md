@@ -15,3 +15,4 @@ Provides information on the method through which a deposit/ withdrawal was initi
 | `EntryWithdrawalTypeRtp`                             | RTP                                                  |
 | `EntryWithdrawalTypeIct`                             | ICT                                                  |
 | `EntryWithdrawalTypeJournal`                         | JOURNAL                                              |
+| `EntryWithdrawalTypeExternalAch`                     | EXTERNAL_ACH                                         |
