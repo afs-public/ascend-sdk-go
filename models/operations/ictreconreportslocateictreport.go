@@ -17,7 +17,6 @@ const (
 	ProgramDateFilterProgramBrokerPartner         ProgramDateFilterProgram = "BROKER_PARTNER"
 	ProgramDateFilterProgramDepositOnly           ProgramDateFilterProgram = "DEPOSIT_ONLY"
 	ProgramDateFilterProgramBankingPartner        ProgramDateFilterProgram = "BANKING_PARTNER"
-	ProgramDateFilterProgramMoneyTransmitter      ProgramDateFilterProgram = "MONEY_TRANSMITTER"
 	ProgramDateFilterProgramWithdrawalOnly        ProgramDateFilterProgram = "WITHDRAWAL_ONLY"
 	ProgramDateFilterProgramDigitalPartner        ProgramDateFilterProgram = "DIGITAL_PARTNER"
 )
@@ -39,8 +38,6 @@ func (e *ProgramDateFilterProgram) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "BANKING_PARTNER":
 		fallthrough
-	case "MONEY_TRANSMITTER":
-		fallthrough
 	case "WITHDRAWAL_ONLY":
 		fallthrough
 	case "DIGITAL_PARTNER":
@@ -58,8 +55,12 @@ type IctReconReportsLocateIctReportRequest struct {
 	BatchID *string `queryParam:"style=form,explode=true,name=batch_id"`
 	// The ICT program for which to locate the report.
 	ProgramDateFilterProgram *ProgramDateFilterProgram `queryParam:"style=form,explode=true,name=program_date_filter.program"`
-	// The process date for which to locate the report.
-	ProgramDateFilterProcessDate *components.DateCreate `queryParam:"style=form,explode=true,name=program_date_filter.process_date"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	ProgramDateFilterProcessDateYear *int `queryParam:"style=form,explode=true,name=program_date_filter.process_date.year"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	ProgramDateFilterProcessDateMonth *int `queryParam:"style=form,explode=true,name=program_date_filter.process_date.month"`
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	ProgramDateFilterProcessDateDay *int `queryParam:"style=form,explode=true,name=program_date_filter.process_date.day"`
 }
 
 func (o *IctReconReportsLocateIctReportRequest) GetCorrespondentID() string {
@@ -83,11 +84,25 @@ func (o *IctReconReportsLocateIctReportRequest) GetProgramDateFilterProgram() *P
 	return o.ProgramDateFilterProgram
 }
 
-func (o *IctReconReportsLocateIctReportRequest) GetProgramDateFilterProcessDate() *components.DateCreate {
+func (o *IctReconReportsLocateIctReportRequest) GetProgramDateFilterProcessDateYear() *int {
 	if o == nil {
 		return nil
 	}
-	return o.ProgramDateFilterProcessDate
+	return o.ProgramDateFilterProcessDateYear
+}
+
+func (o *IctReconReportsLocateIctReportRequest) GetProgramDateFilterProcessDateMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.ProgramDateFilterProcessDateMonth
+}
+
+func (o *IctReconReportsLocateIctReportRequest) GetProgramDateFilterProcessDateDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.ProgramDateFilterProcessDateDay
 }
 
 type IctReconReportsLocateIctReportResponse struct {

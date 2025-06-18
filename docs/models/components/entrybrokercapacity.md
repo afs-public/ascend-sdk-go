@@ -1,6 +1,6 @@
 # EntryBrokerCapacity
 
-Used to calculate broadridge blotter code
+The execution route Apex used for this trade
 
 
 ## Values

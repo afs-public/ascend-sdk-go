@@ -5,12 +5,12 @@ package components
 // CompleteTradeRequestCreate - A request for completing a trade.
 type CompleteTradeRequestCreate struct {
 	// Client calculated fees to use while completing an existing trade.
-	Fees []FeeCreate `json:"fees,omitempty"`
+	Fees []BookingFeeCreate `json:"fees,omitempty"`
 	// The name of the trade to complete.
 	Name string `json:"name"`
 }
 
-func (o *CompleteTradeRequestCreate) GetFees() []FeeCreate {
+func (o *CompleteTradeRequestCreate) GetFees() []BookingFeeCreate {
 	if o == nil {
 		return nil
 	}

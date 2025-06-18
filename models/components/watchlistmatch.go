@@ -39,6 +39,22 @@ func (e MatchState) ToPointer() *MatchState {
 	return &e
 }
 
+type MatchTypes string
+
+const (
+	MatchTypesMatchTypeUnspecified     MatchTypes = "MATCH_TYPE_UNSPECIFIED"
+	MatchTypesNonOfacSanctions         MatchTypes = "NON_OFAC_SANCTIONS"
+	MatchTypesRelativeOrCloseAssociate MatchTypes = "RELATIVE_OR_CLOSE_ASSOCIATE"
+	MatchTypesOfacSanctions            MatchTypes = "OFAC_SANCTIONS"
+	MatchTypesPoliticallyExposedPerson MatchTypes = "POLITICALLY_EXPOSED_PERSON"
+	MatchTypesDndb                     MatchTypes = "DNDB"
+	MatchTypesNegativeNews             MatchTypes = "NEGATIVE_NEWS"
+)
+
+func (e MatchTypes) ToPointer() *MatchTypes {
+	return &e
+}
+
 // WatchlistMatch - Matched profile details
 type WatchlistMatch struct {
 	// Identifies if the entry is active or not
@@ -51,6 +67,8 @@ type WatchlistMatch struct {
 	MatchAttributes []MatchAttributes `json:"match_attributes,omitempty"`
 	// Match state - whether or not the match is confirmed
 	MatchState *MatchState `json:"match_state,omitempty"`
+	// The types of watchlist matches
+	MatchTypes []MatchTypes `json:"match_types,omitempty"`
 	// The time the watchlist match was last updated
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// Indicates the watchlist source for a given match
@@ -103,6 +121,13 @@ func (o *WatchlistMatch) GetMatchState() *MatchState {
 		return nil
 	}
 	return o.MatchState
+}
+
+func (o *WatchlistMatch) GetMatchTypes() []MatchTypes {
+	if o == nil {
+		return nil
+	}
+	return o.MatchTypes
 }
 
 func (o *WatchlistMatch) GetUpdatedAt() *time.Time {

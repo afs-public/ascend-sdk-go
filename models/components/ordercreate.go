@@ -121,6 +121,17 @@ func (e TimeInForce) ToPointer() *TimeInForce {
 	return &e
 }
 
+// Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
+type TradingStrategy string
+
+const (
+	TradingStrategyCore TradingStrategy = "CORE"
+)
+
+func (e TradingStrategy) ToPointer() *TradingStrategy {
+	return &e
+}
+
 // OrderCreate - The message describing an order
 type OrderCreate struct {
 	// The type of the asset in this order, which must be one of the following:
@@ -184,6 +195,8 @@ type OrderCreate struct {
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce TimeInForce `json:"time_in_force"`
+	// Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
+	TradingStrategy *TradingStrategy `json:"trading_strategy,omitempty"`
 }
 
 func (o OrderCreate) MarshalJSON() ([]byte, error) {
@@ -349,4 +362,11 @@ func (o *OrderCreate) GetTimeInForce() TimeInForce {
 		return TimeInForce("")
 	}
 	return o.TimeInForce
+}
+
+func (o *OrderCreate) GetTradingStrategy() *TradingStrategy {
+	if o == nil {
+		return nil
+	}
+	return o.TradingStrategy
 }

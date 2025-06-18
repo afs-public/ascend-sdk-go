@@ -116,6 +116,8 @@ const (
 	DocumentDocumentTypeWireRequestForm                         DocumentDocumentType = "WIRE_REQUEST_FORM"
 	DocumentDocumentTypeWorthlessSecurities                     DocumentDocumentType = "WORTHLESS_SECURITIES"
 	DocumentDocumentTypeChangeOfAddressRequest                  DocumentDocumentType = "CHANGE_OF_ADDRESS_REQUEST"
+	DocumentDocumentTypeOptionsAgreement                        DocumentDocumentType = "OPTIONS_AGREEMENT"
+	DocumentDocumentTypeStateWaiverForm                         DocumentDocumentType = "STATE_WAIVER_FORM"
 )
 
 func (e DocumentDocumentType) ToPointer() *DocumentDocumentType {
@@ -210,7 +212,6 @@ const (
 	DocumentIDDocumentDocumentTypeExecutorCertification              DocumentIDDocumentDocumentType = "EXECUTOR_CERTIFICATION"
 	DocumentIDDocumentDocumentTypeTrusteeCertification               DocumentIDDocumentDocumentType = "TRUSTEE_CERTIFICATION"
 	DocumentIDDocumentDocumentTypeSelfie                             DocumentIDDocumentDocumentType = "SELFIE"
-	DocumentIDDocumentDocumentTypeArticlesOfOrganisation             DocumentIDDocumentDocumentType = "ARTICLES_OF_ORGANISATION"
 	DocumentIDDocumentDocumentTypeCertOfSoleOfficer                  DocumentIDDocumentDocumentType = "CERT_OF_SOLE_OFFICER"
 	DocumentIDDocumentDocumentTypeCertificationCorrespondentAccounts DocumentIDDocumentDocumentType = "CERTIFICATION_CORRESPONDENT_ACCOUNTS"
 	DocumentIDDocumentDocumentTypeCertificationForeignBanks          DocumentIDDocumentDocumentType = "CERTIFICATION_FOREIGN_BANKS"
@@ -225,6 +226,7 @@ const (
 	DocumentIDDocumentDocumentTypeCorporateBylaws                    DocumentIDDocumentDocumentType = "CORPORATE_BYLAWS"
 	DocumentIDDocumentDocumentTypeShareholderAgreement               DocumentIDDocumentDocumentType = "SHAREHOLDER_AGREEMENT"
 	DocumentIDDocumentDocumentTypeCorporateRecords                   DocumentIDDocumentDocumentType = "CORPORATE_RECORDS"
+	DocumentIDDocumentDocumentTypeArticlesOfOrganization             DocumentIDDocumentDocumentType = "ARTICLES_OF_ORGANIZATION"
 )
 
 func (e DocumentIDDocumentDocumentType) ToPointer() *DocumentIDDocumentDocumentType {

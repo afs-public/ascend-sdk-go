@@ -351,6 +351,7 @@ const (
 	OrderRejectedReasonAssetNotSetUpToTrade                              OrderRejectedReason = "ASSET_NOT_SET_UP_TO_TRADE"
 	OrderRejectedReasonInvalidOrderQuantity                              OrderRejectedReason = "INVALID_ORDER_QUANTITY"
 	OrderRejectedReasonClientReceivedTimeRequired                        OrderRejectedReason = "CLIENT_RECEIVED_TIME_REQUIRED"
+	OrderRejectedReasonClientNotPermittedToUseTradingStrategy            OrderRejectedReason = "CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY"
 )
 
 func (e OrderRejectedReason) ToPointer() *OrderRejectedReason {
@@ -548,6 +549,17 @@ func (e OrderTimeInForce) ToPointer() *OrderTimeInForce {
 	return &e
 }
 
+// OrderTradingStrategy - Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
+type OrderTradingStrategy string
+
+const (
+	OrderTradingStrategyCore OrderTradingStrategy = "CORE"
+)
+
+func (e OrderTradingStrategy) ToPointer() *OrderTradingStrategy {
+	return &e
+}
+
 // Order - The message describing an order
 type Order struct {
 	// The identifier of the account transacting this order
@@ -562,7 +574,7 @@ type Order struct {
 	//  When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a maximum of two for larger USD amounts.
 	//
 	//  When asset_type = FIXED_INCOME, there may be more than one value present which would have a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal places of precision, and price values measured in yields will support up to 5 decimal places.
-	AveragePrices []ExecutedPrice `json:"average_prices,omitempty"`
+	AveragePrices []TradingExecutedPrice `json:"average_prices,omitempty"`
 	// Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
 	BrokerCapacity *OrderBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Used to explain why an order is canceled
@@ -582,9 +594,9 @@ type Order struct {
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
-	Executions []Executions `json:"executions,omitempty"`
+	Executions []TradingExecutions `json:"executions,omitempty"`
 	// Fees that will be applied to this order. Only the BROKER_FEE type is supported.
-	Fees []Fee `json:"fees,omitempty"`
+	Fees []TradingFee `json:"fees,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *FilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -631,6 +643,8 @@ type Order struct {
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`
+	// Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
+	TradingStrategy *OrderTradingStrategy `json:"trading_strategy,omitempty"`
 }
 
 func (o Order) MarshalJSON() ([]byte, error) {
@@ -665,7 +679,7 @@ func (o *Order) GetAssetType() *OrderAssetType {
 	return o.AssetType
 }
 
-func (o *Order) GetAveragePrices() []ExecutedPrice {
+func (o *Order) GetAveragePrices() []TradingExecutedPrice {
 	if o == nil {
 		return nil
 	}
@@ -735,14 +749,14 @@ func (o *Order) GetCurrencyCode() *string {
 	return o.CurrencyCode
 }
 
-func (o *Order) GetExecutions() []Executions {
+func (o *Order) GetExecutions() []TradingExecutions {
 	if o == nil {
 		return nil
 	}
 	return o.Executions
 }
 
-func (o *Order) GetFees() []Fee {
+func (o *Order) GetFees() []TradingFee {
 	if o == nil {
 		return nil
 	}
@@ -901,4 +915,11 @@ func (o *Order) GetTimeInForce() *OrderTimeInForce {
 		return nil
 	}
 	return o.TimeInForce
+}
+
+func (o *Order) GetTradingStrategy() *OrderTradingStrategy {
+	if o == nil {
+		return nil
+	}
+	return o.TradingStrategy
 }

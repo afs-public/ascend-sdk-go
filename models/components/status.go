@@ -7,7 +7,7 @@ type Status struct {
 	// The code field contains an enum value of google.rpc.Code.
 	Code *int `json:"code,omitempty"`
 	// The details field contains one or more technical error details.
-	Details []GoogleProtobufAny `json:"details,omitempty"`
+	Details []Any `json:"details,omitempty"`
 	// The message field contains human-friendly messages about the error.
 	Message *string `json:"message,omitempty"`
 }
@@ -19,7 +19,7 @@ func (o *Status) GetCode() *int {
 	return o.Code
 }
 
-func (o *Status) GetDetails() []GoogleProtobufAny {
+func (o *Status) GetDetails() []Any {
 	if o == nil {
 		return nil
 	}

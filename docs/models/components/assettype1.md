@@ -15,3 +15,4 @@ The type or category of the asset
 | `AssetType1FdicSynthetic`   | FDIC_SYNTHETIC              |
 | `AssetType1FixedIncome`     | FIXED_INCOME                |
 | `AssetType1MutualFund`      | MUTUAL_FUND                 |
+| `AssetType1Index`           | INDEX                       |

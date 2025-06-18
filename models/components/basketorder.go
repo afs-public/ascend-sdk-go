@@ -163,6 +163,19 @@ func (e BasketOrderSide) ToPointer() *BasketOrderSide {
 	return &e
 }
 
+type BasketOrderSpecialReportingInstructions string
+
+const (
+	BasketOrderSpecialReportingInstructionsSpecialReportingInstructionsUnspecified BasketOrderSpecialReportingInstructions = "SPECIAL_REPORTING_INSTRUCTIONS_UNSPECIFIED"
+	BasketOrderSpecialReportingInstructionsSolicited                               BasketOrderSpecialReportingInstructions = "SOLICITED"
+	BasketOrderSpecialReportingInstructionsUnsolicited                             BasketOrderSpecialReportingInstructions = "UNSOLICITED"
+	BasketOrderSpecialReportingInstructionsRoundUp                                 BasketOrderSpecialReportingInstructions = "ROUND_UP"
+)
+
+func (e BasketOrderSpecialReportingInstructions) ToPointer() *BasketOrderSpecialReportingInstructions {
+	return &e
+}
+
 // BasketOrderTimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type BasketOrderTimeInForce string
 
@@ -186,7 +199,7 @@ type BasketOrder struct {
 	// The average prices, as weighted averages, across all executions in this order. Will be absent if an order has no executions.
 	//
 	//  When asset_type = EQUITY, there will be at most one value present, with a type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a maximum of two for larger USD amounts.
-	AveragePrices []ExecutedPrice `json:"average_prices,omitempty"`
+	AveragePrices []BasketTradingExecutedPrice `json:"average_prices,omitempty"`
 	// System generated unique id for the basket order.
 	BasketOrderID *string `json:"basket_order_id,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
@@ -221,6 +234,8 @@ type BasketOrder struct {
 	Quantity *BasketOrderQuantity `json:"quantity,omitempty"`
 	// The side of this order.
 	Side *BasketOrderSide `json:"side,omitempty"`
+	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+	SpecialReportingInstructions []BasketOrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *BasketOrderTimeInForce `json:"time_in_force,omitempty"`
 }
@@ -257,7 +272,7 @@ func (o *BasketOrder) GetAssetType() *BasketOrderAssetType {
 	return o.AssetType
 }
 
-func (o *BasketOrder) GetAveragePrices() []ExecutedPrice {
+func (o *BasketOrder) GetAveragePrices() []BasketTradingExecutedPrice {
 	if o == nil {
 		return nil
 	}
@@ -381,6 +396,13 @@ func (o *BasketOrder) GetSide() *BasketOrderSide {
 		return nil
 	}
 	return o.Side
+}
+
+func (o *BasketOrder) GetSpecialReportingInstructions() []BasketOrderSpecialReportingInstructions {
+	if o == nil {
+		return nil
+	}
+	return o.SpecialReportingInstructions
 }
 
 func (o *BasketOrder) GetTimeInForce() *BasketOrderTimeInForce {

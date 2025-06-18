@@ -9,11 +9,11 @@ package components
 //     Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
 type DateCreate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
-	Day *int `json:"day,omitempty" queryParam:"name=day"`
+	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
-	Month *int `json:"month,omitempty" queryParam:"name=month"`
+	Month *int `json:"month,omitempty"`
 	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
-	Year *int `json:"year,omitempty" queryParam:"name=year"`
+	Year *int `json:"year,omitempty"`
 }
 
 func (o *DateCreate) GetDay() *int {

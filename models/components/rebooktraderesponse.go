@@ -2,7 +2,20 @@
 
 package components
 
-// RebookTradeResponseBrokerCapacity - Used to calculate broadridge blotter code
+// RebookTradeResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+type RebookTradeResponseAssetType string
+
+const (
+	RebookTradeResponseAssetTypeAssetTypeUnspecified RebookTradeResponseAssetType = "ASSET_TYPE_UNSPECIFIED"
+	RebookTradeResponseAssetTypeEquity               RebookTradeResponseAssetType = "EQUITY"
+	RebookTradeResponseAssetTypeFixedIncome          RebookTradeResponseAssetType = "FIXED_INCOME"
+)
+
+func (e RebookTradeResponseAssetType) ToPointer() *RebookTradeResponseAssetType {
+	return &e
+}
+
+// RebookTradeResponseBrokerCapacity - Broker capacity for the trade.
 type RebookTradeResponseBrokerCapacity string
 
 const (
@@ -16,145 +29,309 @@ func (e RebookTradeResponseBrokerCapacity) ToPointer() *RebookTradeResponseBroke
 	return &e
 }
 
-// RebookTradeResponsePrevailingMarketPrice - The price for the instrument that is prevailing in the market.
-type RebookTradeResponsePrevailingMarketPrice struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *RebookTradeResponsePrevailingMarketPrice) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// RebookTradeResponsePriceAdjustmentAmount - Total monetary value of the price_adjustment
-type RebookTradeResponsePriceAdjustmentAmount struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *RebookTradeResponsePriceAdjustmentAmount) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// RebookTradeResponsePriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type RebookTradeResponsePriceAdjustmentPercent struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *RebookTradeResponsePriceAdjustmentPercent) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// RebookTradeResponsePriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type RebookTradeResponsePriceAdjustmentType string
+// RebookTradeResponseIdentifierType - Identifier type for the asset being traded.
+type RebookTradeResponseIdentifierType string
 
 const (
-	RebookTradeResponsePriceAdjustmentTypePriceAdjustmentTypeUnspecified RebookTradeResponsePriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	RebookTradeResponsePriceAdjustmentTypeMarkup                         RebookTradeResponsePriceAdjustmentType = "MARKUP"
-	RebookTradeResponsePriceAdjustmentTypeMarkdown                       RebookTradeResponsePriceAdjustmentType = "MARKDOWN"
-	RebookTradeResponsePriceAdjustmentTypeSalesLoad                      RebookTradeResponsePriceAdjustmentType = "SALES_LOAD"
+	RebookTradeResponseIdentifierTypeIdentifierTypeUnspecified RebookTradeResponseIdentifierType = "IDENTIFIER_TYPE_UNSPECIFIED"
+	RebookTradeResponseIdentifierTypeAssetID                   RebookTradeResponseIdentifierType = "ASSET_ID"
+	RebookTradeResponseIdentifierTypeSymbol                    RebookTradeResponseIdentifierType = "SYMBOL"
+	RebookTradeResponseIdentifierTypeCusip                     RebookTradeResponseIdentifierType = "CUSIP"
+	RebookTradeResponseIdentifierTypeIsin                      RebookTradeResponseIdentifierType = "ISIN"
 )
 
-func (e RebookTradeResponsePriceAdjustmentType) ToPointer() *RebookTradeResponsePriceAdjustmentType {
+func (e RebookTradeResponseIdentifierType) ToPointer() *RebookTradeResponseIdentifierType {
 	return &e
 }
 
-// RebookTradeResponsePriceAdjustmentRecord - Information about any price adjustments applied to the security
-type RebookTradeResponsePriceAdjustmentRecord struct {
-	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *RebookTradeResponsePriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
-	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *RebookTradeResponsePriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
-	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *RebookTradeResponsePriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+// RebookTradeResponseLocalMarketTradeDate - Date field to support extended trading hours.
+type RebookTradeResponseLocalMarketTradeDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
 }
 
-func (o *RebookTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentAmount() *RebookTradeResponsePriceAdjustmentAmount {
+func (o *RebookTradeResponseLocalMarketTradeDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentAmount
+	return o.Day
 }
 
-func (o *RebookTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentPercent() *RebookTradeResponsePriceAdjustmentPercent {
+func (o *RebookTradeResponseLocalMarketTradeDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentPercent
+	return o.Month
 }
 
-func (o *RebookTradeResponsePriceAdjustmentRecord) GetPriceAdjustmentType() *RebookTradeResponsePriceAdjustmentType {
+func (o *RebookTradeResponseLocalMarketTradeDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentType
+	return o.Year
+}
+
+// RebookTradeResponseRouteType - Route type for the trade.
+type RebookTradeResponseRouteType string
+
+const (
+	RebookTradeResponseRouteTypeRouteTypeUnspecified RebookTradeResponseRouteType = "ROUTE_TYPE_UNSPECIFIED"
+	RebookTradeResponseRouteTypeDma                  RebookTradeResponseRouteType = "DMA"
+	RebookTradeResponseRouteTypeMngd                 RebookTradeResponseRouteType = "MNGD"
+	RebookTradeResponseRouteTypeQuik                 RebookTradeResponseRouteType = "QUIK"
+	RebookTradeResponseRouteTypeAlgo                 RebookTradeResponseRouteType = "ALGO"
+	RebookTradeResponseRouteTypeAway                 RebookTradeResponseRouteType = "AWAY"
+	RebookTradeResponseRouteTypeCorr                 RebookTradeResponseRouteType = "CORR"
+	RebookTradeResponseRouteTypeBoats                RebookTradeResponseRouteType = "BOATS"
+)
+
+func (e RebookTradeResponseRouteType) ToPointer() *RebookTradeResponseRouteType {
+	return &e
+}
+
+// RebookTradeResponseSettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+type RebookTradeResponseSettlementDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *RebookTradeResponseSettlementDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *RebookTradeResponseSettlementDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *RebookTradeResponseSettlementDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// RebookTradeResponseSide - Denotes if the trade is a SELL or a BUY.
+type RebookTradeResponseSide string
+
+const (
+	RebookTradeResponseSideSideUnspecified RebookTradeResponseSide = "SIDE_UNSPECIFIED"
+	RebookTradeResponseSideBuy             RebookTradeResponseSide = "BUY"
+	RebookTradeResponseSideSell            RebookTradeResponseSide = "SELL"
+)
+
+func (e RebookTradeResponseSide) ToPointer() *RebookTradeResponseSide {
+	return &e
+}
+
+// RebookTradeResponseSideModifier - Side modifier for the trade.
+type RebookTradeResponseSideModifier string
+
+const (
+	RebookTradeResponseSideModifierSideModifierUnspecified RebookTradeResponseSideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	RebookTradeResponseSideModifierShort                   RebookTradeResponseSideModifier = "SHORT"
+	RebookTradeResponseSideModifierShortExempt             RebookTradeResponseSideModifier = "SHORT_EXEMPT"
+	RebookTradeResponseSideModifierShortCover              RebookTradeResponseSideModifier = "SHORT_COVER"
+	RebookTradeResponseSideModifierOpen                    RebookTradeResponseSideModifier = "OPEN"
+	RebookTradeResponseSideModifierClose                   RebookTradeResponseSideModifier = "CLOSE"
+)
+
+func (e RebookTradeResponseSideModifier) ToPointer() *RebookTradeResponseSideModifier {
+	return &e
+}
+
+type RebookTradeResponseSpecialInstructions string
+
+const (
+	RebookTradeResponseSpecialInstructionsSpecialInstructionsUnspecified RebookTradeResponseSpecialInstructions = "SPECIAL_INSTRUCTIONS_UNSPECIFIED"
+	RebookTradeResponseSpecialInstructionsRule144                        RebookTradeResponseSpecialInstructions = "RULE_144"
+	RebookTradeResponseSpecialInstructionsWithDividend                   RebookTradeResponseSpecialInstructions = "WITH_DIVIDEND"
+	RebookTradeResponseSpecialInstructionsWithRights                     RebookTradeResponseSpecialInstructions = "WITH_RIGHTS"
+	RebookTradeResponseSpecialInstructionsCloseContract                  RebookTradeResponseSpecialInstructions = "CLOSE_CONTRACT"
+	RebookTradeResponseSpecialInstructionsCoverShort                     RebookTradeResponseSpecialInstructions = "COVER_SHORT"
+	RebookTradeResponseSpecialInstructionsCrossTrade                     RebookTradeResponseSpecialInstructions = "CROSS_TRADE"
+	RebookTradeResponseSpecialInstructionsOpenContractCovered            RebookTradeResponseSpecialInstructions = "OPEN_CONTRACT_COVERED"
+	RebookTradeResponseSpecialInstructionsDiscretionExercised            RebookTradeResponseSpecialInstructions = "DISCRETION_EXERCISED"
+	RebookTradeResponseSpecialInstructionsDiscretionNotExercised         RebookTradeResponseSpecialInstructions = "DISCRETION_NOT_EXERCISED"
+	RebookTradeResponseSpecialInstructionsOptionAssignment               RebookTradeResponseSpecialInstructions = "OPTION_ASSIGNMENT"
+	RebookTradeResponseSpecialInstructionsEmployeeStockOption            RebookTradeResponseSpecialInstructions = "EMPLOYEE_STOCK_OPTION"
+	RebookTradeResponseSpecialInstructionsInvestmentBanking              RebookTradeResponseSpecialInstructions = "INVESTMENT_BANKING"
+	RebookTradeResponseSpecialInstructionsBrokerDealerOrder              RebookTradeResponseSpecialInstructions = "BROKER_DEALER_ORDER"
+	RebookTradeResponseSpecialInstructionsMakeMarketInSecurity           RebookTradeResponseSpecialInstructions = "MAKE_MARKET_IN_SECURITY"
+	RebookTradeResponseSpecialInstructionsMakeMarketSolicited            RebookTradeResponseSpecialInstructions = "MAKE_MARKET_SOLICITED"
+	RebookTradeResponseSpecialInstructionsMakeMarketUnsolicited          RebookTradeResponseSpecialInstructions = "MAKE_MARKET_UNSOLICITED"
+	RebookTradeResponseSpecialInstructionsCustomerDirected               RebookTradeResponseSpecialInstructions = "CUSTOMER_DIRECTED"
+	RebookTradeResponseSpecialInstructionsFullyRegistered                RebookTradeResponseSpecialInstructions = "FULLY_REGISTERED"
+	RebookTradeResponseSpecialInstructionsOpenContract                   RebookTradeResponseSpecialInstructions = "OPEN_CONTRACT"
+	RebookTradeResponseSpecialInstructionsOddlotDiffOnRequest            RebookTradeResponseSpecialInstructions = "ODDLOT_DIFF_ON_REQUEST"
+	RebookTradeResponseSpecialInstructionsProspectusEnclosed             RebookTradeResponseSpecialInstructions = "PROSPECTUS_ENCLOSED"
+	RebookTradeResponseSpecialInstructionsProspectusSeparateMail         RebookTradeResponseSpecialInstructions = "PROSPECTUS_SEPARATE_MAIL"
+	RebookTradeResponseSpecialInstructionsSolicited                      RebookTradeResponseSpecialInstructions = "SOLICITED"
+	RebookTradeResponseSpecialInstructionsUnsolicited                    RebookTradeResponseSpecialInstructions = "UNSOLICITED"
+	RebookTradeResponseSpecialInstructionsXDividend                      RebookTradeResponseSpecialInstructions = "X_DIVIDEND"
+	RebookTradeResponseSpecialInstructionsActingAsPrincipal              RebookTradeResponseSpecialInstructions = "ACTING_AS_PRINCIPAL"
+	RebookTradeResponseSpecialInstructionsAveragePrice                   RebookTradeResponseSpecialInstructions = "AVERAGE_PRICE"
+	RebookTradeResponseSpecialInstructionsBrokerLiquidation              RebookTradeResponseSpecialInstructions = "BROKER_LIQUIDATION"
+	RebookTradeResponseSpecialInstructionsCouponBooks                    RebookTradeResponseSpecialInstructions = "COUPON_BOOKS"
+	RebookTradeResponseSpecialInstructionsHasPostageFee                  RebookTradeResponseSpecialInstructions = "HAS_POSTAGE_FEE"
+	RebookTradeResponseSpecialInstructionsInternetOrder                  RebookTradeResponseSpecialInstructions = "INTERNET_ORDER"
+	RebookTradeResponseSpecialInstructionsMarginSellout                  RebookTradeResponseSpecialInstructions = "MARGIN_SELLOUT"
+	RebookTradeResponseSpecialInstructionsMarketMakersAsPrincipal        RebookTradeResponseSpecialInstructions = "MARKET_MAKERS_AS_PRINCIPAL"
+	RebookTradeResponseSpecialInstructionsNegativeNetProceed             RebookTradeResponseSpecialInstructions = "NEGATIVE_NET_PROCEED"
+	RebookTradeResponseSpecialInstructionsPreFigIndicator                RebookTradeResponseSpecialInstructions = "PRE_FIG_INDICATOR"
+	RebookTradeResponseSpecialInstructionsRisklessPrincipalInstruction   RebookTradeResponseSpecialInstructions = "RISKLESS_PRINCIPAL_INSTRUCTION"
+	RebookTradeResponseSpecialInstructionsShortInstruction               RebookTradeResponseSpecialInstructions = "SHORT_INSTRUCTION"
+	RebookTradeResponseSpecialInstructionsThirdMarket                    RebookTradeResponseSpecialInstructions = "THIRD_MARKET"
+	RebookTradeResponseSpecialInstructionsSuppressMsrbTransmission       RebookTradeResponseSpecialInstructions = "SUPPRESS_MSRB_TRANSMISSION"
+	RebookTradeResponseSpecialInstructionsSuppressTraceReporting         RebookTradeResponseSpecialInstructions = "SUPPRESS_TRACE_REPORTING"
+	RebookTradeResponseSpecialInstructionsSuppressEmailNotification      RebookTradeResponseSpecialInstructions = "SUPPRESS_EMAIL_NOTIFICATION"
+	RebookTradeResponseSpecialInstructionsStockReward                    RebookTradeResponseSpecialInstructions = "STOCK_REWARD"
+	RebookTradeResponseSpecialInstructionsSuppressRegFees                RebookTradeResponseSpecialInstructions = "SUPPRESS_REG_FEES"
+	RebookTradeResponseSpecialInstructionsSuppressSecFee                 RebookTradeResponseSpecialInstructions = "SUPPRESS_SEC_FEE"
+	RebookTradeResponseSpecialInstructionsSuppressTafFee                 RebookTradeResponseSpecialInstructions = "SUPPRESS_TAF_FEE"
+	RebookTradeResponseSpecialInstructionsDividendReinvestment           RebookTradeResponseSpecialInstructions = "DIVIDEND_REINVESTMENT"
+)
+
+func (e RebookTradeResponseSpecialInstructions) ToPointer() *RebookTradeResponseSpecialInstructions {
+	return &e
+}
+
+// RebookTradeResponseVenue - Exchange venue
+type RebookTradeResponseVenue string
+
+const (
+	RebookTradeResponseVenueExchangeVenueUnspecified RebookTradeResponseVenue = "EXCHANGE_VENUE_UNSPECIFIED"
+	RebookTradeResponseVenueAmex                     RebookTradeResponseVenue = "AMEX"
+	RebookTradeResponseVenueArca                     RebookTradeResponseVenue = "ARCA"
+	RebookTradeResponseVenueBats                     RebookTradeResponseVenue = "BATS"
+	RebookTradeResponseVenueBatsByx                  RebookTradeResponseVenue = "BATS_BYX"
+	RebookTradeResponseVenueBoston                   RebookTradeResponseVenue = "BOSTON"
+	RebookTradeResponseVenueBox                      RebookTradeResponseVenue = "BOX"
+	RebookTradeResponseVenueBzx                      RebookTradeResponseVenue = "BZX"
+	RebookTradeResponseVenueC2                       RebookTradeResponseVenue = "C2"
+	RebookTradeResponseVenueCboe                     RebookTradeResponseVenue = "CBOE"
+	RebookTradeResponseVenueChicago                  RebookTradeResponseVenue = "CHICAGO"
+	RebookTradeResponseVenueCincinnati               RebookTradeResponseVenue = "CINCINNATI"
+	RebookTradeResponseVenueEdga                     RebookTradeResponseVenue = "EDGA"
+	RebookTradeResponseVenueEdgx                     RebookTradeResponseVenue = "EDGX"
+	RebookTradeResponseVenueExclearing               RebookTradeResponseVenue = "EXCLEARING"
+	RebookTradeResponseVenueIex                      RebookTradeResponseVenue = "IEX"
+	RebookTradeResponseVenueIse                      RebookTradeResponseVenue = "ISE"
+	RebookTradeResponseVenueIseGemini                RebookTradeResponseVenue = "ISE_GEMINI"
+	RebookTradeResponseVenueMiax                     RebookTradeResponseVenue = "MIAX"
+	RebookTradeResponseVenueNasdaq                   RebookTradeResponseVenue = "NASDAQ"
+	RebookTradeResponseVenueNasdaqOmxBx              RebookTradeResponseVenue = "NASDAQ_OMX_BX"
+	RebookTradeResponseVenueNyse                     RebookTradeResponseVenue = "NYSE"
+	RebookTradeResponseVenuePhlx                     RebookTradeResponseVenue = "PHLX"
+	RebookTradeResponseVenueOtc                      RebookTradeResponseVenue = "OTC"
+	RebookTradeResponseVenueQsr                      RebookTradeResponseVenue = "QSR"
+)
+
+func (e RebookTradeResponseVenue) ToPointer() *RebookTradeResponseVenue {
+	return &e
+}
+
+// RebookTradeResponseWhenIssued - Denotes that this trade was either when_issued or when_distributed.
+type RebookTradeResponseWhenIssued string
+
+const (
+	RebookTradeResponseWhenIssuedWhenIssuedTypeUnspecified RebookTradeResponseWhenIssued = "WHEN_ISSUED_TYPE_UNSPECIFIED"
+	RebookTradeResponseWhenIssuedWhenIssued                RebookTradeResponseWhenIssued = "WHEN_ISSUED"
+	RebookTradeResponseWhenIssuedWhenDistributed           RebookTradeResponseWhenIssued = "WHEN_DISTRIBUTED"
+)
+
+func (e RebookTradeResponseWhenIssued) ToPointer() *RebookTradeResponseWhenIssued {
+	return &e
 }
 
 // NewTrade - The new trade that is booked.
 type NewTrade struct {
-	// Free form text field containing additional information for a trade
-	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
-	// Max Length 100 characters. Alternate order id from the street used for FRAC trades
+	// A globally unique identifier referencing a single account.
+	AccountID *string `json:"account_id,omitempty"`
+	// The current activity_id of this trade in the Ledger.
+	ActivityID *string `json:"activity_id,omitempty"`
+	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
+	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
+	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// uuid assigned by the Booking API if a trade belongs to an allocation
-	BookingAPITradeAllocationID *string `json:"booking_api_trade_allocation_id,omitempty"`
-	// uuid assigned by the Booking API to all trades
-	BookingAPITradeID *string `json:"booking_api_trade_id,omitempty"`
-	// Executing broker of the trade
-	Broker *string `json:"broker,omitempty"`
-	// Used to calculate broadridge blotter code
+	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	AssetType *RebookTradeResponseAssetType `json:"asset_type,omitempty"`
+	// Broker capacity for the trade.
 	BrokerCapacity *RebookTradeResponseBrokerCapacity `json:"broker_capacity,omitempty"`
-	// Free form text submitted by the client for internal purposes
-	ClientMemos []string `json:"client_memos,omitempty"`
-	// 32 characters. The client order ID from the order submitted
+	// The unique identifier that is associated with an order. Must be unique by date per trade per client.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// MIC code for the exchange
-	Exchange *string `json:"exchange,omitempty"`
-	// Execution id from the street
-	ExecutionID *string `json:"execution_id,omitempty"`
-	// Indicates whether Apex is the clearing broker for this trade. When false, indicates Apex is the clearing broker
-	ExecutionOnly *bool `json:"execution_only,omitempty"`
-	// Max Length 100 characters. External system id provided by a client
-	ExternalID *string `json:"external_id,omitempty"`
-	// The confirmation number associated with a mutual fund trade
-	FundConfirmationNumber *string `json:"fund_confirmation_number,omitempty"`
-	// Max length 100 characters. Order id generated by trading-gateway (Trade-Ex) to uniquely identify all orders in their system. Used as the client_order_id on new order singles sent downstream of the trading-gateway
-	GatewayClientOrderID *string `json:"gateway_client_order_id,omitempty"`
-	// If set to true, indicates the trade should be omitted from client billing
-	InternalError *bool `json:"internal_error,omitempty"`
-	// Set on penny-for-the-lot trades
-	IsWriteoff *bool `json:"is_writeoff,omitempty"`
-	// Repeated record containing information about the tax lots, if specified
-	Lots []Lot `json:"lots,omitempty"`
-	// Max Length 100 characters. Internally generated order id that is returned to client on exec reports
+	// Executing broker of the trade.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
+	// The executions (sometimes referred to as partial-fills) that comprise the trade.
+	Executions []Execution `json:"executions,omitempty"`
+	// Any client calculated fees associated with the trade. Only allowed if trade.open = false. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
+	Fees []BookingFee `json:"fees,omitempty"`
+	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
+	Identifier *string `json:"identifier,omitempty"`
+	// Identifier type for the asset being traded.
+	IdentifierType *RebookTradeResponseIdentifierType `json:"identifier_type,omitempty"`
+	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
+	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
+	// Date field to support extended trading hours.
+	LocalMarketTradeDate *RebookTradeResponseLocalMarketTradeDate `json:"local_market_trade_date,omitempty"`
+	// One or many lot matching instructions for the trade.
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
+	// Market Identifier Code
+	MicCode *string `json:"mic_code,omitempty"`
+	// The resource name of the trade.
+	Name *string `json:"name,omitempty"`
+	// State of this trade's completeness in filling. True: trade is not done filling and can append more executions onto the trade False: trade is done filling and cannot append more executions onto the trade By default, trades are closed when they are created. An open trade can later be closed by calling the CompleteTrade endpoint. Additional executions can be appended to an open trade by calling the CreateExecution endpoint. Trades that are left open will be automatically closed nightly before Ledger's EOD.
+	Open *bool `json:"open,omitempty"`
+	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
-	// The price for the instrument that is prevailing in the market.
-	PrevailingMarketPrice *RebookTradeResponsePrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
-	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *RebookTradeResponsePriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
-	// Used to calculate broadridge blotter code
-	Route *string `json:"route,omitempty"`
-	// The special instructions for a trade
-	SpecialInstructions []string `json:"special_instructions,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the particular issue
-	SymbolDescription *string `json:"symbol_description,omitempty"`
-	// Indicates the trade was executed in a security that is not currently listed. When-issued securities are bought and sold before they are officially issued, allowing investors to speculate on their future value
-	WhenIssued *bool `json:"when_issued,omitempty"`
-	// The yields associated with a fixed income trade. only valid if the SecurityType is FIXED_INCOME.
-	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
+	// Route type for the trade.
+	RouteType *RebookTradeResponseRouteType `json:"route_type,omitempty"`
+	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+	SettlementDate *RebookTradeResponseSettlementDate `json:"settlement_date,omitempty"`
+	// Denotes if the trade is a SELL or a BUY.
+	Side *RebookTradeResponseSide `json:"side,omitempty"`
+	// Side modifier for the trade.
+	SideModifier *RebookTradeResponseSideModifier `json:"side_modifier,omitempty"`
+	// The source of the submission.
+	SourceApplication *string `json:"source_application,omitempty"`
+	// An enumerated list of values used to indicate certain attributes about a trade (E.g. DISCRETION_EXERCISED, BROKER_LIQUIDATION) and/or trigger downstream processing rules (e.g. SUPPRESS_TRACE_REPORTING)
+	SpecialInstructions []RebookTradeResponseSpecialInstructions `json:"special_instructions,omitempty"`
+	// A ULID to uniquely identify the trade globally.
+	TradeID *string `json:"trade_id,omitempty"`
+	// Exchange venue
+	Venue *RebookTradeResponseVenue `json:"venue,omitempty"`
+	// Denotes that this trade was either when_issued or when_distributed.
+	WhenIssued *RebookTradeResponseWhenIssued `json:"when_issued,omitempty"`
 }
 
-func (o *NewTrade) GetAdditionalInstructions() []string {
+func (o *NewTrade) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *NewTrade) GetActivityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActivityID
+}
+
+func (o *NewTrade) GetAdditionalInstructions() *string {
 	if o == nil {
 		return nil
 	}
@@ -168,25 +345,11 @@ func (o *NewTrade) GetAlternateOrderID() *string {
 	return o.AlternateOrderID
 }
 
-func (o *NewTrade) GetBookingAPITradeAllocationID() *string {
+func (o *NewTrade) GetAssetType() *RebookTradeResponseAssetType {
 	if o == nil {
 		return nil
 	}
-	return o.BookingAPITradeAllocationID
-}
-
-func (o *NewTrade) GetBookingAPITradeID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.BookingAPITradeID
-}
-
-func (o *NewTrade) GetBroker() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Broker
+	return o.AssetType
 }
 
 func (o *NewTrade) GetBrokerCapacity() *RebookTradeResponseBrokerCapacity {
@@ -196,13 +359,6 @@ func (o *NewTrade) GetBrokerCapacity() *RebookTradeResponseBrokerCapacity {
 	return o.BrokerCapacity
 }
 
-func (o *NewTrade) GetClientMemos() []string {
-	if o == nil {
-		return nil
-	}
-	return o.ClientMemos
-}
-
 func (o *NewTrade) GetClientOrderID() *string {
 	if o == nil {
 		return nil
@@ -210,67 +366,81 @@ func (o *NewTrade) GetClientOrderID() *string {
 	return o.ClientOrderID
 }
 
-func (o *NewTrade) GetExchange() *string {
+func (o *NewTrade) GetExecutingBroker() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Exchange
+	return o.ExecutingBroker
 }
 
-func (o *NewTrade) GetExecutionID() *string {
+func (o *NewTrade) GetExecutions() []Execution {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionID
+	return o.Executions
 }
 
-func (o *NewTrade) GetExecutionOnly() *bool {
+func (o *NewTrade) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionOnly
+	return o.Fees
 }
 
-func (o *NewTrade) GetExternalID() *string {
+func (o *NewTrade) GetIdentifier() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ExternalID
+	return o.Identifier
 }
 
-func (o *NewTrade) GetFundConfirmationNumber() *string {
+func (o *NewTrade) GetIdentifierType() *RebookTradeResponseIdentifierType {
 	if o == nil {
 		return nil
 	}
-	return o.FundConfirmationNumber
+	return o.IdentifierType
 }
 
-func (o *NewTrade) GetGatewayClientOrderID() *string {
+func (o *NewTrade) GetIssuingRegionCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.GatewayClientOrderID
+	return o.IssuingRegionCode
 }
 
-func (o *NewTrade) GetInternalError() *bool {
+func (o *NewTrade) GetLocalMarketTradeDate() *RebookTradeResponseLocalMarketTradeDate {
 	if o == nil {
 		return nil
 	}
-	return o.InternalError
+	return o.LocalMarketTradeDate
 }
 
-func (o *NewTrade) GetIsWriteoff() *bool {
+func (o *NewTrade) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}
-	return o.IsWriteoff
+	return o.LotMatchingInstructions
 }
 
-func (o *NewTrade) GetLots() []Lot {
+func (o *NewTrade) GetMicCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Lots
+	return o.MicCode
+}
+
+func (o *NewTrade) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *NewTrade) GetOpen() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Open
 }
 
 func (o *NewTrade) GetOrderID() *string {
@@ -280,56 +450,83 @@ func (o *NewTrade) GetOrderID() *string {
 	return o.OrderID
 }
 
-func (o *NewTrade) GetPrevailingMarketPrice() *RebookTradeResponsePrevailingMarketPrice {
+func (o *NewTrade) GetRouteType() *RebookTradeResponseRouteType {
 	if o == nil {
 		return nil
 	}
-	return o.PrevailingMarketPrice
+	return o.RouteType
 }
 
-func (o *NewTrade) GetPriceAdjustmentRecord() *RebookTradeResponsePriceAdjustmentRecord {
+func (o *NewTrade) GetSettlementDate() *RebookTradeResponseSettlementDate {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentRecord
+	return o.SettlementDate
 }
 
-func (o *NewTrade) GetRoute() *string {
+func (o *NewTrade) GetSide() *RebookTradeResponseSide {
 	if o == nil {
 		return nil
 	}
-	return o.Route
+	return o.Side
 }
 
-func (o *NewTrade) GetSpecialInstructions() []string {
+func (o *NewTrade) GetSideModifier() *RebookTradeResponseSideModifier {
+	if o == nil {
+		return nil
+	}
+	return o.SideModifier
+}
+
+func (o *NewTrade) GetSourceApplication() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceApplication
+}
+
+func (o *NewTrade) GetSpecialInstructions() []RebookTradeResponseSpecialInstructions {
 	if o == nil {
 		return nil
 	}
 	return o.SpecialInstructions
 }
 
-func (o *NewTrade) GetSymbolDescription() *string {
+func (o *NewTrade) GetTradeID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.SymbolDescription
+	return o.TradeID
 }
 
-func (o *NewTrade) GetWhenIssued() *bool {
+func (o *NewTrade) GetVenue() *RebookTradeResponseVenue {
+	if o == nil {
+		return nil
+	}
+	return o.Venue
+}
+
+func (o *NewTrade) GetWhenIssued() *RebookTradeResponseWhenIssued {
 	if o == nil {
 		return nil
 	}
 	return o.WhenIssued
 }
 
-func (o *NewTrade) GetYieldRecords() []YieldRecord {
-	if o == nil {
-		return nil
-	}
-	return o.YieldRecords
+// RebookTradeResponseOriginalTradeAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+type RebookTradeResponseOriginalTradeAssetType string
+
+const (
+	RebookTradeResponseOriginalTradeAssetTypeAssetTypeUnspecified RebookTradeResponseOriginalTradeAssetType = "ASSET_TYPE_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeAssetTypeEquity               RebookTradeResponseOriginalTradeAssetType = "EQUITY"
+	RebookTradeResponseOriginalTradeAssetTypeFixedIncome          RebookTradeResponseOriginalTradeAssetType = "FIXED_INCOME"
+)
+
+func (e RebookTradeResponseOriginalTradeAssetType) ToPointer() *RebookTradeResponseOriginalTradeAssetType {
+	return &e
 }
 
-// RebookTradeResponseOriginalTradeBrokerCapacity - Used to calculate broadridge blotter code
+// RebookTradeResponseOriginalTradeBrokerCapacity - Broker capacity for the trade.
 type RebookTradeResponseOriginalTradeBrokerCapacity string
 
 const (
@@ -343,145 +540,309 @@ func (e RebookTradeResponseOriginalTradeBrokerCapacity) ToPointer() *RebookTrade
 	return &e
 }
 
-// RebookTradeResponseOriginalTradePrevailingMarketPrice - The price for the instrument that is prevailing in the market.
-type RebookTradeResponseOriginalTradePrevailingMarketPrice struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *RebookTradeResponseOriginalTradePrevailingMarketPrice) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// RebookTradeResponseOriginalTradePriceAdjustmentAmount - Total monetary value of the price_adjustment
-type RebookTradeResponseOriginalTradePriceAdjustmentAmount struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *RebookTradeResponseOriginalTradePriceAdjustmentAmount) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// RebookTradeResponseOriginalTradePriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type RebookTradeResponseOriginalTradePriceAdjustmentPercent struct {
-	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
-	Value *string `json:"value,omitempty"`
-}
-
-func (o *RebookTradeResponseOriginalTradePriceAdjustmentPercent) GetValue() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Value
-}
-
-// RebookTradeResponseOriginalTradePriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type RebookTradeResponseOriginalTradePriceAdjustmentType string
+// RebookTradeResponseOriginalTradeIdentifierType - Identifier type for the asset being traded.
+type RebookTradeResponseOriginalTradeIdentifierType string
 
 const (
-	RebookTradeResponseOriginalTradePriceAdjustmentTypePriceAdjustmentTypeUnspecified RebookTradeResponseOriginalTradePriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	RebookTradeResponseOriginalTradePriceAdjustmentTypeMarkup                         RebookTradeResponseOriginalTradePriceAdjustmentType = "MARKUP"
-	RebookTradeResponseOriginalTradePriceAdjustmentTypeMarkdown                       RebookTradeResponseOriginalTradePriceAdjustmentType = "MARKDOWN"
-	RebookTradeResponseOriginalTradePriceAdjustmentTypeSalesLoad                      RebookTradeResponseOriginalTradePriceAdjustmentType = "SALES_LOAD"
+	RebookTradeResponseOriginalTradeIdentifierTypeIdentifierTypeUnspecified RebookTradeResponseOriginalTradeIdentifierType = "IDENTIFIER_TYPE_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeIdentifierTypeAssetID                   RebookTradeResponseOriginalTradeIdentifierType = "ASSET_ID"
+	RebookTradeResponseOriginalTradeIdentifierTypeSymbol                    RebookTradeResponseOriginalTradeIdentifierType = "SYMBOL"
+	RebookTradeResponseOriginalTradeIdentifierTypeCusip                     RebookTradeResponseOriginalTradeIdentifierType = "CUSIP"
+	RebookTradeResponseOriginalTradeIdentifierTypeIsin                      RebookTradeResponseOriginalTradeIdentifierType = "ISIN"
 )
 
-func (e RebookTradeResponseOriginalTradePriceAdjustmentType) ToPointer() *RebookTradeResponseOriginalTradePriceAdjustmentType {
+func (e RebookTradeResponseOriginalTradeIdentifierType) ToPointer() *RebookTradeResponseOriginalTradeIdentifierType {
 	return &e
 }
 
-// RebookTradeResponseOriginalTradePriceAdjustmentRecord - Information about any price adjustments applied to the security
-type RebookTradeResponseOriginalTradePriceAdjustmentRecord struct {
-	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *RebookTradeResponseOriginalTradePriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
-	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *RebookTradeResponseOriginalTradePriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
-	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *RebookTradeResponseOriginalTradePriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+// RebookTradeResponseOriginalTradeLocalMarketTradeDate - Date field to support extended trading hours.
+type RebookTradeResponseOriginalTradeLocalMarketTradeDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
 }
 
-func (o *RebookTradeResponseOriginalTradePriceAdjustmentRecord) GetPriceAdjustmentAmount() *RebookTradeResponseOriginalTradePriceAdjustmentAmount {
+func (o *RebookTradeResponseOriginalTradeLocalMarketTradeDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentAmount
+	return o.Day
 }
 
-func (o *RebookTradeResponseOriginalTradePriceAdjustmentRecord) GetPriceAdjustmentPercent() *RebookTradeResponseOriginalTradePriceAdjustmentPercent {
+func (o *RebookTradeResponseOriginalTradeLocalMarketTradeDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentPercent
+	return o.Month
 }
 
-func (o *RebookTradeResponseOriginalTradePriceAdjustmentRecord) GetPriceAdjustmentType() *RebookTradeResponseOriginalTradePriceAdjustmentType {
+func (o *RebookTradeResponseOriginalTradeLocalMarketTradeDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentType
+	return o.Year
+}
+
+// RebookTradeResponseOriginalTradeRouteType - Route type for the trade.
+type RebookTradeResponseOriginalTradeRouteType string
+
+const (
+	RebookTradeResponseOriginalTradeRouteTypeRouteTypeUnspecified RebookTradeResponseOriginalTradeRouteType = "ROUTE_TYPE_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeRouteTypeDma                  RebookTradeResponseOriginalTradeRouteType = "DMA"
+	RebookTradeResponseOriginalTradeRouteTypeMngd                 RebookTradeResponseOriginalTradeRouteType = "MNGD"
+	RebookTradeResponseOriginalTradeRouteTypeQuik                 RebookTradeResponseOriginalTradeRouteType = "QUIK"
+	RebookTradeResponseOriginalTradeRouteTypeAlgo                 RebookTradeResponseOriginalTradeRouteType = "ALGO"
+	RebookTradeResponseOriginalTradeRouteTypeAway                 RebookTradeResponseOriginalTradeRouteType = "AWAY"
+	RebookTradeResponseOriginalTradeRouteTypeCorr                 RebookTradeResponseOriginalTradeRouteType = "CORR"
+	RebookTradeResponseOriginalTradeRouteTypeBoats                RebookTradeResponseOriginalTradeRouteType = "BOATS"
+)
+
+func (e RebookTradeResponseOriginalTradeRouteType) ToPointer() *RebookTradeResponseOriginalTradeRouteType {
+	return &e
+}
+
+// RebookTradeResponseOriginalTradeSettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+type RebookTradeResponseOriginalTradeSettlementDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *RebookTradeResponseOriginalTradeSettlementDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *RebookTradeResponseOriginalTradeSettlementDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *RebookTradeResponseOriginalTradeSettlementDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
+// RebookTradeResponseOriginalTradeSide - Denotes if the trade is a SELL or a BUY.
+type RebookTradeResponseOriginalTradeSide string
+
+const (
+	RebookTradeResponseOriginalTradeSideSideUnspecified RebookTradeResponseOriginalTradeSide = "SIDE_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeSideBuy             RebookTradeResponseOriginalTradeSide = "BUY"
+	RebookTradeResponseOriginalTradeSideSell            RebookTradeResponseOriginalTradeSide = "SELL"
+)
+
+func (e RebookTradeResponseOriginalTradeSide) ToPointer() *RebookTradeResponseOriginalTradeSide {
+	return &e
+}
+
+// RebookTradeResponseOriginalTradeSideModifier - Side modifier for the trade.
+type RebookTradeResponseOriginalTradeSideModifier string
+
+const (
+	RebookTradeResponseOriginalTradeSideModifierSideModifierUnspecified RebookTradeResponseOriginalTradeSideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeSideModifierShort                   RebookTradeResponseOriginalTradeSideModifier = "SHORT"
+	RebookTradeResponseOriginalTradeSideModifierShortExempt             RebookTradeResponseOriginalTradeSideModifier = "SHORT_EXEMPT"
+	RebookTradeResponseOriginalTradeSideModifierShortCover              RebookTradeResponseOriginalTradeSideModifier = "SHORT_COVER"
+	RebookTradeResponseOriginalTradeSideModifierOpen                    RebookTradeResponseOriginalTradeSideModifier = "OPEN"
+	RebookTradeResponseOriginalTradeSideModifierClose                   RebookTradeResponseOriginalTradeSideModifier = "CLOSE"
+)
+
+func (e RebookTradeResponseOriginalTradeSideModifier) ToPointer() *RebookTradeResponseOriginalTradeSideModifier {
+	return &e
+}
+
+type RebookTradeResponseOriginalTradeSpecialInstructions string
+
+const (
+	RebookTradeResponseOriginalTradeSpecialInstructionsSpecialInstructionsUnspecified RebookTradeResponseOriginalTradeSpecialInstructions = "SPECIAL_INSTRUCTIONS_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsRule144                        RebookTradeResponseOriginalTradeSpecialInstructions = "RULE_144"
+	RebookTradeResponseOriginalTradeSpecialInstructionsWithDividend                   RebookTradeResponseOriginalTradeSpecialInstructions = "WITH_DIVIDEND"
+	RebookTradeResponseOriginalTradeSpecialInstructionsWithRights                     RebookTradeResponseOriginalTradeSpecialInstructions = "WITH_RIGHTS"
+	RebookTradeResponseOriginalTradeSpecialInstructionsCloseContract                  RebookTradeResponseOriginalTradeSpecialInstructions = "CLOSE_CONTRACT"
+	RebookTradeResponseOriginalTradeSpecialInstructionsCoverShort                     RebookTradeResponseOriginalTradeSpecialInstructions = "COVER_SHORT"
+	RebookTradeResponseOriginalTradeSpecialInstructionsCrossTrade                     RebookTradeResponseOriginalTradeSpecialInstructions = "CROSS_TRADE"
+	RebookTradeResponseOriginalTradeSpecialInstructionsOpenContractCovered            RebookTradeResponseOriginalTradeSpecialInstructions = "OPEN_CONTRACT_COVERED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsDiscretionExercised            RebookTradeResponseOriginalTradeSpecialInstructions = "DISCRETION_EXERCISED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsDiscretionNotExercised         RebookTradeResponseOriginalTradeSpecialInstructions = "DISCRETION_NOT_EXERCISED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsOptionAssignment               RebookTradeResponseOriginalTradeSpecialInstructions = "OPTION_ASSIGNMENT"
+	RebookTradeResponseOriginalTradeSpecialInstructionsEmployeeStockOption            RebookTradeResponseOriginalTradeSpecialInstructions = "EMPLOYEE_STOCK_OPTION"
+	RebookTradeResponseOriginalTradeSpecialInstructionsInvestmentBanking              RebookTradeResponseOriginalTradeSpecialInstructions = "INVESTMENT_BANKING"
+	RebookTradeResponseOriginalTradeSpecialInstructionsBrokerDealerOrder              RebookTradeResponseOriginalTradeSpecialInstructions = "BROKER_DEALER_ORDER"
+	RebookTradeResponseOriginalTradeSpecialInstructionsMakeMarketInSecurity           RebookTradeResponseOriginalTradeSpecialInstructions = "MAKE_MARKET_IN_SECURITY"
+	RebookTradeResponseOriginalTradeSpecialInstructionsMakeMarketSolicited            RebookTradeResponseOriginalTradeSpecialInstructions = "MAKE_MARKET_SOLICITED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsMakeMarketUnsolicited          RebookTradeResponseOriginalTradeSpecialInstructions = "MAKE_MARKET_UNSOLICITED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsCustomerDirected               RebookTradeResponseOriginalTradeSpecialInstructions = "CUSTOMER_DIRECTED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsFullyRegistered                RebookTradeResponseOriginalTradeSpecialInstructions = "FULLY_REGISTERED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsOpenContract                   RebookTradeResponseOriginalTradeSpecialInstructions = "OPEN_CONTRACT"
+	RebookTradeResponseOriginalTradeSpecialInstructionsOddlotDiffOnRequest            RebookTradeResponseOriginalTradeSpecialInstructions = "ODDLOT_DIFF_ON_REQUEST"
+	RebookTradeResponseOriginalTradeSpecialInstructionsProspectusEnclosed             RebookTradeResponseOriginalTradeSpecialInstructions = "PROSPECTUS_ENCLOSED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsProspectusSeparateMail         RebookTradeResponseOriginalTradeSpecialInstructions = "PROSPECTUS_SEPARATE_MAIL"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSolicited                      RebookTradeResponseOriginalTradeSpecialInstructions = "SOLICITED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsUnsolicited                    RebookTradeResponseOriginalTradeSpecialInstructions = "UNSOLICITED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsXDividend                      RebookTradeResponseOriginalTradeSpecialInstructions = "X_DIVIDEND"
+	RebookTradeResponseOriginalTradeSpecialInstructionsActingAsPrincipal              RebookTradeResponseOriginalTradeSpecialInstructions = "ACTING_AS_PRINCIPAL"
+	RebookTradeResponseOriginalTradeSpecialInstructionsAveragePrice                   RebookTradeResponseOriginalTradeSpecialInstructions = "AVERAGE_PRICE"
+	RebookTradeResponseOriginalTradeSpecialInstructionsBrokerLiquidation              RebookTradeResponseOriginalTradeSpecialInstructions = "BROKER_LIQUIDATION"
+	RebookTradeResponseOriginalTradeSpecialInstructionsCouponBooks                    RebookTradeResponseOriginalTradeSpecialInstructions = "COUPON_BOOKS"
+	RebookTradeResponseOriginalTradeSpecialInstructionsHasPostageFee                  RebookTradeResponseOriginalTradeSpecialInstructions = "HAS_POSTAGE_FEE"
+	RebookTradeResponseOriginalTradeSpecialInstructionsInternetOrder                  RebookTradeResponseOriginalTradeSpecialInstructions = "INTERNET_ORDER"
+	RebookTradeResponseOriginalTradeSpecialInstructionsMarginSellout                  RebookTradeResponseOriginalTradeSpecialInstructions = "MARGIN_SELLOUT"
+	RebookTradeResponseOriginalTradeSpecialInstructionsMarketMakersAsPrincipal        RebookTradeResponseOriginalTradeSpecialInstructions = "MARKET_MAKERS_AS_PRINCIPAL"
+	RebookTradeResponseOriginalTradeSpecialInstructionsNegativeNetProceed             RebookTradeResponseOriginalTradeSpecialInstructions = "NEGATIVE_NET_PROCEED"
+	RebookTradeResponseOriginalTradeSpecialInstructionsPreFigIndicator                RebookTradeResponseOriginalTradeSpecialInstructions = "PRE_FIG_INDICATOR"
+	RebookTradeResponseOriginalTradeSpecialInstructionsRisklessPrincipalInstruction   RebookTradeResponseOriginalTradeSpecialInstructions = "RISKLESS_PRINCIPAL_INSTRUCTION"
+	RebookTradeResponseOriginalTradeSpecialInstructionsShortInstruction               RebookTradeResponseOriginalTradeSpecialInstructions = "SHORT_INSTRUCTION"
+	RebookTradeResponseOriginalTradeSpecialInstructionsThirdMarket                    RebookTradeResponseOriginalTradeSpecialInstructions = "THIRD_MARKET"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressMsrbTransmission       RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_MSRB_TRANSMISSION"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressTraceReporting         RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_TRACE_REPORTING"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressEmailNotification      RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_EMAIL_NOTIFICATION"
+	RebookTradeResponseOriginalTradeSpecialInstructionsStockReward                    RebookTradeResponseOriginalTradeSpecialInstructions = "STOCK_REWARD"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressRegFees                RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_REG_FEES"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressSecFee                 RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_SEC_FEE"
+	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressTafFee                 RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_TAF_FEE"
+	RebookTradeResponseOriginalTradeSpecialInstructionsDividendReinvestment           RebookTradeResponseOriginalTradeSpecialInstructions = "DIVIDEND_REINVESTMENT"
+)
+
+func (e RebookTradeResponseOriginalTradeSpecialInstructions) ToPointer() *RebookTradeResponseOriginalTradeSpecialInstructions {
+	return &e
+}
+
+// RebookTradeResponseOriginalTradeVenue - Exchange venue
+type RebookTradeResponseOriginalTradeVenue string
+
+const (
+	RebookTradeResponseOriginalTradeVenueExchangeVenueUnspecified RebookTradeResponseOriginalTradeVenue = "EXCHANGE_VENUE_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeVenueAmex                     RebookTradeResponseOriginalTradeVenue = "AMEX"
+	RebookTradeResponseOriginalTradeVenueArca                     RebookTradeResponseOriginalTradeVenue = "ARCA"
+	RebookTradeResponseOriginalTradeVenueBats                     RebookTradeResponseOriginalTradeVenue = "BATS"
+	RebookTradeResponseOriginalTradeVenueBatsByx                  RebookTradeResponseOriginalTradeVenue = "BATS_BYX"
+	RebookTradeResponseOriginalTradeVenueBoston                   RebookTradeResponseOriginalTradeVenue = "BOSTON"
+	RebookTradeResponseOriginalTradeVenueBox                      RebookTradeResponseOriginalTradeVenue = "BOX"
+	RebookTradeResponseOriginalTradeVenueBzx                      RebookTradeResponseOriginalTradeVenue = "BZX"
+	RebookTradeResponseOriginalTradeVenueC2                       RebookTradeResponseOriginalTradeVenue = "C2"
+	RebookTradeResponseOriginalTradeVenueCboe                     RebookTradeResponseOriginalTradeVenue = "CBOE"
+	RebookTradeResponseOriginalTradeVenueChicago                  RebookTradeResponseOriginalTradeVenue = "CHICAGO"
+	RebookTradeResponseOriginalTradeVenueCincinnati               RebookTradeResponseOriginalTradeVenue = "CINCINNATI"
+	RebookTradeResponseOriginalTradeVenueEdga                     RebookTradeResponseOriginalTradeVenue = "EDGA"
+	RebookTradeResponseOriginalTradeVenueEdgx                     RebookTradeResponseOriginalTradeVenue = "EDGX"
+	RebookTradeResponseOriginalTradeVenueExclearing               RebookTradeResponseOriginalTradeVenue = "EXCLEARING"
+	RebookTradeResponseOriginalTradeVenueIex                      RebookTradeResponseOriginalTradeVenue = "IEX"
+	RebookTradeResponseOriginalTradeVenueIse                      RebookTradeResponseOriginalTradeVenue = "ISE"
+	RebookTradeResponseOriginalTradeVenueIseGemini                RebookTradeResponseOriginalTradeVenue = "ISE_GEMINI"
+	RebookTradeResponseOriginalTradeVenueMiax                     RebookTradeResponseOriginalTradeVenue = "MIAX"
+	RebookTradeResponseOriginalTradeVenueNasdaq                   RebookTradeResponseOriginalTradeVenue = "NASDAQ"
+	RebookTradeResponseOriginalTradeVenueNasdaqOmxBx              RebookTradeResponseOriginalTradeVenue = "NASDAQ_OMX_BX"
+	RebookTradeResponseOriginalTradeVenueNyse                     RebookTradeResponseOriginalTradeVenue = "NYSE"
+	RebookTradeResponseOriginalTradeVenuePhlx                     RebookTradeResponseOriginalTradeVenue = "PHLX"
+	RebookTradeResponseOriginalTradeVenueOtc                      RebookTradeResponseOriginalTradeVenue = "OTC"
+	RebookTradeResponseOriginalTradeVenueQsr                      RebookTradeResponseOriginalTradeVenue = "QSR"
+)
+
+func (e RebookTradeResponseOriginalTradeVenue) ToPointer() *RebookTradeResponseOriginalTradeVenue {
+	return &e
+}
+
+// RebookTradeResponseOriginalTradeWhenIssued - Denotes that this trade was either when_issued or when_distributed.
+type RebookTradeResponseOriginalTradeWhenIssued string
+
+const (
+	RebookTradeResponseOriginalTradeWhenIssuedWhenIssuedTypeUnspecified RebookTradeResponseOriginalTradeWhenIssued = "WHEN_ISSUED_TYPE_UNSPECIFIED"
+	RebookTradeResponseOriginalTradeWhenIssuedWhenIssued                RebookTradeResponseOriginalTradeWhenIssued = "WHEN_ISSUED"
+	RebookTradeResponseOriginalTradeWhenIssuedWhenDistributed           RebookTradeResponseOriginalTradeWhenIssued = "WHEN_DISTRIBUTED"
+)
+
+func (e RebookTradeResponseOriginalTradeWhenIssued) ToPointer() *RebookTradeResponseOriginalTradeWhenIssued {
+	return &e
 }
 
 // OriginalTrade - The original trade that was rebooked.
 type OriginalTrade struct {
-	// Free form text field containing additional information for a trade
-	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
-	// Max Length 100 characters. Alternate order id from the street used for FRAC trades
+	// A globally unique identifier referencing a single account.
+	AccountID *string `json:"account_id,omitempty"`
+	// The current activity_id of this trade in the Ledger.
+	ActivityID *string `json:"activity_id,omitempty"`
+	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
+	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
+	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// uuid assigned by the Booking API if a trade belongs to an allocation
-	BookingAPITradeAllocationID *string `json:"booking_api_trade_allocation_id,omitempty"`
-	// uuid assigned by the Booking API to all trades
-	BookingAPITradeID *string `json:"booking_api_trade_id,omitempty"`
-	// Executing broker of the trade
-	Broker *string `json:"broker,omitempty"`
-	// Used to calculate broadridge blotter code
+	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	AssetType *RebookTradeResponseOriginalTradeAssetType `json:"asset_type,omitempty"`
+	// Broker capacity for the trade.
 	BrokerCapacity *RebookTradeResponseOriginalTradeBrokerCapacity `json:"broker_capacity,omitempty"`
-	// Free form text submitted by the client for internal purposes
-	ClientMemos []string `json:"client_memos,omitempty"`
-	// 32 characters. The client order ID from the order submitted
+	// The unique identifier that is associated with an order. Must be unique by date per trade per client.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// MIC code for the exchange
-	Exchange *string `json:"exchange,omitempty"`
-	// Execution id from the street
-	ExecutionID *string `json:"execution_id,omitempty"`
-	// Indicates whether Apex is the clearing broker for this trade. When false, indicates Apex is the clearing broker
-	ExecutionOnly *bool `json:"execution_only,omitempty"`
-	// Max Length 100 characters. External system id provided by a client
-	ExternalID *string `json:"external_id,omitempty"`
-	// The confirmation number associated with a mutual fund trade
-	FundConfirmationNumber *string `json:"fund_confirmation_number,omitempty"`
-	// Max length 100 characters. Order id generated by trading-gateway (Trade-Ex) to uniquely identify all orders in their system. Used as the client_order_id on new order singles sent downstream of the trading-gateway
-	GatewayClientOrderID *string `json:"gateway_client_order_id,omitempty"`
-	// If set to true, indicates the trade should be omitted from client billing
-	InternalError *bool `json:"internal_error,omitempty"`
-	// Set on penny-for-the-lot trades
-	IsWriteoff *bool `json:"is_writeoff,omitempty"`
-	// Repeated record containing information about the tax lots, if specified
-	Lots []Lot `json:"lots,omitempty"`
-	// Max Length 100 characters. Internally generated order id that is returned to client on exec reports
+	// Executing broker of the trade.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
+	// The executions (sometimes referred to as partial-fills) that comprise the trade.
+	Executions []Execution `json:"executions,omitempty"`
+	// Any client calculated fees associated with the trade. Only allowed if trade.open = false. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
+	Fees []BookingFee `json:"fees,omitempty"`
+	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
+	Identifier *string `json:"identifier,omitempty"`
+	// Identifier type for the asset being traded.
+	IdentifierType *RebookTradeResponseOriginalTradeIdentifierType `json:"identifier_type,omitempty"`
+	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
+	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
+	// Date field to support extended trading hours.
+	LocalMarketTradeDate *RebookTradeResponseOriginalTradeLocalMarketTradeDate `json:"local_market_trade_date,omitempty"`
+	// One or many lot matching instructions for the trade.
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
+	// Market Identifier Code
+	MicCode *string `json:"mic_code,omitempty"`
+	// The resource name of the trade.
+	Name *string `json:"name,omitempty"`
+	// State of this trade's completeness in filling. True: trade is not done filling and can append more executions onto the trade False: trade is done filling and cannot append more executions onto the trade By default, trades are closed when they are created. An open trade can later be closed by calling the CompleteTrade endpoint. Additional executions can be appended to an open trade by calling the CreateExecution endpoint. Trades that are left open will be automatically closed nightly before Ledger's EOD.
+	Open *bool `json:"open,omitempty"`
+	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
-	// The price for the instrument that is prevailing in the market.
-	PrevailingMarketPrice *RebookTradeResponseOriginalTradePrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
-	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *RebookTradeResponseOriginalTradePriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
-	// Used to calculate broadridge blotter code
-	Route *string `json:"route,omitempty"`
-	// The special instructions for a trade
-	SpecialInstructions []string `json:"special_instructions,omitempty"`
-	// Name of the issuer of a security and additional descriptive information about the particular issue
-	SymbolDescription *string `json:"symbol_description,omitempty"`
-	// Indicates the trade was executed in a security that is not currently listed. When-issued securities are bought and sold before they are officially issued, allowing investors to speculate on their future value
-	WhenIssued *bool `json:"when_issued,omitempty"`
-	// The yields associated with a fixed income trade. only valid if the SecurityType is FIXED_INCOME.
-	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
+	// Route type for the trade.
+	RouteType *RebookTradeResponseOriginalTradeRouteType `json:"route_type,omitempty"`
+	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+	SettlementDate *RebookTradeResponseOriginalTradeSettlementDate `json:"settlement_date,omitempty"`
+	// Denotes if the trade is a SELL or a BUY.
+	Side *RebookTradeResponseOriginalTradeSide `json:"side,omitempty"`
+	// Side modifier for the trade.
+	SideModifier *RebookTradeResponseOriginalTradeSideModifier `json:"side_modifier,omitempty"`
+	// The source of the submission.
+	SourceApplication *string `json:"source_application,omitempty"`
+	// An enumerated list of values used to indicate certain attributes about a trade (E.g. DISCRETION_EXERCISED, BROKER_LIQUIDATION) and/or trigger downstream processing rules (e.g. SUPPRESS_TRACE_REPORTING)
+	SpecialInstructions []RebookTradeResponseOriginalTradeSpecialInstructions `json:"special_instructions,omitempty"`
+	// A ULID to uniquely identify the trade globally.
+	TradeID *string `json:"trade_id,omitempty"`
+	// Exchange venue
+	Venue *RebookTradeResponseOriginalTradeVenue `json:"venue,omitempty"`
+	// Denotes that this trade was either when_issued or when_distributed.
+	WhenIssued *RebookTradeResponseOriginalTradeWhenIssued `json:"when_issued,omitempty"`
 }
 
-func (o *OriginalTrade) GetAdditionalInstructions() []string {
+func (o *OriginalTrade) GetAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountID
+}
+
+func (o *OriginalTrade) GetActivityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ActivityID
+}
+
+func (o *OriginalTrade) GetAdditionalInstructions() *string {
 	if o == nil {
 		return nil
 	}
@@ -495,25 +856,11 @@ func (o *OriginalTrade) GetAlternateOrderID() *string {
 	return o.AlternateOrderID
 }
 
-func (o *OriginalTrade) GetBookingAPITradeAllocationID() *string {
+func (o *OriginalTrade) GetAssetType() *RebookTradeResponseOriginalTradeAssetType {
 	if o == nil {
 		return nil
 	}
-	return o.BookingAPITradeAllocationID
-}
-
-func (o *OriginalTrade) GetBookingAPITradeID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.BookingAPITradeID
-}
-
-func (o *OriginalTrade) GetBroker() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Broker
+	return o.AssetType
 }
 
 func (o *OriginalTrade) GetBrokerCapacity() *RebookTradeResponseOriginalTradeBrokerCapacity {
@@ -523,13 +870,6 @@ func (o *OriginalTrade) GetBrokerCapacity() *RebookTradeResponseOriginalTradeBro
 	return o.BrokerCapacity
 }
 
-func (o *OriginalTrade) GetClientMemos() []string {
-	if o == nil {
-		return nil
-	}
-	return o.ClientMemos
-}
-
 func (o *OriginalTrade) GetClientOrderID() *string {
 	if o == nil {
 		return nil
@@ -537,67 +877,81 @@ func (o *OriginalTrade) GetClientOrderID() *string {
 	return o.ClientOrderID
 }
 
-func (o *OriginalTrade) GetExchange() *string {
+func (o *OriginalTrade) GetExecutingBroker() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Exchange
+	return o.ExecutingBroker
 }
 
-func (o *OriginalTrade) GetExecutionID() *string {
+func (o *OriginalTrade) GetExecutions() []Execution {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionID
+	return o.Executions
 }
 
-func (o *OriginalTrade) GetExecutionOnly() *bool {
+func (o *OriginalTrade) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
-	return o.ExecutionOnly
+	return o.Fees
 }
 
-func (o *OriginalTrade) GetExternalID() *string {
+func (o *OriginalTrade) GetIdentifier() *string {
 	if o == nil {
 		return nil
 	}
-	return o.ExternalID
+	return o.Identifier
 }
 
-func (o *OriginalTrade) GetFundConfirmationNumber() *string {
+func (o *OriginalTrade) GetIdentifierType() *RebookTradeResponseOriginalTradeIdentifierType {
 	if o == nil {
 		return nil
 	}
-	return o.FundConfirmationNumber
+	return o.IdentifierType
 }
 
-func (o *OriginalTrade) GetGatewayClientOrderID() *string {
+func (o *OriginalTrade) GetIssuingRegionCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.GatewayClientOrderID
+	return o.IssuingRegionCode
 }
 
-func (o *OriginalTrade) GetInternalError() *bool {
+func (o *OriginalTrade) GetLocalMarketTradeDate() *RebookTradeResponseOriginalTradeLocalMarketTradeDate {
 	if o == nil {
 		return nil
 	}
-	return o.InternalError
+	return o.LocalMarketTradeDate
 }
 
-func (o *OriginalTrade) GetIsWriteoff() *bool {
+func (o *OriginalTrade) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}
-	return o.IsWriteoff
+	return o.LotMatchingInstructions
 }
 
-func (o *OriginalTrade) GetLots() []Lot {
+func (o *OriginalTrade) GetMicCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Lots
+	return o.MicCode
+}
+
+func (o *OriginalTrade) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
+}
+
+func (o *OriginalTrade) GetOpen() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Open
 }
 
 func (o *OriginalTrade) GetOrderID() *string {
@@ -607,53 +961,67 @@ func (o *OriginalTrade) GetOrderID() *string {
 	return o.OrderID
 }
 
-func (o *OriginalTrade) GetPrevailingMarketPrice() *RebookTradeResponseOriginalTradePrevailingMarketPrice {
+func (o *OriginalTrade) GetRouteType() *RebookTradeResponseOriginalTradeRouteType {
 	if o == nil {
 		return nil
 	}
-	return o.PrevailingMarketPrice
+	return o.RouteType
 }
 
-func (o *OriginalTrade) GetPriceAdjustmentRecord() *RebookTradeResponseOriginalTradePriceAdjustmentRecord {
+func (o *OriginalTrade) GetSettlementDate() *RebookTradeResponseOriginalTradeSettlementDate {
 	if o == nil {
 		return nil
 	}
-	return o.PriceAdjustmentRecord
+	return o.SettlementDate
 }
 
-func (o *OriginalTrade) GetRoute() *string {
+func (o *OriginalTrade) GetSide() *RebookTradeResponseOriginalTradeSide {
 	if o == nil {
 		return nil
 	}
-	return o.Route
+	return o.Side
 }
 
-func (o *OriginalTrade) GetSpecialInstructions() []string {
+func (o *OriginalTrade) GetSideModifier() *RebookTradeResponseOriginalTradeSideModifier {
+	if o == nil {
+		return nil
+	}
+	return o.SideModifier
+}
+
+func (o *OriginalTrade) GetSourceApplication() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SourceApplication
+}
+
+func (o *OriginalTrade) GetSpecialInstructions() []RebookTradeResponseOriginalTradeSpecialInstructions {
 	if o == nil {
 		return nil
 	}
 	return o.SpecialInstructions
 }
 
-func (o *OriginalTrade) GetSymbolDescription() *string {
+func (o *OriginalTrade) GetTradeID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.SymbolDescription
+	return o.TradeID
 }
 
-func (o *OriginalTrade) GetWhenIssued() *bool {
+func (o *OriginalTrade) GetVenue() *RebookTradeResponseOriginalTradeVenue {
+	if o == nil {
+		return nil
+	}
+	return o.Venue
+}
+
+func (o *OriginalTrade) GetWhenIssued() *RebookTradeResponseOriginalTradeWhenIssued {
 	if o == nil {
 		return nil
 	}
 	return o.WhenIssued
-}
-
-func (o *OriginalTrade) GetYieldRecords() []YieldRecord {
-	if o == nil {
-		return nil
-	}
-	return o.YieldRecords
 }
 
 // RebookTradeResponse - A response for the rebook trade method.

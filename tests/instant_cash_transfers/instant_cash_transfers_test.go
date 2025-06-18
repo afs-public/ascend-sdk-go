@@ -177,12 +177,20 @@ func testInstantCashTransfer_TransfersLocateIctReport_LocateIctReport1(
 	t *testing.T, s ascendsdk.SDK, ctx context.Context) {
 
 	assert.NotNil(t, s)
+
+	request := operations.IctReconReportsLocateIctReportRequest{
+		CorrespondentID:                   os.Getenv("CORRESPONDENT_ID"),
+		ProgramDateFilterProgram:          operations.ProgramDateFilterProgramBrokerPartner.ToPointer(),
+		ProgramDateFilterProcessDateYear:  ascendsdk.Int(2025),
+		ProgramDateFilterProcessDateMonth: ascendsdk.Int(5),
+		ProgramDateFilterProcessDateDay:   ascendsdk.Int(28),
+	}
+
 	res, err := s.InstantCashTransferICT.LocateIctReport(
 		ctx,
-		os.Getenv("CORRESPONDENT_ID"),
-		nil,
-		operations.ProgramDateFilterProgramBrokerPartner.ToPointer(),
-		nil)
+		request,
+	)
+
 	assert.NoError(t, err)
 	assert.NotNil(t, res.HTTPMeta)
 	assert.NotNil(t, res.HTTPMeta.Response)

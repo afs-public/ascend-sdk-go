@@ -177,8 +177,8 @@ func (o *TradeAllocationQuantity) GetValue() *string {
 	return o.Value
 }
 
-// SettlementDate - Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field in Eastern Time.
-type SettlementDate struct {
+// TradeAllocationSettlementDate - Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field in Eastern Time.
+type TradeAllocationSettlementDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
@@ -187,21 +187,21 @@ type SettlementDate struct {
 	Year *int `json:"year,omitempty"`
 }
 
-func (o *SettlementDate) GetDay() *int {
+func (o *TradeAllocationSettlementDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Day
 }
 
-func (o *SettlementDate) GetMonth() *int {
+func (o *TradeAllocationSettlementDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Month
 }
 
-func (o *SettlementDate) GetYear() *int {
+func (o *TradeAllocationSettlementDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
@@ -343,7 +343,7 @@ type TradeAllocation struct {
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
-	Fees []Fee `json:"fees,omitempty"`
+	Fees []BookingFee `json:"fees,omitempty"`
 	// The ULID formatted account_id that the positions will be moved from.
 	FromAccountID *string `json:"from_account_id,omitempty"`
 	// The current activity_id of the trade allocation that positions will be moved from in the Ledger.
@@ -357,7 +357,7 @@ type TradeAllocation struct {
 	// Unicode CLDR region code. Issuing Region Code is required for some `identifier_type`s, especially CUSIP.
 	IssuingRegionCode *string `json:"issuing_region_code,omitempty"`
 	// One or many lot matching instructions for the trade allocation.
-	LotMatchingInstructions []Lot `json:"lot_matching_instructions,omitempty"`
+	LotMatchingInstructions []BookingLot `json:"lot_matching_instructions,omitempty"`
 	// Caller provided but can be used for booking-service to note original trade details when booking into the error account or using the error asset.
 	Memo *string `json:"memo,omitempty"`
 	// The resource name of the trade allocation.
@@ -371,7 +371,7 @@ type TradeAllocation struct {
 	// Quantity with requirement of 12 or less integral number and 5 or less fractional precision.
 	Quantity *TradeAllocationQuantity `json:"quantity,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field in Eastern Time.
-	SettlementDate *SettlementDate `json:"settlement_date,omitempty"`
+	SettlementDate *TradeAllocationSettlementDate `json:"settlement_date,omitempty"`
 	// Side modifier for the trade allocation.
 	SideModifier *TradeAllocationSideModifier `json:"side_modifier,omitempty"`
 	// The source of the submission.
@@ -459,7 +459,7 @@ func (o *TradeAllocation) GetExecutionTime() *time.Time {
 	return o.ExecutionTime
 }
 
-func (o *TradeAllocation) GetFees() []Fee {
+func (o *TradeAllocation) GetFees() []BookingFee {
 	if o == nil {
 		return nil
 	}
@@ -508,7 +508,7 @@ func (o *TradeAllocation) GetIssuingRegionCode() *string {
 	return o.IssuingRegionCode
 }
 
-func (o *TradeAllocation) GetLotMatchingInstructions() []Lot {
+func (o *TradeAllocation) GetLotMatchingInstructions() []BookingLot {
 	if o == nil {
 		return nil
 	}
@@ -557,7 +557,7 @@ func (o *TradeAllocation) GetQuantity() *TradeAllocationQuantity {
 	return o.Quantity
 }
 
-func (o *TradeAllocation) GetSettlementDate() *SettlementDate {
+func (o *TradeAllocation) GetSettlementDate() *TradeAllocationSettlementDate {
 	if o == nil {
 		return nil
 	}

@@ -30,7 +30,7 @@ func (o *BookingGetTradeRequest) GetTradeID() string {
 type BookingGetTradeResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	Trade *components.Trade
+	BookingTrade *components.BookingTrade
 	// INVALID_ARGUMENT: The request is not valid.
 	Status *components.Status
 }
@@ -42,11 +42,11 @@ func (o *BookingGetTradeResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *BookingGetTradeResponse) GetTrade() *components.Trade {
+func (o *BookingGetTradeResponse) GetBookingTrade() *components.BookingTrade {
 	if o == nil {
 		return nil
 	}
-	return o.Trade
+	return o.BookingTrade
 }
 
 func (o *BookingGetTradeResponse) GetStatus() *components.Status {

@@ -40,3 +40,4 @@ When an order has the REJECTED status, this will be populated with a system code
 | `OrderRejectedReasonAssetNotSetUpToTrade`                              | ASSET_NOT_SET_UP_TO_TRADE                                              |
 | `OrderRejectedReasonInvalidOrderQuantity`                              | INVALID_ORDER_QUANTITY                                                 |
 | `OrderRejectedReasonClientReceivedTimeRequired`                        | CLIENT_RECEIVED_TIME_REQUIRED                                          |
+| `OrderRejectedReasonClientNotPermittedToUseTradingStrategy`            | CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY                           |

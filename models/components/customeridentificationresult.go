@@ -153,12 +153,16 @@ func (e SelfieVerified) ToPointer() *SelfieVerified {
 type CustomerIdentificationResult struct {
 	// Whether or not the customer birth date was verified
 	BirthDateVerified *BirthDateVerified `json:"birth_date_verified,omitempty"`
+	// Whether or not the result is completed Must be true to be linked to an Investigation or used to Create/Update an LegalNaturalPerson
+	Completed *bool `json:"completed,omitempty"`
 	// Whether or not the document authenticity is verified or not Will be NOT_IN_SCOPE if the check being done is not documentary
 	DocumentAuthenticityVerified *DocumentAuthenticityVerified `json:"document_authenticity_verified,omitempty"`
 	// Whether or not the document expiry was verified This is only in scope for document verification checks If document is expired this will be set to EXPIRED
 	DocumentExpiryStatus *DocumentExpiryStatus `json:"document_expiry_status,omitempty"`
-	// One or more ULIDs from the documents api of the image(s) of the document that relates to the identification check
+	// One or more ULIDs from the documents api of the image(s) of the document that relates to the identification check for a DOCUMENTARY check, these will be the images provided in the session
 	DocumentVerificationIds []string `json:"document_verification_ids,omitempty"`
+	// The URI to complete documentary session Will be populated if the CheckType is DOCUMENTARY
+	DocumentarySessionURI *string `json:"documentary_session_uri,omitempty"`
 	// Whether or not the customer email was verified
 	EmailVerified *EmailVerified `json:"email_verified,omitempty"`
 	// The name of the external vendor
@@ -188,6 +192,13 @@ func (o *CustomerIdentificationResult) GetBirthDateVerified() *BirthDateVerified
 	return o.BirthDateVerified
 }
 
+func (o *CustomerIdentificationResult) GetCompleted() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Completed
+}
+
 func (o *CustomerIdentificationResult) GetDocumentAuthenticityVerified() *DocumentAuthenticityVerified {
 	if o == nil {
 		return nil
@@ -207,6 +218,13 @@ func (o *CustomerIdentificationResult) GetDocumentVerificationIds() []string {
 		return nil
 	}
 	return o.DocumentVerificationIds
+}
+
+func (o *CustomerIdentificationResult) GetDocumentarySessionURI() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DocumentarySessionURI
 }
 
 func (o *CustomerIdentificationResult) GetEmailVerified() *EmailVerified {

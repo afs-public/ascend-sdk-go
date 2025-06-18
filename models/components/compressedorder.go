@@ -163,6 +163,19 @@ func (e CompressedOrderSide) ToPointer() *CompressedOrderSide {
 	return &e
 }
 
+type CompressedOrderSpecialReportingInstructions string
+
+const (
+	CompressedOrderSpecialReportingInstructionsSpecialReportingInstructionsUnspecified CompressedOrderSpecialReportingInstructions = "SPECIAL_REPORTING_INSTRUCTIONS_UNSPECIFIED"
+	CompressedOrderSpecialReportingInstructionsSolicited                               CompressedOrderSpecialReportingInstructions = "SOLICITED"
+	CompressedOrderSpecialReportingInstructionsUnsolicited                             CompressedOrderSpecialReportingInstructions = "UNSOLICITED"
+	CompressedOrderSpecialReportingInstructionsRoundUp                                 CompressedOrderSpecialReportingInstructions = "ROUND_UP"
+)
+
+func (e CompressedOrderSpecialReportingInstructions) ToPointer() *CompressedOrderSpecialReportingInstructions {
+	return &e
+}
+
 // CompressedOrderTimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type CompressedOrderTimeInForce string
 
@@ -186,7 +199,7 @@ type CompressedOrder struct {
 	// The average prices, as weighted averages, across all executions in this order. Will be absent if an order has no executions.
 	//
 	//  When asset_type = EQUITY, there will be at most one value present, with a type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a maximum of two for larger USD amounts.
-	AveragePrices []ExecutedPrice `json:"average_prices,omitempty"`
+	AveragePrices []BasketTradingExecutedPrice `json:"average_prices,omitempty"`
 	// System generated unique id for the compressed order.
 	CompressedOrderID *string `json:"compressed_order_id,omitempty"`
 	// Time of the order creation
@@ -196,7 +209,7 @@ type CompressedOrder struct {
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
-	Executions []Executions `json:"executions,omitempty"`
+	Executions []BasketTradingExecutions `json:"executions,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *CompressedOrderFilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -219,6 +232,8 @@ type CompressedOrder struct {
 	Quantity *CompressedOrderQuantity `json:"quantity,omitempty"`
 	// The side of this order.
 	Side *CompressedOrderSide `json:"side,omitempty"`
+	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+	SpecialReportingInstructions []CompressedOrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *CompressedOrderTimeInForce `json:"time_in_force,omitempty"`
 }
@@ -255,7 +270,7 @@ func (o *CompressedOrder) GetAveragePriceAccountID() *string {
 	return o.AveragePriceAccountID
 }
 
-func (o *CompressedOrder) GetAveragePrices() []ExecutedPrice {
+func (o *CompressedOrder) GetAveragePrices() []BasketTradingExecutedPrice {
 	if o == nil {
 		return nil
 	}
@@ -290,7 +305,7 @@ func (o *CompressedOrder) GetCurrencyCode() *string {
 	return o.CurrencyCode
 }
 
-func (o *CompressedOrder) GetExecutions() []Executions {
+func (o *CompressedOrder) GetExecutions() []BasketTradingExecutions {
 	if o == nil {
 		return nil
 	}
@@ -372,6 +387,13 @@ func (o *CompressedOrder) GetSide() *CompressedOrderSide {
 		return nil
 	}
 	return o.Side
+}
+
+func (o *CompressedOrder) GetSpecialReportingInstructions() []CompressedOrderSpecialReportingInstructions {
+	if o == nil {
+		return nil
+	}
+	return o.SpecialReportingInstructions
 }
 
 func (o *CompressedOrder) GetTimeInForce() *CompressedOrderTimeInForce {

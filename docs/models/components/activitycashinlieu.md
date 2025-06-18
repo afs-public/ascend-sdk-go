@@ -1,0 +1,10 @@
+# ActivityCashInLieu
+
+Object containing metadata for cash in lieu
+
+
+## Fields
+
+| Field                                                                                                                                             | Type                                                                                                                                              | Required                                                                                                                                          | Description                                                                                                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CorporateActionGeneralInformation`                                                                                                               | [*components.ActivityCashInLieuCorporateActionGeneralInformation](../../models/components/activitycashinlieucorporateactiongeneralinformation.md) | :heavy_minus_sign:                                                                                                                                | Common fields for corporate actions                                                                                                               |

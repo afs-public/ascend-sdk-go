@@ -190,12 +190,12 @@ func (s *TradeBooking) CreateTrade(ctx context.Context, accountID string, tradeC
 				return nil, err
 			}
 
-			var out components.Trade
+			var out components.BookingTrade
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Trade = &out
+			res.BookingTrade = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -427,12 +427,12 @@ func (s *TradeBooking) GetTrade(ctx context.Context, accountID string, tradeID s
 				return nil, err
 			}
 
-			var out components.Trade
+			var out components.BookingTrade
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.Trade = &out
+			res.BookingTrade = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

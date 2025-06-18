@@ -214,7 +214,7 @@ type TradeCreate struct {
 	// The executions (sometimes referred to as partial-fills) that comprise the trade.
 	Executions []ExecutionCreate `json:"executions"`
 	// Any client calculated fees associated with the trade. Only allowed if trade.open = false. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
-	Fees []FeeCreate `json:"fees,omitempty"`
+	Fees []BookingFeeCreate `json:"fees,omitempty"`
 	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
 	Identifier string `json:"identifier"`
 	// Identifier type for the asset being traded.
@@ -313,7 +313,7 @@ func (o *TradeCreate) GetExecutions() []ExecutionCreate {
 	return o.Executions
 }
 
-func (o *TradeCreate) GetFees() []FeeCreate {
+func (o *TradeCreate) GetFees() []BookingFeeCreate {
 	if o == nil {
 		return nil
 	}

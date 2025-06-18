@@ -48,6 +48,7 @@ type InvestigationServiceUpdateInvestigationResponse struct {
 	// OK
 	Investigation *components.Investigation
 	// INVALID_ARGUMENT: The request is not valid, additional information may be present in the BadRequest details.
+	// FAILED_PRECONDITION: The request is not valid, additional information may be present in the BadRequest details.
 	Status *components.Status
 }
 

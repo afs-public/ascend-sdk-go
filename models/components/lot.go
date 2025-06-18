@@ -50,8 +50,8 @@ func (o *LotQuantity) GetValue() *string {
 	return o.Value
 }
 
-// TradeDate - Trade date of the trade lot
-type TradeDate struct {
+// LotTradeDate - Trade date of the trade lot
+type LotTradeDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
@@ -60,21 +60,21 @@ type TradeDate struct {
 	Year *int `json:"year,omitempty"`
 }
 
-func (o *TradeDate) GetDay() *int {
+func (o *LotTradeDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Day
 }
 
-func (o *TradeDate) GetMonth() *int {
+func (o *LotTradeDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Month
 }
 
-func (o *TradeDate) GetYear() *int {
+func (o *LotTradeDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
@@ -89,7 +89,7 @@ type Lot struct {
 	// Quantity of the trade lot
 	Quantity *LotQuantity `json:"quantity,omitempty"`
 	// Trade date of the trade lot
-	TradeDate *TradeDate `json:"trade_date,omitempty"`
+	TradeDate *LotTradeDate `json:"trade_date,omitempty"`
 }
 
 func (o *Lot) GetID() *string {
@@ -113,7 +113,7 @@ func (o *Lot) GetQuantity() *LotQuantity {
 	return o.Quantity
 }
 
-func (o *Lot) GetTradeDate() *TradeDate {
+func (o *Lot) GetTradeDate() *LotTradeDate {
 	if o == nil {
 		return nil
 	}

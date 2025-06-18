@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // AssetCategory - The NSCC asset category
 type AssetCategory string
 
@@ -82,29 +77,6 @@ const (
 
 func (e AcatsAssetType) ToPointer() *AcatsAssetType {
 	return &e
-}
-func (e *AcatsAssetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "IDENTIFIER_TYPE_UNSPECIFIED":
-		fallthrough
-	case "CURRENCY_CODE":
-		fallthrough
-	case "CUSIP":
-		fallthrough
-	case "SYMBOL":
-		fallthrough
-	case "ISIN":
-		fallthrough
-	case "ASSET_ID":
-		*e = AcatsAssetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AcatsAssetType: %v", v)
-	}
 }
 
 // AcatsAsset - The asset being transferred If cash, the asset_id is the currency code (e.g. USD) and the position is the amount

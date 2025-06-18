@@ -185,6 +185,238 @@ func (o *ActivityActivityDate) GetYear() *int {
 	return o.Year
 }
 
+// ActivityBrokerCapacity - The execution route Apex used for this trade
+type ActivityBrokerCapacity string
+
+const (
+	ActivityBrokerCapacityCapacityUnspecified ActivityBrokerCapacity = "CAPACITY_UNSPECIFIED"
+	ActivityBrokerCapacityAgency              ActivityBrokerCapacity = "AGENCY"
+	ActivityBrokerCapacityPrincipal           ActivityBrokerCapacity = "PRINCIPAL"
+	ActivityBrokerCapacityMixed               ActivityBrokerCapacity = "MIXED"
+)
+
+func (e ActivityBrokerCapacity) ToPointer() *ActivityBrokerCapacity {
+	return &e
+}
+
+// ActivityPrevailingMarketPrice - The price for the instrument that is prevailing in the market
+type ActivityPrevailingMarketPrice struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityPrevailingMarketPrice) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityPriceAdjustmentAmount - Total monetary value of the price_adjustment
+type ActivityPriceAdjustmentAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityPriceAdjustmentAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityPriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
+type ActivityPriceAdjustmentPercent struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityPriceAdjustmentPercent) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
+type ActivityPriceAdjustmentType string
+
+const (
+	ActivityPriceAdjustmentTypePriceAdjustmentTypeUnspecified ActivityPriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
+	ActivityPriceAdjustmentTypeMarkup                         ActivityPriceAdjustmentType = "MARKUP"
+	ActivityPriceAdjustmentTypeMarkdown                       ActivityPriceAdjustmentType = "MARKDOWN"
+	ActivityPriceAdjustmentTypeSalesLoad                      ActivityPriceAdjustmentType = "SALES_LOAD"
+)
+
+func (e ActivityPriceAdjustmentType) ToPointer() *ActivityPriceAdjustmentType {
+	return &e
+}
+
+// ActivityPriceAdjustmentRecord - Information about any price adjustments applied to the security
+type ActivityPriceAdjustmentRecord struct {
+	// Total monetary value of the price_adjustment
+	PriceAdjustmentAmount *ActivityPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
+	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
+	PriceAdjustmentPercent *ActivityPriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
+	// The type of price adjustment being applied by the broker to the net price of the security
+	PriceAdjustmentType *ActivityPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+}
+
+func (o *ActivityPriceAdjustmentRecord) GetPriceAdjustmentAmount() *ActivityPriceAdjustmentAmount {
+	if o == nil {
+		return nil
+	}
+	return o.PriceAdjustmentAmount
+}
+
+func (o *ActivityPriceAdjustmentRecord) GetPriceAdjustmentPercent() *ActivityPriceAdjustmentPercent {
+	if o == nil {
+		return nil
+	}
+	return o.PriceAdjustmentPercent
+}
+
+func (o *ActivityPriceAdjustmentRecord) GetPriceAdjustmentType() *ActivityPriceAdjustmentType {
+	if o == nil {
+		return nil
+	}
+	return o.PriceAdjustmentType
+}
+
+// ActivityAllocation - Object containing metadata for trade allocation
+type ActivityAllocation struct {
+	// To be populated by the submitter of the trade detail
+	AdditionalInstructions []string `json:"additional_instructions,omitempty"`
+	// A ULID assigned by the Booking API if a trade belongs to an allocation
+	BookingAPITradeAllocationID *string `json:"booking_api_trade_allocation_id,omitempty"`
+	// The execution route Apex used for this trade
+	BrokerCapacity *ActivityBrokerCapacity `json:"broker_capacity,omitempty"`
+	// Client usage area (intact)
+	ClientMemos []string `json:"client_memos,omitempty"`
+	// Client-provided order ID present in execution reports
+	ClientOrderID *string `json:"client_order_id,omitempty"`
+	// External system ID provided by a client
+	ExternalID *string `json:"external_id,omitempty"`
+	// Order ID generated by the trading-gateway
+	GatewayClientOrderID *string `json:"gateway_client_order_id,omitempty"`
+	// Indicates the trade should be omitted from client billing
+	InternalError *bool `json:"internal_error,omitempty"`
+	// Trade lots
+	Lots []Lot `json:"lots,omitempty"`
+	// The price for the instrument that is prevailing in the market
+	PrevailingMarketPrice *ActivityPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
+	// Information about any price adjustments applied to the security
+	PriceAdjustmentRecord *ActivityPriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
+	// Special instructions for the trade
+	SpecialInstructions []string `json:"special_instructions,omitempty"`
+	// The yields associated with a fixed income trade
+	YieldRecords []YieldRecord `json:"yield_records,omitempty"`
+}
+
+func (o *ActivityAllocation) GetAdditionalInstructions() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalInstructions
+}
+
+func (o *ActivityAllocation) GetBookingAPITradeAllocationID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BookingAPITradeAllocationID
+}
+
+func (o *ActivityAllocation) GetBrokerCapacity() *ActivityBrokerCapacity {
+	if o == nil {
+		return nil
+	}
+	return o.BrokerCapacity
+}
+
+func (o *ActivityAllocation) GetClientMemos() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientMemos
+}
+
+func (o *ActivityAllocation) GetClientOrderID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientOrderID
+}
+
+func (o *ActivityAllocation) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
+func (o *ActivityAllocation) GetGatewayClientOrderID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.GatewayClientOrderID
+}
+
+func (o *ActivityAllocation) GetInternalError() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.InternalError
+}
+
+func (o *ActivityAllocation) GetLots() []Lot {
+	if o == nil {
+		return nil
+	}
+	return o.Lots
+}
+
+func (o *ActivityAllocation) GetPrevailingMarketPrice() *ActivityPrevailingMarketPrice {
+	if o == nil {
+		return nil
+	}
+	return o.PrevailingMarketPrice
+}
+
+func (o *ActivityAllocation) GetPriceAdjustmentRecord() *ActivityPriceAdjustmentRecord {
+	if o == nil {
+		return nil
+	}
+	return o.PriceAdjustmentRecord
+}
+
+func (o *ActivityAllocation) GetSpecialInstructions() []string {
+	if o == nil {
+		return nil
+	}
+	return o.SpecialInstructions
+}
+
+func (o *ActivityAllocation) GetYieldRecords() []YieldRecord {
+	if o == nil {
+		return nil
+	}
+	return o.YieldRecords
+}
+
+// ActivityCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
+type ActivityCashRate struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityCashRate) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // ActivityCorporateActionGeneralInformation - Common fields for corporate actions
 type ActivityCorporateActionGeneralInformation struct {
 	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
@@ -283,6 +515,157 @@ func (o *ActivityPaymentDate) GetYear() *int {
 	return o.Year
 }
 
+// ActivityBondDefaultQuantity - Corresponds to the position's trade quantity
+type ActivityBondDefaultQuantity struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityBondDefaultQuantity) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityBondDefault - Object containing metadata for bond defaults
+type ActivityBondDefault struct {
+	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
+	CashRate *ActivityCashRate `json:"cash_rate,omitempty"`
+	// Common fields for corporate actions
+	CorporateActionGeneralInformation *ActivityCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
+	// The anticipated payment date at the depository
+	PaymentDate *ActivityPaymentDate `json:"payment_date,omitempty"`
+	// Corresponds to the position's trade quantity
+	Quantity *ActivityBondDefaultQuantity `json:"quantity,omitempty"`
+}
+
+func (o *ActivityBondDefault) GetCashRate() *ActivityCashRate {
+	if o == nil {
+		return nil
+	}
+	return o.CashRate
+}
+
+func (o *ActivityBondDefault) GetCorporateActionGeneralInformation() *ActivityCorporateActionGeneralInformation {
+	if o == nil {
+		return nil
+	}
+	return o.CorporateActionGeneralInformation
+}
+
+func (o *ActivityBondDefault) GetPaymentDate() *ActivityPaymentDate {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentDate
+}
+
+func (o *ActivityBondDefault) GetQuantity() *ActivityBondDefaultQuantity {
+	if o == nil {
+		return nil
+	}
+	return o.Quantity
+}
+
+// ActivityCapitalGainsCorporateActionGeneralInformation - Common fields for corporate actions
+type ActivityCapitalGainsCorporateActionGeneralInformation struct {
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
+	CorporateActionID *string `json:"corporate_action_id,omitempty"`
+	// Asset Id of the new security after the corporate action event is processed
+	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
+	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
+	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
+	// Asset Id of the existing security before the corporate action event is processed
+	TargetAssetID *string `json:"target_asset_id,omitempty"`
+	// External Identifier of the existing security before the corporate action event is processed
+	TargetCusip *string `json:"target_cusip,omitempty"`
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
+	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetCorporateActionID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CorporateActionID
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetDisbursedAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedAssetID
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetDisbursedCusip() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedCusip
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetDisbursedSymbolDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedSymbolDescription
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetTargetAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetAssetID
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetTargetCusip() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetCusip
+}
+
+func (o *ActivityCapitalGainsCorporateActionGeneralInformation) GetTargetSymbolDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetSymbolDescription
+}
+
+// ActivityCapitalGainsPaymentDate - The anticipated payment date at the depository
+type ActivityCapitalGainsPaymentDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *ActivityCapitalGainsPaymentDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *ActivityCapitalGainsPaymentDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *ActivityCapitalGainsPaymentDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // ActivityCapitalGainsQuantity - The position on which the corporate action was paid
 type ActivityCapitalGainsQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -330,11 +713,11 @@ func (o *ActivityRecordDate) GetYear() *int {
 // ActivityCapitalGains - Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
 type ActivityCapitalGains struct {
 	// Common fields for corporate actions
-	CorporateActionGeneralInformation *ActivityCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
+	CorporateActionGeneralInformation *ActivityCapitalGainsCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
 	// Can indicate the capital gain is eligible for preferential tax treatment
 	LongTermGain *bool `json:"long_term_gain,omitempty"`
 	// The anticipated payment date at the depository
-	PaymentDate *ActivityPaymentDate `json:"payment_date,omitempty"`
+	PaymentDate *ActivityCapitalGainsPaymentDate `json:"payment_date,omitempty"`
 	// The position on which the corporate action was paid
 	Quantity *ActivityCapitalGainsQuantity `json:"quantity,omitempty"`
 	// The date on which positions are recorded in order to calculate entitlement
@@ -343,7 +726,7 @@ type ActivityCapitalGains struct {
 	Reinvested *bool `json:"reinvested,omitempty"`
 }
 
-func (o *ActivityCapitalGains) GetCorporateActionGeneralInformation() *ActivityCorporateActionGeneralInformation {
+func (o *ActivityCapitalGains) GetCorporateActionGeneralInformation() *ActivityCapitalGainsCorporateActionGeneralInformation {
 	if o == nil {
 		return nil
 	}
@@ -357,7 +740,7 @@ func (o *ActivityCapitalGains) GetLongTermGain() *bool {
 	return o.LongTermGain
 }
 
-func (o *ActivityCapitalGains) GetPaymentDate() *ActivityPaymentDate {
+func (o *ActivityCapitalGains) GetPaymentDate() *ActivityCapitalGainsPaymentDate {
 	if o == nil {
 		return nil
 	}
@@ -385,13 +768,13 @@ func (o *ActivityCapitalGains) GetReinvested() *bool {
 	return o.Reinvested
 }
 
-// ActivityCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
-type ActivityCashRate struct {
+// ActivityCashDividendCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
+type ActivityCashDividendCashRate struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *ActivityCashRate) GetValue() *string {
+func (o *ActivityCashDividendCashRate) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -625,7 +1008,7 @@ func (e ActivitySubtype) ToPointer() *ActivitySubtype {
 // ActivityCashDividend - Used to record the distribution of cash to shareholders, paid by the issuer, usually based upon current earnings and/or accumulated profits as declared by the board of directors and details related to the cash dividend
 type ActivityCashDividend struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
-	CashRate *ActivityCashRate `json:"cash_rate,omitempty"`
+	CashRate *ActivityCashDividendCashRate `json:"cash_rate,omitempty"`
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *ActivityCashDividendCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
 	// Number of shares loaned out via the FPSL program on record_date
@@ -652,7 +1035,7 @@ type ActivityCashDividend struct {
 	Subtype *ActivitySubtype `json:"subtype,omitempty"`
 }
 
-func (o *ActivityCashDividend) GetCashRate() *ActivityCashRate {
+func (o *ActivityCashDividend) GetCashRate() *ActivityCashDividendCashRate {
 	if o == nil {
 		return nil
 	}
@@ -741,6 +1124,86 @@ func (o *ActivityCashDividend) GetSubtype() *ActivitySubtype {
 		return nil
 	}
 	return o.Subtype
+}
+
+// ActivityCashInLieuCorporateActionGeneralInformation - Common fields for corporate actions
+type ActivityCashInLieuCorporateActionGeneralInformation struct {
+	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
+	CorporateActionID *string `json:"corporate_action_id,omitempty"`
+	// Asset Id of the new security after the corporate action event is processed
+	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
+	DisbursedCusip *string `json:"disbursed_cusip,omitempty"`
+	// When populated, the name of the issuer of a security and additional descriptive information about the new security after the corporate action event is processed
+	DisbursedSymbolDescription *string `json:"disbursed_symbol_description,omitempty"`
+	// Asset Id of the existing security before the corporate action event is processed
+	TargetAssetID *string `json:"target_asset_id,omitempty"`
+	// External Identifier of the existing security before the corporate action event is processed
+	TargetCusip *string `json:"target_cusip,omitempty"`
+	// Name of the issuer of a security and additional descriptive information about the existing security before the corporate action event is processed
+	TargetSymbolDescription *string `json:"target_symbol_description,omitempty"`
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetCorporateActionID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CorporateActionID
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetDisbursedAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedAssetID
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetDisbursedCusip() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedCusip
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetDisbursedSymbolDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedSymbolDescription
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetTargetAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetAssetID
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetTargetCusip() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetCusip
+}
+
+func (o *ActivityCashInLieuCorporateActionGeneralInformation) GetTargetSymbolDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetSymbolDescription
+}
+
+// ActivityCashInLieu - Object containing metadata for cash in lieu
+type ActivityCashInLieu struct {
+	// Common fields for corporate actions
+	CorporateActionGeneralInformation *ActivityCashInLieuCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
+}
+
+func (o *ActivityCashInLieu) GetCorporateActionGeneralInformation() *ActivityCashInLieuCorporateActionGeneralInformation {
+	if o == nil {
+		return nil
+	}
+	return o.CorporateActionGeneralInformation
 }
 
 // ActivityCommission - Used to record commission charged by brokers or financial intermediaries for executing financial transactions on behalf of clients
@@ -998,6 +1461,7 @@ const (
 	ActivityDepositTypeRtp                             ActivityDepositType = "RTP"
 	ActivityDepositTypeIct                             ActivityDepositType = "ICT"
 	ActivityDepositTypeJournal                         ActivityDepositType = "JOURNAL"
+	ActivityDepositTypeExternalAch                     ActivityDepositType = "EXTERNAL_ACH"
 )
 
 func (e ActivityDepositType) ToPointer() *ActivityDepositType {
@@ -4030,6 +4494,22 @@ func (e ActivitySide) ToPointer() *ActivitySide {
 	return &e
 }
 
+// ActivitySideModifier - Indicates whether the trade is opening a new position or closing an existing position
+type ActivitySideModifier string
+
+const (
+	ActivitySideModifierSideModifierUnspecified ActivitySideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	ActivitySideModifierShort                   ActivitySideModifier = "SHORT"
+	ActivitySideModifierShortExempt             ActivitySideModifier = "SHORT_EXEMPT"
+	ActivitySideModifierShortCover              ActivitySideModifier = "SHORT_COVER"
+	ActivitySideModifierOpen                    ActivitySideModifier = "OPEN"
+	ActivitySideModifierClose                   ActivitySideModifier = "CLOSE"
+)
+
+func (e ActivitySideModifier) ToPointer() *ActivitySideModifier {
+	return &e
+}
+
 // ActivitySpinoffCorporateActionGeneralInformation - Common fields for corporate actions
 type ActivitySpinoffCorporateActionGeneralInformation struct {
 	// A unique alphanumeric value that is assigned to uniquely identify each corporate action event
@@ -4796,12 +5276,27 @@ func (o *ActivityTenderOfferCorporateActionGeneralInformation) GetTargetSymbolDe
 	return o.TargetSymbolDescription
 }
 
+// ActivityTenderOfferType - the type of tender offer
+type ActivityTenderOfferType string
+
+const (
+	ActivityTenderOfferTypeTenderOfferTypeUnspecified ActivityTenderOfferType = "TENDER_OFFER_TYPE_UNSPECIFIED"
+	ActivityTenderOfferTypeOddLotTender               ActivityTenderOfferType = "ODD_LOT_TENDER"
+	ActivityTenderOfferTypeDutchAuction               ActivityTenderOfferType = "DUTCH_AUCTION"
+)
+
+func (e ActivityTenderOfferType) ToPointer() *ActivityTenderOfferType {
+	return &e
+}
+
 // ActivityTenderOffer - Used to record the sale of securities for a specified price due to an offer from the issuer or a third party and details related to the tender offer
 type ActivityTenderOffer struct {
 	// The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 	CashRate *ActivityTenderOfferCashRate `json:"cash_rate,omitempty"`
 	// Common fields for corporate actions
 	CorporateActionGeneralInformation *ActivityTenderOfferCorporateActionGeneralInformation `json:"corporate_action_general_information,omitempty"`
+	// the type of tender offer
+	TenderOfferType *ActivityTenderOfferType `json:"tender_offer_type,omitempty"`
 }
 
 func (o *ActivityTenderOffer) GetCashRate() *ActivityTenderOfferCashRate {
@@ -4818,98 +5313,105 @@ func (o *ActivityTenderOffer) GetCorporateActionGeneralInformation() *ActivityTe
 	return o.CorporateActionGeneralInformation
 }
 
-// ActivityBrokerCapacity - Used to calculate broadridge blotter code
-type ActivityBrokerCapacity string
+func (o *ActivityTenderOffer) GetTenderOfferType() *ActivityTenderOfferType {
+	if o == nil {
+		return nil
+	}
+	return o.TenderOfferType
+}
+
+// ActivityTradeBrokerCapacity - Used to calculate broadridge blotter code
+type ActivityTradeBrokerCapacity string
 
 const (
-	ActivityBrokerCapacityCapacityUnspecified ActivityBrokerCapacity = "CAPACITY_UNSPECIFIED"
-	ActivityBrokerCapacityAgency              ActivityBrokerCapacity = "AGENCY"
-	ActivityBrokerCapacityPrincipal           ActivityBrokerCapacity = "PRINCIPAL"
-	ActivityBrokerCapacityMixed               ActivityBrokerCapacity = "MIXED"
+	ActivityTradeBrokerCapacityCapacityUnspecified ActivityTradeBrokerCapacity = "CAPACITY_UNSPECIFIED"
+	ActivityTradeBrokerCapacityAgency              ActivityTradeBrokerCapacity = "AGENCY"
+	ActivityTradeBrokerCapacityPrincipal           ActivityTradeBrokerCapacity = "PRINCIPAL"
+	ActivityTradeBrokerCapacityMixed               ActivityTradeBrokerCapacity = "MIXED"
 )
 
-func (e ActivityBrokerCapacity) ToPointer() *ActivityBrokerCapacity {
+func (e ActivityTradeBrokerCapacity) ToPointer() *ActivityTradeBrokerCapacity {
 	return &e
 }
 
-// ActivityPrevailingMarketPrice - The price for the instrument that is prevailing in the market.
-type ActivityPrevailingMarketPrice struct {
+// ActivityTradePrevailingMarketPrice - The price for the instrument that is prevailing in the market.
+type ActivityTradePrevailingMarketPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *ActivityPrevailingMarketPrice) GetValue() *string {
+func (o *ActivityTradePrevailingMarketPrice) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// ActivityPriceAdjustmentAmount - Total monetary value of the price_adjustment
-type ActivityPriceAdjustmentAmount struct {
+// ActivityTradePriceAdjustmentAmount - Total monetary value of the price_adjustment
+type ActivityTradePriceAdjustmentAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *ActivityPriceAdjustmentAmount) GetValue() *string {
+func (o *ActivityTradePriceAdjustmentAmount) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// ActivityPriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-type ActivityPriceAdjustmentPercent struct {
+// ActivityTradePriceAdjustmentPercent - The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
+type ActivityTradePriceAdjustmentPercent struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *ActivityPriceAdjustmentPercent) GetValue() *string {
+func (o *ActivityTradePriceAdjustmentPercent) GetValue() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Value
 }
 
-// ActivityPriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
-type ActivityPriceAdjustmentType string
+// ActivityTradePriceAdjustmentType - The type of price adjustment being applied by the broker to the net price of the security
+type ActivityTradePriceAdjustmentType string
 
 const (
-	ActivityPriceAdjustmentTypePriceAdjustmentTypeUnspecified ActivityPriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
-	ActivityPriceAdjustmentTypeMarkup                         ActivityPriceAdjustmentType = "MARKUP"
-	ActivityPriceAdjustmentTypeMarkdown                       ActivityPriceAdjustmentType = "MARKDOWN"
-	ActivityPriceAdjustmentTypeSalesLoad                      ActivityPriceAdjustmentType = "SALES_LOAD"
+	ActivityTradePriceAdjustmentTypePriceAdjustmentTypeUnspecified ActivityTradePriceAdjustmentType = "PRICE_ADJUSTMENT_TYPE_UNSPECIFIED"
+	ActivityTradePriceAdjustmentTypeMarkup                         ActivityTradePriceAdjustmentType = "MARKUP"
+	ActivityTradePriceAdjustmentTypeMarkdown                       ActivityTradePriceAdjustmentType = "MARKDOWN"
+	ActivityTradePriceAdjustmentTypeSalesLoad                      ActivityTradePriceAdjustmentType = "SALES_LOAD"
 )
 
-func (e ActivityPriceAdjustmentType) ToPointer() *ActivityPriceAdjustmentType {
+func (e ActivityTradePriceAdjustmentType) ToPointer() *ActivityTradePriceAdjustmentType {
 	return &e
 }
 
-// ActivityPriceAdjustmentRecord - Information about any price adjustments applied to the security
-type ActivityPriceAdjustmentRecord struct {
+// ActivityTradePriceAdjustmentRecord - Information about any price adjustments applied to the security
+type ActivityTradePriceAdjustmentRecord struct {
 	// Total monetary value of the price_adjustment
-	PriceAdjustmentAmount *ActivityPriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
+	PriceAdjustmentAmount *ActivityTradePriceAdjustmentAmount `json:"price_adjustment_amount,omitempty"`
 	// The percent at which the price was adjusted. Expressed as a number from 0.00-100 (rounded to 2 decimals)
-	PriceAdjustmentPercent *ActivityPriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
+	PriceAdjustmentPercent *ActivityTradePriceAdjustmentPercent `json:"price_adjustment_percent,omitempty"`
 	// The type of price adjustment being applied by the broker to the net price of the security
-	PriceAdjustmentType *ActivityPriceAdjustmentType `json:"price_adjustment_type,omitempty"`
+	PriceAdjustmentType *ActivityTradePriceAdjustmentType `json:"price_adjustment_type,omitempty"`
 }
 
-func (o *ActivityPriceAdjustmentRecord) GetPriceAdjustmentAmount() *ActivityPriceAdjustmentAmount {
+func (o *ActivityTradePriceAdjustmentRecord) GetPriceAdjustmentAmount() *ActivityTradePriceAdjustmentAmount {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentAmount
 }
 
-func (o *ActivityPriceAdjustmentRecord) GetPriceAdjustmentPercent() *ActivityPriceAdjustmentPercent {
+func (o *ActivityTradePriceAdjustmentRecord) GetPriceAdjustmentPercent() *ActivityTradePriceAdjustmentPercent {
 	if o == nil {
 		return nil
 	}
 	return o.PriceAdjustmentPercent
 }
 
-func (o *ActivityPriceAdjustmentRecord) GetPriceAdjustmentType() *ActivityPriceAdjustmentType {
+func (o *ActivityTradePriceAdjustmentRecord) GetPriceAdjustmentType() *ActivityTradePriceAdjustmentType {
 	if o == nil {
 		return nil
 	}
@@ -4929,7 +5431,7 @@ type ActivityTrade struct {
 	// Executing broker of the trade
 	Broker *string `json:"broker,omitempty"`
 	// Used to calculate broadridge blotter code
-	BrokerCapacity *ActivityBrokerCapacity `json:"broker_capacity,omitempty"`
+	BrokerCapacity *ActivityTradeBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Free form text submitted by the client for internal purposes
 	ClientMemos []string `json:"client_memos,omitempty"`
 	// 32 characters. The client order ID from the order submitted
@@ -4955,9 +5457,9 @@ type ActivityTrade struct {
 	// Max Length 100 characters. Internally generated order id that is returned to client on exec reports
 	OrderID *string `json:"order_id,omitempty"`
 	// The price for the instrument that is prevailing in the market.
-	PrevailingMarketPrice *ActivityPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
+	PrevailingMarketPrice *ActivityTradePrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// Information about any price adjustments applied to the security
-	PriceAdjustmentRecord *ActivityPriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
+	PriceAdjustmentRecord *ActivityTradePriceAdjustmentRecord `json:"price_adjustment_record,omitempty"`
 	// Used to calculate broadridge blotter code
 	Route *string `json:"route,omitempty"`
 	// The special instructions for a trade
@@ -5005,7 +5507,7 @@ func (o *ActivityTrade) GetBroker() *string {
 	return o.Broker
 }
 
-func (o *ActivityTrade) GetBrokerCapacity() *ActivityBrokerCapacity {
+func (o *ActivityTrade) GetBrokerCapacity() *ActivityTradeBrokerCapacity {
 	if o == nil {
 		return nil
 	}
@@ -5096,14 +5598,14 @@ func (o *ActivityTrade) GetOrderID() *string {
 	return o.OrderID
 }
 
-func (o *ActivityTrade) GetPrevailingMarketPrice() *ActivityPrevailingMarketPrice {
+func (o *ActivityTrade) GetPrevailingMarketPrice() *ActivityTradePrevailingMarketPrice {
 	if o == nil {
 		return nil
 	}
 	return o.PrevailingMarketPrice
 }
 
-func (o *ActivityTrade) GetPriceAdjustmentRecord() *ActivityPriceAdjustmentRecord {
+func (o *ActivityTrade) GetPriceAdjustmentRecord() *ActivityTradePriceAdjustmentRecord {
 	if o == nil {
 		return nil
 	}
@@ -5450,6 +5952,7 @@ const (
 	ActivityWithdrawalTypeRtp                             ActivityWithdrawalType = "RTP"
 	ActivityWithdrawalTypeIct                             ActivityWithdrawalType = "ICT"
 	ActivityWithdrawalTypeJournal                         ActivityWithdrawalType = "JOURNAL"
+	ActivityWithdrawalTypeExternalAch                     ActivityWithdrawalType = "EXTERNAL_ACH"
 )
 
 func (e ActivityWithdrawalType) ToPointer() *ActivityWithdrawalType {
@@ -5488,6 +5991,8 @@ type ActivityWithdrawal struct {
 	RetirementType *ActivityRetirementType `json:"retirement_type,omitempty"`
 	// Indicates whether the transaction is taxable
 	Taxable *bool `json:"taxable,omitempty"`
+	// Indicates whether or a not a distribution is a full liquidation of a tax-advantaged account
+	TotalDistribution *bool `json:"total_distribution,omitempty"`
 	// The mechanism by which the funds will be withdrawn
 	Type *ActivityWithdrawalType `json:"type,omitempty"`
 }
@@ -5595,6 +6100,13 @@ func (o *ActivityWithdrawal) GetTaxable() *bool {
 		return nil
 	}
 	return o.Taxable
+}
+
+func (o *ActivityWithdrawal) GetTotalDistribution() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TotalDistribution
 }
 
 func (o *ActivityWithdrawal) GetType() *ActivityWithdrawalType {
@@ -5825,14 +6337,20 @@ type Activity struct {
 	ActivityID *string `json:"activity_id,omitempty"`
 	// Activity time refers to the precise moment, recorded in Coordinated Universal Time (UTC), when a financial transaction is executed as reported to Apex
 	ActivityTime *time.Time `json:"activity_time,omitempty"`
+	// Object containing metadata for trade allocation
+	Allocation *ActivityAllocation `json:"allocation,omitempty"`
 	// Name of the issuer of a security and additional descriptive information about the particular issue
 	AssetDescription *string `json:"asset_description,omitempty"`
 	// An Apex-provided, global identifier created on a per asset bases which provides connectivity across all areas Not populated on a currency only movement
 	AssetID *string `json:"asset_id,omitempty"`
+	// Object containing metadata for bond defaults
+	BondDefault *ActivityBondDefault `json:"bond_default,omitempty"`
 	// Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
 	CapitalGains *ActivityCapitalGains `json:"capital_gains,omitempty"`
 	// Used to record the distribution of cash to shareholders, paid by the issuer, usually based upon current earnings and/or accumulated profits as declared by the board of directors and details related to the cash dividend
 	CashDividend *ActivityCashDividend `json:"cash_dividend,omitempty"`
+	// Object containing metadata for cash in lieu
+	CashInLieu *ActivityCashInLieu `json:"cash_in_lieu,omitempty"`
 	// Used to record commission charged by brokers or financial intermediaries for executing financial transactions on behalf of clients
 	Commission *ActivityCommission `json:"commission,omitempty"`
 	// Any commissions associated with the activity
@@ -5925,6 +6443,8 @@ type Activity struct {
 	SettleDate *ActivitySettleDate `json:"settle_date,omitempty"`
 	// Denotes whether the trade is a buy or sell
 	Side *ActivitySide `json:"side,omitempty"`
+	// Indicates whether the trade is opening a new position or closing an existing position
+	SideModifier *ActivitySideModifier `json:"side_modifier,omitempty"`
 	// Used to record a distribution of subsidiary securities to the shareholders of the parent company without a surrender of securities or payment and details related to the spinoff. A spin-off represents a form of divestiture resulting in an independent company
 	Spinoff *ActivitySpinoff `json:"spinoff,omitempty"`
 	// The state of the activity
@@ -6042,6 +6562,13 @@ func (o *Activity) GetActivityTime() *time.Time {
 	return o.ActivityTime
 }
 
+func (o *Activity) GetAllocation() *ActivityAllocation {
+	if o == nil {
+		return nil
+	}
+	return o.Allocation
+}
+
 func (o *Activity) GetAssetDescription() *string {
 	if o == nil {
 		return nil
@@ -6056,6 +6583,13 @@ func (o *Activity) GetAssetID() *string {
 	return o.AssetID
 }
 
+func (o *Activity) GetBondDefault() *ActivityBondDefault {
+	if o == nil {
+		return nil
+	}
+	return o.BondDefault
+}
+
 func (o *Activity) GetCapitalGains() *ActivityCapitalGains {
 	if o == nil {
 		return nil
@@ -6068,6 +6602,13 @@ func (o *Activity) GetCashDividend() *ActivityCashDividend {
 		return nil
 	}
 	return o.CashDividend
+}
+
+func (o *Activity) GetCashInLieu() *ActivityCashInLieu {
+	if o == nil {
+		return nil
+	}
+	return o.CashInLieu
 }
 
 func (o *Activity) GetCommission() *ActivityCommission {
@@ -6390,6 +6931,13 @@ func (o *Activity) GetSide() *ActivitySide {
 		return nil
 	}
 	return o.Side
+}
+
+func (o *Activity) GetSideModifier() *ActivitySideModifier {
+	if o == nil {
+		return nil
+	}
+	return o.SideModifier
 }
 
 func (o *Activity) GetSpinoff() *ActivitySpinoff {

@@ -12,7 +12,6 @@ Enum providing additional information about the type of fee being charged
 | `EntryFeeTypeLiquidity`                      | LIQUIDITY                                    |
 | `EntryFeeTypeGeneralPurpose`                 | GENERAL_PURPOSE                              |
 | `EntryFeeTypeCommission`                     | COMMISSION                                   |
-| `EntryFeeTypeOrf`                            | ORF                                          |
 | `EntryFeeTypeTaf`                            | TAF                                          |
 | `EntryFeeTypeSec`                            | SEC                                          |
 | `EntryFeeTypeAccountClosing`                 | ACCOUNT_CLOSING                              |
@@ -38,3 +37,7 @@ Enum providing additional information about the type of fee being charged
 | `EntryFeeTypeInternationalWireDepositFee`    | INTERNATIONAL_WIRE_DEPOSIT_FEE               |
 | `EntryFeeTypeInternationalWireWithdrawalFee` | INTERNATIONAL_WIRE_WITHDRAWAL_FEE            |
 | `EntryFeeTypeBrokerFee`                      | BROKER_FEE                                   |
+| `EntryFeeTypeOccFee`                         | OCC_FEE                                      |
+| `EntryFeeTypeContractFee`                    | CONTRACT_FEE                                 |
+| `EntryFeeTypeOptionsRegulatory`              | OPTIONS_REGULATORY                           |
+| `EntryFeeTypeFinancialTransactionTax`        | FINANCIAL_TRANSACTION_TAX                    |

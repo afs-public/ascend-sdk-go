@@ -380,6 +380,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 ### [AccountTransfers](docs/sdks/accounttransfers/README.md)
 
 * [CreateTransfer](docs/sdks/accounttransfers/README.md#createtransfer) - Create Transfer
+* [ListTransfers](docs/sdks/accounttransfers/README.md#listtransfers) - List Transfers
+* [AcceptTransfer](docs/sdks/accounttransfers/README.md#accepttransfer) - Accept Transfer
+* [RejectTransfer](docs/sdks/accounttransfers/README.md#rejecttransfer) - Reject Transfer
 * [GetTransfer](docs/sdks/accounttransfers/README.md#gettransfer) - Get Transfer
 
 ### [ACHTransfers](docs/sdks/achtransfers/README.md)

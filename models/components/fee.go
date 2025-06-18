@@ -24,7 +24,6 @@ const (
 	FeeTypeLiquidity                      FeeType = "LIQUIDITY"
 	FeeTypeGeneralPurpose                 FeeType = "GENERAL_PURPOSE"
 	FeeTypeCommission                     FeeType = "COMMISSION"
-	FeeTypeOrf                            FeeType = "ORF"
 	FeeTypeTaf                            FeeType = "TAF"
 	FeeTypeSec                            FeeType = "SEC"
 	FeeTypeAccountClosing                 FeeType = "ACCOUNT_CLOSING"
@@ -50,6 +49,10 @@ const (
 	FeeTypeInternationalWireDepositFee    FeeType = "INTERNATIONAL_WIRE_DEPOSIT_FEE"
 	FeeTypeInternationalWireWithdrawalFee FeeType = "INTERNATIONAL_WIRE_WITHDRAWAL_FEE"
 	FeeTypeBrokerFee                      FeeType = "BROKER_FEE"
+	FeeTypeOccFee                         FeeType = "OCC_FEE"
+	FeeTypeContractFee                    FeeType = "CONTRACT_FEE"
+	FeeTypeOptionsRegulatory              FeeType = "OPTIONS_REGULATORY"
+	FeeTypeFinancialTransactionTax        FeeType = "FINANCIAL_TRANSACTION_TAX"
 )
 
 func (e FeeType) ToPointer() *FeeType {

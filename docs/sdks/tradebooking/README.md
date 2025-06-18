@@ -81,7 +81,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Trade != nil {
+    if res.BookingTrade != nil {
         // handle response
     }
 }
@@ -143,7 +143,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Trade != nil {
+    if res.BookingTrade != nil {
         // handle response
     }
 }
