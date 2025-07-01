@@ -23,8 +23,19 @@ type FixtureBanks struct {
 	t                  *testing.T
 	sdk                *ascendsdk.SDK
 	ctx                context.Context
+	lnpID              *string
 	accountId          *string
 	bankRelationshipId *string
+	reuseAccountID     *string
+}
+
+func (f *FixtureBanks) LNPId() *string {
+	if f.lnpID != nil {
+		return f.lnpID
+	}
+
+	f.lnpID, _ = helpers.CreateLegalNaturalPersonId(f.sdk, f.ctx)
+	return f.lnpID
 }
 
 func (f *FixtureBanks) AccountId() *string {
@@ -36,8 +47,18 @@ func (f *FixtureBanks) AccountId() *string {
 	return f.accountId
 }
 
+func (f *FixtureBanks) ReuseAccountId() *string {
+	if f.reuseAccountID != nil {
+		return f.reuseAccountID
+	}
+
+	f.reuseAccountID, _ = helpers.CreateAccountIdWithLNP(f.sdk, f.ctx, f.LNPId())
+	time.Sleep(10 * time.Second)
+	return f.reuseAccountID
+}
+
 func (f *FixtureBanks) createAndEnrollAccount() *string {
-	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
+	accountId, err := helpers.CreateAccountIdWithLNP(f.sdk, f.ctx, f.LNPId())
 	require.NoError(f.t, err)
 	helpers.Wait()
 
@@ -150,6 +171,17 @@ func TestBankRelationships(t *testing.T) {
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 		time.Sleep(2 * time.Second)
 		assert.Equal(t, *res.BankRelationship.State.State, components.BankRelationshipStateStateApproved)
+	})
+
+	t.Run("ReuseBankRelationship", func(t *testing.T) {
+		reuseBankRelationShipRequest := components.ReuseBankRelationshipRequestCreate{
+			Parent:                 "accounts/" + *fixtures.AccountId(),
+			SourceBankRelationship: "accounts/" + *fixtures.AccountId() + "/bankRelationships/" + *fixtures.bankRelationshipId,
+		}
+		res, err := sdk.BankRelationships.ReuseBankRelationship(ctx, *fixtures.ReuseAccountId(), reuseBankRelationShipRequest)
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+		assert.Equal(t, *res.BankRelationship.State.State, components.BankRelationshipStateStatePending)
 	})
 
 	t.Run("CancelBankRelationship", func(t *testing.T) {

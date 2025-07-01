@@ -12,6 +12,7 @@
 * [CancelBankRelationship](#cancelbankrelationship) - Cancel Bank Relationship
 * [VerifyMicroDeposits](#verifymicrodeposits) - Verify Micro Deposits
 * [ReissueMicroDeposits](#reissuemicrodeposits) - Reissue Micro Deposits
+* [ReuseBankRelationship](#reusebankrelationship) - Reuse Bank Relationship
 
 ## CreateBankRelationship
 
@@ -446,6 +447,69 @@ func main() {
 ### Response
 
 **[*operations.BankRelationshipsReissueMicroDepositsResponse](../../models/operations/bankrelationshipsreissuemicrodepositsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ReuseBankRelationship
+
+Reuses an existing bank relationship for a new account. The source bank relationship must be approved. The new account must be related to the parent account of the `source_bank_relationship`. The new relationship will be created with the `USE_EXISTING` verification method in place of the source bank relationship's verification method.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"context"
+	"log"
+)
+
+func main() {
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    ctx := context.Background()
+    res, err := s.BankRelationships.ReuseBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Z", components.ReuseBankRelationshipRequestCreate{
+        Parent: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z",
+        SourceBankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.BankRelationship != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    | Example                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |                                                                                                                |
+| `accountID`                                                                                                    | *string*                                                                                                       | :heavy_check_mark:                                                                                             | The account id.                                                                                                | 01H8FB90ZRRFWXB4XC2JPJ1D4Z                                                                                     |
+| `reuseBankRelationshipRequestCreate`                                                                           | [components.ReuseBankRelationshipRequestCreate](../../models/components/reusebankrelationshiprequestcreate.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |                                                                                                                |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |                                                                                                                |
+
+### Response
+
+**[*operations.BankRelationshipsReuseBankRelationshipResponse](../../models/operations/bankrelationshipsreusebankrelationshipresponse.md), error**
 
 ### Errors
 

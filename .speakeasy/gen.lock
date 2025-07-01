@@ -1,11 +1,11 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: 5ce91c7251a156c72b6a6bfd31bbe361
-  docVersion: v1:20250617:uat:6f66f0a5cade
+  docChecksum: d3f8dd362b603f2fa8400d49a4984779
+  docVersion: v1:20250630:uat:8b6dcb722a6f
   speakeasyVersion: 1.414.1
   generationVersion: 2.437.1
-  releaseVersion: 1.0.4
+  releaseVersion: 1.0.5
   configChecksum: 84aa446ddba16b7e9da221943ae911cb
 features:
   go:
@@ -364,6 +364,7 @@ generatedFiles:
   - /models/components/retrievefixedincomemarksresponseassetmark.go
   - /models/components/retrievequoterequestcreate.go
   - /models/components/retrievequoteresponse.go
+  - /models/components/reusebankrelationshiprequestcreate.go
   - /models/components/rightsofaccumulationcreate.go
   - /models/components/roledetail.go
   - /models/components/sanctionslistdetail.go
@@ -496,6 +497,7 @@ generatedFiles:
   - /models/operations/bankrelationshipsgetmicrodepositamounts.go
   - /models/operations/bankrelationshipslistbankrelationships.go
   - /models/operations/bankrelationshipsreissuemicrodeposits.go
+  - /models/operations/bankrelationshipsreusebankrelationship.go
   - /models/operations/bankrelationshipsupdatebankrelationship.go
   - /models/operations/bankrelationshipsverifymicrodeposits.go
   - /models/operations/basketordersserviceaddorders.go
@@ -2265,6 +2267,7 @@ generatedFiles:
   - docs/models/components/retrievequoteresponseassettype.md
   - docs/models/components/retrievequoteresponsebrokercapacity.md
   - docs/models/components/retrievequoteresponseidentifiertype.md
+  - docs/models/components/reusebankrelationshiprequestcreate.md
   - docs/models/components/reversestocksplit.md
   - docs/models/components/review.md
   - docs/models/components/rightsdistribution.md
@@ -2687,6 +2690,8 @@ generatedFiles:
   - docs/models/operations/bankrelationshipslistbankrelationshipsresponse.md
   - docs/models/operations/bankrelationshipsreissuemicrodepositsrequest.md
   - docs/models/operations/bankrelationshipsreissuemicrodepositsresponse.md
+  - docs/models/operations/bankrelationshipsreusebankrelationshiprequest.md
+  - docs/models/operations/bankrelationshipsreusebankrelationshipresponse.md
   - docs/models/operations/bankrelationshipsupdatebankrelationshiprequest.md
   - docs/models/operations/bankrelationshipsupdatebankrelationshipresponse.md
   - docs/models/operations/bankrelationshipsverifymicrodepositsrequest.md
@@ -4977,3 +4982,10 @@ examples:
           externalAchDeposit_id: "20230817000319"
       requestBody:
         application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/externalAchDeposits/20230817000319"}
+  BankRelationships_ReuseBankRelationship:
+    "":
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Z"
+      requestBody:
+        application/json: {"parent": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z", "source_bank_relationship": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e"}
