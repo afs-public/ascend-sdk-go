@@ -415,6 +415,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [CancelBankRelationship](docs/sdks/bankrelationships/README.md#cancelbankrelationship) - Cancel Bank Relationship
 * [VerifyMicroDeposits](docs/sdks/bankrelationships/README.md#verifymicrodeposits) - Verify Micro Deposits
 * [ReissueMicroDeposits](docs/sdks/bankrelationships/README.md#reissuemicrodeposits) - Reissue Micro Deposits
+* [ReuseBankRelationship](docs/sdks/bankrelationships/README.md#reusebankrelationship) - Reuse Bank Relationship
 
 ### [BasketOrders](docs/sdks/basketorders/README.md)
 

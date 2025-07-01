@@ -110,6 +110,38 @@ func CreateLegalNaturalPersonId(s *ascendsdk.SDK, ctx context.Context) (*string,
 	return res.LegalNaturalPerson.LegalNaturalPersonID, nil
 }
 
+func CreateAccountIdWithLNP(s *ascendsdk.SDK, ctx context.Context, lnpID *string) (*string, error) {
+	createAccountRequest := components.AccountRequestCreate{
+		AccountGroupID:  os.Getenv("ACCOUNT_GROUP_ID"),
+		CorrespondentID: os.Getenv("CORRESPONDENT_ID"),
+		Parties: []components.PartyRequestCreate{
+			{
+				LegalNaturalPersonID: lnpID,
+				RelationType:         components.RelationTypePrimaryOwner,
+				EmailAddress:         "mail@example.com",
+				PhoneNumber: components.PhoneNumberCreate{
+					E164Number: ascendsdk.String("+15035550123"),
+					Extension:  ascendsdk.String("123"),
+				},
+				MailingAddress: components.PostalAddressCreate{
+					AddressLines:       []string{"1234 NW 12th Ave"},
+					RegionCode:         ascendsdk.String("US"),
+					PostalCode:         ascendsdk.String("97209"),
+					AdministrativeArea: ascendsdk.String("OR"),
+					Locality:           ascendsdk.String("Portland"),
+				},
+			},
+		}}
+
+	res, err := s.AccountCreation.CreateAccount(ctx, createAccountRequest)
+
+	if err != nil {
+		return nil, fmt.Errorf("failed to create account: %w", err)
+	}
+
+	return res.Account.AccountID, nil
+}
+
 func CreateAccountId(s *ascendsdk.SDK, ctx context.Context) (*string, error) {
 	createLegalPersonId, err := CreateLegalNaturalPersonId(s, ctx)
 
