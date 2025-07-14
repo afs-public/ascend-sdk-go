@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: d3f8dd362b603f2fa8400d49a4984779
-  docVersion: v1:20250630:uat:8b6dcb722a6f
+  docChecksum: 2fc840e2ffa59269de0e540902000e6b
+  docVersion: v1:20250714:uat:1c091aeaf0ad
   speakeasyVersion: 1.414.1
   generationVersion: 2.437.1
-  releaseVersion: 1.0.5
-  configChecksum: 84aa446ddba16b7e9da221943ae911cb
+  releaseVersion: 1.0.6
+  configChecksum: 8f1766cd382360d91628685b414a9c7d
 features:
   go:
     additionalDependencies: 0.1.0
@@ -655,6 +655,7 @@ generatedFiles:
   - docs/models/components/accounttimehorizon.md
   - docs/models/components/accounttotalnetworthrangeusd.md
   - docs/models/components/accounttransfer.md
+  - docs/models/components/accounttransfertype.md
   - docs/models/components/accruedinterest.md
   - docs/models/components/accruedinterestamount.md
   - docs/models/components/accruedinterestamount1.md
@@ -710,6 +711,7 @@ generatedFiles:
   - docs/models/components/activityacatspendingout.md
   - docs/models/components/activityaccountmemo.md
   - docs/models/components/activityaccounttransfer.md
+  - docs/models/components/activityaccounttransfertype.md
   - docs/models/components/activityaction.md
   - docs/models/components/activityactivitydate.md
   - docs/models/components/activityallocation.md

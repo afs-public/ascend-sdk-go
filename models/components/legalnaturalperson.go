@@ -215,9 +215,19 @@ type Employment struct {
 	EmploymentID *string `json:"employment_id,omitempty"`
 	// Classifies in what capacity (or if) the underlying natural person holds a job
 	EmploymentStatus *LegalNaturalPersonEmploymentStatus `json:"employment_status,omitempty"`
-	// The nature of work performed at an investor's place of employment. Required if the employment_status is `EMPLOYED` or `SELF_EMPLOYED`.
+	// **Field Dependencies:**
+	//
+	// Required if `employment_status` is one of:
+	//   - `EMPLOYED`
+	//   - `SELF_EMPLOYED`
 	Occupation *string `json:"occupation,omitempty"`
-	// The start year of employment related to a person's stated employer Must be from birth year to current year, or 0 to clear start year value
+	// **Field Dependencies:**
+	//
+	// Required if `employment_status` is one of:
+	//   - `EMPLOYED`
+	//   - `SELF_EMPLOYED`
+	//
+	// Otherwise, must be empty.
 	StartYear *int `json:"start_year,omitempty"`
 }
 
@@ -339,7 +349,11 @@ func (e LegalNaturalPersonType) ToPointer() *LegalNaturalPersonType {
 	return &e
 }
 
-// ForeignIdentification - Foreign identification. Must be provided if the person does not have a U.S. tax ID
+// ForeignIdentification - **Field Dependencies:**
+//
+// Required if `irs_form_type` is `W_8BEN`.
+//
+// Otherwise, must be empty.
 type ForeignIdentification struct {
 	// Identification expiration date
 	ExpirationDate *ExpirationDate `json:"expiration_date,omitempty"`
@@ -1199,6 +1213,8 @@ type LegalNaturalPerson struct {
 	CorrespondentID *string `json:"correspondent_id,omitempty"`
 	// A flag to indicate whether this person is an employee of the correspondent.
 	CustodianEmployee *bool `json:"custodian_employee,omitempty"`
+	// Customer identification id returned by the customer identification service which represents a single instance of an identity verification outcome for the specified customer. This verification result will be used as part of the full investigation.
+	CustomerIdentificationID *string `json:"customer_identification_id,omitempty"`
 	// The day, month, and year of death of a legal natural person
 	DeathDate *DeathDate `json:"death_date,omitempty"`
 	// DBA (Doing Business As) names. Can list up to 5 associated with the Legal Natural Person
@@ -1209,7 +1225,11 @@ type LegalNaturalPerson struct {
 	FamilyName *string `json:"family_name,omitempty"`
 	// The name of the FINRA-associated entity the underlying natural person is affiliated with.
 	FinraAssociatedEntity *string `json:"finra_associated_entity,omitempty"`
-	// Foreign identification. Must be provided if the person does not have a U.S. tax ID
+	// **Field Dependencies:**
+	//
+	// Required if `irs_form_type` is `W_8BEN`.
+	//
+	// Otherwise, must be empty.
 	ForeignIdentification *ForeignIdentification `json:"foreign_identification,omitempty"`
 	// The given name of a natural person; Conventionally known as 'first name' in most English-speaking countries.
 	GivenName *string `json:"given_name,omitempty"`
@@ -1219,7 +1239,7 @@ type LegalNaturalPerson struct {
 	IdentityVerificationResult *LegalNaturalPersonIdentityVerificationResult `json:"identity_verification_result,omitempty"`
 	// Indicates whether the person is an institutional customer
 	InstitutionalCustomer *bool `json:"institutional_customer,omitempty"`
-	// Investigation id relating to the Customer Identification Program (CIP) and Customer Due Diligence (CDD).
+	// Investigation id relating a comprehensive investigation for a customer, encompassing the aggregation of identity verification results and watchlist screenings, conducted to support the Customer Identification Program (CIP) and Customer Due Diligence (CDD)
 	InvestigationID *string `json:"investigation_id,omitempty"`
 	// Indicates if the person is recognized as a "Large Trader" by the SEC.
 	LargeTrader *LegalNaturalPersonLargeTrader `json:"large_trader,omitempty"`
@@ -1312,6 +1332,13 @@ func (o *LegalNaturalPerson) GetCustodianEmployee() *bool {
 		return nil
 	}
 	return o.CustodianEmployee
+}
+
+func (o *LegalNaturalPerson) GetCustomerIdentificationID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CustomerIdentificationID
 }
 
 func (o *LegalNaturalPerson) GetDeathDate() *DeathDate {

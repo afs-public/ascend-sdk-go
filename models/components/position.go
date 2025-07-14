@@ -222,6 +222,8 @@ type Position struct {
 	PendingOutgoingAcat *PendingOutgoingAcat `json:"pending_outgoing_acat,omitempty"`
 	// Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
 	PendingWithdrawal *PendingWithdrawal `json:"pending_withdrawal,omitempty"`
+	// The position version for an asset/account combo. This number only increases, such that larger `position_version`s are newer than lower ones.
+	PositionVersion *string `json:"position_version,omitempty"`
 	// Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket values to represet the total settled position in an account  Currently defined as `free` + `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are added this value will need to change to reflect them
 	Settled *Settled `json:"settled,omitempty"`
 	// original trade position
@@ -319,6 +321,13 @@ func (o *Position) GetPendingWithdrawal() *PendingWithdrawal {
 		return nil
 	}
 	return o.PendingWithdrawal
+}
+
+func (o *Position) GetPositionVersion() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PositionVersion
 }
 
 func (o *Position) GetSettled() *Settled {

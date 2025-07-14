@@ -21,6 +21,7 @@ When an order has the REJECTED status, this will be populated with a system code
 | `CompressedOrderOrderRejectedReasonBlockingCorporateAction`                           | BLOCKING_CORPORATE_ACTION                                                             |
 | `CompressedOrderOrderRejectedReasonUnavailablePriceQuote`                             | UNAVAILABLE_PRICE_QUOTE                                                               |
 | `CompressedOrderOrderRejectedReasonExecutionMisconfiguredClient`                      | EXECUTION_MISCONFIGURED_CLIENT                                                        |
+| `CompressedOrderOrderRejectedReasonNotionalQuantityNotAllowedForSecurity`             | NOTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY                                            |
 | `CompressedOrderOrderRejectedReasonFractionalQuantityNotAllowedForSecurity`           | FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY                                          |
 | `CompressedOrderOrderRejectedReasonOnlyFractionalSellOrWholeOrdersAllowedForSecurity` | ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY                             |
 | `CompressedOrderOrderRejectedReasonSymbolNotTradeable`                                | SYMBOL_NOT_TRADEABLE                                                                  |
