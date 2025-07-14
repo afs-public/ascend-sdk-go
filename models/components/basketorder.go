@@ -91,6 +91,7 @@ const (
 	BasketOrderOrderRejectedReasonBlockingCorporateAction                           BasketOrderOrderRejectedReason = "BLOCKING_CORPORATE_ACTION"
 	BasketOrderOrderRejectedReasonUnavailablePriceQuote                             BasketOrderOrderRejectedReason = "UNAVAILABLE_PRICE_QUOTE"
 	BasketOrderOrderRejectedReasonExecutionMisconfiguredClient                      BasketOrderOrderRejectedReason = "EXECUTION_MISCONFIGURED_CLIENT"
+	BasketOrderOrderRejectedReasonNotionalQuantityNotAllowedForSecurity             BasketOrderOrderRejectedReason = "NOTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY"
 	BasketOrderOrderRejectedReasonFractionalQuantityNotAllowedForSecurity           BasketOrderOrderRejectedReason = "FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY"
 	BasketOrderOrderRejectedReasonOnlyFractionalSellOrWholeOrdersAllowedForSecurity BasketOrderOrderRejectedReason = "ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY"
 	BasketOrderOrderRejectedReasonSymbolNotTradeable                                BasketOrderOrderRejectedReason = "SYMBOL_NOT_TRADEABLE"

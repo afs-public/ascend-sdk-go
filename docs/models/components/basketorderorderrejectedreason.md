@@ -21,6 +21,7 @@ When an order has the REJECTED status, this will be populated with a system code
 | `BasketOrderOrderRejectedReasonBlockingCorporateAction`                           | BLOCKING_CORPORATE_ACTION                                                         |
 | `BasketOrderOrderRejectedReasonUnavailablePriceQuote`                             | UNAVAILABLE_PRICE_QUOTE                                                           |
 | `BasketOrderOrderRejectedReasonExecutionMisconfiguredClient`                      | EXECUTION_MISCONFIGURED_CLIENT                                                    |
+| `BasketOrderOrderRejectedReasonNotionalQuantityNotAllowedForSecurity`             | NOTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY                                        |
 | `BasketOrderOrderRejectedReasonFractionalQuantityNotAllowedForSecurity`           | FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY                                      |
 | `BasketOrderOrderRejectedReasonOnlyFractionalSellOrWholeOrdersAllowedForSecurity` | ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY                         |
 | `BasketOrderOrderRejectedReasonSymbolNotTradeable`                                | SYMBOL_NOT_TRADEABLE                                                              |

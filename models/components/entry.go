@@ -46,6 +46,25 @@ func (e AccountMemo) ToPointer() *AccountMemo {
 	return &e
 }
 
+// AccountTransferType - The type of asset movement being performed within the lifecycle of an account transfer process
+type AccountTransferType string
+
+const (
+	AccountTransferTypeAccountTransferTypeUnspecified AccountTransferType = "ACCOUNT_TRANSFER_TYPE_UNSPECIFIED"
+	AccountTransferTypePartialTransferReceiver        AccountTransferType = "PARTIAL_TRANSFER_RECEIVER"
+	AccountTransferTypePartialTransferDeliverer       AccountTransferType = "PARTIAL_TRANSFER_DELIVERER"
+	AccountTransferTypeFullAccountTransfer            AccountTransferType = "FULL_ACCOUNT_TRANSFER"
+	AccountTransferTypeResidualCredit                 AccountTransferType = "RESIDUAL_CREDIT"
+	AccountTransferTypeMutualFundCleanup              AccountTransferType = "MUTUAL_FUND_CLEANUP"
+	AccountTransferTypeFailReversal                   AccountTransferType = "FAIL_REVERSAL"
+	AccountTransferTypeReclaim                        AccountTransferType = "RECLAIM"
+	AccountTransferTypePositionTransferFund           AccountTransferType = "POSITION_TRANSFER_FUND"
+)
+
+func (e AccountTransferType) ToPointer() *AccountTransferType {
+	return &e
+}
+
 // Action - Indicates whether the account transfer is incoming or outgoing
 type Action string
 
@@ -80,6 +99,8 @@ type AccountTransfer struct {
 	AcatsAssetSequenceNumber *string `json:"acats_asset_sequence_number,omitempty"`
 	// the unique transfer Identifier assigned by NSCC
 	AcatsControlNumber *string `json:"acats_control_number,omitempty"`
+	// The type of asset movement being performed within the lifecycle of an account transfer process
+	AccountTransferType *AccountTransferType `json:"account_transfer_type,omitempty"`
 	// Indicates whether the account transfer is incoming or outgoing
 	Action *Action `json:"action,omitempty"`
 	// Free form text field
@@ -106,6 +127,13 @@ func (o *AccountTransfer) GetAcatsControlNumber() *string {
 		return nil
 	}
 	return o.AcatsControlNumber
+}
+
+func (o *AccountTransfer) GetAccountTransferType() *AccountTransferType {
+	if o == nil {
+		return nil
+	}
+	return o.AccountTransferType
 }
 
 func (o *AccountTransfer) GetAction() *Action {

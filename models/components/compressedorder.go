@@ -91,6 +91,7 @@ const (
 	CompressedOrderOrderRejectedReasonBlockingCorporateAction                           CompressedOrderOrderRejectedReason = "BLOCKING_CORPORATE_ACTION"
 	CompressedOrderOrderRejectedReasonUnavailablePriceQuote                             CompressedOrderOrderRejectedReason = "UNAVAILABLE_PRICE_QUOTE"
 	CompressedOrderOrderRejectedReasonExecutionMisconfiguredClient                      CompressedOrderOrderRejectedReason = "EXECUTION_MISCONFIGURED_CLIENT"
+	CompressedOrderOrderRejectedReasonNotionalQuantityNotAllowedForSecurity             CompressedOrderOrderRejectedReason = "NOTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY"
 	CompressedOrderOrderRejectedReasonFractionalQuantityNotAllowedForSecurity           CompressedOrderOrderRejectedReason = "FRACTIONAL_QUANTITY_NOT_ALLOWED_FOR_SECURITY"
 	CompressedOrderOrderRejectedReasonOnlyFractionalSellOrWholeOrdersAllowedForSecurity CompressedOrderOrderRejectedReason = "ONLY_FRACTIONAL_SELL_OR_WHOLE_ORDERS_ALLOWED_FOR_SECURITY"
 	CompressedOrderOrderRejectedReasonSymbolNotTradeable                                CompressedOrderOrderRejectedReason = "SYMBOL_NOT_TRADEABLE"

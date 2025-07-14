@@ -67,6 +67,8 @@ type LegalNaturalPersonCreate struct {
 	CorrespondentEmployee *bool `json:"correspondent_employee,omitempty"`
 	// A unique identifier referencing a Correspondent; A Client may have several operating Correspondents within its purview.
 	CorrespondentID string `json:"correspondent_id"`
+	// Customer identification id returned by the customer identification service which represents a single instance of an identity verification outcome for the specified customer. This verification result will be used as part of the full investigation.
+	CustomerIdentificationID *string `json:"customer_identification_id,omitempty"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//
 	//  * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date
@@ -170,6 +172,13 @@ func (o *LegalNaturalPersonCreate) GetCorrespondentID() string {
 		return ""
 	}
 	return o.CorrespondentID
+}
+
+func (o *LegalNaturalPersonCreate) GetCustomerIdentificationID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CustomerIdentificationID
 }
 
 func (o *LegalNaturalPersonCreate) GetDeathDate() *DateCreate {
