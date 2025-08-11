@@ -104,6 +104,7 @@ const (
 	BasketOrderOrderRejectedReasonAnotherBasketOrderForAccountHasFailedRiskChecks   BasketOrderOrderRejectedReason = "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS"
 	BasketOrderOrderRejectedReasonInsufficientPosition                              BasketOrderOrderRejectedReason = "INSUFFICIENT_POSITION"
 	BasketOrderOrderRejectedReasonFailedBuyingPower                                 BasketOrderOrderRejectedReason = "FAILED_BUYING_POWER"
+	BasketOrderOrderRejectedReasonRoundUpAmountTooSmall                             BasketOrderOrderRejectedReason = "ROUND_UP_AMOUNT_TOO_SMALL"
 )
 
 func (e BasketOrderOrderRejectedReason) ToPointer() *BasketOrderOrderRejectedReason {
@@ -114,12 +115,13 @@ func (e BasketOrderOrderRejectedReason) ToPointer() *BasketOrderOrderRejectedRea
 type BasketOrderOrderStatus string
 
 const (
-	BasketOrderOrderStatusOrderStatusUnspecified BasketOrderOrderStatus = "ORDER_STATUS_UNSPECIFIED"
-	BasketOrderOrderStatusPendingNew             BasketOrderOrderStatus = "PENDING_NEW"
-	BasketOrderOrderStatusNew                    BasketOrderOrderStatus = "NEW"
-	BasketOrderOrderStatusPartiallyFilled        BasketOrderOrderStatus = "PARTIALLY_FILLED"
-	BasketOrderOrderStatusFilled                 BasketOrderOrderStatus = "FILLED"
-	BasketOrderOrderStatusRejected               BasketOrderOrderStatus = "REJECTED"
+	BasketOrderOrderStatusOrderStatusUnspecified  BasketOrderOrderStatus = "ORDER_STATUS_UNSPECIFIED"
+	BasketOrderOrderStatusPendingNew              BasketOrderOrderStatus = "PENDING_NEW"
+	BasketOrderOrderStatusNew                     BasketOrderOrderStatus = "NEW"
+	BasketOrderOrderStatusPartiallyFilled         BasketOrderOrderStatus = "PARTIALLY_FILLED"
+	BasketOrderOrderStatusFilled                  BasketOrderOrderStatus = "FILLED"
+	BasketOrderOrderStatusRejected                BasketOrderOrderStatus = "REJECTED"
+	BasketOrderOrderStatusRemovedBeforeSubmission BasketOrderOrderStatus = "REMOVED_BEFORE_SUBMISSION"
 )
 
 func (e BasketOrderOrderStatus) ToPointer() *BasketOrderOrderStatus {
@@ -213,6 +215,8 @@ type BasketOrder struct {
 	CumulativeNotionalValue *BasketOrderCumulativeNotionalValue `json:"cumulative_notional_value,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// The execution-level details that compose this order
+	Executions []BasketTradingExecutions `json:"executions,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *BasketOrderFilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -320,6 +324,13 @@ func (o *BasketOrder) GetCurrencyCode() *string {
 		return nil
 	}
 	return o.CurrencyCode
+}
+
+func (o *BasketOrder) GetExecutions() []BasketTradingExecutions {
+	if o == nil {
+		return nil
+	}
+	return o.Executions
 }
 
 func (o *BasketOrder) GetFilledQuantity() *BasketOrderFilledQuantity {

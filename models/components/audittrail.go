@@ -8,7 +8,11 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// AuditType - The type of audit that was performed on the investigation
+// AuditType - The audit record type, one of:
+// - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type.
+// - `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request.
+// - `INVESTIGATION_STATE` - Used for recording investigation state changed events.
+// - `COMMENT` - Used for adding a comment to investigation.
 type AuditType string
 
 const (
@@ -24,7 +28,11 @@ func (e AuditType) ToPointer() *AuditType {
 
 // AuditTrail - Audit trail details
 type AuditTrail struct {
-	// The type of audit that was performed on the investigation
+	// The audit record type, one of:
+	// - `AUDIT_TYPE_UNSPECIFIED` - Default/Null audit type.
+	// - `INVESTIGATION_REQUEST_UPDATE` - Used to update an investigation request.
+	// - `INVESTIGATION_STATE` - Used for recording investigation state changed events.
+	// - `COMMENT` - Used for adding a comment to investigation.
 	AuditType *AuditType `json:"audit_type,omitempty"`
 	// Comment relating to why the audit was saved
 	Comment *string `json:"comment,omitempty"`

@@ -17,17 +17,20 @@ Retrieves retirement contribution and distribution constraints for a cash journa
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="RetirementConstraints_RetrieveCashJournalConstraints" method="post" path="/transfers/v1/cashJournals:retrieveCashJournalConstraints" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -40,7 +43,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Journals.RetrieveCashJournalConstraints(ctx, components.RetrieveCashJournalConstraintsRequestCreate{
         DestinationAccount: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
         SourceAccount: "accounts/01H8FM6EXVH77SAW3TC8KAWMES",
@@ -79,17 +81,20 @@ Creates a cash journal
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="CashJournals_CreateCashJournal" method="post" path="/transfers/v1/cashJournals" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -102,7 +107,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Journals.CreateCashJournal(ctx, components.CashJournalCreate{
         ClientTransferID: "113bw03-49f8-4525-934c-560fb39dg2kd",
         DestinationAccount: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
@@ -142,17 +146,20 @@ Gets an existing cash journal
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="CashJournals_GetCashJournal" method="get" path="/transfers/v1/cashJournals/{cashJournal_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -165,7 +172,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Journals.GetCashJournal(ctx, "20230817000319")
     if err != nil {
         log.Fatal(err)
@@ -201,17 +207,20 @@ Cancels an existing cash journal
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="CashJournals_CancelCashJournal" method="post" path="/transfers/v1/cashJournals/{cashJournal_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -224,7 +233,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Journals.CancelCashJournal(ctx, "20240717000319", components.CancelCashJournalRequestCreate{
         Name: "cashJournals/20240717000319",
     })
@@ -263,17 +271,20 @@ Determines whether a potential cash journal will be considered first party or th
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="CashJournals_CheckPartyType" method="post" path="/transfers/v1/cashJournals:checkPartyType" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -286,7 +297,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Journals.CheckPartyType(ctx, components.CheckPartyTypeRequestCreate{
         DestinationAccount: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
         SourceAccount: "accounts/01H8FM6EXVH77SAW3TC8KAWMES",

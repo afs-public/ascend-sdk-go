@@ -13,17 +13,20 @@ Gets the buying power for an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="MarginsRealTime_GetBuyingPower" method="get" path="/buyingpower/v1/accounts/{account_id}/buyingPower" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -36,7 +39,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Margins.GetBuyingPower(ctx, "01HMS9S15AKBHBD8GPW33P2PMH")
     if err != nil {
         log.Fatal(err)
@@ -61,7 +63,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

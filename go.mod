@@ -1,9 +1,8 @@
 module github.com/afs-public/ascend-sdk-go
 
-go 1.20
+go 1.22
 
 require (
-	github.com/cenkalti/backoff/v4 v4.2.0
 	github.com/ericlagergren/decimal v0.0.0-20221120152707-495c53812d05
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.6.0

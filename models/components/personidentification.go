@@ -2,7 +2,14 @@
 
 package components
 
-// PersonIdentificationType - Tax id type (e.g. ssn)
+// PersonIdentificationType - The identification type for a person, one of:
+// - `ID_TYPE_UNSPECIFIED` - Default/Null value.
+// - `SSN` - SSN tax type.
+// - `ITIN` - ITIN tax type.
+// - `FTIN` - FTIN (foreign tax id) type.
+// - `NATIONAL_ID` - National id type.
+// - `PASSPORT` - Passport id type.
+// - `DRIVING_LICENSE` - Drivers license id type.
 type PersonIdentificationType string
 
 const (
@@ -27,7 +34,14 @@ type PersonIdentification struct {
 	DocumentReferenceIds []string `json:"document_reference_ids,omitempty"`
 	// Country that issued identification Two character region code, complies with https://cldr.unicode.org/index
 	RegionCode *string `json:"region_code,omitempty"`
-	// Tax id type (e.g. ssn)
+	// The identification type for a person, one of:
+	// - `ID_TYPE_UNSPECIFIED` - Default/Null value.
+	// - `SSN` - SSN tax type.
+	// - `ITIN` - ITIN tax type.
+	// - `FTIN` - FTIN (foreign tax id) type.
+	// - `NATIONAL_ID` - National id type.
+	// - `PASSPORT` - Passport id type.
+	// - `DRIVING_LICENSE` - Drivers license id type.
 	Type *PersonIdentificationType `json:"type,omitempty"`
 	// Tax id value
 	Value *string `json:"value,omitempty"`

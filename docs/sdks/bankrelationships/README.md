@@ -20,17 +20,20 @@ Creates a bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_CreateBankRelationship" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -43,7 +46,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BankRelationships.CreateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.BankRelationshipCreate{
         Nickname: "My Primary Bank",
         VerificationMethod: components.VerificationMethodMicroDeposit,
@@ -83,17 +85,21 @@ Lists bank relationships for an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_ListBankRelationships" method="get" path="/transfers/v1/accounts/{account_id}/bankRelationships" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -106,8 +112,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.BankRelationships.ListBankRelationships(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil, nil)
+    res, err := s.BankRelationships.ListBankRelationships(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.Int(100), ascendsdkgo.String("CMFRGgYQup3BhQgaCSkAQCKS7AAAAA=="), operations.StateApproved.ToPointer())
     if err != nil {
         log.Fatal(err)
     }
@@ -145,17 +150,20 @@ Gets an existing bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_GetBankRelationship" method="get" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -168,7 +176,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BankRelationships.GetBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e")
     if err != nil {
         log.Fatal(err)
@@ -205,17 +212,20 @@ Updates an existing bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_UpdateBankRelationship" method="patch" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -228,8 +238,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.BankRelationships.UpdateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.BankRelationshipUpdate{}, nil)
+    res, err := s.BankRelationships.UpdateBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.BankRelationshipUpdate{}, ascendsdkgo.String("[object Object]"))
     if err != nil {
         log.Fatal(err)
     }
@@ -267,17 +276,20 @@ Cancels an existing bank relationship.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_CancelBankRelationship" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -290,7 +302,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BankRelationships.CancelBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.CancelBankRelationshipRequestCreate{
         Comment: "User Request",
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
@@ -331,17 +342,20 @@ Verifies a pending bank relationship with the `MICRO_DEPOSIT` verification metho
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_VerifyMicroDeposits" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:verifyMicroDeposits" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -354,7 +368,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BankRelationships.VerifyMicroDeposits(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.VerifyMicroDepositsRequestCreate{
         Amounts: components.MicroDepositAmountsCreate{
             Amount1: components.DecimalCreate{},
@@ -398,17 +411,20 @@ Reissues micro deposits after micro deposit verification has failed. The user sh
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_ReissueMicroDeposits" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships/{bankRelationship_id}:reissue" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -421,7 +437,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BankRelationships.ReissueMicroDeposits(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "651ef9de0dee00240813e60e", components.ReissueMicroDepositsRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
     })
@@ -461,17 +476,20 @@ Reuses an existing bank relationship for a new account. The source bank relation
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BankRelationships_ReuseBankRelationship" method="post" path="/transfers/v1/accounts/{account_id}/bankRelationships:reuse" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -484,7 +502,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BankRelationships.ReuseBankRelationship(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Z", components.ReuseBankRelationshipRequestCreate{
         Parent: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Z",
         SourceBankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",

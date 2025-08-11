@@ -8,6 +8,8 @@ type ListInvestigationsResponse struct {
 	Investigations []Investigation `json:"investigations,omitempty"`
 	// The next pagination token in the Search response; an empty value means no more results
 	NextPageToken *string `json:"next_page_token,omitempty"`
+	// The total number of investigations matching the search criteria. This is the total number of results available across all pages of the query, not the number of investigations returned in the current page. For example, if the search query matches 1,000 investigations but only 50 results are returned per page, `total_size` will be 1,000.
+	TotalSize *int `json:"total_size,omitempty"`
 }
 
 func (o *ListInvestigationsResponse) GetInvestigations() []Investigation {
@@ -22,4 +24,11 @@ func (o *ListInvestigationsResponse) GetNextPageToken() *string {
 		return nil
 	}
 	return o.NextPageToken
+}
+
+func (o *ListInvestigationsResponse) GetTotalSize() *int {
+	if o == nil {
+		return nil
+	}
+	return o.TotalSize
 }

@@ -13,17 +13,20 @@ Returns details of a list of snapshots.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Snapshots_ListSnapshots" method="get" path="/analytics/v1/snapshots" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -36,8 +39,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.DataRetrieval.ListSnapshots(ctx, nil, nil, nil)
+    res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String("snapshot_type==\"daily_accounts\"&&process_date==date(\"2023-09-30\")"), ascendsdkgo.Int(500), ascendsdkgo.String("M_-BAwEBCVBhZ2VUb2tlbgH_ggABAgEMUnVubmluZ1RvdGFsAQQAAQZGaWx0ZXIBDAAAAAX_ggEyAA=="))
     if err != nil {
         log.Fatal(err)
     }
@@ -65,5 +67,6 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500      | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

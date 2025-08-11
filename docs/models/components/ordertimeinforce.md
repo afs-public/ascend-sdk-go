@@ -5,7 +5,6 @@ Must be the value "DAY". Regulatory requirements dictate that the system capture
 
 ## Values
 
-| Name                                     | Value                                    |
-| ---------------------------------------- | ---------------------------------------- |
-| `OrderTimeInForceTimeInForceUnspecified` | TIME_IN_FORCE_UNSPECIFIED                |
-| `OrderTimeInForceDay`                    | DAY                                      |
+| Name                  | Value                 |
+| --------------------- | --------------------- |
+| `OrderTimeInForceDay` | DAY                   |

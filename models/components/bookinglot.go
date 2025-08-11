@@ -21,7 +21,7 @@ func (o *BookingLotMoneyPrice) GetValue() *string {
 
 // BookingLotMoney - Deprecated; use the price field instead
 //
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type BookingLotMoney struct {
 	CurrencyCode *string               `json:"currency_code,omitempty"`
 	Price        *BookingLotMoneyPrice `json:"price,omitempty"`
@@ -104,7 +104,7 @@ type BookingLot struct {
 	ID *string `json:"id,omitempty"`
 	// Deprecated; use the price field instead
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Money *BookingLotMoney `json:"money,omitempty"`
 	// Lot price in the same currency as the trade price
 	Price *BookingLotPrice `json:"price,omitempty"`

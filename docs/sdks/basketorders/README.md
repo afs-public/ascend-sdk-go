@@ -20,17 +20,20 @@ Creates an empty basket
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_CreateBasket" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -43,7 +46,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BasketOrders.CreateBasket(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", components.BasketCreate{
         ClientBasketID: "39347a0d-860b-48e8-a04d-511133f057e3",
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
@@ -72,10 +74,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 401, 403, 409, 500, 503 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 409 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## AddOrders
 
@@ -85,17 +88,20 @@ Adds a list of basket orders to a basket
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_AddOrders" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:addOrders" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -108,30 +114,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BasketOrders.AddOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", components.AddOrdersRequestCreate{
-        BasketOrders: []components.BasketOrderCreate{
-            components.BasketOrderCreate{
-                AccountID: "01HBRQ5BW6ZAY4BNWP4GWRD80X",
-                AssetType: components.BasketOrderCreateAssetTypeEquity,
-                ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
-                Identifier: "SBUX",
-                IdentifierType: components.BasketOrderCreateIdentifierTypeSymbol,
-                OrderType: components.BasketOrderCreateOrderTypeMarket,
-                Side: components.BasketOrderCreateSideBuy,
-                TimeInForce: components.BasketOrderCreateTimeInForceDay,
-            },
-            components.BasketOrderCreate{
-                AccountID: "01HBRQ5BW6ZAY4BNWP4GWRD80X",
-                AssetType: components.BasketOrderCreateAssetTypeEquity,
-                ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
-                Identifier: "SBUX",
-                IdentifierType: components.BasketOrderCreateIdentifierTypeSymbol,
-                OrderType: components.BasketOrderCreateOrderTypeMarket,
-                Side: components.BasketOrderCreateSideBuy,
-                TimeInForce: components.BasketOrderCreateTimeInForceDay,
-            },
-        },
+        BasketOrders: []components.BasketOrderCreate{},
         Name: "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521",
     })
     if err != nil {
@@ -159,10 +143,11 @@ func main() {
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| sdkerrors.Status                  | 400, 401, 403, 404, 409, 500, 503 | application/json                  |
-| sdkerrors.SDKError                | 4XX, 5XX                          | \*/\*                             |
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| sdkerrors.Status        | 400, 401, 403, 404, 409 | application/json        |
+| sdkerrors.Status        | 500, 503                | application/json        |
+| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
 
 ## GetBasket
 
@@ -172,17 +157,20 @@ Gets a basket by basket ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_GetBasket" method="get" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -195,7 +183,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BasketOrders.GetBasket(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521")
     if err != nil {
         log.Fatal(err)
@@ -221,10 +208,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 401, 403, 404, 500, 503 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## SubmitBasket
 
@@ -234,17 +222,20 @@ Submits a basket for execution in the market
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_SubmitBasket" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:submit" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -257,7 +248,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.BasketOrders.SubmitBasket(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", components.SubmitBasketRequestCreate{
         Name: "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521",
     })
@@ -286,10 +276,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 401, 403, 404, 500, 503 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListBasketOrders
 
@@ -299,17 +290,21 @@ Gets a list of basket orders within a basket.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_ListBasketOrders" method="get" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}/basketOrders" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -322,8 +317,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.BasketOrders.ListBasketOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", nil, nil)
+    res, err := s.BasketOrders.ListBasketOrders(ctx, operations.BasketOrdersServiceListBasketOrdersRequest{
+        CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
+        BasketID: "fffd326-72fa-4d2b-bd1f-45384fe5d521",
+        PageSize: ascendsdkgo.Int(25),
+        PageToken: ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"),
+        ShowRemoved: ascendsdkgo.Bool(true),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -335,14 +335,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                            | Type                                                                                                                                                                                                                                 | Required                                                                                                                                                                                                                             | Description                                                                                                                                                                                                                          | Example                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                                                   | The context to use for the request.                                                                                                                                                                                                  |                                                                                                                                                                                                                                      |
-| `correspondentID`                                                                                                                                                                                                                    | *string*                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                   | The correspondent id.                                                                                                                                                                                                                | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                                                                                                                                                           |
-| `basketID`                                                                                                                                                                                                                           | *string*                                                                                                                                                                                                                             | :heavy_check_mark:                                                                                                                                                                                                                   | The basket id.                                                                                                                                                                                                                       | fffd326-72fa-4d2b-bd1f-45384fe5d521                                                                                                                                                                                                  |
-| `pageSize`                                                                                                                                                                                                                           | **int*                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                   | The maximum number of basket orders to return. The service may return fewer than this value. If unspecified, at most 1000 basket orders will be returned. The maximum value is 1000; values above 1000 will be coerced to 1000.      | 25                                                                                                                                                                                                                                   |
-| `pageToken`                                                                                                                                                                                                                          | **string*                                                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                                                   | A page token, received from a previous `ListBasketOrders` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBasketOrders` must match the call that provided the page token. | AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h                                                                                                                                                                             |
-| `opts`                                                                                                                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                                                   | The options for this request.                                                                                                                                                                                                        |                                                                                                                                                                                                                                      |
+| Parameter                                                                                                                      | Type                                                                                                                           | Required                                                                                                                       | Description                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                                          | :heavy_check_mark:                                                                                                             | The context to use for the request.                                                                                            |
+| `request`                                                                                                                      | [operations.BasketOrdersServiceListBasketOrdersRequest](../../models/operations/basketordersservicelistbasketordersrequest.md) | :heavy_check_mark:                                                                                                             | The request object to use for the request.                                                                                     |
+| `opts`                                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                                       | :heavy_minus_sign:                                                                                                             | The options for this request.                                                                                                  |
 
 ### Response
 
@@ -350,10 +347,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 401, 403, 404, 500, 503 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListCompressedOrders
 
@@ -363,17 +361,20 @@ Gets a list of compressed orders within a basket.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_ListCompressedOrders" method="get" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}/compressedOrders" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -386,8 +387,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.BasketOrders.ListCompressedOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", nil, nil)
+    res, err := s.BasketOrders.ListCompressedOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"))
     if err != nil {
         log.Fatal(err)
     }
@@ -414,7 +414,8 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 401, 403, 404, 500, 503 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

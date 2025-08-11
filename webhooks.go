@@ -45,8 +45,8 @@ func ValidateEventPayload(r *http.Request, webhookSecret string, allowedEventAge
 		return nil, fmt.Errorf("invalid send time format: %w", err)
 	}
 
-	if eventExpired(sendTime, allowedEventAge) {
-		return nil, fmt.Errorf("event has expired, it must be sent within the allowed event age")
+	if eventOutOfRange(sendTime, allowedEventAge) {
+		return nil, fmt.Errorf("event is out of range, it must be sent within the allowed event age")
 	}
 
 	err = verifySignature(signatureHeader, sendTimeHeader, bodyStr, webhookSecret)
@@ -59,17 +59,15 @@ func ValidateEventPayload(r *http.Request, webhookSecret string, allowedEventAge
 		return nil, fmt.Errorf("failed to unmarshal event message: %w", err)
 	}
 
-	fmt.Printf("Received event message: %+v\n", eventMessage)
-
 	return &eventMessage, nil
 }
 
-func eventExpired(sendTime time.Time, allowedEventAge time.Duration) bool {
+func eventOutOfRange(sendTime time.Time, allowedEventAge time.Duration) bool {
 	currentTime := time.Now().UTC()
 	// event is too old and was sent before the allowed event age
 	isTooOld := sendTime.Before(currentTime.Add(-allowedEventAge))
 	// the event is in the future, indicating a potential issue with the send time and should not be processed
-	isInTheFuture := sendTime.After(currentTime)
+	isInTheFuture := sendTime.After(currentTime.Add(allowedEventAge))
 
 	return isTooOld || isInTheFuture
 }

@@ -13,17 +13,21 @@ Calculates the cash balance for an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="CashBalances_CalculateCashBalance" method="get" path="/transfers/v1/accounts/{account_id}:calculateCashBalance" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -36,8 +40,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.CashBalances.CalculateCashBalance(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil)
+    res, err := s.CashBalances.CalculateCashBalance(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", operations.MechanismAch.ToPointer())
     if err != nil {
         log.Fatal(err)
     }

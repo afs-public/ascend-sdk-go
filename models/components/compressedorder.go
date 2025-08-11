@@ -104,6 +104,7 @@ const (
 	CompressedOrderOrderRejectedReasonAnotherBasketOrderForAccountHasFailedRiskChecks   CompressedOrderOrderRejectedReason = "ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS"
 	CompressedOrderOrderRejectedReasonInsufficientPosition                              CompressedOrderOrderRejectedReason = "INSUFFICIENT_POSITION"
 	CompressedOrderOrderRejectedReasonFailedBuyingPower                                 CompressedOrderOrderRejectedReason = "FAILED_BUYING_POWER"
+	CompressedOrderOrderRejectedReasonRoundUpAmountTooSmall                             CompressedOrderOrderRejectedReason = "ROUND_UP_AMOUNT_TOO_SMALL"
 )
 
 func (e CompressedOrderOrderRejectedReason) ToPointer() *CompressedOrderOrderRejectedReason {
@@ -114,12 +115,13 @@ func (e CompressedOrderOrderRejectedReason) ToPointer() *CompressedOrderOrderRej
 type CompressedOrderOrderStatus string
 
 const (
-	CompressedOrderOrderStatusOrderStatusUnspecified CompressedOrderOrderStatus = "ORDER_STATUS_UNSPECIFIED"
-	CompressedOrderOrderStatusPendingNew             CompressedOrderOrderStatus = "PENDING_NEW"
-	CompressedOrderOrderStatusNew                    CompressedOrderOrderStatus = "NEW"
-	CompressedOrderOrderStatusPartiallyFilled        CompressedOrderOrderStatus = "PARTIALLY_FILLED"
-	CompressedOrderOrderStatusFilled                 CompressedOrderOrderStatus = "FILLED"
-	CompressedOrderOrderStatusRejected               CompressedOrderOrderStatus = "REJECTED"
+	CompressedOrderOrderStatusOrderStatusUnspecified  CompressedOrderOrderStatus = "ORDER_STATUS_UNSPECIFIED"
+	CompressedOrderOrderStatusPendingNew              CompressedOrderOrderStatus = "PENDING_NEW"
+	CompressedOrderOrderStatusNew                     CompressedOrderOrderStatus = "NEW"
+	CompressedOrderOrderStatusPartiallyFilled         CompressedOrderOrderStatus = "PARTIALLY_FILLED"
+	CompressedOrderOrderStatusFilled                  CompressedOrderOrderStatus = "FILLED"
+	CompressedOrderOrderStatusRejected                CompressedOrderOrderStatus = "REJECTED"
+	CompressedOrderOrderStatusRemovedBeforeSubmission CompressedOrderOrderStatus = "REMOVED_BEFORE_SUBMISSION"
 )
 
 func (e CompressedOrderOrderStatus) ToPointer() *CompressedOrderOrderStatus {

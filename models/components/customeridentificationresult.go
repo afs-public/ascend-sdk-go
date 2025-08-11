@@ -165,6 +165,8 @@ type CustomerIdentificationResult struct {
 	DocumentarySessionURI *string `json:"documentary_session_uri,omitempty"`
 	// Whether or not the customer email was verified
 	EmailVerified *EmailVerified `json:"email_verified,omitempty"`
+	// Whether or not the result is expired An expired result will cause all `VerificationState`'s to be `UNVERIFIED`, the `ExpirationState` will be `EXPIRED` Will always be `false` for synchronous checks such as `DATABASE` Will be `true` when an asynchronous check such as `DOCUMENTARY` hasn't been completed within the timeframe If `true` the `completed` field will be `false` since a check was never completed
+	Expired *bool `json:"expired,omitempty"`
 	// The name of the external vendor
 	ExternalVendor *string `json:"external_vendor,omitempty"`
 	// The id relating to the external vendor
@@ -232,6 +234,13 @@ func (o *CustomerIdentificationResult) GetEmailVerified() *EmailVerified {
 		return nil
 	}
 	return o.EmailVerified
+}
+
+func (o *CustomerIdentificationResult) GetExpired() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Expired
 }
 
 func (o *CustomerIdentificationResult) GetExternalVendor() *string {

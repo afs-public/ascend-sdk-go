@@ -6,7 +6,7 @@ package components
 type ContributionConstraints struct {
 	// Deprecated! This value is determined based on the current date relative to the tax deadline. It will be inaccurate in cases where the previous year contribution deadline is not the tax deadline (e.g. `RECHARACTERIZATION`). Please refer to the `valid_types.previous_year_deadline` field instead.
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	OnlyAllowCurrentYear *bool `json:"only_allow_current_year,omitempty"`
 	// Valid contribution types
 	ValidTypes []ContributionConstraintsContributionTypeInfo `json:"valid_types,omitempty"`

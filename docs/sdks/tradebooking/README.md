@@ -23,18 +23,21 @@ Creates a trade with one or more executions. Combination of (account_id, client_
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CreateTrade" method="post" path="/booking/v1/accounts/{account_id}/trades" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -47,24 +50,11 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.CreateTrade(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", components.TradeCreate{
         AccountID: "02HASWB2DTMRT3DAM45P56J2T2",
         BrokerCapacity: components.TradeCreateBrokerCapacityAgency,
         ClientOrderID: "00be5285-0623-4560-8c58-f05af2c56ba0",
         Executions: []components.ExecutionCreate{
-            components.ExecutionCreate{
-                ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
-                ExternalID: "0H06HAP3A3Y",
-                Price: components.DecimalCreate{},
-                Quantity: components.DecimalCreate{},
-            },
-            components.ExecutionCreate{
-                ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
-                ExternalID: "0H06HAP3A3Y",
-                Price: components.DecimalCreate{},
-                Quantity: components.DecimalCreate{},
-            },
             components.ExecutionCreate{
                 ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
                 ExternalID: "0H06HAP3A3Y",
@@ -102,10 +92,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 409, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 409      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetTrade
 
@@ -115,17 +106,20 @@ Gets a trade and all executions by trade_id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_GetTrade" method="get" path="/booking/v1/accounts/{account_id}/trades/{trade_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -138,7 +132,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.GetTrade(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", "01FAKETRADEIDPROVIDEDFROMCREATETRADE")
     if err != nil {
         log.Fatal(err)
@@ -164,10 +157,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CompleteTrade
 
@@ -177,17 +171,20 @@ Complete a Trade by closing and generating any fees and withholdings if necessar
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CompleteTrade" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}:complete" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -200,7 +197,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.CompleteTrade(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", components.CompleteTradeRequestCreate{
         Name: "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM",
     })
@@ -229,10 +225,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CancelTrade
 
@@ -242,17 +239,20 @@ Cancel a trade and all the executions using the original trade_id. CancelTrade w
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CancelTrade" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -265,7 +265,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.CancelTrade(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", "01FAKETRADEIDPROVIDEDFROMCREATETRADE", components.CancelTradeRequestCreate{
         Name: "accounts/01FAKEACCOUNT1TYKWEYRH8S2K/trades/01FAKETRADEIDPROVIDEDFROMCREATETRADE",
     })
@@ -294,10 +293,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## RebookTrade
 
@@ -307,18 +307,20 @@ Rebook a trade by the original trade_id. The entire original trade's executions 
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_RebookTrade" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}:rebook" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
-	"github.com/afs-public/ascend-sdk-go/types"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -331,33 +333,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.RebookTrade(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", components.RebookTradeRequestCreate{
         Name: "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM",
         Trade: components.TradeCreate{
             AccountID: "02HASWB2DTMRT3DAM45P56J2T2",
             BrokerCapacity: components.TradeCreateBrokerCapacityAgency,
             ClientOrderID: "00be5285-0623-4560-8c58-f05af2c56ba0",
-            Executions: []components.ExecutionCreate{
-                components.ExecutionCreate{
-                    ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
-                    ExternalID: "0H06HAP3A3Y",
-                    Price: components.DecimalCreate{},
-                    Quantity: components.DecimalCreate{},
-                },
-                components.ExecutionCreate{
-                    ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
-                    ExternalID: "0H06HAP3A3Y",
-                    Price: components.DecimalCreate{},
-                    Quantity: components.DecimalCreate{},
-                },
-                components.ExecutionCreate{
-                    ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
-                    ExternalID: "0H06HAP3A3Y",
-                    Price: components.DecimalCreate{},
-                    Quantity: components.DecimalCreate{},
-                },
-            },
+            Executions: []components.ExecutionCreate{},
             Identifier: "AAPL",
             IdentifierType: components.TradeCreateIdentifierTypeSymbol,
             RouteType: components.RouteTypeMngd,
@@ -390,10 +372,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CreateExecution
 
@@ -403,18 +386,21 @@ Create a new execution under an existing trade that is open.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CreateExecution" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -427,7 +413,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.CreateExecution(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", "01FAKETRADEIDPROVIDEDFROMCREATETRADE", components.ExecutionCreate{
         ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
         ExternalID: "0H06HAP3A3Y",
@@ -459,10 +444,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 500, 503, 504 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetExecution
 
@@ -472,17 +458,20 @@ Gets an execution by execution_id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_GetExecution" method="get" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions/{execution_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -495,7 +484,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.GetExecution(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", "01FAKETRADEIDPROVIDEDFROMCREATETRADE", "01FAKEEXECUTONIDPROVIDEDFROMBOOKINGAPI")
     if err != nil {
         log.Fatal(err)
@@ -522,10 +510,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CancelExecution
 
@@ -535,17 +524,20 @@ Cancel an execution using the original execution_id. If applicable, fees and bac
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CancelExecution" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions/{execution_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -558,7 +550,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.CancelExecution(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", "02G0XX2KDN3M9QKFKRE2HYSCMY", components.CancelExecutionRequestCreate{
         Name: "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM/executions/02G0XX2KDN3M9QKFKRE2HYSCMY",
     })
@@ -588,10 +579,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## RebookExecution
 
@@ -601,18 +593,21 @@ Rebook an execution by the original execution_id. If applicable, fees and backup
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_RebookExecution" method="post" path="/booking/v1/accounts/{account_id}/trades/{trade_id}/executions/{execution_id}:rebook" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -625,7 +620,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeBooking.RebookExecution(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", "02G0XX2KDN3M9QKFKRE2HYSCMY", components.RebookExecutionRequestCreate{
         Execution: components.ExecutionCreate{
             ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
@@ -661,7 +655,8 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

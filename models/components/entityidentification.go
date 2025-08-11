@@ -2,7 +2,11 @@
 
 package components
 
-// EntityIdentificationType - Tax id type for entities (e.g. ein, lei, etc.))
+// EntityIdentificationType - The entity tax id type, one of:
+// - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value.
+// - `EIN` - Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX).
+// - `LEI` - Legal Entity Identifier (20 digit alphanumeric).
+// - `DUNS` - Dun and Bradstreet number.
 type EntityIdentificationType string
 
 const (
@@ -24,7 +28,11 @@ type EntityIdentification struct {
 	DocumentReferenceIds []string `json:"document_reference_ids,omitempty"`
 	// Country that issued identification Two character region code, complies with https://cldr.unicode.org/index
 	RegionCode *string `json:"region_code,omitempty"`
-	// Tax id type for entities (e.g. ein, lei, etc.))
+	// The entity tax id type, one of:
+	// - `ID_ENTITY_TYPE_UNSPECIFIED` - Default/Null value.
+	// - `EIN` - Employer Identification Number (US government issued, 9 digits, XX-XXXXXXX).
+	// - `LEI` - Legal Entity Identifier (20 digit alphanumeric).
+	// - `DUNS` - Dun and Bradstreet number.
 	Type *EntityIdentificationType `json:"type,omitempty"`
 	// Tax id value
 	Value *string `json:"value,omitempty"`

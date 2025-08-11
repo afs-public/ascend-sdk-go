@@ -34,3 +34,4 @@ When an order has the REJECTED status, this will be populated with a system code
 | `BasketOrderOrderRejectedReasonAnotherBasketOrderForAccountHasFailedRiskChecks`   | ANOTHER_BASKET_ORDER_FOR_ACCOUNT_HAS_FAILED_RISK_CHECKS                           |
 | `BasketOrderOrderRejectedReasonInsufficientPosition`                              | INSUFFICIENT_POSITION                                                             |
 | `BasketOrderOrderRejectedReasonFailedBuyingPower`                                 | FAILED_BUYING_POWER                                                               |
+| `BasketOrderOrderRejectedReasonRoundUpAmountTooSmall`                             | ROUND_UP_AMOUNT_TOO_SMALL                                                         |

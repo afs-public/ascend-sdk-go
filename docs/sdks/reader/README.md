@@ -14,17 +14,20 @@ Gets a list of events.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Reader_ListEventMessages" method="get" path="/events/v1/messages" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -37,8 +40,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Reader.ListEventMessages(ctx, nil, nil, nil)
+    res, err := s.Reader.ListEventMessages(ctx, ascendsdkgo.String("publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
     if err != nil {
         log.Fatal(err)
     }
@@ -66,7 +68,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 401, 403, 500 | application/json   |
+| sdkerrors.Status   | 400, 401, 403      | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetEventMessage
@@ -75,17 +78,20 @@ Gets the details of a specific event.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Reader_GetEventMessage" method="get" path="/events/v1/messages/{message_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -98,7 +104,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Reader.GetEventMessage(ctx, "01H8MCDXH3ZXXMAA3918GRCFVE")
     if err != nil {
         log.Fatal(err)
@@ -123,7 +128,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

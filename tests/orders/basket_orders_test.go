@@ -8,6 +8,7 @@ import (
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
@@ -87,7 +88,14 @@ func TestBasketOrders(t *testing.T) {
 	t.Run("Basket Orders List Basket Orders List Basket Orders1", func(t *testing.T) {
 		pageSize := 10
 		pageToken := ""
-		result, err := sdk.BasketOrders.ListBasketOrders(ctx, correspondentId, *basketOrderId, &pageSize, &pageToken)
+		request := operations.BasketOrdersServiceListBasketOrdersRequest{
+			CorrespondentID: correspondentId,
+			BasketID:        *basketOrderId,
+			PageSize:        &pageSize,
+			PageToken:       &pageToken,
+		}
+
+		result, err := sdk.BasketOrders.ListBasketOrders(ctx, request)
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})

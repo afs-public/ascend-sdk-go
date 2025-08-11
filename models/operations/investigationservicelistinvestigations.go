@@ -14,6 +14,18 @@ type InvestigationServiceListInvestigationsRequest struct {
 	// A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:
 	//  ListInvestigationStatesResponse.investigation_states
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
+	// The order in which investigations are listed. Only one field and direction can be specified. Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank):
+	//   - investigation_request_state
+	//   - correspondent_id
+	//   - scope
+	//   - identity_verification
+	//   - watchlist_screen
+	//   - person.given_name
+	//   - person.family_name
+	//   - entity.legal_name
+	//   - created_at
+	//   - updated_at
+	OrderBy *string `queryParam:"style=form,explode=true,name=order_by"`
 }
 
 func (o *InvestigationServiceListInvestigationsRequest) GetPageSize() *int {
@@ -35,6 +47,13 @@ func (o *InvestigationServiceListInvestigationsRequest) GetFilter() *string {
 		return nil
 	}
 	return o.Filter
+}
+
+func (o *InvestigationServiceListInvestigationsRequest) GetOrderBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OrderBy
 }
 
 type InvestigationServiceListInvestigationsResponse struct {

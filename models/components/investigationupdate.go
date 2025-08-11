@@ -2,7 +2,14 @@
 
 package components
 
-// InvestigationUpdateIdentityVerification - Indicates the current state of identity verification
+// InvestigationUpdateIdentityVerification - The screen state of one screening within an investigation, one of:
+// - `SCREEN_STATE_UNSPECIFIED` - Default/Null value.
+// - `PENDING` - Screen result is pending.
+// - `PASSED` - Screen result has passed.
+// - `FAILED` - Screen result has failed.
+// - `NEEDS_REVIEW` - Screen result needs manual review.
+// - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date.
+// - `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
 type InvestigationUpdateIdentityVerification string
 
 const (
@@ -19,7 +26,10 @@ func (e InvestigationUpdateIdentityVerification) ToPointer() *InvestigationUpdat
 	return &e
 }
 
-// InvestigationUpdateInvestigationRequestState - Current state of investigation request
+// InvestigationUpdateInvestigationRequestState - The state of an investigation request, one of:
+// - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` - Default/Null value.
+// - `OPEN` - The investigation request is open.
+// - `CLOSED` - The investigation request is closed.
 type InvestigationUpdateInvestigationRequestState string
 
 const (
@@ -34,14 +44,33 @@ func (e InvestigationUpdateInvestigationRequestState) ToPointer() *Investigation
 
 // InvestigationUpdate - Contains investigation details of corresponding investigation
 type InvestigationUpdate struct {
+	// A unique identifier referencing a client The client ID serves as the unique identifier for the apex client positioned above the correspondent within the apex client configurator hierarchy. Moving forward, the account service will internally assign the client ID for all investigations.
+	ClientID *string `json:"client_id,omitempty"`
 	// Comment relating to why the investigation state was updated
 	Comment *string `json:"comment,omitempty"`
-	// Indicates the current state of identity verification
+	// The screen state of one screening within an investigation, one of:
+	// - `SCREEN_STATE_UNSPECIFIED` - Default/Null value.
+	// - `PENDING` - Screen result is pending.
+	// - `PASSED` - Screen result has passed.
+	// - `FAILED` - Screen result has failed.
+	// - `NEEDS_REVIEW` - Screen result needs manual review.
+	// - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date.
+	// - `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
 	IdentityVerification *InvestigationUpdateIdentityVerification `json:"identity_verification,omitempty"`
-	// Current state of investigation request
+	// The state of an investigation request, one of:
+	// - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` - Default/Null value.
+	// - `OPEN` - The investigation request is open.
+	// - `CLOSED` - The investigation request is closed.
 	InvestigationRequestState *InvestigationUpdateInvestigationRequestState `json:"investigation_request_state,omitempty"`
 	// A list of watchlist entries matched against the investigation
 	WatchlistMatches []WatchlistMatchUpdate `json:"watchlist_matches,omitempty"`
+}
+
+func (o *InvestigationUpdate) GetClientID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientID
 }
 
 func (o *InvestigationUpdate) GetComment() *string {
