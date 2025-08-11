@@ -28,18 +28,21 @@ Gets a list of Accounts based on search criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListAccounts" method="get" path="/accounts/v1/accounts" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -52,8 +55,13 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{})
+    res, err := s.AccountManagement.ListAccounts(ctx, operations.AccountsListAccountsRequest{
+        PageSize: ascendsdkgo.Int(25),
+        PageToken: ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
+        OrderBy: ascendsdkgo.String("state"),
+        Filter: ascendsdkgo.String("account_number == \"R9AHY8P\""),
+        View: operations.ViewFull.ToPointer(),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -79,7 +87,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500, 503 | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateAccount
@@ -88,17 +97,20 @@ UPDATE Updates an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_UpdateAccount" method="patch" path="/accounts/v1/accounts/{account_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -111,7 +123,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.UpdateAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AccountRequestUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -138,10 +149,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## AddParty
 
@@ -149,17 +161,20 @@ Adds a party to an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_AddParty" method="post" path="/accounts/v1/accounts/{account_id}/parties:add" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -172,7 +187,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.AddParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AddPartyRequestCreate{
         Parent: "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK",
         Party: components.PartyRequestCreate{
@@ -206,10 +220,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateParty
 
@@ -217,17 +232,20 @@ Updates a Party.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_UpdateParty" method="patch" path="/accounts/v1/accounts/{account_id}/parties/{party_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -240,7 +258,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.UpdateParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "a58ddb02-3954-4249-a7d5-1d408def12cf", components.PartyRequestUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -268,10 +285,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ReplaceParty
 
@@ -279,17 +297,20 @@ Replaces a party on an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ReplaceParty" method="post" path="/accounts/v1/accounts/{account_id}/parties/{party_id}:replace" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -302,7 +323,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.ReplaceParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.ReplacePartyRequestCreate{
         Name: "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/parties/8096110d-fb55-4f9d-b883-b84f0b70d3ea",
         Party: components.PartyRequestCreate{
@@ -337,10 +357,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## RemoveParty
 
@@ -348,17 +369,20 @@ Remove a party from an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_RemoveParty" method="post" path="/accounts/v1/accounts/{account_id}/parties/{party_id}:remove" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -371,7 +395,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.RemoveParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.RemovePartyRequestCreate{
         Name: "accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/parties/8096110d-fb55-4f9d-b883-b84f0b70d3ea",
     })
@@ -400,10 +423,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CloseAccount
 
@@ -411,17 +435,20 @@ CUSTOM Places an ACCT_MAINT_CLOSURE_PREP_BY_CORRESPONDENT restriction on the Acc
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_CloseAccount" method="post" path="/accounts/v1/accounts/{account_id}:close" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -434,7 +461,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.CloseAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.CloseAccountRequestCreate{})
     if err != nil {
         log.Fatal(err)
@@ -460,10 +486,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 409, 500, 503 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404, 409 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CreateTrustedContact
 
@@ -471,17 +498,20 @@ Creates a new Trusted Contact for an account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_CreateTrustedContact" method="post" path="/accounts/v1/accounts/{account_id}/trustedContacts" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -494,7 +524,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.CreateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.TrustedContactCreate{
         FamilyName: "Doe",
         GivenName: "John",
@@ -525,7 +554,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500, 503 | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateTrustedContact
@@ -534,17 +564,20 @@ Updates a Trusted Contact.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_UpdateTrustedContact" method="patch" path="/accounts/v1/accounts/{account_id}/trustedContacts/{trustedContact_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -557,7 +590,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.UpdateTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea", components.TrustedContactUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -585,10 +617,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## DeleteTrustedContact
 
@@ -596,17 +629,20 @@ DELETE Deletes a Trusted Contact for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_DeleteTrustedContact" method="delete" path="/accounts/v1/accounts/{account_id}/trustedContacts/{trustedContact_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -619,7 +655,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.DeleteTrustedContact(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea")
     if err != nil {
         log.Fatal(err)
@@ -645,10 +680,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CreateInterestedParty
 
@@ -656,17 +692,20 @@ Creates an Interested Party record for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_CreateInterestedParty" method="post" path="/accounts/v1/accounts/{account_id}/interestedParties" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -679,7 +718,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.CreateInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.InterestedPartyCreate{
         MailingAddress: components.PostalAddressCreate{},
         Recipient: "John Dough",
@@ -708,10 +746,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateInterestedParty
 
@@ -719,17 +758,20 @@ Updates an Interested Party.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_UpdateInterestedParty" method="patch" path="/accounts/v1/accounts/{account_id}/interestedParties/{interestedParty_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -742,7 +784,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.UpdateInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "ecf44f2f-7030-48ed-b937-c40891ee10c8", components.InterestedPartyUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -770,10 +811,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## DeleteInterestedParty
 
@@ -781,17 +823,20 @@ Deletes an Interested Party associated from an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_DeleteInterestedParty" method="delete" path="/accounts/v1/accounts/{account_id}/interestedParties/{interestedParty_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -804,7 +849,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.DeleteInterestedParty(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "8096110d-fb55-4f9d-b883-b84f0b70d3ea")
     if err != nil {
         log.Fatal(err)
@@ -830,10 +874,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListAvailableRestrictions
 
@@ -841,17 +886,20 @@ Gets a list of possible Restrictions that can be placed on an Account based on E
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListAvailableRestrictions" method="get" path="/accounts/v1/accounts/{account_id}/availableRestrictions" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -864,7 +912,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.ListAvailableRestrictions(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK")
     if err != nil {
         log.Fatal(err)
@@ -889,10 +936,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CreateRestriction
 
@@ -900,17 +948,20 @@ Applies a Restriction to an account that suspends one or more Entitlements.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_CreateRestriction" method="post" path="/accounts/v1/accounts/{account_id}/restrictions" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -923,7 +974,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.CreateRestriction(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.RestrictionCreate{
         CreateReason: "Some reason for creating",
         RestrictionCode: "MARGIN_CALL_VIOLATION_REG_T",
@@ -952,10 +1002,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 409, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 409      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## EndRestriction
 
@@ -963,17 +1014,20 @@ Ends a Restriction on an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_EndRestriction" method="post" path="/accounts/v1/accounts/{account_id}/restrictions/{restriction_id}:end" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -986,7 +1040,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.AccountManagement.EndRestriction(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", "FRAUD_SUSPENDED_BY_CORRESPONDENT", components.EndRestrictionRequestCreate{
         Reason: "Reason for ending the restriction",
     })
@@ -1015,7 +1068,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

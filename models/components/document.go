@@ -315,6 +315,8 @@ const (
 	DocumentInvestorDocumentDocumentTypeForm1099C                       DocumentInvestorDocumentDocumentType = "FORM_1099_C"
 	DocumentInvestorDocumentDocumentTypeForm4806D                       DocumentInvestorDocumentDocumentType = "FORM_480_6D"
 	DocumentInvestorDocumentDocumentTypeForm5498Esa                     DocumentInvestorDocumentDocumentType = "FORM_5498_ESA"
+	DocumentInvestorDocumentDocumentTypeFpslNegativeConsentForm         DocumentInvestorDocumentDocumentType = "FPSL_NEGATIVE_CONSENT_FORM"
+	DocumentInvestorDocumentDocumentTypeCrsForm                         DocumentInvestorDocumentDocumentType = "CRS_FORM"
 )
 
 func (e DocumentInvestorDocumentDocumentType) ToPointer() *DocumentInvestorDocumentDocumentType {

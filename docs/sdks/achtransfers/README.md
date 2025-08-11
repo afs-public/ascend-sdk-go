@@ -18,17 +18,20 @@ Creates an ACH deposit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="AchDeposits_CreateAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -41,7 +44,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.ACHTransfers.CreateAchDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.AchDepositCreate{
         Amount: components.DecimalCreate{},
         BankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
@@ -82,17 +84,20 @@ Gets an existing ACH deposit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="AchDeposits_GetAchDeposit" method="get" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -105,7 +110,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.ACHTransfers.GetAchDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319")
     if err != nil {
         log.Fatal(err)
@@ -142,17 +146,20 @@ Cancels an existing ACH deposit.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="AchDeposits_CancelAchDeposit" method="post" path="/transfers/v1/accounts/{account_id}/achDeposits/{achDeposit_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -165,7 +172,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.ACHTransfers.CancelAchDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.CancelAchDepositRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achDeposits/20230817000319",
     })
@@ -205,17 +211,20 @@ Creates an ACH withdrawal.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="AchWithdrawals_CreateAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -228,7 +237,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.ACHTransfers.CreateAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.AchWithdrawalCreate{
         BankRelationship: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/bankRelationships/651ef9de0dee00240813e60e",
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
@@ -268,17 +276,20 @@ Gets an existing ACH withdrawal.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="AchWithdrawals_GetAchWithdrawal" method="get" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -291,7 +302,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.ACHTransfers.GetAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230620500726")
     if err != nil {
         log.Fatal(err)
@@ -328,17 +338,20 @@ Cancels an existing ACH withdrawal.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="AchWithdrawals_CancelAchWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/achWithdrawals/{achWithdrawal_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -351,7 +364,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.ACHTransfers.CancelAchWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230620500726", components.CancelAchWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/achWithdrawals/20230620500726",
     })

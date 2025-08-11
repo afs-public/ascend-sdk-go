@@ -18,18 +18,21 @@ Creates a new trade allocation. These are used to allocate or distribute positio
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CreateTradeAllocation" method="post" path="/booking/v1/accounts/{account_id}/tradeAllocations" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -42,7 +45,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeAllocation.CreateTradeAllocation(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", components.TradeAllocationCreate{
         BrokerCapacity: components.TradeAllocationCreateBrokerCapacityAgency,
         ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
@@ -54,7 +56,7 @@ func main() {
         SourceApplication: "Trading-App",
         ToAccountID: "02HASWB2DTMRT3DAM45P56J2T2",
         ToSide: components.ToSideBuy,
-    }, nil)
+    }, ascendsdkgo.String("8a0d35c0-428c-439e-9b03-b611530fe06f"))
     if err != nil {
         log.Fatal(err)
     }
@@ -80,10 +82,11 @@ func main() {
 
 ### Errors
 
-| Error Type                        | Status Code                       | Content Type                      |
-| --------------------------------- | --------------------------------- | --------------------------------- |
-| sdkerrors.Status                  | 400, 403, 404, 409, 500, 503, 504 | application/json                  |
-| sdkerrors.SDKError                | 4XX, 5XX                          | \*/\*                             |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404, 409 | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetTradeAllocation
 
@@ -93,17 +96,20 @@ Retrieves a trade allocation and its details.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_GetTradeAllocation" method="get" path="/booking/v1/accounts/{account_id}/tradeAllocations/{tradeAllocation_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -116,7 +122,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeAllocation.GetTradeAllocation(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM")
     if err != nil {
         log.Fatal(err)
@@ -142,10 +147,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CancelTradeAllocation
 
@@ -155,17 +161,20 @@ Cancel a trade allocation using the original trade_allocation_id.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_CancelTradeAllocation" method="post" path="/booking/v1/accounts/{account_id}/tradeAllocations/{tradeAllocation_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -178,7 +187,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeAllocation.CancelTradeAllocation(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", components.CancelTradeAllocationRequestCreate{
         Name: "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM",
     })
@@ -207,10 +215,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## RebookTradeAllocation
 
@@ -220,18 +229,21 @@ Rebook a trade allocation by the original trade_allocation_id. The allocation is
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Booking_RebookTradeAllocation" method="post" path="/booking/v1/accounts/{account_id}/tradeAllocations/{tradeAllocation_id}:rebook" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/types"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -244,7 +256,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.TradeAllocation.RebookTradeAllocation(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", components.RebookTradeAllocationRequestCreate{
         Name: "accounts/02HASWB2DTMRT3DAM45P56J2T2/tradeAllocations/01J0XX2KDN3M9QKFKRE2HYSCQM",
         RequestID: "8a0d35c0-428c-439e-9b03-b611530fe06f",
@@ -286,7 +297,8 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

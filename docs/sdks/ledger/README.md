@@ -17,17 +17,20 @@ List all Entries based on a filter
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Ledger_ListEntries" method="get" path="/ledger/v1/accounts/{account_id}/entries" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -40,8 +43,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Ledger.ListEntries(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", nil, nil, nil)
+    res, err := s.Ledger.ListEntries(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", ascendsdkgo.Int(0), ascendsdkgo.String("v-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAOv-CAfzbNG7ZAS8xZWYyMmM3ZS01NjdmLTBhYzgtYjZmZi1kNzYwNDI3YmI3N2Q6MjAyNC0wNi0wMgA="), ascendsdkgo.String("process_date == date('2024-05-11') && account_id == '01HBRQ5BW6ZAY4BNWP4GWRD80X'"))
     if err != nil {
         log.Fatal(err)
     }
@@ -68,10 +70,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 500, 503, 504 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListActivities
 
@@ -79,17 +82,20 @@ List all Completed Activities based on a filter
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Ledger_ListActivities" method="get" path="/ledger/v1/accounts/{account_id}/activities" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -102,8 +108,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Ledger.ListActivities(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", nil, nil, nil)
+    res, err := s.Ledger.ListActivities(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAI_-CAfwVsHF9ARgyMDI0LTA2LTA0OjFGQTA1MDExOjUwMDEA"), ascendsdkgo.String("subtype_category == 'TRADE' && process_date >= date('2023-07-31') && settle_date >= date('2023-08-18') && side == 'BUY' &&  activity_date >= date('2023-09-15') && asset_id == 8395"))
     if err != nil {
         log.Fatal(err)
     }
@@ -130,10 +135,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 500, 503, 504 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListPositions
 
@@ -141,17 +147,20 @@ List positions based on a filter
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Ledger_ListPositions" method="get" path="/ledger/v1/accounts/{account_id}/positions" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -164,8 +173,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Ledger.ListPositions(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", nil, nil, nil)
+    res, err := s.Ledger.ListPositions(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", ascendsdkgo.Int(20), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAOv-CAfwFIZG3AS8xZWYyMmM4Ny0zNDI5LTAyYzItODRjNC03ODdmNTJlNDY1MTE6MjAyNC0wNi0wMgA="), ascendsdkgo.String("date >= date('2023-08-31') && asset_id == 8395"))
     if err != nil {
         log.Fatal(err)
     }
@@ -192,10 +200,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 500, 503, 504 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetActivity
 
@@ -203,17 +212,20 @@ Get an activity
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Ledger_GetActivity" method="get" path="/ledger/v1/accounts/{account_id}/activities/{activity_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -226,7 +238,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Ledger.GetActivity(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", "FAKEACTIVITYID")
     if err != nil {
         log.Fatal(err)
@@ -252,10 +263,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 500, 503, 504 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetEntry
 
@@ -263,17 +275,20 @@ Get an entry
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Ledger_GetEntry" method="get" path="/ledger/v1/accounts/{account_id}/entries/{entry_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -286,8 +301,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Ledger.GetEntry(ctx, "{\"account_id\":\"\"}", "{\"entry_id\":\"\"}")
+    res, err := s.Ledger.GetEntry(ctx, "[object Object]", "[object Object]")
     if err != nil {
         log.Fatal(err)
     }
@@ -312,7 +326,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 500, 503, 504 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

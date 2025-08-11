@@ -19,17 +19,20 @@ Creates a new push subscription for event notifications.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_CreatePushSubscription" method="post" path="/events/v1/subscriptions" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -42,7 +45,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Subscriber.CreatePushSubscription(ctx, components.PushSubscriptionCreate{
         DisplayName: "This is an example HTTP configuration.",
         EventTypes: []string{
@@ -72,10 +74,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 409, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 409 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListPushSubscriptions
 
@@ -83,17 +86,20 @@ Gets a list of push subscriptions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_ListPushSubscriptions" method="get" path="/events/v1/subscriptions" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -106,8 +112,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
+    res, err := s.Subscriber.ListPushSubscriptions(ctx, ascendsdkgo.String("correspondent_id==\"01H8MCDXH4HYJJAV921BDKCC83\""), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
     if err != nil {
         log.Fatal(err)
     }
@@ -135,7 +140,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 401, 403, 500 | application/json   |
+| sdkerrors.Status   | 400, 401, 403      | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetPushSubscription
@@ -144,17 +150,20 @@ Gets the details of a specific push subscription.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_GetPushSubscription" method="get" path="/events/v1/subscriptions/{subscription_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -167,7 +176,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Subscriber.GetPushSubscription(ctx, "01H8MCDXH4JVH7KVNB2YY42907")
     if err != nil {
         log.Fatal(err)
@@ -192,10 +200,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdatePushSubscription
 
@@ -203,17 +212,20 @@ Updates the details of a push subscription.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_UpdatePushSubscription" method="patch" path="/events/v1/subscriptions/{subscription_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -226,7 +238,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Subscriber.UpdatePushSubscription(ctx, "01H8MCDXH4JVH7KVNB2YY42907", components.PushSubscriptionUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -253,10 +264,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## DeletePushSubscription
 
@@ -264,17 +276,20 @@ Stops receiving events from a push subscription, and then deletes it.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_DeletePushSubscription" method="delete" path="/events/v1/subscriptions/{subscription_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -287,7 +302,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Subscriber.DeletePushSubscription(ctx, "01H8MCDXH4JVH7KVNB2YY42907")
     if err != nil {
         log.Fatal(err)
@@ -312,10 +326,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetPushSubscriptionDelivery
 
@@ -323,17 +338,20 @@ Gets the details of a specific push subscription delivery.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_GetPushSubscriptionDelivery" method="get" path="/events/v1/subscriptions/{subscription_id}/deliveries/{delivery_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -346,7 +364,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Subscriber.GetPushSubscriptionDelivery(ctx, "01H8MCDXH4JVH7KVNB2YY42907", "01H8MCDXH415BJ962YDN4B02JK")
     if err != nil {
         log.Fatal(err)
@@ -372,10 +389,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListPushSubscriptionDeliveries
 
@@ -383,17 +401,20 @@ Gets a list of a push subscription's event deliveries.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Subscriber_ListPushSubscriptionDeliveries" method="get" path="/events/v1/subscriptions/{subscription_id}/deliveries" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -406,8 +427,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Subscriber.ListPushSubscriptionDeliveries(ctx, "01H8MCDXH4JVH7KVNB2YY42907", nil, nil, nil)
+    res, err := s.Subscriber.ListPushSubscriptionDeliveries(ctx, "01H8MCDXH4JVH7KVNB2YY42907", ascendsdkgo.String("event_publish_time==timestamp(\"2023-06-13T23:48:58.343Z\")"), ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
     if err != nil {
         log.Fatal(err)
     }
@@ -434,7 +454,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 401, 403, 404, 500 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

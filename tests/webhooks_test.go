@@ -134,7 +134,7 @@ func TestEvents(t *testing.T) {
 			body:          validBody,
 			headers:       map[string]string{},
 			expectError:   true,
-			errorContains: "event has expired",
+			errorContains: "event is out of range",
 		},
 		{
 			name:     "Error - Missing Signature Header",

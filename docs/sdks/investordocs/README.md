@@ -14,17 +14,20 @@ Create a batch of signed links that can be used to upload files.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="InvestorCommunicationService_BatchCreateUploadLinks" method="post" path="/investordocs/v1/uploadLinks:batchCreate" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -37,7 +40,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InvestorDocs.BatchCreateUploadLinks(ctx, components.BatchCreateUploadLinksRequestCreate{})
     if err != nil {
         log.Fatal(err)
@@ -64,7 +66,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 401, 403, 500 | application/json   |
+| sdkerrors.Status   | 400, 401, 403      | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListDocuments
@@ -73,17 +76,20 @@ List documents that match search parameters.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="InvestorCommunicationService_ListDocuments" method="get" path="/investordocs/v1/documents" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -96,7 +102,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InvestorDocs.ListDocuments(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
@@ -125,5 +130,6 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 401, 403, 500 | application/json   |
+| sdkerrors.Status   | 400, 401, 403      | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

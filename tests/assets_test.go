@@ -4,51 +4,61 @@ package tests
 
 import (
 	"context"
-	"os"
 	"testing"
 
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func TestAssets_AssetsListAssets1_AssetsListAssets1(t *testing.T) {
+func TestAssets_AssetsListAssets1(t *testing.T) {
+	ctx := context.Background()
+
+	testHTTPClient := createTestHTTPClient("Assets_ListAssets_1")
+
 	s := ascendsdkgo.New(
-		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
 		ascendsdkgo.WithSecurity(components.Security{
-			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: ascendsdkgo.String(utils.GetEnv("API_KEY", "value")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
-				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
-				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
-				Organization: os.Getenv("SERVICE_ACCOUNT_CREDS_ORGANIZATION"),
-				Type:         "serviceAccount",
+				PrivateKey:   utils.GetEnv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", "value"),
+				Name:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_NAME", "value"),
+				Organization: utils.GetEnv("SERVICE_ACCOUNT_CREDS_ORGANIZATION", "value"),
+				Type:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_TYPE", "value"),
 			},
 		}),
+		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	ctx := context.Background()
-	res, err := s.Assets.ListAssets(ctx, nil, nil, nil, nil)
+	res, err := s.Assets.ListAssets(ctx, ascendsdkgo.String(""), ascendsdkgo.Int(25), ascendsdkgo.String(""), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+
 }
 
-func TestAssets_AssetsGetAsset_AssetsGetAsset1(t *testing.T) {
+func TestAssets_AssetsGetAsset(t *testing.T) {
+	ctx := context.Background()
+
+	testHTTPClient := createTestHTTPClient("Assets_GetAsset")
+
 	s := ascendsdkgo.New(
-		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
+		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
 		ascendsdkgo.WithSecurity(components.Security{
-			APIKey: ascendsdkgo.String(os.Getenv("API_KEY")),
+			APIKey: ascendsdkgo.String(utils.GetEnv("API_KEY", "value")),
 			ServiceAccountCreds: &components.ServiceAccountCreds{
-				PrivateKey:   os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY"),
-				Name:         os.Getenv("SERVICE_ACCOUNT_CREDS_NAME"),
-				Organization: os.Getenv("SERVICE_ACCOUNT_CREDS_ORGANIZATION"),
-				Type:         "serviceAccount",
+				PrivateKey:   utils.GetEnv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", "value"),
+				Name:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_NAME", "value"),
+				Organization: utils.GetEnv("SERVICE_ACCOUNT_CREDS_ORGANIZATION", "value"),
+				Type:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_TYPE", "value"),
 			},
 		}),
+		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	ctx := context.Background()
 	res, err := s.Assets.GetAsset(ctx, "8395")
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+
 }

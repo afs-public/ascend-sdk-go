@@ -19,17 +19,20 @@ Creates an ICT deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctDeposits_CreateIctDeposit" method="post" path="/transfers/v1/accounts/{account_id}/ictDeposits" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -42,7 +45,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.CreateIctDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.IctDepositCreate{
         Amount: components.DecimalCreate{},
         ClientTransferID: "ABC-123",
@@ -89,17 +91,20 @@ Gets an existing ICT deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctDeposits_GetIctDeposit" method="get" path="/transfers/v1/accounts/{account_id}/ictDeposits/{ictDeposit_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -112,7 +117,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.GetIctDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472")
     if err != nil {
         log.Fatal(err)
@@ -149,17 +153,20 @@ Cancels an existing ICT deposit
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctDeposits_CancelIctDeposit" method="post" path="/transfers/v1/accounts/{account_id}/ictDeposits/{ictDeposit_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -172,7 +179,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.CancelIctDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472", components.CancelIctDepositRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictDeposits/20240321000472",
     })
@@ -212,17 +218,20 @@ Creates an ICT withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctWithdrawals_CreateIctWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/ictWithdrawals" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -235,7 +244,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.CreateIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.IctWithdrawalCreate{
         ClientTransferID: "20230817000319",
         Program: components.IctWithdrawalCreateProgramBrokerPartner,
@@ -281,17 +289,20 @@ Gets an existing ICT withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctWithdrawals_GetIctWithdrawal" method="get" path="/transfers/v1/accounts/{account_id}/ictWithdrawals/{ictWithdrawal_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -304,7 +315,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.GetIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472")
     if err != nil {
         log.Fatal(err)
@@ -341,17 +351,20 @@ Cancels an existing ICT withdrawal
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctWithdrawals_CancelIctWithdrawal" method="post" path="/transfers/v1/accounts/{account_id}/ictWithdrawals/{ictWithdrawal_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -364,7 +377,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.CancelIctWithdrawal(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20240321000472", components.CancelIctWithdrawalRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/ictWithdrawals/20240321000472",
     })
@@ -404,18 +416,21 @@ Returns a signed link pointing to a recon report file for a specific ICT batch.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IctReconReports_LocateIctReport" method="get" path="/transfers/v1/correspondents/{correspondent_id}/ictReconReports:locate" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -428,9 +443,10 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.InstantCashTransferICT.LocateIctReport(ctx, operations.IctReconReportsLocateIctReportRequest{
         CorrespondentID: "01H8MCDXH4HYJJAV921BDKCC83",
+        BatchID: ascendsdkgo.String("24114.108.2b2c1.001"),
+        ProgramDateFilterProgram: operations.ProgramDateFilterProgramBrokerPartner.ToPointer(),
     })
     if err != nil {
         log.Fatal(err)

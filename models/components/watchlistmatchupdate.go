@@ -2,7 +2,12 @@
 
 package components
 
-// WatchlistMatchUpdateMatchState - Match state - whether or not the match is confirmed
+// WatchlistMatchUpdateMatchState - The match state for a profile, one of:
+// - `MATCH_UNSPECIFIED` - Default/Null value.
+// - `CONFIRMED_MATCH` - Match is confirmed.
+// - `POTENTIAL_MATCH` - Match is a potential.
+// - `NO_MATCH` - Match is confirmed not to be a match.
+// - `INCONCLUSIVE` - Match is deemed to be inconclusive.
 type WatchlistMatchUpdateMatchState string
 
 const (
@@ -21,7 +26,12 @@ func (e WatchlistMatchUpdateMatchState) ToPointer() *WatchlistMatchUpdateMatchSt
 type WatchlistMatchUpdate struct {
 	// Identifies that a confirmed watchlist match can be excluded when calculating the related screen state
 	ExcludeFromScreening *bool `json:"exclude_from_screening,omitempty"`
-	// Match state - whether or not the match is confirmed
+	// The match state for a profile, one of:
+	// - `MATCH_UNSPECIFIED` - Default/Null value.
+	// - `CONFIRMED_MATCH` - Match is confirmed.
+	// - `POTENTIAL_MATCH` - Match is a potential.
+	// - `NO_MATCH` - Match is confirmed not to be a match.
+	// - `INCONCLUSIVE` - Match is deemed to be inconclusive.
 	MatchState *WatchlistMatchUpdateMatchState `json:"match_state,omitempty"`
 	// Indicates the watchlist source for a given match
 	WatchlistID *string `json:"watchlist_id,omitempty"`

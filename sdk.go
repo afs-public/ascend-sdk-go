@@ -2,12 +2,15 @@
 
 package ascendsdkgo
 
+// Generated from OpenAPI doc version v1:20250811:uat:c8e4b50ba105 and generator version 2.680.0
+
 import (
 	"context"
 	"fmt"
 	"net/http"
 	"time"
 
+	"github.com/afs-public/ascend-sdk-go/internal/config"
 	"github.com/afs-public/ascend-sdk-go/internal/hooks"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
@@ -30,7 +33,7 @@ var ServerList = map[string]string{
 	ServerSbx:  "https://sbx.apexapis.com",
 }
 
-// HTTPClient provides an interface for suplying the SDK with a custom HTTP client
+// HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
@@ -56,35 +59,9 @@ func Float64(f float64) *float64 { return &f }
 // Pointer provides a helper function to return a pointer to a type
 func Pointer[T any](v T) *T { return &v }
 
-type sdkConfiguration struct {
-	Client            HTTPClient
-	Security          func(context.Context) (interface{}, error)
-	ServerURL         string
-	Server            string
-	Language          string
-	OpenAPIDocVersion string
-	SDKVersion        string
-	GenVersion        string
-	UserAgent         string
-	RetryConfig       *retry.Config
-	Hooks             *hooks.Hooks
-	Timeout           *time.Duration
-}
-
-func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
-	if c.ServerURL != "" {
-		return c.ServerURL, nil
-	}
-
-	if c.Server == "" {
-		c.Server = "uat"
-	}
-
-	return ServerList[c.Server], nil
-}
-
 // SDK - Ascend OpenAPI: Combined Ascend OpenAPI spec for SDK generation
 type SDK struct {
+	SDKVersion               string
 	Authentication           *Authentication
 	Reader                   *Reader
 	Subscriber               *Subscriber
@@ -104,18 +81,25 @@ type SDK struct {
 	FeesAndCredits           *FeesAndCredits
 	TestSimulation           *TestSimulation
 	AccountTransfers         *AccountTransfers
-	CreateOrder              *CreateOrder
-	FixedIncomePricing       *FixedIncomePricing
-	BasketOrders             *BasketOrders
-	TradeBooking             *TradeBooking
-	TradeAllocation          *TradeAllocation
-	Assets                   *Assets
-	Ledger                   *Ledger
-	Margins                  *Margins
-	InvestorDocs             *InvestorDocs
-	DataRetrieval            *DataRetrieval
+	// Create Order
+	// Creates a new order for equity or fixed income securities.
+	//
+	//  Equity quantities may be for fractional shares, whole shares, or notional dollar amounts. Fixed income orders may be specified in face value currency amounts, with prices expressed in conventional "percentage of par" values.
+	//
+	//  Upon successful submission, if the request is a duplicate, returns the existing order in its current state in the system. If the request is not a duplicate, returns the summary of the newly submitted order.
+	CreateOrder        *CreateOrder
+	FixedIncomePricing *FixedIncomePricing
+	BasketOrders       *BasketOrders
+	TradeBooking       *TradeBooking
+	TradeAllocation    *TradeAllocation
+	Assets             *Assets
+	Ledger             *Ledger
+	Margins            *Margins
+	InvestorDocs       *InvestorDocs
+	DataRetrieval      *DataRetrieval
 
-	sdkConfiguration sdkConfiguration
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
 type SDKOption func(*SDK)
@@ -189,14 +173,12 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		sdkConfiguration: sdkConfiguration{
-			Language:          "go",
-			OpenAPIDocVersion: "v1:20250714:uat:1c091aeaf0ad",
-			SDKVersion:        "1.0.6",
-			GenVersion:        "2.437.1",
-			UserAgent:         "speakeasy-sdk/go 1.0.6 2.437.1 v1:20250714:uat:1c091aeaf0ad github.com/afs-public/ascend-sdk-go",
-			Hooks:             hooks.New(),
+		SDKVersion: "1.1.0",
+		sdkConfiguration: config.SDKConfiguration{
+			UserAgent:  "speakeasy-sdk/go 1.1.0 2.680.0 v1:20250811:uat:c8e4b50ba105 github.com/afs-public/ascend-sdk-go",
+			ServerList: ServerList,
 		},
+		hooks: hooks.New(),
 	}
 	for _, opt := range opts {
 		opt(sdk)
@@ -209,68 +191,40 @@ func New(opts ...SDKOption) *SDK {
 
 	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
 	serverURL := currentServerURL
-	serverURL, sdk.sdkConfiguration.Client = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
-	if serverURL != currentServerURL {
+	serverURL, sdk.sdkConfiguration.Client = sdk.hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
+	if currentServerURL != serverURL {
 		sdk.sdkConfiguration.ServerURL = serverURL
 	}
 
-	sdk.Authentication = newAuthentication(sdk.sdkConfiguration)
-
-	sdk.Reader = newReader(sdk.sdkConfiguration)
-
-	sdk.Subscriber = newSubscriber(sdk.sdkConfiguration)
-
-	sdk.PersonManagement = newPersonManagement(sdk.sdkConfiguration)
-
-	sdk.AccountCreation = newAccountCreation(sdk.sdkConfiguration)
-
-	sdk.AccountManagement = newAccountManagement(sdk.sdkConfiguration)
-
-	sdk.EnrollmentsAndAgreements = newEnrollmentsAndAgreements(sdk.sdkConfiguration)
-
-	sdk.Investigations = newInvestigations(sdk.sdkConfiguration)
-
-	sdk.BankRelationships = newBankRelationships(sdk.sdkConfiguration)
-
-	sdk.ACHTransfers = newACHTransfers(sdk.sdkConfiguration)
-
-	sdk.InstantCashTransferICT = newInstantCashTransferICT(sdk.sdkConfiguration)
-
-	sdk.Retirements = newRetirements(sdk.sdkConfiguration)
-
-	sdk.Journals = newJournals(sdk.sdkConfiguration)
-
-	sdk.ScheduleTransfers = newScheduleTransfers(sdk.sdkConfiguration)
-
-	sdk.Wires = newWires(sdk.sdkConfiguration)
-
-	sdk.CashBalances = newCashBalances(sdk.sdkConfiguration)
-
-	sdk.FeesAndCredits = newFeesAndCredits(sdk.sdkConfiguration)
-
-	sdk.TestSimulation = newTestSimulation(sdk.sdkConfiguration)
-
-	sdk.AccountTransfers = newAccountTransfers(sdk.sdkConfiguration)
-
-	sdk.CreateOrder = newCreateOrder(sdk.sdkConfiguration)
-
-	sdk.FixedIncomePricing = newFixedIncomePricing(sdk.sdkConfiguration)
-
-	sdk.BasketOrders = newBasketOrders(sdk.sdkConfiguration)
-
-	sdk.TradeBooking = newTradeBooking(sdk.sdkConfiguration)
-
-	sdk.TradeAllocation = newTradeAllocation(sdk.sdkConfiguration)
-
-	sdk.Assets = newAssets(sdk.sdkConfiguration)
-
-	sdk.Ledger = newLedger(sdk.sdkConfiguration)
-
-	sdk.Margins = newMargins(sdk.sdkConfiguration)
-
-	sdk.InvestorDocs = newInvestorDocs(sdk.sdkConfiguration)
-
-	sdk.DataRetrieval = newDataRetrieval(sdk.sdkConfiguration)
+	sdk.Authentication = newAuthentication(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Reader = newReader(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Subscriber = newSubscriber(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PersonManagement = newPersonManagement(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AccountCreation = newAccountCreation(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AccountManagement = newAccountManagement(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.EnrollmentsAndAgreements = newEnrollmentsAndAgreements(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Investigations = newInvestigations(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.BankRelationships = newBankRelationships(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.ACHTransfers = newACHTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.InstantCashTransferICT = newInstantCashTransferICT(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Retirements = newRetirements(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Journals = newJournals(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.ScheduleTransfers = newScheduleTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Wires = newWires(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.CashBalances = newCashBalances(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.FeesAndCredits = newFeesAndCredits(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.TestSimulation = newTestSimulation(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AccountTransfers = newAccountTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.CreateOrder = newCreateOrder(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.FixedIncomePricing = newFixedIncomePricing(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.BasketOrders = newBasketOrders(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.TradeBooking = newTradeBooking(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.TradeAllocation = newTradeAllocation(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Assets = newAssets(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Ledger = newLedger(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Margins = newMargins(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.InvestorDocs = newInvestorDocs(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.DataRetrieval = newDataRetrieval(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

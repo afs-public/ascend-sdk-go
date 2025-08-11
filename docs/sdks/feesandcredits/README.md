@@ -18,17 +18,20 @@ Create a fee
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Fees_CreateFee" method="post" path="/transfers/v1/accounts/{account_id}/fees" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -41,7 +44,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.FeesAndCredits.CreateFee(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.TransfersFeeCreate{
         Amount: components.DecimalCreate{},
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
@@ -82,17 +84,20 @@ Retrieve an existing fee
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Fees_GetFee" method="get" path="/transfers/v1/accounts/{account_id}/fees/{fee_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -105,7 +110,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.FeesAndCredits.GetFee(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230823123456")
     if err != nil {
         log.Fatal(err)
@@ -142,17 +146,20 @@ Cancel an existing fee
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Fees_CancelFee" method="post" path="/transfers/v1/accounts/{account_id}/fees/{fee_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -165,7 +172,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.FeesAndCredits.CancelFee(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230823123456", components.CancelFeeRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/fees/20230823123456",
     })
@@ -205,17 +211,20 @@ Create a credit
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Credits_CreateCredit" method="post" path="/transfers/v1/accounts/{account_id}/credits" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -228,7 +237,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.FeesAndCredits.CreateCredit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.TransfersCreditCreate{
         Amount: components.DecimalCreate{},
         ClientTransferID: "179dcd33-49f8-4615-989c-560fb387c4fd",
@@ -269,17 +277,20 @@ Retrieve an existing credit
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Credits_GetCredit" method="get" path="/transfers/v1/accounts/{account_id}/credits/{credit_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -292,7 +303,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.FeesAndCredits.GetCredit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230823123456")
     if err != nil {
         log.Fatal(err)
@@ -329,17 +339,20 @@ Cancel an existing credit
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Credits_CancelCredit" method="post" path="/transfers/v1/accounts/{account_id}/credits/{credit_id}:cancel" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -352,7 +365,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.FeesAndCredits.CancelCredit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230823123456", components.CancelCreditRequestCreate{
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/credits/20230823123456",
     })

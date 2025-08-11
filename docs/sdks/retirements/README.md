@@ -16,17 +16,20 @@ Lists the aggregated retirement contribution summaries by tax year
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="RetirementConstraints_ListContributionSummaries" method="get" path="/transfers/v1/accounts/{account_id}/contributionSummaries" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -39,8 +42,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Retirements.ListContributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil)
+    res, err := s.Retirements.ListContributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.Int(2), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh"))
     if err != nil {
         log.Fatal(err)
     }
@@ -77,17 +79,20 @@ Retrieves retirement contribution constraints for an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="RetirementConstraints_RetrieveContributionConstraints" method="post" path="/transfers/v1/accounts/{account_id}:retrieveContributionConstraints" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -100,7 +105,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Retirements.RetrieveContributionConstraints(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.RetrieveContributionConstraintsRequestCreate{
         Mechanism: components.MechanismAch,
         Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
@@ -140,17 +144,20 @@ Lists the aggregated retirement distribution summaries by tax year
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="RetirementConstraints_ListDistributionSummaries" method="get" path="/transfers/v1/accounts/{account_id}/distributionSummaries" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -163,8 +170,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Retirements.ListDistributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", nil, nil)
+    res, err := s.Retirements.ListDistributionSummaries(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", ascendsdkgo.Int(2), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZ3hh"))
     if err != nil {
         log.Fatal(err)
     }
@@ -201,17 +207,20 @@ Retrieves retirement distribution constraints for an account
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="RetirementConstraints_RetrieveDistributionConstraints" method="post" path="/transfers/v1/accounts/{account_id}:retrieveDistributionConstraints" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -224,7 +233,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Retirements.RetrieveDistributionConstraints(ctx, "01H8FM6EXVH77SAW3TC8KAWMES", components.RetrieveDistributionConstraintsRequestCreate{
         Mechanism: components.RetrieveDistributionConstraintsRequestCreateMechanismAch,
         Name: "accounts/01H8FM6EXVH77SAW3TC8KAWMES",

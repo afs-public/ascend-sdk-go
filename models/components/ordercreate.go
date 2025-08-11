@@ -49,14 +49,12 @@ func (e IdentifierType) ToPointer() *IdentifierType {
 	return &e
 }
 
-// OrderType - The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+// OrderType - The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 type OrderType string
 
 const (
-	OrderTypeOrderTypeUnspecified OrderType = "ORDER_TYPE_UNSPECIFIED"
-	OrderTypeLimit                OrderType = "LIMIT"
-	OrderTypeMarket               OrderType = "MARKET"
-	OrderTypeStop                 OrderType = "STOP"
+	OrderTypeLimit  OrderType = "LIMIT"
+	OrderTypeMarket OrderType = "MARKET"
 )
 
 func (e OrderType) ToPointer() *OrderType {
@@ -113,22 +111,27 @@ func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions 
 type TimeInForce string
 
 const (
-	TimeInForceTimeInForceUnspecified TimeInForce = "TIME_IN_FORCE_UNSPECIFIED"
-	TimeInForceDay                    TimeInForce = "DAY"
+	TimeInForceDay TimeInForce = "DAY"
 )
 
 func (e TimeInForce) ToPointer() *TimeInForce {
 	return &e
 }
 
-// Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
-type TradingStrategy string
+// Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
+type TradingSession string
 
 const (
-	TradingStrategyCore TradingStrategy = "CORE"
+	TradingSessionTradingSessionUnspecified TradingSession = "TRADING_SESSION_UNSPECIFIED"
+	TradingSessionCore                      TradingSession = "CORE"
+	TradingSessionPre                       TradingSession = "PRE"
+	TradingSessionPost                      TradingSession = "POST"
+	TradingSessionOvernight                 TradingSession = "OVERNIGHT"
+	TradingSessionApex24                    TradingSession = "APEX24"
+	TradingSessionGtx                       TradingSession = "GTX"
 )
 
-func (e TradingStrategy) ToPointer() *TradingStrategy {
+func (e TradingSession) ToPointer() *TradingSession {
 	return &e
 }
 
@@ -177,7 +180,7 @@ type OrderCreate struct {
 	//
 	//  Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
 	OrderDate DateCreate `json:"order_date"`
-	// The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+	// The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 	OrderType OrderType `json:"order_type"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
@@ -195,8 +198,8 @@ type OrderCreate struct {
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce TimeInForce `json:"time_in_force"`
-	// Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
-	TradingStrategy *TradingStrategy `json:"trading_strategy,omitempty"`
+	// Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
+	TradingSession *TradingSession `json:"trading_session,omitempty"`
 }
 
 func (o OrderCreate) MarshalJSON() ([]byte, error) {
@@ -364,9 +367,9 @@ func (o *OrderCreate) GetTimeInForce() TimeInForce {
 	return o.TimeInForce
 }
 
-func (o *OrderCreate) GetTradingStrategy() *TradingStrategy {
+func (o *OrderCreate) GetTradingSession() *TradingSession {
 	if o == nil {
 		return nil
 	}
-	return o.TradingStrategy
+	return o.TradingSession
 }

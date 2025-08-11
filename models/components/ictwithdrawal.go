@@ -348,7 +348,7 @@ func (e IctWithdrawalTransferStateState) ToPointer() *IctWithdrawalTransferState
 
 // IctWithdrawalTransferState - Deprecated, use state instead
 //
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type IctWithdrawalTransferState struct {
 	// The user or service that triggered the state update.
 	Actor *string `json:"actor,omitempty"`
@@ -1120,7 +1120,7 @@ type IctWithdrawal struct {
 	State *IctWithdrawalState `json:"state,omitempty"`
 	// Deprecated, use state instead
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	TransferState *IctWithdrawalTransferState `json:"transfer_state,omitempty"`
 	// The travel rule information for the ICT withdrawal
 	TravelRule *IctWithdrawalTravelRule `json:"travel_rule,omitempty"`

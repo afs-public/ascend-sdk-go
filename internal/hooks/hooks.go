@@ -6,6 +6,8 @@ import (
 	"context"
 	"errors"
 	"net/http"
+
+	"github.com/afs-public/ascend-sdk-go/internal/config"
 )
 
 type FailEarly struct {
@@ -24,10 +26,13 @@ type HTTPClient interface {
 }
 
 type HookContext struct {
-	Context        context.Context
-	OperationID    string
-	OAuth2Scopes   []string
-	SecuritySource func(context.Context) (interface{}, error)
+	SDK              any
+	SDKConfiguration config.SDKConfiguration
+	BaseURL          string
+	Context          context.Context
+	OperationID      string
+	OAuth2Scopes     []string
+	SecuritySource   func(context.Context) (interface{}, error)
 }
 
 type BeforeRequestContext struct {
@@ -69,6 +74,11 @@ type Hooks struct {
 	afterSuccessHook  []afterSuccessHook
 	afterErrorHook    []afterErrorHook
 }
+
+var _ sdkInitHook = (*Hooks)(nil)
+var _ beforeRequestHook = (*Hooks)(nil)
+var _ afterSuccessHook = (*Hooks)(nil)
+var _ afterErrorHook = (*Hooks)(nil)
 
 func New() *Hooks {
 	h := &Hooks{

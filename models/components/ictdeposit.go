@@ -207,7 +207,7 @@ func (e IctDepositTransferStateState) ToPointer() *IctDepositTransferStateState 
 
 // TransferState - Deprecated, use state instead
 //
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type TransferState struct {
 	// The user or service that triggered the state update.
 	Actor *string `json:"actor,omitempty"`
@@ -979,7 +979,7 @@ type IctDeposit struct {
 	State *IctDepositState `json:"state,omitempty"`
 	// Deprecated, use state instead
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	TransferState *TransferState `json:"transfer_state,omitempty"`
 	// The travel rule information for the ICT deposit
 	TravelRule *TravelRule `json:"travel_rule,omitempty"`

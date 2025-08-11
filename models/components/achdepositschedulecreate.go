@@ -26,7 +26,7 @@ func (e AchDepositScheduleCreateType) ToPointer() *AchDepositScheduleCreateType 
 
 // IraContribution - The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
 //
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type IraContribution struct {
 	// Tax year for which the contribution is applied. Current year is always valid; prior year is only valid before tax deadline. Must be in "YYYY" format.
 	TaxYear int `json:"tax_year"`
@@ -54,7 +54,7 @@ type AchDepositScheduleCreate struct {
 	BankRelationship string `json:"bank_relationship"`
 	// The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	IraContribution *IraContribution `json:"ira_contribution,omitempty"`
 	// The retirement contribution details for a scheduled deposit
 	RetirementContribution *ScheduledRetirementContributionCreate `json:"retirement_contribution,omitempty"`

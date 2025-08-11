@@ -23,3 +23,5 @@ Describes the contents of a document and how it is used
 | `DocumentInvestorDocumentDocumentTypeForm1099C`                       | FORM_1099_C                                                           |
 | `DocumentInvestorDocumentDocumentTypeForm4806D`                       | FORM_480_6D                                                           |
 | `DocumentInvestorDocumentDocumentTypeForm5498Esa`                     | FORM_5498_ESA                                                         |
+| `DocumentInvestorDocumentDocumentTypeFpslNegativeConsentForm`         | FPSL_NEGATIVE_CONSENT_FORM                                            |
+| `DocumentInvestorDocumentDocumentTypeCrsForm`                         | CRS_FORM                                                              |

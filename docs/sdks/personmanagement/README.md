@@ -24,17 +24,20 @@ Creates a Legal Natural Person.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_CreateLegalNaturalPerson" method="post" path="/accounts/v1/legalNaturalPersons" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -47,7 +50,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.CreateLegalNaturalPerson(ctx, components.LegalNaturalPersonCreate{
         BirthDate: components.DateCreate{},
         CitizenshipCountries: []string{
@@ -63,7 +65,7 @@ func main() {
         PersonalAddress: components.PostalAddressCreate{},
         TaxProfile: components.TaxProfileCreate{
             FederalTaxClassification: components.FederalTaxClassificationCCorporation,
-            IrsFormType: components.IrsFormTypeW9,
+            IrsFormType: components.IrsFormTypeIrsFormTypeUnspecified,
             LegalTaxRegionCode: "US",
             UsTinStatus: components.UsTinStatusPassing,
         },
@@ -93,7 +95,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500, 503 | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListLegalNaturalPersons
@@ -102,17 +105,20 @@ Gets a list of Legal Natural Person records based on search criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListLegalNaturalPersons" method="get" path="/accounts/v1/legalNaturalPersons" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -125,8 +131,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, nil, nil, nil, nil)
+    res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), nil, ascendsdkgo.String("legal_natural_person_id == \"e6716139-da77-46d1-9f15-13599161db0b\""))
     if err != nil {
         log.Fatal(err)
     }
@@ -155,7 +160,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500, 503 | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetLegalNaturalPerson
@@ -164,17 +170,20 @@ Get Legal Natural Person
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_GetLegalNaturalPerson" method="get" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -187,7 +196,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.GetLegalNaturalPerson(ctx, "e6716139-da77-46d1-9f15-13599161db0b")
     if err != nil {
         log.Fatal(err)
@@ -212,10 +220,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateLegalNaturalPerson
 
@@ -223,17 +232,20 @@ Updates a Legal Natural Person.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_UpdateLegalNaturalPerson" method="patch" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -246,7 +258,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.UpdateLegalNaturalPerson(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.LegalNaturalPersonUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -273,10 +284,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## AssignLargeTrader
 
@@ -284,17 +296,20 @@ Assigns a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_AssignLargeTrader" method="post" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}/largeTrader:assign" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -307,7 +322,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.AssignLargeTrader(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.AssignLargeTraderRequestCreate{
         LargeTraderID: "1234567890",
     })
@@ -335,10 +349,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## EndLargeTraderLegalNaturalPerson
 
@@ -346,17 +361,20 @@ Removes a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_EndLargeTrader_LegalNaturalPerson" method="post" path="/accounts/v1/legalNaturalPersons/{legalNaturalPerson_id}/largeTrader:remove" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -369,9 +387,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.EndLargeTraderLegalNaturalPerson(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.EndLargeTraderRequestCreate{
-        EndReason: components.EndReasonEventReasonOther,
+        EndReason: components.EndReasonEventReasonEnded,
     })
     if err != nil {
         log.Fatal(err)
@@ -397,10 +414,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CreateLegalEntity
 
@@ -408,17 +426,20 @@ Creates a Legal Entity.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_CreateLegalEntity" method="post" path="/accounts/v1/legalEntities" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -431,7 +452,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.CreateLegalEntity(ctx, components.LegalEntityCreate{
         CorrespondentID: "01HPMZZM6RKMVZA1JQ63RQKJRP",
         EntityName: "Acme, Inc",
@@ -443,10 +463,10 @@ func main() {
         },
         RegistrationRegion: "US",
         TaxID: "987-65-4321",
-        TaxIDType: components.LegalEntityCreateTaxIDTypeTaxIDTypeItin,
+        TaxIDType: components.LegalEntityCreateTaxIDTypeTaxIDTypeSsn,
         TaxProfile: components.TaxProfileCreate{
             FederalTaxClassification: components.FederalTaxClassificationCCorporation,
-            IrsFormType: components.IrsFormTypeW9,
+            IrsFormType: components.IrsFormTypeIrsFormTypeUnspecified,
             LegalTaxRegionCode: "US",
             UsTinStatus: components.UsTinStatusPassing,
         },
@@ -476,7 +496,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500, 503 | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListLegalEntities
@@ -485,17 +506,20 @@ Gets a list of Legal Entity records based on search criteria.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListLegalEntities" method="get" path="/accounts/v1/legalEntities" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -508,8 +532,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.PersonManagement.ListLegalEntities(ctx, nil, nil, nil, nil)
+    res, err := s.PersonManagement.ListLegalEntities(ctx, ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), ascendsdkgo.String(""), ascendsdkgo.String(""))
     if err != nil {
         log.Fatal(err)
     }
@@ -538,7 +561,8 @@ func main() {
 
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 403, 500, 503 | application/json   |
+| sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetLegalEntity
@@ -547,17 +571,20 @@ Get Legal Entity
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_GetLegalEntity" method="get" path="/accounts/v1/legalEntities/{legalEntity_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -570,7 +597,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.GetLegalEntity(ctx, "e6716139-da77-46d1-9f15-13599161db0b")
     if err != nil {
         log.Fatal(err)
@@ -595,10 +621,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## UpdateLegalEntity
 
@@ -606,17 +633,20 @@ Updates a Legal Entity.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_UpdateLegalEntity" method="patch" path="/accounts/v1/legalEntities/{legalEntity_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -629,7 +659,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.UpdateLegalEntity(ctx, "42567868-9373-4872-9d24-2e33f6c19b75", components.LegalEntityUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
@@ -656,10 +685,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## AssignLargeTraderLegalEntity
 
@@ -667,17 +697,20 @@ Assigns a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_AssignLargeTrader_LegalEntity" method="post" path="/accounts/v1/legalEntities/{legalEntity_id}/largeTrader:assign" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -690,7 +723,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.AssignLargeTraderLegalEntity(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.AssignLargeTraderRequestCreate{
         LargeTraderID: "1234567890",
     })
@@ -718,10 +750,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## EndLargeTrader
 
@@ -729,17 +762,20 @@ Removes a person's Large Trader ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_EndLargeTrader_1" method="post" path="/accounts/v1/legalEntities/{legalEntity_id}/largeTrader:remove" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -752,9 +788,8 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.PersonManagement.EndLargeTrader(ctx, "e6716139-da77-46d1-9f15-13599161db0b", components.EndLargeTraderRequestCreate{
-        EndReason: components.EndReasonEventReasonCreated,
+        EndReason: components.EndReasonEventReasonEnded,
     })
     if err != nil {
         log.Fatal(err)
@@ -780,7 +815,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

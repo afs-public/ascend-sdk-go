@@ -16,17 +16,20 @@ Lists assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Assets_ListAssets_1" method="get" path="/assets/v1/assets" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -39,8 +42,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Assets.ListAssets(ctx, nil, nil, nil, nil)
+    res, err := s.Assets.ListAssets(ctx, ascendsdkgo.String("correspondents/1234"), ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
     if err != nil {
         log.Fatal(err)
     }
@@ -67,10 +69,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetAsset
 
@@ -78,17 +81,20 @@ Gets assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Assets_GetAsset" method="get" path="/assets/v1/assets/{asset_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -101,7 +107,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Assets.GetAsset(ctx, "8395")
     if err != nil {
         log.Fatal(err)
@@ -126,10 +131,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListAssetsCorrespondent
 
@@ -137,17 +143,20 @@ Lists assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Assets_ListAssets_Correspondent" method="get" path="/assets/v1/correspondents/{correspondent_id}/assets" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -160,8 +169,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.Assets.ListAssetsCorrespondent(ctx, "1234", nil, nil, nil)
+    res, err := s.Assets.ListAssetsCorrespondent(ctx, "1234", ascendsdkgo.Int(100), ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="), ascendsdkgo.String("(symbol == 'IBM' && usable) || symbol == 'USD'"))
     if err != nil {
         log.Fatal(err)
     }
@@ -188,10 +196,11 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| sdkerrors.Status             | 400, 403, 404, 500, 503, 504 | application/json             |
-| sdkerrors.SDKError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503, 504      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## GetAssetCorrespondent
 
@@ -199,17 +208,20 @@ Gets assets
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Assets_GetAsset_Correspondent" method="get" path="/assets/v1/correspondents/{correspondent_id}/assets/{asset_id}" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -222,7 +234,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.Assets.GetAssetCorrespondent(ctx, "8395", "<id>")
     if err != nil {
         log.Fatal(err)
@@ -248,7 +259,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

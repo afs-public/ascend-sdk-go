@@ -36,6 +36,19 @@ func (e OrderBrokerCapacity) ToPointer() *OrderBrokerCapacity {
 	return &e
 }
 
+// CancelInitiator - Output only field that is required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. This field denotes the initiator of the cancel request. This field will be present when provided on the CancelOrderRequest
+type CancelInitiator string
+
+const (
+	CancelInitiatorInitiatorUnspecified CancelInitiator = "INITIATOR_UNSPECIFIED"
+	CancelInitiatorFirm                 CancelInitiator = "FIRM"
+	CancelInitiatorClient               CancelInitiator = "CLIENT"
+)
+
+func (e CancelInitiator) ToPointer() *CancelInitiator {
+	return &e
+}
+
 // CancelRejectedReason - Used to denote when a cancel request has been rejected.
 type CancelRejectedReason string
 
@@ -351,7 +364,7 @@ const (
 	OrderRejectedReasonAssetNotSetUpToTrade                              OrderRejectedReason = "ASSET_NOT_SET_UP_TO_TRADE"
 	OrderRejectedReasonInvalidOrderQuantity                              OrderRejectedReason = "INVALID_ORDER_QUANTITY"
 	OrderRejectedReasonClientReceivedTimeRequired                        OrderRejectedReason = "CLIENT_RECEIVED_TIME_REQUIRED"
-	OrderRejectedReasonClientNotPermittedToUseTradingStrategy            OrderRejectedReason = "CLIENT_NOT_PERMITTED_TO_USE_TRADING_STRATEGY"
+	OrderRejectedReasonClientNotPermittedToUseTradingSession             OrderRejectedReason = "CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION"
 )
 
 func (e OrderRejectedReason) ToPointer() *OrderRejectedReason {
@@ -378,14 +391,12 @@ func (e OrderStatus) ToPointer() *OrderStatus {
 	return &e
 }
 
-// OrderOrderType - The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+// OrderOrderType - The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 type OrderOrderType string
 
 const (
-	OrderOrderTypeOrderTypeUnspecified OrderOrderType = "ORDER_TYPE_UNSPECIFIED"
-	OrderOrderTypeLimit                OrderOrderType = "LIMIT"
-	OrderOrderTypeMarket               OrderOrderType = "MARKET"
-	OrderOrderTypeStop                 OrderOrderType = "STOP"
+	OrderOrderTypeLimit  OrderOrderType = "LIMIT"
+	OrderOrderTypeMarket OrderOrderType = "MARKET"
 )
 
 func (e OrderOrderType) ToPointer() *OrderOrderType {
@@ -541,22 +552,27 @@ func (o *StopPrice) GetType() *OrderStopPriceType {
 type OrderTimeInForce string
 
 const (
-	OrderTimeInForceTimeInForceUnspecified OrderTimeInForce = "TIME_IN_FORCE_UNSPECIFIED"
-	OrderTimeInForceDay                    OrderTimeInForce = "DAY"
+	OrderTimeInForceDay OrderTimeInForce = "DAY"
 )
 
 func (e OrderTimeInForce) ToPointer() *OrderTimeInForce {
 	return &e
 }
 
-// OrderTradingStrategy - Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
-type OrderTradingStrategy string
+// OrderTradingSession - Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
+type OrderTradingSession string
 
 const (
-	OrderTradingStrategyCore OrderTradingStrategy = "CORE"
+	OrderTradingSessionTradingSessionUnspecified OrderTradingSession = "TRADING_SESSION_UNSPECIFIED"
+	OrderTradingSessionCore                      OrderTradingSession = "CORE"
+	OrderTradingSessionPre                       OrderTradingSession = "PRE"
+	OrderTradingSessionPost                      OrderTradingSession = "POST"
+	OrderTradingSessionOvernight                 OrderTradingSession = "OVERNIGHT"
+	OrderTradingSessionApex24                    OrderTradingSession = "APEX24"
+	OrderTradingSessionGtx                       OrderTradingSession = "GTX"
 )
 
-func (e OrderTradingStrategy) ToPointer() *OrderTradingStrategy {
+func (e OrderTradingSession) ToPointer() *OrderTradingSession {
 	return &e
 }
 
@@ -577,10 +593,14 @@ type Order struct {
 	AveragePrices []TradingExecutedPrice `json:"average_prices,omitempty"`
 	// Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
 	BrokerCapacity *OrderBrokerCapacity `json:"broker_capacity,omitempty"`
+	// Output only field that is required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. This field denotes the initiator of the cancel request. This field will be present when provided on the CancelOrderRequest
+	CancelInitiator *CancelInitiator `json:"cancel_initiator,omitempty"`
 	// Used to explain why an order is canceled
 	CancelReason *string `json:"cancel_reason,omitempty"`
 	// Used to denote when a cancel request has been rejected.
 	CancelRejectedReason *CancelRejectedReason `json:"cancel_rejected_reason,omitempty"`
+	// Output only field for Equity Orders related to CAT reporting on behalf of clients. This field will be present when provided on the CancelOrderRequest
+	ClientCancelReceivedTime *time.Time `json:"client_cancel_received_time,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
 	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
@@ -627,7 +647,7 @@ type Order struct {
 	OrderRejectedReason *OrderRejectedReason `json:"order_rejected_reason,omitempty"`
 	// The processing status of the order
 	OrderStatus *OrderStatus `json:"order_status,omitempty"`
-	// The execution type of this order. For Equities: MARKET, LIMIT, or STOP are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+	// The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 	OrderType *OrderOrderType `json:"order_type,omitempty"`
 	// The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no executions.
 	PrevailingMarketPrice *OrderPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
@@ -643,8 +663,8 @@ type Order struct {
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`
-	// Which TradingStrategy Session to trade in, defaults to 'CORE'. Only available for Equity orders.
-	TradingStrategy *OrderTradingStrategy `json:"trading_strategy,omitempty"`
+	// Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
+	TradingSession *OrderTradingSession `json:"trading_session,omitempty"`
 }
 
 func (o Order) MarshalJSON() ([]byte, error) {
@@ -693,6 +713,13 @@ func (o *Order) GetBrokerCapacity() *OrderBrokerCapacity {
 	return o.BrokerCapacity
 }
 
+func (o *Order) GetCancelInitiator() *CancelInitiator {
+	if o == nil {
+		return nil
+	}
+	return o.CancelInitiator
+}
+
 func (o *Order) GetCancelReason() *string {
 	if o == nil {
 		return nil
@@ -705,6 +732,13 @@ func (o *Order) GetCancelRejectedReason() *CancelRejectedReason {
 		return nil
 	}
 	return o.CancelRejectedReason
+}
+
+func (o *Order) GetClientCancelReceivedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelReceivedTime
 }
 
 func (o *Order) GetClientOrderID() *string {
@@ -917,9 +951,9 @@ func (o *Order) GetTimeInForce() *OrderTimeInForce {
 	return o.TimeInForce
 }
 
-func (o *Order) GetTradingStrategy() *OrderTradingStrategy {
+func (o *Order) GetTradingSession() *OrderTradingSession {
 	if o == nil {
 		return nil
 	}
-	return o.TradingStrategy
+	return o.TradingSession
 }

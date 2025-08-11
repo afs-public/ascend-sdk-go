@@ -4,7 +4,7 @@ package components
 
 // Money - Deprecated; use the price field instead
 //
-// Deprecated type: This will be removed in a future release, please migrate away from it as soon as possible.
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type Money struct {
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
@@ -35,7 +35,7 @@ type LotCreate struct {
 	ID *string `json:"id,omitempty"`
 	// Deprecated; use the price field instead
 	//
-	// Deprecated field: This will be removed in a future release, please migrate away from it as soon as possible.
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Money *Money `json:"money,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//

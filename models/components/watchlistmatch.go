@@ -24,7 +24,12 @@ func (e MatchAttributes) ToPointer() *MatchAttributes {
 	return &e
 }
 
-// MatchState - Match state - whether or not the match is confirmed
+// MatchState - The match state for a profile, one of:
+// - `MATCH_UNSPECIFIED` - Default/Null value.
+// - `CONFIRMED_MATCH` - Match is confirmed.
+// - `POTENTIAL_MATCH` - Match is a potential.
+// - `NO_MATCH` - Match is confirmed not to be a match.
+// - `INCONCLUSIVE` - Match is deemed to be inconclusive.
 type MatchState string
 
 const (
@@ -63,11 +68,30 @@ type WatchlistMatch struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// Identifies that a confirmed watchlist match can be excluded when calculating the related screen state
 	ExcludeFromScreening *bool `json:"exclude_from_screening,omitempty"`
-	// The attributes used to identify this watchlist match
+	// The attributes used in watchlist screening, one of:
+	// - `MATCH_ATTRIBUTE_UNSPECIFIED` - Default/Null value.
+	// - `NAME` - Matched on name.
+	// - `PHONE_NUMBER` - Matched on phone number.
+	// - `BIRTH_DATE` - Matched on birth date.
+	// - `IDENTIFICATION` - Matched on identification.
+	// - `EMAIL` - Matched on email.
+	// - `ADDRESS` - Matched on address.
 	MatchAttributes []MatchAttributes `json:"match_attributes,omitempty"`
-	// Match state - whether or not the match is confirmed
+	// The match state for a profile, one of:
+	// - `MATCH_UNSPECIFIED` - Default/Null value.
+	// - `CONFIRMED_MATCH` - Match is confirmed.
+	// - `POTENTIAL_MATCH` - Match is a potential.
+	// - `NO_MATCH` - Match is confirmed not to be a match.
+	// - `INCONCLUSIVE` - Match is deemed to be inconclusive.
 	MatchState *MatchState `json:"match_state,omitempty"`
-	// The types of watchlist matches
+	// The type of watchlist match, one of:
+	// - `MATCH_TYPE_UNSPECIFIED` - Default/Null value.
+	// - `NON_OFAC_SANCTIONS` - Matched on a non OFAC sanctions list.
+	// - `RELATIVE_OR_CLOSE_ASSOCIATE` - Matched on a relative or close associate.
+	// - `OFAC_SANCTIONS` - Matched on a OFAC sanctions list.
+	// - `POLITICALLY_EXPOSED_PERSON` - Matched on a politically exposed person list.
+	// - `DNDB` - Matched on a do not do business list.
+	// - `NEGATIVE_NEWS` - Matched on a negative news list.
 	MatchTypes []MatchTypes `json:"match_types,omitempty"`
 	// The time the watchlist match was last updated
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`

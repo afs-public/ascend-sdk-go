@@ -15,6 +15,8 @@ type BasketOrdersServiceListBasketOrdersRequest struct {
 	PageSize *int `queryParam:"style=form,explode=true,name=page_size"`
 	// A page token, received from a previous `ListBasketOrders` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListBasketOrders` must match the call that provided the page token.
 	PageToken *string `queryParam:"style=form,explode=true,name=page_token"`
+	// Indicates whether basket orders with a status of REMOVED_BEFORE_SUBMISSION will be included in the response. By default, removed orders are not returned.
+	ShowRemoved *bool `queryParam:"style=form,explode=true,name=show_removed"`
 }
 
 func (o *BasketOrdersServiceListBasketOrdersRequest) GetCorrespondentID() string {
@@ -43,6 +45,13 @@ func (o *BasketOrdersServiceListBasketOrdersRequest) GetPageToken() *string {
 		return nil
 	}
 	return o.PageToken
+}
+
+func (o *BasketOrdersServiceListBasketOrdersRequest) GetShowRemoved() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ShowRemoved
 }
 
 type BasketOrdersServiceListBasketOrdersResponse struct {

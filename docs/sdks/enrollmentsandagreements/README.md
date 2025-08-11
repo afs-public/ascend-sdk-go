@@ -20,17 +20,20 @@ Adds an Enrollment to an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_EnrollAccount" method="post" path="/accounts/v1/accounts/{account_id}:enroll" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -43,7 +46,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.EnrollmentsAndAgreements.EnrollAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.EnrollAccountRequestCreate{
         Enrollment: components.EnrollmentCreate{
             PrincipalApproverID: "02HB7N66WW02WL3B6B9W29K0HW",
@@ -74,10 +76,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListAvailableEnrollments
 
@@ -85,17 +88,20 @@ Get a list of Enrollments available for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListAvailableEnrollments" method="get" path="/accounts/v1/accounts/{account_id}/availableEnrollments" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -108,8 +114,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListAvailableEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil, nil, nil)
+    res, err := s.EnrollmentsAndAgreements.ListAvailableEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), ascendsdkgo.String("enrollment_type == \"REGISTRATION_INDIVIDUAL\""))
     if err != nil {
         log.Fatal(err)
     }
@@ -136,10 +141,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## AccountsListAvailableEnrollmentsByAccountGroup
 
@@ -147,17 +153,20 @@ Get a list of Enrollments available for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListAvailableEnrollments_1" method="get" path="/accounts/v1/accountGroups/{accountGroup_id}/availableEnrollments" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -170,8 +179,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.AccountsListAvailableEnrollmentsByAccountGroup(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil, nil, nil)
+    res, err := s.EnrollmentsAndAgreements.AccountsListAvailableEnrollmentsByAccountGroup(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(25), ascendsdkgo.String("AbTYnwAkMjIyZDNjYTAtZmVjZS00N2Q5LTgyMDctNzI3MDdkMjFiZj3h"), ascendsdkgo.String("enrollment_type == \"REGISTRATION_INDIVIDUAL\""))
     if err != nil {
         log.Fatal(err)
     }
@@ -198,10 +206,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## DeactivateEnrollment
 
@@ -209,17 +218,20 @@ Deactivates an Account Enrollment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_DeactivateEnrollment" method="post" path="/accounts/v1/accounts/{account_id}/enrollments:deactivate" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -232,7 +244,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.EnrollmentsAndAgreements.DeactivateEnrollment(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.DeactivateEnrollmentRequestCreate{})
     if err != nil {
         log.Fatal(err)
@@ -258,10 +269,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListEnrollments
 
@@ -269,17 +281,20 @@ Gets a list of Enrollments for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListEnrollments" method="get" path="/accounts/v1/accounts/{account_id}/enrollments" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -292,8 +307,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil, nil)
+    res, err := s.EnrollmentsAndAgreements.ListEnrollments(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(5), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -319,10 +333,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## AffirmAgreements
 
@@ -330,17 +345,20 @@ Affirm Agreements for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_AffirmAgreements" method="post" path="/accounts/v1/accounts/{account_id}/agreements:affirm" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -353,7 +371,6 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
     res, err := s.EnrollmentsAndAgreements.AffirmAgreements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", components.AffirmAgreementsRequestCreate{
         AccountAgreementIds: []string{
             "fa2f181c-f2fb-4bc2-b75a-79302c634ae5",
@@ -383,10 +400,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListAgreements
 
@@ -394,17 +412,20 @@ Gets a list of Agreements on an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListAgreements" method="get" path="/accounts/v1/accounts/{account_id}/agreements" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -417,8 +438,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListAgreements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil, nil)
+    res, err := s.EnrollmentsAndAgreements.ListAgreements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(5), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -444,10 +464,11 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ListEntitlements
 
@@ -455,17 +476,20 @@ Gets a list of Entitlements for an Account.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="Accounts_ListEntitlements" method="get" path="/accounts/v1/accounts/{account_id}/entitlements" -->
 ```go
 package main
 
 import(
-	"github.com/afs-public/ascend-sdk-go/models/components"
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
 	"log"
 )
 
 func main() {
+    ctx := context.Background()
+
     s := ascendsdkgo.New(
         ascendsdkgo.WithSecurity(components.Security{
             APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -478,8 +502,7 @@ func main() {
         }),
     )
 
-    ctx := context.Background()
-    res, err := s.EnrollmentsAndAgreements.ListEntitlements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil, nil)
+    res, err := s.EnrollmentsAndAgreements.ListEntitlements(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", ascendsdkgo.Int(5), ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"))
     if err != nil {
         log.Fatal(err)
     }
@@ -505,7 +528,8 @@ func main() {
 
 ### Errors
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

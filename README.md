@@ -79,9 +79,10 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := ascendsdkgo.New()
 
-	ctx := context.Background()
 	res, err := s.Authentication.GenerateServiceAccountToken(ctx, components.GenerateServiceAccountTokenRequestCreate{
 		Jws: "eyJhbGciOiAiUlMyNTYifQ.eyJuYW1lIjogImpkb3VnaCIsIm9yZ2FuaXphdGlvbiI6ICJjb3JyZXNwb25kZW50cy8xMjM0NTY3OC0xMjM0LTEyMzQtMTIzNC0xMjM0NTY3ODkxMDEiLCJkYXRldGltZSI6ICIyMDI0LTAyLTA1VDIxOjAyOjI3LjkwMTE4MFoifQ.IMy3KmYoG8Ppf+7hXN7tm7J4MrNpQLGL7WCWvhh4nZWAVKkluL3/u3KC6hZ6Mb/5p7Y54CgZ68aWT2BcP5y4VtzIZR1Chm5pxbLfgE4aJuk+FnF6K3Gc3bBjOWCL58pxY2aTb0iU/exDEA1cbMDvbCzmY5kRefDvorLOqgUS/tS2MJ2jv4RlZFPlmHv5PtOruJ8xUW19gEgGhsPXYYeSHFTE1ZlaDvyXrKtpOvlf+FVc2RTuEw529LZnzwH4/eJJR3BpSpHyJTjQqiaMT3wzpXXYKfCRqnDkSSKJDzCzTb0/uWK/Lf0uafxPXk5YLdis+dbo1zNQhVVKjwnMpk1vLw",
 	}, operations.AuthenticationGenerateServiceAccountTokenSecurity{
@@ -121,6 +122,8 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithRetryConfig(
 			retry.Config{
@@ -135,7 +138,6 @@ func main() {
 			}),
 	)
 
-	ctx := context.Background()
 	res, err := s.Authentication.GenerateServiceAccountToken(ctx, components.GenerateServiceAccountTokenRequestCreate{
 		Jws: "eyJhbGciOiAiUlMyNTYifQ.eyJuYW1lIjogImpkb3VnaCIsIm9yZ2FuaXphdGlvbiI6ICJjb3JyZXNwb25kZW50cy8xMjM0NTY3OC0xMjM0LTEyMzQtMTIzNC0xMjM0NTY3ODkxMDEiLCJkYXRldGltZSI6ICIyMDI0LTAyLTA1VDIxOjAyOjI3LjkwMTE4MFoifQ.IMy3KmYoG8Ppf+7hXN7tm7J4MrNpQLGL7WCWvhh4nZWAVKkluL3/u3KC6hZ6Mb/5p7Y54CgZ68aWT2BcP5y4VtzIZR1Chm5pxbLfgE4aJuk+FnF6K3Gc3bBjOWCL58pxY2aTb0iU/exDEA1cbMDvbCzmY5kRefDvorLOqgUS/tS2MJ2jv4RlZFPlmHv5PtOruJ8xUW19gEgGhsPXYYeSHFTE1ZlaDvyXrKtpOvlf+FVc2RTuEw529LZnzwH4/eJJR3BpSpHyJTjQqiaMT3wzpXXYKfCRqnDkSSKJDzCzTb0/uWK/Lf0uafxPXk5YLdis+dbo1zNQhVVKjwnMpk1vLw",
 	}, operations.AuthenticationGenerateServiceAccountTokenSecurity{
@@ -161,10 +163,11 @@ By Default, an API error will return `sdkerrors.SDKError`. When custom error res
 
 For example, the `GetAccount` function may return the following errors:
 
-| Error Type              | Status Code             | Content Type            |
-| ----------------------- | ----------------------- | ----------------------- |
-| sdkerrors.Status        | 400, 403, 404, 500, 503 | application/json        |
-| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
+| Error Type         | Status Code   | Content Type     |
+| ------------------ | ------------- | ---------------- |
+| sdkerrors.Status   | 400, 403, 404 | application/json |
+| sdkerrors.Status   | 500, 503      | application/json |
+| sdkerrors.SDKError | 4XX, 5XX      | \*/\*            |
 
 ### Example
 
@@ -176,11 +179,14 @@ import (
 	"errors"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"log"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithSecurity(components.Security{
 			APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
@@ -193,9 +199,14 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
-	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
+	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
 	if err != nil {
+
+		var e *sdkerrors.Status
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 
 		var e *sdkerrors.Status
 		if errors.As(err, &e) {
@@ -219,13 +230,13 @@ func main() {
 
 ### Select Server by Name
 
-You can override the default server globally using the `WithServer` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+You can override the default server globally using the `WithServer(server string)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
 
-| Name | Server | Variables |
-| ----- | ------ | --------- |
-| `uat` | `https://uat.apexapis.com` | None |
-| `prod` | `https://api.apexapis.com` | None |
-| `sbx` | `https://sbx.apexapis.com` | None |
+| Name   | Server                     | Description                |
+| ------ | -------------------------- | -------------------------- |
+| `uat`  | `https://uat.apexapis.com` | our uat environment        |
+| `prod` | `https://api.apexapis.com` | our production environment |
+| `sbx`  | `https://sbx.apexapis.com` | our sandbox environment    |
 
 #### Example
 
@@ -236,10 +247,13 @@ import (
 	"context"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithServer("sbx"),
 		ascendsdkgo.WithSecurity(components.Security{
@@ -253,8 +267,7 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
-	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
+	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -265,10 +278,9 @@ func main() {
 
 ```
 
-
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
 ```go
 package main
 
@@ -276,10 +288,13 @@ import (
 	"context"
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"log"
 )
 
 func main() {
+	ctx := context.Background()
+
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithServerURL("https://uat.apexapis.com"),
 		ascendsdkgo.WithSecurity(components.Security{
@@ -293,8 +308,7 @@ func main() {
 		}),
 	)
 
-	ctx := context.Background()
-	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", nil)
+	res, err := s.AccountCreation.GetAccount(ctx, "01HC3MAQ4DR9QN1V8MJ4CN1HMK", operations.QueryParamViewFull.ToPointer())
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -323,12 +337,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/afs-public/ascend-sdk-go"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = ascendsdkgo.New(ascendsdkgo.WithClient(httpClient))
 )
 ```
 
@@ -340,12 +355,6 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 <!-- No Table of Contents [toc] -->
 
 <!-- No Summary -->
-
-<!-- Start Special Types [types] -->
-## Special Types
-
-
-<!-- End Special Types [types] -->
 
 <!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations

@@ -208,7 +208,14 @@ func (o *Entity) GetRegistrationRegion() *string {
 	return o.RegistrationRegion
 }
 
-// IdentityVerification - Indicates the current state of identity verification
+// IdentityVerification - The screen state of one screening within an investigation, one of:
+// - `SCREEN_STATE_UNSPECIFIED` - Default/Null value.
+// - `PENDING` - Screen result is pending.
+// - `PASSED` - Screen result has passed.
+// - `FAILED` - Screen result has failed.
+// - `NEEDS_REVIEW` - Screen result needs manual review.
+// - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date.
+// - `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
 type IdentityVerification string
 
 const (
@@ -225,7 +232,10 @@ func (e IdentityVerification) ToPointer() *IdentityVerification {
 	return &e
 }
 
-// IdentityVerificationScope - Used to determine who is responsible for running identity verification checks
+// IdentityVerificationScope - Used to determine who is responsible for running identity verification checks, one of:
+// - `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value.
+// - `PERFORMED_BY_APEX` - Run CIP and CDD checks.
+// - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
 type IdentityVerificationScope string
 
 const (
@@ -238,7 +248,10 @@ func (e IdentityVerificationScope) ToPointer() *IdentityVerificationScope {
 	return &e
 }
 
-// InvestigationRequestState - Current state of investigation request
+// InvestigationRequestState - The state of an investigation request, one of:
+// - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` - Default/Null value.
+// - `OPEN` - The investigation request is open.
+// - `CLOSED` - The investigation request is closed.
 type InvestigationRequestState string
 
 const (
@@ -397,7 +410,13 @@ func (o *InvestigationPersonLegalAddress) GetSublocality() *string {
 	return o.Sublocality
 }
 
-// InvestigationNameSuffix - Suffix of the person's name
+// InvestigationNameSuffix - The name suffix for individuals, one of:
+// - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value.
+// - `SR` - Senior.
+// - `JR` - Junior.
+// - `III` - The third.
+// - `IV` - The fourth.
+// - `V` - The fifth.
 type InvestigationNameSuffix string
 
 const (
@@ -562,7 +581,13 @@ type Person struct {
 	MailingAddresses []PostalAddress `json:"mailing_addresses,omitempty"`
 	// Middle names
 	MiddleNames *string `json:"middle_names,omitempty"`
-	// Suffix of the person's name
+	// The name suffix for individuals, one of:
+	// - `NAME_SUFFIX_UNSPECIFIED` - Default/Null value.
+	// - `SR` - Senior.
+	// - `JR` - Junior.
+	// - `III` - The third.
+	// - `IV` - The fourth.
+	// - `V` - The fifth.
 	NameSuffix *InvestigationNameSuffix `json:"name_suffix,omitempty"`
 	// phone numbers related to this person
 	PhoneNumbers []string `json:"phone_numbers,omitempty"`
@@ -668,7 +693,14 @@ func (o *Person) GetProvidedIdentityVerification() *ProvidedIdentityVerification
 	return o.ProvidedIdentityVerification
 }
 
-// WatchlistScreen - Indicates the current state of the watchlist screen
+// WatchlistScreen - The screen state of one screening within an investigation, one of:
+// - `SCREEN_STATE_UNSPECIFIED` - Default/Null value.
+// - `PENDING` - Screen result is pending.
+// - `PASSED` - Screen result has passed.
+// - `FAILED` - Screen result has failed.
+// - `NEEDS_REVIEW` - Screen result needs manual review.
+// - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date.
+// - `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
 type WatchlistScreen string
 
 const (
@@ -689,19 +721,34 @@ func (e WatchlistScreen) ToPointer() *WatchlistScreen {
 type Investigation struct {
 	// Audit trail of an investigation
 	AuditTrail []AuditTrail `json:"audit_trail,omitempty"`
+	// A unique identifier referencing a client The client ID serves as the unique identifier for the apex client positioned above the correspondent within the apex client configurator hierarchy. Moving forward, the account service will internally assign the client ID for all investigations.
+	ClientID *string `json:"client_id,omitempty"`
 	// A unique identifier referencing a Correspondent
 	CorrespondentID *string `json:"correspondent_id,omitempty"`
 	// The time the investigation state was created
 	CreateTime *time.Time `json:"create_time,omitempty"`
 	// investigation details on an entity
 	Entity *Entity `json:"entity,omitempty"`
-	// Indicates the current state of identity verification
+	// The screen state of one screening within an investigation, one of:
+	// - `SCREEN_STATE_UNSPECIFIED` - Default/Null value.
+	// - `PENDING` - Screen result is pending.
+	// - `PASSED` - Screen result has passed.
+	// - `FAILED` - Screen result has failed.
+	// - `NEEDS_REVIEW` - Screen result needs manual review.
+	// - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date.
+	// - `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
 	IdentityVerification *IdentityVerification `json:"identity_verification,omitempty"`
 	// The results of the identity verification check
 	IdentityVerificationResults []IdentityVerificationResult `json:"identity_verification_results,omitempty"`
-	// Used to determine who is responsible for running identity verification checks
+	// Used to determine who is responsible for running identity verification checks, one of:
+	// - `IDENTITY_VERIFICATION_SCOPE_UNSPECIFIED` - Default/Null value.
+	// - `PERFORMED_BY_APEX` - Run CIP and CDD checks.
+	// - `PROVIDED_BY_CLIENT` - Run CDD checks with CIP provided in request.
 	IdentityVerificationScope *IdentityVerificationScope `json:"identity_verification_scope,omitempty"`
-	// Current state of investigation request
+	// The state of an investigation request, one of:
+	// - `INVESTIGATION_REQUEST_STATE_UNSPECIFIED` - Default/Null value.
+	// - `OPEN` - The investigation request is open.
+	// - `CLOSED` - The investigation request is closed.
 	InvestigationRequestState *InvestigationRequestState `json:"investigation_request_state,omitempty"`
 	// Required: The ID for an open investigation The format is "investigations/{investigation}"
 	Name *string `json:"name,omitempty"`
@@ -711,7 +758,14 @@ type Investigation struct {
 	UpdateTime *time.Time `json:"update_time,omitempty"`
 	// A list of watchlist entries matched against the investigation
 	WatchlistMatches []WatchlistMatch `json:"watchlist_matches,omitempty"`
-	// Indicates the current state of the watchlist screen
+	// The screen state of one screening within an investigation, one of:
+	// - `SCREEN_STATE_UNSPECIFIED` - Default/Null value.
+	// - `PENDING` - Screen result is pending.
+	// - `PASSED` - Screen result has passed.
+	// - `FAILED` - Screen result has failed.
+	// - `NEEDS_REVIEW` - Screen result needs manual review.
+	// - `DEFERRED_REVIEW` - Screen result is deferred for review at a later date.
+	// - `OUT_OF_SCOPE` - Screen state is out of scope for this investigation type.
 	WatchlistScreen *WatchlistScreen `json:"watchlist_screen,omitempty"`
 }
 
@@ -731,6 +785,13 @@ func (o *Investigation) GetAuditTrail() []AuditTrail {
 		return nil
 	}
 	return o.AuditTrail
+}
+
+func (o *Investigation) GetClientID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientID
 }
 
 func (o *Investigation) GetCorrespondentID() *string {
