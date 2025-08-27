@@ -105,6 +105,7 @@ const (
 	CompressedOrderOrderRejectedReasonInsufficientPosition                              CompressedOrderOrderRejectedReason = "INSUFFICIENT_POSITION"
 	CompressedOrderOrderRejectedReasonFailedBuyingPower                                 CompressedOrderOrderRejectedReason = "FAILED_BUYING_POWER"
 	CompressedOrderOrderRejectedReasonRoundUpAmountTooSmall                             CompressedOrderOrderRejectedReason = "ROUND_UP_AMOUNT_TOO_SMALL"
+	CompressedOrderOrderRejectedReasonAssetNotSetUpForRoundUps                          CompressedOrderOrderRejectedReason = "ASSET_NOT_SET_UP_FOR_ROUND_UPS"
 )
 
 func (e CompressedOrderOrderRejectedReason) ToPointer() *CompressedOrderOrderRejectedReason {

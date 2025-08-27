@@ -138,8 +138,10 @@ func generateJwt(serverUrl string, apiKey string, jws string) (string, error) {
 
 func getJws(creds components.ServiceAccountCreds) (string, error) {
 	privateKeyContent := creds.PrivateKey
+	privateKeyContent = strings.ReplaceAll(privateKeyContent, "\n", "")
 	privateKeyContent = strings.ReplaceAll(privateKeyContent, "\\n", "")
 	privateKeyContent = strings.ReplaceAll(privateKeyContent, "\r", "")
+	privateKeyContent = strings.ReplaceAll(privateKeyContent, "\\r", "")
 	privateKeyContent = strings.ReplaceAll(privateKeyContent, "-----BEGIN PRIVATE KEY-----", "")
 	privateKeyContent = strings.ReplaceAll(privateKeyContent, "-----END PRIVATE KEY-----", "")
 

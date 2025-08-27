@@ -18,7 +18,7 @@ const withdrawal_account_id = "01JHGTEPC6ZTAHCFRH2MD3VJJT"
 const deceased_account_id = "01JHK07CRQ9X8P5XE9JWG4PFSP"
 
 func createCashJournal(ctx context.Context, sdk ascendsdk.SDK, accountId *string) (string, error) {
-	oneStr := "250001.00"
+	oneStr := "500001.00"
 
 	request := components.CashJournalCreate{
 		ClientTransferID:   uuid.NewString(),

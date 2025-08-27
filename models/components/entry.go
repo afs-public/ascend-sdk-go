@@ -59,6 +59,7 @@ const (
 	AccountTransferTypeFailReversal                   AccountTransferType = "FAIL_REVERSAL"
 	AccountTransferTypeReclaim                        AccountTransferType = "RECLAIM"
 	AccountTransferTypePositionTransferFund           AccountTransferType = "POSITION_TRANSFER_FUND"
+	AccountTransferTypeSponsoredTransfer              AccountTransferType = "SPONSORED_TRANSFER"
 )
 
 func (e AccountTransferType) ToPointer() *AccountTransferType {
@@ -77,6 +78,50 @@ const (
 
 func (e Action) ToPointer() *Action {
 	return &e
+}
+
+// FairMarketValue - Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+type FairMarketValue struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *FairMarketValue) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// FairMarketValueDate - Date from which the asset was valued and used in the fair market value calculation
+type FairMarketValueDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *FairMarketValueDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *FairMarketValueDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *FairMarketValueDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
 }
 
 // Method - the method used for the account transfer
@@ -109,6 +154,10 @@ type AccountTransfer struct {
 	ContraPartyAccountNumber *string `json:"contra_party_account_number,omitempty"`
 	// contra party identifier
 	ContraPartyID *string `json:"contra_party_id,omitempty"`
+	// Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+	FairMarketValue *FairMarketValue `json:"fair_market_value,omitempty"`
+	// Date from which the asset was valued and used in the fair market value calculation
+	FairMarketValueDate *FairMarketValueDate `json:"fair_market_value_date,omitempty"`
 	// Contra party institution for the account transfer
 	Institution *string `json:"institution,omitempty"`
 	// the method used for the account transfer
@@ -162,6 +211,20 @@ func (o *AccountTransfer) GetContraPartyID() *string {
 		return nil
 	}
 	return o.ContraPartyID
+}
+
+func (o *AccountTransfer) GetFairMarketValue() *FairMarketValue {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValue
+}
+
+func (o *AccountTransfer) GetFairMarketValueDate() *FairMarketValueDate {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValueDate
 }
 
 func (o *AccountTransfer) GetInstitution() *string {
@@ -1138,6 +1201,8 @@ const (
 	SubtypeMaturity                           Subtype = "MATURITY"
 	SubtypeTermination                        Subtype = "TERMINATION"
 	SubtypeRedemptionOfWarrants               Subtype = "REDEMPTION_OF_WARRANTS"
+	SubtypeInterimPayment                     Subtype = "INTERIM_PAYMENT"
+	SubtypeFinalPayment                       Subtype = "FINAL_PAYMENT"
 )
 
 func (e Subtype) ToPointer() *Subtype {
@@ -1922,40 +1987,49 @@ func (o *Exchange) GetType() *EntryExchangeType {
 type EntryFeeType string
 
 const (
-	EntryFeeTypeFeeTypeUnspecified             EntryFeeType = "FEE_TYPE_UNSPECIFIED"
-	EntryFeeTypeClientClearing                 EntryFeeType = "CLIENT_CLEARING"
-	EntryFeeTypeLiquidity                      EntryFeeType = "LIQUIDITY"
-	EntryFeeTypeGeneralPurpose                 EntryFeeType = "GENERAL_PURPOSE"
-	EntryFeeTypeCommission                     EntryFeeType = "COMMISSION"
-	EntryFeeTypeTaf                            EntryFeeType = "TAF"
-	EntryFeeTypeSec                            EntryFeeType = "SEC"
-	EntryFeeTypeAccountClosing                 EntryFeeType = "ACCOUNT_CLOSING"
-	EntryFeeTypeAccountIra                     EntryFeeType = "ACCOUNT_IRA"
-	EntryFeeTypeAchReturn                      EntryFeeType = "ACH_RETURN"
-	EntryFeeTypeAdvisory                       EntryFeeType = "ADVISORY"
-	EntryFeeTypeCheckFee                       EntryFeeType = "CHECK_FEE"
-	EntryFeeTypeExchange                       EntryFeeType = "EXCHANGE"
-	EntryFeeTypeManagement                     EntryFeeType = "MANAGEMENT"
-	EntryFeeTypeOvernight                      EntryFeeType = "OVERNIGHT"
-	EntryFeeTypePlatform                       EntryFeeType = "PLATFORM"
-	EntryFeeTypeStatement                      EntryFeeType = "STATEMENT"
-	EntryFeeTypeStopPayment                    EntryFeeType = "STOP_PAYMENT"
-	EntryFeeTypeWireFee                        EntryFeeType = "WIRE_FEE"
-	EntryFeeTypeInactivity                     EntryFeeType = "INACTIVITY"
-	EntryFeeTypeAmaService                     EntryFeeType = "AMA_SERVICE"
-	EntryFeeTypeNoticeOfChange                 EntryFeeType = "NOTICE_OF_CHANGE"
-	EntryFeeTypeAccountTransfer                EntryFeeType = "ACCOUNT_TRANSFER"
-	EntryFeeTypeAgencyProcessing               EntryFeeType = "AGENCY_PROCESSING"
-	EntryFeeTypeRtpFee                         EntryFeeType = "RTP_FEE"
-	EntryFeeTypeDomesticWireDepositFee         EntryFeeType = "DOMESTIC_WIRE_DEPOSIT_FEE"
-	EntryFeeTypeDomesticWireWithdrawalFee      EntryFeeType = "DOMESTIC_WIRE_WITHDRAWAL_FEE"
-	EntryFeeTypeInternationalWireDepositFee    EntryFeeType = "INTERNATIONAL_WIRE_DEPOSIT_FEE"
-	EntryFeeTypeInternationalWireWithdrawalFee EntryFeeType = "INTERNATIONAL_WIRE_WITHDRAWAL_FEE"
-	EntryFeeTypeBrokerFee                      EntryFeeType = "BROKER_FEE"
-	EntryFeeTypeOccFee                         EntryFeeType = "OCC_FEE"
-	EntryFeeTypeContractFee                    EntryFeeType = "CONTRACT_FEE"
-	EntryFeeTypeOptionsRegulatory              EntryFeeType = "OPTIONS_REGULATORY"
-	EntryFeeTypeFinancialTransactionTax        EntryFeeType = "FINANCIAL_TRANSACTION_TAX"
+	EntryFeeTypeFeeTypeUnspecified                  EntryFeeType = "FEE_TYPE_UNSPECIFIED"
+	EntryFeeTypeClientClearing                      EntryFeeType = "CLIENT_CLEARING"
+	EntryFeeTypeLiquidity                           EntryFeeType = "LIQUIDITY"
+	EntryFeeTypeGeneralPurpose                      EntryFeeType = "GENERAL_PURPOSE"
+	EntryFeeTypeCommission                          EntryFeeType = "COMMISSION"
+	EntryFeeTypeTaf                                 EntryFeeType = "TAF"
+	EntryFeeTypeSec                                 EntryFeeType = "SEC"
+	EntryFeeTypeAccountClosing                      EntryFeeType = "ACCOUNT_CLOSING"
+	EntryFeeTypeAccountIra                          EntryFeeType = "ACCOUNT_IRA"
+	EntryFeeTypeAchReturn                           EntryFeeType = "ACH_RETURN"
+	EntryFeeTypeAdvisory                            EntryFeeType = "ADVISORY"
+	EntryFeeTypeCheckFee                            EntryFeeType = "CHECK_FEE"
+	EntryFeeTypeExchange                            EntryFeeType = "EXCHANGE"
+	EntryFeeTypeManagement                          EntryFeeType = "MANAGEMENT"
+	EntryFeeTypeOvernight                           EntryFeeType = "OVERNIGHT"
+	EntryFeeTypePlatform                            EntryFeeType = "PLATFORM"
+	EntryFeeTypeStatement                           EntryFeeType = "STATEMENT"
+	EntryFeeTypeStopPayment                         EntryFeeType = "STOP_PAYMENT"
+	EntryFeeTypeWireFee                             EntryFeeType = "WIRE_FEE"
+	EntryFeeTypeInactivity                          EntryFeeType = "INACTIVITY"
+	EntryFeeTypeAmaService                          EntryFeeType = "AMA_SERVICE"
+	EntryFeeTypeNoticeOfChange                      EntryFeeType = "NOTICE_OF_CHANGE"
+	EntryFeeTypeAccountTransfer                     EntryFeeType = "ACCOUNT_TRANSFER"
+	EntryFeeTypeAgencyProcessing                    EntryFeeType = "AGENCY_PROCESSING"
+	EntryFeeTypeRtpFee                              EntryFeeType = "RTP_FEE"
+	EntryFeeTypeDomesticWireDepositFee              EntryFeeType = "DOMESTIC_WIRE_DEPOSIT_FEE"
+	EntryFeeTypeDomesticWireWithdrawalFee           EntryFeeType = "DOMESTIC_WIRE_WITHDRAWAL_FEE"
+	EntryFeeTypeInternationalWireDepositFee         EntryFeeType = "INTERNATIONAL_WIRE_DEPOSIT_FEE"
+	EntryFeeTypeInternationalWireWithdrawalFee      EntryFeeType = "INTERNATIONAL_WIRE_WITHDRAWAL_FEE"
+	EntryFeeTypeBrokerFee                           EntryFeeType = "BROKER_FEE"
+	EntryFeeTypeOccFee                              EntryFeeType = "OCC_FEE"
+	EntryFeeTypeContractFee                         EntryFeeType = "CONTRACT_FEE"
+	EntryFeeTypeOptionsRegulatory                   EntryFeeType = "OPTIONS_REGULATORY"
+	EntryFeeTypeFinancialTransactionTax             EntryFeeType = "FINANCIAL_TRANSACTION_TAX"
+	EntryFeeTypeRegularCheckDelivery                EntryFeeType = "REGULAR_CHECK_DELIVERY"
+	EntryFeeTypeOvernightCheckDelivery              EntryFeeType = "OVERNIGHT_CHECK_DELIVERY"
+	EntryFeeTypeSaturdayCheckDelivery               EntryFeeType = "SATURDAY_CHECK_DELIVERY"
+	EntryFeeTypeOvernightCheckToBroker              EntryFeeType = "OVERNIGHT_CHECK_TO_BROKER"
+	EntryFeeTypeInternationalCheckOvernightDelivery EntryFeeType = "INTERNATIONAL_CHECK_OVERNIGHT_DELIVERY"
+	EntryFeeTypeInternationalCheckRegularDelivery   EntryFeeType = "INTERNATIONAL_CHECK_REGULAR_DELIVERY"
+	EntryFeeTypePrintCheckAtFirm                    EntryFeeType = "PRINT_CHECK_AT_FIRM"
+	EntryFeeTypeVoidedCheck                         EntryFeeType = "VOIDED_CHECK"
+	EntryFeeTypeStopPaymentAfter180Days             EntryFeeType = "STOP_PAYMENT_AFTER_180_DAYS"
 )
 
 func (e EntryFeeType) ToPointer() *EntryFeeType {
@@ -2930,6 +3004,8 @@ const (
 	EntrySubtypeMaturity                           EntrySubtype = "MATURITY"
 	EntrySubtypeTermination                        EntrySubtype = "TERMINATION"
 	EntrySubtypeRedemptionOfWarrants               EntrySubtype = "REDEMPTION_OF_WARRANTS"
+	EntrySubtypeInterimPayment                     EntrySubtype = "INTERIM_PAYMENT"
+	EntrySubtypeFinalPayment                       EntrySubtype = "FINAL_PAYMENT"
 )
 
 func (e EntrySubtype) ToPointer() *EntrySubtype {
@@ -4053,6 +4129,8 @@ const (
 	EntryRedemptionFullSubtypeMaturity                           EntryRedemptionFullSubtype = "MATURITY"
 	EntryRedemptionFullSubtypeTermination                        EntryRedemptionFullSubtype = "TERMINATION"
 	EntryRedemptionFullSubtypeRedemptionOfWarrants               EntryRedemptionFullSubtype = "REDEMPTION_OF_WARRANTS"
+	EntryRedemptionFullSubtypeInterimPayment                     EntryRedemptionFullSubtype = "INTERIM_PAYMENT"
+	EntryRedemptionFullSubtypeFinalPayment                       EntryRedemptionFullSubtype = "FINAL_PAYMENT"
 )
 
 func (e EntryRedemptionFullSubtype) ToPointer() *EntryRedemptionFullSubtype {
@@ -6755,6 +6833,7 @@ const (
 	EntryWithholdingStateWv                          EntryWithholdingState = "WV"
 	EntryWithholdingStateWi                          EntryWithholdingState = "WI"
 	EntryWithholdingStateWy                          EntryWithholdingState = "WY"
+	EntryWithholdingStateDc                          EntryWithholdingState = "DC"
 )
 
 func (e EntryWithholdingState) ToPointer() *EntryWithholdingState {

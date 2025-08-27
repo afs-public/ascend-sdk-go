@@ -128,6 +128,29 @@ func (o *CumulativeNotionalValue) GetValue() *string {
 	return o.Value
 }
 
+// ExtraReportingData - Any reporting data provided by the SetExtraReportingData endpoint.
+type ExtraReportingData struct {
+	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
+}
+
+func (e ExtraReportingData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *ExtraReportingData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *ExtraReportingData) GetCancelConfirmedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CancelConfirmedTime
+}
+
 // FilledQuantity - The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 type FilledQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -365,6 +388,7 @@ const (
 	OrderRejectedReasonInvalidOrderQuantity                              OrderRejectedReason = "INVALID_ORDER_QUANTITY"
 	OrderRejectedReasonClientReceivedTimeRequired                        OrderRejectedReason = "CLIENT_RECEIVED_TIME_REQUIRED"
 	OrderRejectedReasonClientNotPermittedToUseTradingSession             OrderRejectedReason = "CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION"
+	OrderRejectedReasonStopPriceBelowMarketPrice                         OrderRejectedReason = "STOP_PRICE_BELOW_MARKET_PRICE"
 )
 
 func (e OrderRejectedReason) ToPointer() *OrderRejectedReason {
@@ -615,6 +639,8 @@ type Order struct {
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
 	Executions []TradingExecutions `json:"executions,omitempty"`
+	// Any reporting data provided by the SetExtraReportingData endpoint.
+	ExtraReportingData *ExtraReportingData `json:"extra_reporting_data,omitempty"`
 	// Fees that will be applied to this order. Only the BROKER_FEE type is supported.
 	Fees []TradingFee `json:"fees,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
@@ -788,6 +814,13 @@ func (o *Order) GetExecutions() []TradingExecutions {
 		return nil
 	}
 	return o.Executions
+}
+
+func (o *Order) GetExtraReportingData() *ExtraReportingData {
+	if o == nil {
+		return nil
+	}
+	return o.ExtraReportingData
 }
 
 func (o *Order) GetFees() []TradingFee {

@@ -35,3 +35,4 @@ When an order has the REJECTED status, this will be populated with a system code
 | `BasketOrderOrderRejectedReasonInsufficientPosition`                              | INSUFFICIENT_POSITION                                                             |
 | `BasketOrderOrderRejectedReasonFailedBuyingPower`                                 | FAILED_BUYING_POWER                                                               |
 | `BasketOrderOrderRejectedReasonRoundUpAmountTooSmall`                             | ROUND_UP_AMOUNT_TOO_SMALL                                                         |
+| `BasketOrderOrderRejectedReasonAssetNotSetUpForRoundUps`                          | ASSET_NOT_SET_UP_FOR_ROUND_UPS                                                    |

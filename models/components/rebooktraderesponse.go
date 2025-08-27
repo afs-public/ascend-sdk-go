@@ -2,7 +2,7 @@
 
 package components
 
-// RebookTradeResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// RebookTradeResponseAssetType - Type of the asset being traded.
 type RebookTradeResponseAssetType string
 
 const (
@@ -267,7 +267,7 @@ type NewTrade struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *RebookTradeResponseAssetType `json:"asset_type,omitempty"`
 	// Broker capacity for the trade.
 	BrokerCapacity *RebookTradeResponseBrokerCapacity `json:"broker_capacity,omitempty"`
@@ -513,7 +513,7 @@ func (o *NewTrade) GetWhenIssued() *RebookTradeResponseWhenIssued {
 	return o.WhenIssued
 }
 
-// RebookTradeResponseOriginalTradeAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// RebookTradeResponseOriginalTradeAssetType - Type of the asset being traded.
 type RebookTradeResponseOriginalTradeAssetType string
 
 const (
@@ -778,7 +778,7 @@ type OriginalTrade struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *RebookTradeResponseOriginalTradeAssetType `json:"asset_type,omitempty"`
 	// Broker capacity for the trade.
 	BrokerCapacity *RebookTradeResponseOriginalTradeBrokerCapacity `json:"broker_capacity,omitempty"`

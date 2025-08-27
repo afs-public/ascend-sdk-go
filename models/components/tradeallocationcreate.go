@@ -8,7 +8,7 @@ import (
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 )
 
-// TradeAllocationCreateAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// TradeAllocationCreateAssetType - Type of the asset being traded.
 type TradeAllocationCreateAssetType string
 
 const (
@@ -158,8 +158,8 @@ type TradeAllocationCreate struct {
 	AccruedInterestAmount *DecimalCreate `json:"accrued_interest_amount,omitempty"`
 	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
-	AssetType *TradeAllocationCreateAssetType `json:"asset_type,omitempty"`
+	// Type of the asset being traded.
+	AssetType TradeAllocationCreateAssetType `json:"asset_type"`
 	// The yield associated with an individual fill of a fixed income trade. Required for FIXED_INCOME trades. Not allowed for trades of other instrument types.
 	BondYield []BondYieldCreate `json:"bond_yield,omitempty"`
 	// Broker capacity for the trade.
@@ -259,9 +259,9 @@ func (o *TradeAllocationCreate) GetAdditionalInstructions() *string {
 	return o.AdditionalInstructions
 }
 
-func (o *TradeAllocationCreate) GetAssetType() *TradeAllocationCreateAssetType {
+func (o *TradeAllocationCreate) GetAssetType() TradeAllocationCreateAssetType {
 	if o == nil {
-		return nil
+		return TradeAllocationCreateAssetType("")
 	}
 	return o.AssetType
 }

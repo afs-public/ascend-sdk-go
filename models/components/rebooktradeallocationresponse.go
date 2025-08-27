@@ -21,7 +21,7 @@ func (o *RebookTradeAllocationResponseAccruedInterestAmount) GetValue() *string 
 	return o.Value
 }
 
-// RebookTradeAllocationResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// RebookTradeAllocationResponseAssetType - Type of the asset being traded.
 type RebookTradeAllocationResponseAssetType string
 
 const (
@@ -330,7 +330,7 @@ type NewTradeAllocation struct {
 	AccruedInterestAmount *RebookTradeAllocationResponseAccruedInterestAmount `json:"accrued_interest_amount,omitempty"`
 	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *RebookTradeAllocationResponseAssetType `json:"asset_type,omitempty"`
 	// The yield associated with an individual fill of a fixed income trade. Required for FIXED_INCOME trades. Not allowed for trades of other instrument types.
 	BondYield []BondYield `json:"bond_yield,omitempty"`
@@ -640,7 +640,7 @@ func (o *RebookTradeAllocationResponseOriginalTradeAllocationAccruedInterestAmou
 	return o.Value
 }
 
-// RebookTradeAllocationResponseOriginalTradeAllocationAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// RebookTradeAllocationResponseOriginalTradeAllocationAssetType - Type of the asset being traded.
 type RebookTradeAllocationResponseOriginalTradeAllocationAssetType string
 
 const (
@@ -949,7 +949,7 @@ type OriginalTradeAllocation struct {
 	AccruedInterestAmount *RebookTradeAllocationResponseOriginalTradeAllocationAccruedInterestAmount `json:"accrued_interest_amount,omitempty"`
 	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *RebookTradeAllocationResponseOriginalTradeAllocationAssetType `json:"asset_type,omitempty"`
 	// The yield associated with an individual fill of a fixed income trade. Required for FIXED_INCOME trades. Not allowed for trades of other instrument types.
 	BondYield []BondYield `json:"bond_yield,omitempty"`

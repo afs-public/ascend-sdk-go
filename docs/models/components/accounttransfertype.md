@@ -16,3 +16,4 @@ The type of asset movement being performed within the lifecycle of an account tr
 | `AccountTransferTypeFailReversal`                   | FAIL_REVERSAL                                       |
 | `AccountTransferTypeReclaim`                        | RECLAIM                                             |
 | `AccountTransferTypePositionTransferFund`           | POSITION_TRANSFER_FUND                              |
+| `AccountTransferTypeSponsoredTransfer`              | SPONSORED_TRANSFER                                  |

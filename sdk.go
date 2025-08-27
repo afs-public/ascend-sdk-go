@@ -2,7 +2,7 @@
 
 package ascendsdkgo
 
-// Generated from OpenAPI doc version v1:20250811:uat:c8e4b50ba105 and generator version 2.680.0
+// Generated from OpenAPI doc version v1:20250822:uat:240983991338 and generator version 2.680.0
 
 import (
 	"context"
@@ -76,10 +76,11 @@ type SDK struct {
 	Retirements              *Retirements
 	Journals                 *Journals
 	ScheduleTransfers        *ScheduleTransfers
+	Checks                   *Checks
+	TestSimulation           *TestSimulation
 	Wires                    *Wires
 	CashBalances             *CashBalances
 	FeesAndCredits           *FeesAndCredits
-	TestSimulation           *TestSimulation
 	AccountTransfers         *AccountTransfers
 	// Create Order
 	// Creates a new order for equity or fixed income securities.
@@ -173,9 +174,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "1.1.0",
+		SDKVersion: "1.1.1",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.1.0 2.680.0 v1:20250811:uat:c8e4b50ba105 github.com/afs-public/ascend-sdk-go",
+			UserAgent:  "speakeasy-sdk/go 1.1.1 2.680.0 v1:20250822:uat:240983991338 github.com/afs-public/ascend-sdk-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -210,10 +211,11 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Retirements = newRetirements(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Journals = newJournals(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.ScheduleTransfers = newScheduleTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Checks = newChecks(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.TestSimulation = newTestSimulation(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Wires = newWires(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.CashBalances = newCashBalances(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.FeesAndCredits = newFeesAndCredits(sdk, sdk.sdkConfiguration, sdk.hooks)
-	sdk.TestSimulation = newTestSimulation(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AccountTransfers = newAccountTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.CreateOrder = newCreateOrder(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.FixedIncomePricing = newFixedIncomePricing(sdk, sdk.sdkConfiguration, sdk.hooks)

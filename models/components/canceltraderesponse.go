@@ -2,7 +2,7 @@
 
 package components
 
-// CancelTradeResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// CancelTradeResponseAssetType - Type of the asset being traded.
 type CancelTradeResponseAssetType string
 
 const (
@@ -267,7 +267,7 @@ type CancelTradeResponseTrade struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *CancelTradeResponseAssetType `json:"asset_type,omitempty"`
 	// Broker capacity for the trade.
 	BrokerCapacity *CancelTradeResponseBrokerCapacity `json:"broker_capacity,omitempty"`

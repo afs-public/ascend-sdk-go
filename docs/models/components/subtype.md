@@ -40,3 +40,5 @@ Corresponds to the subtype of corporaction type
 | `SubtypeMaturity`                           | MATURITY                                    |
 | `SubtypeTermination`                        | TERMINATION                                 |
 | `SubtypeRedemptionOfWarrants`               | REDEMPTION_OF_WARRANTS                      |
+| `SubtypeInterimPayment`                     | INTERIM_PAYMENT                             |
+| `SubtypeFinalPayment`                       | FINAL_PAYMENT                               |

@@ -40,3 +40,5 @@ The subtype for the corporate action event
 | `ActivityRedemptionFullSubtypeMaturity`                           | MATURITY                                                          |
 | `ActivityRedemptionFullSubtypeTermination`                        | TERMINATION                                                       |
 | `ActivityRedemptionFullSubtypeRedemptionOfWarrants`               | REDEMPTION_OF_WARRANTS                                            |
+| `ActivityRedemptionFullSubtypeInterimPayment`                     | INTERIM_PAYMENT                                                   |
+| `ActivityRedemptionFullSubtypeFinalPayment`                       | FINAL_PAYMENT                                                     |

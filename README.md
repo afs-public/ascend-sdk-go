@@ -434,10 +434,15 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [SubmitBasket](docs/sdks/basketorders/README.md#submitbasket) - Submit Basket
 * [ListBasketOrders](docs/sdks/basketorders/README.md#listbasketorders) - List Basket Orders
 * [ListCompressedOrders](docs/sdks/basketorders/README.md#listcompressedorders) - List Compressed Orders
+* [RemoveOrders](docs/sdks/basketorders/README.md#removeorders) - Remove Basket Orders
 
 ### [CashBalances](docs/sdks/cashbalances/README.md)
 
 * [CalculateCashBalance](docs/sdks/cashbalances/README.md#calculatecashbalance) - Get Cash Balance
+
+### [Checks](docs/sdks/checks/README.md)
+
+* [GetCheckDeposit](docs/sdks/checks/README.md#getcheckdeposit) - Get Check Deposit
 
 ### [CreateOrder](docs/sdks/createorder/README.md)
 
@@ -578,6 +583,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 ### [TestSimulation](docs/sdks/testsimulation/README.md)
 
+* [SimulateCreateCheckDeposit](docs/sdks/testsimulation/README.md#simulatecreatecheckdeposit) - Simulate Check Deposit Creation
 * [ForceApproveAchDeposit](docs/sdks/testsimulation/README.md#forceapproveachdeposit) - ACH Deposit Approval
 * [ForceNocAchDeposit](docs/sdks/testsimulation/README.md#forcenocachdeposit) - NOC for a Deposit
 * [ForceRejectAchDeposit](docs/sdks/testsimulation/README.md#forcerejectachdeposit) - ACH Deposit Rejection
