@@ -56,3 +56,4 @@
 | `WithholdingStateWv`                          | WV                                            |
 | `WithholdingStateWi`                          | WI                                            |
 | `WithholdingStateWy`                          | WY                                            |
+| `WithholdingStateDc`                          | DC                                            |

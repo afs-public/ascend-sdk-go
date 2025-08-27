@@ -60,6 +60,21 @@ func (e BasketOrderIdentifierType) ToPointer() *BasketOrderIdentifierType {
 	return &e
 }
 
+// BasketOrderMaxSellQuantity - The maximum number of shares to be sold if this is a notional SELL order of an Equity asset type. (Prohibited for other side or asset_type inputs.)
+//
+//	This will only be recognized for clients configured to bypass the short sale risk check. When specified, must be greater than 0 and can't exceed 5 decimal places.
+type BasketOrderMaxSellQuantity struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *BasketOrderMaxSellQuantity) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // BasketOrderNotionalValue - Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. Either a quantity or notional_value MUST be specified (but not both). For Equities: currently not supported yet For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified.
 type BasketOrderNotionalValue struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -105,6 +120,7 @@ const (
 	BasketOrderOrderRejectedReasonInsufficientPosition                              BasketOrderOrderRejectedReason = "INSUFFICIENT_POSITION"
 	BasketOrderOrderRejectedReasonFailedBuyingPower                                 BasketOrderOrderRejectedReason = "FAILED_BUYING_POWER"
 	BasketOrderOrderRejectedReasonRoundUpAmountTooSmall                             BasketOrderOrderRejectedReason = "ROUND_UP_AMOUNT_TOO_SMALL"
+	BasketOrderOrderRejectedReasonAssetNotSetUpForRoundUps                          BasketOrderOrderRejectedReason = "ASSET_NOT_SET_UP_FOR_ROUND_UPS"
 )
 
 func (e BasketOrderOrderRejectedReason) ToPointer() *BasketOrderOrderRejectedReason {
@@ -207,7 +223,7 @@ type BasketOrder struct {
 	BasketOrderID *string `json:"basket_order_id,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// Time the order request was received by the client. Must be in the past, and must be less than 24 hours old.
+	// Time the order request was received by the client. Must be in the past.
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Time of the order creation
 	CreateTime *time.Time `json:"create_time,omitempty"`
@@ -225,6 +241,10 @@ type BasketOrder struct {
 	IdentifierType *BasketOrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
+	// The maximum number of shares to be sold if this is a notional SELL order of an Equity asset type. (Prohibited for other side or asset_type inputs.)
+	//
+	//  This will only be recognized for clients configured to bypass the short sale risk check. When specified, must be greater than 0 and can't exceed 5 decimal places.
+	MaxSellQuantity *BasketOrderMaxSellQuantity `json:"max_sell_quantity,omitempty"`
 	// System generated name of the basket order.
 	Name *string `json:"name,omitempty"`
 	// Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. Either a quantity or notional_value MUST be specified (but not both). For Equities: currently not supported yet For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified.
@@ -359,6 +379,13 @@ func (o *BasketOrder) GetLastUpdateTime() *time.Time {
 		return nil
 	}
 	return o.LastUpdateTime
+}
+
+func (o *BasketOrder) GetMaxSellQuantity() *BasketOrderMaxSellQuantity {
+	if o == nil {
+		return nil
+	}
+	return o.MaxSellQuantity
 }
 
 func (o *BasketOrder) GetName() *string {

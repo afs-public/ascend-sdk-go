@@ -21,7 +21,7 @@ func (o *TradeAllocationAccruedInterestAmount) GetValue() *string {
 	return o.Value
 }
 
-// TradeAllocationAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// TradeAllocationAssetType - Type of the asset being traded.
 type TradeAllocationAssetType string
 
 const (
@@ -330,7 +330,7 @@ type TradeAllocation struct {
 	AccruedInterestAmount *TradeAllocationAccruedInterestAmount `json:"accrued_interest_amount,omitempty"`
 	// Free form instructions that can be used to provide additional instructions (that are not captured by existing special instructions) and will be put on the trade confirm.
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *TradeAllocationAssetType `json:"asset_type,omitempty"`
 	// The yield associated with an individual fill of a fixed income trade. Required for FIXED_INCOME trades. Not allowed for trades of other instrument types.
 	BondYield []BondYield `json:"bond_yield,omitempty"`

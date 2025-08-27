@@ -2,7 +2,7 @@
 
 package components
 
-// BookingTradeAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// BookingTradeAssetType - Type of the asset being traded.
 type BookingTradeAssetType string
 
 const (
@@ -267,7 +267,7 @@ type BookingTrade struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *BookingTradeAssetType `json:"asset_type,omitempty"`
 	// Broker capacity for the trade.
 	BrokerCapacity *BookingTradeBrokerCapacity `json:"broker_capacity,omitempty"`

@@ -59,6 +59,7 @@ const (
 	ActivityAccountTransferTypeFailReversal                   ActivityAccountTransferType = "FAIL_REVERSAL"
 	ActivityAccountTransferTypeReclaim                        ActivityAccountTransferType = "RECLAIM"
 	ActivityAccountTransferTypePositionTransferFund           ActivityAccountTransferType = "POSITION_TRANSFER_FUND"
+	ActivityAccountTransferTypeSponsoredTransfer              ActivityAccountTransferType = "SPONSORED_TRANSFER"
 )
 
 func (e ActivityAccountTransferType) ToPointer() *ActivityAccountTransferType {
@@ -77,6 +78,50 @@ const (
 
 func (e ActivityAction) ToPointer() *ActivityAction {
 	return &e
+}
+
+// ActivityFairMarketValue - Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+type ActivityFairMarketValue struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityFairMarketValue) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityFairMarketValueDate - Date from which the asset was valued and used in the fair market value calculation
+type ActivityFairMarketValueDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *ActivityFairMarketValueDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *ActivityFairMarketValueDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *ActivityFairMarketValueDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
 }
 
 // ActivityMethod - The method used for the account transfer
@@ -109,6 +154,10 @@ type ActivityAccountTransfer struct {
 	ContraPartyAccountNumber *string `json:"contra_party_account_number,omitempty"`
 	// Contra party identifier
 	ContraPartyID *string `json:"contra_party_id,omitempty"`
+	// Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+	FairMarketValue *ActivityFairMarketValue `json:"fair_market_value,omitempty"`
+	// Date from which the asset was valued and used in the fair market value calculation
+	FairMarketValueDate *ActivityFairMarketValueDate `json:"fair_market_value_date,omitempty"`
 	// Contra party institution for the account transfer
 	Institution *string `json:"institution,omitempty"`
 	// The method used for the account transfer
@@ -162,6 +211,20 @@ func (o *ActivityAccountTransfer) GetContraPartyID() *string {
 		return nil
 	}
 	return o.ContraPartyID
+}
+
+func (o *ActivityAccountTransfer) GetFairMarketValue() *ActivityFairMarketValue {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValue
+}
+
+func (o *ActivityAccountTransfer) GetFairMarketValueDate() *ActivityFairMarketValueDate {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValueDate
 }
 
 func (o *ActivityAccountTransfer) GetInstitution() *string {
@@ -1027,6 +1090,8 @@ const (
 	ActivitySubtypeMaturity                           ActivitySubtype = "MATURITY"
 	ActivitySubtypeTermination                        ActivitySubtype = "TERMINATION"
 	ActivitySubtypeRedemptionOfWarrants               ActivitySubtype = "REDEMPTION_OF_WARRANTS"
+	ActivitySubtypeInterimPayment                     ActivitySubtype = "INTERIM_PAYMENT"
+	ActivitySubtypeFinalPayment                       ActivitySubtype = "FINAL_PAYMENT"
 )
 
 func (e ActivitySubtype) ToPointer() *ActivitySubtype {
@@ -2337,6 +2402,8 @@ const (
 	ActivityLiquidationSubtypeMaturity                           ActivityLiquidationSubtype = "MATURITY"
 	ActivityLiquidationSubtypeTermination                        ActivityLiquidationSubtype = "TERMINATION"
 	ActivityLiquidationSubtypeRedemptionOfWarrants               ActivityLiquidationSubtype = "REDEMPTION_OF_WARRANTS"
+	ActivityLiquidationSubtypeInterimPayment                     ActivityLiquidationSubtype = "INTERIM_PAYMENT"
+	ActivityLiquidationSubtypeFinalPayment                       ActivityLiquidationSubtype = "FINAL_PAYMENT"
 )
 
 func (e ActivityLiquidationSubtype) ToPointer() *ActivityLiquidationSubtype {
@@ -3504,6 +3571,8 @@ const (
 	ActivityRedemptionFullSubtypeMaturity                           ActivityRedemptionFullSubtype = "MATURITY"
 	ActivityRedemptionFullSubtypeTermination                        ActivityRedemptionFullSubtype = "TERMINATION"
 	ActivityRedemptionFullSubtypeRedemptionOfWarrants               ActivityRedemptionFullSubtype = "REDEMPTION_OF_WARRANTS"
+	ActivityRedemptionFullSubtypeInterimPayment                     ActivityRedemptionFullSubtype = "INTERIM_PAYMENT"
+	ActivityRedemptionFullSubtypeFinalPayment                       ActivityRedemptionFullSubtype = "FINAL_PAYMENT"
 )
 
 func (e ActivityRedemptionFullSubtype) ToPointer() *ActivityRedemptionFullSubtype {

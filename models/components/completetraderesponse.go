@@ -2,7 +2,7 @@
 
 package components
 
-// CompleteTradeResponseAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// CompleteTradeResponseAssetType - Type of the asset being traded.
 type CompleteTradeResponseAssetType string
 
 const (
@@ -267,7 +267,7 @@ type Trade struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
+	// Type of the asset being traded.
 	AssetType *CompleteTradeResponseAssetType `json:"asset_type,omitempty"`
 	// Broker capacity for the trade.
 	BrokerCapacity *CompleteTradeResponseBrokerCapacity `json:"broker_capacity,omitempty"`

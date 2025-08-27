@@ -52,6 +52,7 @@ func main() {
 
     res, err := s.TradeBooking.CreateTrade(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", components.TradeCreate{
         AccountID: "02HASWB2DTMRT3DAM45P56J2T2",
+        AssetType: components.TradeCreateAssetTypeEquity,
         BrokerCapacity: components.TradeCreateBrokerCapacityAgency,
         ClientOrderID: "00be5285-0623-4560-8c58-f05af2c56ba0",
         Executions: []components.ExecutionCreate{
@@ -337,6 +338,7 @@ func main() {
         Name: "accounts/02HASWB2DTMRT3DAM45P56J2T2/trades/01J0XX2KDN3M9QKFKRE2HYSCQM",
         Trade: components.TradeCreate{
             AccountID: "02HASWB2DTMRT3DAM45P56J2T2",
+            AssetType: components.TradeCreateAssetTypeEquity,
             BrokerCapacity: components.TradeCreateBrokerCapacityAgency,
             ClientOrderID: "00be5285-0623-4560-8c58-f05af2c56ba0",
             Executions: []components.ExecutionCreate{},

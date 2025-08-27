@@ -82,6 +82,7 @@ const (
 	WithholdingStateWv                          WithholdingState = "WV"
 	WithholdingStateWi                          WithholdingState = "WI"
 	WithholdingStateWy                          WithholdingState = "WY"
+	WithholdingStateDc                          WithholdingState = "DC"
 )
 
 func (e WithholdingState) ToPointer() *WithholdingState {

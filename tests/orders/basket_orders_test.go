@@ -34,7 +34,7 @@ func TestBasketOrders(t *testing.T) {
 	ctx := context.Background()
 
 	correspondentId := os.Getenv("CORRESPONDENT_ID")
-
+	basketOrderToRemove := uuid.NewString()
 	basketOrderId := createBasketOrder(ctx, sdk, t)
 	fmt.Println("basketOrderID", basketOrderId)
 
@@ -60,6 +60,17 @@ func TestBasketOrders(t *testing.T) {
 					Side:           components.BasketOrderCreateSideBuy,
 					TimeInForce:    components.BasketOrderCreateTimeInForceDay,
 				},
+				{
+					AccountID:      "01JHGTEPC6ZTAHCFRH2MD3VJJT",
+					AssetType:      components.BasketOrderCreateAssetTypeEquity,
+					ClientOrderID:  basketOrderToRemove,
+					Identifier:     "SBUX",
+					IdentifierType: components.BasketOrderCreateIdentifierTypeSymbol,
+					OrderType:      components.BasketOrderCreateOrderTypeMarket,
+					Quantity:       &components.DecimalCreate{Value: &onestr},
+					Side:           components.BasketOrderCreateSideBuy,
+					TimeInForce:    components.BasketOrderCreateTimeInForceDay,
+				},
 			},
 			Name: basketOrderName,
 		}
@@ -71,6 +82,17 @@ func TestBasketOrders(t *testing.T) {
 
 	t.Run("Basket Orders Orders Get Basket Get Basket1", func(t *testing.T) {
 		result, err := sdk.BasketOrders.GetBasket(ctx, correspondentId, *basketOrderId)
+		require.NoError(t, err)
+		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
+	})
+
+	t.Run("Basket Orders Orders Remove Orders Remove Orders1", func(t *testing.T) {
+		request := components.RemoveOrdersRequestCreate{
+			ClientOrderIds: []string{basketOrderToRemove},
+			Name:           basketOrderName,
+		}
+
+		result, err := sdk.BasketOrders.RemoveOrders(ctx, correspondentId, *basketOrderId, request)
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})

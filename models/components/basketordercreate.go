@@ -92,7 +92,7 @@ type BasketOrderCreate struct {
 	AssetType BasketOrderCreateAssetType `json:"asset_type"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID string `json:"client_order_id"`
-	// Time the order request was received by the client. Must be in the past, and must be less than 24 hours old.
+	// Time the order request was received by the client. Must be in the past.
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
@@ -100,6 +100,12 @@ type BasketOrderCreate struct {
 	Identifier string `json:"identifier"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported
 	IdentifierType BasketOrderCreateIdentifierType `json:"identifier_type"`
+	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
+	//
+	//  [BigDecimal]:
+	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
+	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
+	MaxSellQuantity *DecimalCreate `json:"max_sell_quantity,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
 	//  [BigDecimal]:
@@ -180,6 +186,13 @@ func (o *BasketOrderCreate) GetIdentifierType() BasketOrderCreateIdentifierType 
 		return BasketOrderCreateIdentifierType("")
 	}
 	return o.IdentifierType
+}
+
+func (o *BasketOrderCreate) GetMaxSellQuantity() *DecimalCreate {
+	if o == nil {
+		return nil
+	}
+	return o.MaxSellQuantity
 }
 
 func (o *BasketOrderCreate) GetNotionalValue() *DecimalCreate {

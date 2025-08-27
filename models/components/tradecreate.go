@@ -2,7 +2,7 @@
 
 package components
 
-// TradeCreateAssetType - Type of the asset being traded. Required for SYMBOL and CUSIP.
+// TradeCreateAssetType - Type of the asset being traded.
 type TradeCreateAssetType string
 
 const (
@@ -203,8 +203,8 @@ type TradeCreate struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// Fractional support for market-makers' internal order ids.
 	AlternateOrderID *string `json:"alternate_order_id,omitempty"`
-	// Type of the asset being traded. Required for SYMBOL and CUSIP.
-	AssetType *TradeCreateAssetType `json:"asset_type,omitempty"`
+	// Type of the asset being traded.
+	AssetType TradeCreateAssetType `json:"asset_type"`
 	// Broker capacity for the trade.
 	BrokerCapacity TradeCreateBrokerCapacity `json:"broker_capacity"`
 	// The unique identifier that is associated with an order. Must be unique by date per trade per client.
@@ -278,9 +278,9 @@ func (o *TradeCreate) GetAlternateOrderID() *string {
 	return o.AlternateOrderID
 }
 
-func (o *TradeCreate) GetAssetType() *TradeCreateAssetType {
+func (o *TradeCreate) GetAssetType() TradeCreateAssetType {
 	if o == nil {
-		return nil
+		return TradeCreateAssetType("")
 	}
 	return o.AssetType
 }

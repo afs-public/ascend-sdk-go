@@ -11,6 +11,7 @@
 * [SubmitBasket](#submitbasket) - Submit Basket
 * [ListBasketOrders](#listbasketorders) - List Basket Orders
 * [ListCompressedOrders](#listcompressedorders) - List Compressed Orders
+* [RemoveOrders](#removeorders) - Remove Basket Orders
 
 ## CreateBasket
 
@@ -411,6 +412,78 @@ func main() {
 ### Response
 
 **[*operations.BasketOrdersServiceListCompressedOrdersResponse](../../models/operations/basketordersservicelistcompressedordersresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## RemoveOrders
+
+Removes a list of basket orders by client order ID.
+
+ Upon successful submission, returns the details of the removed basket orders.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_RemoveOrders" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:removeOrders" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.BasketOrders.RemoveOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", components.RemoveOrdersRequestCreate{
+        ClientOrderIds: []string{
+            "77e4c4b9-38e7-469f-9a8d-cd8baf7c1952",
+            "4cff908e-aaed-401d-8ec9-929e3eb18cbc",
+        },
+        Name: "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.RemoveOrdersResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  | Example                                                                                      |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |                                                                                              |
+| `correspondentID`                                                                            | *string*                                                                                     | :heavy_check_mark:                                                                           | The correspondent id.                                                                        | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                   |
+| `basketID`                                                                                   | *string*                                                                                     | :heavy_check_mark:                                                                           | The basket id.                                                                               | fffd326-72fa-4d2b-bd1f-45384fe5d521                                                          |
+| `removeOrdersRequestCreate`                                                                  | [components.RemoveOrdersRequestCreate](../../models/components/removeordersrequestcreate.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |                                                                                              |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |                                                                                              |
+
+### Response
+
+**[*operations.BasketOrdersServiceRemoveOrdersResponse](../../models/operations/basketordersserviceremoveordersresponse.md), error**
 
 ### Errors
 
