@@ -44,6 +44,8 @@ type AuthenticationListSigningKeysResponse struct {
 	ListSigningKeysResponse *components.ListSigningKeysResponse
 	// INTERNAL: An internal server error occurred.
 	Status *components.Status
+
+	Next func() (*AuthenticationListSigningKeysResponse, error)
 }
 
 func (o *AuthenticationListSigningKeysResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -77,7 +77,7 @@ func (t TransfersCreditState) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransfersCreditState) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -136,6 +136,8 @@ func (e TransfersCreditType) ToPointer() *TransfersCreditType {
 type TransfersCredit struct {
 	// The amount of the credit being issued to the investor
 	Amount *TransfersCreditAmount `json:"amount,omitempty"`
+	// Bulk upload identifier to group related credit transfers
+	BulkUploadID *string `json:"bulk_upload_id,omitempty"`
 	// External identifier supplied by the API caller. Each request must have a unique pairing of client_transfer_id and account
 	ClientTransferID *string `json:"client_transfer_id,omitempty"`
 	// Optional description information that will attach to this transaction
@@ -155,6 +157,13 @@ func (o *TransfersCredit) GetAmount() *TransfersCreditAmount {
 		return nil
 	}
 	return o.Amount
+}
+
+func (o *TransfersCredit) GetBulkUploadID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BulkUploadID
 }
 
 func (o *TransfersCredit) GetClientTransferID() *string {

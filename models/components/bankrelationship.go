@@ -95,7 +95,7 @@ func (b BankRelationshipState) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BankRelationshipState) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -173,7 +173,7 @@ func (b BankRelationship) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BankRelationship) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
 		return err
 	}
 	return nil

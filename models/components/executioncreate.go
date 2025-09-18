@@ -65,7 +65,7 @@ func (e ExecutionCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (e *ExecutionCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"execution_time", "external_id", "price", "quantity"}); err != nil {
 		return err
 	}
 	return nil

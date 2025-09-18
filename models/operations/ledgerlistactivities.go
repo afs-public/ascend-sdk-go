@@ -51,6 +51,8 @@ type LedgerListActivitiesResponse struct {
 	ListActivitiesResponse *components.ListActivitiesResponse
 	// INVALID_ARGUMENT: The request is not valid, additional information may be present in the BadRequest details.
 	Status *components.Status
+
+	Next func() (*LedgerListActivitiesResponse, error)
 }
 
 func (o *LedgerListActivitiesResponse) GetHTTPMeta() components.HTTPMetadata {

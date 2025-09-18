@@ -152,6 +152,8 @@ func (e CouponType) ToPointer() *CouponType {
 }
 
 // Duration - Weighted average time until a bond’s cash flows are received in years
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type Duration struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -534,6 +536,8 @@ type FixedIncome struct {
 	// Type of coupon rate
 	CouponType *CouponType `json:"coupon_type,omitempty"`
 	// Weighted average time until a bond’s cash flows are received in years
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Duration *Duration `json:"duration,omitempty"`
 	// date of first coupon
 	FirstCouponDate *FirstCouponDate `json:"first_coupon_date,omitempty"`

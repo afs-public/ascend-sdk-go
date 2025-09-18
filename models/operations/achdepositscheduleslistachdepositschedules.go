@@ -54,6 +54,8 @@ type AchDepositSchedulesListAchDepositSchedulesResponse struct {
 	ListAchDepositSchedulesResponse *components.ListAchDepositSchedulesResponse
 	// INVALID_ARGUMENT: The request has an invalid argument.
 	Status *components.Status
+
+	Next func() (*AchDepositSchedulesListAchDepositSchedulesResponse, error)
 }
 
 func (o *AchDepositSchedulesListAchDepositSchedulesResponse) GetHTTPMeta() components.HTTPMetadata {

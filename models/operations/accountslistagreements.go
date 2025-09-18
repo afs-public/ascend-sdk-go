@@ -44,6 +44,8 @@ type AccountsListAgreementsResponse struct {
 	ListAgreementsResponse *components.ListAgreementsResponse
 	// INVALID_ARGUMENT: The request is not valid, additional information may be present in the BadRequest details.
 	Status *components.Status
+
+	Next func() (*AccountsListAgreementsResponse, error)
 }
 
 func (o *AccountsListAgreementsResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -7,6 +7,8 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strconv"
+	"strings"
 
 	"github.com/afs-public/ascend-sdk-go/internal/config"
 	"github.com/afs-public/ascend-sdk-go/internal/hooks"
@@ -15,6 +17,7 @@ import (
 	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/afs-public/ascend-sdk-go/retry"
+	"github.com/spyzhov/ajson"
 )
 
 type Ledger struct {
@@ -200,6 +203,52 @@ func (s *Ledger) ListEntries(ctx context.Context, accountID string, pageSize *in
 			Request:  req,
 			Response: httpRes,
 		},
+	}
+	res.Next = func() (*operations.LedgerListEntriesResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_page_token")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+
+		return s.ListEntries(
+			ctx,
+			accountID,
+			pageSize,
+			&nCVal,
+			filter,
+			opts...,
+		)
 	}
 
 	switch {
@@ -481,6 +530,52 @@ func (s *Ledger) ListActivities(ctx context.Context, accountID string, pageSize 
 			Response: httpRes,
 		},
 	}
+	res.Next = func() (*operations.LedgerListActivitiesResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_page_token")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+
+		return s.ListActivities(
+			ctx,
+			accountID,
+			pageSize,
+			&nCVal,
+			filter,
+			opts...,
+		)
+	}
 
 	switch {
 	case httpRes.StatusCode == 200:
@@ -760,6 +855,52 @@ func (s *Ledger) ListPositions(ctx context.Context, accountID string, pageSize *
 			Request:  req,
 			Response: httpRes,
 		},
+	}
+	res.Next = func() (*operations.LedgerListPositionsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_page_token")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+
+		return s.ListPositions(
+			ctx,
+			accountID,
+			pageSize,
+			&nCVal,
+			filter,
+			opts...,
+		)
 	}
 
 	switch {

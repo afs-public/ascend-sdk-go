@@ -1,17 +1,17 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: d1bde040cb67d385e81d1c372294d048
-  docVersion: v1:20250822:uat:240983991338
-  speakeasyVersion: 1.601.3
-  generationVersion: 2.680.0
-  releaseVersion: 1.1.1
-  configChecksum: b6a8ddf664f047a8c2de05c629d75188
+  docChecksum: 717145375c4d2f7707da160500525042
+  docVersion: v1:20250916:uat:415b21f7a6e1
+  speakeasyVersion: 1.608.0
+  generationVersion: 2.691.6
+  releaseVersion: 1.2.0
+  configChecksum: d08b5d0c64d815be2a6989fa4205c80a
 features:
   go:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
-    core: 3.9.3
+    core: 3.9.6
     customSecuritySchemes: 0.1.0
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
@@ -26,6 +26,7 @@ features:
     nameOverrides: 2.81.2
     nullables: 0.1.1
     openEnums: 0.1.0
+    pagination: 2.82.4
     responseFormat: 0.1.2
     retries: 2.84.2
     sdkHooks: 0.2.0

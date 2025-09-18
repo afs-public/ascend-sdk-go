@@ -106,7 +106,7 @@ func (w WatchlistMatch) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WatchlistMatch) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil

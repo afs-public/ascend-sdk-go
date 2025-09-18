@@ -60,6 +60,8 @@ type BasketOrdersServiceListBasketOrdersResponse struct {
 	ListBasketOrdersResponse *components.ListBasketOrdersResponse
 	// INVALID_ARGUMENT: The correspondent_id or the basket_id could not be determined for the request.
 	Status *components.Status
+
+	Next func() (*BasketOrdersServiceListBasketOrdersResponse, error)
 }
 
 func (o *BasketOrdersServiceListBasketOrdersResponse) GetHTTPMeta() components.HTTPMetadata {

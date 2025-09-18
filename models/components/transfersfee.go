@@ -77,7 +77,7 @@ func (t TransfersFeeState) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransfersFeeState) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -138,6 +138,8 @@ func (e TransfersFeeType) ToPointer() *TransfersFeeType {
 type TransfersFee struct {
 	// The amount of the fee being charged from the investor's account
 	Amount *TransfersFeeAmount `json:"amount,omitempty"`
+	// Bulk upload identifier to group related fee transfers
+	BulkUploadID *string `json:"bulk_upload_id,omitempty"`
 	// External identifier supplied by the API caller. Each request must have a unique pairing of client_transfer_id and account
 	ClientTransferID *string `json:"client_transfer_id,omitempty"`
 	// Optional description information that will attach to this transaction
@@ -157,6 +159,13 @@ func (o *TransfersFee) GetAmount() *TransfersFeeAmount {
 		return nil
 	}
 	return o.Amount
+}
+
+func (o *TransfersFee) GetBulkUploadID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BulkUploadID
 }
 
 func (o *TransfersFee) GetClientTransferID() *string {

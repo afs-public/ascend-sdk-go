@@ -39,7 +39,7 @@ func CreateBooking(sdk *ascendsdk.SDK, ctx context.Context, accountId string) ([
 		RouteType:         components.RouteTypeQuik,
 		Side:              components.TradeCreateSideBuy,
 		SourceApplication: "Trading-App",
-		AssetType:         &assetType,
+		AssetType:         assetType,
 		Open:              ascendsdk.Bool(true),
 	}
 
@@ -83,7 +83,7 @@ func CreateTradeAllocation(sdk *ascendsdk.SDK, ctx context.Context, accountId st
 		FromAccountID:     deceasedAccountID,
 		Identifier:        "SBUX",
 		IdentifierType:    components.TradeAllocationCreateIdentifierTypeSymbol,
-		AssetType:         &assetType,
+		AssetType:         assetType,
 		Price:             components.DecimalCreate{Value: ascendsdk.String("5")},
 		Quantity:          components.DecimalCreate{Value: ascendsdk.String("1")},
 		SourceApplication: "Trading-App",

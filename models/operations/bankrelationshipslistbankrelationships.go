@@ -90,6 +90,8 @@ type BankRelationshipsListBankRelationshipsResponse struct {
 	ListBankRelationshipsResponse *components.ListBankRelationshipsResponse
 	// INVALID_ARGUMENT: The request has an invalid argument.
 	Status *components.Status
+
+	Next func() (*BankRelationshipsListBankRelationshipsResponse, error)
 }
 
 func (o *BankRelationshipsListBankRelationshipsResponse) GetHTTPMeta() components.HTTPMetadata {

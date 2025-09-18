@@ -42,6 +42,8 @@ type InvestorCommunicationServiceListDocumentsResponse struct {
 	ListDocumentsResponse *components.ListDocumentsResponse
 	// INVALID_ARGUMENT: The request was not well formed.
 	Status *components.Status
+
+	Next func() (*InvestorCommunicationServiceListDocumentsResponse, error)
 }
 
 func (o *InvestorCommunicationServiceListDocumentsResponse) GetHTTPMeta() components.HTTPMetadata {

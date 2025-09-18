@@ -197,7 +197,7 @@ func (o OrderCostPreviewResponse) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrderCostPreviewResponse) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, nil); err != nil {
 		return err
 	}
 	return nil

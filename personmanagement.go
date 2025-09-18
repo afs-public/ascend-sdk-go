@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"strconv"
+	"strings"
 
 	"github.com/afs-public/ascend-sdk-go/internal/config"
 	"github.com/afs-public/ascend-sdk-go/internal/hooks"
@@ -16,6 +18,7 @@ import (
 	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/afs-public/ascend-sdk-go/retry"
+	"github.com/spyzhov/ajson"
 )
 
 type PersonManagement struct {
@@ -475,6 +478,52 @@ func (s *PersonManagement) ListLegalNaturalPersons(ctx context.Context, pageSize
 			Request:  req,
 			Response: httpRes,
 		},
+	}
+	res.Next = func() (*operations.AccountsListLegalNaturalPersonsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_page_token")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+
+		return s.ListLegalNaturalPersons(
+			ctx,
+			pageSize,
+			&nCVal,
+			orderBy,
+			filter,
+			opts...,
+		)
 	}
 
 	switch {
@@ -2128,6 +2177,52 @@ func (s *PersonManagement) ListLegalEntities(ctx context.Context, pageSize *int,
 			Request:  req,
 			Response: httpRes,
 		},
+	}
+	res.Next = func() (*operations.AccountsListLegalEntitiesResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_page_token")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+
+		return s.ListLegalEntities(
+			ctx,
+			pageSize,
+			&nCVal,
+			orderBy,
+			filter,
+			opts...,
+		)
 	}
 
 	switch {

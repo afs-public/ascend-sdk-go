@@ -48,6 +48,8 @@ type TransferScheduleSummariesListScheduleSummariesResponse struct {
 	ListScheduleSummariesResponse *components.ListScheduleSummariesResponse
 	// INVALID_ARGUMENT: The request has an invalid argument.
 	Status *components.Status
+
+	Next func() (*TransferScheduleSummariesListScheduleSummariesResponse, error)
 }
 
 func (o *TransferScheduleSummariesListScheduleSummariesResponse) GetHTTPMeta() components.HTTPMetadata {

@@ -48,7 +48,19 @@ func main() {
         log.Fatal(err)
     }
     if res.ListEntriesResponse != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
@@ -113,7 +125,19 @@ func main() {
         log.Fatal(err)
     }
     if res.ListActivitiesResponse != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
@@ -178,7 +202,19 @@ func main() {
         log.Fatal(err)
     }
     if res.ListPositionsResponse != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```

@@ -60,6 +60,8 @@ type AccountsListLegalNaturalPersonsResponse struct {
 	ListLegalNaturalPersonsResponse *components.ListLegalNaturalPersonsResponse
 	// INVALID_ARGUMENT: The request is not valid, additional information may be present in the BadRequest details.
 	Status *components.Status
+
+	Next func() (*AccountsListLegalNaturalPersonsResponse, error)
 }
 
 func (o *AccountsListLegalNaturalPersonsResponse) GetHTTPMeta() components.HTTPMetadata {

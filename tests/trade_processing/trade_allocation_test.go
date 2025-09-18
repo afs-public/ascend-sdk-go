@@ -55,7 +55,7 @@ func Test_Trade_Allocation(t *testing.T) {
 				FromAccountID:     fixture.deceasedAccountId,
 				Identifier:        "SBUX",
 				IdentifierType:    components.TradeAllocationCreateIdentifierTypeSymbol,
-				AssetType:         &assetType,
+				AssetType:         assetType,
 				Price:             components.DecimalCreate{Value: ascendsdk.String("5")},
 				Quantity:          components.DecimalCreate{Value: ascendsdk.String("1")},
 				SourceApplication: "Trading-App",
