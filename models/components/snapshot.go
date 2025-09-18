@@ -21,7 +21,7 @@ func (f File) MarshalJSON() ([]byte, error) {
 }
 
 func (f *File) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &f, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -95,7 +95,7 @@ func (s Snapshot) MarshalJSON() ([]byte, error) {
 }
 
 func (s *Snapshot) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil

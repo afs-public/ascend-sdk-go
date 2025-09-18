@@ -239,7 +239,7 @@ func (t TradeAllocationCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TradeAllocationCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"asset_type", "broker_capacity", "execution_time", "from_account_id", "identifier", "identifier_type", "price", "quantity", "source_application", "to_account_id", "to_side"}); err != nil {
 		return err
 	}
 	return nil

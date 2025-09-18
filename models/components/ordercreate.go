@@ -207,7 +207,7 @@ func (o OrderCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrderCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"asset_type", "client_order_id", "identifier", "identifier_type", "order_date", "order_type", "side", "time_in_force"}); err != nil {
 		return err
 	}
 	return nil

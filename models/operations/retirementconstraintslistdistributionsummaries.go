@@ -42,6 +42,8 @@ type RetirementConstraintsListDistributionSummariesResponse struct {
 	ListDistributionSummariesResponse *components.ListDistributionSummariesResponse
 	// INVALID_ARGUMENT: The request has an invalid argument.
 	Status *components.Status
+
+	Next func() (*RetirementConstraintsListDistributionSummariesResponse, error)
 }
 
 func (o *RetirementConstraintsListDistributionSummariesResponse) GetHTTPMeta() components.HTTPMetadata {

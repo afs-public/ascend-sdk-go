@@ -260,7 +260,7 @@ func (r RejectTransferResponseTransfer) MarshalJSON() ([]byte, error) {
 }
 
 func (r *RejectTransferResponseTransfer) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil

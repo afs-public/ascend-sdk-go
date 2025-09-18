@@ -72,6 +72,8 @@ type AccountTransfersListTransfersResponse struct {
 	ListTransfersResponse *components.ListTransfersResponse
 	// INVALID_ARGUMENT: The request has an invalid argument.
 	Status *components.Status
+
+	Next func() (*AccountTransfersListTransfersResponse, error)
 }
 
 func (o *AccountTransfersListTransfersResponse) GetHTTPMeta() components.HTTPMetadata {

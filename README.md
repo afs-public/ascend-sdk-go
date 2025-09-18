@@ -59,6 +59,55 @@ func main() {
 <!-- No SDK Example Usage [usage] -->
 
 
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```go
+package main
+
+import (
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := ascendsdkgo.New()
+
+	res, err := s.Authentication.ListSigningKeys(ctx, operations.AuthenticationListSigningKeysSecurity{
+		APIKeyAuth: "<YOUR_API_KEY_HERE>",
+	}, ascendsdkgo.Int(50), ascendsdkgo.String("ZXhhbXBsZQo"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.ListSigningKeysResponse != nil {
+		for {
+			// handle items
+
+			res, err = res.Next()
+
+			if err != nil {
+				// handle error
+			}
+
+			if res == nil {
+				break
+			}
+		}
+	}
+}
+
+```
+<!-- End Pagination [pagination] -->
+
 <!-- Start Retries [retries] -->
 ## Retries
 

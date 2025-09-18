@@ -133,7 +133,7 @@ func (b BasketOrderCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (b *BasketOrderCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"account_id", "asset_type", "client_order_id", "identifier", "identifier_type", "order_type", "side", "time_in_force"}); err != nil {
 		return err
 	}
 	return nil

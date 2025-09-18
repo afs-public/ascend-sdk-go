@@ -2,7 +2,7 @@
 
 package ascendsdkgo
 
-// Generated from OpenAPI doc version v1:20250822:uat:240983991338 and generator version 2.680.0
+// Generated from OpenAPI doc version v1:20250916:uat:415b21f7a6e1 and generator version 2.691.6
 
 import (
 	"context"
@@ -174,9 +174,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "1.1.1",
+		SDKVersion: "1.2.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.1.1 2.680.0 v1:20250822:uat:240983991338 github.com/afs-public/ascend-sdk-go",
+			UserAgent:  "speakeasy-sdk/go 1.2.0 2.691.6 v1:20250916:uat:415b21f7a6e1 github.com/afs-public/ascend-sdk-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),

@@ -54,6 +54,8 @@ type AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse struct {
 	ListAchWithdrawalSchedulesResponse *components.ListAchWithdrawalSchedulesResponse
 	// INVALID_ARGUMENT: The request has an invalid argument.
 	Status *components.Status
+
+	Next func() (*AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse, error)
 }
 
 func (o *AchWithdrawalSchedulesListAchWithdrawalSchedulesResponse) GetHTTPMeta() components.HTTPMetadata {

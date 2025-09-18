@@ -137,7 +137,7 @@ func (i IctDepositState) MarshalJSON() ([]byte, error) {
 }
 
 func (i *IctDepositState) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -236,7 +236,7 @@ func (t TransferState) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransferState) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil

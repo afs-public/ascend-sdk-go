@@ -50,6 +50,8 @@ type ReaderListEventMessagesResponse struct {
 	ListEventMessagesResponse *components.ListEventMessagesResponse
 	// INVALID_ARGUMENT: The request was not well formed.
 	Status *components.Status
+
+	Next func() (*ReaderListEventMessagesResponse, error)
 }
 
 func (o *ReaderListEventMessagesResponse) GetHTTPMeta() components.HTTPMetadata {

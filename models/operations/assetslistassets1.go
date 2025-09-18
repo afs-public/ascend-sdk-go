@@ -51,6 +51,8 @@ type AssetsListAssets1Response struct {
 	ListAssetsResponse *components.ListAssetsResponse
 	// INVALID_ARGUMENT: The request is not valid, additional information may be present in the BadRequest details.
 	Status *components.Status
+
+	Next func() (*AssetsListAssets1Response, error)
 }
 
 func (o *AssetsListAssets1Response) GetHTTPMeta() components.HTTPMetadata {

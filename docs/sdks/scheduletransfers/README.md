@@ -59,7 +59,19 @@ func main() {
         log.Fatal(err)
     }
     if res.ListScheduleSummariesResponse != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
@@ -195,7 +207,19 @@ func main() {
         log.Fatal(err)
     }
     if res.ListAchDepositSchedulesResponse != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
@@ -522,7 +546,19 @@ func main() {
         log.Fatal(err)
     }
     if res.ListAchWithdrawalSchedulesResponse != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```

@@ -62,6 +62,8 @@ type InvestigationServiceListInvestigationsResponse struct {
 	ListInvestigationsResponse *components.ListInvestigationsResponse
 	// INVALID_ARGUMENT: The request is not valid, additional information may be present in the BadRequest details.
 	Status *components.Status
+
+	Next func() (*InvestigationServiceListInvestigationsResponse, error)
 }
 
 func (o *InvestigationServiceListInvestigationsResponse) GetHTTPMeta() components.HTTPMetadata {

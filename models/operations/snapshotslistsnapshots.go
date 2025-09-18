@@ -42,6 +42,8 @@ type SnapshotsListSnapshotsResponse struct {
 	ListSnapshotsResponse *components.ListSnapshotsResponse
 	// INVALID_ARGUMENT: The request is invalid.
 	Status *components.Status
+
+	Next func() (*SnapshotsListSnapshotsResponse, error)
 }
 
 func (o *SnapshotsListSnapshotsResponse) GetHTTPMeta() components.HTTPMetadata {

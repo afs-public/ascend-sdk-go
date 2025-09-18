@@ -59,6 +59,8 @@ type SubscriberListPushSubscriptionDeliveriesResponse struct {
 	ListPushSubscriptionDeliveriesResponse *components.ListPushSubscriptionDeliveriesResponse
 	// INVALID_ARGUMENT: The request was not well formed.
 	Status *components.Status
+
+	Next func() (*SubscriberListPushSubscriptionDeliveriesResponse, error)
 }
 
 func (o *SubscriberListPushSubscriptionDeliveriesResponse) GetHTTPMeta() components.HTTPMetadata {

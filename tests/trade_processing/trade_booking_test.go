@@ -124,7 +124,7 @@ func Test_Trade_Booking(t *testing.T) {
 				RouteType:         components.RouteTypeQuik,
 				Side:              components.TradeCreateSideBuy,
 				SourceApplication: "Trading-App",
-				AssetType:         &assetType,
+				AssetType:         assetType,
 			},
 		}
 		result, err := sdk.TradeBooking.RebookTrade(ctx, fixture.enrolledWithdrawalAccountId, bookingIds[0], request)

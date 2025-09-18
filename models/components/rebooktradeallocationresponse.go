@@ -397,7 +397,7 @@ func (n NewTradeAllocation) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NewTradeAllocation) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -1016,7 +1016,7 @@ func (o OriginalTradeAllocation) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OriginalTradeAllocation) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, nil); err != nil {
 		return err
 	}
 	return nil

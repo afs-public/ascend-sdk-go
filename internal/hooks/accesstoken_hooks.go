@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"net/url"
 	"strings"
@@ -130,7 +131,8 @@ func generateJwt(serverUrl string, apiKey string, jws string) (string, error) {
 		expiresIn := result["expires_in"].(float64)
 
 		accessToken = token
-		accessTokenExpiration = time.Now().Add(time.Duration(expiresIn) * time.Second)
+		// Add 1 hour safety buffer to refresh tokens before they actually expire
+		accessTokenExpiration = time.Now().Add(time.Duration(math.Max(expiresIn-3600, 60)) * time.Second)
 		return accessToken, nil
 	}
 
