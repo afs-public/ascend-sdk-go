@@ -25,7 +25,6 @@ func (f *FixtureCashBalances) AccountId() *string {
 	}
 
 	f.accountId, _ = helpers.CreateAccountId(f.sdk, f.ctx)
-	helpers.Wait()
 	return f.accountId
 }
 

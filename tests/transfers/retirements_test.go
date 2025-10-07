@@ -3,7 +3,6 @@ package transfers
 import (
 	"context"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
@@ -19,8 +18,6 @@ func TestRetirements(t *testing.T) {
 
 	accountId, err := helpers.CreateAccountId(sdk, ctx)
 	require.NoError(t, err)
-
-	time.Sleep(5 * time.Second)
 
 	t.Run("Retirements Transfers List Contribution Summaries List Contribution Summaries1", func(t *testing.T) {
 		pageSize := 10

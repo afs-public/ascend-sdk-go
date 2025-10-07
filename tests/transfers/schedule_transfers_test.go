@@ -51,7 +51,6 @@ func (f *Fixture) ScheduleId(t *testing.T) *string {
 	require.NoError(f.t, err)
 
 	f.scheduleId = &scheduleId
-	time.Sleep(5 * time.Second)
 	return &scheduleId
 }
 
@@ -65,7 +64,6 @@ func (f *Fixture) WithdrawalScheduleId(t *testing.T) *string {
 	require.NoError(f.t, err)
 
 	f.withdrawalScheduleId = &withdrawalScheduleId
-	time.Sleep(5 * time.Second)
 	return &withdrawalScheduleId
 }
 
@@ -88,15 +86,12 @@ func (f *Fixture) BankRelationshipId() *string {
 func (f *Fixture) createAndEnrollAccount() *string {
 	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	return accountId
 }
@@ -107,7 +102,6 @@ func (f *Fixture) setupBankRelationship(accountID string) *string {
 
 	correctMicroDeposits, err := helpers.GetCorrectMicroDeposits(f.sdk, f.ctx, accountID, *bankRelationshipId)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	err = helpers.VerifyMicroDeposits(f.sdk, f.ctx, accountID, *bankRelationshipId, correctMicroDeposits)
 	require.NoError(f.t, err)
@@ -133,7 +127,6 @@ func CreateDepositSchedule(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context
 			},
 		},
 	}
-	time.Sleep(3 * time.Second)
 	res, err := sdk.ScheduleTransfers.CreateAchDepositSchedule(ctx, accountId, scheduleCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -163,7 +156,6 @@ func CreateWithdrawalSchedule(t *testing.T, sdk *ascendsdk.SDK, ctx context.Cont
 			},
 		},
 	}
-	time.Sleep(3 * time.Second)
 	res, err := sdk.ScheduleTransfers.CreateAchWithdrawalSchedule(ctx, accountId, scheduleCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -330,7 +322,6 @@ func TestScheduleTransfers(t *testing.T) {
 
 	t.Run("Test Schedule Transfers Transfers Get Wire Withdrawal Schedule Get Wire Withdrawal Schedule1", func(t *testing.T) {
 		fixtures.WireScheduleId(t)
-		time.Sleep(5 * time.Second)
 		result, err := sdk.ScheduleTransfers.GetWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(), *fixtures.WireScheduleId(t))
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)

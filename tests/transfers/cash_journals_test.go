@@ -4,7 +4,6 @@ import (
 	"context"
 	"strings"
 	"testing"
-	"time"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
@@ -48,13 +47,9 @@ func TestCashJournals(t *testing.T) {
 
 	accountId, err := helpers.CreateAccountId(sdk, ctx)
 
-	time.Sleep(5 * time.Second)
-
 	cashJournalId, err := createCashJournal(ctx, *sdk, accountId)
 
 	require.NoError(t, err)
-
-	time.Sleep(5 * time.Second)
 
 	t.Run("Cash Journals Transfers Create Cash Journal Create Cash Journal1", func(t *testing.T) {
 		assert.Greater(t, len(cashJournalId), 0)

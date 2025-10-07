@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: 717145375c4d2f7707da160500525042
-  docVersion: v1:20250916:uat:415b21f7a6e1
+  docChecksum: ada9b980acbe653e0bd359f9184c0329
+  docVersion: v1:20251003:uat:a1308663494e
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.2.0
-  configChecksum: d08b5d0c64d815be2a6989fa4205c80a
+  releaseVersion: 1.2.1
+  configChecksum: fa5cc8d691d14599f0082b1b2a691b52
 features:
   go:
     additionalDependencies: 0.1.0
@@ -68,6 +68,7 @@ generatedFiles:
   - /models/components/any.go
   - /models/components/asset.go
   - /models/components/assetcreate.go
+  - /models/components/assettradingconfig.go
   - /models/components/assignlargetraderrequestcreate.go
   - /models/components/audittrail.go
   - /models/components/availableenrollment.go
@@ -266,6 +267,7 @@ generatedFiles:
   - /models/components/listactivitiesresponse.go
   - /models/components/listagreementsresponse.go
   - /models/components/listassetsresponse.go
+  - /models/components/listassettradingconfigsresponse.go
   - /models/components/listavailableenrollmentsresponse.go
   - /models/components/listavailablerestrictionsresponse.go
   - /models/components/listbankrelationshipsresponse.go
@@ -375,6 +377,7 @@ generatedFiles:
   - /models/components/scheduledretirementcontributioncreate.go
   - /models/components/schedulepropertiescreate.go
   - /models/components/security.go
+  - /models/components/setextrareportingdatarequestcreate.go
   - /models/components/simulatecreatecheckdepositrequestcreate.go
   - /models/components/snapshot.go
   - /models/components/status.go
@@ -494,6 +497,8 @@ generatedFiles:
   - /models/operations/assetsgetassetcorrespondent.go
   - /models/operations/assetslistassets1.go
   - /models/operations/assetslistassetscorrespondent.go
+  - /models/operations/assettradingconfigservicegetassettradingconfig.go
+  - /models/operations/assettradingconfigservicelistassettradingconfigs.go
   - /models/operations/authenticationgenerateserviceaccounttoken.go
   - /models/operations/authenticationlistsigningkeys.go
   - /models/operations/bankrelationshipscancelbankrelationship.go
@@ -570,6 +575,7 @@ generatedFiles:
   - /models/operations/orderservicecancelorder.go
   - /models/operations/orderservicecreateorder.go
   - /models/operations/orderservicegetorder.go
+  - /models/operations/orderservicesetextrareportingdata.go
   - /models/operations/readergeteventmessage.go
   - /models/operations/readerlisteventmessages.go
   - /models/operations/retirementconstraintslistcontributionsummaries.go
@@ -605,6 +611,7 @@ generatedFiles:
   - accounttransfers.go
   - achtransfers.go
   - assets.go
+  - assettradingconfig.go
   - authentication.go
   - bankrelationships.go
   - basketorders.go
@@ -944,6 +951,9 @@ generatedFiles:
   - docs/models/components/assetequitytype.md
   - docs/models/components/assetexpirationdate.md
   - docs/models/components/assetissuedate.md
+  - docs/models/components/assettradability.md
+  - docs/models/components/assettradingconfig.md
+  - docs/models/components/assettradingconfigassettype.md
   - docs/models/components/assettype.md
   - docs/models/components/assettype1.md
   - docs/models/components/assignlargetraderrequestcreate.md
@@ -1864,6 +1874,7 @@ generatedFiles:
   - docs/models/components/listactivitiesresponse.md
   - docs/models/components/listagreementsresponse.md
   - docs/models/components/listassetsresponse.md
+  - docs/models/components/listassettradingconfigsresponse.md
   - docs/models/components/listavailableenrollmentsresponse.md
   - docs/models/components/listavailablerestrictionsresponse.md
   - docs/models/components/listbankrelationshipsresponse.md
@@ -1960,6 +1971,7 @@ generatedFiles:
   - docs/models/components/optiondeliverable.md
   - docs/models/components/optiondeliverablequantity.md
   - docs/models/components/optionroot.md
+  - docs/models/components/optionroottradability.md
   - docs/models/components/optionslevel.md
   - docs/models/components/optiontype.md
   - docs/models/components/order.md
@@ -2317,6 +2329,7 @@ generatedFiles:
   - docs/models/components/selfieverified.md
   - docs/models/components/seriesdate.md
   - docs/models/components/serviceaccountcreds.md
+  - docs/models/components/setextrareportingdatarequestcreate.md
   - docs/models/components/settled.md
   - docs/models/components/settledate.md
   - docs/models/components/settlementconvention.md
@@ -2700,6 +2713,10 @@ generatedFiles:
   - docs/models/operations/assetslistassets1response.md
   - docs/models/operations/assetslistassetscorrespondentrequest.md
   - docs/models/operations/assetslistassetscorrespondentresponse.md
+  - docs/models/operations/assettradingconfigservicegetassettradingconfigrequest.md
+  - docs/models/operations/assettradingconfigservicegetassettradingconfigresponse.md
+  - docs/models/operations/assettradingconfigservicelistassettradingconfigsrequest.md
+  - docs/models/operations/assettradingconfigservicelistassettradingconfigsresponse.md
   - docs/models/operations/authenticationgenerateserviceaccounttokenresponse.md
   - docs/models/operations/authenticationgenerateserviceaccounttokensecurity.md
   - docs/models/operations/authenticationlistsigningkeysrequest.md
@@ -2853,6 +2870,8 @@ generatedFiles:
   - docs/models/operations/orderservicecreateorderresponse.md
   - docs/models/operations/orderservicegetorderrequest.md
   - docs/models/operations/orderservicegetorderresponse.md
+  - docs/models/operations/orderservicesetextrareportingdatarequest.md
+  - docs/models/operations/orderservicesetextrareportingdataresponse.md
   - docs/models/operations/programdatefilterprogram.md
   - docs/models/operations/queryparamview.md
   - docs/models/operations/readergeteventmessagerequest.md
@@ -2917,6 +2936,7 @@ generatedFiles:
   - docs/sdks/accounttransfers/README.md
   - docs/sdks/achtransfers/README.md
   - docs/sdks/assets/README.md
+  - docs/sdks/assettradingconfig/README.md
   - docs/sdks/authentication/README.md
   - docs/sdks/bankrelationships/README.md
   - docs/sdks/basketorders/README.md
@@ -2976,7 +2996,9 @@ generatedFiles:
   - sdk.go
   - subscriber.go
   - tests/assets_test.go
+  - tests/assettradingconfig_test.go
   - tests/checks_test.go
+  - tests/createorder_test.go
   - tests/dataretrieval_test.go
   - tests/files.go
   - tests/investigations_test.go
@@ -5510,6 +5532,53 @@ examples:
           application/json: {}
         default:
           application/json: {}
+  OrderService_SetExtraReportingData:
+    speakeasy-default-order-service-set-extra-reporting-data:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          order_id: "ebb0c9b5-2c74-45c9-a4ab-40596b778706"
+      requestBody:
+        application/json: {"cancel_confirmed_time": "2025-12-13T15:28:17.262732Z", "name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AssetTradingConfigService_GetAssetTradingConfig:
+    speakeasy-default-asset-trading-config-service-get-asset-trading-config:
+      parameters:
+        path:
+          correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          asset_id: "612"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  AssetTradingConfigService_ListAssetTradingConfigs:
+    speakeasy-default-asset-trading-config-service-list-asset-trading-configs:
+      parameters:
+        path:
+          correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+          asset_id: "[null]"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests:
   Accounts_ListLegalNaturalPersons: "2025-08-11T18:04:40Z"
@@ -5525,3 +5594,6 @@ generatedTests:
   Subscriber_ListPushSubscriptions: "2025-08-11T18:04:40Z"
   CheckDeposits_GetCheckDeposit: "2025-08-22T19:33:10Z"
   CheckDeposits_SimulateCreateCheckDeposit: "2025-08-22T19:33:10Z"
+  OrderService_SetExtraReportingData: "2025-10-06T21:33:43Z"
+  AssetTradingConfigService_GetAssetTradingConfig: "2025-10-06T21:33:43Z"
+  AssetTradingConfigService_ListAssetTradingConfigs: "2025-10-06T21:33:43Z"

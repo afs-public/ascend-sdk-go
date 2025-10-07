@@ -4,7 +4,6 @@ import (
 	"context"
 	"os"
 	"testing"
-	"time"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
@@ -17,8 +16,6 @@ func TestAssetsAdditional(t *testing.T) {
 	ctx := context.Background()
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
-
-	time.Sleep(5 * time.Second)
 
 	t.Run("Test Assets Assets List Assets By_correspondent1 Assets List Assets By_correspondent1", func(t *testing.T) {
 		result, err := sdk.Assets.ListAssetsCorrespondent(ctx, os.Getenv("CORRESPONDENT_ID"), ascendsdk.Pointer(10), ascendsdk.Pointer(""), ascendsdk.String(""))

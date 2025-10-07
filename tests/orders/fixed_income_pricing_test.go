@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -33,7 +32,6 @@ func TestFixedIncomePricing(t *testing.T) {
 	}
 	helpers.AffirmAgreements(sdk, ctx, *accountId, agreements)
 
-	time.Sleep(5 * time.Second)
 	testPreviewOrderCost(t, sdk, ctx, *accountId)
 	testRetrieveQuote(t, sdk, ctx, *accountId)
 	testRetrieveFixedIncomeMarks(t, sdk, ctx)

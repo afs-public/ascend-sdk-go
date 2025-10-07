@@ -4,7 +4,6 @@ import (
 	"context"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -34,8 +33,6 @@ func (f *Fixtures) AccountId() *string {
 
 	f.accountId = accountId
 
-	time.Sleep(5 * time.Second)
-
 	return accountId
 }
 
@@ -48,8 +45,6 @@ func (f *Fixtures) EnrollAccountIds() []components.Agreement {
 	require.NoError(f.t, err)
 
 	f.enrolledAgreements = agreements
-
-	time.Sleep(5 * time.Second)
 
 	return agreements
 }

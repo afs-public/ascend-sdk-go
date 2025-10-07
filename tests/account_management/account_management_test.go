@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -33,8 +32,6 @@ func TestAccountManagement(t *testing.T) {
 
 	err = helpers.AffirmAgreements(sdk, ctx, *accountId, agreements)
 	require.NoError(t, err)
-
-	time.Sleep(5 * time.Second)
 
 	listAccountId := accountId
 	response, err := sdk.AccountCreation.GetAccount(ctx, *listAccountId, operations.QueryParamViewFull.ToPointer())
