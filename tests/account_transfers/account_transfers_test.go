@@ -96,15 +96,12 @@ func (f *Fixture) AccountTransferId() *string {
 func (f *Fixture) createAndEnrollAccount() *string {
 	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	return accountId
 }

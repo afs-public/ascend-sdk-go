@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"testing"
-	"time"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
@@ -21,8 +20,6 @@ func TestInvestorDocs(t *testing.T) {
 
 	accountId, err := helpers.CreateAccountId(sdk, ctx)
 	require.NoError(t, err)
-
-	time.Sleep(5 * time.Second)
 
 	t.Run("Investor Docs Investor Docs Batch Create Upload Links Batch Create Upload Links1", func(t *testing.T) {
 		request := components.BatchCreateUploadLinksRequestCreate{

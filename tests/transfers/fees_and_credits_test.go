@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"strings"
 	"testing"
-	"time"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
@@ -24,7 +23,6 @@ func (f *Fixtures) FeeId(t *testing.T) *string {
 	fmt.Println("feeId:", feeId)
 	require.NoError(f.t, err)
 	f.feeId = &feeId
-	time.Sleep(5 * time.Second)
 	return &feeId
 }
 
@@ -36,7 +34,6 @@ func (f *Fixtures) CreditId(t *testing.T) *string {
 	fmt.Println("creditId: ", creditId)
 	require.NoError(f.t, err)
 	f.creditId = &creditId
-	time.Sleep(3 * time.Second)
 	return &creditId
 }
 
@@ -49,7 +46,6 @@ func CreateFee(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolledAc
 		Description:      ascendsdk.String("Fee charged"),
 		Type:             components.TransfersFeeCreateType("MANAGEMENT"),
 	}
-	time.Sleep(5 * time.Second)
 	res, err := sdk.FeesAndCredits.CreateFee(ctx, enrolledAccountId, feeCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -70,7 +66,6 @@ func CreateCredit(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolle
 		Description:      ascendsdk.String("Credit awarded"),
 		Type:             components.TransfersCreditCreateTypePromotional,
 	}
-	time.Sleep(3 * time.Second)
 	res, err := sdk.FeesAndCredits.CreateCredit(ctx, enrolledAccountId, creditCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

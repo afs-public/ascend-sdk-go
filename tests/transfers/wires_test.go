@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"strings"
 	"testing"
-	"time"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
@@ -24,7 +23,6 @@ func (f *Fixtures) WireId(t *testing.T) *string {
 	fmt.Println("Wire Withdrawal Id:", wireId)
 	require.NoError(f.t, err)
 	f.wireId = &wireId
-	time.Sleep(5 * time.Second)
 	return &wireId
 }
 
@@ -42,7 +40,6 @@ func CreateWireWithdrawal(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context,
 			},
 		},
 	}
-	time.Sleep(5 * time.Second)
 	res, err := sdk.Wires.CreateWireWithdrawal(ctx, enrolledAccountId, wireWithdrawalCreate)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

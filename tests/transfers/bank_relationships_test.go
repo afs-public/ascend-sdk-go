@@ -7,7 +7,6 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -53,22 +52,18 @@ func (f *FixtureBanks) ReuseAccountId() *string {
 	}
 
 	f.reuseAccountID, _ = helpers.CreateAccountIdWithLNP(f.sdk, f.ctx, f.LNPId())
-	time.Sleep(10 * time.Second)
 	return f.reuseAccountID
 }
 
 func (f *FixtureBanks) createAndEnrollAccount() *string {
 	accountId, err := helpers.CreateAccountIdWithLNP(f.sdk, f.ctx, f.LNPId())
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	return accountId
 }
@@ -169,7 +164,6 @@ func TestBankRelationships(t *testing.T) {
 		res, err := sdk.BankRelationships.VerifyMicroDeposits(ctx, *fixtures.AccountId(), *fixtures.bankRelationshipId, verifyMicrodepositRequest)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-		time.Sleep(2 * time.Second)
 		assert.Equal(t, *res.BankRelationship.State.State, components.BankRelationshipStateStateApproved)
 	})
 

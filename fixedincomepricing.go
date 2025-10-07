@@ -110,6 +110,16 @@ func (s *FixedIncomePricing) PreviewOrderCost(ctx context.Context, accountID str
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -118,11 +128,8 @@ func (s *FixedIncomePricing) PreviewOrderCost(ctx context.Context, accountID str
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"4XX",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -313,7 +320,7 @@ func (s *FixedIncomePricing) PreviewOrderCost(ctx context.Context, accountID str
 }
 
 // RetrieveQuote - Retrieve Quote
-// Returns quote information containing the best bid/ask for the given Fixed Income asset.
+// Returns quote information containing the best bid/ask for the given Fixed Income asset. For Fixed Income assets in the UAT environment, CUSIPS are subject to expiration. Therefore please refer to the [list available in the Market Simulator](https://developer.apexclearing.com/apex-fintech-solutions/docs/market-simulator#fixed-income-simulator-scenarios) for the most recent CUSIP list prior to testing.
 func (s *FixedIncomePricing) RetrieveQuote(ctx context.Context, accountID string, retrieveQuoteRequestCreate components.RetrieveQuoteRequestCreate, opts ...operations.Option) (*operations.OrderPriceServiceRetrieveQuoteResponse, error) {
 	request := operations.OrderPriceServiceRetrieveQuoteRequest{
 		AccountID:                  accountID,
@@ -391,6 +398,16 @@ func (s *FixedIncomePricing) RetrieveQuote(ctx context.Context, accountID string
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -399,11 +416,8 @@ func (s *FixedIncomePricing) RetrieveQuote(ctx context.Context, accountID string
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"4XX",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -672,6 +686,16 @@ func (s *FixedIncomePricing) RetrieveFixedIncomeMarks(ctx context.Context, corre
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -680,11 +704,8 @@ func (s *FixedIncomePricing) RetrieveFixedIncomeMarks(ctx context.Context, corre
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"4XX",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {

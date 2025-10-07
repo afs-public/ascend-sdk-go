@@ -171,18 +171,15 @@ func getCompletedWithdrawalId(fixture Fixtures) (*string, error) {
 	if err != nil {
 		return nil, err
 	}
-	time.Sleep(15 * time.Second)
 	bankRelationShip := *bankRelationShipPtr
 	amounts, err := helpers.GetCorrectMicroDeposits(fixture.sdk, fixture.ctx, fixture.enrolledWithdrawalAccountId, bankRelationShip)
 	if err != nil {
 		return nil, err
 	}
-	time.Sleep(10 * time.Second)
 	err = helpers.VerifyMicroDeposits(fixture.sdk, fixture.ctx, fixture.enrolledWithdrawalAccountId, bankRelationShip, amounts)
 	if err != nil {
 		return nil, err
 	}
-	helpers.Wait()
 	achWithdrawalRequest := components.AchWithdrawalCreate{
 		BankRelationship: "accounts/" + fixture.enrolledWithdrawalAccountId + "/bankRelationships/" + bankRelationShip,
 		Amount:           &components.DecimalCreate{Value: ascendsdk.String("0.01")},
@@ -223,7 +220,6 @@ func getWireWithdrawalId(accountId string, fixture Fixtures) (*string, error) {
 			},
 		},
 	}
-	time.Sleep(5 * time.Second)
 	res, err := fixture.sdk.Wires.CreateWireWithdrawal(fixture.ctx, accountId, wireWithdrawalCreate)
 	if err != nil {
 		return nil, err

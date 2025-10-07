@@ -38,14 +38,11 @@ func (f *Fixtures) OrderId(t *testing.T) *string {
 
 	f.orderId = &orderId
 
-	time.Sleep(5 * time.Second)
-
 	return &orderId
 }
 
 func CreateOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolledAccountId string) (string, error) {
 
-	time.Sleep(5 * time.Second)
 	s := sdk
 
 	// Fund Account with Credit
@@ -57,8 +54,6 @@ func CreateOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolled
 	}
 
 	s.FeesAndCredits.CreateCredit(ctx, enrolledAccountId, transfersCreditCreate)
-
-	time.Sleep(5 * time.Second)
 
 	// Create Order
 	create := components.OrderCreate{

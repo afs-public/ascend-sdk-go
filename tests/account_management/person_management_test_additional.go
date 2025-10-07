@@ -3,7 +3,6 @@ package account_management1
 import (
 	"context"
 	"testing"
-	"time"
 
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 
@@ -26,8 +25,6 @@ func TestPersonManagementAdditional(t *testing.T) {
 
 	legalNaturalPersonId, err := helpers.CreateLegalNaturalPersonId(sdk, ctx)
 	require.NoError(t, err)
-
-	time.Sleep(5 * time.Second)
 
 	t.Run("Person Management Accounts Get Legal Natural Person Get Legal Natural Person1", func(t *testing.T) {
 		result, err := sdk.PersonManagement.GetLegalNaturalPerson(ctx, *legalNaturalPersonId)

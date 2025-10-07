@@ -5,15 +5,12 @@ import (
 	"fmt"
 	"os"
 	"testing"
-	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
-	"github.com/afs-public/ascend-sdk-go/models/operations"
-
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -61,8 +58,6 @@ func (f *Fixtures) SubscriberId() *string {
 
 	f.subscriberId = subscriberId
 
-	time.Sleep(5 * time.Second)
-
 	return subscriberId
 }
 
@@ -77,8 +72,6 @@ func (f *Fixtures) DeliveryId() *string {
 	require.NoError(f.t, err)
 
 	f.deliveryId = deliveryId
-
-	time.Sleep(5 * time.Second)
 
 	return deliveryId
 }
@@ -120,24 +113,6 @@ func TestSubscriber(t *testing.T) {
 			},
 		}
 
-		var status *operations.SubscriberGetPushSubscriptionResponse
-		for i := 0; i < 12; i++ {
-			status, err = sdk.Subscriber.GetPushSubscription(ctx, *fixtures.SubscriberId())
-			require.NoError(t, err)
-
-			if *status.PushSubscription.State == components.StateUpdating || *status.PushSubscription.State == components.StateActive {
-				break
-			}
-
-			time.Sleep(2 * time.Second)
-		}
-
-		require.Contains(t,
-			[]components.State{components.StateUpdating, components.StateActive},
-			*status.PushSubscription.State,
-			"Push subscription must be in the state of UPDATED or ACTIVE to receive an update, otherwise we will get an error",
-		)
-
 		res, err := sdk.Subscriber.UpdatePushSubscription(ctx, *fixtures.SubscriberId(), pushSubscriptionUpdateCreate, nil)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -155,7 +130,6 @@ func TestSubscriber(t *testing.T) {
 	})
 
 	t.Run("DeletePushSubscription", func(t *testing.T) {
-		time.Sleep(5 * time.Second)
 		res, err := sdk.Subscriber.DeletePushSubscription(ctx, *fixtures.SubscriberId())
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

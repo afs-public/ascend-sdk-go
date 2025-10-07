@@ -57,15 +57,12 @@ func (f *Fixture) WithdrawalId() *string {
 func (f *Fixture) createAndEnrollAccount() *string {
 	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	return accountId
 }
@@ -76,7 +73,6 @@ func (f *Fixture) setupBankRelationship(accountID string) *string {
 
 	correctMicroDeposits, err := helpers.GetCorrectMicroDeposits(f.sdk, f.ctx, accountID, *bankRelationshipId)
 	require.NoError(f.t, err)
-	helpers.Wait()
 
 	err = helpers.VerifyMicroDeposits(f.sdk, f.ctx, accountID, *bankRelationshipId, correctMicroDeposits)
 	require.NoError(f.t, err)

@@ -550,7 +550,7 @@ func (e OrderStopPriceType) ToPointer() *OrderStopPriceType {
 	return &e
 }
 
-// StopPrice - The stop price for this order. Only allowed for equities, when the side is SELL.
+// StopPrice - The stop price for this order. Only allowed for equities.
 type StopPrice struct {
 	// The stop price which must be greater than zero if provided. For equity orders in the USD currency, up to 2 decimal places are allowed for prices above $1 and up to 4 decimal places for prices at or below $1.
 	Price *OrderStopPricePrice `json:"price,omitempty"`
@@ -685,7 +685,7 @@ type Order struct {
 	Side *OrderSide `json:"side,omitempty"`
 	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
 	SpecialReportingInstructions []OrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
-	// The stop price for this order. Only allowed for equities, when the side is SELL.
+	// The stop price for this order. Only allowed for equities.
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`

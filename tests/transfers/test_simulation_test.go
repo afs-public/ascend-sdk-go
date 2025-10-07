@@ -4,7 +4,6 @@ import (
 	"context"
 	"strings"
 	"testing"
-	"time"
 
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/google/uuid"
@@ -89,15 +88,12 @@ func Test_Test_Simulation(t *testing.T) {
 	require.NoError(t, err)
 	accountIdPtr, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
 	require.NoError(t, err)
-	helpers.Wait()
 	accountId := *accountIdPtr
 	bankRelationShipPtr, err := helpers.CreateBankRelationship(sdk, ctx, accountId)
 	require.NoError(t, err)
-	helpers.Wait()
 	bankRelationShip := *bankRelationShipPtr
 	amounts, err := helpers.GetCorrectMicroDeposits(sdk, ctx, accountId, bankRelationShip)
 	require.NoError(t, err)
-	helpers.Wait()
 	err = helpers.VerifyMicroDeposits(sdk, ctx, accountId, bankRelationShip, amounts)
 	require.NoError(t, err)
 
@@ -182,7 +178,6 @@ func testTestSimulationTransfersForceNocAchDepositForceNocAchDeposit1(t *testing
 		t.Skip("Skipping Endpoint Test: ACH Deposit Approval")
 	}
 	assert.NotNil(t, fixture.AchDeposit(fixture.enrolledDepositAccountId, fixture.bankRelationshipDepositId))
-	time.Sleep(5 * time.Second)
 	request := components.ForceNocAchDepositRequestCreate{
 		NachaNoc: components.NachaNocCreate{
 			Code:                   components.CodeC05,
@@ -202,7 +197,6 @@ func testTestSimulationTransfersForceRejectAchDepositForceRejectAchDeposit1(t *t
 		fixture.t.Skip("Skipping Endpoint Test: ACH Deposit Approval")
 	}
 	assert.NotNil(t, fixture.AchDeposit(fixture.deceasedAccountId, fixture.deceasedBankRelationshipId))
-	time.Sleep(5 * time.Second)
 	request := components.ForceRejectAchDepositRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/achDeposits/" + *fixture.pendingDepositAchAccountId,
 	}
@@ -225,7 +219,6 @@ func testTestSimulationTransfersForceAchDepositReturnForceAchDepositReturn1(t *t
 		t.Skip("Skipping Endpoint Test: ACH Deposit Return")
 	}
 	assert.NotNil(t, fixture.AchDeposit(fixture.enrolledDepositAccountId, fixture.bankRelationshipDepositId))
-	time.Sleep(5 * time.Second)
 	request := components.ForceReturnAchDepositRequestCreate{
 		NachaReturn: components.NachaReturnCreate{
 			Code: components.NachaReturnCreateCodeR16,
@@ -246,7 +239,6 @@ func testTestSimulationTransfersForceApproveAchWithdrawalForceApproveAchWithdraw
 	}
 
 	assert.NotNil(t, fixture.AchWithdrawal(fixture.deceasedAccountId, fixture.deceasedBankRelationshipId))
-	time.Sleep(5 * time.Second)
 
 	request := components.ForceApproveAchWithdrawalRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/achWithdrawals/" + *fixture.pendingWithdrawalAchAccountId,
@@ -290,7 +282,6 @@ func testTestSimulationTransfersForceRejectAchWithdrawalForceRejectAchWithdrawal
 		t.Skip("Skipping Endpoint Test: ACH Withdrawal Rejection")
 	}
 	assert.NotNil(t, fixture.AchWithdrawal(fixture.deceasedAccountId, fixture.deceasedBankRelationshipId))
-	time.Sleep(5 * time.Second)
 	request := components.ForceRejectAchWithdrawalRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/achWithdrawals/" + *fixture.pendingWithdrawalAchAccountId,
 	}
@@ -313,7 +304,6 @@ func testTestSimulationTransfersForceAchWithdrawalReturnForceAchWithdrawalReturn
 		t.Skip("Skipping Endpoint Test: ACH Withdrawal Return")
 	}
 	assert.NotNil(t, fixture.completedWithdrawalId())
-	time.Sleep(5 * time.Second)
 	request := components.ForceReturnAchWithdrawalRequestCreate{
 		NachaReturn: components.NachaReturnCreate{
 			Code: components.NachaReturnCreateCodeR16,
@@ -332,7 +322,6 @@ func testTestSimulationTransfersForceApproveIctWithdrawalForceApproveIctWithdraw
 		t.Skip("Skipping Endpoint Test: Force Approve ICT Withdrawal")
 	}
 	assert.NotNil(t, fixture.pendingIctWithdrawal())
-	time.Sleep(10 * time.Second)
 	request := components.ForceApproveIctWithdrawalRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictWithdrawals/" + *fixture.pendingIctWithdrawalId,
 	}
@@ -354,7 +343,6 @@ func testTestSimulationTransfersForceRejectIctWithdrawalForceRejectIctWithdrawal
 		t.Skip("Skipping Endpoint Test: Force Reject ICT Withdrawal")
 	}
 	assert.NotNil(t, fixture.pendingIctWithdrawal())
-	time.Sleep(10 * time.Second)
 	request := components.ForceRejectIctWithdrawalRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictWithdrawals/" + *fixture.pendingIctWithdrawalId,
 	}
@@ -376,7 +364,6 @@ func testTestSimulationTransfersForceApproveIctDepositForceApproveIctDeposit1(t 
 		t.Skip("Skipping Endpoint Test: Force Approve ICT Deposit")
 	}
 	assert.NotNil(t, fixture.pendingIctDeposit())
-	time.Sleep(10 * time.Second)
 	request := components.ForceApproveIctDepositRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictDeposits/" + *fixture.pendingIctDepositId,
 	}
@@ -398,7 +385,6 @@ func testTestSimulationTransfersForceRejectIctDepositForceRejectIctDeposit1(t *t
 		t.Skip("Skipping Endpoint Test: Force Reject ICT Deposit")
 	}
 	assert.NotNil(t, fixture.pendingIctDeposit())
-	time.Sleep(10 * time.Second)
 	request := components.ForceRejectIctDepositRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/ictDeposits/" + *fixture.pendingIctDepositId,
 	}
@@ -420,7 +406,6 @@ func testTestSimulationTransfersForceApproveAchDepositForceApproveAchDeposit1(t 
 		t.Skip("Skipping Endpoint Test: ACH Deposit Approval")
 	}
 	assert.NotNil(t, fixture.AchDeposit(fixture.deceasedAccountId, fixture.deceasedBankRelationshipId))
-	time.Sleep(5 * time.Second)
 	request := components.ForceApproveAchDepositRequestCreate{
 		Name: "accounts/" + fixture.deceasedAccountId + "/achDeposits/" + *fixture.pendingDepositAchAccountId,
 	}
@@ -443,7 +428,6 @@ func testTestSimulationTransfersForceApproveWireWithdrawalForceApproveWireWithdr
 	}
 	assert.NotNil(t, fixture.pendingWireWithdrawal(fixture.enrolledWithdrawalAccountId))
 	assert.NotNil(t, fixture.wireId)
-	time.Sleep(5 * time.Second)
 	request := components.ForceApproveWireWithdrawalRequestCreate{
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/wireWithdrawals/" + *fixture.wireId,
 	}
@@ -459,7 +443,6 @@ func testTestSimulationTransfersForceRejectWireWithdrawalForceRejectWireWithdraw
 	}
 	assert.NotNil(t, fixture.pendingWireWithdrawal(fixture.enrolledWithdrawalAccountId))
 	assert.NotNil(t, fixture.wireId)
-	time.Sleep(5 * time.Second)
 	request := components.ForceRejectWireWithdrawalRequestCreate{
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/wireWithdrawals/" + *fixture.wireId,
 	}
@@ -485,8 +468,6 @@ func testTestSimulationTransfersForceApproveCashJournalForceApproveCashJournal1(
 
 	assert.NotNil(t, fixture.pendingCashJournal(fixture.deceasedAccountId))
 
-	time.Sleep(5 * time.Second)
-
 	request := components.ForceApproveCashJournalRequestCreate{
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/cashJournals/" + *fixture.cashJournalId,
 	}
@@ -501,8 +482,6 @@ func testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t 
 		t.Skip("Skipping Endpoint Test: Force Reject Cash Journal")
 	}
 	assert.NotNil(t, fixture.pendingCashJournal(fixture.deceasedAccountId))
-
-	time.Sleep(5 * time.Second)
 
 	request := components.ForceRejectCashJournalRequestCreate{
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/cashJournals/" + *fixture.cashJournalId,
