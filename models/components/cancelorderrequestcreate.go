@@ -27,6 +27,8 @@ type CancelOrderRequestCreate struct {
 	CancelInitiator *CancelOrderRequestCreateCancelInitiator `json:"cancel_initiator,omitempty"`
 	// Related to CAT reporting when Apex reports for the client. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
 	ClientCancelReceivedTime *time.Time `json:"client_cancel_received_time,omitempty"`
+	// Related to CAT reporting when Apex reports for the client. Denotes the time the client sent the cancel request to Apex. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
+	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// Format: accounts/{account_id}/orders/{order_id}
 	Name string `json:"name"`
 }
@@ -54,6 +56,13 @@ func (o *CancelOrderRequestCreate) GetClientCancelReceivedTime() *time.Time {
 		return nil
 	}
 	return o.ClientCancelReceivedTime
+}
+
+func (o *CancelOrderRequestCreate) GetClientCancelSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelSentTime
 }
 
 func (o *CancelOrderRequestCreate) GetName() string {

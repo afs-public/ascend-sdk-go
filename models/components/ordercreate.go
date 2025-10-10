@@ -49,12 +49,14 @@ func (e IdentifierType) ToPointer() *IdentifierType {
 	return &e
 }
 
-// OrderType - The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+// OrderType - The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 type OrderType string
 
 const (
-	OrderTypeLimit  OrderType = "LIMIT"
-	OrderTypeMarket OrderType = "MARKET"
+	OrderTypeLimit           OrderType = "LIMIT"
+	OrderTypeMarket          OrderType = "MARKET"
+	OrderTypeStop            OrderType = "STOP"
+	OrderTypeMarketIfTouched OrderType = "MARKET_IF_TOUCHED"
 )
 
 func (e OrderType) ToPointer() *OrderType {
@@ -111,7 +113,8 @@ func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions 
 type TimeInForce string
 
 const (
-	TimeInForceDay TimeInForce = "DAY"
+	TimeInForceDay          TimeInForce = "DAY"
+	TimeInForceGoodTillDate TimeInForce = "GOOD_TILL_DATE"
 )
 
 func (e TimeInForce) ToPointer() *TimeInForce {
@@ -146,6 +149,8 @@ type OrderCreate struct {
 	ClientOrderID string `json:"client_order_id"`
 	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
+	// Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. Denotes the time the client sent the order to Apex. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
+	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
 	// A custom commission applied to an order
 	Commission *CommissionCreate `json:"commission,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
@@ -180,7 +185,7 @@ type OrderCreate struct {
 	//
 	//  Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
 	OrderDate DateCreate `json:"order_date"`
-	// The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 	OrderType OrderType `json:"order_type"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
@@ -198,6 +203,12 @@ type OrderCreate struct {
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce TimeInForce `json:"time_in_force"`
+	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
+	//
+	//  * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date
+	//
+	//  Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
+	TimeInForceExpirationDate *DateCreate `json:"time_in_force_expiration_date,omitempty"`
 	// Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
 	TradingSession *TradingSession `json:"trading_session,omitempty"`
 }
@@ -239,6 +250,13 @@ func (o *OrderCreate) GetClientReceivedTime() *time.Time {
 		return nil
 	}
 	return o.ClientReceivedTime
+}
+
+func (o *OrderCreate) GetClientSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientSentTime
 }
 
 func (o *OrderCreate) GetCommission() *CommissionCreate {
@@ -365,6 +383,13 @@ func (o *OrderCreate) GetTimeInForce() TimeInForce {
 		return TimeInForce("")
 	}
 	return o.TimeInForce
+}
+
+func (o *OrderCreate) GetTimeInForceExpirationDate() *DateCreate {
+	if o == nil {
+		return nil
+	}
+	return o.TimeInForceExpirationDate
 }
 
 func (o *OrderCreate) GetTradingSession() *TradingSession {
