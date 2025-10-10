@@ -504,6 +504,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [GetOrder](docs/sdks/createorder/README.md#getorder) - Get Order
 * [CancelOrder](docs/sdks/createorder/README.md#cancelorder) - Cancel Order
 * [SetExtraReportingData](docs/sdks/createorder/README.md#setextrareportingdata) - Set Extra Reporting Data
+* [ListCorrespondentOrders](docs/sdks/createorder/README.md#listcorrespondentorders) - List Correspondent Orders
 
 ### [DataRetrieval](docs/sdks/dataretrieval/README.md)
 

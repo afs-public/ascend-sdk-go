@@ -415,12 +415,14 @@ func (e OrderStatus) ToPointer() *OrderStatus {
 	return &e
 }
 
-// OrderOrderType - The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+// OrderOrderType - The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 type OrderOrderType string
 
 const (
-	OrderOrderTypeLimit  OrderOrderType = "LIMIT"
-	OrderOrderTypeMarket OrderOrderType = "MARKET"
+	OrderOrderTypeLimit           OrderOrderType = "LIMIT"
+	OrderOrderTypeMarket          OrderOrderType = "MARKET"
+	OrderOrderTypeStop            OrderOrderType = "STOP"
+	OrderOrderTypeMarketIfTouched OrderOrderType = "MARKET_IF_TOUCHED"
 )
 
 func (e OrderOrderType) ToPointer() *OrderOrderType {
@@ -576,11 +578,43 @@ func (o *StopPrice) GetType() *OrderStopPriceType {
 type OrderTimeInForce string
 
 const (
-	OrderTimeInForceDay OrderTimeInForce = "DAY"
+	OrderTimeInForceDay          OrderTimeInForce = "DAY"
+	OrderTimeInForceGoodTillDate OrderTimeInForce = "GOOD_TILL_DATE"
 )
 
 func (e OrderTimeInForce) ToPointer() *OrderTimeInForce {
 	return &e
+}
+
+// TimeInForceExpirationDate - The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+type TimeInForceExpirationDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *TimeInForceExpirationDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *TimeInForceExpirationDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *TimeInForceExpirationDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
 }
 
 // OrderTradingSession - Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
@@ -625,10 +659,14 @@ type Order struct {
 	CancelRejectedReason *CancelRejectedReason `json:"cancel_rejected_reason,omitempty"`
 	// Output only field for Equity Orders related to CAT reporting on behalf of clients. This field will be present when provided on the CancelOrderRequest
 	ClientCancelReceivedTime *time.Time `json:"client_cancel_received_time,omitempty"`
+	// Output only field for Equity Orders related to CAT reporting on behalf of clients. This field will be present when provided on the CancelOrderRequest
+	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
 	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
+	// Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. Denotes the time the client sent the order to Apex. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
+	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
 	// A custom commission to be applied to this order. When specifying an AMOUNT type, the value represents a notional amount measured in the currency of the order.
 	Commission *OrderCommission `json:"commission,omitempty"`
 	// Time of the order creation
@@ -665,6 +703,8 @@ type Order struct {
 	Name *string `json:"name,omitempty"`
 	// Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. For Equities: This represents the maximum amount to be spent. The final order may may have a smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified. For Fixed Income: Not supported, you must specify a `quantity` value.
 	NotionalValue *NotionalValue `json:"notional_value,omitempty"`
+	// A value derived from the order_status, indicating whether the order is still open. The statuses that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED, and PENDING_CANCEL. An order with any other status is not considered open.
+	Open *bool `json:"open,omitempty"`
 	// The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is within 5 minutes prior to market close, the next valid market day may be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
 	OrderDate *OrderDate `json:"order_date,omitempty"`
 	// System generated unique id for the order.
@@ -673,7 +713,7 @@ type Order struct {
 	OrderRejectedReason *OrderRejectedReason `json:"order_rejected_reason,omitempty"`
 	// The processing status of the order
 	OrderStatus *OrderStatus `json:"order_status,omitempty"`
-	// The execution type of this order. For Equities: MARKET, and LIMIT are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
 	OrderType *OrderOrderType `json:"order_type,omitempty"`
 	// The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no executions.
 	PrevailingMarketPrice *OrderPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
@@ -689,6 +729,8 @@ type Order struct {
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`
+	// The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
+	TimeInForceExpirationDate *TimeInForceExpirationDate `json:"time_in_force_expiration_date,omitempty"`
 	// Which TradingSession to trade in, defaults to 'CORE'. Only available for Equity orders.
 	TradingSession *OrderTradingSession `json:"trading_session,omitempty"`
 }
@@ -767,6 +809,13 @@ func (o *Order) GetClientCancelReceivedTime() *time.Time {
 	return o.ClientCancelReceivedTime
 }
 
+func (o *Order) GetClientCancelSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelSentTime
+}
+
 func (o *Order) GetClientOrderID() *string {
 	if o == nil {
 		return nil
@@ -779,6 +828,13 @@ func (o *Order) GetClientReceivedTime() *time.Time {
 		return nil
 	}
 	return o.ClientReceivedTime
+}
+
+func (o *Order) GetClientSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientSentTime
 }
 
 func (o *Order) GetCommission() *OrderCommission {
@@ -900,6 +956,13 @@ func (o *Order) GetNotionalValue() *NotionalValue {
 	return o.NotionalValue
 }
 
+func (o *Order) GetOpen() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Open
+}
+
 func (o *Order) GetOrderDate() *OrderDate {
 	if o == nil {
 		return nil
@@ -982,6 +1045,13 @@ func (o *Order) GetTimeInForce() *OrderTimeInForce {
 		return nil
 	}
 	return o.TimeInForce
+}
+
+func (o *Order) GetTimeInForceExpirationDate() *TimeInForceExpirationDate {
+	if o == nil {
+		return nil
+	}
+	return o.TimeInForceExpirationDate
 }
 
 func (o *Order) GetTradingSession() *OrderTradingSession {

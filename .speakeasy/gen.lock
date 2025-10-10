@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: ada9b980acbe653e0bd359f9184c0329
-  docVersion: v1:20251003:uat:a1308663494e
+  docChecksum: b78fe33a2e48f1cf16bb3f4d7cc3e5e8
+  docVersion: v1:20251009:uat:ac355eac4466
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.2.1
-  configChecksum: fa5cc8d691d14599f0082b1b2a691b52
+  releaseVersion: 1.2.2
+  configChecksum: e9c961f75acd42d29705b1b532ab6c6a
 features:
   go:
     additionalDependencies: 0.1.0
@@ -274,6 +274,7 @@ generatedFiles:
   - /models/components/listbasketordersresponse.go
   - /models/components/listcompressedordersresponse.go
   - /models/components/listcontributionsummariesresponse.go
+  - /models/components/listcorrespondentordersresponse.go
   - /models/components/listdistributionsummariesresponse.go
   - /models/components/listdocumentsresponse.go
   - /models/components/listenrollmentsresponse.go
@@ -575,6 +576,7 @@ generatedFiles:
   - /models/operations/orderservicecancelorder.go
   - /models/operations/orderservicecreateorder.go
   - /models/operations/orderservicegetorder.go
+  - /models/operations/orderservicelistcorrespondentorders.go
   - /models/operations/orderservicesetextrareportingdata.go
   - /models/operations/readergeteventmessage.go
   - /models/operations/readerlisteventmessages.go
@@ -1881,6 +1883,7 @@ generatedFiles:
   - docs/models/components/listbasketordersresponse.md
   - docs/models/components/listcompressedordersresponse.md
   - docs/models/components/listcontributionsummariesresponse.md
+  - docs/models/components/listcorrespondentordersresponse.md
   - docs/models/components/listdistributionsummariesresponse.md
   - docs/models/components/listdocumentsresponse.md
   - docs/models/components/listenrollmentsresponse.md
@@ -2385,6 +2388,7 @@ generatedFiles:
   - docs/models/components/tenderoffertype.md
   - docs/models/components/timehorizon.md
   - docs/models/components/timeinforce.md
+  - docs/models/components/timeinforceexpirationdate.md
   - docs/models/components/timeunit.md
   - docs/models/components/token.md
   - docs/models/components/toside.md
@@ -2870,6 +2874,8 @@ generatedFiles:
   - docs/models/operations/orderservicecreateorderresponse.md
   - docs/models/operations/orderservicegetorderrequest.md
   - docs/models/operations/orderservicegetorderresponse.md
+  - docs/models/operations/orderservicelistcorrespondentordersrequest.md
+  - docs/models/operations/orderservicelistcorrespondentordersresponse.md
   - docs/models/operations/orderservicesetextrareportingdatarequest.md
   - docs/models/operations/orderservicesetextrareportingdataresponse.md
   - docs/models/operations/programdatefilterprogram.md
@@ -5579,6 +5585,20 @@ examples:
           application/json: {}
         default:
           application/json: {}
+  OrderService_ListCorrespondentOrders:
+    speakeasy-default-order-service-list-correspondent-orders:
+      parameters:
+        path:
+          correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
 examplesVersion: 1.0.2
 generatedTests:
   Accounts_ListLegalNaturalPersons: "2025-08-11T18:04:40Z"
@@ -5597,3 +5617,4 @@ generatedTests:
   OrderService_SetExtraReportingData: "2025-10-06T21:33:43Z"
   AssetTradingConfigService_GetAssetTradingConfig: "2025-10-06T21:33:43Z"
   AssetTradingConfigService_ListAssetTradingConfigs: "2025-10-06T21:33:43Z"
+  OrderService_ListCorrespondentOrders: "2025-10-09T21:29:38Z"

@@ -2,7 +2,7 @@
 
 package ascendsdkgo
 
-// Generated from OpenAPI doc version v1:20251003:uat:a1308663494e and generator version 2.691.6
+// Generated from OpenAPI doc version v1:20251009:uat:ac355eac4466 and generator version 2.691.6
 
 import (
 	"context"
@@ -82,17 +82,23 @@ type SDK struct {
 	CashBalances             *CashBalances
 	FeesAndCredits           *FeesAndCredits
 	AccountTransfers         *AccountTransfers
-	CreateOrder              *CreateOrder
-	FixedIncomePricing       *FixedIncomePricing
-	BasketOrders             *BasketOrders
-	AssetTradingConfig       *AssetTradingConfig
-	TradeBooking             *TradeBooking
-	TradeAllocation          *TradeAllocation
-	Assets                   *Assets
-	Ledger                   *Ledger
-	Margins                  *Margins
-	InvestorDocs             *InvestorDocs
-	DataRetrieval            *DataRetrieval
+	// Create Order
+	// Creates a new order for equity or fixed income securities.
+	//
+	//  Equity quantities may be for fractional shares, whole shares, or notional dollar amounts. Fixed income orders may be specified in face value currency amounts, with prices expressed in conventional "percentage of par" values.
+	//
+	//  Upon successful submission, if the request is a duplicate, returns the existing order in its current state in the system. If the request is not a duplicate, returns the summary of the newly submitted order.
+	CreateOrder        *CreateOrder
+	FixedIncomePricing *FixedIncomePricing
+	BasketOrders       *BasketOrders
+	AssetTradingConfig *AssetTradingConfig
+	TradeBooking       *TradeBooking
+	TradeAllocation    *TradeAllocation
+	Assets             *Assets
+	Ledger             *Ledger
+	Margins            *Margins
+	InvestorDocs       *InvestorDocs
+	DataRetrieval      *DataRetrieval
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -169,9 +175,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "1.2.1",
+		SDKVersion: "1.2.2",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.2.1 2.691.6 v1:20251003:uat:a1308663494e github.com/afs-public/ascend-sdk-go",
+			UserAgent:  "speakeasy-sdk/go 1.2.2 2.691.6 v1:20251009:uat:ac355eac4466 github.com/afs-public/ascend-sdk-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
