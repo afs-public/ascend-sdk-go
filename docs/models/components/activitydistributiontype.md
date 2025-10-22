@@ -28,3 +28,4 @@ Categorizes the withdrawal to indicate whether special handling of the transacti
 | `ActivityDistributionTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                              |
 | `ActivityDistributionTypeRevocation`                                 | REVOCATION                                                           |
 | `ActivityDistributionTypeNonReportable`                              | NON_REPORTABLE                                                       |
+| `ActivityDistributionTypeQualifiedCharitableDistribution`            | QUALIFIED_CHARITABLE_DISTRIBUTION                                    |

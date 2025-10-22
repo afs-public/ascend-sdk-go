@@ -1,5 +1,5 @@
-# CreateOrder
-(*CreateOrder*)
+# Orders
+(*Orders*)
 
 ## Overview
 
@@ -47,7 +47,7 @@ func main() {
         }),
     )
 
-    res, err := s.CreateOrder.CreateOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", components.OrderCreate{
+    res, err := s.Orders.CreateOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", components.OrderCreate{
         AssetType: components.AssetTypeEquity,
         ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
         Identifier: "SBUX",
@@ -121,7 +121,7 @@ func main() {
         }),
     )
 
-    res, err := s.CreateOrder.GetOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706")
+    res, err := s.Orders.GetOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706")
     if err != nil {
         log.Fatal(err)
     }
@@ -186,7 +186,7 @@ func main() {
         }),
     )
 
-    res, err := s.CreateOrder.CancelOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706", components.CancelOrderRequestCreate{
+    res, err := s.Orders.CancelOrder(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706", components.CancelOrderRequestCreate{
         Name: "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706",
     })
     if err != nil {
@@ -253,7 +253,7 @@ func main() {
         }),
     )
 
-    res, err := s.CreateOrder.SetExtraReportingData(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706", components.SetExtraReportingDataRequestCreate{
+    res, err := s.Orders.SetExtraReportingData(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706", components.SetExtraReportingDataRequestCreate{
         CancelConfirmedTime: types.MustNewTimeFromString("2025-12-13T15:28:17.262732Z"),
         Name: "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706",
     })
@@ -320,7 +320,7 @@ func main() {
         }),
     )
 
-    res, err := s.CreateOrder.ListCorrespondentOrders(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", ascendsdkgo.String("open && order_date >= date('2025-05-10')"), ascendsdkgo.Int(50), ascendsdkgo.String("CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"))
+    res, err := s.Orders.ListCorrespondentOrders(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", ascendsdkgo.String("open && order_date >= date('2025-05-10')"), ascendsdkgo.Int(50), ascendsdkgo.String("CiAKGjBpNDd2Nmp2Zml2cXRwYjBpOXA"))
     if err != nil {
         log.Fatal(err)
     }

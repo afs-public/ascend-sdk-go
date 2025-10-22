@@ -29,3 +29,4 @@
 | `OrderSpecialReportingInstructionsThirdMarket`                             | THIRD_MARKET                                                               |
 | `OrderSpecialReportingInstructionsSuppressTraceReporting`                  | SUPPRESS_TRACE_REPORTING                                                   |
 | `OrderSpecialReportingInstructionsWhenDistributed`                         | WHEN_DISTRIBUTED                                                           |
+| `OrderSpecialReportingInstructionsRoundUp`                                 | ROUND_UP                                                                   |

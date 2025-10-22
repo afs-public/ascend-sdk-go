@@ -111,7 +111,8 @@ func generateJwt(serverUrl string, apiKey string, jws string) (string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return "", errors.New("failed to get access token")
+		body, _ := ioutil.ReadAll(resp.Body)
+		return "", fmt.Errorf("Error generating service account token [url: %s, status: %d, error_text: %s]", opURL, resp.StatusCode, string(body))
 	} else {
 
 		// parse response body to get access token

@@ -10,3 +10,4 @@ Flag indicating whether this is a deposit or withdrawal transfer
 | `DirectionDirectionUnspecified` | DIRECTION_UNSPECIFIED           |
 | `DirectionDeposit`              | DEPOSIT                         |
 | `DirectionWithdrawal`           | WITHDRAWAL                      |
+| `DirectionJournal`              | JOURNAL                         |

@@ -76,7 +76,7 @@ func CreateOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolled
 		TimeInForce: components.TimeInForceDay,
 	}
 
-	res, err := s.CreateOrder.CreateOrder(ctx, enrolledAccountId, create)
+	res, err := s.Orders.CreateOrder(ctx, enrolledAccountId, create)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	if res.HTTPMeta.Response.StatusCode == 200 {
@@ -116,7 +116,7 @@ func TestOrderService(t *testing.T) {
 	})
 
 	t.Run("GetOrder", func(t *testing.T) {
-		res, err := sdk.CreateOrder.GetOrder(ctx, fixtures.accountId, *fixtures.OrderId(t))
+		res, err := sdk.Orders.GetOrder(ctx, fixtures.accountId, *fixtures.OrderId(t))
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
@@ -125,7 +125,7 @@ func TestOrderService(t *testing.T) {
 		request := components.CancelOrderRequestCreate{
 			Name: "accounts/" + fixtures.accountId + "/orders/" + *fixtures.OrderId(t),
 		}
-		res, err := sdk.CreateOrder.CancelOrder(ctx, fixtures.accountId, *fixtures.OrderId(t), request)
+		res, err := sdk.Orders.CancelOrder(ctx, fixtures.accountId, *fixtures.OrderId(t), request)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 		assert.NotNil(t, res.Order.OrderID)

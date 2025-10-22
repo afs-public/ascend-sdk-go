@@ -11,5 +11,6 @@ The name of the program that the ICT withdrawal is associated with.
 | `IctWithdrawalProgramBrokerPartner`         | BROKER_PARTNER                              |
 | `IctWithdrawalProgramDepositOnly`           | DEPOSIT_ONLY                                |
 | `IctWithdrawalProgramBankingPartner`        | BANKING_PARTNER                             |
+| `IctWithdrawalProgramMoneyTransmitter`      | MONEY_TRANSMITTER                           |
 | `IctWithdrawalProgramWithdrawalOnly`        | WITHDRAWAL_ONLY                             |
 | `IctWithdrawalProgramDigitalPartner`        | DIGITAL_PARTNER                             |

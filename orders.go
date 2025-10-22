@@ -17,14 +17,14 @@ import (
 	"github.com/afs-public/ascend-sdk-go/retry"
 )
 
-type CreateOrder struct {
+type Orders struct {
 	rootSDK          *SDK
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newCreateOrder(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *CreateOrder {
-	return &CreateOrder{
+func newOrders(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Orders {
+	return &Orders{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
@@ -37,7 +37,7 @@ func newCreateOrder(rootSDK *SDK, sdkConfig config.SDKConfiguration, hooks *hook
 //	Equity quantities may be for fractional shares, whole shares, or notional dollar amounts. Fixed income orders may be specified in face value currency amounts, with prices expressed in conventional "percentage of par" values.
 //
 //	Upon successful submission, if the request is a duplicate, returns the existing order in its current state in the system. If the request is not a duplicate, returns the summary of the newly submitted order.
-func (s *CreateOrder) CreateOrder(ctx context.Context, accountID string, orderCreate components.OrderCreate, opts ...operations.Option) (*operations.OrderServiceCreateOrderResponse, error) {
+func (s *Orders) CreateOrder(ctx context.Context, accountID string, orderCreate components.OrderCreate, opts ...operations.Option) (*operations.OrderServiceCreateOrderResponse, error) {
 	request := operations.OrderServiceCreateOrderRequest{
 		AccountID:   accountID,
 		OrderCreate: orderCreate,
@@ -329,7 +329,7 @@ func (s *CreateOrder) CreateOrder(ctx context.Context, accountID string, orderCr
 // Gets an order by order ID.
 //
 //	Upon successful submission, returns the details of the queried order.
-func (s *CreateOrder) GetOrder(ctx context.Context, accountID string, orderID string, opts ...operations.Option) (*operations.OrderServiceGetOrderResponse, error) {
+func (s *Orders) GetOrder(ctx context.Context, accountID string, orderID string, opts ...operations.Option) (*operations.OrderServiceGetOrderResponse, error) {
 	request := operations.OrderServiceGetOrderRequest{
 		AccountID: accountID,
 		OrderID:   orderID,
@@ -614,7 +614,7 @@ func (s *CreateOrder) GetOrder(ctx context.Context, accountID string, orderID st
 // Submits an order cancellation request by order ID. Confirmation of order cancellation requests are provided through asynchronous events.
 //
 //	Upon successful submission, returns the details of the order pending cancellation.
-func (s *CreateOrder) CancelOrder(ctx context.Context, accountID string, orderID string, cancelOrderRequestCreate components.CancelOrderRequestCreate, opts ...operations.Option) (*operations.OrderServiceCancelOrderResponse, error) {
+func (s *Orders) CancelOrder(ctx context.Context, accountID string, orderID string, cancelOrderRequestCreate components.CancelOrderRequestCreate, opts ...operations.Option) (*operations.OrderServiceCancelOrderResponse, error) {
 	request := operations.OrderServiceCancelOrderRequest{
 		AccountID:                accountID,
 		OrderID:                  orderID,
@@ -905,7 +905,7 @@ func (s *CreateOrder) CancelOrder(ctx context.Context, accountID string, orderID
 
 // SetExtraReportingData - Set Extra Reporting Data
 // Sets extra reporting data to an existing order. Any SetExtraReportingDataRequest must include the name of the order and the cancel_confirmed_time
-func (s *CreateOrder) SetExtraReportingData(ctx context.Context, accountID string, orderID string, setExtraReportingDataRequestCreate components.SetExtraReportingDataRequestCreate, opts ...operations.Option) (*operations.OrderServiceSetExtraReportingDataResponse, error) {
+func (s *Orders) SetExtraReportingData(ctx context.Context, accountID string, orderID string, setExtraReportingDataRequestCreate components.SetExtraReportingDataRequestCreate, opts ...operations.Option) (*operations.OrderServiceSetExtraReportingDataResponse, error) {
 	request := operations.OrderServiceSetExtraReportingDataRequest{
 		AccountID:                          accountID,
 		OrderID:                            orderID,
@@ -1196,7 +1196,7 @@ func (s *CreateOrder) SetExtraReportingData(ctx context.Context, accountID strin
 
 // ListCorrespondentOrders - List Correspondent Orders
 // Lists orders matching the specified filter criteria. Results are paginated and sorted in the reverse order of their creation.
-func (s *CreateOrder) ListCorrespondentOrders(ctx context.Context, correspondentID string, filter *string, pageSize *int, pageToken *string, opts ...operations.Option) (*operations.OrderServiceListCorrespondentOrdersResponse, error) {
+func (s *Orders) ListCorrespondentOrders(ctx context.Context, correspondentID string, filter *string, pageSize *int, pageToken *string, opts ...operations.Option) (*operations.OrderServiceListCorrespondentOrdersResponse, error) {
 	request := operations.OrderServiceListCorrespondentOrdersRequest{
 		CorrespondentID: correspondentID,
 		Filter:          filter,

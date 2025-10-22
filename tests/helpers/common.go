@@ -1,14 +1,18 @@
 package helpers
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"math/rand"
+	"net/http"
 	"os"
 	"strconv"
 	"strings"
 	"testing"
 
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
@@ -106,7 +110,87 @@ func CreateLegalNaturalPersonId(s *ascendsdk.SDK, ctx context.Context) (*string,
 		return nil, fmt.Errorf("failed to create legal natural person: %w", err)
 	}
 
-	return res.LegalNaturalPerson.LegalNaturalPersonID, nil
+	lnpID := res.LegalNaturalPerson.LegalNaturalPersonID
+
+	// Upload CIP Results
+	correspondentID := os.Getenv("CORRESPONDENT_ID")
+	docType := components.IDDocumentUploadRequestCreateDocumentTypeThirdPartyCipResults
+	mimeType := "application/json"
+	batchSourceID := uuid.New().String()
+
+	uploadLinkRequest := components.BatchCreateUploadLinksRequestCreate{
+		CreateDocumentUploadLinkRequest: []components.CreateUploadLinkRequestCreate{
+			{
+				IDDocumentUploadRequest: &components.IDDocumentUploadRequestCreate{
+					CorrespondentID:      correspondentID,
+					DocumentType:         docType,
+					LegalNaturalPersonID: *lnpID,
+				},
+				ClientBatchSourceID: batchSourceID,
+				MimeType:            mimeType,
+			},
+		},
+	}
+
+	uploadLinksRes, err := s.InvestorDocs.BatchCreateUploadLinks(ctx, uploadLinkRequest)
+	if err != nil {
+		fmt.Printf("Failed to create upload links: %v\n", err)
+		return lnpID, nil
+	}
+
+	// Check if upload links were created successfully
+	if uploadLinksRes.BatchCreateUploadLinksResponse == nil || len(uploadLinksRes.BatchCreateUploadLinksResponse.UploadLink) == 0 {
+		fmt.Println("No upload links returned")
+		return lnpID, nil
+	}
+
+	uploadURL := uploadLinksRes.BatchCreateUploadLinksResponse.UploadLink[0].UploadLink
+
+	// Upload the test.json file
+	testFilePath := "../../../examples/test.json"
+
+	// Check if file exists
+	if _, err := os.Stat(testFilePath); os.IsNotExist(err) {
+		fmt.Printf("Test file not found at: %s\n", testFilePath)
+		return lnpID, nil
+	}
+
+	// Read and validate file content
+	jsonContent, err := os.ReadFile(testFilePath)
+	if err != nil {
+		fmt.Printf("Error reading file: %v\n", err)
+		return lnpID, nil
+	}
+
+	if len(jsonContent) == 0 {
+		fmt.Println("Test file is empty")
+		return lnpID, nil
+	}
+
+	// Upload to signed URL
+	req, err := http.NewRequest("PUT", *uploadURL, bytes.NewReader(jsonContent))
+	if err != nil {
+		fmt.Printf("Error creating upload request: %v\n", err)
+		return lnpID, nil
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	uploadResp, err := client.Do(req)
+	if err != nil {
+		fmt.Printf("Error during upload: %v\n", err)
+		return lnpID, nil
+	}
+	defer uploadResp.Body.Close()
+
+	if uploadResp.StatusCode != 200 && uploadResp.StatusCode != 201 && uploadResp.StatusCode != 204 {
+		bodyBytes, _ := io.ReadAll(uploadResp.Body)
+		fmt.Printf("Upload failed with status code: %d\n", uploadResp.StatusCode)
+		fmt.Printf("Response body: %s\n", string(bodyBytes))
+	}
+
+	return lnpID, nil
 }
 
 func CreateAccountIdWithLNP(s *ascendsdk.SDK, ctx context.Context, lnpID *string) (*string, error) {

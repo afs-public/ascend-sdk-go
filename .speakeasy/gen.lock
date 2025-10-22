@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: b78fe33a2e48f1cf16bb3f4d7cc3e5e8
-  docVersion: v1:20251009:uat:ac355eac4466
+  docChecksum: 834b7bdbca5fb3e122e1664978f5f38e
+  docVersion: v1:20251022:uat:75a9118ab2c9
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.2.2
-  configChecksum: e9c961f75acd42d29705b1b532ab6c6a
+  releaseVersion: 1.3.0
+  configChecksum: e9fc78fa0ebd2d20b1d3f8cb274f7877
 features:
   go:
     additionalDependencies: 0.1.0
@@ -619,7 +619,6 @@ generatedFiles:
   - basketorders.go
   - cashbalances.go
   - checks.go
-  - createorder.go
   - dataretrieval.go
   - docs/models/components/acatsasset.md
   - docs/models/components/acatsassetposition.md
@@ -683,6 +682,7 @@ generatedFiles:
   - docs/models/components/achdepositscheduleamount.md
   - docs/models/components/achdepositschedulecreate.md
   - docs/models/components/achdepositschedulecreatetype.md
+  - docs/models/components/achdepositscheduleenddate.md
   - docs/models/components/achdepositscheduleiracontribution.md
   - docs/models/components/achdepositscheduleretirementcontribution.md
   - docs/models/components/achdepositscheduleretirementcontributiontype.md
@@ -706,6 +706,7 @@ generatedFiles:
   - docs/models/components/achwithdrawalschedule.md
   - docs/models/components/achwithdrawalscheduleamount.md
   - docs/models/components/achwithdrawalschedulecreate.md
+  - docs/models/components/achwithdrawalscheduleenddate.md
   - docs/models/components/achwithdrawalschedulefederaltaxwithholding.md
   - docs/models/components/achwithdrawalscheduleiradistributionamount.md
   - docs/models/components/achwithdrawalscheduleiradistributionfederaltaxwithholdingamount.md
@@ -2335,6 +2336,7 @@ generatedFiles:
   - docs/models/components/setextrareportingdatarequestcreate.md
   - docs/models/components/settled.md
   - docs/models/components/settledate.md
+  - docs/models/components/settledcashavailabletowithdraw.md
   - docs/models/components/settlementconvention.md
   - docs/models/components/settlementdate.md
   - docs/models/components/settlementmethod.md
@@ -2422,6 +2424,7 @@ generatedFiles:
   - docs/models/components/tradeallocationstate.md
   - docs/models/components/tradeallocationtoside.md
   - docs/models/components/tradeallocationwhenissued.md
+  - docs/models/components/tradecashavailabletowithdraw.md
   - docs/models/components/tradeconfirmationdeliverypreference.md
   - docs/models/components/tradecreate.md
   - docs/models/components/tradecreateassettype.md
@@ -2442,6 +2445,7 @@ generatedFiles:
   - docs/models/components/transfercreate.md
   - docs/models/components/transferschedulesummary.md
   - docs/models/components/transferschedulesummaryamount.md
+  - docs/models/components/transferschedulesummaryenddate.md
   - docs/models/components/transferschedulesummaryfederaltaxwithholding.md
   - docs/models/components/transferschedulesummarymechanism.md
   - docs/models/components/transferschedulesummarypercentage.md
@@ -2538,6 +2542,7 @@ generatedFiles:
   - docs/models/components/wirewithdrawalscheduleamount.md
   - docs/models/components/wirewithdrawalschedulebeneficiary.md
   - docs/models/components/wirewithdrawalschedulecreate.md
+  - docs/models/components/wirewithdrawalscheduleenddate.md
   - docs/models/components/wirewithdrawalschedulefederaltaxwithholding.md
   - docs/models/components/wirewithdrawalschedulepercentage.md
   - docs/models/components/wirewithdrawalschedulerecipientbankaddress.md
@@ -2948,7 +2953,6 @@ generatedFiles:
   - docs/sdks/basketorders/README.md
   - docs/sdks/cashbalances/README.md
   - docs/sdks/checks/README.md
-  - docs/sdks/createorder/README.md
   - docs/sdks/dataretrieval/README.md
   - docs/sdks/enrollmentsandagreements/README.md
   - docs/sdks/feesandcredits/README.md
@@ -2959,6 +2963,7 @@ generatedFiles:
   - docs/sdks/journals/README.md
   - docs/sdks/ledger/README.md
   - docs/sdks/margins/README.md
+  - docs/sdks/orders/README.md
   - docs/sdks/personmanagement/README.md
   - docs/sdks/reader/README.md
   - docs/sdks/retirements/README.md
@@ -2994,6 +2999,7 @@ generatedFiles:
   - margins.go
   - models/operations/options.go
   - models/sdkerrors/sdkerror.go
+  - orders.go
   - personmanagement.go
   - reader.go
   - retirements.go

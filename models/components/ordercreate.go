@@ -103,13 +103,14 @@ const (
 	SpecialReportingInstructionsThirdMarket                             SpecialReportingInstructions = "THIRD_MARKET"
 	SpecialReportingInstructionsSuppressTraceReporting                  SpecialReportingInstructions = "SUPPRESS_TRACE_REPORTING"
 	SpecialReportingInstructionsWhenDistributed                         SpecialReportingInstructions = "WHEN_DISTRIBUTED"
+	SpecialReportingInstructionsRoundUp                                 SpecialReportingInstructions = "ROUND_UP"
 )
 
 func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions {
 	return &e
 }
 
-// TimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+// TimeInForce - Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type TimeInForce string
 
 const (
@@ -201,7 +202,7 @@ type OrderCreate struct {
 	SpecialReportingInstructions []SpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// A stop price definition
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
-	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+	// Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce TimeInForce `json:"time_in_force"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//

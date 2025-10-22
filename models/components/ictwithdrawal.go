@@ -29,6 +29,7 @@ const (
 	IctWithdrawalProgramBrokerPartner         IctWithdrawalProgram = "BROKER_PARTNER"
 	IctWithdrawalProgramDepositOnly           IctWithdrawalProgram = "DEPOSIT_ONLY"
 	IctWithdrawalProgramBankingPartner        IctWithdrawalProgram = "BANKING_PARTNER"
+	IctWithdrawalProgramMoneyTransmitter      IctWithdrawalProgram = "MONEY_TRANSMITTER"
 	IctWithdrawalProgramWithdrawalOnly        IctWithdrawalProgram = "WITHDRAWAL_ONLY"
 	IctWithdrawalProgramDigitalPartner        IctWithdrawalProgram = "DIGITAL_PARTNER"
 )

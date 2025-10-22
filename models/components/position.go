@@ -2,7 +2,7 @@
 
 package components
 
-// AdjustedSettled - `settled` + any as of settled amounts for the date
+// AdjustedSettled - This field shows settled positions that have been adjusted to account for as-of transactions (transactions recorded after their actual occurrence). Unlike the settled field, which remains unchanged for historical dates when as-of transactions are recorded, the adjusted_settled field updates to reflect what the position would have been if all transactions had been recorded on their actual dates of occurrence.
 type AdjustedSettled struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -15,7 +15,7 @@ func (o *AdjustedSettled) GetValue() *string {
 	return o.Value
 }
 
-// AdjustedTrade - `trade` + any as of trade amounts for the date
+// AdjustedTrade - This value reflects trade positions that have been adjusted due to the recording of transactions after their actual occurrence (as-of transactions). The key difference between this field and the trade field is that when an as-of transaction is recorded to the Ledger, the trade field will not change for historical dates, but the adjusted_trade field will update to reflect what the position would have been if the as-of transaction had been recorded on the date of its occurrence
 type AdjustedTrade struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -28,7 +28,7 @@ func (o *AdjustedTrade) GetValue() *string {
 	return o.Value
 }
 
-// Date - The date for which the positions were calculated
+// Date - The date for which positions were calculated
 type Date struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -59,7 +59,7 @@ func (o *Date) GetYear() *int {
 	return o.Year
 }
 
-// PositionFpsl - Quantity of asset in use by the FPSL program. Should not be used by currency assets
+// PositionFpsl - Represents the amount of an asset that has been loaned out via the fully paid securities lending program
 type PositionFpsl struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -72,7 +72,7 @@ func (o *PositionFpsl) GetValue() *string {
 	return o.Value
 }
 
-// Free - Quantity of asset available for allocation for use by the FPSL program. Raw bucket values. These denote that a position is allocated to this purpose. Values may be negative
+// Free - Represents the amount of an asset that is available to loan by the fully paid securities lending program.
 type Free struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -85,7 +85,7 @@ func (o *Free) GetValue() *string {
 	return o.Value
 }
 
-// LastAdjustedDate - The most recent date an adjustment occurred
+// LastAdjustedDate - The most recent date a position changed in any way
 type LastAdjustedDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -116,7 +116,7 @@ func (o *LastAdjustedDate) GetYear() *int {
 	return o.Year
 }
 
-// PendingDrip - Quantity of currency from a dividend being reserved for reinvestment. should not be used by non-currency assets
+// PendingDrip - Represents the amount of cash that has been paid to an account due to a dividend or capital gain but is due to be reinvested in the security that paid the account holder
 type PendingDrip struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -129,7 +129,7 @@ func (o *PendingDrip) GetValue() *string {
 	return o.Value
 }
 
-// PendingOutgoingAcat - Quantity/ amount of asset restricted due to an outgoing acat request
+// PendingOutgoingAcat - Represents the amount of an asset that is subject to a pending outgoing account transfer, but has not completed the bookkeeping phase of that account transfer
 type PendingOutgoingAcat struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -142,7 +142,7 @@ func (o *PendingOutgoingAcat) GetValue() *string {
 	return o.Value
 }
 
-// PendingWithdrawal - Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+// PendingWithdrawal - Represents the amount of cash that has been requested for withdrawal but has not posted to the Ledger
 type PendingWithdrawal struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -155,7 +155,7 @@ func (o *PendingWithdrawal) GetValue() *string {
 	return o.Value
 }
 
-// Settled - Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket values to represet the total settled position in an account  Currently defined as `free` + `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are added this value will need to change to reflect them
+// Settled - This field refers to the quantity of assets that have completed the entire clearing and settlement cycle, where ownership of the securities has been officially transferred and payment has been fully processed. The settled position includes all transactions that have been recorded in the Ledger with process_date, activity_date, and settle_date on or before the date specified in the response.
 type Settled struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -168,7 +168,7 @@ func (o *Settled) GetValue() *string {
 	return o.Value
 }
 
-// PositionTrade - original trade position
+// PositionTrade - This field represents the total amount of an asset owned by the account including transactions that have been executed but not yet settled, commonly known as the trade date position. It includes all transactions recorded in the Ledger with process_date and activity_date on or before the date in the response, even those with future settle_dates. Unlike the settled position, which only includes completed settlements, the trade position provides a forward-looking view of ownership that accounts for pending settlements
 type PositionTrade struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -181,7 +181,7 @@ func (o *PositionTrade) GetValue() *string {
 	return o.Value
 }
 
-// Unrestricted - Computed based on the bucket values to represent the total unrestricted position in an account. Will always be less than or equal to `settled`  settled - (pending_outgoing_acat + pending_drip + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust this to either incorporate the new value or not
+// Unrestricted - This field represents the portion of a settled position that is available for trading or withdrawal without restrictions. It is calculated by subtracting positions with pending restrictions from the total settled amount (currently: settled - (pending_outgoing_acat + pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex may update this calculation to incorporate these values. Note that the Cash and Margin systems may place additional restrictions on cash/ assets according to their business logic.
 type Unrestricted struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -198,37 +198,37 @@ func (o *Unrestricted) GetValue() *string {
 type Position struct {
 	// A globally unique identifier referencing a single account; this is the main identifier for an account used for machine-to-machine interactions
 	AccountID *string `json:"account_id,omitempty"`
-	// `settled` + any as of settled amounts for the date
+	// This field shows settled positions that have been adjusted to account for as-of transactions (transactions recorded after their actual occurrence). Unlike the settled field, which remains unchanged for historical dates when as-of transactions are recorded, the adjusted_settled field updates to reflect what the position would have been if all transactions had been recorded on their actual dates of occurrence.
 	AdjustedSettled *AdjustedSettled `json:"adjusted_settled,omitempty"`
-	// `trade` + any as of trade amounts for the date
+	// This value reflects trade positions that have been adjusted due to the recording of transactions after their actual occurrence (as-of transactions). The key difference between this field and the trade field is that when an as-of transaction is recorded to the Ledger, the trade field will not change for historical dates, but the adjusted_trade field will update to reflect what the position would have been if the as-of transaction had been recorded on the date of its occurrence
 	AdjustedTrade *AdjustedTrade `json:"adjusted_trade,omitempty"`
 	// An Apex-provided, global identifier created on a per asset bases which provides connectivity across all areas
 	AssetID *string `json:"asset_id,omitempty"`
 	// The correspondent id associated with the account for the position
 	CorrespondentID *string `json:"correspondent_id,omitempty"`
-	// The date for which the positions were calculated
+	// The date for which positions were calculated
 	Date *Date `json:"date,omitempty"`
-	// Quantity of asset in use by the FPSL program. Should not be used by currency assets
+	// Represents the amount of an asset that has been loaned out via the fully paid securities lending program
 	Fpsl *PositionFpsl `json:"fpsl,omitempty"`
-	// Quantity of asset available for allocation for use by the FPSL program. Raw bucket values. These denote that a position is allocated to this purpose. Values may be negative
+	// Represents the amount of an asset that is available to loan by the fully paid securities lending program.
 	Free *Free `json:"free,omitempty"`
-	// The most recent date an adjustment occurred
+	// The most recent date a position changed in any way
 	LastAdjustedDate *LastAdjustedDate `json:"last_adjusted_date,omitempty"`
 	// accounts/{account_id}/positions/{position_id}
 	Name *string `json:"name,omitempty"`
-	// Quantity of currency from a dividend being reserved for reinvestment. should not be used by non-currency assets
+	// Represents the amount of cash that has been paid to an account due to a dividend or capital gain but is due to be reinvested in the security that paid the account holder
 	PendingDrip *PendingDrip `json:"pending_drip,omitempty"`
-	// Quantity/ amount of asset restricted due to an outgoing acat request
+	// Represents the amount of an asset that is subject to a pending outgoing account transfer, but has not completed the bookkeeping phase of that account transfer
 	PendingOutgoingAcat *PendingOutgoingAcat `json:"pending_outgoing_acat,omitempty"`
-	// Quantity of currency being reserved for withdrawal. should not be used by non-currency assets
+	// Represents the amount of cash that has been requested for withdrawal but has not posted to the Ledger
 	PendingWithdrawal *PendingWithdrawal `json:"pending_withdrawal,omitempty"`
-	// The position version for an asset/account combo. This number only increases, such that larger `position_version`s are newer than lower ones.
+	// Represents a chronologically-ordered version identifier that enables efficient position state tracking and event ordering. The system guarantees that positions from earlier dates have smaller version numbers than those from later dates
 	PositionVersion *string `json:"position_version,omitempty"`
-	// Computed fieldsOriginal Settled Position before and as-of changesComputed based on the bucket values to represet the total settled position in an account  Currently defined as `free` + `fpsl` + `pending_outgoing_acat` + `drip` + `pending_withdrawal`, but if/when new buckets are added this value will need to change to reflect them
+	// This field refers to the quantity of assets that have completed the entire clearing and settlement cycle, where ownership of the securities has been officially transferred and payment has been fully processed. The settled position includes all transactions that have been recorded in the Ledger with process_date, activity_date, and settle_date on or before the date specified in the response.
 	Settled *Settled `json:"settled,omitempty"`
-	// original trade position
+	// This field represents the total amount of an asset owned by the account including transactions that have been executed but not yet settled, commonly known as the trade date position. It includes all transactions recorded in the Ledger with process_date and activity_date on or before the date in the response, even those with future settle_dates. Unlike the settled position, which only includes completed settlements, the trade position provides a forward-looking view of ownership that accounts for pending settlements
 	Trade *PositionTrade `json:"trade,omitempty"`
-	// Computed based on the bucket values to represent the total unrestricted position in an account. Will always be less than or equal to `settled`  settled - (pending_outgoing_acat + pending_drip + pending_withdrawal) ; however, if/when the API adds new buckets, Apex may adjust this to either incorporate the new value or not
+	// This field represents the portion of a settled position that is available for trading or withdrawal without restrictions. It is calculated by subtracting positions with pending restrictions from the total settled amount (currently: settled - (pending_outgoing_acat + pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex may update this calculation to incorporate these values. Note that the Cash and Margin systems may place additional restrictions on cash/ assets according to their business logic.
 	Unrestricted *Unrestricted `json:"unrestricted,omitempty"`
 }
 

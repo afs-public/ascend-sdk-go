@@ -40,6 +40,7 @@ type AchDepositSchedulesCancelAchDepositScheduleResponse struct {
 	// OK
 	AchDepositSchedule *components.AchDepositSchedule
 	// INVALID_ARGUMENT: The request has an invalid argument.
+	// FAILED_PRECONDITION: The schedule is in a state that doesn't allow cancellation.
 	Status *components.Status
 }
 

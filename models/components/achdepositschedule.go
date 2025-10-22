@@ -127,6 +127,37 @@ func (o *AchDepositScheduleAmount) GetValue() *string {
 	return o.Value
 }
 
+// AchDepositScheduleEndDate - The schedule end date if there is a finite number of occurrences
+type AchDepositScheduleEndDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *AchDepositScheduleEndDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *AchDepositScheduleEndDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *AchDepositScheduleEndDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // AchDepositScheduleStartDate - The schedule start date
 type AchDepositScheduleStartDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -186,6 +217,8 @@ func (e AchDepositScheduleTimeUnit) ToPointer() *AchDepositScheduleTimeUnit {
 
 // AchDepositScheduleScheduleProperties - Common schedule properties
 type AchDepositScheduleScheduleProperties struct {
+	// The schedule end date if there is a finite number of occurrences
+	EndDate *AchDepositScheduleEndDate `json:"end_date,omitempty"`
 	// The number of occurrences (empty or 0 indicates unlimited occurrences)
 	Occurrences *int `json:"occurrences,omitempty"`
 	// The schedule start date
@@ -196,6 +229,13 @@ type AchDepositScheduleScheduleProperties struct {
 	TimeUnit *AchDepositScheduleTimeUnit `json:"time_unit,omitempty"`
 	// The multiplier used to determine the length of the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 	UnitMultiplier *int `json:"unit_multiplier,omitempty"`
+}
+
+func (o *AchDepositScheduleScheduleProperties) GetEndDate() *AchDepositScheduleEndDate {
+	if o == nil {
+		return nil
+	}
+	return o.EndDate
 }
 
 func (o *AchDepositScheduleScheduleProperties) GetOccurrences() *int {

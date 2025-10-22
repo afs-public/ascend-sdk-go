@@ -93,6 +93,32 @@ func (o *PendingDebitInterestAmount) GetValue() *string {
 	return o.Value
 }
 
+// SettledCashAvailableToWithdraw - The account's total settled balance in USD. Net balance of settled cash and settled cash equivalents This value can be positive or negative.
+type SettledCashAvailableToWithdraw struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *SettledCashAvailableToWithdraw) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// TradeCashAvailableToWithdraw - The account's total trade balance in USD. Real Time net balance of cash and cash equivalents in the investor account, inclusive of current day activity. This value can be positive or negative.
+type TradeCashAvailableToWithdraw struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *TradeCashAvailableToWithdraw) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // UnadjustedAvailableCashToWithdrawAmount - The account's unadjusted available cash to withdraw in USD. It is calculated based on the `open_balance_amount` and account activity. This value can be negative.
 type UnadjustedAvailableCashToWithdrawAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -151,6 +177,10 @@ type CalculateCashBalanceResponse struct {
 	PendingDebitInterestAmount *PendingDebitInterestAmount `json:"pending_debit_interest_amount,omitempty"`
 	// The account's pending withdrawals. Pending withdrawals may need review and have yet to post to the ledger. The amounts are **added** to `open_balance_amount` and `open_liquidity_amount` to calculate `available_cash_to_withdraw_amount` and `available_liquidity_amount`. Since withdrawals have negative amounts, the calculated values will **decrease**.
 	PendingWithdrawals []CalculateCashBalanceResponseTransferSummary `json:"pending_withdrawals,omitempty"`
+	// The account's total settled balance in USD. Net balance of settled cash and settled cash equivalents This value can be positive or negative.
+	SettledCashAvailableToWithdraw *SettledCashAvailableToWithdraw `json:"settled_cash_available_to_withdraw,omitempty"`
+	// The account's total trade balance in USD. Real Time net balance of cash and cash equivalents in the investor account, inclusive of current day activity. This value can be positive or negative.
+	TradeCashAvailableToWithdraw *TradeCashAvailableToWithdraw `json:"trade_cash_available_to_withdraw,omitempty"`
 	// The account's unadjusted available cash to withdraw in USD. It is calculated based on the `open_balance_amount` and account activity. This value can be negative.
 	UnadjustedAvailableCashToWithdrawAmount *UnadjustedAvailableCashToWithdrawAmount `json:"unadjusted_available_cash_to_withdraw_amount,omitempty"`
 	// The account's withheld deposit threshold. Amounts in `withheld_deposits` up to this threshold will be not be subtracted to calculate `available_cash_to_withdraw_amount` and `available_liquidity_amount`. This value is always non-negative.
@@ -262,6 +292,20 @@ func (o *CalculateCashBalanceResponse) GetPendingWithdrawals() []CalculateCashBa
 		return nil
 	}
 	return o.PendingWithdrawals
+}
+
+func (o *CalculateCashBalanceResponse) GetSettledCashAvailableToWithdraw() *SettledCashAvailableToWithdraw {
+	if o == nil {
+		return nil
+	}
+	return o.SettledCashAvailableToWithdraw
+}
+
+func (o *CalculateCashBalanceResponse) GetTradeCashAvailableToWithdraw() *TradeCashAvailableToWithdraw {
+	if o == nil {
+		return nil
+	}
+	return o.TradeCashAvailableToWithdraw
 }
 
 func (o *CalculateCashBalanceResponse) GetUnadjustedAvailableCashToWithdrawAmount() *UnadjustedAvailableCashToWithdrawAmount {

@@ -498,14 +498,6 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 * [GetCheckDeposit](docs/sdks/checks/README.md#getcheckdeposit) - Get Check Deposit
 
-### [CreateOrder](docs/sdks/createorder/README.md)
-
-* [CreateOrder](docs/sdks/createorder/README.md#createorder) - Create Order
-* [GetOrder](docs/sdks/createorder/README.md#getorder) - Get Order
-* [CancelOrder](docs/sdks/createorder/README.md#cancelorder) - Cancel Order
-* [SetExtraReportingData](docs/sdks/createorder/README.md#setextrareportingdata) - Set Extra Reporting Data
-* [ListCorrespondentOrders](docs/sdks/createorder/README.md#listcorrespondentorders) - List Correspondent Orders
-
 ### [DataRetrieval](docs/sdks/dataretrieval/README.md)
 
 * [ListSnapshots](docs/sdks/dataretrieval/README.md#listsnapshots) - List Snapshots
@@ -579,6 +571,14 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 ### [Margins](docs/sdks/margins/README.md)
 
 * [GetBuyingPower](docs/sdks/margins/README.md#getbuyingpower) - Get Buying Power
+
+### [Orders](docs/sdks/orders/README.md)
+
+* [CreateOrder](docs/sdks/orders/README.md#createorder) - Create Order
+* [GetOrder](docs/sdks/orders/README.md#getorder) - Get Order
+* [CancelOrder](docs/sdks/orders/README.md#cancelorder) - Cancel Order
+* [SetExtraReportingData](docs/sdks/orders/README.md#setextrareportingdata) - Set Extra Reporting Data
+* [ListCorrespondentOrders](docs/sdks/orders/README.md#listcorrespondentorders) - List Correspondent Orders
 
 ### [PersonManagement](docs/sdks/personmanagement/README.md)
 
