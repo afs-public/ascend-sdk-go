@@ -40,6 +40,7 @@ type WireWithdrawalSchedulesCancelWireWithdrawalScheduleResponse struct {
 	// OK
 	WireWithdrawalSchedule *components.WireWithdrawalSchedule
 	// INVALID_ARGUMENT: The request has an invalid argument.
+	// FAILED_PRECONDITION: The schedule is in a state that doesn't allow cancellation.
 	Status *components.Status
 }
 

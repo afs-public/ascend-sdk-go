@@ -388,6 +388,9 @@ const (
 	OrderRejectedReasonInvalidOrderQuantity                              OrderRejectedReason = "INVALID_ORDER_QUANTITY"
 	OrderRejectedReasonClientReceivedTimeRequired                        OrderRejectedReason = "CLIENT_RECEIVED_TIME_REQUIRED"
 	OrderRejectedReasonClientNotPermittedToUseTradingSession             OrderRejectedReason = "CLIENT_NOT_PERMITTED_TO_USE_TRADING_SESSION"
+	OrderRejectedReasonRoundUpAmountTooSmall                             OrderRejectedReason = "ROUND_UP_AMOUNT_TOO_SMALL"
+	OrderRejectedReasonAssetNotSetUpForRoundUps                          OrderRejectedReason = "ASSET_NOT_SET_UP_FOR_ROUND_UPS"
+	OrderRejectedReasonBelowRoundUpMinimum                               OrderRejectedReason = "BELOW_ROUND_UP_MINIMUM"
 	OrderRejectedReasonStopPriceBelowMarketPrice                         OrderRejectedReason = "STOP_PRICE_BELOW_MARKET_PRICE"
 )
 
@@ -521,6 +524,7 @@ const (
 	OrderSpecialReportingInstructionsThirdMarket                             OrderSpecialReportingInstructions = "THIRD_MARKET"
 	OrderSpecialReportingInstructionsSuppressTraceReporting                  OrderSpecialReportingInstructions = "SUPPRESS_TRACE_REPORTING"
 	OrderSpecialReportingInstructionsWhenDistributed                         OrderSpecialReportingInstructions = "WHEN_DISTRIBUTED"
+	OrderSpecialReportingInstructionsRoundUp                                 OrderSpecialReportingInstructions = "ROUND_UP"
 )
 
 func (e OrderSpecialReportingInstructions) ToPointer() *OrderSpecialReportingInstructions {
@@ -574,7 +578,7 @@ func (o *StopPrice) GetType() *OrderStopPriceType {
 	return o.Type
 }
 
-// OrderTimeInForce - Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+// OrderTimeInForce - Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 type OrderTimeInForce string
 
 const (
@@ -727,7 +731,7 @@ type Order struct {
 	SpecialReportingInstructions []OrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// The stop price for this order. Only allowed for equities.
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
-	// Must be the value "DAY". Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+	// Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`
 	// The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
 	TimeInForceExpirationDate *TimeInForceExpirationDate `json:"time_in_force_expiration_date,omitempty"`

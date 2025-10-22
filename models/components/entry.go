@@ -158,6 +158,8 @@ type AccountTransfer struct {
 	FairMarketValue *FairMarketValue `json:"fair_market_value,omitempty"`
 	// Date from which the asset was valued and used in the fair market value calculation
 	FairMarketValueDate *FairMarketValueDate `json:"fair_market_value_date,omitempty"`
+	// Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by cost basis and tax systems to ensure proper tax treatment and reporting compliance.
+	GiftTransfer *bool `json:"gift_transfer,omitempty"`
 	// Contra party institution for the account transfer
 	Institution *string `json:"institution,omitempty"`
 	// the method used for the account transfer
@@ -225,6 +227,13 @@ func (o *AccountTransfer) GetFairMarketValueDate() *FairMarketValueDate {
 		return nil
 	}
 	return o.FairMarketValueDate
+}
+
+func (o *AccountTransfer) GetGiftTransfer() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.GiftTransfer
 }
 
 func (o *AccountTransfer) GetInstitution() *string {
@@ -6586,6 +6595,7 @@ const (
 	DistributionTypeNetIncomeAttributable                      DistributionType = "NET_INCOME_ATTRIBUTABLE"
 	DistributionTypeRevocation                                 DistributionType = "REVOCATION"
 	DistributionTypeNonReportable                              DistributionType = "NON_REPORTABLE"
+	DistributionTypeQualifiedCharitableDistribution            DistributionType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e DistributionType) ToPointer() *DistributionType {

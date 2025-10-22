@@ -22,6 +22,7 @@ const (
 	DirectionDirectionUnspecified Direction = "DIRECTION_UNSPECIFIED"
 	DirectionDeposit              Direction = "DEPOSIT"
 	DirectionWithdrawal           Direction = "WITHDRAWAL"
+	DirectionJournal              Direction = "JOURNAL"
 )
 
 func (e Direction) ToPointer() *Direction {
@@ -32,8 +33,10 @@ func (e Direction) ToPointer() *Direction {
 type TransferScheduleSummaryMechanism string
 
 const (
-	TransferScheduleSummaryMechanismAch  TransferScheduleSummaryMechanism = "ACH"
-	TransferScheduleSummaryMechanismWire TransferScheduleSummaryMechanism = "WIRE"
+	TransferScheduleSummaryMechanismAch         TransferScheduleSummaryMechanism = "ACH"
+	TransferScheduleSummaryMechanismCashJournal TransferScheduleSummaryMechanism = "CASH_JOURNAL"
+	TransferScheduleSummaryMechanismCheck       TransferScheduleSummaryMechanism = "CHECK"
+	TransferScheduleSummaryMechanismWire        TransferScheduleSummaryMechanism = "WIRE"
 )
 
 func (e TransferScheduleSummaryMechanism) ToPointer() *TransferScheduleSummaryMechanism {
@@ -291,6 +294,37 @@ func (o *TransferScheduleSummaryRetirementDistribution) GetType() *TransferSched
 	return o.Type
 }
 
+// TransferScheduleSummaryEndDate - The schedule end date if there is a finite number of occurrences
+type TransferScheduleSummaryEndDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *TransferScheduleSummaryEndDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *TransferScheduleSummaryEndDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *TransferScheduleSummaryEndDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // StartDate - The schedule start date
 type StartDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -350,6 +384,8 @@ func (e TransferScheduleSummaryTimeUnit) ToPointer() *TransferScheduleSummaryTim
 
 // ScheduleProperties - Common schedule properties
 type ScheduleProperties struct {
+	// The schedule end date if there is a finite number of occurrences
+	EndDate *TransferScheduleSummaryEndDate `json:"end_date,omitempty"`
 	// The number of occurrences (empty or 0 indicates unlimited occurrences)
 	Occurrences *int `json:"occurrences,omitempty"`
 	// The schedule start date
@@ -360,6 +396,13 @@ type ScheduleProperties struct {
 	TimeUnit *TransferScheduleSummaryTimeUnit `json:"time_unit,omitempty"`
 	// The multiplier used to determine the length of the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 	UnitMultiplier *int `json:"unit_multiplier,omitempty"`
+}
+
+func (o *ScheduleProperties) GetEndDate() *TransferScheduleSummaryEndDate {
+	if o == nil {
+		return nil
+	}
+	return o.EndDate
 }
 
 func (o *ScheduleProperties) GetOccurrences() *int {

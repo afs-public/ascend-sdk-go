@@ -14,10 +14,10 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestCreateOrder_CreateOrderSetExtraReportingData(t *testing.T) {
+func TestOrder_OrderSetExtraReportingData(t *testing.T) {
 	ctx := context.Background()
 
-	testHTTPClient := createTestHTTPClient("CreateOrder_SetExtraReportingData")
+	testHTTPClient := createTestHTTPClient("Order_SetExtraReportingData")
 
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
@@ -33,7 +33,7 @@ func TestCreateOrder_CreateOrderSetExtraReportingData(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.CreateOrder.SetExtraReportingData(ctx, "01K6P14WKCJT0G38KKHY52M4BQ", "a73f4471-832c-4ff2-9b14-f44420592a67", components.SetExtraReportingDataRequestCreate{
+	res, err := s.Orders.SetExtraReportingData(ctx, "01K6P14WKCJT0G38KKHY52M4BQ", "a73f4471-832c-4ff2-9b14-f44420592a67", components.SetExtraReportingDataRequestCreate{
 		CancelConfirmedTime: types.MustNewTimeFromString("2025-12-13T15:28:17.262732Z"),
 		Name:                "accounts/01K6P14WKCJT0G38KKHY52M4BQ/orders/a73f4471-832c-4ff2-9b14-f44420592a67",
 	})
@@ -42,10 +42,10 @@ func TestCreateOrder_CreateOrderSetExtraReportingData(t *testing.T) {
 
 }
 
-func TestCreateOrder_CreateOrderListCorrespondentOrders(t *testing.T) {
+func TestOrder_OrderListCorrespondentOrders(t *testing.T) {
 	ctx := context.Background()
 
-	testHTTPClient := createTestHTTPClient("CreateOrder_ListCorrespondentOrders")
+	testHTTPClient := createTestHTTPClient("Order_ListCorrespondentOrders")
 
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
@@ -61,7 +61,7 @@ func TestCreateOrder_CreateOrderListCorrespondentOrders(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.CreateOrder.ListCorrespondentOrders(ctx, utils.GetEnv("CORRESPONDENT_ID", ""), ascendsdkgo.String(""), ascendsdkgo.Int(25), ascendsdkgo.String(""))
+	res, err := s.Orders.ListCorrespondentOrders(ctx, utils.GetEnv("CORRESPONDENT_ID", ""), ascendsdkgo.String(""), ascendsdkgo.Int(25), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

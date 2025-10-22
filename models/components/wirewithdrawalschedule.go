@@ -506,6 +506,37 @@ func (o *WireWithdrawalScheduleAmount) GetValue() *string {
 	return o.Value
 }
 
+// WireWithdrawalScheduleEndDate - The schedule end date if there is a finite number of occurrences
+type WireWithdrawalScheduleEndDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *WireWithdrawalScheduleEndDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *WireWithdrawalScheduleEndDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *WireWithdrawalScheduleEndDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // WireWithdrawalScheduleStartDate - The schedule start date
 type WireWithdrawalScheduleStartDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
@@ -565,6 +596,8 @@ func (e WireWithdrawalScheduleTimeUnit) ToPointer() *WireWithdrawalScheduleTimeU
 
 // WireWithdrawalScheduleScheduleProperties - Common schedule properties
 type WireWithdrawalScheduleScheduleProperties struct {
+	// The schedule end date if there is a finite number of occurrences
+	EndDate *WireWithdrawalScheduleEndDate `json:"end_date,omitempty"`
 	// The number of occurrences (empty or 0 indicates unlimited occurrences)
 	Occurrences *int `json:"occurrences,omitempty"`
 	// The schedule start date
@@ -575,6 +608,13 @@ type WireWithdrawalScheduleScheduleProperties struct {
 	TimeUnit *WireWithdrawalScheduleTimeUnit `json:"time_unit,omitempty"`
 	// The multiplier used to determine the length of the interval between transfers. The time period between transfers in a scheduled series is the unit of time times the multiplier
 	UnitMultiplier *int `json:"unit_multiplier,omitempty"`
+}
+
+func (o *WireWithdrawalScheduleScheduleProperties) GetEndDate() *WireWithdrawalScheduleEndDate {
+	if o == nil {
+		return nil
+	}
+	return o.EndDate
 }
 
 func (o *WireWithdrawalScheduleScheduleProperties) GetOccurrences() *int {

@@ -11,5 +11,6 @@ The ICT program associated with the report.
 | `LocateIctReportResponseProgramBrokerPartner`         | BROKER_PARTNER                                        |
 | `LocateIctReportResponseProgramDepositOnly`           | DEPOSIT_ONLY                                          |
 | `LocateIctReportResponseProgramBankingPartner`        | BANKING_PARTNER                                       |
+| `LocateIctReportResponseProgramMoneyTransmitter`      | MONEY_TRANSMITTER                                     |
 | `LocateIctReportResponseProgramWithdrawalOnly`        | WITHDRAWAL_ONLY                                       |
 | `LocateIctReportResponseProgramDigitalPartner`        | DIGITAL_PARTNER                                       |

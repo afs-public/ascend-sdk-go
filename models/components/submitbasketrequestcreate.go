@@ -2,10 +2,36 @@
 
 package components
 
+import (
+	"time"
+
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
+)
+
 // SubmitBasketRequestCreate - The message to submit a basket for execution in the market
 type SubmitBasketRequestCreate struct {
+	// Time the basket submission request was sent by the client. This is a required field for clients that we report on behalf of, and it will be validated accordingly.
+	ClientBasketSubmitTime *time.Time `json:"client_basket_submit_time,omitempty"`
 	// Format: correspondents/{correspondent}/baskets/{basket}
 	Name string `json:"name"`
+}
+
+func (s SubmitBasketRequestCreate) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SubmitBasketRequestCreate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"name"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *SubmitBasketRequestCreate) GetClientBasketSubmitTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientBasketSubmitTime
 }
 
 func (o *SubmitBasketRequestCreate) GetName() string {

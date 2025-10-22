@@ -36,6 +36,8 @@ type Basket struct {
 	BasketState *BasketState `json:"basket_state,omitempty"`
 	// User-supplied unique basket ID. Cannot be more than 40 characters long.
 	ClientBasketID *string `json:"client_basket_id,omitempty"`
+	// Time the basket submission request was sent by the client. This is a situationally optional field that reflects the value provided by the user in the SubmitBasketRequest.
+	ClientBasketSubmitTime *time.Time `json:"client_basket_submit_time,omitempty"`
 	// Time the basket was completed
 	CompleteTime *time.Time `json:"complete_time,omitempty"`
 	// Number of compressed orders in the basket that will go to market. This number is calculated after basket submission.
@@ -93,6 +95,13 @@ func (o *Basket) GetClientBasketID() *string {
 		return nil
 	}
 	return o.ClientBasketID
+}
+
+func (o *Basket) GetClientBasketSubmitTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientBasketSubmitTime
 }
 
 func (o *Basket) GetCompleteTime() *time.Time {

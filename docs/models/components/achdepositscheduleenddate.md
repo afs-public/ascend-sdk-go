@@ -1,6 +1,6 @@
-# LastAdjustedDate
+# AchDepositScheduleEndDate
 
-The most recent date a position changed in any way
+The schedule end date if there is a finite number of occurrences
 
 
 ## Fields

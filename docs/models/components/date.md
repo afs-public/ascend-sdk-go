@@ -1,6 +1,6 @@
 # Date
 
-The date for which the positions were calculated
+The date for which positions were calculated
 
 
 ## Fields

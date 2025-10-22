@@ -10,6 +10,7 @@ const (
 	ProgramBrokerPartner         Program = "BROKER_PARTNER"
 	ProgramDepositOnly           Program = "DEPOSIT_ONLY"
 	ProgramBankingPartner        Program = "BANKING_PARTNER"
+	ProgramMoneyTransmitter      Program = "MONEY_TRANSMITTER"
 	ProgramWithdrawalOnly        Program = "WITHDRAWAL_ONLY"
 	ProgramDigitalPartner        Program = "DIGITAL_PARTNER"
 )

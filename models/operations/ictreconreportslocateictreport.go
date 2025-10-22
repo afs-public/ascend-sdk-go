@@ -17,6 +17,7 @@ const (
 	ProgramDateFilterProgramBrokerPartner         ProgramDateFilterProgram = "BROKER_PARTNER"
 	ProgramDateFilterProgramDepositOnly           ProgramDateFilterProgram = "DEPOSIT_ONLY"
 	ProgramDateFilterProgramBankingPartner        ProgramDateFilterProgram = "BANKING_PARTNER"
+	ProgramDateFilterProgramMoneyTransmitter      ProgramDateFilterProgram = "MONEY_TRANSMITTER"
 	ProgramDateFilterProgramWithdrawalOnly        ProgramDateFilterProgram = "WITHDRAWAL_ONLY"
 	ProgramDateFilterProgramDigitalPartner        ProgramDateFilterProgram = "DIGITAL_PARTNER"
 )
@@ -37,6 +38,8 @@ func (e *ProgramDateFilterProgram) UnmarshalJSON(data []byte) error {
 	case "DEPOSIT_ONLY":
 		fallthrough
 	case "BANKING_PARTNER":
+		fallthrough
+	case "MONEY_TRANSMITTER":
 		fallthrough
 	case "WITHDRAWAL_ONLY":
 		fallthrough
