@@ -12,3 +12,4 @@ The type of asset referenced by the security identifier
 | `RetrieveQuoteResponseAssetTypeFixedIncome`          | FIXED_INCOME                                         |
 | `RetrieveQuoteResponseAssetTypeMutualFund`           | MUTUAL_FUND                                          |
 | `RetrieveQuoteResponseAssetTypeOption`               | OPTION                                               |
+| `RetrieveQuoteResponseAssetTypeEventContract`        | EVENT_CONTRACT                                       |

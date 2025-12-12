@@ -27,6 +27,7 @@ const (
 	DistributionConstraintsDistributionTypeInfoTypeNetIncomeAttributable                      DistributionConstraintsDistributionTypeInfoType = "NET_INCOME_ATTRIBUTABLE"
 	DistributionConstraintsDistributionTypeInfoTypeRevocation                                 DistributionConstraintsDistributionTypeInfoType = "REVOCATION"
 	DistributionConstraintsDistributionTypeInfoTypeNonReportable                              DistributionConstraintsDistributionTypeInfoType = "NON_REPORTABLE"
+	DistributionConstraintsDistributionTypeInfoTypeQualifiedCharitableDistribution            DistributionConstraintsDistributionTypeInfoType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e DistributionConstraintsDistributionTypeInfoType) ToPointer() *DistributionConstraintsDistributionTypeInfoType {

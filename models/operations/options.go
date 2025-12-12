@@ -4,10 +4,9 @@ package operations
 
 import (
 	"errors"
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/retry"
+	"time"
 )
 
 var ErrUnsupportedOption = errors.New("unsupported option")

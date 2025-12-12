@@ -21,7 +21,6 @@ Otherwise, must be empty.
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointCp`                   | REGISTRATION_JOINT_CP                                                                  |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationEstate`                    | REGISTRATION_ESTATE                                                                    |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraTraditional`            | REGISTRATION_IRA_TRADITIONAL                                                           |
-| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSimple`                 | REGISTRATION_IRA_SIMPLE                                                                |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSep`                    | REGISTRATION_IRA_SEP                                                                   |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRoth`                   | REGISTRATION_IRA_ROTH                                                                  |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                                                              |

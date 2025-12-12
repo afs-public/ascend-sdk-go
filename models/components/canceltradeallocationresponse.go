@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // CancelTradeAllocationResponseAccruedInterestAmount - The amount of interest that has been accrued in the issuing currency for a single instrument.

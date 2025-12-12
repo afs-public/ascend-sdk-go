@@ -28,6 +28,19 @@ func (e LLCEnrollmentMetadataCreateFdicCashSweep) ToPointer() *LLCEnrollmentMeta
 	return &e
 }
 
+// LLCEnrollmentMetadataCreateMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+type LLCEnrollmentMetadataCreateMoneyMarketFundSweep string
+
+const (
+	LLCEnrollmentMetadataCreateMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified LLCEnrollmentMetadataCreateMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
+	LLCEnrollmentMetadataCreateMoneyMarketFundSweepMoneyMarketFundSweepEnroll                LLCEnrollmentMetadataCreateMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
+	LLCEnrollmentMetadataCreateMoneyMarketFundSweepMoneyMarketFundSweepDecline               LLCEnrollmentMetadataCreateMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
+)
+
+func (e LLCEnrollmentMetadataCreateMoneyMarketFundSweep) ToPointer() *LLCEnrollmentMetadataCreateMoneyMarketFundSweep {
+	return &e
+}
+
 type LLCEnrollmentMetadataCreate struct {
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *LLCEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
@@ -35,6 +48,8 @@ type LLCEnrollmentMetadataCreate struct {
 	EddAccountEnrollmentMetadata *EddAccountEnrollmentMetadataCreate `json:"edd_account_enrollment_metadata,omitempty"`
 	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *LLCEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
+	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+	MoneyMarketFundSweep *LLCEnrollmentMetadataCreateMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
 }
 
 func (o *LLCEnrollmentMetadataCreate) GetDividendReinvestmentPlan() *LLCEnrollmentMetadataCreateDividendReinvestmentPlan {
@@ -56,4 +71,11 @@ func (o *LLCEnrollmentMetadataCreate) GetFdicCashSweep() *LLCEnrollmentMetadataC
 		return nil
 	}
 	return o.FdicCashSweep
+}
+
+func (o *LLCEnrollmentMetadataCreate) GetMoneyMarketFundSweep() *LLCEnrollmentMetadataCreateMoneyMarketFundSweep {
+	if o == nil {
+		return nil
+	}
+	return o.MoneyMarketFundSweep
 }

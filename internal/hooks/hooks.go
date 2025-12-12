@@ -5,9 +5,8 @@ package hooks
 import (
 	"context"
 	"errors"
-	"net/http"
-
 	"github.com/afs-public/ascend-sdk-go/internal/config"
+	"net/http"
 )
 
 type FailEarly struct {

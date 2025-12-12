@@ -2,6 +2,20 @@
 
 package components
 
+// CftcDocumentDeliveryPreference - Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+type CftcDocumentDeliveryPreference string
+
+const (
+	CftcDocumentDeliveryPreferenceDeliveryPreferenceUnspecified CftcDocumentDeliveryPreference = "DELIVERY_PREFERENCE_UNSPECIFIED"
+	CftcDocumentDeliveryPreferenceDigital                       CftcDocumentDeliveryPreference = "DIGITAL"
+	CftcDocumentDeliveryPreferencePhysical                      CftcDocumentDeliveryPreference = "PHYSICAL"
+	CftcDocumentDeliveryPreferenceSuppress                      CftcDocumentDeliveryPreference = "SUPPRESS"
+)
+
+func (e CftcDocumentDeliveryPreference) ToPointer() *CftcDocumentDeliveryPreference {
+	return &e
+}
+
 // InterestedPartyMailingAddress - The object containing data for the purpose of delivery physical mailings to a party; Typically used for statements, account updates, tax documents, and other postal mailings; May also be used as an alternative identity verification address to personalAddress. Required fields within the `mailing_address` object include:
 //   - `administrative_area`
 //   - `region_code` - 2 character CLDR Code
@@ -148,6 +162,8 @@ func (e InterestedPartyTradeConfirmationDeliveryPreference) ToPointer() *Interes
 
 // InterestedParty - An interested party.
 type InterestedParty struct {
+	// Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+	CftcDocumentDeliveryPreference *CftcDocumentDeliveryPreference `json:"cftc_document_delivery_preference,omitempty"`
 	// A system-generated unique identifier for an Interested Party on an account; Used to access the record after creation
 	InterestedPartyID *string `json:"interested_party_id,omitempty"`
 	// The object containing data for the purpose of delivery physical mailings to a party; Typically used for statements, account updates, tax documents, and other postal mailings; May also be used as an alternative identity verification address to personalAddress. Required fields within the `mailing_address` object include:
@@ -165,6 +181,13 @@ type InterestedParty struct {
 	StatementDeliveryPreference *InterestedPartyStatementDeliveryPreference `json:"statement_delivery_preference,omitempty"`
 	// Delivery method instruction for trade confirmations for a given Interested Party record; Can be `PHYSICAL`, `SUPPRESS`; Defaults to `PHYSICAL` on party creation
 	TradeConfirmationDeliveryPreference *InterestedPartyTradeConfirmationDeliveryPreference `json:"trade_confirmation_delivery_preference,omitempty"`
+}
+
+func (o *InterestedParty) GetCftcDocumentDeliveryPreference() *CftcDocumentDeliveryPreference {
+	if o == nil {
+		return nil
+	}
+	return o.CftcDocumentDeliveryPreference
 }
 
 func (o *InterestedParty) GetInterestedPartyID() *string {

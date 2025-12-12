@@ -28,6 +28,19 @@ func (e FdicCashSweep) ToPointer() *FdicCashSweep {
 	return &e
 }
 
+// MoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+type MoneyMarketFundSweep string
+
+const (
+	MoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified MoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
+	MoneyMarketFundSweepMoneyMarketFundSweepEnroll                MoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
+	MoneyMarketFundSweepMoneyMarketFundSweepDecline               MoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
+)
+
+func (e MoneyMarketFundSweep) ToPointer() *MoneyMarketFundSweep {
+	return &e
+}
+
 type CorporationEnrollmentMetadataCreate struct {
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *DividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
@@ -35,6 +48,8 @@ type CorporationEnrollmentMetadataCreate struct {
 	EddAccountEnrollmentMetadata *EddAccountEnrollmentMetadataCreate `json:"edd_account_enrollment_metadata,omitempty"`
 	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *FdicCashSweep `json:"fdic_cash_sweep,omitempty"`
+	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+	MoneyMarketFundSweep *MoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
 }
 
 func (o *CorporationEnrollmentMetadataCreate) GetDividendReinvestmentPlan() *DividendReinvestmentPlan {
@@ -56,4 +71,11 @@ func (o *CorporationEnrollmentMetadataCreate) GetFdicCashSweep() *FdicCashSweep 
 		return nil
 	}
 	return o.FdicCashSweep
+}
+
+func (o *CorporationEnrollmentMetadataCreate) GetMoneyMarketFundSweep() *MoneyMarketFundSweep {
+	if o == nil {
+		return nil
+	}
+	return o.MoneyMarketFundSweep
 }

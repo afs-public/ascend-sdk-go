@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // AccountCatAccountHolderType - The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
@@ -24,6 +23,19 @@ const (
 )
 
 func (e AccountCatAccountHolderType) ToPointer() *AccountCatAccountHolderType {
+	return &e
+}
+
+// CftcOwnerType - Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum only applies to accounts regulated by the CFTC
+type CftcOwnerType string
+
+const (
+	CftcOwnerTypeCftcOwnerTypeUnspecified CftcOwnerType = "CFTC_OWNER_TYPE_UNSPECIFIED"
+	CftcOwnerTypeCustomer                 CftcOwnerType = "CUSTOMER"
+	CftcOwnerTypeProprietary              CftcOwnerType = "PROPRIETARY"
+)
+
+func (e CftcOwnerType) ToPointer() *CftcOwnerType {
 	return &e
 }
 
@@ -416,7 +428,6 @@ const (
 	RegistrationTypeIndividualRegistration                    RegistrationType = "INDIVIDUAL_REGISTRATION"
 	RegistrationTypeEstateRegistration                        RegistrationType = "ESTATE_REGISTRATION"
 	RegistrationTypeTraditionalIraRegistration                RegistrationType = "TRADITIONAL_IRA_REGISTRATION"
-	RegistrationTypeSimpleIraRegistration                     RegistrationType = "SIMPLE_IRA_REGISTRATION"
 	RegistrationTypeSepIraRegistration                        RegistrationType = "SEP_IRA_REGISTRATION"
 	RegistrationTypeRothIraRegistration                       RegistrationType = "ROTH_IRA_REGISTRATION"
 	RegistrationTypeRolloverIraRegistration                   RegistrationType = "ROLLOVER_IRA_REGISTRATION"
@@ -493,7 +504,7 @@ func (e AccountCostBasisLotDisposalMethod) ToPointer() *AccountCostBasisLotDispo
 type AccountTaxProfile struct {
 	// A method of determining the cost basis of an asset that has been sold or disposed of, by identifying which specific lot of the asset was sold and using the cost of that lot to calculate the cost basis; this method is commonly used for tax purposes to determine the amount of reportable capital gains or losses By default, this is set to `COST_BASIS_LOT_DISPOSAL_MIN_TAX_TERM`
 	CostBasisLotDisposalMethod *AccountCostBasisLotDisposalMethod `json:"cost_basis_lot_disposal_method,omitempty"`
-	// Indicates if the account is eligible to mark-to-market their securities and commodities holdings; Named after the related section of the IRS tax code
+	// Indicates if the account is eligible to mark-to-market their securities and commodities holdings; Named after the related section of the IRS tax code. By default, this is set to `false`.
 	Section475Election *bool `json:"section_475_election,omitempty"`
 }
 
@@ -513,7 +524,7 @@ func (o *AccountTaxProfile) GetSection475Election() *bool {
 
 // An Account as represented in the account ecosystem.
 type Account struct {
-	// Indicates if the issuer of a security held by the account is permitted to communicate directly with the shareholder versus through the brokerage firm; This can include sending proxy statements, annual reports, and other important information directly to the shareholder's address on file with the brokerage firm
+	// Indicates if the issuer of a security held by the account is permitted to communicate directly with the shareholder versus through the brokerage firm; This can include sending proxy statements, annual reports, and other important information directly to the shareholder's address on file with the brokerage firm. By default, this is set to `false`.
 	AcceptsIssuerDirectCommunication *bool `json:"accepts_issuer_direct_communication,omitempty"`
 	// An Account Group is a way of segmenting accounts within a Correspondent; It is up to the client to define what these groups are and AFS Operations is responsible for configuring them; If the client requests additional groups/codes, they can be added; Examples of Account Groups could hypothetically include HNW (High Net Worth), GOLD (Gold Status Customer), and NWC (Northwest Branch Customer)
 	AccountGroupID *string `json:"account_group_id,omitempty"`
@@ -523,12 +534,14 @@ type Account struct {
 	AccountNumber *string `json:"account_number,omitempty"`
 	// The list of restrictions currently impacting a given account; Restrictions suspend one or more entitlements dependent on their mapping
 	ActiveRestrictions []string `json:"active_restrictions,omitempty"`
-	// A boolean to indicate if an account is advised
+	// A boolean to indicate if an account is advised. By default, this is set to `false`.
 	Advised *bool `json:"advised,omitempty"`
 	// The collection of legal agreements belonging to a given account
 	Agreements []Agreement `json:"agreements,omitempty"`
 	// The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
 	CatAccountHolderType *AccountCatAccountHolderType `json:"cat_account_holder_type,omitempty"`
+	// Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum only applies to accounts regulated by the CFTC
+	CftcOwnerType *CftcOwnerType `json:"cftc_owner_type,omitempty"`
 	// The time the account was closed; If the account is not closed, this is null
 	CloseTime *time.Time `json:"close_time,omitempty"`
 	// A unique identifier referencing a Correspondent; A Client may have several operating Correspondents within its purview.
@@ -551,7 +564,7 @@ type Account struct {
 	InterestedParties []InterestedParty `json:"interested_parties,omitempty"`
 	// The account's goals and customer's financial profile; Used to assess customer fitness and is required by FINRA
 	InvestmentProfile *InvestmentProfile `json:"investment_profile,omitempty"`
-	// A boolean to indicate if an account is managed
+	// A boolean to indicate if an account is managed. By default, this is set to `false`.
 	Managed *bool `json:"managed,omitempty"`
 	// An identifier generated for all non-cash accounts; Uses a combination of account type and owner information to tie accounts together in order to perform margin calculations
 	MarginGroupID *string `json:"margin_group_id,omitempty"`
@@ -563,7 +576,7 @@ type Account struct {
 	OwnershipType *OwnershipType `json:"ownership_type,omitempty"`
 	// Parties associated with the account (e.g. custodian).
 	Parties []Party `json:"parties,omitempty"`
-	// Indicates if the customer is a PDT; This is set if the account executes four or more day trades (buy and sell the same security intraday) within a period of five business days
+	// Indicates if the customer is a PDT; This is set if the account executes four or more day trades (buy and sell the same security intraday) within a period of five business days. By default, this is set to `false`.
 	PatternDayTrader *bool `json:"pattern_day_trader,omitempty"`
 	// The primary registered representative for the account
 	PrimaryRegisteredRepID *string `json:"primary_registered_rep_id,omitempty"`
@@ -579,7 +592,7 @@ type Account struct {
 	Title *string `json:"title,omitempty"`
 	// A list of persons designated to verify the well being of the account holder.
 	TrustedContacts []TrustedContact `json:"trusted_contacts,omitempty"`
-	// A boolean to indicate if an account is a wrap brokerage account
+	// A boolean to indicate if an account is a wrap brokerage account. By default, this is set to `false`.
 	WrapFeeBilled *bool `json:"wrap_fee_billed,omitempty"`
 }
 
@@ -648,6 +661,13 @@ func (o *Account) GetCatAccountHolderType() *AccountCatAccountHolderType {
 		return nil
 	}
 	return o.CatAccountHolderType
+}
+
+func (o *Account) GetCftcOwnerType() *CftcOwnerType {
+	if o == nil {
+		return nil
+	}
+	return o.CftcOwnerType
 }
 
 func (o *Account) GetCloseTime() *time.Time {

@@ -12,6 +12,7 @@
 * [ListBasketOrders](#listbasketorders) - List Basket Orders
 * [ListCompressedOrders](#listcompressedorders) - List Compressed Orders
 * [RemoveOrders](#removeorders) - Remove Basket Orders
+* [SetExtraReportingData](#setextrareportingdata) - Set Extra Reporting Data
 
 ## CreateBasket
 
@@ -480,10 +481,6 @@ func main() {
     )
 
     res, err := s.BasketOrders.RemoveOrders(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", components.RemoveOrdersRequestCreate{
-        ClientOrderIds: []string{
-            "77e4c4b9-38e7-469f-9a8d-cd8baf7c1952",
-            "4cff908e-aaed-401d-8ec9-929e3eb18cbc",
-        },
         Name: "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521",
     })
     if err != nil {
@@ -508,6 +505,74 @@ func main() {
 ### Response
 
 **[*operations.BasketOrdersServiceRemoveOrdersResponse](../../models/operations/basketordersserviceremoveordersresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SetExtraReportingData
+
+Sets extra reporting data to an existing basket order. Any SetExtraReportingDataRequest must include the name of the order and the cancel_confirmed_time
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="BasketOrdersService_SetExtraReportingData" method="post" path="/baskettrading/v1/correspondents/{correspondent_id}/baskets/{basket_id}:setExtraReportingData" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/types"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.BasketOrders.SetExtraReportingData(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "fffd326-72fa-4d2b-bd1f-45384fe5d521", components.SetExtraReportingDataRequestCreate{
+        CancelConfirmedTime: types.MustNewTimeFromString("2025-12-13T15:28:17.262732Z"),
+        Name: "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SetExtraReportingDataResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                      | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    | Example                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |                                                                                                                |
+| `correspondentID`                                                                                              | *string*                                                                                                       | :heavy_check_mark:                                                                                             | The correspondent id.                                                                                          | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                                     |
+| `basketID`                                                                                                     | *string*                                                                                                       | :heavy_check_mark:                                                                                             | The basket id.                                                                                                 | fffd326-72fa-4d2b-bd1f-45384fe5d521                                                                            |
+| `setExtraReportingDataRequestCreate`                                                                           | [components.SetExtraReportingDataRequestCreate](../../models/components/setextrareportingdatarequestcreate.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |                                                                                                                |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |                                                                                                                |
+
+### Response
+
+**[*operations.BasketOrdersServiceSetExtraReportingDataResponse](../../models/operations/basketordersservicesetextrareportingdataresponse.md), error**
 
 ### Errors
 

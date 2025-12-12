@@ -28,3 +28,4 @@ The type of retirement distribution.
 | `TransferScheduleSummaryRetirementDistributionTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                                       |
 | `TransferScheduleSummaryRetirementDistributionTypeRevocation`                                 | REVOCATION                                                                                    |
 | `TransferScheduleSummaryRetirementDistributionTypeNonReportable`                              | NON_REPORTABLE                                                                                |
+| `TransferScheduleSummaryRetirementDistributionTypeQualifiedCharitableDistribution`            | QUALIFIED_CHARITABLE_DISTRIBUTION                                                             |

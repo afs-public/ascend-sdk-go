@@ -28,3 +28,4 @@ The type of retirement distribution.
 | `CashJournalRetirementDistributionTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                           |
 | `CashJournalRetirementDistributionTypeRevocation`                                 | REVOCATION                                                                        |
 | `CashJournalRetirementDistributionTypeNonReportable`                              | NON_REPORTABLE                                                                    |
+| `CashJournalRetirementDistributionTypeQualifiedCharitableDistribution`            | QUALIFIED_CHARITABLE_DISTRIBUTION                                                 |

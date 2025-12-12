@@ -11,6 +11,8 @@
 * [LinkDocuments](#linkdocuments) - Link Documents
 * [GetWatchlistItem](#getwatchlistitem) - Get Watchlist Item
 * [GetCustomerIdentification](#getcustomeridentification) - Get Identity Verification
+* [CreateIdentityLookup](#createidentitylookup) - Create Identity Lookup
+* [VerifyIdentityLookup](#verifyidentitylookup) - Verify Identity Lookup
 
 ## GetInvestigation
 
@@ -409,3 +411,144 @@ func main() {
 | sdkerrors.Status   | 400, 403, 404      | application/json   |
 | sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## CreateIdentityLookup
+
+Creates a new identity lookup and initiates verification process
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="IdentityLookupService_CreateIdentityLookup" method="post" path="/cip/v1/correspondents/{correspondent_id}/identityLookups" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.Investigations.CreateIdentityLookup(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", components.IdentityLookupCreate{
+        DeviceMetadata: components.DeviceMetadataCreate{
+            IPAddress: "203.0.113.42",
+        },
+        Identification: components.IdentificationCreate{
+            RegionCode: "US",
+            Type: components.IdentificationCreateTypeSsn,
+            Value: "123-45-6789",
+        },
+        PhoneNumber: components.PhoneNumberCreate{},
+        UserConsent: true,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.IdentityLookup != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                          | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ctx`                                                                              | [context.Context](https://pkg.go.dev/context#Context)                              | :heavy_check_mark:                                                                 | The context to use for the request.                                                |                                                                                    |
+| `correspondentID`                                                                  | *string*                                                                           | :heavy_check_mark:                                                                 | The correspondent id.                                                              | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                         |
+| `identityLookupCreate`                                                             | [components.IdentityLookupCreate](../../models/components/identitylookupcreate.md) | :heavy_check_mark:                                                                 | N/A                                                                                |                                                                                    |
+| `opts`                                                                             | [][operations.Option](../../models/operations/option.md)                           | :heavy_minus_sign:                                                                 | The options for this request.                                                      |                                                                                    |
+
+### Response
+
+**[*operations.IdentityLookupServiceCreateIdentityLookupResponse](../../models/operations/identitylookupservicecreateidentitylookupresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404, 429 | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## VerifyIdentityLookup
+
+Verifies an identity lookup with the provided verification code
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="IdentityLookupService_VerifyIdentityLookup" method="post" path="/cip/v1/correspondents/{correspondent_id}/identityLookups/{identityLookup_id}:verify" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.Investigations.VerifyIdentityLookup(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", "01HEWVF4ZSNKYRP293J53ASJCJ", components.VerifyIdentityLookupRequestCreate{
+        Name: "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/identityLookups/01HEWVF4ZSNKYRP293J53ASJCJ",
+        VerificationCode: "123456",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.IdentityLookup != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  | Example                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |                                                                                                              |
+| `correspondentID`                                                                                            | *string*                                                                                                     | :heavy_check_mark:                                                                                           | The correspondent id.                                                                                        | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                                   |
+| `identityLookupID`                                                                                           | *string*                                                                                                     | :heavy_check_mark:                                                                                           | The identityLookup id.                                                                                       | 01HEWVF4ZSNKYRP293J53ASJCJ                                                                                   |
+| `verifyIdentityLookupRequestCreate`                                                                          | [components.VerifyIdentityLookupRequestCreate](../../models/components/verifyidentitylookuprequestcreate.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |                                                                                                              |
+| `opts`                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |                                                                                                              |
+
+### Response
+
+**[*operations.IdentityLookupServiceVerifyIdentityLookupResponse](../../models/operations/identitylookupserviceverifyidentitylookupresponse.md), error**
+
+### Errors
+
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| sdkerrors.Status        | 400, 401, 403, 404, 429 | application/json        |
+| sdkerrors.Status        | 500, 504                | application/json        |
+| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |

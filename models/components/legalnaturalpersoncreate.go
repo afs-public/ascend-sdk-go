@@ -49,9 +49,9 @@ func (e TaxIDType) ToPointer() *TaxIDType {
 
 // LegalNaturalPersonCreate - A legal natural person. This represents the full set of data for an individual. A Customer Identification Program (CIP) may be run on legal natural persons.
 type LegalNaturalPersonCreate struct {
-	// Indicates whether the person is an accredited investor
+	// Indicates whether the person is an accredited investor. By default, this is set to `false`.
 	AccreditedInvestor *bool `json:"accredited_investor,omitempty"`
-	// Indicates whether the person is an adviser
+	// Indicates whether the person is an adviser. By default, this is set to `false`.
 	Adviser *bool `json:"adviser,omitempty"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//
@@ -63,7 +63,7 @@ type LegalNaturalPersonCreate struct {
 	CitizenshipCountries []string `json:"citizenship_countries"`
 	// A list of ticker symbols in which the underlying person is a control person; control persons are defined as having significant influence over a company’s management and operations, typically through ownership of a large percentage of the company’s voting stock or through positions on the company’s board of directors or executive team
 	ControlPersonCompanySymbols *string `json:"control_person_company_symbols,omitempty"`
-	// Indicates the related owner record is an employee of the clearing broker's correspondent customer.
+	// Indicates the related owner record is an employee of the clearing broker's correspondent customer. By default, this is set to `false`.
 	CorrespondentEmployee *bool `json:"correspondent_employee,omitempty"`
 	// A unique identifier referencing a Correspondent; A Client may have several operating Correspondents within its purview.
 	CorrespondentID string `json:"correspondent_id"`
@@ -89,7 +89,7 @@ type LegalNaturalPersonCreate struct {
 	GivenName string `json:"given_name"`
 	// An identity verification result that clients may supply. This result represents data and confirmation attesting to identity verification.
 	IdentityVerificationResult *IdentityVerificationResultCreate `json:"identity_verification_result,omitempty"`
-	// Indicates whether the person is an institutional customer
+	// Indicates whether the person is an institutional customer. By default, this is set to `false`.
 	InstitutionalCustomer *bool `json:"institutional_customer,omitempty"`
 	// A large trader.
 	LargeTrader *LargeTraderCreate `json:"large_trader,omitempty"`
@@ -115,7 +115,7 @@ type LegalNaturalPersonCreate struct {
 	PoliticallyExposedImmediateFamilyNames []string `json:"politically_exposed_immediate_family_names,omitempty"`
 	// A Party's self-disclosed list of named politically exposed organizations they are personally associated with.
 	PoliticallyExposedOrganization *string `json:"politically_exposed_organization,omitempty"`
-	// Boolean indicator whether the LNP is subject to backup withholding
+	// Boolean indicator whether the LNP is subject to backup withholding. By default, this is set to `false`.
 	SubjectToBackupWithholding *bool `json:"subject_to_backup_withholding,omitempty"`
 	// The full U.S. tax ID for a related person; Must be provided with `ITIN` or `SSN` tax ID type
 	TaxID *string `json:"tax_id,omitempty"`

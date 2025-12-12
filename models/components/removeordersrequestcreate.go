@@ -4,15 +4,21 @@ package components
 
 // RemoveOrdersRequestCreate - The message to remove a list of basket orders by client order ID.
 type RemoveOrdersRequestCreate struct {
-	// The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed from a basket at a time.
-	ClientOrderIds []string `json:"client_order_ids"`
+	// Deprecated: Use `requests` instead.
+	//
+	//  The client order IDs of the basket orders to remove. A maximum of 500 orders can be removed from a basket at a time.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	ClientOrderIds []string `json:"client_order_ids,omitempty"`
 	// Format: correspondents/{correspondent}/baskets/{basket}
 	Name string `json:"name"`
+	// Per-order removal requests with optional CAT reporting data. A maximum of 500 orders can be removed from a basket at a time.
+	Requests []RemoveOrderRequestCreate `json:"requests,omitempty"`
 }
 
 func (o *RemoveOrdersRequestCreate) GetClientOrderIds() []string {
 	if o == nil {
-		return []string{}
+		return nil
 	}
 	return o.ClientOrderIds
 }
@@ -22,4 +28,11 @@ func (o *RemoveOrdersRequestCreate) GetName() string {
 		return ""
 	}
 	return o.Name
+}
+
+func (o *RemoveOrdersRequestCreate) GetRequests() []RemoveOrderRequestCreate {
+	if o == nil {
+		return nil
+	}
+	return o.Requests
 }

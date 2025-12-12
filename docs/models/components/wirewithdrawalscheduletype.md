@@ -28,3 +28,4 @@ The type of retirement distribution.
 | `WireWithdrawalScheduleTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                |
 | `WireWithdrawalScheduleTypeRevocation`                                 | REVOCATION                                                             |
 | `WireWithdrawalScheduleTypeNonReportable`                              | NON_REPORTABLE                                                         |
+| `WireWithdrawalScheduleTypeQualifiedCharitableDistribution`            | QUALIFIED_CHARITABLE_DISTRIBUTION                                      |

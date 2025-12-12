@@ -20,7 +20,6 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointCp                   DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_JOINT_CP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationEstate                    DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_ESTATE"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraTraditional            DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_TRADITIONAL"
-	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSimple                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_SIMPLE"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSep                    DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_SEP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRoth                   DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_ROTH"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRollover               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_ROLLOVER"

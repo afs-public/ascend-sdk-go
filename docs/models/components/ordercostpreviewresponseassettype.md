@@ -12,3 +12,4 @@ The type of asset referenced by the security identifier
 | `OrderCostPreviewResponseAssetTypeFixedIncome`          | FIXED_INCOME                                            |
 | `OrderCostPreviewResponseAssetTypeMutualFund`           | MUTUAL_FUND                                             |
 | `OrderCostPreviewResponseAssetTypeOption`               | OPTION                                                  |
+| `OrderCostPreviewResponseAssetTypeEventContract`        | EVENT_CONTRACT                                          |

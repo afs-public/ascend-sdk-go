@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // ExecutionCreate - An execution represents a partial-fill or a fill that is part of an order. Executions are children to a Trade, which collectively represents an entire order made by a client.

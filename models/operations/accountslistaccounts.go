@@ -5,7 +5,6 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 
@@ -52,6 +51,7 @@ type AccountsListAccountsRequest struct {
 	//  `title`
 	//  `state`
 	//  `account_group_id`
+	//  `create_time`
 	OrderBy *string `queryParam:"style=form,explode=true,name=order_by"`
 	// A CEL string to filter results; Use `upperAscii()` for case-insensitive searches; E.g. `parties.exists(parties,parties.legal_natural_person.family_name.upperAscii()=="dOuGh".upperAscii())`; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:
 	//  `account_id`
@@ -79,6 +79,7 @@ type AccountsListAccountsRequest struct {
 	//  `enrollments.state`
 	//  `identifiers.type`
 	//  `identifiers.value`
+	//  `create_time` with format of timestamp("2025-08-13T18:31:40Z")
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
 	// The view to return. Defaults to `BASIC`.
 	View *View `queryParam:"style=form,explode=true,name=view"`

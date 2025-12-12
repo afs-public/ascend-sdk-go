@@ -31,7 +31,6 @@ const (
 	EnrollmentCreateTypeRegistrationJointCp                   EnrollmentCreateType = "REGISTRATION_JOINT_CP"
 	EnrollmentCreateTypeRegistrationEstate                    EnrollmentCreateType = "REGISTRATION_ESTATE"
 	EnrollmentCreateTypeRegistrationIraTraditional            EnrollmentCreateType = "REGISTRATION_IRA_TRADITIONAL"
-	EnrollmentCreateTypeRegistrationIraSimple                 EnrollmentCreateType = "REGISTRATION_IRA_SIMPLE"
 	EnrollmentCreateTypeRegistrationIraSep                    EnrollmentCreateType = "REGISTRATION_IRA_SEP"
 	EnrollmentCreateTypeRegistrationIraRoth                   EnrollmentCreateType = "REGISTRATION_IRA_ROTH"
 	EnrollmentCreateTypeRegistrationIraRollover               EnrollmentCreateType = "REGISTRATION_IRA_ROLLOVER"
@@ -68,6 +67,8 @@ type EnrollmentCreate struct {
 	ForeignJointAccountEnrollmentMetadata *ForeignJointAccountEnrollmentMetadataCreate `json:"foreign_joint_account_enrollment_metadata,omitempty"`
 	// Percentages for FPSL Enrollment, must equal 100
 	FpslEnrollmentMetadata *FPSLEnrollmentMetaDataCreate `json:"fpsl_enrollment_metadata,omitempty"`
+	// Enrollment metadata for the FUTURES enrollment type
+	FuturesEnrollmentMetadata *FuturesEnrollmentMetadataCreate `json:"futures_enrollment_metadata,omitempty"`
 	// Enrollment metadata for Individual accounts enrollment type
 	IndividualEnrollmentMetadata *IndividualEnrollmentMetadataCreate `json:"individual_enrollment_metadata,omitempty"`
 	// Enrollment metadata for beneficiary IRA accounts enrollment type
@@ -158,6 +159,13 @@ func (o *EnrollmentCreate) GetFpslEnrollmentMetadata() *FPSLEnrollmentMetaDataCr
 		return nil
 	}
 	return o.FpslEnrollmentMetadata
+}
+
+func (o *EnrollmentCreate) GetFuturesEnrollmentMetadata() *FuturesEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.FuturesEnrollmentMetadata
 }
 
 func (o *EnrollmentCreate) GetIndividualEnrollmentMetadata() *IndividualEnrollmentMetadataCreate {

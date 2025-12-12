@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // WireWithdrawalAmount - A cash amount in the format of decimal value
@@ -311,6 +310,7 @@ const (
 	WireWithdrawalTypeNetIncomeAttributable                      WireWithdrawalType = "NET_INCOME_ATTRIBUTABLE"
 	WireWithdrawalTypeRevocation                                 WireWithdrawalType = "REVOCATION"
 	WireWithdrawalTypeNonReportable                              WireWithdrawalType = "NON_REPORTABLE"
+	WireWithdrawalTypeQualifiedCharitableDistribution            WireWithdrawalType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e WireWithdrawalType) ToPointer() *WireWithdrawalType {

@@ -4,10 +4,9 @@ package config
 
 import (
 	"context"
+	"github.com/afs-public/ascend-sdk-go/retry"
 	"net/http"
 	"time"
-
-	"github.com/afs-public/ascend-sdk-go/retry"
 )
 
 type HTTPClient interface {

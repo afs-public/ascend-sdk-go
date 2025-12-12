@@ -82,6 +82,26 @@ func (fixture *Fixtures) pendingCashJournal(accountId string) string {
 	return pendingCashJournalId
 }
 
+func (fixture *Fixtures) wireDeposit(accountId string) string {
+	if fixture.wireDepositId != nil {
+		return *fixture.wireDepositId
+	}
+	wireDepositRequest := components.SimulateWireDepositRequestCreate{
+		Amount: components.DecimalCreate{
+			Value: ascendsdkgo.String("100.00"),
+		},
+		Parent:     "accounts/" + accountId,
+		Domestic:   ascendsdkgo.Bool(true),
+		ThirdParty: ascendsdkgo.Bool(false),
+	}
+	response, err := fixture.sdk.TestSimulation.SimulateWireDeposit(fixture.ctx, accountId, wireDepositRequest)
+	require.NoError(fixture.t, err)
+	wireDepositId := strings.Split(*response.WireDeposit.Name, "/")
+	depositId := wireDepositId[len(wireDepositId)-1]
+	fixture.wireDepositId = &depositId
+	return depositId
+}
+
 func Test_Test_Simulation(t *testing.T) {
 	ctx := context.Background()
 	sdk, err := helpers.SetupAscendSDK()
@@ -170,6 +190,18 @@ func Test_Test_Simulation(t *testing.T) {
 
 	t.Run("test Test Simulation Transfers Force Reject Cash Journal Force Reject Cash Journal1", func(t *testing.T) {
 		testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Simulate Wire Deposit Simulate Wire Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersSimulateWireDepositSimulateWireDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Approve Wire Deposit Force Approve Wire Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceApproveWireDepositForceApproveWireDeposit1(t, *fixture)
+	})
+
+	t.Run("test Test Simulation Transfers Force Reject Wire Deposit Force Reject Wire Deposit1", func(t *testing.T) {
+		testTestSimulationTransfersForceRejectWireDepositForceRejectWireDeposit1(t, *fixture)
 	})
 }
 
@@ -487,6 +519,47 @@ func testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t 
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/cashJournals/" + *fixture.cashJournalId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceRejectCashJournal(fixture.ctx, *fixture.cashJournalId, request)
+	require.NoError(t, err)
+	assert.NotNil(t, &res.HTTPMeta.Response)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+}
+
+func testTestSimulationTransfersSimulateWireDepositSimulateWireDeposit1(t *testing.T, fixture Fixtures) {
+	if isNotWireHours() {
+		t.Skip("Skipping Endpoint Test: Simulate Wire Deposit")
+	}
+	depositId := fixture.wireDeposit(fixture.enrolledDepositAccountId)
+	assert.NotNil(t, depositId)
+	assert.Greater(t, len(depositId), 0)
+}
+
+func testTestSimulationTransfersForceApproveWireDepositForceApproveWireDeposit1(t *testing.T, fixture Fixtures) {
+	t.Skip("TODO: Fix wire deposit state machine - transfer already in FundsPosted state")
+	if isNotWireHours() {
+		t.Skip("Skipping Endpoint Test: Force Approve Wire Deposit")
+	}
+	assert.NotNil(t, fixture.wireDeposit(fixture.enrolledDepositAccountId))
+	assert.NotNil(t, fixture.wireDepositId)
+	request := components.ForceApproveWireDepositRequestCreate{
+		Name: "accounts/" + fixture.enrolledDepositAccountId + "/wireDeposits/" + *fixture.wireDepositId,
+	}
+	res, err := fixture.sdk.TestSimulation.ForceApproveWireDeposit(fixture.ctx, fixture.enrolledDepositAccountId, *fixture.wireDepositId, request)
+	require.NoError(t, err)
+	assert.NotNil(t, &res.HTTPMeta.Response)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+}
+
+func testTestSimulationTransfersForceRejectWireDepositForceRejectWireDeposit1(t *testing.T, fixture Fixtures) {
+	t.Skip("TODO: Fix wire deposit state machine - transfer already in FundsPosted state")
+	if isNotWireHours() {
+		t.Skip("Skipping Endpoint Test: Force Reject Wire Deposit")
+	}
+	assert.NotNil(t, fixture.wireDeposit(fixture.enrolledDepositAccountId))
+	assert.NotNil(t, fixture.wireDepositId)
+	request := components.ForceRejectWireDepositRequestCreate{
+		Name: "accounts/" + fixture.enrolledDepositAccountId + "/wireDeposits/" + *fixture.wireDepositId,
+	}
+	res, err := fixture.sdk.TestSimulation.ForceRejectWireDeposit(fixture.ctx, fixture.enrolledDepositAccountId, *fixture.wireDepositId, request)
 	require.NoError(t, err)
 	assert.NotNil(t, &res.HTTPMeta.Response)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

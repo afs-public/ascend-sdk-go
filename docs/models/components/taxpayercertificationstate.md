@@ -10,3 +10,4 @@ Taxpayer certification status.
 | `TaxpayerCertificationStateTaxpayerCertificationStateUnspecified` | TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED                          |
 | `TaxpayerCertificationStateCertified`                             | CERTIFIED                                                         |
 | `TaxpayerCertificationStateUncertified`                           | UNCERTIFIED                                                       |
+| `TaxpayerCertificationStatePendingCertification`                  | PENDING_CERTIFICATION                                             |

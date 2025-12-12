@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // CashJournalAmount - The amount to transfer in USD
@@ -199,6 +198,7 @@ const (
 	CashJournalRetirementDistributionTypeNetIncomeAttributable                      CashJournalRetirementDistributionType = "NET_INCOME_ATTRIBUTABLE"
 	CashJournalRetirementDistributionTypeRevocation                                 CashJournalRetirementDistributionType = "REVOCATION"
 	CashJournalRetirementDistributionTypeNonReportable                              CashJournalRetirementDistributionType = "NON_REPORTABLE"
+	CashJournalRetirementDistributionTypeQualifiedCharitableDistribution            CashJournalRetirementDistributionType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e CashJournalRetirementDistributionType) ToPointer() *CashJournalRetirementDistributionType {

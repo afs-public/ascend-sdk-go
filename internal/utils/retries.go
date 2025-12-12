@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/afs-public/ascend-sdk-go/retry"
 	"io"
 	"math"
 	"math/rand"
@@ -15,8 +16,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/afs-public/ascend-sdk-go/retry"
 )
 
 // Deprecated: Use retry.BackoffStrategy instead.

@@ -136,7 +136,7 @@ type LegalEntityCreate struct {
 	//
 	//  Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
 	FormationDate *DateCreate `json:"formation_date,omitempty"`
-	// Indicates whether the entity is an institutional customer
+	// Indicates whether the entity is an institutional customer. By default, this is set to `false`.
 	InstitutionalCustomer *bool `json:"institutional_customer,omitempty"`
 	// A large trader.
 	LargeTrader *LargeTraderCreate `json:"large_trader,omitempty"`
@@ -160,7 +160,7 @@ type LegalEntityCreate struct {
 	RelatedDocumentIds []string `json:"related_document_ids,omitempty"`
 	// Indicates whether the trust is a revocable trust. By default, this is set to `false`.
 	RevocableTrust *bool `json:"revocable_trust,omitempty"`
-	// Boolean indicator whether the LE is subject to backup withholding
+	// Boolean indicator whether the LE is subject to backup withholding. By default, this is set to `false`.
 	SubjectToBackupWithholding *bool `json:"subject_to_backup_withholding,omitempty"`
 	// The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type
 	TaxID string `json:"tax_id"`

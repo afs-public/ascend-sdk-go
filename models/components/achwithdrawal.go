@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // AchWithdrawalAmount - The amount to withdraw in USD. The value should not be set if the withdrawal is `full_disbursement`.
@@ -142,6 +141,7 @@ const (
 	AchWithdrawalTypeNetIncomeAttributable                      AchWithdrawalType = "NET_INCOME_ATTRIBUTABLE"
 	AchWithdrawalTypeRevocation                                 AchWithdrawalType = "REVOCATION"
 	AchWithdrawalTypeNonReportable                              AchWithdrawalType = "NON_REPORTABLE"
+	AchWithdrawalTypeQualifiedCharitableDistribution            AchWithdrawalType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e AchWithdrawalType) ToPointer() *AchWithdrawalType {

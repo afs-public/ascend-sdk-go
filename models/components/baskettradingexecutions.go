@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // BasketTradingExecutionsQuantity - The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured in the face value of the currency of the order.
