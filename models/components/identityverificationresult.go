@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // IdentityVerificationResult - A summary of the results from a identity verification check

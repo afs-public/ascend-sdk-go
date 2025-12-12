@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // AssetType - The type of the asset in this order, which must be one of the following:
@@ -104,6 +103,8 @@ const (
 	SpecialReportingInstructionsSuppressTraceReporting                  SpecialReportingInstructions = "SUPPRESS_TRACE_REPORTING"
 	SpecialReportingInstructionsWhenDistributed                         SpecialReportingInstructions = "WHEN_DISTRIBUTED"
 	SpecialReportingInstructionsRoundUp                                 SpecialReportingInstructions = "ROUND_UP"
+	SpecialReportingInstructionsCatParentAlgo                           SpecialReportingInstructions = "CAT_PARENT_ALGO"
+	SpecialReportingInstructionsCatParentGtc                            SpecialReportingInstructions = "CAT_PARENT_GTC"
 )
 
 func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions {
@@ -160,7 +161,7 @@ type OrderCreate struct {
 	Fees []FeeCreate `json:"fees,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`
-	// A string attribute denoting the country of issuance or where the asset is trading. Only available for Mutual Fund orders. Defaults to US, when trading non US mutual funds this field must be provided Complies with ISO-3166 Alpha-2 Codes
+	// A string attribute denoting the country of issuance or where the asset is trading. * Only available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with ISO-3166 Alpha-2 Codes
 	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
 	IdentifierType IdentifierType `json:"identifier_type"`

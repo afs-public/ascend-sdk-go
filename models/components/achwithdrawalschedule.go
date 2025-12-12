@@ -123,6 +123,7 @@ const (
 	AchWithdrawalScheduleTypeNetIncomeAttributable                      AchWithdrawalScheduleType = "NET_INCOME_ATTRIBUTABLE"
 	AchWithdrawalScheduleTypeRevocation                                 AchWithdrawalScheduleType = "REVOCATION"
 	AchWithdrawalScheduleTypeNonReportable                              AchWithdrawalScheduleType = "NON_REPORTABLE"
+	AchWithdrawalScheduleTypeQualifiedCharitableDistribution            AchWithdrawalScheduleType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e AchWithdrawalScheduleType) ToPointer() *AchWithdrawalScheduleType {

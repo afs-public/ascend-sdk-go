@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // RetrieveFixedIncomeMarksResponseAssetMarkAccruedInterestAmount - The amount of accrued interest estimated to be exchanged given the requested quantity. Measured in a USD value with 2-decimal places of precision.

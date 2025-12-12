@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // BasketOrderAssetType - The type of the asset in this order
@@ -21,6 +20,19 @@ func (e BasketOrderAssetType) ToPointer() *BasketOrderAssetType {
 	return &e
 }
 
+// BasketOrderCancelInitiator - Output only field that is required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. This field denotes the initiator of the cancel request. This field will be present when provided on the RemoveOrderRequest
+type BasketOrderCancelInitiator string
+
+const (
+	BasketOrderCancelInitiatorInitiatorUnspecified BasketOrderCancelInitiator = "INITIATOR_UNSPECIFIED"
+	BasketOrderCancelInitiatorFirm                 BasketOrderCancelInitiator = "FIRM"
+	BasketOrderCancelInitiatorClient               BasketOrderCancelInitiator = "CLIENT"
+)
+
+func (e BasketOrderCancelInitiator) ToPointer() *BasketOrderCancelInitiator {
+	return &e
+}
+
 // BasketOrderCumulativeNotionalValue - The product of order quantity & price, summed across all fills, reported in the currency specified in the order. (This will be rounded to 2 decimal places for USD currencies). Will be absent if an order has no fill information.
 type BasketOrderCumulativeNotionalValue struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -32,6 +44,29 @@ func (o *BasketOrderCumulativeNotionalValue) GetValue() *string {
 		return nil
 	}
 	return o.Value
+}
+
+// BasketOrderExtraReportingData - Any reporting data provided by the SetExtraReportingData endpoint.
+type BasketOrderExtraReportingData struct {
+	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
+}
+
+func (b BasketOrderExtraReportingData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(b, "", false)
+}
+
+func (b *BasketOrderExtraReportingData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *BasketOrderExtraReportingData) GetCancelConfirmedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CancelConfirmedTime
 }
 
 // BasketOrderFilledQuantity - The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
@@ -221,9 +256,15 @@ type BasketOrder struct {
 	AveragePrices []BasketTradingExecutedPrice `json:"average_prices,omitempty"`
 	// System generated unique id for the basket order.
 	BasketOrderID *string `json:"basket_order_id,omitempty"`
+	// Output only field that is required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. This field denotes the initiator of the cancel request. This field will be present when provided on the RemoveOrderRequest
+	CancelInitiator *BasketOrderCancelInitiator `json:"cancel_initiator,omitempty"`
+	// Output only field for Equity Orders related to CAT reporting on behalf of clients. This field will be present when provided on the RemoveOrderRequest
+	ClientCancelReceivedTime *time.Time `json:"client_cancel_received_time,omitempty"`
+	// Output only field for Equity Orders related to CAT reporting on behalf of clients. This field will be present when provided on the RemoveOrderRequest
+	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// Time the order request was received by the client. Must be in the past.
+	// Time the order request was received by the client. Must be in the past. Timezone will default to UTC if not provided.
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Time of the order creation
 	CreateTime *time.Time `json:"create_time,omitempty"`
@@ -233,6 +274,8 @@ type BasketOrder struct {
 	CurrencyCode *string `json:"currency_code,omitempty"`
 	// The execution-level details that compose this order
 	Executions []BasketTradingExecutions `json:"executions,omitempty"`
+	// Any reporting data provided by the SetExtraReportingData endpoint.
+	ExtraReportingData *BasketOrderExtraReportingData `json:"extra_reporting_data,omitempty"`
 	// The summed quantity value across all fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no fill information.
 	FilledQuantity *BasketOrderFilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -311,6 +354,27 @@ func (o *BasketOrder) GetBasketOrderID() *string {
 	return o.BasketOrderID
 }
 
+func (o *BasketOrder) GetCancelInitiator() *BasketOrderCancelInitiator {
+	if o == nil {
+		return nil
+	}
+	return o.CancelInitiator
+}
+
+func (o *BasketOrder) GetClientCancelReceivedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelReceivedTime
+}
+
+func (o *BasketOrder) GetClientCancelSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelSentTime
+}
+
 func (o *BasketOrder) GetClientOrderID() *string {
 	if o == nil {
 		return nil
@@ -351,6 +415,13 @@ func (o *BasketOrder) GetExecutions() []BasketTradingExecutions {
 		return nil
 	}
 	return o.Executions
+}
+
+func (o *BasketOrder) GetExtraReportingData() *BasketOrderExtraReportingData {
+	if o == nil {
+		return nil
+	}
+	return o.ExtraReportingData
 }
 
 func (o *BasketOrder) GetFilledQuantity() *BasketOrderFilledQuantity {

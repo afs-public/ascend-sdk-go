@@ -30,3 +30,5 @@
 | `SpecialReportingInstructionsSuppressTraceReporting`                  | SUPPRESS_TRACE_REPORTING                                              |
 | `SpecialReportingInstructionsWhenDistributed`                         | WHEN_DISTRIBUTED                                                      |
 | `SpecialReportingInstructionsRoundUp`                                 | ROUND_UP                                                              |
+| `SpecialReportingInstructionsCatParentAlgo`                           | CAT_PARENT_ALGO                                                       |
+| `SpecialReportingInstructionsCatParentGtc`                            | CAT_PARENT_GTC                                                        |

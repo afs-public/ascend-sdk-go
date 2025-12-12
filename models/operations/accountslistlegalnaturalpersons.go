@@ -23,6 +23,7 @@ type AccountsListLegalNaturalPersonsRequest struct {
 	//  `tax_id`
 	//  `tax_id_type`
 	//  `investigation_id`
+	//  `foreign_identification.identification_number`
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
 }
 

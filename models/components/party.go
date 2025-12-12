@@ -2,6 +2,20 @@
 
 package components
 
+// PartyCftcDocumentDeliveryPreference - Delivery method instruction for CFTC documents for a given Party record; Defaults to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+type PartyCftcDocumentDeliveryPreference string
+
+const (
+	PartyCftcDocumentDeliveryPreferenceDeliveryPreferenceUnspecified PartyCftcDocumentDeliveryPreference = "DELIVERY_PREFERENCE_UNSPECIFIED"
+	PartyCftcDocumentDeliveryPreferenceDigital                       PartyCftcDocumentDeliveryPreference = "DIGITAL"
+	PartyCftcDocumentDeliveryPreferencePhysical                      PartyCftcDocumentDeliveryPreference = "PHYSICAL"
+	PartyCftcDocumentDeliveryPreferenceSuppress                      PartyCftcDocumentDeliveryPreference = "SUPPRESS"
+)
+
+func (e PartyCftcDocumentDeliveryPreference) ToPointer() *PartyCftcDocumentDeliveryPreference {
+	return &e
+}
+
 type PartyBusinessIndustrialClassification string
 
 const (
@@ -489,6 +503,7 @@ const (
 	PartyTaxpayerCertificationStateTaxpayerCertificationStateUnspecified PartyTaxpayerCertificationState = "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED"
 	PartyTaxpayerCertificationStateCertified                             PartyTaxpayerCertificationState = "CERTIFIED"
 	PartyTaxpayerCertificationStateUncertified                           PartyTaxpayerCertificationState = "UNCERTIFIED"
+	PartyTaxpayerCertificationStatePendingCertification                  PartyTaxpayerCertificationState = "PENDING_CERTIFICATION"
 )
 
 func (e PartyTaxpayerCertificationState) ToPointer() *PartyTaxpayerCertificationState {
@@ -658,7 +673,7 @@ type PartyLegalEntity struct {
 	FormationDate *PartyFormationDate `json:"formation_date,omitempty"`
 	// Globally Unique identifier for a legal natural person
 	GlobalPersonID *string `json:"global_person_id,omitempty"`
-	// Indicates whether the entity is an institutional customer
+	// Indicates whether the entity is an institutional customer. By default, this is set to `false`.
 	InstitutionalCustomer *bool `json:"institutional_customer,omitempty"`
 	// Investigation id relating to the Customer Identification Program (CIP) and Customer Due Diligence (CDD).
 	InvestigationID *string `json:"investigation_id,omitempty"`
@@ -1993,6 +2008,7 @@ const (
 	PartyLegalNaturalPersonTaxpayerCertificationStateTaxpayerCertificationStateUnspecified PartyLegalNaturalPersonTaxpayerCertificationState = "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED"
 	PartyLegalNaturalPersonTaxpayerCertificationStateCertified                             PartyLegalNaturalPersonTaxpayerCertificationState = "CERTIFIED"
 	PartyLegalNaturalPersonTaxpayerCertificationStateUncertified                           PartyLegalNaturalPersonTaxpayerCertificationState = "UNCERTIFIED"
+	PartyLegalNaturalPersonTaxpayerCertificationStatePendingCertification                  PartyLegalNaturalPersonTaxpayerCertificationState = "PENDING_CERTIFICATION"
 )
 
 func (e PartyLegalNaturalPersonTaxpayerCertificationState) ToPointer() *PartyLegalNaturalPersonTaxpayerCertificationState {
@@ -2123,9 +2139,9 @@ func (o *PartyLegalNaturalPersonTaxProfile) GetWithholdingState() *PartyLegalNat
 
 // PartyLegalNaturalPerson - Legal natural person.
 type PartyLegalNaturalPerson struct {
-	// Indicates whether the person is an accredited investor
+	// Indicates whether the person is an accredited investor. By default, this is set to `false`.
 	AccreditedInvestor *bool `json:"accredited_investor,omitempty"`
-	// Indicates whether the person is an adviser
+	// Indicates whether the person is an adviser. By default, this is set to `false`.
 	Adviser *bool `json:"adviser,omitempty"`
 	// The legal day, month, and year of birth for a natural person.
 	BirthDate *PartyBirthDate `json:"birth_date,omitempty"`
@@ -2133,11 +2149,11 @@ type PartyLegalNaturalPerson struct {
 	CitizenshipCountries []string `json:"citizenship_countries,omitempty"`
 	// A list of ticker symbols in which the underlying person is a control person; control persons are defined as having significant influence over a company’s management and operations, typically through ownership of a large percentage of the company’s voting stock or through positions on the company’s board of directors or executive team
 	ControlPersonCompanySymbols *string `json:"control_person_company_symbols,omitempty"`
-	// Indicates the related owner record is an employee of the clearing broker's correspondent customer.
+	// Indicates the related owner record is an employee of the clearing broker's correspondent customer. By default, this is set to `false`.
 	CorrespondentEmployee *bool `json:"correspondent_employee,omitempty"`
 	// A unique identifier referencing a Correspondent; A Client may have several operating Correspondents within its purview.
 	CorrespondentID *string `json:"correspondent_id,omitempty"`
-	// A flag to indicate whether this person is an employee of the correspondent.
+	// A flag to indicate whether this person is an employee of the correspondent. By default, this is set to `false`.
 	CustodianEmployee *bool `json:"custodian_employee,omitempty"`
 	// Customer identification id returned by the customer identification service which represents a single instance of an identity verification outcome for the specified customer. This verification result will be used as part of the full investigation.
 	CustomerIdentificationID *string `json:"customer_identification_id,omitempty"`
@@ -2163,7 +2179,7 @@ type PartyLegalNaturalPerson struct {
 	GlobalPersonID *string `json:"global_person_id,omitempty"`
 	// Third-party data result used to verify the identity of an introduced investor. If the client identity_verification_model is PROVIDED_BY_CLIENT, this field is required
 	IdentityVerificationResult *PartyIdentityVerificationResult `json:"identity_verification_result,omitempty"`
-	// Indicates whether the person is an institutional customer
+	// Indicates whether the person is an institutional customer. By default, this is set to `false`.
 	InstitutionalCustomer *bool `json:"institutional_customer,omitempty"`
 	// Investigation id relating a comprehensive investigation for a customer, encompassing the aggregation of identity verification results and watchlist screenings, conducted to support the Customer Identification Program (CIP) and Customer Due Diligence (CDD)
 	InvestigationID *string `json:"investigation_id,omitempty"`
@@ -2730,6 +2746,8 @@ func (e PartyTradeConfirmationDeliveryPreference) ToPointer() *PartyTradeConfirm
 
 // Party - A single record representing an owner or manager of an Account. Contains fully populated Party Identity object.
 type Party struct {
+	// Delivery method instruction for CFTC documents for a given Party record; Defaults to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+	CftcDocumentDeliveryPreference *PartyCftcDocumentDeliveryPreference `json:"cftc_document_delivery_preference,omitempty"`
 	// An email address indicated for account communications.
 	EmailAddress *string `json:"email_address,omitempty"`
 	// Legal entity.
@@ -2761,6 +2779,13 @@ type Party struct {
 	TaxDocumentDeliveryPreference *PartyTaxDocumentDeliveryPreference `json:"tax_document_delivery_preference,omitempty"`
 	// Delivery method instruction for trade confirmations for a given Party record; Can be `DIGITAL`, `PHYSICAL`, `SUPPRESS`; Defaults to `DIGITAL` on account creation but may be updated
 	TradeConfirmationDeliveryPreference *PartyTradeConfirmationDeliveryPreference `json:"trade_confirmation_delivery_preference,omitempty"`
+}
+
+func (o *Party) GetCftcDocumentDeliveryPreference() *PartyCftcDocumentDeliveryPreference {
+	if o == nil {
+		return nil
+	}
+	return o.CftcDocumentDeliveryPreference
 }
 
 func (o *Party) GetEmailAddress() *string {

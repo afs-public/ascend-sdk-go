@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // BasketState - The processing status of the basket

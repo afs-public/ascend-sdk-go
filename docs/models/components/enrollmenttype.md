@@ -17,7 +17,6 @@ The enrollment type.
 | `EnrollmentTypeRegistrationJointCp`                   | REGISTRATION_JOINT_CP                                 |
 | `EnrollmentTypeRegistrationEstate`                    | REGISTRATION_ESTATE                                   |
 | `EnrollmentTypeRegistrationIraTraditional`            | REGISTRATION_IRA_TRADITIONAL                          |
-| `EnrollmentTypeRegistrationIraSimple`                 | REGISTRATION_IRA_SIMPLE                               |
 | `EnrollmentTypeRegistrationIraSep`                    | REGISTRATION_IRA_SEP                                  |
 | `EnrollmentTypeRegistrationIraRoth`                   | REGISTRATION_IRA_ROTH                                 |
 | `EnrollmentTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                             |

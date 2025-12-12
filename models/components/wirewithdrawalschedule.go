@@ -429,6 +429,7 @@ const (
 	WireWithdrawalScheduleTypeNetIncomeAttributable                      WireWithdrawalScheduleType = "NET_INCOME_ATTRIBUTABLE"
 	WireWithdrawalScheduleTypeRevocation                                 WireWithdrawalScheduleType = "REVOCATION"
 	WireWithdrawalScheduleTypeNonReportable                              WireWithdrawalScheduleType = "NON_REPORTABLE"
+	WireWithdrawalScheduleTypeQualifiedCharitableDistribution            WireWithdrawalScheduleType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e WireWithdrawalScheduleType) ToPointer() *WireWithdrawalScheduleType {

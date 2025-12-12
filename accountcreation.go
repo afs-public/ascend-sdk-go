@@ -6,9 +6,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"net/http"
-	"net/url"
-
 	"github.com/afs-public/ascend-sdk-go/internal/config"
 	"github.com/afs-public/ascend-sdk-go/internal/hooks"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
@@ -16,6 +13,8 @@ import (
 	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/afs-public/ascend-sdk-go/retry"
+	"net/http"
+	"net/url"
 )
 
 type AccountCreation struct {

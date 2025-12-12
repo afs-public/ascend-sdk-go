@@ -16,7 +16,6 @@ const (
 	EnrollmentTypeRegistrationJointCp                   EnrollmentType = "REGISTRATION_JOINT_CP"
 	EnrollmentTypeRegistrationEstate                    EnrollmentType = "REGISTRATION_ESTATE"
 	EnrollmentTypeRegistrationIraTraditional            EnrollmentType = "REGISTRATION_IRA_TRADITIONAL"
-	EnrollmentTypeRegistrationIraSimple                 EnrollmentType = "REGISTRATION_IRA_SIMPLE"
 	EnrollmentTypeRegistrationIraSep                    EnrollmentType = "REGISTRATION_IRA_SEP"
 	EnrollmentTypeRegistrationIraRoth                   EnrollmentType = "REGISTRATION_IRA_ROTH"
 	EnrollmentTypeRegistrationIraRollover               EnrollmentType = "REGISTRATION_IRA_ROLLOVER"

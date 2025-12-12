@@ -3,14 +3,13 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // SubmitBasketRequestCreate - The message to submit a basket for execution in the market
 type SubmitBasketRequestCreate struct {
-	// Time the basket submission request was sent by the client. This is a required field for clients that we report on behalf of, and it will be validated accordingly.
+	// Time the basket submission request was sent by the client. This is a required field for clients that we report on behalf of, and it will be validated accordingly. Timezone information will default to UTC if not provided.
 	ClientBasketSubmitTime *time.Time `json:"client_basket_submit_time,omitempty"`
 	// Format: correspondents/{correspondent}/baskets/{basket}
 	Name string `json:"name"`

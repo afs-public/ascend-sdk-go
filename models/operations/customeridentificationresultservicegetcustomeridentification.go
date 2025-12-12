@@ -5,7 +5,6 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 

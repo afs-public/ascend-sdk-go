@@ -230,6 +230,7 @@ const (
 	TransferScheduleSummaryRetirementDistributionTypeNetIncomeAttributable                      TransferScheduleSummaryRetirementDistributionType = "NET_INCOME_ATTRIBUTABLE"
 	TransferScheduleSummaryRetirementDistributionTypeRevocation                                 TransferScheduleSummaryRetirementDistributionType = "REVOCATION"
 	TransferScheduleSummaryRetirementDistributionTypeNonReportable                              TransferScheduleSummaryRetirementDistributionType = "NON_REPORTABLE"
+	TransferScheduleSummaryRetirementDistributionTypeQualifiedCharitableDistribution            TransferScheduleSummaryRetirementDistributionType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e TransferScheduleSummaryRetirementDistributionType) ToPointer() *TransferScheduleSummaryRetirementDistributionType {

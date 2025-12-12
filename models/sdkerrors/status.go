@@ -4,7 +4,6 @@ package sdkerrors
 
 import (
 	"encoding/json"
-
 	"github.com/afs-public/ascend-sdk-go/models/components"
 )
 

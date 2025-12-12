@@ -489,6 +489,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ListBasketOrders](docs/sdks/basketorders/README.md#listbasketorders) - List Basket Orders
 * [ListCompressedOrders](docs/sdks/basketorders/README.md#listcompressedorders) - List Compressed Orders
 * [RemoveOrders](docs/sdks/basketorders/README.md#removeorders) - Remove Basket Orders
+* [SetExtraReportingData](docs/sdks/basketorders/README.md#setextrareportingdata) - Set Extra Reporting Data
 
 ### [CashBalances](docs/sdks/cashbalances/README.md)
 
@@ -546,6 +547,8 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [LinkDocuments](docs/sdks/investigations/README.md#linkdocuments) - Link Documents
 * [GetWatchlistItem](docs/sdks/investigations/README.md#getwatchlistitem) - Get Watchlist Item
 * [GetCustomerIdentification](docs/sdks/investigations/README.md#getcustomeridentification) - Get Identity Verification
+* [CreateIdentityLookup](docs/sdks/investigations/README.md#createidentitylookup) - Create Identity Lookup
+* [VerifyIdentityLookup](docs/sdks/investigations/README.md#verifyidentitylookup) - Verify Identity Lookup
 
 ### [InvestorDocs](docs/sdks/investordocs/README.md)
 
@@ -655,6 +658,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ForceRejectIctWithdrawal](docs/sdks/testsimulation/README.md#forcerejectictwithdrawal) - Force Reject ICT Withdrawal
 * [ForceApproveWireWithdrawal](docs/sdks/testsimulation/README.md#forceapprovewirewithdrawal) - Force Approve Wire Withdrawal
 * [ForceRejectWireWithdrawal](docs/sdks/testsimulation/README.md#forcerejectwirewithdrawal) - Force Reject Wire Withdrawal
+* [SimulateWireDeposit](docs/sdks/testsimulation/README.md#simulatewiredeposit) - Simulate Wire Deposit
+* [ForceApproveWireDeposit](docs/sdks/testsimulation/README.md#forceapprovewiredeposit) - Force Approve Wire Deposit
+* [ForceRejectWireDeposit](docs/sdks/testsimulation/README.md#forcerejectwiredeposit) - Force Reject Wire Deposit
 * [ForceApproveCashJournal](docs/sdks/testsimulation/README.md#forceapprovecashjournal) - Force Approve Cash Journal
 * [ForceRejectCashJournal](docs/sdks/testsimulation/README.md#forcerejectcashjournal) - Force Reject Cash Journal
 

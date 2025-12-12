@@ -10,3 +10,4 @@ Taxpayer certification status.
 | `PartyLegalNaturalPersonTaxpayerCertificationStateTaxpayerCertificationStateUnspecified` | TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED                                                 |
 | `PartyLegalNaturalPersonTaxpayerCertificationStateCertified`                             | CERTIFIED                                                                                |
 | `PartyLegalNaturalPersonTaxpayerCertificationStateUncertified`                           | UNCERTIFIED                                                                              |
+| `PartyLegalNaturalPersonTaxpayerCertificationStatePendingCertification`                  | PENDING_CERTIFICATION                                                                    |

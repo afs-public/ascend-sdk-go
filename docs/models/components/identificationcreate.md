@@ -1,0 +1,12 @@
+# IdentificationCreate
+
+Represents an identification document
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `RegionCode`                                                                               | *string*                                                                                   | :heavy_check_mark:                                                                         | CLDR format                                                                                | US                                                                                         |
+| `Type`                                                                                     | [components.IdentificationCreateType](../../models/components/identificationcreatetype.md) | :heavy_check_mark:                                                                         | The type of identification document                                                        | SSN                                                                                        |
+| `Value`                                                                                    | *string*                                                                                   | :heavy_check_mark:                                                                         | The value of the identification document                                                   | 123-45-6789                                                                                |

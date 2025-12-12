@@ -489,6 +489,7 @@ const (
 	LegalEntityTaxpayerCertificationStateTaxpayerCertificationStateUnspecified LegalEntityTaxpayerCertificationState = "TAXPAYER_CERTIFICATION_STATE_UNSPECIFIED"
 	LegalEntityTaxpayerCertificationStateCertified                             LegalEntityTaxpayerCertificationState = "CERTIFIED"
 	LegalEntityTaxpayerCertificationStateUncertified                           LegalEntityTaxpayerCertificationState = "UNCERTIFIED"
+	LegalEntityTaxpayerCertificationStatePendingCertification                  LegalEntityTaxpayerCertificationState = "PENDING_CERTIFICATION"
 )
 
 func (e LegalEntityTaxpayerCertificationState) ToPointer() *LegalEntityTaxpayerCertificationState {
@@ -658,7 +659,7 @@ type LegalEntity struct {
 	FormationDate *FormationDate `json:"formation_date,omitempty"`
 	// Globally Unique identifier for a legal natural person
 	GlobalPersonID *string `json:"global_person_id,omitempty"`
-	// Indicates whether the entity is an institutional customer
+	// Indicates whether the entity is an institutional customer. By default, this is set to `false`.
 	InstitutionalCustomer *bool `json:"institutional_customer,omitempty"`
 	// Investigation id relating to the Customer Identification Program (CIP) and Customer Due Diligence (CDD).
 	InvestigationID *string `json:"investigation_id,omitempty"`

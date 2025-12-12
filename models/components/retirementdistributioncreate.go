@@ -27,6 +27,7 @@ const (
 	RetirementDistributionCreateTypeNetIncomeAttributable                      RetirementDistributionCreateType = "NET_INCOME_ATTRIBUTABLE"
 	RetirementDistributionCreateTypeRevocation                                 RetirementDistributionCreateType = "REVOCATION"
 	RetirementDistributionCreateTypeNonReportable                              RetirementDistributionCreateType = "NON_REPORTABLE"
+	RetirementDistributionCreateTypeQualifiedCharitableDistribution            RetirementDistributionCreateType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e RetirementDistributionCreateType) ToPointer() *RetirementDistributionCreateType {

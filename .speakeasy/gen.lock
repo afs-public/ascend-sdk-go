@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: 834b7bdbca5fb3e122e1664978f5f38e
-  docVersion: v1:20251022:uat:75a9118ab2c9
+  docChecksum: 69899f7f639329d02cfd747208568b07
+  docVersion: v1:20251212:uat:f648e4b8e037
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.3.0
-  configChecksum: e9fc78fa0ebd2d20b1d3f8cb274f7877
+  releaseVersion: 1.3.1
+  configChecksum: 3ccab31121723624140190b2e24d3dbd
 features:
   go:
     additionalDependencies: 0.1.0
@@ -154,6 +154,7 @@ generatedFiles:
   - /models/components/depositscheduledetailscreate.go
   - /models/components/depositscheduledetailsupdate.go
   - /models/components/descriptiondetail.go
+  - /models/components/devicemetadatacreate.go
   - /models/components/distributionconstraints.go
   - /models/components/distributionconstraintsdistributiontypeinfo.go
   - /models/components/distributionsummary.go
@@ -178,6 +179,7 @@ generatedFiles:
   - /models/components/execution.go
   - /models/components/executioncreate.go
   - /models/components/externalaccountcreate.go
+  - /models/components/extrareportingdatacreate.go
   - /models/components/fee.go
   - /models/components/feecreate.go
   - /models/components/financialprofilecreate.go
@@ -186,6 +188,7 @@ generatedFiles:
   - /models/components/forceapprovecashjournalrequestcreate.go
   - /models/components/forceapproveictdepositrequestcreate.go
   - /models/components/forceapproveictwithdrawalrequestcreate.go
+  - /models/components/forceapprovewiredepositrequestcreate.go
   - /models/components/forceapprovewirewithdrawalrequestcreate.go
   - /models/components/forcenocachdepositrequestcreate.go
   - /models/components/forcenocachwithdrawalrequestcreate.go
@@ -194,6 +197,7 @@ generatedFiles:
   - /models/components/forcerejectcashjournalrequestcreate.go
   - /models/components/forcerejectictdepositrequestcreate.go
   - /models/components/forcerejectictwithdrawalrequestcreate.go
+  - /models/components/forcerejectwiredepositrequestcreate.go
   - /models/components/forcerejectwirewithdrawalrequestcreate.go
   - /models/components/forcereturnachdepositrequestcreate.go
   - /models/components/forcereturnachwithdrawalrequestcreate.go
@@ -206,6 +210,7 @@ generatedFiles:
   - /models/components/foreignjointaccountenrollmentmetadatacreate.go
   - /models/components/foreignnaturalpersonaccountenrollmentmetadatacreate.go
   - /models/components/fpslenrollmentmetadatacreate.go
+  - /models/components/futuresenrollmentmetadatacreate.go
   - /models/components/generateserviceaccounttokenrequestcreate.go
   - /models/components/httpmetadata.go
   - /models/components/httppushcallbackcreate.go
@@ -217,11 +222,15 @@ generatedFiles:
   - /models/components/ictwithdrawalcreate.go
   - /models/components/ictwithdrawaltravelrulecreate.go
   - /models/components/iddocumentuploadrequestcreate.go
+  - /models/components/identification.go
+  - /models/components/identificationcreate.go
   - /models/components/identificationdetail.go
   - /models/components/identifier.go
   - /models/components/identifiercreate.go
   - /models/components/identifierupdate.go
   - /models/components/identityidentification.go
+  - /models/components/identitylookup.go
+  - /models/components/identitylookupcreate.go
   - /models/components/identityverificationresult.go
   - /models/components/identityverificationresultcreate.go
   - /models/components/identityverificationresultupdate.go
@@ -250,6 +259,7 @@ generatedFiles:
   - /models/components/largetrader.go
   - /models/components/largetradercreate.go
   - /models/components/largetraderupdate.go
+  - /models/components/latlngcreate.go
   - /models/components/legalagreement.go
   - /models/components/legalentity.go
   - /models/components/legalentitycreate.go
@@ -353,6 +363,7 @@ generatedFiles:
   - /models/components/relatedpepcreate.go
   - /models/components/relatedpepdetailscreate.go
   - /models/components/relatedprofile.go
+  - /models/components/removeorderrequestcreate.go
   - /models/components/removeordersrequestcreate.go
   - /models/components/removeordersresponse.go
   - /models/components/removepartyrequestcreate.go
@@ -379,7 +390,9 @@ generatedFiles:
   - /models/components/schedulepropertiescreate.go
   - /models/components/security.go
   - /models/components/setextrareportingdatarequestcreate.go
+  - /models/components/setextrareportingdataresponse.go
   - /models/components/simulatecreatecheckdepositrequestcreate.go
+  - /models/components/simulatewiredepositrequestcreate.go
   - /models/components/snapshot.go
   - /models/components/status.go
   - /models/components/stoppricecreate.go
@@ -408,6 +421,7 @@ generatedFiles:
   - /models/components/trustedcontactupdate.go
   - /models/components/trustenrollmentmetadatacreate.go
   - /models/components/uploadlink.go
+  - /models/components/verifyidentitylookuprequestcreate.go
   - /models/components/verifymicrodepositsrequestcreate.go
   - /models/components/virtualaccountnumberenrollmentmetadatacreate.go
   - /models/components/watchlistitem.go
@@ -517,6 +531,7 @@ generatedFiles:
   - /models/operations/basketordersservicelistbasketorders.go
   - /models/operations/basketordersservicelistcompressedorders.go
   - /models/operations/basketordersserviceremoveorders.go
+  - /models/operations/basketordersservicesetextrareportingdata.go
   - /models/operations/basketordersservicesubmitbasket.go
   - /models/operations/bookingcancelexecution.go
   - /models/operations/bookingcanceltrade.go
@@ -558,6 +573,8 @@ generatedFiles:
   - /models/operations/ictwithdrawalsforceapproveictwithdrawal.go
   - /models/operations/ictwithdrawalsforcerejectictwithdrawal.go
   - /models/operations/ictwithdrawalsgetictwithdrawal.go
+  - /models/operations/identitylookupservicecreateidentitylookup.go
+  - /models/operations/identitylookupserviceverifyidentitylookup.go
   - /models/operations/investigationservicegetinvestigation.go
   - /models/operations/investigationservicelinkdocuments.go
   - /models/operations/investigationservicelistinvestigations.go
@@ -595,7 +612,10 @@ generatedFiles:
   - /models/operations/subscriberupdatepushsubscription.go
   - /models/operations/transferschedulesummarieslistschedulesummaries.go
   - /models/operations/watchlistservicegetwatchlistitem.go
+  - /models/operations/wiredepositsforceapprovewiredeposit.go
+  - /models/operations/wiredepositsforcerejectwiredeposit.go
   - /models/operations/wiredepositsgetwiredeposit.go
+  - /models/operations/wiredepositssimulatewiredeposit.go
   - /models/operations/wirewithdrawalscancelwirewithdrawal.go
   - /models/operations/wirewithdrawalschedulescancelwirewithdrawalschedule.go
   - /models/operations/wirewithdrawalschedulescreatewirewithdrawalschedule.go
@@ -983,6 +1003,7 @@ generatedFiles:
   - docs/models/components/basketcreate.md
   - docs/models/components/basketorder.md
   - docs/models/components/basketorderassettype.md
+  - docs/models/components/basketordercancelinitiator.md
   - docs/models/components/basketordercreate.md
   - docs/models/components/basketordercreateassettype.md
   - docs/models/components/basketordercreateidentifiertype.md
@@ -991,6 +1012,7 @@ generatedFiles:
   - docs/models/components/basketordercreatespecialreportinginstructions.md
   - docs/models/components/basketordercreatetimeinforce.md
   - docs/models/components/basketordercumulativenotionalvalue.md
+  - docs/models/components/basketorderextrareportingdata.md
   - docs/models/components/basketorderfilledquantity.md
   - docs/models/components/basketorderidentifiertype.md
   - docs/models/components/basketordermaxsellquantity.md
@@ -1153,6 +1175,8 @@ generatedFiles:
   - docs/models/components/cashrate.md
   - docs/models/components/cashtype.md
   - docs/models/components/cataccountholdertype.md
+  - docs/models/components/cftcdocumentdeliverypreference.md
+  - docs/models/components/cftcownertype.md
   - docs/models/components/checkdeposit.md
   - docs/models/components/checkdepositamount.md
   - docs/models/components/checkdepositretirementcontribution.md
@@ -1260,6 +1284,9 @@ generatedFiles:
   - docs/models/components/descriptiondetail.md
   - docs/models/components/detail.md
   - docs/models/components/determinedaccountriskrating.md
+  - docs/models/components/devicemetadata.md
+  - docs/models/components/devicemetadatacreate.md
+  - docs/models/components/devicetype.md
   - docs/models/components/direction.md
   - docs/models/components/distributionconstraints.md
   - docs/models/components/distributionconstraintsdistributiontypeinfo.md
@@ -1306,6 +1333,7 @@ generatedFiles:
   - docs/models/components/enrollmentcorporationenrollmentmetadatadeterminedaccountriskrating.md
   - docs/models/components/enrollmentcorporationenrollmentmetadatadividendreinvestmentplan.md
   - docs/models/components/enrollmentcorporationenrollmentmetadatafdiccashsweep.md
+  - docs/models/components/enrollmentcorporationenrollmentmetadatamoneymarketfundsweep.md
   - docs/models/components/enrollmentcorporationenrollmentmetadataprimaryaccountactivitytype.md
   - docs/models/components/enrollmentcorporationenrollmentmetadatawithdrawalfrequency.md
   - docs/models/components/enrollmentcreate.md
@@ -1335,6 +1363,7 @@ generatedFiles:
   - docs/models/components/enrollmentforeignjointaccountenrollmentmetadatarelatedpepdetails.md
   - docs/models/components/enrollmentforeignjointaccountenrollmentmetadatawithdrawalfrequency.md
   - docs/models/components/enrollmentforeignnaturalpersonaccountenrollmentmetadata.md
+  - docs/models/components/enrollmentfuturesinvestmentobjective.md
   - docs/models/components/enrollmentindividualenrollmentmetadatadividendreinvestmentplan.md
   - docs/models/components/enrollmentindividualenrollmentmetadatafdiccashsweep.md
   - docs/models/components/enrollmentinitialdepositamount.md
@@ -1368,6 +1397,7 @@ generatedFiles:
   - docs/models/components/enrollmentllcenrollmentmetadatainitialdepositamount.md
   - docs/models/components/enrollmentllcenrollmentmetadatalowpricedsecurities.md
   - docs/models/components/enrollmentllcenrollmentmetadatalowpricedsecuritiespercentage.md
+  - docs/models/components/enrollmentllcenrollmentmetadatamoneymarketfundsweep.md
   - docs/models/components/enrollmentllcenrollmentmetadataotheraccounts.md
   - docs/models/components/enrollmentllcenrollmentmetadataplannedactivity.md
   - docs/models/components/enrollmentllcenrollmentmetadataprimaryaccountactivitytype.md
@@ -1375,6 +1405,7 @@ generatedFiles:
   - docs/models/components/enrollmentllcenrollmentmetadatawithdrawalfrequency.md
   - docs/models/components/enrollmentlowpricedsecurities.md
   - docs/models/components/enrollmentlowpricedsecuritiespercentage.md
+  - docs/models/components/enrollmentmoneymarketfundsweep.md
   - docs/models/components/enrollmentopenedonbehalfof.md
   - docs/models/components/enrollmentoperatingpurpose.md
   - docs/models/components/enrollmentoptionslevel.md
@@ -1386,6 +1417,7 @@ generatedFiles:
   - docs/models/components/enrollmenttaxauthority.md
   - docs/models/components/enrollmenttrustenrollmentmetadatadividendreinvestmentplan.md
   - docs/models/components/enrollmenttrustenrollmentmetadatafdiccashsweep.md
+  - docs/models/components/enrollmenttrustenrollmentmetadatamoneymarketfundsweep.md
   - docs/models/components/enrollmenttype.md
   - docs/models/components/enrollmenttype1.md
   - docs/models/components/enrollmentwithdrawalfrequency.md
@@ -1553,6 +1585,7 @@ generatedFiles:
   - docs/models/components/estateenrollmentmetadata.md
   - docs/models/components/estateenrollmentmetadatacreate.md
   - docs/models/components/estateenrollmentmetadatacreatedividendreinvestmentplan.md
+  - docs/models/components/estateenrollmentmetadatacreatemoneymarketfundsweep.md
   - docs/models/components/estimatedaccruedinterest.md
   - docs/models/components/estimatedgrossamount.md
   - docs/models/components/estimatedgrosscreditamount.md
@@ -1575,6 +1608,7 @@ generatedFiles:
   - docs/models/components/externalaccount.md
   - docs/models/components/externalaccountcreate.md
   - docs/models/components/extrareportingdata.md
+  - docs/models/components/extrareportingdatacreate.md
   - docs/models/components/factordenominator.md
   - docs/models/components/factornumerator.md
   - docs/models/components/fairmarketvalue.md
@@ -1604,6 +1638,7 @@ generatedFiles:
   - docs/models/components/forceapprovecashjournalrequestcreate.md
   - docs/models/components/forceapproveictdepositrequestcreate.md
   - docs/models/components/forceapproveictwithdrawalrequestcreate.md
+  - docs/models/components/forceapprovewiredepositrequestcreate.md
   - docs/models/components/forceapprovewirewithdrawalrequestcreate.md
   - docs/models/components/forcenocachdepositrequestcreate.md
   - docs/models/components/forcenocachwithdrawalrequestcreate.md
@@ -1612,6 +1647,7 @@ generatedFiles:
   - docs/models/components/forcerejectcashjournalrequestcreate.md
   - docs/models/components/forcerejectictdepositrequestcreate.md
   - docs/models/components/forcerejectictwithdrawalrequestcreate.md
+  - docs/models/components/forcerejectwiredepositrequestcreate.md
   - docs/models/components/forcerejectwirewithdrawalrequestcreate.md
   - docs/models/components/forcereturnachdepositrequestcreate.md
   - docs/models/components/forcereturnachwithdrawalrequestcreate.md
@@ -1640,7 +1676,12 @@ generatedFiles:
   - docs/models/components/free.md
   - docs/models/components/fullypaidunsettledfundsamount.md
   - docs/models/components/fundingtype.md
+  - docs/models/components/futuresenrollmentmetadata.md
+  - docs/models/components/futuresenrollmentmetadatacreate.md
+  - docs/models/components/futuresinvestmentobjective.md
   - docs/models/components/generateserviceaccounttokenrequestcreate.md
+  - docs/models/components/geolocation.md
+  - docs/models/components/geolocationmechanism.md
   - docs/models/components/grossamount.md
   - docs/models/components/grosscreditamount.md
   - docs/models/components/httpcallback.md
@@ -1693,8 +1734,12 @@ generatedFiles:
   - docs/models/components/iddocument.md
   - docs/models/components/iddocumentuploadrequestcreate.md
   - docs/models/components/iddocumentuploadrequestcreatedocumenttype.md
+  - docs/models/components/identification.md
+  - docs/models/components/identificationcreate.md
+  - docs/models/components/identificationcreatetype.md
   - docs/models/components/identificationdetail.md
   - docs/models/components/identificationnumberverified.md
+  - docs/models/components/identificationtype.md
   - docs/models/components/identifier.md
   - docs/models/components/identifiercreate.md
   - docs/models/components/identifiercreatetype.md
@@ -1705,6 +1750,18 @@ generatedFiles:
   - docs/models/components/identity.md
   - docs/models/components/identityidentification.md
   - docs/models/components/identityidentificationtype.md
+  - docs/models/components/identitylookup.md
+  - docs/models/components/identitylookupbirthdate.md
+  - docs/models/components/identitylookupcreate.md
+  - docs/models/components/identitylookupdevicetype.md
+  - docs/models/components/identitylookupgeolocationmechanism.md
+  - docs/models/components/identitylookupidentification.md
+  - docs/models/components/identitylookuplookupresultphonenumber.md
+  - docs/models/components/identitylookuplookupresultshortcode.md
+  - docs/models/components/identitylookupphonenumber.md
+  - docs/models/components/identitylookupshortcode.md
+  - docs/models/components/identitylookupstate.md
+  - docs/models/components/identitylookuptype.md
   - docs/models/components/identityverification.md
   - docs/models/components/identityverificationresult.md
   - docs/models/components/identityverificationresultcreate.md
@@ -1810,6 +1867,7 @@ generatedFiles:
   - docs/models/components/lastadjusteddate.md
   - docs/models/components/lastchangeddate.md
   - docs/models/components/lastcoupondate.md
+  - docs/models/components/latlngcreate.md
   - docs/models/components/legaladdress.md
   - docs/models/components/legaladdressverified.md
   - docs/models/components/legalagreement.md
@@ -1906,9 +1964,11 @@ generatedFiles:
   - docs/models/components/llcenrollmentmetadatacreate.md
   - docs/models/components/llcenrollmentmetadatacreatedividendreinvestmentplan.md
   - docs/models/components/llcenrollmentmetadatacreatefdiccashsweep.md
+  - docs/models/components/llcenrollmentmetadatacreatemoneymarketfundsweep.md
   - docs/models/components/localmarkettradedate.md
   - docs/models/components/locateictreportresponse.md
   - docs/models/components/locateictreportresponseprogram.md
+  - docs/models/components/lookupresult.md
   - docs/models/components/lot.md
   - docs/models/components/lotcreate.md
   - docs/models/components/lotmoney.md
@@ -1937,6 +1997,7 @@ generatedFiles:
   - docs/models/components/microdepositamountscreate.md
   - docs/models/components/minimumquantity.md
   - docs/models/components/money.md
+  - docs/models/components/moneymarketfundsweep.md
   - docs/models/components/mutualfund.md
   - docs/models/components/mutualfundtype.md
   - docs/models/components/nachanoccreate.md
@@ -2029,6 +2090,7 @@ generatedFiles:
   - docs/models/components/party.md
   - docs/models/components/partybirthdate.md
   - docs/models/components/partybusinessindustrialclassification.md
+  - docs/models/components/partycftcdocumentdeliverypreference.md
   - docs/models/components/partycnoticedate.md
   - docs/models/components/partycorporatestructure.md
   - docs/models/components/partycustomerreferralsource.md
@@ -2270,6 +2332,8 @@ generatedFiles:
   - docs/models/components/relationtype.md
   - docs/models/components/remainingcontributionallowed.md
   - docs/models/components/remainingdistributionrequired.md
+  - docs/models/components/removeorderrequestcreate.md
+  - docs/models/components/removeorderrequestcreatecancelinitiator.md
   - docs/models/components/removeordersrequestcreate.md
   - docs/models/components/removeordersresponse.md
   - docs/models/components/removepartyrequestcreate.md
@@ -2334,6 +2398,23 @@ generatedFiles:
   - docs/models/components/seriesdate.md
   - docs/models/components/serviceaccountcreds.md
   - docs/models/components/setextrareportingdatarequestcreate.md
+  - docs/models/components/setextrareportingdataresponse.md
+  - docs/models/components/setextrareportingdataresponseassettype.md
+  - docs/models/components/setextrareportingdataresponsebasketorder.md
+  - docs/models/components/setextrareportingdataresponsecancelinitiator.md
+  - docs/models/components/setextrareportingdataresponsecumulativenotionalvalue.md
+  - docs/models/components/setextrareportingdataresponseextrareportingdata.md
+  - docs/models/components/setextrareportingdataresponsefilledquantity.md
+  - docs/models/components/setextrareportingdataresponseidentifiertype.md
+  - docs/models/components/setextrareportingdataresponsemaxsellquantity.md
+  - docs/models/components/setextrareportingdataresponsenotionalvalue.md
+  - docs/models/components/setextrareportingdataresponseorderrejectedreason.md
+  - docs/models/components/setextrareportingdataresponseorderstatus.md
+  - docs/models/components/setextrareportingdataresponseordertype.md
+  - docs/models/components/setextrareportingdataresponsequantity.md
+  - docs/models/components/setextrareportingdataresponseside.md
+  - docs/models/components/setextrareportingdataresponsespecialreportinginstructions.md
+  - docs/models/components/setextrareportingdataresponsetimeinforce.md
   - docs/models/components/settled.md
   - docs/models/components/settledate.md
   - docs/models/components/settledcashavailabletowithdraw.md
@@ -2347,6 +2428,7 @@ generatedFiles:
   - docs/models/components/side.md
   - docs/models/components/sidemodifier.md
   - docs/models/components/simulatecreatecheckdepositrequestcreate.md
+  - docs/models/components/simulatewiredepositrequestcreate.md
   - docs/models/components/smaamount.md
   - docs/models/components/snapshot.md
   - docs/models/components/snapshotprocessdate.md
@@ -2489,6 +2571,7 @@ generatedFiles:
   - docs/models/components/trustenrollmentmetadatacreate.md
   - docs/models/components/trustenrollmentmetadatacreatedividendreinvestmentplan.md
   - docs/models/components/trustenrollmentmetadatacreatefdiccashsweep.md
+  - docs/models/components/trustenrollmentmetadatacreatemoneymarketfundsweep.md
   - docs/models/components/type.md
   - docs/models/components/unadjustedavailablecashtowithdrawamount.md
   - docs/models/components/unitsplit.md
@@ -2500,6 +2583,7 @@ generatedFiles:
   - docs/models/components/value.md
   - docs/models/components/venue.md
   - docs/models/components/verificationmethod.md
+  - docs/models/components/verifyidentitylookuprequestcreate.md
   - docs/models/components/verifymicrodepositsrequestcreate.md
   - docs/models/components/virtualaccountnumberenrollmentmetadata.md
   - docs/models/components/virtualaccountnumberenrollmentmetadatacreate.md
@@ -2761,6 +2845,8 @@ generatedFiles:
   - docs/models/operations/basketordersservicelistcompressedordersresponse.md
   - docs/models/operations/basketordersserviceremoveordersrequest.md
   - docs/models/operations/basketordersserviceremoveordersresponse.md
+  - docs/models/operations/basketordersservicesetextrareportingdatarequest.md
+  - docs/models/operations/basketordersservicesetextrareportingdataresponse.md
   - docs/models/operations/basketordersservicesubmitbasketrequest.md
   - docs/models/operations/basketordersservicesubmitbasketresponse.md
   - docs/models/operations/bookingcancelexecutionrequest.md
@@ -2842,6 +2928,10 @@ generatedFiles:
   - docs/models/operations/ictwithdrawalsforcerejectictwithdrawalresponse.md
   - docs/models/operations/ictwithdrawalsgetictwithdrawalrequest.md
   - docs/models/operations/ictwithdrawalsgetictwithdrawalresponse.md
+  - docs/models/operations/identitylookupservicecreateidentitylookuprequest.md
+  - docs/models/operations/identitylookupservicecreateidentitylookupresponse.md
+  - docs/models/operations/identitylookupserviceverifyidentitylookuprequest.md
+  - docs/models/operations/identitylookupserviceverifyidentitylookupresponse.md
   - docs/models/operations/investigationservicegetinvestigationrequest.md
   - docs/models/operations/investigationservicegetinvestigationresponse.md
   - docs/models/operations/investigationservicelinkdocumentsrequest.md
@@ -2919,8 +3009,14 @@ generatedFiles:
   - docs/models/operations/view.md
   - docs/models/operations/watchlistservicegetwatchlistitemrequest.md
   - docs/models/operations/watchlistservicegetwatchlistitemresponse.md
+  - docs/models/operations/wiredepositsforceapprovewiredepositrequest.md
+  - docs/models/operations/wiredepositsforceapprovewiredepositresponse.md
+  - docs/models/operations/wiredepositsforcerejectwiredepositrequest.md
+  - docs/models/operations/wiredepositsforcerejectwiredepositresponse.md
   - docs/models/operations/wiredepositsgetwiredepositrequest.md
   - docs/models/operations/wiredepositsgetwiredepositresponse.md
+  - docs/models/operations/wiredepositssimulatewiredepositrequest.md
+  - docs/models/operations/wiredepositssimulatewiredepositresponse.md
   - docs/models/operations/wirewithdrawalscancelwirewithdrawalrequest.md
   - docs/models/operations/wirewithdrawalscancelwirewithdrawalresponse.md
   - docs/models/operations/wirewithdrawalschedulescancelwirewithdrawalschedulerequest.md
@@ -3010,11 +3106,11 @@ generatedFiles:
   - tests/assets_test.go
   - tests/assettradingconfig_test.go
   - tests/checks_test.go
-  - tests/createorder_test.go
   - tests/dataretrieval_test.go
   - tests/files.go
   - tests/investigations_test.go
   - tests/margins_test.go
+  - tests/order_test.go
   - tests/personmanagement_test.go
   - tests/subscriber_test.go
   - tests/testclient.go
@@ -5534,7 +5630,7 @@ examples:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
       requestBody:
-        application/json: {"client_order_ids": ["77e4c4b9-38e7-469f-9a8d-cd8baf7c1952", "4cff908e-aaed-401d-8ec9-929e3eb18cbc"], "name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
+        application/json: {"name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
       responses:
         "200":
           application/json: {}
@@ -5596,6 +5692,100 @@ examples:
       parameters:
         path:
           correspondent_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  IdentityLookupService_CreateIdentityLookup:
+    speakeasy-default-identity-lookup-service-create-identity-lookup:
+      parameters:
+        path:
+          correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
+      requestBody:
+        application/json: {"device_metadata": {"ip_address": "203.0.113.42"}, "identification": {"region_code": "US", "type": "SSN", "value": "123-45-6789"}, "phone_number": {}, "user_consent": true}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  IdentityLookupService_VerifyIdentityLookup:
+    speakeasy-default-identity-lookup-service-verify-identity-lookup:
+      parameters:
+        path:
+          correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
+          identityLookup_id: "01HEWVF4ZSNKYRP293J53ASJCJ"
+      requestBody:
+        application/json: {"name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/identityLookups/01HEWVF4ZSNKYRP293J53ASJCJ", "verification_code": "123456"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  WireDeposits_SimulateWireDeposit:
+    speakeasy-default-wire-deposits-simulate-wire-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"amount": {}, "parent": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireDeposits_ForceApproveWireDeposit:
+    speakeasy-default-wire-deposits-force-approve-wire-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  WireDeposits_ForceRejectWireDeposit:
+    speakeasy-default-wire-deposits-force-reject-wire-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          wireDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  BasketOrdersService_SetExtraReportingData:
+    speakeasy-default-basket-orders-service-set-extra-reporting-data:
+      parameters:
+        path:
+          correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
+          basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
+      requestBody:
+        application/json: {"cancel_confirmed_time": "2025-12-13T15:28:17.262732Z", "name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
       responses:
         "200":
           application/json: {}

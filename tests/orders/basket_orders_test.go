@@ -129,4 +129,8 @@ func TestBasketOrders(t *testing.T) {
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})
+
+	t.Run("Basket Orders Set Extra Reporting Data Set Extra Reporting Data1", func(t *testing.T) {
+		t.Skip("Skipping: SDK model SetExtraReportingDataRequestCreate is missing required field 'ClientOrderID' - needs SDK regeneration")
+	})
 }

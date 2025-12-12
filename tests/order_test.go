@@ -4,14 +4,13 @@ package tests
 
 import (
 	"context"
-	"testing"
-
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/afs-public/ascend-sdk-go/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
 )
 
 func TestOrder_OrderSetExtraReportingData(t *testing.T) {

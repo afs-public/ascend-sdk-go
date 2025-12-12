@@ -28,6 +28,19 @@ func (e TrustEnrollmentMetadataCreateFdicCashSweep) ToPointer() *TrustEnrollment
 	return &e
 }
 
+// TrustEnrollmentMetadataCreateMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+type TrustEnrollmentMetadataCreateMoneyMarketFundSweep string
+
+const (
+	TrustEnrollmentMetadataCreateMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified TrustEnrollmentMetadataCreateMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
+	TrustEnrollmentMetadataCreateMoneyMarketFundSweepMoneyMarketFundSweepEnroll                TrustEnrollmentMetadataCreateMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
+	TrustEnrollmentMetadataCreateMoneyMarketFundSweepMoneyMarketFundSweepDecline               TrustEnrollmentMetadataCreateMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
+)
+
+func (e TrustEnrollmentMetadataCreateMoneyMarketFundSweep) ToPointer() *TrustEnrollmentMetadataCreateMoneyMarketFundSweep {
+	return &e
+}
+
 // OpenedOnBehalfOf - Trust account is opened on behalf of
 type OpenedOnBehalfOf string
 
@@ -47,6 +60,8 @@ type TrustEnrollmentMetadataCreate struct {
 	DividendReinvestmentPlan *TrustEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
 	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *TrustEnrollmentMetadataCreateFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
+	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+	MoneyMarketFundSweep *TrustEnrollmentMetadataCreateMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
 	// Trust account is opened on behalf of
 	OpenedOnBehalfOf OpenedOnBehalfOf `json:"opened_on_behalf_of"`
 }
@@ -63,6 +78,13 @@ func (o *TrustEnrollmentMetadataCreate) GetFdicCashSweep() *TrustEnrollmentMetad
 		return nil
 	}
 	return o.FdicCashSweep
+}
+
+func (o *TrustEnrollmentMetadataCreate) GetMoneyMarketFundSweep() *TrustEnrollmentMetadataCreateMoneyMarketFundSweep {
+	if o == nil {
+		return nil
+	}
+	return o.MoneyMarketFundSweep
 }
 
 func (o *TrustEnrollmentMetadataCreate) GetOpenedOnBehalfOf() OpenedOnBehalfOf {

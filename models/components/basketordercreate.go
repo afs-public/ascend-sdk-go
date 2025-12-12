@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // BasketOrderCreateAssetType - The type of the asset in this order
@@ -92,10 +91,12 @@ type BasketOrderCreate struct {
 	AssetType BasketOrderCreateAssetType `json:"asset_type"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID string `json:"client_order_id"`
-	// Time the order request was received by the client. Must be in the past.
+	// Time the order request was received by the client. Must be in the past. Timezone will default to UTC if not provided.
 	ClientOrderReceivedTime *time.Time `json:"client_order_received_time,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Any extra reporting data provided by the client for an order
+	ExtraReportingData *ExtraReportingDataCreate `json:"extra_reporting_data,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported
@@ -172,6 +173,13 @@ func (o *BasketOrderCreate) GetCurrencyCode() *string {
 		return nil
 	}
 	return o.CurrencyCode
+}
+
+func (o *BasketOrderCreate) GetExtraReportingData() *ExtraReportingDataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.ExtraReportingData
 }
 
 func (o *BasketOrderCreate) GetIdentifier() string {

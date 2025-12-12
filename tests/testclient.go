@@ -5,10 +5,9 @@ package tests
 import (
 	"crypto/rand"
 	"fmt"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"net/http"
 	"time"
-
-	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 )
 
 func createTestHTTPClient(testName string) ascendsdkgo.HTTPClient {

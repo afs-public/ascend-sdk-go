@@ -4,13 +4,12 @@ package tests
 
 import (
 	"context"
-	"testing"
-
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
 )
 
 func TestTestSimulation_CheckDepositsSimulateCreateCheckDeposit(t *testing.T) {

@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // IctWithdrawalAmount - The amount of the transfer being withdrawn from the customer's account in USD. A value should not be provided if the withdrawal is a full disbursement.
@@ -159,6 +158,7 @@ const (
 	IctWithdrawalTypeNetIncomeAttributable                      IctWithdrawalType = "NET_INCOME_ATTRIBUTABLE"
 	IctWithdrawalTypeRevocation                                 IctWithdrawalType = "REVOCATION"
 	IctWithdrawalTypeNonReportable                              IctWithdrawalType = "NON_REPORTABLE"
+	IctWithdrawalTypeQualifiedCharitableDistribution            IctWithdrawalType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
 func (e IctWithdrawalType) ToPointer() *IctWithdrawalType {

@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // AskMinimumQuantity - The best ask minimum quantity. This will be absent if no ask information is available
@@ -43,6 +42,7 @@ const (
 	RetrieveQuoteResponseAssetTypeFixedIncome          RetrieveQuoteResponseAssetType = "FIXED_INCOME"
 	RetrieveQuoteResponseAssetTypeMutualFund           RetrieveQuoteResponseAssetType = "MUTUAL_FUND"
 	RetrieveQuoteResponseAssetTypeOption               RetrieveQuoteResponseAssetType = "OPTION"
+	RetrieveQuoteResponseAssetTypeEventContract        RetrieveQuoteResponseAssetType = "EVENT_CONTRACT"
 )
 
 func (e RetrieveQuoteResponseAssetType) ToPointer() *RetrieveQuoteResponseAssetType {

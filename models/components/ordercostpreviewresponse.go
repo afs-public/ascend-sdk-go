@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // OrderCostPreviewResponseAssetType - The type of asset referenced by the security identifier
@@ -17,6 +16,7 @@ const (
 	OrderCostPreviewResponseAssetTypeFixedIncome          OrderCostPreviewResponseAssetType = "FIXED_INCOME"
 	OrderCostPreviewResponseAssetTypeMutualFund           OrderCostPreviewResponseAssetType = "MUTUAL_FUND"
 	OrderCostPreviewResponseAssetTypeOption               OrderCostPreviewResponseAssetType = "OPTION"
+	OrderCostPreviewResponseAssetTypeEventContract        OrderCostPreviewResponseAssetType = "EVENT_CONTRACT"
 )
 
 func (e OrderCostPreviewResponseAssetType) ToPointer() *OrderCostPreviewResponseAssetType {

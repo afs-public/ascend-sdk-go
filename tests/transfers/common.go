@@ -37,6 +37,7 @@ type Fixtures struct {
 	creditId                      *string
 	wireId                        *string
 	cashJournalId                 *string
+	wireDepositId                 *string
 }
 
 func getMicrodepositAmounts(sdk *ascendsdk.SDK, ctx context.Context, accountId string, bankRelationshipId string) (components.MicroDepositAmounts, error) {

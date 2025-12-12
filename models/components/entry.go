@@ -3,9 +3,8 @@
 package components
 
 import (
-	"time"
-
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
 )
 
 // AcatsPendingOut - Used to record the movement of funds or shares to/ from the pending_acats memo location

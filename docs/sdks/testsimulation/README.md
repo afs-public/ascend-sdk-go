@@ -21,6 +21,9 @@
 * [ForceRejectIctWithdrawal](#forcerejectictwithdrawal) - Force Reject ICT Withdrawal
 * [ForceApproveWireWithdrawal](#forceapprovewirewithdrawal) - Force Approve Wire Withdrawal
 * [ForceRejectWireWithdrawal](#forcerejectwirewithdrawal) - Force Reject Wire Withdrawal
+* [SimulateWireDeposit](#simulatewiredeposit) - Simulate Wire Deposit
+* [ForceApproveWireDeposit](#forceapprovewiredeposit) - Force Approve Wire Deposit
+* [ForceRejectWireDeposit](#forcerejectwiredeposit) - Force Reject Wire Deposit
 * [ForceApproveCashJournal](#forceapprovecashjournal) - Force Approve Cash Journal
 * [ForceRejectCashJournal](#forcerejectcashjournal) - Force Reject Cash Journal
 
@@ -1065,6 +1068,201 @@ func main() {
 ### Response
 
 **[*operations.WireWithdrawalsForceRejectWireWithdrawalResponse](../../models/operations/wirewithdrawalsforcerejectwirewithdrawalresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SimulateWireDeposit
+
+Simulates the process of creating a wire deposit - FOR TESTING
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="WireDeposits_SimulateWireDeposit" method="post" path="/transfers/v1/accounts/{account_id}/wireDeposits:simulate" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.TestSimulation.SimulateWireDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", components.SimulateWireDepositRequestCreate{
+        Amount: components.DecimalCreate{},
+        Parent: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.WireDeposit != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                | Example                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |                                                                                                            |
+| `accountID`                                                                                                | *string*                                                                                                   | :heavy_check_mark:                                                                                         | The account id.                                                                                            | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                 |
+| `simulateWireDepositRequestCreate`                                                                         | [components.SimulateWireDepositRequestCreate](../../models/components/simulatewiredepositrequestcreate.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |                                                                                                            |
+| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |                                                                                                            |
+
+### Response
+
+**[*operations.WireDepositsSimulateWireDepositResponse](../../models/operations/wiredepositssimulatewiredepositresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ForceApproveWireDeposit
+
+Simulates the process of approving a wire deposit - FOR TESTING
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="WireDeposits_ForceApproveWireDeposit" method="post" path="/transfers/v1/accounts/{account_id}/wireDeposits/{wireDeposit_id}:forceApprove" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.TestSimulation.ForceApproveWireDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceApproveWireDepositRequestCreate{
+        Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireDeposits/20230817000319",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.WireDeposit != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        | Example                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |                                                                                                                    |
+| `accountID`                                                                                                        | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | The account id.                                                                                                    | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                         |
+| `wireDepositID`                                                                                                    | *string*                                                                                                           | :heavy_check_mark:                                                                                                 | The wireDeposit id.                                                                                                | 20230817000319                                                                                                     |
+| `forceApproveWireDepositRequestCreate`                                                                             | [components.ForceApproveWireDepositRequestCreate](../../models/components/forceapprovewiredepositrequestcreate.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |                                                                                                                    |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |                                                                                                                    |
+
+### Response
+
+**[*operations.WireDepositsForceApproveWireDepositResponse](../../models/operations/wiredepositsforceapprovewiredepositresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ForceRejectWireDeposit
+
+Forces a rejection on an existing wire deposit pending review - FOR TESTING
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="WireDeposits_ForceRejectWireDeposit" method="post" path="/transfers/v1/accounts/{account_id}/wireDeposits/{wireDeposit_id}:forceReject" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.TestSimulation.ForceRejectWireDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceRejectWireDepositRequestCreate{
+        Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/wireDeposits/20230817000319",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.WireDeposit != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      | Example                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |                                                                                                                  |
+| `accountID`                                                                                                      | *string*                                                                                                         | :heavy_check_mark:                                                                                               | The account id.                                                                                                  | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                       |
+| `wireDepositID`                                                                                                  | *string*                                                                                                         | :heavy_check_mark:                                                                                               | The wireDeposit id.                                                                                              | 20230817000319                                                                                                   |
+| `forceRejectWireDepositRequestCreate`                                                                            | [components.ForceRejectWireDepositRequestCreate](../../models/components/forcerejectwiredepositrequestcreate.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |                                                                                                                  |
+| `opts`                                                                                                           | [][operations.Option](../../models/operations/option.md)                                                         | :heavy_minus_sign:                                                                                               | The options for this request.                                                                                    |                                                                                                                  |
+
+### Response
+
+**[*operations.WireDepositsForceRejectWireDepositResponse](../../models/operations/wiredepositsforcerejectwiredepositresponse.md), error**
 
 ### Errors
 

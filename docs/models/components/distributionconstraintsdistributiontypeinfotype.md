@@ -28,3 +28,4 @@ Retirement distribution type
 | `DistributionConstraintsDistributionTypeInfoTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                                                     |
 | `DistributionConstraintsDistributionTypeInfoTypeRevocation`                                 | REVOCATION                                                                                  |
 | `DistributionConstraintsDistributionTypeInfoTypeNonReportable`                              | NON_REPORTABLE                                                                              |
+| `DistributionConstraintsDistributionTypeInfoTypeQualifiedCharitableDistribution`            | QUALIFIED_CHARITABLE_DISTRIBUTION                                                           |

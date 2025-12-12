@@ -28,3 +28,4 @@ The type of retirement distribution.
 | `AchWithdrawalTypeNetIncomeAttributable`                      | NET_INCOME_ATTRIBUTABLE                                       |
 | `AchWithdrawalTypeRevocation`                                 | REVOCATION                                                    |
 | `AchWithdrawalTypeNonReportable`                              | NON_REPORTABLE                                                |
+| `AchWithdrawalTypeQualifiedCharitableDistribution`            | QUALIFIED_CHARITABLE_DISTRIBUTION                             |
