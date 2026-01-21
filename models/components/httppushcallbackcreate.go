@@ -6,7 +6,7 @@ package components
 type HTTPPushCallbackCreate struct {
 	// A string that will be used to generate a signature for each event push request; This value cannot be more than 64KiB
 	ClientSecret string `json:"client_secret"`
-	// The maximum amount of time, in seconds, the service will wait for an acknowledgement of a delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+	// The maximum amount of time, in seconds, the service will wait for an acknowledgement of a delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
 	TimeoutSeconds *int `json:"timeout_seconds,omitempty"`
 	// The URL address of the client HTTP server that will receive the events via POST; URLs must be in the form of https://{domain}[/{path}]
 	URL string `json:"url"`

@@ -51,7 +51,7 @@ func main() {
         AssetType: components.AssetTypeEquity,
         ClientOrderID: "a6d5258b-6b23-478a-8145-98e79d60427a",
         Identifier: "SBUX",
-        IdentifierType: components.IdentifierTypeSymbol,
+        IdentifierType: components.OrderCreateIdentifierTypeSymbol,
         OrderDate: components.DateCreate{},
         OrderType: components.OrderTypeMarket,
         Side: components.SideBuy,

@@ -118,6 +118,7 @@ const (
 	DocumentDocumentTypeChangeOfAddressRequest                  DocumentDocumentType = "CHANGE_OF_ADDRESS_REQUEST"
 	DocumentDocumentTypeOptionsAgreement                        DocumentDocumentType = "OPTIONS_AGREEMENT"
 	DocumentDocumentTypeStateWaiverForm                         DocumentDocumentType = "STATE_WAIVER_FORM"
+	DocumentDocumentTypeAltsSubscriptionAgreement               DocumentDocumentType = "ALTS_SUBSCRIPTION_AGREEMENT"
 )
 
 func (e DocumentDocumentType) ToPointer() *DocumentDocumentType {
@@ -317,6 +318,7 @@ const (
 	DocumentInvestorDocumentDocumentTypeForm5498Esa                     DocumentInvestorDocumentDocumentType = "FORM_5498_ESA"
 	DocumentInvestorDocumentDocumentTypeFpslNegativeConsentForm         DocumentInvestorDocumentDocumentType = "FPSL_NEGATIVE_CONSENT_FORM"
 	DocumentInvestorDocumentDocumentTypeCrsForm                         DocumentInvestorDocumentDocumentType = "CRS_FORM"
+	DocumentInvestorDocumentDocumentTypeFpslConfirmation                DocumentInvestorDocumentDocumentType = "FPSL_CONFIRMATION"
 )
 
 func (e DocumentInvestorDocumentDocumentType) ToPointer() *DocumentInvestorDocumentDocumentType {

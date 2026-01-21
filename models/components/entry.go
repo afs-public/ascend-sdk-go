@@ -79,13 +79,13 @@ func (e Action) ToPointer() *Action {
 	return &e
 }
 
-// FairMarketValue - Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
-type FairMarketValue struct {
+// EntryFairMarketValue - Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+type EntryFairMarketValue struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *FairMarketValue) GetValue() *string {
+func (o *EntryFairMarketValue) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -154,7 +154,7 @@ type AccountTransfer struct {
 	// contra party identifier
 	ContraPartyID *string `json:"contra_party_id,omitempty"`
 	// Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
-	FairMarketValue *FairMarketValue `json:"fair_market_value,omitempty"`
+	FairMarketValue *EntryFairMarketValue `json:"fair_market_value,omitempty"`
 	// Date from which the asset was valued and used in the fair market value calculation
 	FairMarketValueDate *FairMarketValueDate `json:"fair_market_value_date,omitempty"`
 	// Indicates whether the account transfer constitutes a gift for tax reporting purposes. Used by cost basis and tax systems to ensure proper tax treatment and reporting compliance.
@@ -214,7 +214,7 @@ func (o *AccountTransfer) GetContraPartyID() *string {
 	return o.ContraPartyID
 }
 
-func (o *AccountTransfer) GetFairMarketValue() *FairMarketValue {
+func (o *AccountTransfer) GetFairMarketValue() *EntryFairMarketValue {
 	if o == nil {
 		return nil
 	}

@@ -2,7 +2,7 @@
 
 package ascendsdkgo
 
-// Generated from OpenAPI doc version v1:20251212:uat:f648e4b8e037 and generator version 2.691.6
+// Generated from OpenAPI doc version v1:20260112:uat:5e3b93765864 and generator version 2.691.6
 
 import (
 	"context"
@@ -78,6 +78,7 @@ type SDK struct {
 	Checks                   *Checks
 	TestSimulation           *TestSimulation
 	Wires                    *Wires
+	PositionJournals         *PositionJournals
 	CashBalances             *CashBalances
 	FeesAndCredits           *FeesAndCredits
 	AccountTransfers         *AccountTransfers
@@ -168,9 +169,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "1.3.1",
+		SDKVersion: "1.3.2",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.3.1 2.691.6 v1:20251212:uat:f648e4b8e037 github.com/afs-public/ascend-sdk-go",
+			UserAgent:  "speakeasy-sdk/go 1.3.2 2.691.6 v1:20260112:uat:5e3b93765864 github.com/afs-public/ascend-sdk-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -208,6 +209,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.Checks = newChecks(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.TestSimulation = newTestSimulation(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Wires = newWires(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PositionJournals = newPositionJournals(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.CashBalances = newCashBalances(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.FeesAndCredits = newFeesAndCredits(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AccountTransfers = newAccountTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)

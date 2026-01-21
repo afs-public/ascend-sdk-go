@@ -4,7 +4,7 @@ package components
 
 // HTTPCallback - The information about an HTTP target callback
 type HTTPCallback struct {
-	// The maximum amount of time, in seconds, the service will wait for an acknowledgement of a delivery. If a value of 0 or no value is specified, the timeout will default to 10 seconds.
+	// The maximum amount of time, in seconds, the service will wait for an acknowledgement of a delivery; If a value of 0 or no value is specified, the timeout will default to 10 seconds
 	TimeoutSeconds *int `json:"timeout_seconds,omitempty"`
 	// The URL address of the client HTTP server that will receive the events via POST; URLs must be in the form of https://{domain}[/{path}]
 	URL *string `json:"url,omitempty"`
@@ -41,9 +41,11 @@ func (e State) ToPointer() *State {
 
 // PushSubscription - Configuration information about a push subscription
 type PushSubscription struct {
-	// The client that owns the subscription. A client subscription will receive events for it and all of its correspondents. This can only be set at creation time and is mutually exclusive with correspondent_id.
+	// The id of the account group to receive events for; The subscription will receive events related to any of the accounts in the specified account group; This can only be set at creation time and is mutually exclusive with client_id and correspondent_id
+	AccountGroupID *string `json:"account_group_id,omitempty"`
+	// The id of the client to receive events for; The subscription will receive events related to the specified client, and any of its correspondents and accounts; This can only be set at creation time and is mutually exclusive with correspondent_id and account_group_id
 	ClientID *string `json:"client_id,omitempty"`
-	// The correspondent that owns the subscription. A correspondent subscription will receive events only for itself. This can only be set at creation time and is mutually exclusive with client_id.
+	// The id of the correspondent to receive events for; The subscription will receive events related to the specified correspondent and any of its accounts; This can only be set at creation time and is mutually exclusive with client_id and account_group_id
 	CorrespondentID *string `json:"correspondent_id,omitempty"`
 	// The user-defined name for the subscription
 	DisplayName *string `json:"display_name,omitempty"`
@@ -53,10 +55,19 @@ type PushSubscription struct {
 	HTTPCallback *HTTPCallback `json:"http_callback,omitempty"`
 	// The resource name of the subscription; Format: subscriptions/{subscription}
 	Name *string `json:"name,omitempty"`
+	// The organization that owns the subscription; Format: {org_type}/{org_id} This field can only be set at creation time and if it is not specified, then it will default to the target organization, unless the target is an account group, in which case this field is required
+	Owner *string `json:"owner,omitempty"`
 	// The current status of the subscription
 	State *State `json:"state,omitempty"`
 	// The unique identifier for the subscription
 	SubscriptionID *string `json:"subscription_id,omitempty"`
+}
+
+func (o *PushSubscription) GetAccountGroupID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountGroupID
 }
 
 func (o *PushSubscription) GetClientID() *string {
@@ -99,6 +110,13 @@ func (o *PushSubscription) GetName() *string {
 		return nil
 	}
 	return o.Name
+}
+
+func (o *PushSubscription) GetOwner() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Owner
 }
 
 func (o *PushSubscription) GetState() *State {

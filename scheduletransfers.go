@@ -3076,6 +3076,1328 @@ func (s *ScheduleTransfers) CancelAchWithdrawalSchedule(ctx context.Context, acc
 
 }
 
+// CreateCheckWithdrawalSchedule - Create Check Withdrawal Schedule
+// Creates a Check withdrawal transfer schedule
+func (s *ScheduleTransfers) CreateCheckWithdrawalSchedule(ctx context.Context, accountID string, checkWithdrawalScheduleCreate components.CheckWithdrawalScheduleCreate, opts ...operations.Option) (*operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse, error) {
+	request := operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleRequest{
+		AccountID:                     accountID,
+		CheckWithdrawalScheduleCreate: checkWithdrawalScheduleCreate,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "CheckWithdrawalSchedules_CreateCheckWithdrawalSchedule",
+		OAuth2Scopes:     []string{},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CheckWithdrawalScheduleCreate", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"4XX",
+				"5XX",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"400", "403", "409", "4XX", "5XX"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.CheckWithdrawalSchedulesCreateCheckWithdrawalScheduleResponse{
+		HTTPMeta: components.HTTPMetadata{
+			Request:  req,
+			Response: httpRes,
+		},
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.CheckWithdrawalSchedule
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.CheckWithdrawalSchedule = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 403:
+		fallthrough
+	case httpRes.StatusCode == 409:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out sdkerrors.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.Status = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// ListCheckWithdrawalSchedules - List Check Withdrawal Schedules
+// Return a list of Check withdrawal schedules for the specified account and filter params
+func (s *ScheduleTransfers) ListCheckWithdrawalSchedules(ctx context.Context, accountID string, filter *string, pageSize *int, pageToken *string, opts ...operations.Option) (*operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse, error) {
+	request := operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesRequest{
+		AccountID: accountID,
+		Filter:    filter,
+		PageSize:  pageSize,
+		PageToken: pageToken,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "CheckWithdrawalSchedules_ListCheckWithdrawalSchedules",
+		OAuth2Scopes:     []string{},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"4XX",
+				"5XX",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"400", "403", "4XX", "5XX"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.CheckWithdrawalSchedulesListCheckWithdrawalSchedulesResponse{
+		HTTPMeta: components.HTTPMetadata{
+			Request:  req,
+			Response: httpRes,
+		},
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.ListCheckWithdrawalSchedulesResponse
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.ListCheckWithdrawalSchedulesResponse = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 403:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out sdkerrors.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.Status = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// GetCheckWithdrawalSchedule - Get Check Withdrawal Schedule
+// Gets a Check withdrawal transfer schedule
+func (s *ScheduleTransfers) GetCheckWithdrawalSchedule(ctx context.Context, accountID string, checkWithdrawalScheduleID string, opts ...operations.Option) (*operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse, error) {
+	request := operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleRequest{
+		AccountID:                 accountID,
+		CheckWithdrawalScheduleID: checkWithdrawalScheduleID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules/{checkWithdrawalSchedule_id}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "CheckWithdrawalSchedules_GetCheckWithdrawalSchedule",
+		OAuth2Scopes:     []string{},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"4XX",
+				"5XX",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"400", "403", "404", "4XX", "5XX"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.CheckWithdrawalSchedulesGetCheckWithdrawalScheduleResponse{
+		HTTPMeta: components.HTTPMetadata{
+			Request:  req,
+			Response: httpRes,
+		},
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.CheckWithdrawalSchedule
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.CheckWithdrawalSchedule = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 403:
+		fallthrough
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out sdkerrors.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.Status = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// UpdateCheckWithdrawalSchedule - Update Check Withdrawal Schedule
+// Updates the amount of a Check withdrawal transfer schedule
+func (s *ScheduleTransfers) UpdateCheckWithdrawalSchedule(ctx context.Context, accountID string, checkWithdrawalScheduleID string, checkWithdrawalScheduleUpdate components.CheckWithdrawalScheduleUpdate, updateMask *string, opts ...operations.Option) (*operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse, error) {
+	request := operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleRequest{
+		AccountID:                     accountID,
+		CheckWithdrawalScheduleID:     checkWithdrawalScheduleID,
+		UpdateMask:                    updateMask,
+		CheckWithdrawalScheduleUpdate: checkWithdrawalScheduleUpdate,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules/{checkWithdrawalSchedule_id}", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "CheckWithdrawalSchedules_UpdateCheckWithdrawalSchedule",
+		OAuth2Scopes:     []string{},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CheckWithdrawalScheduleUpdate", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "PATCH", opURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"4XX",
+				"5XX",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"400", "403", "404", "4XX", "5XX"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.CheckWithdrawalSchedulesUpdateCheckWithdrawalScheduleResponse{
+		HTTPMeta: components.HTTPMetadata{
+			Request:  req,
+			Response: httpRes,
+		},
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.CheckWithdrawalSchedule
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.CheckWithdrawalSchedule = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 403:
+		fallthrough
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out sdkerrors.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.Status = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
+// CancelCheckWithdrawalSchedule - Cancel Check Withdrawal Schedule
+// Cancels a Check withdrawal transfer schedule
+func (s *ScheduleTransfers) CancelCheckWithdrawalSchedule(ctx context.Context, accountID string, checkWithdrawalScheduleID string, cancelCheckWithdrawalScheduleRequestCreate components.CancelCheckWithdrawalScheduleRequestCreate, opts ...operations.Option) (*operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse, error) {
+	request := operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleRequest{
+		AccountID:                 accountID,
+		CheckWithdrawalScheduleID: checkWithdrawalScheduleID,
+		CancelCheckWithdrawalScheduleRequestCreate: cancelCheckWithdrawalScheduleRequestCreate,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+		operations.SupportedOptionTimeout,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
+
+	var baseURL string
+	if o.ServerURL == nil {
+		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
+	} else {
+		baseURL = *o.ServerURL
+	}
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transfers/v1/accounts/{account_id}/checkWithdrawalSchedules/{checkWithdrawalSchedule_id}:cancel", request, nil)
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		SDK:              s.rootSDK,
+		SDKConfiguration: s.sdkConfiguration,
+		BaseURL:          baseURL,
+		Context:          ctx,
+		OperationID:      "CheckWithdrawalSchedules_CancelCheckWithdrawalSchedule",
+		OAuth2Scopes:     []string{},
+		SecuritySource:   s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CancelCheckWithdrawalScheduleRequestCreate", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
+
+	timeout := o.Timeout
+	if timeout == nil {
+		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout != nil {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, *timeout)
+		defer cancel()
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("error creating request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
+
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+		return nil, err
+	}
+
+	for k, v := range o.SetHeaders {
+		req.Header.Set(k, v)
+	}
+
+	globalRetryConfig := s.sdkConfiguration.RetryConfig
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		if globalRetryConfig != nil {
+			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 500,
+					MaxInterval:     5000,
+					Exponent:        1.5,
+					MaxElapsedTime:  15000,
+				},
+				RetryConnectionErrors: true,
+			}
+		}
+	}
+
+	var httpRes *http.Response
+	if retryConfig != nil {
+		httpRes, err = utils.Retry(ctx, utils.Retries{
+			Config: retryConfig,
+			StatusCodes: []string{
+				"4XX",
+				"5XX",
+			},
+		}, func() (*http.Response, error) {
+			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
+				copyBody, err := req.GetBody()
+
+				if err != nil {
+					return nil, err
+				}
+
+				req.Body = copyBody
+			}
+
+			req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+			if err != nil {
+				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
+					return nil, err
+				}
+
+				return nil, retry.Permanent(err)
+			}
+
+			httpRes, err := s.sdkConfiguration.Client.Do(req)
+			if err != nil || httpRes == nil {
+				if err != nil {
+					err = fmt.Errorf("error sending request: %w", err)
+				} else {
+					err = fmt.Errorf("error sending request: no response")
+				}
+
+				_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			}
+			return httpRes, err
+		})
+
+		if err != nil {
+			return nil, err
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	} else {
+		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, err
+		}
+
+		httpRes, err = s.sdkConfiguration.Client.Do(req)
+		if err != nil || httpRes == nil {
+			if err != nil {
+				err = fmt.Errorf("error sending request: %w", err)
+			} else {
+				err = fmt.Errorf("error sending request: no response")
+			}
+
+			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
+			return nil, err
+		} else if utils.MatchStatusCodes([]string{"400", "403", "404", "4XX", "5XX"}, httpRes.StatusCode) {
+			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
+			if err != nil {
+				return nil, err
+			} else if _httpRes != nil {
+				httpRes = _httpRes
+			}
+		} else {
+			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
+			if err != nil {
+				return nil, err
+			}
+		}
+	}
+
+	res := &operations.CheckWithdrawalSchedulesCancelCheckWithdrawalScheduleResponse{
+		HTTPMeta: components.HTTPMetadata{
+			Request:  req,
+			Response: httpRes,
+		},
+	}
+
+	switch {
+	case httpRes.StatusCode == 200:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.CheckWithdrawalSchedule
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.CheckWithdrawalSchedule = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 403:
+		fallthrough
+	case httpRes.StatusCode == 404:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out sdkerrors.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, sdkerrors.NewSDKError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	default:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out components.Status
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			res.Status = &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
+	}
+
+	return res, nil
+
+}
+
 // CreateWireWithdrawalSchedule - Create Wire Withdrawal Schedule
 // Creates a Wire withdrawal transfer schedule
 func (s *ScheduleTransfers) CreateWireWithdrawalSchedule(ctx context.Context, accountID string, wireWithdrawalScheduleCreate components.WireWithdrawalScheduleCreate, opts ...operations.Option) (*operations.WireWithdrawalSchedulesCreateWireWithdrawalScheduleResponse, error) {

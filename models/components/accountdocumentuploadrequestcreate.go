@@ -118,6 +118,7 @@ const (
 	DocumentTypeChangeOfAddressRequest                  DocumentType = "CHANGE_OF_ADDRESS_REQUEST"
 	DocumentTypeOptionsAgreement                        DocumentType = "OPTIONS_AGREEMENT"
 	DocumentTypeStateWaiverForm                         DocumentType = "STATE_WAIVER_FORM"
+	DocumentTypeAltsSubscriptionAgreement               DocumentType = "ALTS_SUBSCRIPTION_AGREEMENT"
 )
 
 func (e DocumentType) ToPointer() *DocumentType {
