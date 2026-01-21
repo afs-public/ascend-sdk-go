@@ -598,6 +598,12 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [AssignLargeTraderLegalEntity](docs/sdks/personmanagement/README.md#assignlargetraderlegalentity) - Assign Entity Large Trader
 * [EndLargeTrader](docs/sdks/personmanagement/README.md#endlargetrader) - End Entity Large Trader
 
+### [PositionJournals](docs/sdks/positionjournals/README.md)
+
+* [CreatePositionJournal](docs/sdks/positionjournals/README.md#createpositionjournal) - Create Position Journal
+* [GetPositionJournal](docs/sdks/positionjournals/README.md#getpositionjournal) - Get Position Journal
+* [CancelPositionJournal](docs/sdks/positionjournals/README.md#cancelpositionjournal) - Cancel Position Journal
+
 ### [Reader](docs/sdks/reader/README.md)
 
 * [ListEventMessages](docs/sdks/reader/README.md#listeventmessages) - List Event Messages
@@ -623,6 +629,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [GetAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getachwithdrawalschedule) - Get ACH Withdrawal Schedule
 * [UpdateAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#updateachwithdrawalschedule) - Update ACH Withdrawal Schedule
 * [CancelAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#cancelachwithdrawalschedule) - Cancel ACH Withdrawal Schedule
+* [CreateCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#createcheckwithdrawalschedule) - Create Check Withdrawal Schedule
+* [ListCheckWithdrawalSchedules](docs/sdks/scheduletransfers/README.md#listcheckwithdrawalschedules) - List Check Withdrawal Schedules
+* [GetCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getcheckwithdrawalschedule) - Get Check Withdrawal Schedule
+* [UpdateCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#updatecheckwithdrawalschedule) - Update Check Withdrawal Schedule
+* [CancelCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#cancelcheckwithdrawalschedule) - Cancel Check Withdrawal Schedule
 * [CreateWireWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#createwirewithdrawalschedule) - Create Wire Withdrawal Schedule
 * [ListWireWithdrawalSchedules](docs/sdks/scheduletransfers/README.md#listwirewithdrawalschedules) - List Wire Withdrawal Schedules
 * [GetWireWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getwirewithdrawalschedule) - Get Wire Withdrawal Schedule
@@ -643,6 +654,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 ### [TestSimulation](docs/sdks/testsimulation/README.md)
 
 * [SimulateCreateCheckDeposit](docs/sdks/testsimulation/README.md#simulatecreatecheckdeposit) - Simulate Check Deposit Creation
+* [ForceApproveCheckDeposit](docs/sdks/testsimulation/README.md#forceapprovecheckdeposit) - Check Deposit Approval
 * [ForceApproveAchDeposit](docs/sdks/testsimulation/README.md#forceapproveachdeposit) - ACH Deposit Approval
 * [ForceNocAchDeposit](docs/sdks/testsimulation/README.md#forcenocachdeposit) - NOC for a Deposit
 * [ForceRejectAchDeposit](docs/sdks/testsimulation/README.md#forcerejectachdeposit) - ACH Deposit Rejection
@@ -663,6 +675,8 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ForceRejectWireDeposit](docs/sdks/testsimulation/README.md#forcerejectwiredeposit) - Force Reject Wire Deposit
 * [ForceApproveCashJournal](docs/sdks/testsimulation/README.md#forceapprovecashjournal) - Force Approve Cash Journal
 * [ForceRejectCashJournal](docs/sdks/testsimulation/README.md#forcerejectcashjournal) - Force Reject Cash Journal
+* [ForceApprovePositionJournal](docs/sdks/testsimulation/README.md#forceapprovepositionjournal) - Force Approve Position Journal
+* [ForceRejectPositionJournal](docs/sdks/testsimulation/README.md#forcerejectpositionjournal) - Force Reject Position Journal
 
 ### [TradeAllocation](docs/sdks/tradeallocation/README.md)
 

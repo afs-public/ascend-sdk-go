@@ -10,7 +10,7 @@ type CreateUploadLinkRequestCreate struct {
 	ClientBatchSourceID string `json:"client_batch_source_id"`
 	// Identity document to be uploaded;
 	IDDocumentUploadRequest *IDDocumentUploadRequestCreate `json:"id_document_upload_request,omitempty"`
-	// Media type for the document to be uploaded; Required for all documents; Must be one of: application/json, application/pdf, image/jpeg, image/png, text/csv, or text/plain
+	// Media type for the document to be uploaded; Required for all documents; Must be one of: application/json, application/pdf, image/jpeg, image/png, image/tiff, text/csv, or text/plain
 	MimeType string `json:"mime_type"`
 }
 

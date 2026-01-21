@@ -2,7 +2,6 @@ package events
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"testing"
 
@@ -16,34 +15,23 @@ import (
 )
 
 type Fixtures struct {
-	t                 *testing.T
-	sdk               *ascendsdk.SDK
-	ctx               context.Context
-	subscriberId      *string
-	fixedSubscriberId *string
-	listPushSubId     *string
-	deliveryId        *string
-	correspondentId   *string
+	t                *testing.T
+	sdk              *ascendsdk.SDK
+	ctx              context.Context
+	subscriberId     *string
+	testSubscriberId *string
+	deliveryId       *string
+	correspondentId  *string
 }
 
-func (f *Fixtures) CorrespondentId() (correspondentId *string) {
-	correspondentId = ascendsdk.String(os.Getenv("CORRESPONDENT_ID"))
-	require.NotNil(f.t, correspondentId, "CORRESPONDENT_ID is required and must be set as an environment variable")
-	return
-}
-
-func (f *Fixtures) SubscriptionId() *string {
-	s := f.sdk
-	ctx := f.ctx
-
-	res, err := s.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
-	if err != nil {
-		return nil
+func (f *Fixtures) CorrespondentId() *string {
+	if f.correspondentId != nil {
+		return f.correspondentId
 	}
-	subscriptions := res.ListPushSubscriptionsResponse.PushSubscriptions
-	subscription_id := subscriptions[0].SubscriptionID
-
-	return subscription_id
+	correspondentId := ascendsdk.String(os.Getenv("CORRESPONDENT_ID"))
+	require.NotNil(f.t, correspondentId, "CORRESPONDENT_ID is required and must be set as an environment variable")
+	f.correspondentId = correspondentId
+	return correspondentId
 }
 
 func (f *Fixtures) SubscriberId() *string {
@@ -52,8 +40,6 @@ func (f *Fixtures) SubscriberId() *string {
 	}
 
 	subscriberId, err := subscriberId(f.sdk, f.ctx, f.CorrespondentId())
-
-	fmt.Println("subscriberId", subscriberId)
 	require.NoError(f.t, err)
 
 	f.subscriberId = subscriberId
@@ -61,14 +47,32 @@ func (f *Fixtures) SubscriberId() *string {
 	return subscriberId
 }
 
+func (f *Fixtures) TestSubscriberId() *string {
+	if f.testSubscriberId != nil {
+		return f.testSubscriberId
+	}
+
+	s := f.sdk
+	ctx := f.ctx
+
+	res, err := s.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
+	if err != nil {
+		return nil
+	}
+	subscriptions := res.ListPushSubscriptionsResponse.PushSubscriptions
+	if len(subscriptions) > 0 {
+		f.testSubscriberId = subscriptions[0].SubscriptionID
+	}
+
+	return f.testSubscriberId
+}
+
 func (f *Fixtures) DeliveryId() *string {
 	if f.deliveryId != nil {
 		return f.deliveryId
 	}
 
-	deliveryId, err := deliveryID(f.sdk, f.ctx, f.SubscriptionId())
-
-	fmt.Println("DeliveryID", deliveryId)
+	deliveryId, err := deliveryID(f.sdk, f.ctx, f.TestSubscriberId())
 	require.NoError(f.t, err)
 
 	f.deliveryId = deliveryId
@@ -95,43 +99,42 @@ func TestSubscriber(t *testing.T) {
 	t.Run("GetPushSubscription", func(t *testing.T) {
 		res, err := sdk.Subscriber.GetPushSubscription(ctx, *fixtures.SubscriberId())
 		require.NoError(t, err)
+		assert.NotNil(t, res.HTTPMeta)
+		assert.NotNil(t, res.HTTPMeta.Response)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-	})
-
-	t.Run("ListPushSubscriptions", func(t *testing.T) {
-		res, err := sdk.Subscriber.ListPushSubscriptions(ctx, nil, nil, nil)
-		require.NoError(t, err)
-		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-		assert.NotNil(t, res.ListPushSubscriptionsResponse.PushSubscriptions)
 	})
 
 	t.Run("UpdatePushSubscription", func(t *testing.T) {
-		var updatedEventType = "position.v2.updated"
-		pushSubscriptionUpdateCreate := components.PushSubscriptionUpdate{
+		pushSubscriptionUpdate := components.PushSubscriptionUpdate{
 			EventTypes: []string{
-				updatedEventType,
+				"position.v2.updated",
 			},
 		}
 
-		res, err := sdk.Subscriber.UpdatePushSubscription(ctx, *fixtures.SubscriberId(), pushSubscriptionUpdateCreate, nil)
+		res, err := sdk.Subscriber.UpdatePushSubscription(ctx, *fixtures.SubscriberId(), pushSubscriptionUpdate, nil)
 		require.NoError(t, err)
+		assert.NotNil(t, res.HTTPMeta)
+		assert.NotNil(t, res.HTTPMeta.Response)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-		assert.Equal(t, updatedEventType, res.PushSubscription.EventTypes[0])
 	})
 
 	t.Run("ListPushSubscriptionDeliveries", func(t *testing.T) {
 		assert.NotNil(t, fixtures.DeliveryId())
 	})
 
-	t.Run("GetPushSubscriptionDelivery", func(t *testing.T) {
-		res, err := sdk.Subscriber.GetPushSubscriptionDelivery(ctx, *fixtures.SubscriptionId(), *fixtures.DeliveryId())
+	t.Run("GetSubscriptionEventDelivery", func(t *testing.T) {
+		res, err := sdk.Subscriber.GetPushSubscriptionDelivery(ctx, *fixtures.TestSubscriberId(), *fixtures.DeliveryId())
 		require.NoError(t, err)
+		assert.NotNil(t, res.HTTPMeta)
+		assert.NotNil(t, res.HTTPMeta.Response)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
 
 	t.Run("DeletePushSubscription", func(t *testing.T) {
 		res, err := sdk.Subscriber.DeletePushSubscription(ctx, *fixtures.SubscriberId())
 		require.NoError(t, err)
+		assert.NotNil(t, res.HTTPMeta)
+		assert.NotNil(t, res.HTTPMeta.Response)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
 }

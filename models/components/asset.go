@@ -250,6 +250,7 @@ const (
 	FixedIncomeTypeTreasury                   FixedIncomeType = "TREASURY"
 	FixedIncomeTypeGovernment                 FixedIncomeType = "GOVERNMENT"
 	FixedIncomeTypeForeignGovernment          FixedIncomeType = "FOREIGN_GOVERNMENT"
+	FixedIncomeTypeEuroBond                   FixedIncomeType = "EURO_BOND"
 )
 
 func (e FixedIncomeType) ToPointer() *FixedIncomeType {

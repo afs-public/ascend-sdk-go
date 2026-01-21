@@ -6,6 +6,7 @@
 ### Available Operations
 
 * [SimulateCreateCheckDeposit](#simulatecreatecheckdeposit) - Simulate Check Deposit Creation
+* [ForceApproveCheckDeposit](#forceapprovecheckdeposit) - Check Deposit Approval
 * [ForceApproveAchDeposit](#forceapproveachdeposit) - ACH Deposit Approval
 * [ForceNocAchDeposit](#forcenocachdeposit) - NOC for a Deposit
 * [ForceRejectAchDeposit](#forcerejectachdeposit) - ACH Deposit Rejection
@@ -26,6 +27,8 @@
 * [ForceRejectWireDeposit](#forcerejectwiredeposit) - Force Reject Wire Deposit
 * [ForceApproveCashJournal](#forceapprovecashjournal) - Force Approve Cash Journal
 * [ForceRejectCashJournal](#forcerejectcashjournal) - Force Reject Cash Journal
+* [ForceApprovePositionJournal](#forceapprovepositionjournal) - Force Approve Position Journal
+* [ForceRejectPositionJournal](#forcerejectpositionjournal) - Force Reject Position Journal
 
 ## SimulateCreateCheckDeposit
 
@@ -90,6 +93,71 @@ func main() {
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ForceApproveCheckDeposit
+
+Force approval of an existing check deposit that is pending review FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CheckDeposits_ForceApproveCheckDeposit" method="post" path="/transfers/v1/accounts/{account_id}/checkDeposits/{checkDeposit_id}:forceApprove" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, "01H8FB90ZRRFWXB4XC2JPJ1D4Y", "20230817000319", components.ForceApproveCheckDepositRequestCreate{
+        Name: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkDeposits/20230817000319",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CheckDeposit != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          | Example                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |                                                                                                                      |
+| `accountID`                                                                                                          | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | The account id.                                                                                                      | 01H8FB90ZRRFWXB4XC2JPJ1D4Y                                                                                           |
+| `checkDepositID`                                                                                                     | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | The checkDeposit id.                                                                                                 | 20230817000319                                                                                                       |
+| `forceApproveCheckDepositRequestCreate`                                                                              | [components.ForceApproveCheckDepositRequestCreate](../../models/components/forceapprovecheckdepositrequestcreate.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |                                                                                                                      |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |                                                                                                                      |
+
+### Response
+
+**[*operations.CheckDepositsForceApproveCheckDepositResponse](../../models/operations/checkdepositsforceapprovecheckdepositresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## ForceApproveAchDeposit
@@ -1397,4 +1465,132 @@ func main() {
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Status   | 400, 403           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ForceApprovePositionJournal
+
+Forces approval of an existing position journal that is pending review FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="PositionJournals_ForceApprovePositionJournal" method="post" path="/transfers/v1/positionJournals/{positionJournal_id}:forceApprove" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.TestSimulation.ForceApprovePositionJournal(ctx, "20230817000319", components.ForceApprovePositionJournalRequestCreate{
+        Name: "positionJournals/20230817000319",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.PositionJournal != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |                                                                                                                            |
+| `positionJournalID`                                                                                                        | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The positionJournal id.                                                                                                    | 20230817000319                                                                                                             |
+| `forceApprovePositionJournalRequestCreate`                                                                                 | [components.ForceApprovePositionJournalRequestCreate](../../models/components/forceapprovepositionjournalrequestcreate.md) | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |                                                                                                                            |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |                                                                                                                            |
+
+### Response
+
+**[*operations.PositionJournalsForceApprovePositionJournalResponse](../../models/operations/positionjournalsforceapprovepositionjournalresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## ForceRejectPositionJournal
+
+Forces rejection of an existing position journal that is pending review FOR TESTING ONLY!
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="PositionJournals_ForceRejectPositionJournal" method="post" path="/transfers/v1/positionJournals/{positionJournal_id}:forceReject" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.TestSimulation.ForceRejectPositionJournal(ctx, "20230817000319", components.ForceRejectPositionJournalRequestCreate{
+        Name: "positionJournals/20230817000319",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.PositionJournal != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |                                                                                                                          |
+| `positionJournalID`                                                                                                      | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | The positionJournal id.                                                                                                  | 20230817000319                                                                                                           |
+| `forceRejectPositionJournalRequestCreate`                                                                                | [components.ForceRejectPositionJournalRequestCreate](../../models/components/forcerejectpositionjournalrequestcreate.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |                                                                                                                          |
+
+### Response
+
+**[*operations.PositionJournalsForceRejectPositionJournalResponse](../../models/operations/positionjournalsforcerejectpositionjournalresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

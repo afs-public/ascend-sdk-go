@@ -46,13 +46,13 @@ func (o *PrevailingMarketPrice) GetValue() *string {
 	return o.Value
 }
 
-// Quantity - The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured in the face value of the currency of the order.
-type Quantity struct {
+// TradingExecutionsQuantity - The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured in the face value of the currency of the order.
+type TradingExecutionsQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
 }
 
-func (o *Quantity) GetValue() *string {
+func (o *TradingExecutionsQuantity) GetValue() *string {
 	if o == nil {
 		return nil
 	}
@@ -72,7 +72,7 @@ type TradingExecutions struct {
 	// The prevailing market price of the asset, without fees or commissions. Will only be present for orders of Fixed Income assets.
 	PrevailingMarketPrice *PrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
 	// The quantity of the order. For Equities: measured in shares. For Fixed Income assets: measured in the face value of the currency of the order.
-	Quantity *Quantity `json:"quantity,omitempty"`
+	Quantity *TradingExecutionsQuantity `json:"quantity,omitempty"`
 }
 
 func (t TradingExecutions) MarshalJSON() ([]byte, error) {
@@ -121,7 +121,7 @@ func (o *TradingExecutions) GetPrevailingMarketPrice() *PrevailingMarketPrice {
 	return o.PrevailingMarketPrice
 }
 
-func (o *TradingExecutions) GetQuantity() *Quantity {
+func (o *TradingExecutions) GetQuantity() *TradingExecutionsQuantity {
 	if o == nil {
 		return nil
 	}

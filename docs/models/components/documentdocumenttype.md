@@ -119,3 +119,4 @@ Describes the contents of a document and how it is used
 | `DocumentDocumentTypeChangeOfAddressRequest`                  | CHANGE_OF_ADDRESS_REQUEST                                     |
 | `DocumentDocumentTypeOptionsAgreement`                        | OPTIONS_AGREEMENT                                             |
 | `DocumentDocumentTypeStateWaiverForm`                         | STATE_WAIVER_FORM                                             |
+| `DocumentDocumentTypeAltsSubscriptionAgreement`               | ALTS_SUBSCRIPTION_AGREEMENT                                   |

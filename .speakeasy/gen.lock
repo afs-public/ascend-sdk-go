@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: 69899f7f639329d02cfd747208568b07
-  docVersion: v1:20251212:uat:f648e4b8e037
+  docChecksum: 84c7e346129bb255bd3af8fb7e1464fe
+  docVersion: v1:20260112:uat:5e3b93765864
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.3.1
-  configChecksum: 3ccab31121723624140190b2e24d3dbd
+  releaseVersion: 1.3.2
+  configChecksum: f9183af0cd52fc1eadfb75c947ce269e
 features:
   go:
     additionalDependencies: 0.1.0
@@ -107,6 +107,7 @@ generatedFiles:
   - /models/components/cancelachwithdrawalschedulerequestcreate.go
   - /models/components/cancelbankrelationshiprequestcreate.go
   - /models/components/cancelcashjournalrequestcreate.go
+  - /models/components/cancelcheckwithdrawalschedulerequestcreate.go
   - /models/components/cancelcreditrequestcreate.go
   - /models/components/cancelexecutionrequestcreate.go
   - /models/components/cancelexecutionresponse.go
@@ -114,6 +115,7 @@ generatedFiles:
   - /models/components/cancelictdepositrequestcreate.go
   - /models/components/cancelictwithdrawalrequestcreate.go
   - /models/components/cancelorderrequestcreate.go
+  - /models/components/cancelpositionjournalrequestcreate.go
   - /models/components/canceltradeallocationrequestcreate.go
   - /models/components/canceltradeallocationresponse.go
   - /models/components/canceltraderequestcreate.go
@@ -126,6 +128,9 @@ generatedFiles:
   - /models/components/checkdeposit.go
   - /models/components/checkpartytyperequestcreate.go
   - /models/components/checkpartytyperesponse.go
+  - /models/components/checkwithdrawalschedule.go
+  - /models/components/checkwithdrawalschedulecreate.go
+  - /models/components/checkwithdrawalscheduleupdate.go
   - /models/components/closeaccountrequestcreate.go
   - /models/components/commission.go
   - /models/components/commissioncreate.go
@@ -186,8 +191,10 @@ generatedFiles:
   - /models/components/forceapproveachdepositrequestcreate.go
   - /models/components/forceapproveachwithdrawalrequestcreate.go
   - /models/components/forceapprovecashjournalrequestcreate.go
+  - /models/components/forceapprovecheckdepositrequestcreate.go
   - /models/components/forceapproveictdepositrequestcreate.go
   - /models/components/forceapproveictwithdrawalrequestcreate.go
+  - /models/components/forceapprovepositionjournalrequestcreate.go
   - /models/components/forceapprovewiredepositrequestcreate.go
   - /models/components/forceapprovewirewithdrawalrequestcreate.go
   - /models/components/forcenocachdepositrequestcreate.go
@@ -197,6 +204,7 @@ generatedFiles:
   - /models/components/forcerejectcashjournalrequestcreate.go
   - /models/components/forcerejectictdepositrequestcreate.go
   - /models/components/forcerejectictwithdrawalrequestcreate.go
+  - /models/components/forcerejectpositionjournalrequestcreate.go
   - /models/components/forcerejectwiredepositrequestcreate.go
   - /models/components/forcerejectwirewithdrawalrequestcreate.go
   - /models/components/forcereturnachdepositrequestcreate.go
@@ -282,6 +290,7 @@ generatedFiles:
   - /models/components/listavailablerestrictionsresponse.go
   - /models/components/listbankrelationshipsresponse.go
   - /models/components/listbasketordersresponse.go
+  - /models/components/listcheckwithdrawalschedulesresponse.go
   - /models/components/listcompressedordersresponse.go
   - /models/components/listcontributionsummariesresponse.go
   - /models/components/listcorrespondentordersresponse.go
@@ -340,6 +349,8 @@ generatedFiles:
   - /models/components/plannedactivitycreate.go
   - /models/components/position.go
   - /models/components/positioncreate.go
+  - /models/components/positionjournal.go
+  - /models/components/positionjournalcreate.go
   - /models/components/postaladdress.go
   - /models/components/postaladdresscreate.go
   - /models/components/postaladdressupdate.go
@@ -409,6 +420,7 @@ generatedFiles:
   - /models/components/tradingfee.go
   - /models/components/transferaccountcreate.go
   - /models/components/transfercreate.go
+  - /models/components/transfersbeneficiarycreate.go
   - /models/components/transferschedulesummary.go
   - /models/components/transferscredit.go
   - /models/components/transferscreditcreate.go
@@ -553,8 +565,14 @@ generatedFiles:
   - /models/operations/cashjournalsforceapprovecashjournal.go
   - /models/operations/cashjournalsforcerejectcashjournal.go
   - /models/operations/cashjournalsgetcashjournal.go
+  - /models/operations/checkdepositsforceapprovecheckdeposit.go
   - /models/operations/checkdepositsgetcheckdeposit.go
   - /models/operations/checkdepositssimulatecreatecheckdeposit.go
+  - /models/operations/checkwithdrawalschedulescancelcheckwithdrawalschedule.go
+  - /models/operations/checkwithdrawalschedulescreatecheckwithdrawalschedule.go
+  - /models/operations/checkwithdrawalschedulesgetcheckwithdrawalschedule.go
+  - /models/operations/checkwithdrawalscheduleslistcheckwithdrawalschedules.go
+  - /models/operations/checkwithdrawalschedulesupdatecheckwithdrawalschedule.go
   - /models/operations/creditscancelcredit.go
   - /models/operations/creditscreatecredit.go
   - /models/operations/creditsgetcredit.go
@@ -595,6 +613,11 @@ generatedFiles:
   - /models/operations/orderservicegetorder.go
   - /models/operations/orderservicelistcorrespondentorders.go
   - /models/operations/orderservicesetextrareportingdata.go
+  - /models/operations/positionjournalscancelpositionjournal.go
+  - /models/operations/positionjournalscreatepositionjournal.go
+  - /models/operations/positionjournalsforceapprovepositionjournal.go
+  - /models/operations/positionjournalsforcerejectpositionjournal.go
+  - /models/operations/positionjournalsgetpositionjournal.go
   - /models/operations/readergeteventmessage.go
   - /models/operations/readerlisteventmessages.go
   - /models/operations/retirementconstraintslistcontributionsummaries.go
@@ -1092,6 +1115,7 @@ generatedFiles:
   - docs/models/components/cancelachwithdrawalschedulerequestcreate.md
   - docs/models/components/cancelbankrelationshiprequestcreate.md
   - docs/models/components/cancelcashjournalrequestcreate.md
+  - docs/models/components/cancelcheckwithdrawalschedulerequestcreate.md
   - docs/models/components/cancelcreditrequestcreate.md
   - docs/models/components/cancelexecutionrequestcreate.md
   - docs/models/components/cancelexecutionresponse.md
@@ -1112,6 +1136,7 @@ generatedFiles:
   - docs/models/components/cancelinitiator.md
   - docs/models/components/cancelorderrequestcreate.md
   - docs/models/components/cancelorderrequestcreatecancelinitiator.md
+  - docs/models/components/cancelpositionjournalrequestcreate.md
   - docs/models/components/cancelrejectedreason.md
   - docs/models/components/canceltradeallocationrequestcreate.md
   - docs/models/components/canceltradeallocationresponse.md
@@ -1187,6 +1212,26 @@ generatedFiles:
   - docs/models/components/checkpartytyperesponse.md
   - docs/models/components/checkpartytyperesponsepartytype.md
   - docs/models/components/checktypes.md
+  - docs/models/components/checkwithdrawalschedule.md
+  - docs/models/components/checkwithdrawalscheduleamount.md
+  - docs/models/components/checkwithdrawalschedulebeneficiary.md
+  - docs/models/components/checkwithdrawalschedulecreate.md
+  - docs/models/components/checkwithdrawalscheduledeliverymethod.md
+  - docs/models/components/checkwithdrawalscheduleenddate.md
+  - docs/models/components/checkwithdrawalschedulefederaltaxwithholding.md
+  - docs/models/components/checkwithdrawalschedulepercentage.md
+  - docs/models/components/checkwithdrawalscheduleretirementdistribution.md
+  - docs/models/components/checkwithdrawalscheduleretirementdistributionamount.md
+  - docs/models/components/checkwithdrawalscheduleretirementdistributionfederaltaxwithholdingamount.md
+  - docs/models/components/checkwithdrawalscheduleretirementdistributionpercentage.md
+  - docs/models/components/checkwithdrawalschedulescheduledetails.md
+  - docs/models/components/checkwithdrawalschedulescheduleproperties.md
+  - docs/models/components/checkwithdrawalschedulestartdate.md
+  - docs/models/components/checkwithdrawalschedulestate.md
+  - docs/models/components/checkwithdrawalschedulestatetaxwithholding.md
+  - docs/models/components/checkwithdrawalscheduletimeunit.md
+  - docs/models/components/checkwithdrawalscheduletype.md
+  - docs/models/components/checkwithdrawalscheduleupdate.md
   - docs/models/components/classification.md
   - docs/models/components/closeaccountrequestcreate.md
   - docs/models/components/cnoticedate.md
@@ -1276,6 +1321,7 @@ generatedFiles:
   - docs/models/components/decimalupdate.md
   - docs/models/components/deliverer.md
   - docs/models/components/delivery.md
+  - docs/models/components/deliverymethod.md
   - docs/models/components/deposit.md
   - docs/models/components/depositedfunds.md
   - docs/models/components/depositedfundscreate.md
@@ -1460,6 +1506,7 @@ generatedFiles:
   - docs/models/components/entryexchangetype.md
   - docs/models/components/entryfactordenominator.md
   - docs/models/components/entryfactornumerator.md
+  - docs/models/components/entryfairmarketvalue.md
   - docs/models/components/entryfee.md
   - docs/models/components/entryfeetype.md
   - docs/models/components/entryflipbrokercapacity.md
@@ -1636,8 +1683,10 @@ generatedFiles:
   - docs/models/components/forceapproveachdepositrequestcreate.md
   - docs/models/components/forceapproveachwithdrawalrequestcreate.md
   - docs/models/components/forceapprovecashjournalrequestcreate.md
+  - docs/models/components/forceapprovecheckdepositrequestcreate.md
   - docs/models/components/forceapproveictdepositrequestcreate.md
   - docs/models/components/forceapproveictwithdrawalrequestcreate.md
+  - docs/models/components/forceapprovepositionjournalrequestcreate.md
   - docs/models/components/forceapprovewiredepositrequestcreate.md
   - docs/models/components/forceapprovewirewithdrawalrequestcreate.md
   - docs/models/components/forcenocachdepositrequestcreate.md
@@ -1647,6 +1696,7 @@ generatedFiles:
   - docs/models/components/forcerejectcashjournalrequestcreate.md
   - docs/models/components/forcerejectictdepositrequestcreate.md
   - docs/models/components/forcerejectictwithdrawalrequestcreate.md
+  - docs/models/components/forcerejectpositionjournalrequestcreate.md
   - docs/models/components/forcerejectwiredepositrequestcreate.md
   - docs/models/components/forcerejectwirewithdrawalrequestcreate.md
   - docs/models/components/forcereturnachdepositrequestcreate.md
@@ -1940,6 +1990,7 @@ generatedFiles:
   - docs/models/components/listavailablerestrictionsresponse.md
   - docs/models/components/listbankrelationshipsresponse.md
   - docs/models/components/listbasketordersresponse.md
+  - docs/models/components/listcheckwithdrawalschedulesresponse.md
   - docs/models/components/listcompressedordersresponse.md
   - docs/models/components/listcontributionsummariesresponse.md
   - docs/models/components/listcorrespondentordersresponse.md
@@ -2058,6 +2109,7 @@ generatedFiles:
   - docs/models/components/ordercostpreviewresponsequantity.md
   - docs/models/components/ordercostpreviewresponsetype.md
   - docs/models/components/ordercreate.md
+  - docs/models/components/ordercreateidentifiertype.md
   - docs/models/components/orderdate.md
   - docs/models/components/orderidentifiertype.md
   - docs/models/components/orderlimitpricetype.md
@@ -2193,6 +2245,13 @@ generatedFiles:
   - docs/models/components/position.md
   - docs/models/components/positioncreate.md
   - docs/models/components/positionfpsl.md
+  - docs/models/components/positionjournal.md
+  - docs/models/components/positionjournalcreate.md
+  - docs/models/components/positionjournalcreatetype.md
+  - docs/models/components/positionjournalidentifiertype.md
+  - docs/models/components/positionjournalstate.md
+  - docs/models/components/positionjournalstatestate.md
+  - docs/models/components/positionjournaltype.md
   - docs/models/components/positionlimit.md
   - docs/models/components/positionmarketvalueamount.md
   - docs/models/components/positiontrade.md
@@ -2518,6 +2577,7 @@ generatedFiles:
   - docs/models/components/tradingexecutedprice.md
   - docs/models/components/tradingexecutedpricetype.md
   - docs/models/components/tradingexecutions.md
+  - docs/models/components/tradingexecutionsquantity.md
   - docs/models/components/tradingfee.md
   - docs/models/components/tradingfeeamount.md
   - docs/models/components/tradingfeetype.md
@@ -2525,6 +2585,7 @@ generatedFiles:
   - docs/models/components/transfer.md
   - docs/models/components/transferaccountcreate.md
   - docs/models/components/transfercreate.md
+  - docs/models/components/transfersbeneficiarycreate.md
   - docs/models/components/transferschedulesummary.md
   - docs/models/components/transferschedulesummaryamount.md
   - docs/models/components/transferschedulesummaryenddate.md
@@ -2628,6 +2689,7 @@ generatedFiles:
   - docs/models/components/wirewithdrawalschedulecreate.md
   - docs/models/components/wirewithdrawalscheduleenddate.md
   - docs/models/components/wirewithdrawalschedulefederaltaxwithholding.md
+  - docs/models/components/wirewithdrawalscheduleintermediaryaddress.md
   - docs/models/components/wirewithdrawalschedulepercentage.md
   - docs/models/components/wirewithdrawalschedulerecipientbankaddress.md
   - docs/models/components/wirewithdrawalschedulerecipientbanktype.md
@@ -2887,10 +2949,22 @@ generatedFiles:
   - docs/models/operations/cashjournalsforcerejectcashjournalresponse.md
   - docs/models/operations/cashjournalsgetcashjournalrequest.md
   - docs/models/operations/cashjournalsgetcashjournalresponse.md
+  - docs/models/operations/checkdepositsforceapprovecheckdepositrequest.md
+  - docs/models/operations/checkdepositsforceapprovecheckdepositresponse.md
   - docs/models/operations/checkdepositsgetcheckdepositrequest.md
   - docs/models/operations/checkdepositsgetcheckdepositresponse.md
   - docs/models/operations/checkdepositssimulatecreatecheckdepositrequest.md
   - docs/models/operations/checkdepositssimulatecreatecheckdepositresponse.md
+  - docs/models/operations/checkwithdrawalschedulescancelcheckwithdrawalschedulerequest.md
+  - docs/models/operations/checkwithdrawalschedulescancelcheckwithdrawalscheduleresponse.md
+  - docs/models/operations/checkwithdrawalschedulescreatecheckwithdrawalschedulerequest.md
+  - docs/models/operations/checkwithdrawalschedulescreatecheckwithdrawalscheduleresponse.md
+  - docs/models/operations/checkwithdrawalschedulesgetcheckwithdrawalschedulerequest.md
+  - docs/models/operations/checkwithdrawalschedulesgetcheckwithdrawalscheduleresponse.md
+  - docs/models/operations/checkwithdrawalscheduleslistcheckwithdrawalschedulesrequest.md
+  - docs/models/operations/checkwithdrawalscheduleslistcheckwithdrawalschedulesresponse.md
+  - docs/models/operations/checkwithdrawalschedulesupdatecheckwithdrawalschedulerequest.md
+  - docs/models/operations/checkwithdrawalschedulesupdatecheckwithdrawalscheduleresponse.md
   - docs/models/operations/creditscancelcreditrequest.md
   - docs/models/operations/creditscancelcreditresponse.md
   - docs/models/operations/creditscreatecreditrequest.md
@@ -2973,6 +3047,15 @@ generatedFiles:
   - docs/models/operations/orderservicelistcorrespondentordersresponse.md
   - docs/models/operations/orderservicesetextrareportingdatarequest.md
   - docs/models/operations/orderservicesetextrareportingdataresponse.md
+  - docs/models/operations/positionjournalscancelpositionjournalrequest.md
+  - docs/models/operations/positionjournalscancelpositionjournalresponse.md
+  - docs/models/operations/positionjournalscreatepositionjournalresponse.md
+  - docs/models/operations/positionjournalsforceapprovepositionjournalrequest.md
+  - docs/models/operations/positionjournalsforceapprovepositionjournalresponse.md
+  - docs/models/operations/positionjournalsforcerejectpositionjournalrequest.md
+  - docs/models/operations/positionjournalsforcerejectpositionjournalresponse.md
+  - docs/models/operations/positionjournalsgetpositionjournalrequest.md
+  - docs/models/operations/positionjournalsgetpositionjournalresponse.md
   - docs/models/operations/programdatefilterprogram.md
   - docs/models/operations/queryparamview.md
   - docs/models/operations/readergeteventmessagerequest.md
@@ -3061,6 +3144,7 @@ generatedFiles:
   - docs/sdks/margins/README.md
   - docs/sdks/orders/README.md
   - docs/sdks/personmanagement/README.md
+  - docs/sdks/positionjournals/README.md
   - docs/sdks/reader/README.md
   - docs/sdks/retirements/README.md
   - docs/sdks/scheduletransfers/README.md
@@ -3097,6 +3181,7 @@ generatedFiles:
   - models/sdkerrors/sdkerror.go
   - orders.go
   - personmanagement.go
+  - positionjournals.go
   - reader.go
   - retirements.go
   - retry/config.go
@@ -5792,6 +5877,155 @@ examples:
         "400":
           application/json: {}
         "500":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_CreateCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-create-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      requestBody:
+        application/json: {"delivery_method": "STANDARD", "schedule_details": {"client_schedule_id": "ABC-123", "schedule_properties": {"start_date": {}, "time_unit": "MONTH", "unit_multiplier": 1}}}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_ListCheckWithdrawalSchedules:
+    speakeasy-default-check-withdrawal-schedules-list-check-withdrawal-schedules:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_GetCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-get-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_UpdateCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-update-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckWithdrawalSchedules_CancelCheckWithdrawalSchedule:
+    speakeasy-default-check-withdrawal-schedules-cancel-check-withdrawal-schedule:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkWithdrawalSchedule_id: "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkWithdrawalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  CheckDeposits_ForceApproveCheckDeposit:
+    speakeasy-default-check-deposits-force-approve-check-deposit:
+      parameters:
+        path:
+          account_id: "01H8FB90ZRRFWXB4XC2JPJ1D4Y"
+          checkDeposit_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y/checkDeposits/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_ForceApprovePositionJournal:
+    speakeasy-default-position-journals-force-approve-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "positionJournals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_ForceRejectPositionJournal:
+    speakeasy-default-position-journals-force-reject-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20230817000319"
+      requestBody:
+        application/json: {"name": "positionJournals/20230817000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_CreatePositionJournal:
+    speakeasy-default-position-journals-create-position-journal:
+      requestBody:
+        application/json: {"client_transfer_id": "113bw03-49f8-4525-934c-560fb39dg2kd", "destination_account": "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y", "identifier": "AAPL", "identifier_type": "SYMBOL", "quantity": {}, "source_account": "accounts/01H8FM6EXVH77SAW3TC8KAWMES", "type": "REWARD"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_GetPositionJournal:
+    speakeasy-default-position-journals-get-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20230817000319"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        default:
+          application/json: {}
+  PositionJournals_CancelPositionJournal:
+    speakeasy-default-position-journals-cancel-position-journal:
+      parameters:
+        path:
+          positionJournal_id: "20240717000319"
+      requestBody:
+        application/json: {"name": "positionJournals/20240717000319"}
+      responses:
+        "200":
+          application/json: {}
+        "400":
           application/json: {}
         default:
           application/json: {}

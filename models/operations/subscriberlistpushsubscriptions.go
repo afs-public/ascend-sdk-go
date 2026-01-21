@@ -12,9 +12,11 @@ type SubscriberListPushSubscriptionsRequest struct {
 	//  `subscription_id`
 	//  `client_id`
 	//  `correspondent_id`
+	//  `account_group_id`
 	//  `display_name`
 	//  `event_types`
 	//  `state`
+	//  `owner`
 	//  `http_callback.url`
 	//  `http_callback.timeout_seconds`
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`

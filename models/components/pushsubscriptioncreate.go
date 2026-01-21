@@ -4,9 +4,11 @@ package components
 
 // PushSubscriptionCreate - Configuration information about a push subscription
 type PushSubscriptionCreate struct {
-	// The client that owns the subscription. A client subscription will receive events for it and all of its correspondents. This can only be set at creation time and is mutually exclusive with correspondent_id.
+	// The id of the account group to receive events for; The subscription will receive events related to any of the accounts in the specified account group; This can only be set at creation time and is mutually exclusive with client_id and correspondent_id
+	AccountGroupID *string `json:"account_group_id,omitempty"`
+	// The id of the client to receive events for; The subscription will receive events related to the specified client, and any of its correspondents and accounts; This can only be set at creation time and is mutually exclusive with correspondent_id and account_group_id
 	ClientID *string `json:"client_id,omitempty"`
-	// The correspondent that owns the subscription. A correspondent subscription will receive events only for itself. This can only be set at creation time and is mutually exclusive with client_id.
+	// The id of the correspondent to receive events for; The subscription will receive events related to the specified correspondent and any of its accounts; This can only be set at creation time and is mutually exclusive with client_id and account_group_id
 	CorrespondentID *string `json:"correspondent_id,omitempty"`
 	// The user-defined name for the subscription
 	DisplayName string `json:"display_name"`
@@ -14,6 +16,15 @@ type PushSubscriptionCreate struct {
 	EventTypes []string `json:"event_types"`
 	// Configuration information about an HTTP target callback
 	HTTPCallback *HTTPPushCallbackCreate `json:"http_callback,omitempty"`
+	// The organization that owns the subscription; Format: {org_type}/{org_id} This field can only be set at creation time and if it is not specified, then it will default to the target organization, unless the target is an account group, in which case this field is required
+	Owner *string `json:"owner,omitempty"`
+}
+
+func (o *PushSubscriptionCreate) GetAccountGroupID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountGroupID
 }
 
 func (o *PushSubscriptionCreate) GetClientID() *string {
@@ -49,4 +60,11 @@ func (o *PushSubscriptionCreate) GetHTTPCallback() *HTTPPushCallbackCreate {
 		return nil
 	}
 	return o.HTTPCallback
+}
+
+func (o *PushSubscriptionCreate) GetOwner() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Owner
 }

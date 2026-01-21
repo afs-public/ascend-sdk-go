@@ -2,96 +2,7 @@
 
 package components
 
-// Address - The address of the person or entity taking receipt of the wired funds. This will be populated automatically in the case of a valid first-party wire
-type Address struct {
-	// Required: Describes the city in which the entity is located.
-	City *string `json:"city,omitempty"`
-	// Required: The country code used for geolocation, identity verification, and/or mail delivery purposes.
-	Country *string `json:"country,omitempty"`
-	// Required: The postal code used for geolocation, identity verification, and/or mail delivery purposes.
-	PostalCode *string `json:"postal_code,omitempty"`
-	// Required: The state code used for geolocation, identity verification, and/or mail delivery purposes.
-	State *string `json:"state,omitempty"`
-	// The street name and number relating to a party's legal or mailing address.
-	StreetAddress []string `json:"streetAddress,omitempty"`
-}
-
-func (o *Address) GetCity() *string {
-	if o == nil {
-		return nil
-	}
-	return o.City
-}
-
-func (o *Address) GetCountry() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Country
-}
-
-func (o *Address) GetPostalCode() *string {
-	if o == nil {
-		return nil
-	}
-	return o.PostalCode
-}
-
-func (o *Address) GetState() *string {
-	if o == nil {
-		return nil
-	}
-	return o.State
-}
-
-func (o *Address) GetStreetAddress() []string {
-	if o == nil {
-		return nil
-	}
-	return o.StreetAddress
-}
-
-// WireWithdrawalScheduleBeneficiary - The beneficiary of the wire withdrawal
-type WireWithdrawalScheduleBeneficiary struct {
-	// The bank account of the person or entity taking receipt of the wired funds. Limited to 25 characters if intermediaryDetails.account is set
-	Account *string `json:"account,omitempty"`
-	// The name of the person or entity taking receipt of the wired funds. This field defaults to the name of the account owner and should only be populated when performing a third party wire transfer
-	AccountTitle *string `json:"account_title,omitempty"`
-	// The address of the person or entity taking receipt of the wired funds. This will be populated automatically in the case of a valid first-party wire
-	Address *Address `json:"address,omitempty"`
-	// Indicates if this beneficiary is a third party beneficiary. A wire transfer is considered third party if the beneficiary is not the exact same person and/or entity that the funds originated from. This includes wire transfers where the originator account is an individual account and the beneficiary account is a joint account
-	ThirdParty *bool `json:"third_party,omitempty"`
-}
-
-func (o *WireWithdrawalScheduleBeneficiary) GetAccount() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Account
-}
-
-func (o *WireWithdrawalScheduleBeneficiary) GetAccountTitle() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AccountTitle
-}
-
-func (o *WireWithdrawalScheduleBeneficiary) GetAddress() *Address {
-	if o == nil {
-		return nil
-	}
-	return o.Address
-}
-
-func (o *WireWithdrawalScheduleBeneficiary) GetThirdParty() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ThirdParty
-}
-
-// WireWithdrawalScheduleAddress - The address of the intermediary party
+// WireWithdrawalScheduleAddress - The address of the person or entity taking receipt of the wired funds. This will be populated automatically in the case of a valid first-party wire
 type WireWithdrawalScheduleAddress struct {
 	// Required: Describes the city in which the entity is located.
 	City *string `json:"city,omitempty"`
@@ -140,6 +51,95 @@ func (o *WireWithdrawalScheduleAddress) GetStreetAddress() []string {
 	return o.StreetAddress
 }
 
+// WireWithdrawalScheduleBeneficiary - The beneficiary of the wire withdrawal
+type WireWithdrawalScheduleBeneficiary struct {
+	// The bank account of the person or entity taking receipt of the wired funds. Limited to 25 characters if intermediaryDetails.account is set
+	Account *string `json:"account,omitempty"`
+	// The name of the person or entity taking receipt of the wired funds. This field defaults to the name of the account owner and should only be populated when performing a third party wire transfer
+	AccountTitle *string `json:"account_title,omitempty"`
+	// The address of the person or entity taking receipt of the wired funds. This will be populated automatically in the case of a valid first-party wire
+	Address *WireWithdrawalScheduleAddress `json:"address,omitempty"`
+	// Indicates if this beneficiary is a third party beneficiary. A wire transfer is considered third party if the beneficiary is not the exact same person and/or entity that the funds originated from. This includes wire transfers where the originator account is an individual account and the beneficiary account is a joint account
+	ThirdParty *bool `json:"third_party,omitempty"`
+}
+
+func (o *WireWithdrawalScheduleBeneficiary) GetAccount() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Account
+}
+
+func (o *WireWithdrawalScheduleBeneficiary) GetAccountTitle() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountTitle
+}
+
+func (o *WireWithdrawalScheduleBeneficiary) GetAddress() *WireWithdrawalScheduleAddress {
+	if o == nil {
+		return nil
+	}
+	return o.Address
+}
+
+func (o *WireWithdrawalScheduleBeneficiary) GetThirdParty() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ThirdParty
+}
+
+// WireWithdrawalScheduleIntermediaryAddress - The address of the intermediary party
+type WireWithdrawalScheduleIntermediaryAddress struct {
+	// Required: Describes the city in which the entity is located.
+	City *string `json:"city,omitempty"`
+	// Required: The country code used for geolocation, identity verification, and/or mail delivery purposes.
+	Country *string `json:"country,omitempty"`
+	// Required: The postal code used for geolocation, identity verification, and/or mail delivery purposes.
+	PostalCode *string `json:"postal_code,omitempty"`
+	// Required: The state code used for geolocation, identity verification, and/or mail delivery purposes.
+	State *string `json:"state,omitempty"`
+	// The street name and number relating to a party's legal or mailing address.
+	StreetAddress []string `json:"streetAddress,omitempty"`
+}
+
+func (o *WireWithdrawalScheduleIntermediaryAddress) GetCity() *string {
+	if o == nil {
+		return nil
+	}
+	return o.City
+}
+
+func (o *WireWithdrawalScheduleIntermediaryAddress) GetCountry() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Country
+}
+
+func (o *WireWithdrawalScheduleIntermediaryAddress) GetPostalCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PostalCode
+}
+
+func (o *WireWithdrawalScheduleIntermediaryAddress) GetState() *string {
+	if o == nil {
+		return nil
+	}
+	return o.State
+}
+
+func (o *WireWithdrawalScheduleIntermediaryAddress) GetStreetAddress() []string {
+	if o == nil {
+		return nil
+	}
+	return o.StreetAddress
+}
+
 // Intermediary - The intermediary party
 type Intermediary struct {
 	// The account number of the intermediary party
@@ -147,7 +147,7 @@ type Intermediary struct {
 	// The name of the intermediary party
 	AccountTitle *string `json:"account_title,omitempty"`
 	// The address of the intermediary party
-	Address *WireWithdrawalScheduleAddress `json:"address,omitempty"`
+	Address *WireWithdrawalScheduleIntermediaryAddress `json:"address,omitempty"`
 }
 
 func (o *Intermediary) GetAccount() *string {
@@ -164,7 +164,7 @@ func (o *Intermediary) GetAccountTitle() *string {
 	return o.AccountTitle
 }
 
-func (o *Intermediary) GetAddress() *WireWithdrawalScheduleAddress {
+func (o *Intermediary) GetAddress() *WireWithdrawalScheduleIntermediaryAddress {
 	if o == nil {
 		return nil
 	}

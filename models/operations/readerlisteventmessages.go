@@ -15,6 +15,7 @@ type ReaderListEventMessagesRequest struct {
 	//  `partition_key`
 	//  `client_id`
 	//  `correspondent_id`
+	//  `account_group_id`
 	//  `account_id`
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
 	// The number of entries to return in a single page; Default = 100; Maximum = 1000

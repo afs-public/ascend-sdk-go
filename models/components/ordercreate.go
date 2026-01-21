@@ -35,16 +35,16 @@ func (e BrokerCapacity) ToPointer() *BrokerCapacity {
 	return &e
 }
 
-// IdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
-type IdentifierType string
+// OrderCreateIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
+type OrderCreateIdentifierType string
 
 const (
-	IdentifierTypeSymbol IdentifierType = "SYMBOL"
-	IdentifierTypeCusip  IdentifierType = "CUSIP"
-	IdentifierTypeIsin   IdentifierType = "ISIN"
+	OrderCreateIdentifierTypeSymbol OrderCreateIdentifierType = "SYMBOL"
+	OrderCreateIdentifierTypeCusip  OrderCreateIdentifierType = "CUSIP"
+	OrderCreateIdentifierTypeIsin   OrderCreateIdentifierType = "ISIN"
 )
 
-func (e IdentifierType) ToPointer() *IdentifierType {
+func (e OrderCreateIdentifierType) ToPointer() *OrderCreateIdentifierType {
 	return &e
 }
 
@@ -164,7 +164,7 @@ type OrderCreate struct {
 	// A string attribute denoting the country of issuance or where the asset is trading. * Only available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with ISO-3166 Alpha-2 Codes
 	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
-	IdentifierType IdentifierType `json:"identifier_type"`
+	IdentifierType OrderCreateIdentifierType `json:"identifier_type"`
 	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
 	LetterOfIntent *LetterOfIntentCreate `json:"letter_of_intent,omitempty"`
 	// A limit price definition
@@ -296,9 +296,9 @@ func (o *OrderCreate) GetIdentifierIssuingRegionCode() *string {
 	return o.IdentifierIssuingRegionCode
 }
 
-func (o *OrderCreate) GetIdentifierType() IdentifierType {
+func (o *OrderCreate) GetIdentifierType() OrderCreateIdentifierType {
 	if o == nil {
-		return IdentifierType("")
+		return OrderCreateIdentifierType("")
 	}
 	return o.IdentifierType
 }

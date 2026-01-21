@@ -4,12 +4,14 @@ package tests
 
 import (
 	"context"
+	"strings"
+	"testing"
+
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestTestSimulation_CheckDepositsSimulateCreateCheckDeposit(t *testing.T) {
@@ -36,6 +38,59 @@ func TestTestSimulation_CheckDepositsSimulateCreateCheckDeposit(t *testing.T) {
 			Value: ascendsdkgo.String("100"),
 		},
 		Parent: "01JHGTEPC6ZTAHCFRH2MD3VJJT",
+	})
+	require.NoError(t, err)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+
+}
+
+func TestTestSimulation_CheckDepositsForceApproveCheckDeposit(t *testing.T) {
+	ctx := context.Background()
+
+	testHTTPClient := createTestHTTPClient("CheckDeposits_ForceApproveCheckDeposit")
+
+	accountID := utils.GetEnv("ACCOUNT_ID", "01JHGTEPC6ZTAHCFRH2MD3VJJT")
+
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(utils.GetEnv("API_KEY", "value")),
+			ServiceAccountCreds: &components.ServiceAccountCreds{
+				PrivateKey:   utils.GetEnv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", "value"),
+				Name:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_NAME", "value"),
+				Organization: utils.GetEnv("SERVICE_ACCOUNT_CREDS_ORGANIZATION", "value"),
+				Type:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_TYPE", "value"),
+			},
+		}),
+		ascendsdkgo.WithClient(testHTTPClient),
+	)
+
+	// First, create a check deposit
+	createRes, err := s.TestSimulation.SimulateCreateCheckDeposit(ctx, accountID, components.SimulateCreateCheckDepositRequestCreate{
+		Amount: components.DecimalCreate{
+			Value: ascendsdkgo.String("100"),
+		},
+		Parent: accountID,
+	})
+	require.NoError(t, err)
+	require.NotNil(t, createRes.CheckDeposit)
+	require.NotNil(t, createRes.CheckDeposit.Name)
+
+	// Extract check deposit ID from the name (format: accounts/{account}/checkDeposits/{check_deposit})
+	name := *createRes.CheckDeposit.Name
+	parts := strings.Split(name, "/")
+	checkDepositID := parts[len(parts)-1]
+
+	// Check if the deposit is in PENDING_REVIEW state before force approving
+	if createRes.CheckDeposit.State != nil &&
+		createRes.CheckDeposit.State.State != nil &&
+		*createRes.CheckDeposit.State.State != components.CheckDepositStateStatePendingReview {
+		t.Skipf("Check deposit is not pending review (state: %s), skipping force approve test", *createRes.CheckDeposit.State.State)
+	}
+
+	// Force approve the check deposit
+	res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, accountID, checkDepositID, components.ForceApproveCheckDepositRequestCreate{
+		Name: name,
 	})
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

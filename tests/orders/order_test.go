@@ -65,7 +65,7 @@ func CreateOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolled
 			Day:   ascendsdk.Int(time.Now().Day()),
 		},
 		Identifier:     "SBUX",
-		IdentifierType: components.IdentifierTypeSymbol,
+		IdentifierType: components.OrderCreateIdentifierTypeSymbol,
 		Quantity:       &components.DecimalCreate{Value: ascendsdk.String("1")},
 		OrderType:      components.OrderTypeLimit,
 		LimitPrice: &components.LimitPriceCreate{

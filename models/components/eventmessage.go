@@ -9,6 +9,8 @@ import (
 
 // EventMessage - Represents an envelope and the data of an event
 type EventMessage struct {
+	// The account group ID related to the event (if applicable)
+	AccountGroupID *string `json:"account_group_id,omitempty"`
 	// The account ID related to the event (if applicable)
 	AccountID *string `json:"account_id,omitempty"`
 	// The client ID related to the event
@@ -23,7 +25,7 @@ type EventMessage struct {
 	MessageID *string `json:"message_id,omitempty"`
 	// The resource name of the event; Format: messages/{message}
 	Name *string `json:"name,omitempty"`
-	// A value, if present, is used to group related events together. Events with the same partition key are guaranteed to be sent to the consumer in the same order they were published.
+	// A value, if present, is used to group related events together; Events with the same partition key are guaranteed to be sent to the consumer in the same order they were published
 	PartitionKey *string `json:"partition_key,omitempty"`
 	// The date and time of the event publication (not necessarily the time the event occurred)
 	PublishTime *time.Time `json:"publish_time,omitempty"`
@@ -38,6 +40,13 @@ func (e *EventMessage) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
+}
+
+func (o *EventMessage) GetAccountGroupID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountGroupID
 }
 
 func (o *EventMessage) GetAccountID() *string {
