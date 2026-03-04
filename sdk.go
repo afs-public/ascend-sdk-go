@@ -2,7 +2,7 @@
 
 package ascendsdkgo
 
-// Generated from OpenAPI doc version v1:20260112:uat:5e3b93765864 and generator version 2.691.6
+// Generated from OpenAPI doc version v1:20260220:uat:5482f78d90fa and generator version 2.691.6
 
 import (
 	"context"
@@ -60,39 +60,50 @@ func Pointer[T any](v T) *T { return &v }
 
 // SDK - Ascend OpenAPI: Combined Ascend OpenAPI spec for SDK generation
 type SDK struct {
-	SDKVersion               string
-	Authentication           *Authentication
-	Reader                   *Reader
-	Subscriber               *Subscriber
-	PersonManagement         *PersonManagement
-	AccountCreation          *AccountCreation
-	AccountManagement        *AccountManagement
-	EnrollmentsAndAgreements *EnrollmentsAndAgreements
-	Investigations           *Investigations
-	BankRelationships        *BankRelationships
-	ACHTransfers             *ACHTransfers
-	InstantCashTransferICT   *InstantCashTransferICT
-	Retirements              *Retirements
-	Journals                 *Journals
-	ScheduleTransfers        *ScheduleTransfers
-	Checks                   *Checks
-	TestSimulation           *TestSimulation
-	Wires                    *Wires
-	PositionJournals         *PositionJournals
-	CashBalances             *CashBalances
-	FeesAndCredits           *FeesAndCredits
-	AccountTransfers         *AccountTransfers
-	Orders                   *Orders
-	FixedIncomePricing       *FixedIncomePricing
-	BasketOrders             *BasketOrders
-	AssetTradingConfig       *AssetTradingConfig
-	TradeBooking             *TradeBooking
-	TradeAllocation          *TradeAllocation
-	Assets                   *Assets
-	Ledger                   *Ledger
-	Margins                  *Margins
-	InvestorDocs             *InvestorDocs
-	DataRetrieval            *DataRetrieval
+	SDKVersion                      string
+	Authentication                  *Authentication
+	Reader                          *Reader
+	Subscriber                      *Subscriber
+	PersonManagement                *PersonManagement
+	AccountCreation                 *AccountCreation
+	AccountManagement               *AccountManagement
+	EnrollmentsAndAgreements        *EnrollmentsAndAgreements
+	Investigations                  *Investigations
+	BankRelationships               *BankRelationships
+	ACHTransfers                    *ACHTransfers
+	InstantCashTransferICT          *InstantCashTransferICT
+	Retirements                     *Retirements
+	Journals                        *Journals
+	ScheduleTransfers               *ScheduleTransfers
+	Checks                          *Checks
+	TestSimulation                  *TestSimulation
+	Wires                           *Wires
+	PositionJournals                *PositionJournals
+	CashBalances                    *CashBalances
+	FeesAndCredits                  *FeesAndCredits
+	AccountTransfers                *AccountTransfers
+	Orders                          *Orders
+	OptionOrders                    *OptionOrders
+	FixedIncomePricing              *FixedIncomePricing
+	BasketOrders                    *BasketOrders
+	AssetTradingConfig              *AssetTradingConfig
+	AlternativeAccountAccreditation *AlternativeAccountAccreditation
+	AlternativeOrders               *AlternativeOrders
+	AlternativeInvestments          *AlternativeInvestments
+	AlternativeInvestmentDocuments  *AlternativeInvestmentDocuments
+	PreIPOInterests                 *PreIPOInterests
+	PreIPOCompanies                 *PreIPOCompanies
+	PreIPONewsEvents                *PreIPONewsEvents
+	PreIPOResearchDocuments         *PreIPOResearchDocuments
+	PreIPOFundingRounds             *PreIPOFundingRounds
+	TradeBooking                    *TradeBooking
+	TradeAllocation                 *TradeAllocation
+	Assets                          *Assets
+	Ledger                          *Ledger
+	BuyingPower                     *BuyingPower
+	InvestorDocs                    *InvestorDocs
+	DataRetrieval                   *DataRetrieval
+	OptionInstructions              *OptionInstructions
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -169,9 +180,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "1.3.2",
+		SDKVersion: "1.3.3",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.3.2 2.691.6 v1:20260112:uat:5e3b93765864 github.com/afs-public/ascend-sdk-go",
+			UserAgent:  "speakeasy-sdk/go 1.3.3 2.691.6 v1:20260220:uat:5482f78d90fa github.com/afs-public/ascend-sdk-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -214,16 +225,27 @@ func New(opts ...SDKOption) *SDK {
 	sdk.FeesAndCredits = newFeesAndCredits(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AccountTransfers = newAccountTransfers(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Orders = newOrders(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.OptionOrders = newOptionOrders(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.FixedIncomePricing = newFixedIncomePricing(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.BasketOrders = newBasketOrders(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AssetTradingConfig = newAssetTradingConfig(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AlternativeAccountAccreditation = newAlternativeAccountAccreditation(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AlternativeOrders = newAlternativeOrders(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AlternativeInvestments = newAlternativeInvestments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AlternativeInvestmentDocuments = newAlternativeInvestmentDocuments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PreIPOInterests = newPreIPOInterests(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PreIPOCompanies = newPreIPOCompanies(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PreIPONewsEvents = newPreIPONewsEvents(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PreIPOResearchDocuments = newPreIPOResearchDocuments(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PreIPOFundingRounds = newPreIPOFundingRounds(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.TradeBooking = newTradeBooking(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.TradeAllocation = newTradeAllocation(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Assets = newAssets(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Ledger = newLedger(sdk, sdk.sdkConfiguration, sdk.hooks)
-	sdk.Margins = newMargins(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.BuyingPower = newBuyingPower(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.InvestorDocs = newInvestorDocs(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.DataRetrieval = newDataRetrieval(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.OptionInstructions = newOptionInstructions(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

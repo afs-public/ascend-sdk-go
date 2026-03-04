@@ -4,7 +4,7 @@ package components
 
 // CashJournalConstraintsContributionConstraints - Contribution constraints for the destination account
 type CashJournalConstraintsContributionConstraints struct {
-	// Deprecated! This value is determined based on the current date relative to the tax deadline. It will be inaccurate in cases where the previous year contribution deadline is not the tax deadline (e.g. `RECHARACTERIZATION`). Please refer to the `valid_types.previous_year_deadline` field instead.
+	// Deprecated: please refer to the `valid_types.previous_year_deadline` field instead This value is determined based on the current date relative to the tax deadline. It will be inaccurate in cases where the previous year contribution deadline is not the tax deadline (e.g. `RECHARACTERIZATION`).
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	OnlyAllowCurrentYear *bool `json:"only_allow_current_year,omitempty"`

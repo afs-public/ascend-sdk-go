@@ -205,7 +205,7 @@ func (e IctDepositTransferStateState) ToPointer() *IctDepositTransferStateState 
 	return &e
 }
 
-// TransferState - Deprecated, use state instead
+// TransferState - Deprecated: use state instead
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type TransferState struct {
@@ -977,7 +977,7 @@ type IctDeposit struct {
 	RetirementContribution *IctDepositRetirementContribution `json:"retirement_contribution,omitempty"`
 	// The state of the ICT deposit
 	State *IctDepositState `json:"state,omitempty"`
-	// Deprecated, use state instead
+	// Deprecated: use state instead
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	TransferState *TransferState `json:"transfer_state,omitempty"`

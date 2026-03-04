@@ -40,7 +40,6 @@ const (
 	BeneficiaryEntityTypeEntityTypeUnspecified   BeneficiaryEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	BeneficiaryEntityTypeCorporation             BeneficiaryEntityType = "CORPORATION"
 	BeneficiaryEntityTypeLimitedLiabilityCompany BeneficiaryEntityType = "LIMITED_LIABILITY_COMPANY"
-	BeneficiaryEntityTypePartnership             BeneficiaryEntityType = "PARTNERSHIP"
 	BeneficiaryEntityTypeTrust                   BeneficiaryEntityType = "TRUST"
 	BeneficiaryEntityTypeEstate                  BeneficiaryEntityType = "ESTATE"
 )
@@ -169,11 +168,11 @@ func (o *MailingAddress) GetSublocality() *string {
 	return o.Sublocality
 }
 
-// ShortCode - A short code.
+// BeneficiaryShortCode - A short code.
 //
 //	Reference(s):
 //	- https://en.wikipedia.org/wiki/Short_code
-type ShortCode struct {
+type BeneficiaryShortCode struct {
 	// Required. The short code digits, without a leading plus ('+') or country calling code, e.g. "611".
 	Number *string `json:"number,omitempty"`
 	// Required. The BCP-47 region code of the location where calls to this short code can be made, such as "US" and "BB".
@@ -183,22 +182,22 @@ type ShortCode struct {
 	RegionCode *string `json:"region_code,omitempty"`
 }
 
-func (o *ShortCode) GetNumber() *string {
+func (o *BeneficiaryShortCode) GetNumber() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Number
 }
 
-func (o *ShortCode) GetRegionCode() *string {
+func (o *BeneficiaryShortCode) GetRegionCode() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RegionCode
 }
 
-// PhoneNumber - The phone number for a party; Lives on the party record in the context of the account and does not commute to other accounts held by/for the person
-type PhoneNumber struct {
+// BeneficiaryPhoneNumber - The phone number for a party; Lives on the party record in the context of the account and does not commute to other accounts held by/for the person
+type BeneficiaryPhoneNumber struct {
 	// The phone number, represented as a leading plus sign ('+'), followed by a phone number that uses a relaxed ITU E.164 format consisting of the country calling code (1 to 3 digits) and the subscriber number, with no additional spaces or formatting, e.g.: - correct: "+15552220123" - incorrect: "+1 (555) 222-01234 x123".
 	//
 	//  The ITU E.164 format limits the latter to 12 digits, but in practice not all countries respect that, so we relax that restriction here. National-only numbers are not allowed.
@@ -213,24 +212,24 @@ type PhoneNumber struct {
 	//
 	//  Reference(s):
 	//  - https://en.wikipedia.org/wiki/Short_code
-	ShortCode *ShortCode `json:"short_code,omitempty"`
+	ShortCode *BeneficiaryShortCode `json:"short_code,omitempty"`
 }
 
-func (o *PhoneNumber) GetE164Number() *string {
+func (o *BeneficiaryPhoneNumber) GetE164Number() *string {
 	if o == nil {
 		return nil
 	}
 	return o.E164Number
 }
 
-func (o *PhoneNumber) GetExtension() *string {
+func (o *BeneficiaryPhoneNumber) GetExtension() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Extension
 }
 
-func (o *PhoneNumber) GetShortCode() *ShortCode {
+func (o *BeneficiaryPhoneNumber) GetShortCode() *BeneficiaryShortCode {
 	if o == nil {
 		return nil
 	}
@@ -291,7 +290,7 @@ type Beneficiary struct {
 	// Non-primary names representing a natural person; Name attributed to a person other than "Given" and "Family" names.
 	MiddleNames *string `json:"middle_names,omitempty"`
 	// The phone number for a party; Lives on the party record in the context of the account and does not commute to other accounts held by/for the person
-	PhoneNumber *PhoneNumber `json:"phone_number,omitempty"`
+	PhoneNumber *BeneficiaryPhoneNumber `json:"phone_number,omitempty"`
 	// The relationship of the beneficiary to the account owner
 	RelationType *BeneficiaryRelationType `json:"relation_type,omitempty"`
 	// The full U.S. tax ID for a related person; Tax ID is required if birth date is not provided.
@@ -363,7 +362,7 @@ func (o *Beneficiary) GetMiddleNames() *string {
 	return o.MiddleNames
 }
 
-func (o *Beneficiary) GetPhoneNumber() *PhoneNumber {
+func (o *Beneficiary) GetPhoneNumber() *BeneficiaryPhoneNumber {
 	if o == nil {
 		return nil
 	}

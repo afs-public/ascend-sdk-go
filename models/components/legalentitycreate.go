@@ -44,7 +44,6 @@ const (
 	EntityTypeEntityTypeUnspecified   EntityType = "ENTITY_TYPE_UNSPECIFIED"
 	EntityTypeCorporation             EntityType = "CORPORATION"
 	EntityTypeLimitedLiabilityCompany EntityType = "LIMITED_LIABILITY_COMPANY"
-	EntityTypePartnership             EntityType = "PARTNERSHIP"
 	EntityTypeTrust                   EntityType = "TRUST"
 	EntityTypeEstate                  EntityType = "ESTATE"
 )
@@ -104,6 +103,8 @@ type LegalEntityCreate struct {
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
 	BrokerDealer                     *bool                             `json:"broker_dealer,omitempty"`
 	BusinessIndustrialClassification *BusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
+	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
+	ClientEntityID *string `json:"client_entity_id,omitempty"`
 	// Corporate structure of the entity.
 	CorporateStructure *CorporateStructure `json:"corporate_structure,omitempty"`
 	// The correspondent id associated with the legal entity.
@@ -196,6 +197,13 @@ func (o *LegalEntityCreate) GetBusinessIndustrialClassification() *BusinessIndus
 		return nil
 	}
 	return o.BusinessIndustrialClassification
+}
+
+func (o *LegalEntityCreate) GetClientEntityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientEntityID
 }
 
 func (o *LegalEntityCreate) GetCorporateStructure() *CorporateStructure {

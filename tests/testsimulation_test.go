@@ -49,8 +49,6 @@ func TestTestSimulation_CheckDepositsForceApproveCheckDeposit(t *testing.T) {
 
 	testHTTPClient := createTestHTTPClient("CheckDeposits_ForceApproveCheckDeposit")
 
-	accountID := utils.GetEnv("ACCOUNT_ID", "01JHGTEPC6ZTAHCFRH2MD3VJJT")
-
 	s := ascendsdkgo.New(
 		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
 		ascendsdkgo.WithSecurity(components.Security{
@@ -65,34 +63,30 @@ func TestTestSimulation_CheckDepositsForceApproveCheckDeposit(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	// First, create a check deposit
-	createRes, err := s.TestSimulation.SimulateCreateCheckDeposit(ctx, accountID, components.SimulateCreateCheckDepositRequestCreate{
+	// First create a check deposit to get a valid check deposit ID
+	createRes, err := s.TestSimulation.SimulateCreateCheckDeposit(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", components.SimulateCreateCheckDepositRequestCreate{
 		Amount: components.DecimalCreate{
 			Value: ascendsdkgo.String("100"),
 		},
-		Parent: accountID,
+		Parent: "01JHGTEPC6ZTAHCFRH2MD3VJJT",
 	})
 	require.NoError(t, err)
-	require.NotNil(t, createRes.CheckDeposit)
-	require.NotNil(t, createRes.CheckDeposit.Name)
+	require.Equal(t, 200, createRes.HTTPMeta.Response.StatusCode)
 
-	// Extract check deposit ID from the name (format: accounts/{account}/checkDeposits/{check_deposit})
-	name := *createRes.CheckDeposit.Name
-	parts := strings.Split(name, "/")
-	checkDepositID := parts[len(parts)-1]
+	nameParts := strings.Split(*createRes.CheckDeposit.Name, "/")
+	checkDepositID := nameParts[len(nameParts)-1]
 
-	// Check if the deposit is in PENDING_REVIEW state before force approving
-	if createRes.CheckDeposit.State != nil &&
-		createRes.CheckDeposit.State.State != nil &&
-		*createRes.CheckDeposit.State.State != components.CheckDepositStateStatePendingReview {
-		t.Skipf("Check deposit is not pending review (state: %s), skipping force approve test", *createRes.CheckDeposit.State.State)
+	req := components.ForceApproveCheckDepositRequestCreate{
+		Name: "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/" + checkDepositID,
 	}
-
-	// Force approve the check deposit
-	res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, accountID, checkDepositID, components.ForceApproveCheckDepositRequestCreate{
-		Name: name,
-	})
-	require.NoError(t, err)
+	res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", checkDepositID, req)
+	if err != nil {
+		// FAILED_PRECONDITION (code 3) is expected when the deposit was auto-approved
+		// and doesn't need review
+		if strings.Contains(err.Error(), "does not need review") {
+			t.Skipf("Skipping: check deposit was auto-approved and does not need review")
+		}
+		require.NoError(t, err)
+	}
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-
 }

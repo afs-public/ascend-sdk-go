@@ -44,7 +44,6 @@ const (
 	LegalEntityUpdateEntityTypeEntityTypeUnspecified   LegalEntityUpdateEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	LegalEntityUpdateEntityTypeCorporation             LegalEntityUpdateEntityType = "CORPORATION"
 	LegalEntityUpdateEntityTypeLimitedLiabilityCompany LegalEntityUpdateEntityType = "LIMITED_LIABILITY_COMPANY"
-	LegalEntityUpdateEntityTypePartnership             LegalEntityUpdateEntityType = "PARTNERSHIP"
 	LegalEntityUpdateEntityTypeTrust                   LegalEntityUpdateEntityType = "TRUST"
 	LegalEntityUpdateEntityTypeEstate                  LegalEntityUpdateEntityType = "ESTATE"
 )
@@ -104,6 +103,8 @@ type LegalEntityUpdate struct {
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
 	BrokerDealer                     *bool                                              `json:"broker_dealer,omitempty"`
 	BusinessIndustrialClassification *LegalEntityUpdateBusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
+	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
+	ClientEntityID *string `json:"client_entity_id,omitempty"`
 	// Corporate structure of the entity.
 	CorporateStructure *LegalEntityUpdateCorporateStructure `json:"corporate_structure,omitempty"`
 	// The correspondent id associated with the legal entity.
@@ -196,6 +197,13 @@ func (o *LegalEntityUpdate) GetBusinessIndustrialClassification() *LegalEntityUp
 		return nil
 	}
 	return o.BusinessIndustrialClassification
+}
+
+func (o *LegalEntityUpdate) GetClientEntityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientEntityID
 }
 
 func (o *LegalEntityUpdate) GetCorporateStructure() *LegalEntityUpdateCorporateStructure {

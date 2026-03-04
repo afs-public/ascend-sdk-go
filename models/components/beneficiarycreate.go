@@ -9,7 +9,6 @@ const (
 	BeneficiaryCreateEntityTypeEntityTypeUnspecified   BeneficiaryCreateEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	BeneficiaryCreateEntityTypeCorporation             BeneficiaryCreateEntityType = "CORPORATION"
 	BeneficiaryCreateEntityTypeLimitedLiabilityCompany BeneficiaryCreateEntityType = "LIMITED_LIABILITY_COMPANY"
-	BeneficiaryCreateEntityTypePartnership             BeneficiaryCreateEntityType = "PARTNERSHIP"
 	BeneficiaryCreateEntityTypeTrust                   BeneficiaryCreateEntityType = "TRUST"
 	BeneficiaryCreateEntityTypeEstate                  BeneficiaryCreateEntityType = "ESTATE"
 )

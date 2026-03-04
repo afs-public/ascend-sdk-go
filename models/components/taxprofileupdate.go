@@ -8,7 +8,6 @@ type TaxProfileUpdateFederalTaxClassification string
 const (
 	TaxProfileUpdateFederalTaxClassificationFederalTaxClassificationUnspecified TaxProfileUpdateFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	TaxProfileUpdateFederalTaxClassificationIndivSolepropOrSinglememberllc      TaxProfileUpdateFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
-	TaxProfileUpdateFederalTaxClassificationPartnership                         TaxProfileUpdateFederalTaxClassification = "PARTNERSHIP"
 	TaxProfileUpdateFederalTaxClassificationCCorporation                        TaxProfileUpdateFederalTaxClassification = "C_CORPORATION"
 	TaxProfileUpdateFederalTaxClassificationSCorporation                        TaxProfileUpdateFederalTaxClassification = "S_CORPORATION"
 	TaxProfileUpdateFederalTaxClassificationTrustEstate                         TaxProfileUpdateFederalTaxClassification = "TRUST_ESTATE"

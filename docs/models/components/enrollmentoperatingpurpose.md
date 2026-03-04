@@ -29,3 +29,6 @@ The purpose of the operating account.
 | `EnrollmentOperatingPurposePrincipalTrading`              | PRINCIPAL_TRADING                                         |
 | `EnrollmentOperatingPurposeSafekeepingBookEntityDomestic` | SAFEKEEPING_BOOK_ENTITY_DOMESTIC                          |
 | `EnrollmentOperatingPurposeFail`                          | FAIL                                                      |
+| `EnrollmentOperatingPurposeWash`                          | WASH                                                      |
+| `EnrollmentOperatingPurposeSettlement`                    | SETTLEMENT                                                |
+| `EnrollmentOperatingPurposeTransferLocation`              | TRANSFER_LOCATION                                         |

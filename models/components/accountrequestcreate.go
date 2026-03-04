@@ -31,9 +31,15 @@ type AccountRequestCreate struct {
 	Advised *bool `json:"advised,omitempty"`
 	// The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
 	CatAccountHolderType *CatAccountHolderType `json:"cat_account_holder_type,omitempty"`
+	// A single record representing the originating_fdid and originating_cat_reporter_crd
+	CatReporterInformation *CatReporterInformationCreate `json:"cat_reporter_information,omitempty"`
+	// An external identifier for the account. This identifier does not have internal uniqueness constraints.
+	ClientAccountID *string `json:"client_account_id,omitempty"`
 	// A unique identifier referencing a Correspondent; A Client may have several operating Correspondents within its purview.
 	CorrespondentID string `json:"correspondent_id"`
 	// A list of identifiers associated with the account
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Identifiers []IdentifierCreate `json:"identifiers,omitempty"`
 	// A list of natural persons indicated to receive selected account documents such as account statements
 	InterestedParties []InterestedPartyCreate `json:"interested_parties,omitempty"`
@@ -41,6 +47,8 @@ type AccountRequestCreate struct {
 	InvestmentProfile *InvestmentProfileCreate `json:"investment_profile,omitempty"`
 	// A boolean to indicate if an account is managed
 	Managed *bool `json:"managed,omitempty"`
+	// The previous account ID associated with the account; Must be unique
+	OriginatingAccountID *string `json:"originating_account_id,omitempty"`
 	// Parties associated with the account (e.g. custodian).
 	Parties []PartyRequestCreate `json:"parties"`
 	// The primary registered representative for the account
@@ -81,6 +89,20 @@ func (o *AccountRequestCreate) GetCatAccountHolderType() *CatAccountHolderType {
 	return o.CatAccountHolderType
 }
 
+func (o *AccountRequestCreate) GetCatReporterInformation() *CatReporterInformationCreate {
+	if o == nil {
+		return nil
+	}
+	return o.CatReporterInformation
+}
+
+func (o *AccountRequestCreate) GetClientAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientAccountID
+}
+
 func (o *AccountRequestCreate) GetCorrespondentID() string {
 	if o == nil {
 		return ""
@@ -114,6 +136,13 @@ func (o *AccountRequestCreate) GetManaged() *bool {
 		return nil
 	}
 	return o.Managed
+}
+
+func (o *AccountRequestCreate) GetOriginatingAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingAccountID
 }
 
 func (o *AccountRequestCreate) GetParties() []PartyRequestCreate {

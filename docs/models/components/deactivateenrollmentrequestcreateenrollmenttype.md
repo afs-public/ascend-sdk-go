@@ -34,4 +34,5 @@ Otherwise, must be empty.
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                                                      |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                                                        |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                                                 |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegTMargin`                            | REG_T_MARGIN                                                                           |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                                                 |

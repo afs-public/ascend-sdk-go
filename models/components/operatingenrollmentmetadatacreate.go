@@ -28,6 +28,9 @@ const (
 	OperatingPurposePrincipalTrading              OperatingPurpose = "PRINCIPAL_TRADING"
 	OperatingPurposeSafekeepingBookEntityDomestic OperatingPurpose = "SAFEKEEPING_BOOK_ENTITY_DOMESTIC"
 	OperatingPurposeFail                          OperatingPurpose = "FAIL"
+	OperatingPurposeWash                          OperatingPurpose = "WASH"
+	OperatingPurposeSettlement                    OperatingPurpose = "SETTLEMENT"
+	OperatingPurposeTransferLocation              OperatingPurpose = "TRANSFER_LOCATION"
 )
 
 func (e OperatingPurpose) ToPointer() *OperatingPurpose {

@@ -88,7 +88,6 @@ const (
 	LegalEntityEntityTypeEntityTypeUnspecified   LegalEntityEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	LegalEntityEntityTypeCorporation             LegalEntityEntityType = "CORPORATION"
 	LegalEntityEntityTypeLimitedLiabilityCompany LegalEntityEntityType = "LIMITED_LIABILITY_COMPANY"
-	LegalEntityEntityTypePartnership             LegalEntityEntityType = "PARTNERSHIP"
 	LegalEntityEntityTypeTrust                   LegalEntityEntityType = "TRUST"
 	LegalEntityEntityTypeEstate                  LegalEntityEntityType = "ESTATE"
 )
@@ -380,7 +379,6 @@ type LegalEntityFederalTaxClassification string
 const (
 	LegalEntityFederalTaxClassificationFederalTaxClassificationUnspecified LegalEntityFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	LegalEntityFederalTaxClassificationIndivSolepropOrSinglememberllc      LegalEntityFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
-	LegalEntityFederalTaxClassificationPartnership                         LegalEntityFederalTaxClassification = "PARTNERSHIP"
 	LegalEntityFederalTaxClassificationCCorporation                        LegalEntityFederalTaxClassification = "C_CORPORATION"
 	LegalEntityFederalTaxClassificationSCorporation                        LegalEntityFederalTaxClassification = "S_CORPORATION"
 	LegalEntityFederalTaxClassificationTrustEstate                         LegalEntityFederalTaxClassification = "TRUST_ESTATE"
@@ -627,6 +625,8 @@ type LegalEntity struct {
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
 	BrokerDealer                     *bool                                        `json:"broker_dealer,omitempty"`
 	BusinessIndustrialClassification *LegalEntityBusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
+	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
+	ClientEntityID *string `json:"client_entity_id,omitempty"`
 	// Corporate structure of the entity.
 	CorporateStructure *LegalEntityCorporateStructure `json:"corporate_structure,omitempty"`
 	// The correspondent id associated with the legal entity.
@@ -724,6 +724,13 @@ func (o *LegalEntity) GetBusinessIndustrialClassification() *LegalEntityBusiness
 		return nil
 	}
 	return o.BusinessIndustrialClassification
+}
+
+func (o *LegalEntity) GetClientEntityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientEntityID
 }
 
 func (o *LegalEntity) GetCorporateStructure() *LegalEntityCorporateStructure {

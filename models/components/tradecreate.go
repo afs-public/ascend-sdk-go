@@ -75,19 +75,19 @@ func (e TradeCreateSide) ToPointer() *TradeCreateSide {
 	return &e
 }
 
-// SideModifier - Side modifier for the trade.
-type SideModifier string
+// TradeCreateSideModifier - Side modifier for the trade.
+type TradeCreateSideModifier string
 
 const (
-	SideModifierSideModifierUnspecified SideModifier = "SIDE_MODIFIER_UNSPECIFIED"
-	SideModifierShort                   SideModifier = "SHORT"
-	SideModifierShortExempt             SideModifier = "SHORT_EXEMPT"
-	SideModifierShortCover              SideModifier = "SHORT_COVER"
-	SideModifierOpen                    SideModifier = "OPEN"
-	SideModifierClose                   SideModifier = "CLOSE"
+	TradeCreateSideModifierSideModifierUnspecified TradeCreateSideModifier = "SIDE_MODIFIER_UNSPECIFIED"
+	TradeCreateSideModifierShort                   TradeCreateSideModifier = "SHORT"
+	TradeCreateSideModifierShortExempt             TradeCreateSideModifier = "SHORT_EXEMPT"
+	TradeCreateSideModifierShortCover              TradeCreateSideModifier = "SHORT_COVER"
+	TradeCreateSideModifierOpen                    TradeCreateSideModifier = "OPEN"
+	TradeCreateSideModifierClose                   TradeCreateSideModifier = "CLOSE"
 )
 
-func (e SideModifier) ToPointer() *SideModifier {
+func (e TradeCreateSideModifier) ToPointer() *TradeCreateSideModifier {
 	return &e
 }
 
@@ -246,7 +246,7 @@ type TradeCreate struct {
 	// Denotes if the trade is a SELL or a BUY.
 	Side TradeCreateSide `json:"side"`
 	// Side modifier for the trade.
-	SideModifier *SideModifier `json:"side_modifier,omitempty"`
+	SideModifier *TradeCreateSideModifier `json:"side_modifier,omitempty"`
 	// The source of the submission.
 	SourceApplication string `json:"source_application"`
 	// An enumerated list of values used to indicate certain attributes about a trade (E.g. DISCRETION_EXERCISED, BROKER_LIQUIDATION) and/or trigger downstream processing rules (e.g. SUPPRESS_TRACE_REPORTING)
@@ -397,7 +397,7 @@ func (o *TradeCreate) GetSide() TradeCreateSide {
 	return o.Side
 }
 
-func (o *TradeCreate) GetSideModifier() *SideModifier {
+func (o *TradeCreate) GetSideModifier() *TradeCreateSideModifier {
 	if o == nil {
 		return nil
 	}
