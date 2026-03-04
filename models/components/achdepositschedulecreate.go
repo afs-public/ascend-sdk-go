@@ -24,7 +24,7 @@ func (e AchDepositScheduleCreateType) ToPointer() *AchDepositScheduleCreateType 
 	return &e
 }
 
-// IraContribution - The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+// IraContribution - Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type IraContribution struct {
@@ -52,7 +52,7 @@ func (o *IraContribution) GetType() AchDepositScheduleCreateType {
 type AchDepositScheduleCreate struct {
 	// The name of the bank relationship to be used in the ACH transaction
 	BankRelationship string `json:"bank_relationship"`
-	// The ira contribution info for an IRA account. Deprecated, see retirement_contribution_details
+	// Deprecated: see retirement_contribution_details The ira contribution info for an IRA account.
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	IraContribution *IraContribution `json:"ira_contribution,omitempty"`

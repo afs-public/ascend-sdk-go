@@ -13,3 +13,4 @@ The Reserve Class associated with the account
 | `ReserveClassFirm`                    | FIRM                                  |
 | `ReserveClassStreet`                  | STREET                                |
 | `ReserveClassGl`                      | G_L                                   |
+| `ReserveClassFuturesCustomer`         | FUTURES_CUSTOMER                      |

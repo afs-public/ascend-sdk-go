@@ -102,7 +102,6 @@ const (
 	PartyEntityTypeEntityTypeUnspecified   PartyEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	PartyEntityTypeCorporation             PartyEntityType = "CORPORATION"
 	PartyEntityTypeLimitedLiabilityCompany PartyEntityType = "LIMITED_LIABILITY_COMPANY"
-	PartyEntityTypePartnership             PartyEntityType = "PARTNERSHIP"
 	PartyEntityTypeTrust                   PartyEntityType = "TRUST"
 	PartyEntityTypeEstate                  PartyEntityType = "ESTATE"
 )
@@ -394,7 +393,6 @@ type PartyFederalTaxClassification string
 const (
 	PartyFederalTaxClassificationFederalTaxClassificationUnspecified PartyFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	PartyFederalTaxClassificationIndivSolepropOrSinglememberllc      PartyFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
-	PartyFederalTaxClassificationPartnership                         PartyFederalTaxClassification = "PARTNERSHIP"
 	PartyFederalTaxClassificationCCorporation                        PartyFederalTaxClassification = "C_CORPORATION"
 	PartyFederalTaxClassificationSCorporation                        PartyFederalTaxClassification = "S_CORPORATION"
 	PartyFederalTaxClassificationTrustEstate                         PartyFederalTaxClassification = "TRUST_ESTATE"
@@ -641,6 +639,8 @@ type PartyLegalEntity struct {
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
 	BrokerDealer                     *bool                                  `json:"broker_dealer,omitempty"`
 	BusinessIndustrialClassification *PartyBusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
+	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
+	ClientEntityID *string `json:"client_entity_id,omitempty"`
 	// Corporate structure of the entity.
 	CorporateStructure *PartyCorporateStructure `json:"corporate_structure,omitempty"`
 	// The correspondent id associated with the legal entity.
@@ -738,6 +738,13 @@ func (o *PartyLegalEntity) GetBusinessIndustrialClassification() *PartyBusinessI
 		return nil
 	}
 	return o.BusinessIndustrialClassification
+}
+
+func (o *PartyLegalEntity) GetClientEntityID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientEntityID
 }
 
 func (o *PartyLegalEntity) GetCorporateStructure() *PartyCorporateStructure {
@@ -1164,11 +1171,9 @@ type PartyEmployment struct {
 	Occupation *string `json:"occupation,omitempty"`
 	// **Field Dependencies:**
 	//
-	// Required if `employment_status` is one of:
+	// Must be empty if `employment_status` is ___not___ one of:
 	//   - `EMPLOYED`
 	//   - `SELF_EMPLOYED`
-	//
-	// Otherwise, must be empty.
 	StartYear *int `json:"start_year,omitempty"`
 }
 
@@ -1899,7 +1904,6 @@ type PartyLegalNaturalPersonFederalTaxClassification string
 const (
 	PartyLegalNaturalPersonFederalTaxClassificationFederalTaxClassificationUnspecified PartyLegalNaturalPersonFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	PartyLegalNaturalPersonFederalTaxClassificationIndivSolepropOrSinglememberllc      PartyLegalNaturalPersonFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
-	PartyLegalNaturalPersonFederalTaxClassificationPartnership                         PartyLegalNaturalPersonFederalTaxClassification = "PARTNERSHIP"
 	PartyLegalNaturalPersonFederalTaxClassificationCCorporation                        PartyLegalNaturalPersonFederalTaxClassification = "C_CORPORATION"
 	PartyLegalNaturalPersonFederalTaxClassificationSCorporation                        PartyLegalNaturalPersonFederalTaxClassification = "S_CORPORATION"
 	PartyLegalNaturalPersonFederalTaxClassificationTrustEstate                         PartyLegalNaturalPersonFederalTaxClassification = "TRUST_ESTATE"
@@ -2147,6 +2151,8 @@ type PartyLegalNaturalPerson struct {
 	BirthDate *PartyBirthDate `json:"birth_date,omitempty"`
 	// This is used for tax (treaty) and country block list considerations Maximum list of two 2-char CLDR Code citizenship countries, e.g. US, CA
 	CitizenshipCountries []string `json:"citizenship_countries,omitempty"`
+	// An external identifier for the legal natural person. This identifier does not have internal uniqueness constraints.
+	ClientPersonID *string `json:"client_person_id,omitempty"`
 	// A list of ticker symbols in which the underlying person is a control person; control persons are defined as having significant influence over a company’s management and operations, typically through ownership of a large percentage of the company’s voting stock or through positions on the company’s board of directors or executive team
 	ControlPersonCompanySymbols *string `json:"control_person_company_symbols,omitempty"`
 	// Indicates the related owner record is an employee of the clearing broker's correspondent customer. By default, this is set to `false`.
@@ -2246,6 +2252,13 @@ func (o *PartyLegalNaturalPerson) GetCitizenshipCountries() []string {
 		return nil
 	}
 	return o.CitizenshipCountries
+}
+
+func (o *PartyLegalNaturalPerson) GetClientPersonID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientPersonID
 }
 
 func (o *PartyLegalNaturalPerson) GetControlPersonCompanySymbols() *string {

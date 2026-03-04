@@ -44,6 +44,7 @@ const (
 	EnrollmentCreateTypeRegistrationIraBeneficiaryRoth        EnrollmentCreateType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
 	EnrollmentCreateTypeRegistrationIndividualForeign         EnrollmentCreateType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentCreateTypeRegistrationCustodial                 EnrollmentCreateType = "REGISTRATION_CUSTODIAL"
+	EnrollmentCreateTypeRegTMargin                            EnrollmentCreateType = "REG_T_MARGIN"
 	EnrollmentCreateTypeVirtualAccountNumber                  EnrollmentCreateType = "VIRTUAL_ACCOUNT_NUMBER"
 )
 

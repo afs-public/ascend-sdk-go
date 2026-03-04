@@ -8,7 +8,6 @@ type FederalTaxClassification string
 const (
 	FederalTaxClassificationFederalTaxClassificationUnspecified FederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	FederalTaxClassificationIndivSolepropOrSinglememberllc      FederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
-	FederalTaxClassificationPartnership                         FederalTaxClassification = "PARTNERSHIP"
 	FederalTaxClassificationCCorporation                        FederalTaxClassification = "C_CORPORATION"
 	FederalTaxClassificationSCorporation                        FederalTaxClassification = "S_CORPORATION"
 	FederalTaxClassificationTrustEstate                         FederalTaxClassification = "TRUST_ESTATE"

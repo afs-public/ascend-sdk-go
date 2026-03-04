@@ -106,7 +106,7 @@ func main() {
 
     res, err := s.AssetTradingConfig.ListAssetTradingConfigs(ctx, operations.AssetTradingConfigServiceListAssetTradingConfigsRequest{
         CorrespondentID: "01HBRQ5BW6ZAY4BNWP4GWRD80X",
-        AssetID: "",
+        AssetID: "-",
         PageSize: ascendsdkgo.Int(100),
         PageToken: ascendsdkgo.String("Mv-BAwEBCVBhZ2VUb2tlbgH_ggABAgEPUmVxdWVzdENoZWNrc3VtAQYAAQJJZAEMAAAAD_-CAfzrRtzkAQQ1MDA3AA=="),
         Filter: ascendsdkgo.String("symbol == 'SBUX' && asset_type == 'EQUITY'"),

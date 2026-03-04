@@ -1,0 +1,9 @@
+# OptionOrderServiceCreateOptionOrderRequest
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `AccountID`                                                                  | *string*                                                                     | :heavy_check_mark:                                                           | The account id.                                                              | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                   |
+| `OptionOrderCreate`                                                          | [components.OptionOrderCreate](../../models/components/optionordercreate.md) | :heavy_check_mark:                                                           | N/A                                                                          |                                                                              |

@@ -30,4 +30,5 @@ The enrollment type.
 | `EnrollmentTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                     |
 | `EnrollmentTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                       |
 | `EnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                |
+| `EnrollmentTypeRegTMargin`                            | REG_T_MARGIN                                          |
 | `EnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                |

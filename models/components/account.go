@@ -26,6 +26,28 @@ func (e AccountCatAccountHolderType) ToPointer() *AccountCatAccountHolderType {
 	return &e
 }
 
+// CatReporterInformation - The CAT reporter information for the account
+type CatReporterInformation struct {
+	// The prior CAT reporter's 7 digit CRD number; Must be provided with an `ORIGINATING_FDID`
+	OriginatingCatReporterCrd *string `json:"originating_cat_reporter_crd,omitempty"`
+	// The previous FDID associated with the account; Must be unique and provided with an `ORIGINATING_CAT_REPORTER_CRD`
+	OriginatingFdid *string `json:"originating_fdid,omitempty"`
+}
+
+func (o *CatReporterInformation) GetOriginatingCatReporterCrd() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingCatReporterCrd
+}
+
+func (o *CatReporterInformation) GetOriginatingFdid() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingFdid
+}
+
 // CftcOwnerType - Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum only applies to accounts regulated by the CFTC
 type CftcOwnerType string
 
@@ -438,7 +460,6 @@ const (
 	RegistrationTypeTrustRegistration                         RegistrationType = "TRUST_REGISTRATION"
 	RegistrationTypeCorporationRegistration                   RegistrationType = "CORPORATION_REGISTRATION"
 	RegistrationTypeLlcRegistration                           RegistrationType = "LLC_REGISTRATION"
-	RegistrationTypePartnershipRegistration                   RegistrationType = "PARTNERSHIP_REGISTRATION"
 	RegistrationTypeOperatingRegistration                     RegistrationType = "OPERATING_REGISTRATION"
 	RegistrationTypeIraBeneficiaryTraditionalRegistration     RegistrationType = "IRA_BENEFICIARY_TRADITIONAL_REGISTRATION"
 	RegistrationTypeIraBeneficiaryRothRegistration            RegistrationType = "IRA_BENEFICIARY_ROTH_REGISTRATION"
@@ -460,6 +481,7 @@ const (
 	ReserveClassFirm                    ReserveClass = "FIRM"
 	ReserveClassStreet                  ReserveClass = "STREET"
 	ReserveClassGl                      ReserveClass = "G_L"
+	ReserveClassFuturesCustomer         ReserveClass = "FUTURES_CUSTOMER"
 )
 
 func (e ReserveClass) ToPointer() *ReserveClass {
@@ -540,8 +562,12 @@ type Account struct {
 	Agreements []Agreement `json:"agreements,omitempty"`
 	// The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
 	CatAccountHolderType *AccountCatAccountHolderType `json:"cat_account_holder_type,omitempty"`
+	// The CAT reporter information for the account
+	CatReporterInformation *CatReporterInformation `json:"cat_reporter_information,omitempty"`
 	// Indicates the CFTC (Commodity Futures Trading Commission) owner type of the account. This enum only applies to accounts regulated by the CFTC
 	CftcOwnerType *CftcOwnerType `json:"cftc_owner_type,omitempty"`
+	// An external identifier for the account. This identifier does not have internal uniqueness constraints.
+	ClientAccountID *string `json:"client_account_id,omitempty"`
 	// The time the account was closed; If the account is not closed, this is null
 	CloseTime *time.Time `json:"close_time,omitempty"`
 	// A unique identifier referencing a Correspondent; A Client may have several operating Correspondents within its purview.
@@ -559,6 +585,8 @@ type Account struct {
 	// Describes if the account is cash-only or has access to a form of margin
 	FundingType *FundingType `json:"funding_type,omitempty"`
 	// A list of identifiers associated with the account
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Identifiers []Identifier `json:"identifiers,omitempty"`
 	// A list of natural persons indicated to receive selected account documents such as account statements
 	InterestedParties []InterestedParty `json:"interested_parties,omitempty"`
@@ -572,6 +600,8 @@ type Account struct {
 	Name *string `json:"name,omitempty"`
 	// The time the account was activated; Differs from `create_time` which is when the initial account record was created
 	OpenTime *time.Time `json:"open_time,omitempty"`
+	// The previous account ID associated with the account; Must be unique
+	OriginatingAccountID *string `json:"originating_account_id,omitempty"`
 	// A roll-up account classification based on the `registration_type`; Indicates what owns the account and/or if it is a special type (e.g., Joint, Estate, Retirement, etc.); Used primarily for reporting and high-level type identification
 	OwnershipType *OwnershipType `json:"ownership_type,omitempty"`
 	// Parties associated with the account (e.g. custodian).
@@ -663,11 +693,25 @@ func (o *Account) GetCatAccountHolderType() *AccountCatAccountHolderType {
 	return o.CatAccountHolderType
 }
 
+func (o *Account) GetCatReporterInformation() *CatReporterInformation {
+	if o == nil {
+		return nil
+	}
+	return o.CatReporterInformation
+}
+
 func (o *Account) GetCftcOwnerType() *CftcOwnerType {
 	if o == nil {
 		return nil
 	}
 	return o.CftcOwnerType
+}
+
+func (o *Account) GetClientAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientAccountID
 }
 
 func (o *Account) GetCloseTime() *time.Time {
@@ -773,6 +817,13 @@ func (o *Account) GetOpenTime() *time.Time {
 		return nil
 	}
 	return o.OpenTime
+}
+
+func (o *Account) GetOriginatingAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingAccountID
 }
 
 func (o *Account) GetOwnershipType() *OwnershipType {

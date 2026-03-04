@@ -452,6 +452,30 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [GetAchWithdrawal](docs/sdks/achtransfers/README.md#getachwithdrawal) - Get ACH Withdrawal
 * [CancelAchWithdrawal](docs/sdks/achtransfers/README.md#cancelachwithdrawal) - Cancel ACH Withdrawal
 
+### [AlternativeAccountAccreditation](docs/sdks/alternativeaccountaccreditation/README.md)
+
+* [GetAccountAccreditation](docs/sdks/alternativeaccountaccreditation/README.md#getaccountaccreditation) - Get Account Accreditation
+* [SetAccountAccreditationType](docs/sdks/alternativeaccountaccreditation/README.md#setaccountaccreditationtype) - Set Account Accreditation
+
+### [AlternativeInvestmentDocuments](docs/sdks/alternativeinvestmentdocuments/README.md)
+
+* [ListAlternativeInvestmentDocuments](docs/sdks/alternativeinvestmentdocuments/README.md#listalternativeinvestmentdocuments) - List Alternative Investment Documents
+* [GetAlternativeInvestmentDocument](docs/sdks/alternativeinvestmentdocuments/README.md#getalternativeinvestmentdocument) - Get Alternative Investment Document
+* [DownloadAlternativeInvestmentDocument](docs/sdks/alternativeinvestmentdocuments/README.md#downloadalternativeinvestmentdocument) - Download Alternative Investment Documents
+
+### [AlternativeInvestments](docs/sdks/alternativeinvestments/README.md)
+
+* [ListAlternativeInvestments](docs/sdks/alternativeinvestments/README.md#listalternativeinvestments) - List Alternative Investment Assets
+* [GetAlternativeInvestment](docs/sdks/alternativeinvestments/README.md#getalternativeinvestment) - Get Alternative Investment Asset
+
+### [AlternativeOrders](docs/sdks/alternativeorders/README.md)
+
+* [CreateAlternativeOrder](docs/sdks/alternativeorders/README.md#createalternativeorder) - Create Alternative Order
+* [ListAlternativeOrders](docs/sdks/alternativeorders/README.md#listalternativeorders) - List Alternative Orders
+* [GetAlternativeOrder](docs/sdks/alternativeorders/README.md#getalternativeorder) - Get Alternative Order
+* [RetrievePendingInvestorActions](docs/sdks/alternativeorders/README.md#retrievependinginvestoractions) - Get Pending Investor Actions
+* [SettleAlternativeOrder](docs/sdks/alternativeorders/README.md#settlealternativeorder) - Simulate Alternative Order Booking
+
 ### [Assets](docs/sdks/assets/README.md)
 
 * [ListAssets](docs/sdks/assets/README.md#listassets) - List Assets
@@ -490,6 +514,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ListCompressedOrders](docs/sdks/basketorders/README.md#listcompressedorders) - List Compressed Orders
 * [RemoveOrders](docs/sdks/basketorders/README.md#removeorders) - Remove Basket Orders
 * [SetExtraReportingData](docs/sdks/basketorders/README.md#setextrareportingdata) - Set Extra Reporting Data
+
+### [BuyingPower](docs/sdks/buyingpower/README.md)
+
+* [GetBuyingPower](docs/sdks/buyingpower/README.md#getbuyingpower) - Get Buying Power
+* [GetAssetBuyingPower](docs/sdks/buyingpower/README.md#getassetbuyingpower) - Get Asset Buying Power
 
 ### [CashBalances](docs/sdks/cashbalances/README.md)
 
@@ -571,9 +600,18 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [GetActivity](docs/sdks/ledger/README.md#getactivity) - Get Activity
 * [GetEntry](docs/sdks/ledger/README.md#getentry) - Get Entry
 
-### [Margins](docs/sdks/margins/README.md)
+### [OptionInstructions](docs/sdks/optioninstructions/README.md)
 
-* [GetBuyingPower](docs/sdks/margins/README.md#getbuyingpower) - Get Buying Power
+* [CreateOptionInstruction](docs/sdks/optioninstructions/README.md#createoptioninstruction) - Create Option Instruction
+* [ListOptionInstructions](docs/sdks/optioninstructions/README.md#listoptioninstructions) - List Option Instructions
+* [GetOptionInstruction](docs/sdks/optioninstructions/README.md#getoptioninstruction) - Get Option Instruction
+* [CancelOptionInstruction](docs/sdks/optioninstructions/README.md#canceloptioninstruction) - Cancel Option Instruction
+
+### [OptionOrders](docs/sdks/optionorders/README.md)
+
+* [CreateOptionOrder](docs/sdks/optionorders/README.md#createoptionorder) - Create Option Order
+* [GetOptionOrder](docs/sdks/optionorders/README.md#getoptionorder) - Get Option Order
+* [CancelOptionOrder](docs/sdks/optionorders/README.md#canceloptionorder) - Cancel Option Order
 
 ### [Orders](docs/sdks/orders/README.md)
 
@@ -604,6 +642,35 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [GetPositionJournal](docs/sdks/positionjournals/README.md#getpositionjournal) - Get Position Journal
 * [CancelPositionJournal](docs/sdks/positionjournals/README.md#cancelpositionjournal) - Cancel Position Journal
 
+### [PreIPOCompanies](docs/sdks/preipocompanies/README.md)
+
+* [ListPreIpoCompanies](docs/sdks/preipocompanies/README.md#listpreipocompanies) - List Pre IPO Company
+* [GetPreIpoCompany](docs/sdks/preipocompanies/README.md#getpreipocompany) - Get Pre IPO Company
+
+### [PreIPOFundingRounds](docs/sdks/preipofundingrounds/README.md)
+
+* [ListPreIpoCompanyFundingRounds](docs/sdks/preipofundingrounds/README.md#listpreipocompanyfundingrounds) - List Pre IPO Company Funding Rounds
+* [GetPreIpoCompanyFundingRound](docs/sdks/preipofundingrounds/README.md#getpreipocompanyfundinground) - Get Pre IPO Company Funding Round
+
+### [PreIPOInterests](docs/sdks/preipointerests/README.md)
+
+* [CreatePreIpoCompanyInterest](docs/sdks/preipointerests/README.md#createpreipocompanyinterest) - Create Pre IPO Company Interest
+* [ListPreIpoCompanyInterests](docs/sdks/preipointerests/README.md#listpreipocompanyinterests) - List Pre IPO Company Interests
+* [GetPreIpoCompanyInterest](docs/sdks/preipointerests/README.md#getpreipocompanyinterest) - Get Pre IPO Company Interest
+* [UpdatePreIpoCompanyInterest](docs/sdks/preipointerests/README.md#updatepreipocompanyinterest) - Update Pre IPO Company Interest
+* [DeletePreIpoCompanyInterest](docs/sdks/preipointerests/README.md#deletepreipocompanyinterest) - Delete Pre IPO Company Interest
+
+### [PreIPONewsEvents](docs/sdks/preiponewsevents/README.md)
+
+* [ListPreIpoCompanyNewsEvents](docs/sdks/preiponewsevents/README.md#listpreipocompanynewsevents) - List Pre IPO Company News Events
+* [GetPreIpoCompanyNewsEvent](docs/sdks/preiponewsevents/README.md#getpreipocompanynewsevent) - Get Pre IPO Company Event
+
+### [PreIPOResearchDocuments](docs/sdks/preiporesearchdocuments/README.md)
+
+* [ListPreIpoCompanyResearchDocuments](docs/sdks/preiporesearchdocuments/README.md#listpreipocompanyresearchdocuments) - List Pre IPO Company Research Documents
+* [GetPreIpoCompanyResearchDocument](docs/sdks/preiporesearchdocuments/README.md#getpreipocompanyresearchdocument) - Get Pre IPO Company Research Document
+* [DownloadPreIpoCompanyResearchDocument](docs/sdks/preiporesearchdocuments/README.md#downloadpreipocompanyresearchdocument) - Download Pre IPO Company Research Document
+
 ### [Reader](docs/sdks/reader/README.md)
 
 * [ListEventMessages](docs/sdks/reader/README.md#listeventmessages) - List Event Messages
@@ -629,6 +696,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [GetAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getachwithdrawalschedule) - Get ACH Withdrawal Schedule
 * [UpdateAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#updateachwithdrawalschedule) - Update ACH Withdrawal Schedule
 * [CancelAchWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#cancelachwithdrawalschedule) - Cancel ACH Withdrawal Schedule
+* [CreateCashJournalSchedule](docs/sdks/scheduletransfers/README.md#createcashjournalschedule) - Create Cash Journal Schedule
+* [GetCashJournalSchedule](docs/sdks/scheduletransfers/README.md#getcashjournalschedule) - Get Cash Journal Schedule
+* [UpdateCashJournalSchedule](docs/sdks/scheduletransfers/README.md#updatecashjournalschedule) - Update Cash Journal Schedule
+* [CancelCashJournalSchedule](docs/sdks/scheduletransfers/README.md#cancelcashjournalschedule) - Cancel Cash Journal Schedule
+* [SearchCashJournalSchedules](docs/sdks/scheduletransfers/README.md#searchcashjournalschedules) - Search Cash Journal Schedules
 * [CreateCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#createcheckwithdrawalschedule) - Create Check Withdrawal Schedule
 * [ListCheckWithdrawalSchedules](docs/sdks/scheduletransfers/README.md#listcheckwithdrawalschedules) - List Check Withdrawal Schedules
 * [GetCheckWithdrawalSchedule](docs/sdks/scheduletransfers/README.md#getcheckwithdrawalschedule) - Get Check Withdrawal Schedule

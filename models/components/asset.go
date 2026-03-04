@@ -2,6 +2,264 @@
 
 package components
 
+// EstimatedValueDescriptor - Indicates whether the valuation represents estimate of investors' interest in the net assets of the program or estimate of the value of the security.
+type EstimatedValueDescriptor string
+
+const (
+	EstimatedValueDescriptorEstimatedValueDescriptorUnspecified EstimatedValueDescriptor = "ESTIMATED_VALUE_DESCRIPTOR_UNSPECIFIED"
+	EstimatedValueDescriptorIa                                  EstimatedValueDescriptor = "IA"
+	EstimatedValueDescriptorSv                                  EstimatedValueDescriptor = "SV"
+)
+
+func (e EstimatedValueDescriptor) ToPointer() *EstimatedValueDescriptor {
+	return &e
+}
+
+// OwnershipStructure - Describes the legal entity structure of the alternative investment. Critical for tax treatment, regulatory compliance, and operational procedures.
+type OwnershipStructure string
+
+const (
+	OwnershipStructureOwnershipStructureUnspecified  OwnershipStructure = "OWNERSHIP_STRUCTURE_UNSPECIFIED"
+	OwnershipStructureLimitedPartnership             OwnershipStructure = "LIMITED_PARTNERSHIP"
+	OwnershipStructureUsLlc                          OwnershipStructure = "US_LLC"
+	OwnershipStructureUsSCorp                        OwnershipStructure = "US_S_CORP"
+	OwnershipStructureUsCCorp                        OwnershipStructure = "US_C_CORP"
+	OwnershipStructureCaymanOrdinaryResident         OwnershipStructure = "CAYMAN_ORDINARY_RESIDENT"
+	OwnershipStructureCaymanExempted                 OwnershipStructure = "CAYMAN_EXEMPTED"
+	OwnershipStructureCaymanOrdinaryNonresident      OwnershipStructure = "CAYMAN_ORDINARY_NONRESIDENT"
+	OwnershipStructureCaymanLimitedDurationExempted  OwnershipStructure = "CAYMAN_LIMITED_DURATION_EXEMPTED"
+	OwnershipStructureCaymanForeign                  OwnershipStructure = "CAYMAN_FOREIGN"
+	OwnershipStructureCaymanTrust                    OwnershipStructure = "CAYMAN_TRUST"
+	OwnershipStructureBviGuaranteeNoShares           OwnershipStructure = "BVI_GUARANTEE_NO_SHARES"
+	OwnershipStructureBviGuaranteeMayIssueShares     OwnershipStructure = "BVI_GUARANTEE_MAY_ISSUE_SHARES"
+	OwnershipStructureBviUnlimitedNoShares           OwnershipStructure = "BVI_UNLIMITED_NO_SHARES"
+	OwnershipStructureBviUnlimitedMayIssueShares     OwnershipStructure = "BVI_UNLIMITED_MAY_ISSUE_SHARES"
+	OwnershipStructureBermudaLimitedByShares         OwnershipStructure = "BERMUDA_LIMITED_BY_SHARES"
+	OwnershipStructureBermudaLimitedByGuarantee      OwnershipStructure = "BERMUDA_LIMITED_BY_GUARANTEE"
+	OwnershipStructureBermudaUnlimitedLiability      OwnershipStructure = "BERMUDA_UNLIMITED_LIABILITY"
+	OwnershipStructureLuxembourgSa                   OwnershipStructure = "LUXEMBOURG_SA"
+	OwnershipStructureLuxembourgSarl                 OwnershipStructure = "LUXEMBOURG_SARL"
+	OwnershipStructureLuxembourgSnc                  OwnershipStructure = "LUXEMBOURG_SNC"
+	OwnershipStructureLuxembourgLimitedPartnership   OwnershipStructure = "LUXEMBOURG_LIMITED_PARTNERSHIP"
+	OwnershipStructureLuxembourgSc                   OwnershipStructure = "LUXEMBOURG_SC"
+	OwnershipStructureIrishPrivateLimited            OwnershipStructure = "IRISH_PRIVATE_LIMITED"
+	OwnershipStructureIrishPublicLimited             OwnershipStructure = "IRISH_PUBLIC_LIMITED"
+	OwnershipStructureIrishLimitedByGuarantee        OwnershipStructure = "IRISH_LIMITED_BY_GUARANTEE"
+	OwnershipStructureJerseyLlp                      OwnershipStructure = "JERSEY_LLP"
+	OwnershipStructureJerseyPublic                   OwnershipStructure = "JERSEY_PUBLIC"
+	OwnershipStructureJerseyPrivate                  OwnershipStructure = "JERSEY_PRIVATE"
+	OwnershipStructureIsleOfManLlc                   OwnershipStructure = "ISLE_OF_MAN_LLC"
+	OwnershipStructureIsleOfManTrust                 OwnershipStructure = "ISLE_OF_MAN_TRUST"
+	OwnershipStructureMauritiusDomestic              OwnershipStructure = "MAURITIUS_DOMESTIC"
+	OwnershipStructureMauritiusCategoryIGbl          OwnershipStructure = "MAURITIUS_CATEGORY_I_GBL"
+	OwnershipStructureMauritiusCategoryIiGbl         OwnershipStructure = "MAURITIUS_CATEGORY_II_GBL"
+	OwnershipStructureMauritiusSocieteCommerciale    OwnershipStructure = "MAURITIUS_SOCIETE_COMMERCIALE"
+	OwnershipStructureMauritiusSocieteEnNom          OwnershipStructure = "MAURITIUS_SOCIETE_EN_NOM"
+	OwnershipStructureMauritiusSocieteCivile         OwnershipStructure = "MAURITIUS_SOCIETE_CIVILE"
+	OwnershipStructureOtherOwnership                 OwnershipStructure = "OTHER_OWNERSHIP"
+	OwnershipStructureDelawareBusinessTrust          OwnershipStructure = "DELAWARE_BUSINESS_TRUST"
+	OwnershipStructureMassachusettsBusinessTrust     OwnershipStructure = "MASSACHUSETTS_BUSINESS_TRUST"
+	OwnershipStructureMarylandReit                   OwnershipStructure = "MARYLAND_REIT"
+	OwnershipStructureCaymanExemptLimitedPartnership OwnershipStructure = "CAYMAN_EXEMPT_LIMITED_PARTNERSHIP"
+	OwnershipStructureBviLimitedByShares             OwnershipStructure = "BVI_LIMITED_BY_SHARES"
+	OwnershipStructureDelawareStatutoryTrust         OwnershipStructure = "DELAWARE_STATUTORY_TRUST"
+)
+
+func (e OwnershipStructure) ToPointer() *OwnershipStructure {
+	return &e
+}
+
+// AssetTaxReportingStructure - Indicates whether the investment generates IRS Form 1099 or Schedule K-1 for tax reporting. Critical for year-end tax processing.
+type AssetTaxReportingStructure string
+
+const (
+	AssetTaxReportingStructureTaxReportingStructureUnspecified AssetTaxReportingStructure = "TAX_REPORTING_STRUCTURE_UNSPECIFIED"
+	AssetTaxReportingStructureForm1099                         AssetTaxReportingStructure = "FORM_1099"
+	AssetTaxReportingStructureFormK1                           AssetTaxReportingStructure = "FORM_K1"
+)
+
+func (e AssetTaxReportingStructure) ToPointer() *AssetTaxReportingStructure {
+	return &e
+}
+
+// UniversalFootnote - Universal footnote combining valuation descriptor, source, and method information.
+type UniversalFootnote string
+
+const (
+	UniversalFootnoteUniversalFootnoteUnspecified UniversalFootnote = "UNIVERSAL_FOOTNOTE_UNSPECIFIED"
+	UniversalFootnoteA                            UniversalFootnote = "A"
+	UniversalFootnoteB                            UniversalFootnote = "B"
+	UniversalFootnoteC                            UniversalFootnote = "C"
+	UniversalFootnoteD                            UniversalFootnote = "D"
+	UniversalFootnoteE                            UniversalFootnote = "E"
+	UniversalFootnoteF                            UniversalFootnote = "F"
+	UniversalFootnoteG                            UniversalFootnote = "G"
+	UniversalFootnoteH                            UniversalFootnote = "H"
+	UniversalFootnoteI                            UniversalFootnote = "I"
+	UniversalFootnoteJ                            UniversalFootnote = "J"
+	UniversalFootnoteK                            UniversalFootnote = "K"
+	UniversalFootnoteL                            UniversalFootnote = "L"
+	UniversalFootnoteM                            UniversalFootnote = "M"
+	UniversalFootnoteN                            UniversalFootnote = "N"
+	UniversalFootnoteO                            UniversalFootnote = "O"
+	UniversalFootnoteP                            UniversalFootnote = "P"
+	UniversalFootnoteQ                            UniversalFootnote = "Q"
+	UniversalFootnoteR                            UniversalFootnote = "R"
+	UniversalFootnoteS                            UniversalFootnote = "S"
+	UniversalFootnoteT                            UniversalFootnote = "T"
+	UniversalFootnoteU                            UniversalFootnote = "U"
+)
+
+func (e UniversalFootnote) ToPointer() *UniversalFootnote {
+	return &e
+}
+
+// ValuationFrequency - Indicates how often the asset is valued. Critical for pricing workflows, client expectations, and operational scheduling.
+type ValuationFrequency string
+
+const (
+	ValuationFrequencyValuationFrequencyUnspecified ValuationFrequency = "VALUATION_FREQUENCY_UNSPECIFIED"
+	ValuationFrequencyDaily                         ValuationFrequency = "DAILY"
+	ValuationFrequencyWeekly                        ValuationFrequency = "WEEKLY"
+	ValuationFrequencyBiweekly                      ValuationFrequency = "BIWEEKLY"
+	ValuationFrequencyMonthly                       ValuationFrequency = "MONTHLY"
+	ValuationFrequencySemimonthly                   ValuationFrequency = "SEMIMONTHLY"
+	ValuationFrequencyQuarterly                     ValuationFrequency = "QUARTERLY"
+	ValuationFrequencyAnnually                      ValuationFrequency = "ANNUALLY"
+	ValuationFrequencyOther                         ValuationFrequency = "OTHER"
+)
+
+func (e ValuationFrequency) ToPointer() *ValuationFrequency {
+	return &e
+}
+
+// ValuationMethod - Indicates the methodology used to determine the asset's value. Different valuation methods require different data sources and calculation workflows.
+type ValuationMethod string
+
+const (
+	ValuationMethodValuationMethodUnspecified ValuationMethod = "VALUATION_METHOD_UNSPECIFIED"
+	ValuationMethodInd                        ValuationMethod = "IND"
+	ValuationMethodGpc                        ValuationMethod = "GPC"
+	ValuationMethodGpu                        ValuationMethod = "GPU"
+	ValuationMethodBkv                        ValuationMethod = "BKV"
+	ValuationMethodRep                        ValuationMethod = "REP"
+	ValuationMethodSec                        ValuationMethod = "SEC"
+	ValuationMethodPar                        ValuationMethod = "PAR"
+	ValuationMethodMkt                        ValuationMethod = "MKT"
+	ValuationMethodAv                         ValuationMethod = "AV"
+	ValuationMethodGps                        ValuationMethod = "GPS"
+	ValuationMethodTc                         ValuationMethod = "TC"
+	ValuationMethodAto                        ValuationMethod = "ATO"
+	ValuationMethodIto                        ValuationMethod = "ITO"
+	ValuationMethodNi                         ValuationMethod = "NI"
+	ValuationMethodNid                        ValuationMethod = "NID"
+	ValuationMethodLbr                        ValuationMethod = "LBR"
+	ValuationMethodNa                         ValuationMethod = "N_A"
+)
+
+func (e ValuationMethod) ToPointer() *ValuationMethod {
+	return &e
+}
+
+// ValuationSource - Indicates whether the valuation was provided by management of program, third part firm conducting independent valuation or by broker/dealer.
+type ValuationSource string
+
+const (
+	ValuationSourceValuationSourceUnspecified ValuationSource = "VALUATION_SOURCE_UNSPECIFIED"
+	ValuationSourceMgt                        ValuationSource = "MGT"
+	ValuationSourceIv                         ValuationSource = "IV"
+	ValuationSourceBd                         ValuationSource = "BD"
+)
+
+func (e ValuationSource) ToPointer() *ValuationSource {
+	return &e
+}
+
+// AltInvestment specific asset details
+type AltInvestment struct {
+	// DTCC-assigned 16-character unique identifier for alternative investment products. Enables industry-wide standardization and DTCC AIP network integration.
+	AipSin *string `json:"aip_sin,omitempty"`
+	// Indicates whether the valuation represents estimate of investors' interest in the net assets of the program or estimate of the value of the security.
+	EstimatedValueDescriptor *EstimatedValueDescriptor `json:"estimated_value_descriptor,omitempty"`
+	// Describes the legal entity structure of the alternative investment. Critical for tax treatment, regulatory compliance, and operational procedures.
+	OwnershipStructure *OwnershipStructure `json:"ownership_structure,omitempty"`
+	// Indicates whether the investment generates IRS Form 1099 or Schedule K-1 for tax reporting. Critical for year-end tax processing.
+	TaxReportingStructure *AssetTaxReportingStructure `json:"tax_reporting_structure,omitempty"`
+	// Indicates whether the investment uses unitized accounting (shares/units with NAV), or capital account accounting (member capital accounts). Critical for transaction processing and position reporting. A value of true means Unitized. A value of false means Capital Account.
+	UnitizedCapitalIndicator *bool `json:"unitized_capital_indicator,omitempty"`
+	// Universal footnote combining valuation descriptor, source, and method information.
+	UniversalFootnote *UniversalFootnote `json:"universal_footnote,omitempty"`
+	// Indicates how often the asset is valued. Critical for pricing workflows, client expectations, and operational scheduling.
+	ValuationFrequency *ValuationFrequency `json:"valuation_frequency,omitempty"`
+	// Indicates the methodology used to determine the asset's value. Different valuation methods require different data sources and calculation workflows.
+	ValuationMethod *ValuationMethod `json:"valuation_method,omitempty"`
+	// Indicates whether the valuation was provided by management of program, third part firm conducting independent valuation or by broker/dealer.
+	ValuationSource *ValuationSource `json:"valuation_source,omitempty"`
+}
+
+func (o *AltInvestment) GetAipSin() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AipSin
+}
+
+func (o *AltInvestment) GetEstimatedValueDescriptor() *EstimatedValueDescriptor {
+	if o == nil {
+		return nil
+	}
+	return o.EstimatedValueDescriptor
+}
+
+func (o *AltInvestment) GetOwnershipStructure() *OwnershipStructure {
+	if o == nil {
+		return nil
+	}
+	return o.OwnershipStructure
+}
+
+func (o *AltInvestment) GetTaxReportingStructure() *AssetTaxReportingStructure {
+	if o == nil {
+		return nil
+	}
+	return o.TaxReportingStructure
+}
+
+func (o *AltInvestment) GetUnitizedCapitalIndicator() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.UnitizedCapitalIndicator
+}
+
+func (o *AltInvestment) GetUniversalFootnote() *UniversalFootnote {
+	if o == nil {
+		return nil
+	}
+	return o.UniversalFootnote
+}
+
+func (o *AltInvestment) GetValuationFrequency() *ValuationFrequency {
+	if o == nil {
+		return nil
+	}
+	return o.ValuationFrequency
+}
+
+func (o *AltInvestment) GetValuationMethod() *ValuationMethod {
+	if o == nil {
+		return nil
+	}
+	return o.ValuationMethod
+}
+
+func (o *AltInvestment) GetValuationSource() *ValuationSource {
+	if o == nil {
+		return nil
+	}
+	return o.ValuationSource
+}
+
 // CurrencyType - Indicates the type of currency
 type CurrencyType string
 
@@ -151,7 +409,7 @@ func (e CouponType) ToPointer() *CouponType {
 	return &e
 }
 
-// Duration - Weighted average time until a bond’s cash flows are received in years
+// Duration - Weighted average time until a bond's cash flows are received in years
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type Duration struct {
@@ -536,7 +794,7 @@ type FixedIncome struct {
 	CouponRate *CouponRate `json:"coupon_rate,omitempty"`
 	// Type of coupon rate
 	CouponType *CouponType `json:"coupon_type,omitempty"`
-	// Weighted average time until a bond’s cash flows are received in years
+	// Weighted average time until a bond's cash flows are received in years
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Duration *Duration `json:"duration,omitempty"`
@@ -1270,6 +1528,7 @@ const (
 	AssetType1FdicSynthetic   AssetType1 = "FDIC_SYNTHETIC"
 	AssetType1FixedIncome     AssetType1 = "FIXED_INCOME"
 	AssetType1MutualFund      AssetType1 = "MUTUAL_FUND"
+	AssetType1AltInvestment   AssetType1 = "ALT_INVESTMENT"
 	AssetType1Index           AssetType1 = "INDEX"
 )
 
@@ -1279,6 +1538,8 @@ func (e AssetType1) ToPointer() *AssetType1 {
 
 // Asset is the Apex representation of a security
 type Asset struct {
+	// AltInvestment specific asset details
+	AltInvestment *AltInvestment `json:"alt_investment,omitempty"`
 	// Apex internal identifier assigned upon entry to every security.
 	AssetID *string `json:"asset_id,omitempty"`
 	// Currency specific asset details
@@ -1311,6 +1572,13 @@ type Asset struct {
 	Type *AssetType1 `json:"type,omitempty"`
 	// A usable asset is active in its respective market and can be traded and/or transferred
 	Usable *bool `json:"usable,omitempty"`
+}
+
+func (o *Asset) GetAltInvestment() *AltInvestment {
+	if o == nil {
+		return nil
+	}
+	return o.AltInvestment
 }
 
 func (o *Asset) GetAssetID() *string {

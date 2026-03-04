@@ -93,8 +93,8 @@ func (e BookingTradeRouteType) ToPointer() *BookingTradeRouteType {
 	return &e
 }
 
-// SettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
-type SettlementDate struct {
+// BookingTradeSettlementDate - Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
+type BookingTradeSettlementDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
 	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
@@ -103,21 +103,21 @@ type SettlementDate struct {
 	Year *int `json:"year,omitempty"`
 }
 
-func (o *SettlementDate) GetDay() *int {
+func (o *BookingTradeSettlementDate) GetDay() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Day
 }
 
-func (o *SettlementDate) GetMonth() *int {
+func (o *BookingTradeSettlementDate) GetMonth() *int {
 	if o == nil {
 		return nil
 	}
 	return o.Month
 }
 
-func (o *SettlementDate) GetYear() *int {
+func (o *BookingTradeSettlementDate) GetYear() *int {
 	if o == nil {
 		return nil
 	}
@@ -300,7 +300,7 @@ type BookingTrade struct {
 	// Route type for the trade.
 	RouteType *BookingTradeRouteType `json:"route_type,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
-	SettlementDate *SettlementDate `json:"settlement_date,omitempty"`
+	SettlementDate *BookingTradeSettlementDate `json:"settlement_date,omitempty"`
 	// Denotes if the trade is a SELL or a BUY.
 	Side *BookingTradeSide `json:"side,omitempty"`
 	// Side modifier for the trade.
@@ -457,7 +457,7 @@ func (o *BookingTrade) GetRouteType() *BookingTradeRouteType {
 	return o.RouteType
 }
 
-func (o *BookingTrade) GetSettlementDate() *SettlementDate {
+func (o *BookingTrade) GetSettlementDate() *BookingTradeSettlementDate {
 	if o == nil {
 		return nil
 	}

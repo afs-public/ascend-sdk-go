@@ -111,7 +111,7 @@ func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions 
 	return &e
 }
 
-// TimeInForce - Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+// TimeInForce - For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
 type TimeInForce string
 
 const (
@@ -199,11 +199,11 @@ type OrderCreate struct {
 	RightsOfAccumulation *RightsOfAccumulationCreate `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side Side `json:"side"`
-	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
 	SpecialReportingInstructions []SpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// A stop price definition
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
-	// Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+	// For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
 	TimeInForce TimeInForce `json:"time_in_force"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//

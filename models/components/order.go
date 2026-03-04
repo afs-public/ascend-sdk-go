@@ -92,7 +92,7 @@ func (o *Value) GetValue() *string {
 	return o.Value
 }
 
-// OrderCommission - A custom commission to be applied to this order. When specifying an AMOUNT type, the value represents a notional amount measured in the currency of the order.
+// OrderCommission - A custom commission to be applied to this order. When specifying an AMOUNT type, the value represents a notional amount measured in the currency of the order. Only available for Equity, Mutual Fund, and Fixed Income orders.
 type OrderCommission struct {
 	// The type of commission value being specified. Only the type of "AMOUNT" is supported.
 	Type *OrderCommissionType `json:"type,omitempty"`
@@ -290,9 +290,7 @@ func (o *LimitPrice) GetType() *OrderLimitPriceType {
 	return o.Type
 }
 
-// MaxSellQuantity - The maximum number of shares to be sold if this is a notional SELL order of an Equity asset type. (Prohibited for other side or asset_type inputs.)
-//
-//	This will only be recognized for clients configured not to use OMS checks. When specified, must be greater than 0 and can't exceed 5 decimal places.
+// MaxSellQuantity - The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This field restricts the quantity to sell, even if the notional amount requires more shares to fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if your account is subject to Apex position checks. Refer to Position Check for details. When specified, must be greater than 0 and can't exceed 5 decimal places.
 type MaxSellQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -318,7 +316,7 @@ func (o *NotionalValue) GetValue() *string {
 	return o.Value
 }
 
-// OrderDate - The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is within 5 minutes prior to market close, the next valid market day may be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
+// OrderDate - The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
 type OrderDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -579,7 +577,7 @@ func (o *StopPrice) GetType() *OrderStopPriceType {
 	return o.Type
 }
 
-// OrderTimeInForce - Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+// OrderTimeInForce - For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
 type OrderTimeInForce string
 
 const (
@@ -643,7 +641,7 @@ func (e OrderTradingSession) ToPointer() *OrderTradingSession {
 type Order struct {
 	// The identifier of the account transacting this order
 	AccountID *string `json:"account_id,omitempty"`
-	// Apex Asset ID for this asset. This will not be returned in the initial CreateOrder response and will be available after an order completes validation. If the provided identifier does not match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
+	// Apex Asset ID for this asset. When the identifier_type is not ASSET_ID, this field will not be returned in the initial CreateOrder response and will be available after an order completes validation. If the provided identifier does not match any Apex asset available for trading, an OrderRejectReason of "UNKNOWN_SECURITY" will be returned and the asset_id will not be set.
 	AssetID *string `json:"asset_id,omitempty"`
 	// The type of the asset in this order, which must be one of the following:
 	//  EQUITY, MUTUAL_FUND, and FIXED_INCOME.
@@ -672,7 +670,7 @@ type Order struct {
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
 	// Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. Denotes the time the client sent the order to Apex. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
 	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
-	// A custom commission to be applied to this order. When specifying an AMOUNT type, the value represents a notional amount measured in the currency of the order.
+	// A custom commission to be applied to this order. When specifying an AMOUNT type, the value represents a notional amount measured in the currency of the order. Only available for Equity, Mutual Fund, and Fixed Income orders.
 	Commission *OrderCommission `json:"commission,omitempty"`
 	// Time of the order creation
 	CreateTime *time.Time `json:"create_time,omitempty"`
@@ -700,9 +698,7 @@ type Order struct {
 	LetterOfIntent *LetterOfIntent `json:"letter_of_intent,omitempty"`
 	// The limit price for this order.
 	LimitPrice *LimitPrice `json:"limit_price,omitempty"`
-	// The maximum number of shares to be sold if this is a notional SELL order of an Equity asset type. (Prohibited for other side or asset_type inputs.)
-	//
-	//  This will only be recognized for clients configured not to use OMS checks. When specified, must be greater than 0 and can't exceed 5 decimal places.
+	// The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This field restricts the quantity to sell, even if the notional amount requires more shares to fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if your account is subject to Apex position checks. Refer to Position Check for details. When specified, must be greater than 0 and can't exceed 5 decimal places.
 	MaxSellQuantity *MaxSellQuantity `json:"max_sell_quantity,omitempty"`
 	// System generated name of the order.
 	Name *string `json:"name,omitempty"`
@@ -710,7 +706,7 @@ type Order struct {
 	NotionalValue *NotionalValue `json:"notional_value,omitempty"`
 	// A value derived from the order_status, indicating whether the order is still open. The statuses that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED, and PENDING_CANCEL. An order with any other status is not considered open.
 	Open *bool `json:"open,omitempty"`
-	// The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is within 5 minutes prior to market close, the next valid market day may be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
+	// The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
 	OrderDate *OrderDate `json:"order_date,omitempty"`
 	// System generated unique id for the order.
 	OrderID *string `json:"order_id,omitempty"`
@@ -728,11 +724,11 @@ type Order struct {
 	RightsOfAccumulation *RightsOfAccumulation `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side *OrderSide `json:"side,omitempty"`
-	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions.
+	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
 	SpecialReportingInstructions []OrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// The stop price for this order. Only allowed for equities.
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
-	// Regulatory requirements dictate that the system capture the intended time_in_force, which is why this a mandatory field.
+	// For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`
 	// The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
 	TimeInForceExpirationDate *TimeInForceExpirationDate `json:"time_in_force_expiration_date,omitempty"`

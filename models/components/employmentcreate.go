@@ -40,11 +40,9 @@ type EmploymentCreate struct {
 	Occupation *string `json:"occupation,omitempty"`
 	// **Field Dependencies:**
 	//
-	// Required if `employment_status` is one of:
+	// Must be empty if `employment_status` is ___not___ one of:
 	//   - `EMPLOYED`
 	//   - `SELF_EMPLOYED`
-	//
-	// Otherwise, must be empty.
 	StartYear *int `json:"start_year,omitempty"`
 }
 

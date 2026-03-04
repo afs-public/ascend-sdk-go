@@ -223,11 +223,9 @@ type Employment struct {
 	Occupation *string `json:"occupation,omitempty"`
 	// **Field Dependencies:**
 	//
-	// Required if `employment_status` is one of:
+	// Must be empty if `employment_status` is ___not___ one of:
 	//   - `EMPLOYED`
 	//   - `SELF_EMPLOYED`
-	//
-	// Otherwise, must be empty.
 	StartYear *int `json:"start_year,omitempty"`
 }
 
@@ -958,7 +956,6 @@ type LegalNaturalPersonFederalTaxClassification string
 const (
 	LegalNaturalPersonFederalTaxClassificationFederalTaxClassificationUnspecified LegalNaturalPersonFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	LegalNaturalPersonFederalTaxClassificationIndivSolepropOrSinglememberllc      LegalNaturalPersonFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
-	LegalNaturalPersonFederalTaxClassificationPartnership                         LegalNaturalPersonFederalTaxClassification = "PARTNERSHIP"
 	LegalNaturalPersonFederalTaxClassificationCCorporation                        LegalNaturalPersonFederalTaxClassification = "C_CORPORATION"
 	LegalNaturalPersonFederalTaxClassificationSCorporation                        LegalNaturalPersonFederalTaxClassification = "S_CORPORATION"
 	LegalNaturalPersonFederalTaxClassificationTrustEstate                         LegalNaturalPersonFederalTaxClassification = "TRUST_ESTATE"
@@ -1206,6 +1203,8 @@ type LegalNaturalPerson struct {
 	BirthDate *BirthDate `json:"birth_date,omitempty"`
 	// This is used for tax (treaty) and country block list considerations Maximum list of two 2-char CLDR Code citizenship countries, e.g. US, CA
 	CitizenshipCountries []string `json:"citizenship_countries,omitempty"`
+	// An external identifier for the legal natural person. This identifier does not have internal uniqueness constraints.
+	ClientPersonID *string `json:"client_person_id,omitempty"`
 	// A list of ticker symbols in which the underlying person is a control person; control persons are defined as having significant influence over a company’s management and operations, typically through ownership of a large percentage of the company’s voting stock or through positions on the company’s board of directors or executive team
 	ControlPersonCompanySymbols *string `json:"control_person_company_symbols,omitempty"`
 	// Indicates the related owner record is an employee of the clearing broker's correspondent customer. By default, this is set to `false`.
@@ -1305,6 +1304,13 @@ func (o *LegalNaturalPerson) GetCitizenshipCountries() []string {
 		return nil
 	}
 	return o.CitizenshipCountries
+}
+
+func (o *LegalNaturalPerson) GetClientPersonID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientPersonID
 }
 
 func (o *LegalNaturalPerson) GetControlPersonCompanySymbols() *string {

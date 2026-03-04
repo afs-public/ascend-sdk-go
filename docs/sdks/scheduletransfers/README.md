@@ -16,6 +16,11 @@
 * [GetAchWithdrawalSchedule](#getachwithdrawalschedule) - Get ACH Withdrawal Schedule
 * [UpdateAchWithdrawalSchedule](#updateachwithdrawalschedule) - Update ACH Withdrawal Schedule
 * [CancelAchWithdrawalSchedule](#cancelachwithdrawalschedule) - Cancel ACH Withdrawal Schedule
+* [CreateCashJournalSchedule](#createcashjournalschedule) - Create Cash Journal Schedule
+* [GetCashJournalSchedule](#getcashjournalschedule) - Get Cash Journal Schedule
+* [UpdateCashJournalSchedule](#updatecashjournalschedule) - Update Cash Journal Schedule
+* [CancelCashJournalSchedule](#cancelcashjournalschedule) - Cancel Cash Journal Schedule
+* [SearchCashJournalSchedules](#searchcashjournalschedules) - Search Cash Journal Schedules
 * [CreateCheckWithdrawalSchedule](#createcheckwithdrawalschedule) - Create Check Withdrawal Schedule
 * [ListCheckWithdrawalSchedules](#listcheckwithdrawalschedules) - List Check Withdrawal Schedules
 * [GetCheckWithdrawalSchedule](#getcheckwithdrawalschedule) - Get Check Withdrawal Schedule
@@ -779,6 +784,334 @@ func main() {
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## CreateCashJournalSchedule
+
+Creates a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CashJournalSchedules_CreateCashJournalSchedule" method="post" path="/transfers/v1/cashJournalSchedules" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.ScheduleTransfers.CreateCashJournalSchedule(ctx, components.CashJournalScheduleCreate{
+        DestinationAccount: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D5Z",
+        ScheduleDetails: components.WithdrawalScheduleDetailsCreate{
+            ClientScheduleID: "ABC-123",
+            ScheduleProperties: components.SchedulePropertiesCreate{
+                StartDate: components.DateCreate{},
+                TimeUnit: components.TimeUnitMonth,
+                UnitMultiplier: 1,
+            },
+        },
+        SourceAccount: "accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CashJournalSchedule != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [components.CashJournalScheduleCreate](../../models/components/cashjournalschedulecreate.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.CashJournalSchedulesCreateCashJournalScheduleResponse](../../models/operations/cashjournalschedulescreatecashjournalscheduleresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 409      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## GetCashJournalSchedule
+
+Gets a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CashJournalSchedules_GetCashJournalSchedule" method="get" path="/transfers/v1/cashJournalSchedules/{cashJournalSchedule_id}" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.ScheduleTransfers.GetCashJournalSchedule(ctx, "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1")
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CashJournalSchedule != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `cashJournalScheduleID`                                  | *string*                                                 | :heavy_check_mark:                                       | The cashJournalSchedule id.                              | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                     |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.CashJournalSchedulesGetCashJournalScheduleResponse](../../models/operations/cashjournalschedulesgetcashjournalscheduleresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## UpdateCashJournalSchedule
+
+Updates the amount of a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CashJournalSchedules_UpdateCashJournalSchedule" method="patch" path="/transfers/v1/cashJournalSchedules/{cashJournalSchedule_id}" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.ScheduleTransfers.UpdateCashJournalSchedule(ctx, "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CashJournalScheduleUpdate{}, ascendsdkgo.String("[object Object]"))
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CashJournalSchedule != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                 | Type                                                                                                                      | Required                                                                                                                  | Description                                                                                                               | Example                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                     | [context.Context](https://pkg.go.dev/context#Context)                                                                     | :heavy_check_mark:                                                                                                        | The context to use for the request.                                                                                       |                                                                                                                           |
+| `cashJournalScheduleID`                                                                                                   | *string*                                                                                                                  | :heavy_check_mark:                                                                                                        | The cashJournalSchedule id.                                                                                               | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                                      |
+| `cashJournalScheduleUpdate`                                                                                               | [components.CashJournalScheduleUpdate](../../models/components/cashjournalscheduleupdate.md)                              | :heavy_check_mark:                                                                                                        | N/A                                                                                                                       |                                                                                                                           |
+| `updateMask`                                                                                                              | **string*                                                                                                                 | :heavy_minus_sign:                                                                                                        | A field mask representing the update. Note: only the 'schedule_details.amount' field of a schedule is currently updatable | {<br/>"update_mask": "schedule_details.amount"<br/>}                                                                      |
+| `opts`                                                                                                                    | [][operations.Option](../../models/operations/option.md)                                                                  | :heavy_minus_sign:                                                                                                        | The options for this request.                                                                                             |                                                                                                                           |
+
+### Response
+
+**[*operations.CashJournalSchedulesUpdateCashJournalScheduleResponse](../../models/operations/cashjournalschedulesupdatecashjournalscheduleresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## CancelCashJournalSchedule
+
+Cancels a Cash Journal transfer schedule
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CashJournalSchedules_CancelCashJournalSchedule" method="post" path="/transfers/v1/cashJournalSchedules/{cashJournalSchedule_id}:cancel" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.ScheduleTransfers.CancelCashJournalSchedule(ctx, "40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1", components.CancelCashJournalScheduleRequestCreate{
+        Name: "cashJournalSchedules/40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CashJournalSchedule != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                              | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            | Example                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                  | :heavy_check_mark:                                                                                                     | The context to use for the request.                                                                                    |                                                                                                                        |
+| `cashJournalScheduleID`                                                                                                | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | The cashJournalSchedule id.                                                                                            | 40eb6b6f-76ff-4dc9-b8a0-b65a7658f8b1                                                                                   |
+| `cancelCashJournalScheduleRequestCreate`                                                                               | [components.CancelCashJournalScheduleRequestCreate](../../models/components/cancelcashjournalschedulerequestcreate.md) | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |                                                                                                                        |
+| `opts`                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                     | The options for this request.                                                                                          |                                                                                                                        |
+
+### Response
+
+**[*operations.CashJournalSchedulesCancelCashJournalScheduleResponse](../../models/operations/cashjournalschedulescancelcashjournalscheduleresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SearchCashJournalSchedules
+
+Search Cash Journal Schedules visible to the calling service account using the specified search parameters
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CashJournalSchedules_SearchCashJournalSchedules" method="get" path="/transfers/v1/cashJournalSchedules:search" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.ScheduleTransfers.SearchCashJournalSchedules(ctx, operations.CashJournalSchedulesSearchCashJournalSchedulesRequest{
+        SourceAccount: ascendsdkgo.String("accounts/01H8FB90ZRRFWXB4XC2JPJ1D4Y"),
+        DestinationAccount: ascendsdkgo.String("accounts/01H8FB90ZRRFWXB4XC2JPJ1D5Z"),
+        Filter: ascendsdkgo.String("state == 'ACTIVE' && start_date > '2024-04-05' && end_date < '2024-08-10'"),
+        PageSize: ascendsdkgo.Int(100),
+        PageToken: ascendsdkgo.String("4ZHd3wAaMD1IQ0ZKS2BKV0FSRVdLW4VLWkY1R1B3MU4"),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SearchCashJournalSchedulesResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                                            | Type                                                                                                                                                 | Required                                                                                                                                             | Description                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                                | :heavy_check_mark:                                                                                                                                   | The context to use for the request.                                                                                                                  |
+| `request`                                                                                                                                            | [operations.CashJournalSchedulesSearchCashJournalSchedulesRequest](../../models/operations/cashjournalschedulessearchcashjournalschedulesrequest.md) | :heavy_check_mark:                                                                                                                                   | The request object to use for the request.                                                                                                           |
+| `opts`                                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                                             | :heavy_minus_sign:                                                                                                                                   | The options for this request.                                                                                                                        |
+
+### Response
+
+**[*operations.CashJournalSchedulesSearchCashJournalSchedulesResponse](../../models/operations/cashjournalschedulessearchcashjournalschedulesresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
 ## CreateCheckWithdrawalSchedule

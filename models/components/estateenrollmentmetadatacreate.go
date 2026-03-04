@@ -15,27 +15,12 @@ func (e EstateEnrollmentMetadataCreateDividendReinvestmentPlan) ToPointer() *Est
 	return &e
 }
 
-// EstateEnrollmentMetadataCreateMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
-type EstateEnrollmentMetadataCreateMoneyMarketFundSweep string
-
-const (
-	EstateEnrollmentMetadataCreateMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified EstateEnrollmentMetadataCreateMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
-	EstateEnrollmentMetadataCreateMoneyMarketFundSweepMoneyMarketFundSweepEnroll                EstateEnrollmentMetadataCreateMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
-	EstateEnrollmentMetadataCreateMoneyMarketFundSweepMoneyMarketFundSweepDecline               EstateEnrollmentMetadataCreateMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
-)
-
-func (e EstateEnrollmentMetadataCreateMoneyMarketFundSweep) ToPointer() *EstateEnrollmentMetadataCreateMoneyMarketFundSweep {
-	return &e
-}
-
 // EstateEnrollmentMetadataCreate - Enrollment metadata for estate enrollments
 type EstateEnrollmentMetadataCreate struct {
 	// The document id for the certificate of appointment
 	CertificateOfAppointmentDocumentID *string `json:"certificate_of_appointment_document_id,omitempty"`
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *EstateEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
-	MoneyMarketFundSweep *EstateEnrollmentMetadataCreateMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
 }
 
 func (o *EstateEnrollmentMetadataCreate) GetCertificateOfAppointmentDocumentID() *string {
@@ -50,11 +35,4 @@ func (o *EstateEnrollmentMetadataCreate) GetDividendReinvestmentPlan() *EstateEn
 		return nil
 	}
 	return o.DividendReinvestmentPlan
-}
-
-func (o *EstateEnrollmentMetadataCreate) GetMoneyMarketFundSweep() *EstateEnrollmentMetadataCreateMoneyMarketFundSweep {
-	if o == nil {
-		return nil
-	}
-	return o.MoneyMarketFundSweep
 }

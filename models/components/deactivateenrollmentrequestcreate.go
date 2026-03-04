@@ -33,6 +33,7 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraBeneficiaryRoth        DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividualForeign         DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CUSTODIAL"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegTMargin                            DeactivateEnrollmentRequestCreateEnrollmentType = "REG_T_MARGIN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber                  DeactivateEnrollmentRequestCreateEnrollmentType = "VIRTUAL_ACCOUNT_NUMBER"
 )
 

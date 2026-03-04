@@ -29,6 +29,7 @@ const (
 	EnrollmentTypeRegistrationIraBeneficiaryRoth        EnrollmentType = "REGISTRATION_IRA_BENEFICIARY_ROTH"
 	EnrollmentTypeRegistrationIndividualForeign         EnrollmentType = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentTypeRegistrationCustodial                 EnrollmentType = "REGISTRATION_CUSTODIAL"
+	EnrollmentTypeRegTMargin                            EnrollmentType = "REG_T_MARGIN"
 	EnrollmentTypeVirtualAccountNumber                  EnrollmentType = "VIRTUAL_ACCOUNT_NUMBER"
 )
 

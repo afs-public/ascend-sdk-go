@@ -500,27 +500,12 @@ func (e EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan) ToPointer() 
 	return &e
 }
 
-// EnrollmentMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
-type EnrollmentMoneyMarketFundSweep string
-
-const (
-	EnrollmentMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified EnrollmentMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
-	EnrollmentMoneyMarketFundSweepMoneyMarketFundSweepEnroll                EnrollmentMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
-	EnrollmentMoneyMarketFundSweepMoneyMarketFundSweepDecline               EnrollmentMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
-)
-
-func (e EnrollmentMoneyMarketFundSweep) ToPointer() *EnrollmentMoneyMarketFundSweep {
-	return &e
-}
-
 // EstateEnrollmentMetadata - Metadata for the REGISTRATION_ESTATE enrollment type
 type EstateEnrollmentMetadata struct {
 	// The document id for the certificate of appointment
 	CertificateOfAppointmentDocumentID *string `json:"certificate_of_appointment_document_id,omitempty"`
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *EnrollmentEstateEnrollmentMetadataDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
-	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
-	MoneyMarketFundSweep *EnrollmentMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
 }
 
 func (o *EstateEnrollmentMetadata) GetCertificateOfAppointmentDocumentID() *string {
@@ -535,13 +520,6 @@ func (o *EstateEnrollmentMetadata) GetDividendReinvestmentPlan() *EnrollmentEsta
 		return nil
 	}
 	return o.DividendReinvestmentPlan
-}
-
-func (o *EstateEnrollmentMetadata) GetMoneyMarketFundSweep() *EnrollmentMoneyMarketFundSweep {
-	if o == nil {
-		return nil
-	}
-	return o.MoneyMarketFundSweep
 }
 
 // EnrollmentForeignIndividualAccountEnrollmentMetadataDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
@@ -2449,16 +2427,16 @@ func (e EnrollmentLlcEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentLlc
 	return &e
 }
 
-// EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
-type EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep string
+// EnrollmentMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+type EnrollmentMoneyMarketFundSweep string
 
 const (
-	EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
-	EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweepMoneyMarketFundSweepEnroll                EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
-	EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweepMoneyMarketFundSweepDecline               EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
+	EnrollmentMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified EnrollmentMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
+	EnrollmentMoneyMarketFundSweepMoneyMarketFundSweepEnroll                EnrollmentMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
+	EnrollmentMoneyMarketFundSweepMoneyMarketFundSweepDecline               EnrollmentMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
 )
 
-func (e EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep) ToPointer() *EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep {
+func (e EnrollmentMoneyMarketFundSweep) ToPointer() *EnrollmentMoneyMarketFundSweep {
 	return &e
 }
 
@@ -2471,7 +2449,7 @@ type LlcEnrollmentMetadata struct {
 	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
 	FdicCashSweep *EnrollmentLlcEnrollmentMetadataFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
 	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
-	MoneyMarketFundSweep *EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
+	MoneyMarketFundSweep *EnrollmentMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
 }
 
 func (o *LlcEnrollmentMetadata) GetDividendReinvestmentPlan() *EnrollmentLlcEnrollmentMetadataDividendReinvestmentPlan {
@@ -2495,7 +2473,7 @@ func (o *LlcEnrollmentMetadata) GetFdicCashSweep() *EnrollmentLlcEnrollmentMetad
 	return o.FdicCashSweep
 }
 
-func (o *LlcEnrollmentMetadata) GetMoneyMarketFundSweep() *EnrollmentLlcEnrollmentMetadataMoneyMarketFundSweep {
+func (o *LlcEnrollmentMetadata) GetMoneyMarketFundSweep() *EnrollmentMoneyMarketFundSweep {
 	if o == nil {
 		return nil
 	}
@@ -2528,6 +2506,9 @@ const (
 	EnrollmentOperatingPurposePrincipalTrading              EnrollmentOperatingPurpose = "PRINCIPAL_TRADING"
 	EnrollmentOperatingPurposeSafekeepingBookEntityDomestic EnrollmentOperatingPurpose = "SAFEKEEPING_BOOK_ENTITY_DOMESTIC"
 	EnrollmentOperatingPurposeFail                          EnrollmentOperatingPurpose = "FAIL"
+	EnrollmentOperatingPurposeWash                          EnrollmentOperatingPurpose = "WASH"
+	EnrollmentOperatingPurposeSettlement                    EnrollmentOperatingPurpose = "SETTLEMENT"
+	EnrollmentOperatingPurposeTransferLocation              EnrollmentOperatingPurpose = "TRANSFER_LOCATION"
 )
 
 func (e EnrollmentOperatingPurpose) ToPointer() *EnrollmentOperatingPurpose {
@@ -2928,6 +2909,7 @@ const (
 	EnrollmentType1RegistrationIraBeneficiaryRoth        EnrollmentType1 = "REGISTRATION_IRA_BENEFICIARY_ROTH"
 	EnrollmentType1RegistrationIndividualForeign         EnrollmentType1 = "REGISTRATION_INDIVIDUAL_FOREIGN"
 	EnrollmentType1RegistrationCustodial                 EnrollmentType1 = "REGISTRATION_CUSTODIAL"
+	EnrollmentType1RegTMargin                            EnrollmentType1 = "REG_T_MARGIN"
 	EnrollmentType1VirtualAccountNumber                  EnrollmentType1 = "VIRTUAL_ACCOUNT_NUMBER"
 )
 

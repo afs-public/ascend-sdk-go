@@ -6569,35 +6569,35 @@ func (o *WarrantExercise) GetCorporateActionGeneralInformation() *EntryWarrantEx
 	return o.CorporateActionGeneralInformation
 }
 
-// DistributionType - Provides information on the reason for the distribution from a retirement account
-type DistributionType string
+// EntryDistributionType - Provides information on the reason for the distribution from a retirement account
+type EntryDistributionType string
 
 const (
-	DistributionTypeDistributionTypeUnspecified                DistributionType = "DISTRIBUTION_TYPE_UNSPECIFIED"
-	DistributionTypePremature                                  DistributionType = "PREMATURE"
-	DistributionTypeDisability                                 DistributionType = "DISABILITY"
-	DistributionTypeDeath                                      DistributionType = "DEATH"
-	DistributionTypeNormal                                     DistributionType = "NORMAL"
-	DistributionTypeSosepp                                     DistributionType = "SOSEPP"
-	DistributionTypeRolloverToQualifiedPlan                    DistributionType = "ROLLOVER_TO_QUALIFIED_PLAN"
-	DistributionTypeRolloverToIra                              DistributionType = "ROLLOVER_TO_IRA"
-	DistributionTypeDistTransfer                               DistributionType = "DIST_TRANSFER"
-	DistributionTypeExcessContributionRemovalBeforeTaxDeadline DistributionType = "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE"
-	DistributionTypeExcessContributionRemovalAfterTaxDeadline  DistributionType = "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE"
-	DistributionTypeRecharacterizationPriorYear                DistributionType = "RECHARACTERIZATION_PRIOR_YEAR"
-	DistributionTypeRecharacterizationCurrentYear              DistributionType = "RECHARACTERIZATION_CURRENT_YEAR"
-	DistributionTypeDistConversion                             DistributionType = "DIST_CONVERSION"
-	DistributionTypeManagementFee                              DistributionType = "MANAGEMENT_FEE"
-	DistributionTypePrematureSimpleIraLessThan2Years           DistributionType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
-	DistributionTypeNormalRothIraGreaterThan5Years             DistributionType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
-	DistributionTypePlanLoan401K                               DistributionType = "PLAN_LOAN_401K"
-	DistributionTypeNetIncomeAttributable                      DistributionType = "NET_INCOME_ATTRIBUTABLE"
-	DistributionTypeRevocation                                 DistributionType = "REVOCATION"
-	DistributionTypeNonReportable                              DistributionType = "NON_REPORTABLE"
-	DistributionTypeQualifiedCharitableDistribution            DistributionType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
+	EntryDistributionTypeDistributionTypeUnspecified                EntryDistributionType = "DISTRIBUTION_TYPE_UNSPECIFIED"
+	EntryDistributionTypePremature                                  EntryDistributionType = "PREMATURE"
+	EntryDistributionTypeDisability                                 EntryDistributionType = "DISABILITY"
+	EntryDistributionTypeDeath                                      EntryDistributionType = "DEATH"
+	EntryDistributionTypeNormal                                     EntryDistributionType = "NORMAL"
+	EntryDistributionTypeSosepp                                     EntryDistributionType = "SOSEPP"
+	EntryDistributionTypeRolloverToQualifiedPlan                    EntryDistributionType = "ROLLOVER_TO_QUALIFIED_PLAN"
+	EntryDistributionTypeRolloverToIra                              EntryDistributionType = "ROLLOVER_TO_IRA"
+	EntryDistributionTypeDistTransfer                               EntryDistributionType = "DIST_TRANSFER"
+	EntryDistributionTypeExcessContributionRemovalBeforeTaxDeadline EntryDistributionType = "EXCESS_CONTRIBUTION_REMOVAL_BEFORE_TAX_DEADLINE"
+	EntryDistributionTypeExcessContributionRemovalAfterTaxDeadline  EntryDistributionType = "EXCESS_CONTRIBUTION_REMOVAL_AFTER_TAX_DEADLINE"
+	EntryDistributionTypeRecharacterizationPriorYear                EntryDistributionType = "RECHARACTERIZATION_PRIOR_YEAR"
+	EntryDistributionTypeRecharacterizationCurrentYear              EntryDistributionType = "RECHARACTERIZATION_CURRENT_YEAR"
+	EntryDistributionTypeDistConversion                             EntryDistributionType = "DIST_CONVERSION"
+	EntryDistributionTypeManagementFee                              EntryDistributionType = "MANAGEMENT_FEE"
+	EntryDistributionTypePrematureSimpleIraLessThan2Years           EntryDistributionType = "PREMATURE_SIMPLE_IRA_LESS_THAN_2_YEARS"
+	EntryDistributionTypeNormalRothIraGreaterThan5Years             EntryDistributionType = "NORMAL_ROTH_IRA_GREATER_THAN_5_YEARS"
+	EntryDistributionTypePlanLoan401K                               EntryDistributionType = "PLAN_LOAN_401K"
+	EntryDistributionTypeNetIncomeAttributable                      EntryDistributionType = "NET_INCOME_ATTRIBUTABLE"
+	EntryDistributionTypeRevocation                                 EntryDistributionType = "REVOCATION"
+	EntryDistributionTypeNonReportable                              EntryDistributionType = "NON_REPORTABLE"
+	EntryDistributionTypeQualifiedCharitableDistribution            EntryDistributionType = "QUALIFIED_CHARITABLE_DISTRIBUTION"
 )
 
-func (e DistributionType) ToPointer() *DistributionType {
+func (e EntryDistributionType) ToPointer() *EntryDistributionType {
 	return &e
 }
 
@@ -6649,7 +6649,7 @@ type Withdrawal struct {
 	// If populated, provides information on the institution the funds have been sent to
 	DestinationInstitution *string `json:"destination_institution,omitempty"`
 	// Provides information on the reason for the distribution from a retirement account
-	DistributionType *DistributionType `json:"distribution_type,omitempty"`
+	DistributionType *EntryDistributionType `json:"distribution_type,omitempty"`
 	// tax year associated with the distribution
 	DistributionYear *int `json:"distribution_year,omitempty"`
 	// Unique tracking number provided to allow tracking a wire transfer from the initiating bank to the receiving bank
@@ -6693,7 +6693,7 @@ func (o *Withdrawal) GetDestinationInstitution() *string {
 	return o.DestinationInstitution
 }
 
-func (o *Withdrawal) GetDistributionType() *DistributionType {
+func (o *Withdrawal) GetDistributionType() *EntryDistributionType {
 	if o == nil {
 		return nil
 	}

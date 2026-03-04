@@ -29,7 +29,13 @@ type AccountRequestUpdate struct {
 	Advised *bool `json:"advised,omitempty"`
 	// The FINRA CAT classification for the Account Holder; Is set automatically based on attributes of the owners and account type
 	CatAccountHolderType *AccountRequestUpdateCatAccountHolderType `json:"cat_account_holder_type,omitempty"`
+	// A single record representing the originating_fdid and originating_cat_reporter_crd
+	CatReporterInformation *CatReporterInformationUpdate `json:"cat_reporter_information,omitempty"`
+	// An external identifier for the account. This identifier does not have internal uniqueness constraints.
+	ClientAccountID *string `json:"client_account_id,omitempty"`
 	// A list of identifiers associated with the account
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Identifiers []IdentifierUpdate `json:"identifiers,omitempty"`
 	// A list of natural persons indicated to receive selected account documents such as account statements
 	InterestedParties []InterestedPartyUpdate `json:"interested_parties,omitempty"`
@@ -37,6 +43,8 @@ type AccountRequestUpdate struct {
 	InvestmentProfile *InvestmentProfileUpdate `json:"investment_profile,omitempty"`
 	// A boolean to indicate if an account is managed
 	Managed *bool `json:"managed,omitempty"`
+	// The previous account ID associated with the account; Must be unique
+	OriginatingAccountID *string `json:"originating_account_id,omitempty"`
 	// Parties associated with the account (e.g. custodian).
 	Parties []PartyRequestUpdate `json:"parties,omitempty"`
 	// The primary registered representative for the account
@@ -70,6 +78,20 @@ func (o *AccountRequestUpdate) GetCatAccountHolderType() *AccountRequestUpdateCa
 	return o.CatAccountHolderType
 }
 
+func (o *AccountRequestUpdate) GetCatReporterInformation() *CatReporterInformationUpdate {
+	if o == nil {
+		return nil
+	}
+	return o.CatReporterInformation
+}
+
+func (o *AccountRequestUpdate) GetClientAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientAccountID
+}
+
 func (o *AccountRequestUpdate) GetIdentifiers() []IdentifierUpdate {
 	if o == nil {
 		return nil
@@ -96,6 +118,13 @@ func (o *AccountRequestUpdate) GetManaged() *bool {
 		return nil
 	}
 	return o.Managed
+}
+
+func (o *AccountRequestUpdate) GetOriginatingAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingAccountID
 }
 
 func (o *AccountRequestUpdate) GetParties() []PartyRequestUpdate {

@@ -30,4 +30,5 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentCreateTypeRegistrationIraBeneficiaryRoth`        | REGISTRATION_IRA_BENEFICIARY_ROTH                           |
 | `EnrollmentCreateTypeRegistrationIndividualForeign`         | REGISTRATION_INDIVIDUAL_FOREIGN                             |
 | `EnrollmentCreateTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                      |
+| `EnrollmentCreateTypeRegTMargin`                            | REG_T_MARGIN                                                |
 | `EnrollmentCreateTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                      |

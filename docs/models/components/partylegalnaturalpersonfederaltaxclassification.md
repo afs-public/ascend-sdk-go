@@ -9,7 +9,6 @@ Federal tax classification.
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `PartyLegalNaturalPersonFederalTaxClassificationFederalTaxClassificationUnspecified` | FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED                                               |
 | `PartyLegalNaturalPersonFederalTaxClassificationIndivSolepropOrSinglememberllc`      | INDIV_SOLEPROP_OR_SINGLEMEMBERLLC                                                    |
-| `PartyLegalNaturalPersonFederalTaxClassificationPartnership`                         | PARTNERSHIP                                                                          |
 | `PartyLegalNaturalPersonFederalTaxClassificationCCorporation`                        | C_CORPORATION                                                                        |
 | `PartyLegalNaturalPersonFederalTaxClassificationSCorporation`                        | S_CORPORATION                                                                        |
 | `PartyLegalNaturalPersonFederalTaxClassificationTrustEstate`                         | TRUST_ESTATE                                                                         |

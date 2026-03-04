@@ -43,7 +43,7 @@ func main() {
 
     res, err := s.FixedIncomePricing.PreviewOrderCost(ctx, "<id>", components.OrderCostPreviewRequestCreate{
         AssetType: components.OrderCostPreviewRequestCreateAssetTypeFixedIncome,
-        Identifier: "37833100",
+        Identifier: "037833100",
         IdentifierType: components.OrderCostPreviewRequestCreateIdentifierTypeCusip,
         LimitPrice: components.LimitPriceCreate{
             Price: components.DecimalCreate{},
@@ -116,7 +116,7 @@ func main() {
 
     res, err := s.FixedIncomePricing.RetrieveQuote(ctx, "<id>", components.RetrieveQuoteRequestCreate{
         AssetType: components.RetrieveQuoteRequestCreateAssetTypeFixedIncome,
-        Identifier: "37833100",
+        Identifier: "037833100",
         IdentifierType: components.RetrieveQuoteRequestCreateIdentifierTypeCusip,
         Parent: "<value>",
     })
