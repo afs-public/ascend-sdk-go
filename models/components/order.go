@@ -13,16 +13,17 @@ import (
 type OrderAssetType string
 
 const (
-	OrderAssetTypeEquity      OrderAssetType = "EQUITY"
-	OrderAssetTypeFixedIncome OrderAssetType = "FIXED_INCOME"
-	OrderAssetTypeMutualFund  OrderAssetType = "MUTUAL_FUND"
+	OrderAssetTypeEquity        OrderAssetType = "EQUITY"
+	OrderAssetTypeFixedIncome   OrderAssetType = "FIXED_INCOME"
+	OrderAssetTypeMutualFund    OrderAssetType = "MUTUAL_FUND"
+	OrderAssetTypeEventContract OrderAssetType = "EVENT_CONTRACT"
 )
 
 func (e OrderAssetType) ToPointer() *OrderAssetType {
 	return &e
 }
 
-// OrderBrokerCapacity - Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+// OrderBrokerCapacity - Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
 type OrderBrokerCapacity string
 
 const (
@@ -163,13 +164,14 @@ func (o *FilledQuantity) GetValue() *string {
 	return o.Value
 }
 
-// OrderIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
+// OrderIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported For Event Contracts: only SYMBOL and ASSET_ID are supported
 type OrderIdentifierType string
 
 const (
-	OrderIdentifierTypeSymbol OrderIdentifierType = "SYMBOL"
-	OrderIdentifierTypeCusip  OrderIdentifierType = "CUSIP"
-	OrderIdentifierTypeIsin   OrderIdentifierType = "ISIN"
+	OrderIdentifierTypeAssetID OrderIdentifierType = "ASSET_ID"
+	OrderIdentifierTypeSymbol  OrderIdentifierType = "SYMBOL"
+	OrderIdentifierTypeCusip   OrderIdentifierType = "CUSIP"
+	OrderIdentifierTypeIsin    OrderIdentifierType = "ISIN"
 )
 
 func (e OrderIdentifierType) ToPointer() *OrderIdentifierType {
@@ -303,7 +305,7 @@ func (o *MaxSellQuantity) GetValue() *string {
 	return o.Value
 }
 
-// NotionalValue - Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. For Equities: This represents the maximum amount to be spent. The final order may may have a smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified. For Fixed Income: Not supported, you must specify a `quantity` value.
+// NotionalValue - Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. For Equities: This represents the maximum amount to be spent. The final order may may have a smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified. For Fixed Income: Not supported, you must specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity` value.
 type NotionalValue struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -415,7 +417,7 @@ func (e OrderStatus) ToPointer() *OrderStatus {
 	return &e
 }
 
-// OrderOrderType - The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+// OrderOrderType - The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported. For Event Contracts: only MARKET and LIMIT are supported.
 type OrderOrderType string
 
 const (
@@ -429,7 +431,7 @@ func (e OrderOrderType) ToPointer() *OrderOrderType {
 	return &e
 }
 
-// OrderPrevailingMarketPrice - The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no executions.
+// OrderPrevailingMarketPrice - The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME. Will be absent if an order has no executions.
 type OrderPrevailingMarketPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -442,7 +444,7 @@ func (o *OrderPrevailingMarketPrice) GetValue() *string {
 	return o.Value
 }
 
-// OrderQuantity - Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
+// OrderQuantity - Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
 type OrderQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -577,12 +579,15 @@ func (o *StopPrice) GetType() *OrderStopPriceType {
 	return o.Type
 }
 
-// OrderTimeInForce - For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
+// OrderTimeInForce - For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY", "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
 type OrderTimeInForce string
 
 const (
-	OrderTimeInForceDay          OrderTimeInForce = "DAY"
-	OrderTimeInForceGoodTillDate OrderTimeInForce = "GOOD_TILL_DATE"
+	OrderTimeInForceDay               OrderTimeInForce = "DAY"
+	OrderTimeInForceGoodTillDate      OrderTimeInForce = "GOOD_TILL_DATE"
+	OrderTimeInForceGoodTillCanceled  OrderTimeInForce = "GOOD_TILL_CANCELED"
+	OrderTimeInForceImmediateOrCancel OrderTimeInForce = "IMMEDIATE_OR_CANCEL"
+	OrderTimeInForceFillOrKill        OrderTimeInForce = "FILL_OR_KILL"
 )
 
 func (e OrderTimeInForce) ToPointer() *OrderTimeInForce {
@@ -650,9 +655,9 @@ type Order struct {
 	//
 	//  When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a maximum of two for larger USD amounts.
 	//
-	//  When asset_type = FIXED_INCOME, there may be more than one value present which would have a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 4 decimal places of precision, and price values measured in yields will support up to 5 decimal places.
+	//  When asset_type = FIXED_INCOME, there may be more than one value present which would have a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal places of precision, and price values measured in yields will support up to 7 decimal places.
 	AveragePrices []TradingExecutedPrice `json:"average_prices,omitempty"`
-	// Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+	// Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
 	BrokerCapacity *OrderBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Output only field that is required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. This field denotes the initiator of the cancel request. This field will be present when provided on the CancelOrderRequest
 	CancelInitiator *CancelInitiator `json:"cancel_initiator,omitempty"`
@@ -690,7 +695,7 @@ type Order struct {
 	Identifier *string `json:"identifier,omitempty"`
 	// A string attribute denoting the country of issuance or where the asset is trading. * Only available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with ISO-3166 Alpha-2 Codes
 	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
-	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
+	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported For Event Contracts: only SYMBOL and ASSET_ID are supported
 	IdentifierType *OrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
@@ -702,7 +707,7 @@ type Order struct {
 	MaxSellQuantity *MaxSellQuantity `json:"max_sell_quantity,omitempty"`
 	// System generated name of the order.
 	Name *string `json:"name,omitempty"`
-	// Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. For Equities: This represents the maximum amount to be spent. The final order may may have a smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified. For Fixed Income: Not supported, you must specify a `quantity` value.
+	// Notional quantity of the order, measured in USD. Maximum 2 decimal place precision. For Equities: This represents the maximum amount to be spent. The final order may may have a smaller notional amount. For Mutual Funds: Only supported for BUY orders. The order will be transacted at the full notional amount specified. For Fixed Income: Not supported, you must specify a `quantity` value. For Event Contracts: Not supported, you must specify a `quantity` value.
 	NotionalValue *NotionalValue `json:"notional_value,omitempty"`
 	// A value derived from the order_status, indicating whether the order is still open. The statuses that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED, and PENDING_CANCEL. An order with any other status is not considered open.
 	Open *bool `json:"open,omitempty"`
@@ -714,11 +719,11 @@ type Order struct {
 	OrderRejectedReason *OrderRejectedReason `json:"order_rejected_reason,omitempty"`
 	// The processing status of the order
 	OrderStatus *OrderStatus `json:"order_status,omitempty"`
-	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported. For Event Contracts: only MARKET and LIMIT are supported.
 	OrderType *OrderOrderType `json:"order_type,omitempty"`
-	// The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Will be absent if an order has no executions.
+	// The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME. Will be absent if an order has no executions.
 	PrevailingMarketPrice *OrderPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
-	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. Either a quantity or notional_value MUST be specified (but not both).
+	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
 	Quantity *OrderQuantity `json:"quantity,omitempty"`
 	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
 	RightsOfAccumulation *RightsOfAccumulation `json:"rights_of_accumulation,omitempty"`
@@ -728,7 +733,7 @@ type Order struct {
 	SpecialReportingInstructions []OrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// The stop price for this order. Only allowed for equities.
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
-	// For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
+	// For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY", "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
 	TimeInForce *OrderTimeInForce `json:"time_in_force,omitempty"`
 	// The date till which a GOOD_TILL_DATE order will remain valid. If the order is a STOP/MIT order with TimeInForce as GOOD_TILL_DATE, then this must be populated.
 	TimeInForceExpirationDate *TimeInForceExpirationDate `json:"time_in_force_expiration_date,omitempty"`

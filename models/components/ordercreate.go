@@ -13,16 +13,17 @@ import (
 type AssetType string
 
 const (
-	AssetTypeEquity      AssetType = "EQUITY"
-	AssetTypeFixedIncome AssetType = "FIXED_INCOME"
-	AssetTypeMutualFund  AssetType = "MUTUAL_FUND"
+	AssetTypeEquity        AssetType = "EQUITY"
+	AssetTypeFixedIncome   AssetType = "FIXED_INCOME"
+	AssetTypeMutualFund    AssetType = "MUTUAL_FUND"
+	AssetTypeEventContract AssetType = "EVENT_CONTRACT"
 )
 
 func (e AssetType) ToPointer() *AssetType {
 	return &e
 }
 
-// BrokerCapacity - Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+// BrokerCapacity - Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
 type BrokerCapacity string
 
 const (
@@ -35,20 +36,21 @@ func (e BrokerCapacity) ToPointer() *BrokerCapacity {
 	return &e
 }
 
-// OrderCreateIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
+// OrderCreateIdentifierType - The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported For Event Contracts: only SYMBOL and ASSET_ID are supported
 type OrderCreateIdentifierType string
 
 const (
-	OrderCreateIdentifierTypeSymbol OrderCreateIdentifierType = "SYMBOL"
-	OrderCreateIdentifierTypeCusip  OrderCreateIdentifierType = "CUSIP"
-	OrderCreateIdentifierTypeIsin   OrderCreateIdentifierType = "ISIN"
+	OrderCreateIdentifierTypeAssetID OrderCreateIdentifierType = "ASSET_ID"
+	OrderCreateIdentifierTypeSymbol  OrderCreateIdentifierType = "SYMBOL"
+	OrderCreateIdentifierTypeCusip   OrderCreateIdentifierType = "CUSIP"
+	OrderCreateIdentifierTypeIsin    OrderCreateIdentifierType = "ISIN"
 )
 
 func (e OrderCreateIdentifierType) ToPointer() *OrderCreateIdentifierType {
 	return &e
 }
 
-// OrderType - The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+// OrderType - The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported. For Event Contracts: only MARKET and LIMIT are supported.
 type OrderType string
 
 const (
@@ -111,12 +113,15 @@ func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions 
 	return &e
 }
 
-// TimeInForce - For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
+// TimeInForce - For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY", "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
 type TimeInForce string
 
 const (
-	TimeInForceDay          TimeInForce = "DAY"
-	TimeInForceGoodTillDate TimeInForce = "GOOD_TILL_DATE"
+	TimeInForceDay               TimeInForce = "DAY"
+	TimeInForceGoodTillDate      TimeInForce = "GOOD_TILL_DATE"
+	TimeInForceGoodTillCanceled  TimeInForce = "GOOD_TILL_CANCELED"
+	TimeInForceImmediateOrCancel TimeInForce = "IMMEDIATE_OR_CANCEL"
+	TimeInForceFillOrKill        TimeInForce = "FILL_OR_KILL"
 )
 
 func (e TimeInForce) ToPointer() *TimeInForce {
@@ -145,7 +150,7 @@ type OrderCreate struct {
 	// The type of the asset in this order, which must be one of the following:
 	//  EQUITY, MUTUAL_FUND, and FIXED_INCOME.
 	AssetType AssetType `json:"asset_type"`
-	// Defaults to "AGENCY" if not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.
+	// Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
 	BrokerCapacity *BrokerCapacity `json:"broker_capacity,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID string `json:"client_order_id"`
@@ -163,7 +168,7 @@ type OrderCreate struct {
 	Identifier string `json:"identifier"`
 	// A string attribute denoting the country of issuance or where the asset is trading. * Only available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with ISO-3166 Alpha-2 Codes
 	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
-	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported
+	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported For Event Contracts: only SYMBOL and ASSET_ID are supported
 	IdentifierType OrderCreateIdentifierType `json:"identifier_type"`
 	// Letter of Intent (LOI). An LOI allows investors to receive sales charge discounts based on a commitment to buy a specified monetary amount of shares over a period of time, usually 13 months.
 	LetterOfIntent *LetterOfIntentCreate `json:"letter_of_intent,omitempty"`
@@ -187,7 +192,7 @@ type OrderCreate struct {
 	//
 	//  Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
 	OrderDate DateCreate `json:"order_date"`
-	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported.
+	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported. For Event Contracts: only MARKET and LIMIT are supported.
 	OrderType OrderType `json:"order_type"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
@@ -203,7 +208,7 @@ type OrderCreate struct {
 	SpecialReportingInstructions []SpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// A stop price definition
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
-	// For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed.
+	// For Equities: Either "DAY" or "GOOD_TILL_DATE" are allowed. For Mutual Funds: Only "DAY" is allowed. For Fixed Income: Only "DAY" is allowed. For Event Contracts: Either "DAY", "GOOD_TILL_DATE", "GOOD_TILL_CANCELED", "IMMEDIATE_OR_CANCEL", or "FILL_OR_KILL" are allowed.
 	TimeInForce TimeInForce `json:"time_in_force"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//

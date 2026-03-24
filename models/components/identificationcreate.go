@@ -8,6 +8,7 @@ type IdentificationCreateType string
 const (
 	IdentificationCreateTypeTypeUnspecified IdentificationCreateType = "TYPE_UNSPECIFIED"
 	IdentificationCreateTypeSsn             IdentificationCreateType = "SSN"
+	IdentificationCreateTypeCpf             IdentificationCreateType = "CPF"
 )
 
 func (e IdentificationCreateType) ToPointer() *IdentificationCreateType {

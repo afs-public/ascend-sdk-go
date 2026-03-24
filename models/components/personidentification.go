@@ -10,16 +10,24 @@ package components
 // - `NATIONAL_ID` - National id type.
 // - `PASSPORT` - Passport id type.
 // - `DRIVING_LICENSE` - Drivers license id type.
+// - `STATE_ID_CARD` - State ID card.
+// - `NATIONAL_ID_CARD` - National ID card.
+// - `PERMANENT_RESIDENT_VISA` - Permanent resident visa.
+// - `MILITARY_ID_CARD` - Military ID card.
 type PersonIdentificationType string
 
 const (
-	PersonIdentificationTypeIDTypeUnspecified PersonIdentificationType = "ID_TYPE_UNSPECIFIED"
-	PersonIdentificationTypeSsn               PersonIdentificationType = "SSN"
-	PersonIdentificationTypeItin              PersonIdentificationType = "ITIN"
-	PersonIdentificationTypeFtin              PersonIdentificationType = "FTIN"
-	PersonIdentificationTypeNationalID        PersonIdentificationType = "NATIONAL_ID"
-	PersonIdentificationTypePassport          PersonIdentificationType = "PASSPORT"
-	PersonIdentificationTypeDrivingLicense    PersonIdentificationType = "DRIVING_LICENSE"
+	PersonIdentificationTypeIDTypeUnspecified     PersonIdentificationType = "ID_TYPE_UNSPECIFIED"
+	PersonIdentificationTypeSsn                   PersonIdentificationType = "SSN"
+	PersonIdentificationTypeItin                  PersonIdentificationType = "ITIN"
+	PersonIdentificationTypeFtin                  PersonIdentificationType = "FTIN"
+	PersonIdentificationTypeNationalID            PersonIdentificationType = "NATIONAL_ID"
+	PersonIdentificationTypePassport              PersonIdentificationType = "PASSPORT"
+	PersonIdentificationTypeDrivingLicense        PersonIdentificationType = "DRIVING_LICENSE"
+	PersonIdentificationTypeStateIDCard           PersonIdentificationType = "STATE_ID_CARD"
+	PersonIdentificationTypeNationalIDCard        PersonIdentificationType = "NATIONAL_ID_CARD"
+	PersonIdentificationTypePermanentResidentVisa PersonIdentificationType = "PERMANENT_RESIDENT_VISA"
+	PersonIdentificationTypeMilitaryIDCard        PersonIdentificationType = "MILITARY_ID_CARD"
 )
 
 func (e PersonIdentificationType) ToPointer() *PersonIdentificationType {
@@ -42,6 +50,10 @@ type PersonIdentification struct {
 	// - `NATIONAL_ID` - National id type.
 	// - `PASSPORT` - Passport id type.
 	// - `DRIVING_LICENSE` - Drivers license id type.
+	// - `STATE_ID_CARD` - State ID card.
+	// - `NATIONAL_ID_CARD` - National ID card.
+	// - `PERMANENT_RESIDENT_VISA` - Permanent resident visa.
+	// - `MILITARY_ID_CARD` - Military ID card.
 	Type *PersonIdentificationType `json:"type,omitempty"`
 	// Tax id value
 	Value *string `json:"value,omitempty"`

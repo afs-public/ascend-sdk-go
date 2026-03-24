@@ -12,6 +12,31 @@ import (
 	"testing"
 )
 
+func TestMargins_MarginsRealTimeGetAssetBuyingPower(t *testing.T) {
+	ctx := context.Background()
+
+	testHTTPClient := createTestHTTPClient("MarginsRealTime_GetAssetBuyingPower")
+
+	s := ascendsdkgo.New(
+		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
+		ascendsdkgo.WithSecurity(components.Security{
+			APIKey: ascendsdkgo.String(utils.GetEnv("API_KEY", "value")),
+			ServiceAccountCreds: &components.ServiceAccountCreds{
+				PrivateKey:   utils.GetEnv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", "value"),
+				Name:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_NAME", "value"),
+				Organization: utils.GetEnv("SERVICE_ACCOUNT_CREDS_ORGANIZATION", "value"),
+				Type:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_TYPE", "value"),
+			},
+		}),
+		ascendsdkgo.WithClient(testHTTPClient),
+	)
+
+	res, err := s.BuyingPower.GetAssetBuyingPower(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "67587")
+	require.NoError(t, err)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+
+}
+
 func TestMargins_MarginsRealTimeGetBuyingPower(t *testing.T) {
 	ctx := context.Background()
 
@@ -35,28 +60,4 @@ func TestMargins_MarginsRealTimeGetBuyingPower(t *testing.T) {
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
-}
-
-func TestMargins_MarginsRealTimeGetAssetBuyingPower(t *testing.T) {
-	ctx := context.Background()
-
-	testHTTPClient := createTestHTTPClient("MarginsRealTime_GetAssetBuyingPower")
-
-	s := ascendsdkgo.New(
-		ascendsdkgo.WithServerURL(utils.GetEnv("SERVICE_ACCOUNT_CREDS_URL", "")),
-		ascendsdkgo.WithSecurity(components.Security{
-			APIKey: ascendsdkgo.String(utils.GetEnv("API_KEY", "value")),
-			ServiceAccountCreds: &components.ServiceAccountCreds{
-				PrivateKey:   utils.GetEnv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY", "value"),
-				Name:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_NAME", "value"),
-				Organization: utils.GetEnv("SERVICE_ACCOUNT_CREDS_ORGANIZATION", "value"),
-				Type:         utils.GetEnv("SERVICE_ACCOUNT_CREDS_TYPE", "value"),
-			},
-		}),
-		ascendsdkgo.WithClient(testHTTPClient),
-	)
-
-	res, err := s.BuyingPower.GetAssetBuyingPower(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "67587")
-	require.NoError(t, err)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }

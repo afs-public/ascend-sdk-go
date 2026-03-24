@@ -1,6 +1,6 @@
-# PreIpoCompanyInterestAmount
+# ActivityTransferFairMarketValue
 
-The amount the account is interested in investing in USD.
+Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
 
 
 ## Fields

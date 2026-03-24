@@ -50,3 +50,6 @@ Enum providing additional information about the type of fee being charged
 | `EntryFeeTypePrintCheckAtFirm`                    | PRINT_CHECK_AT_FIRM                               |
 | `EntryFeeTypeVoidedCheck`                         | VOIDED_CHECK                                      |
 | `EntryFeeTypeStopPaymentAfter180Days`             | STOP_PAYMENT_AFTER_180_DAYS                       |
+| `EntryFeeTypeConfirm`                             | CONFIRM                                           |
+| `EntryFeeTypeClearing`                            | CLEARING                                          |
+| `EntryFeeTypePromotionalCreditClawback`           | PROMOTIONAL_CREDIT_CLAWBACK                       |

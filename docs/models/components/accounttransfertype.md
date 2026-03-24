@@ -17,3 +17,5 @@ The type of asset movement being performed within the lifecycle of an account tr
 | `AccountTransferTypeReclaim`                        | RECLAIM                                             |
 | `AccountTransferTypePositionTransferFund`           | POSITION_TRANSFER_FUND                              |
 | `AccountTransferTypeSponsoredTransfer`              | SPONSORED_TRANSFER                                  |
+| `AccountTransferTypeDrsTransfer`                    | DRS_TRANSFER                                        |
+| `AccountTransferTypeDwacTransfer`                   | DWAC_TRANSFER                                       |
