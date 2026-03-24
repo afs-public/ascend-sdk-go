@@ -59,6 +59,8 @@ const (
 	ActivityAccountTransferTypeReclaim                        ActivityAccountTransferType = "RECLAIM"
 	ActivityAccountTransferTypePositionTransferFund           ActivityAccountTransferType = "POSITION_TRANSFER_FUND"
 	ActivityAccountTransferTypeSponsoredTransfer              ActivityAccountTransferType = "SPONSORED_TRANSFER"
+	ActivityAccountTransferTypeDrsTransfer                    ActivityAccountTransferType = "DRS_TRANSFER"
+	ActivityAccountTransferTypeDwacTransfer                   ActivityAccountTransferType = "DWAC_TRANSFER"
 )
 
 func (e ActivityAccountTransferType) ToPointer() *ActivityAccountTransferType {
@@ -1651,6 +1653,43 @@ func (o *ActivityDrip) GetAction() *ActivityDripAction {
 		return nil
 	}
 	return o.Action
+}
+
+// ActivityOutcome - The determined outcome of the event
+type ActivityOutcome string
+
+const (
+	ActivityOutcomeEventContractOutcomeUnspecified ActivityOutcome = "EVENT_CONTRACT_OUTCOME_UNSPECIFIED"
+	ActivityOutcomeFavorable                       ActivityOutcome = "FAVORABLE"
+	ActivityOutcomeUnfavorable                     ActivityOutcome = "UNFAVORABLE"
+	ActivityOutcomeVoid                            ActivityOutcome = "VOID"
+	ActivityOutcomeTie                             ActivityOutcome = "TIE"
+)
+
+func (e ActivityOutcome) ToPointer() *ActivityOutcome {
+	return &e
+}
+
+// ActivityEventContractSettlement - Used to record the settlement/payout of event contracts based on real-world event outcomes
+type ActivityEventContractSettlement struct {
+	// The exchange that issued the event contract
+	Exchange *string `json:"exchange,omitempty"`
+	// The determined outcome of the event
+	Outcome *ActivityOutcome `json:"outcome,omitempty"`
+}
+
+func (o *ActivityEventContractSettlement) GetExchange() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exchange
+}
+
+func (o *ActivityEventContractSettlement) GetOutcome() *ActivityOutcome {
+	if o == nil {
+		return nil
+	}
+	return o.Outcome
 }
 
 // ActivityExchangeCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
@@ -5752,6 +5791,50 @@ func (o *ActivityTrade) GetYieldRecords() []YieldRecord {
 	return o.YieldRecords
 }
 
+// ActivityTransferFairMarketValue - Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+type ActivityTransferFairMarketValue struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityTransferFairMarketValue) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityTransferFairMarketValueDate - Date from which the asset was valued and used in the fair market value calculation
+type ActivityTransferFairMarketValueDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *ActivityTransferFairMarketValueDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *ActivityTransferFairMarketValueDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *ActivityTransferFairMarketValueDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // ActivityTransferType - Provides more granular detail on the purpose of transfer
 type ActivityTransferType string
 
@@ -5762,6 +5845,11 @@ const (
 	ActivityTransferTypeMigration               ActivityTransferType = "MIGRATION"
 	ActivityTransferTypeManualAdjustment        ActivityTransferType = "MANUAL_ADJUSTMENT"
 	ActivityTransferTypeInternalConversion      ActivityTransferType = "INTERNAL_CONVERSION"
+	ActivityTransferTypeFreeReceive             ActivityTransferType = "FREE_RECEIVE"
+	ActivityTransferTypeFreeDeliver             ActivityTransferType = "FREE_DELIVER"
+	ActivityTransferTypeStockReward             ActivityTransferType = "STOCK_REWARD"
+	ActivityTransferTypeTokenizationTransfer    ActivityTransferType = "TOKENIZATION_TRANSFER"
+	ActivityTransferTypeEscheatment             ActivityTransferType = "ESCHEATMENT"
 )
 
 func (e ActivityTransferType) ToPointer() *ActivityTransferType {
@@ -5774,6 +5862,10 @@ type ActivityTransfer struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// String field that can be populated with the broker dealer undergoing a clearing platform conversion. Used for activity description purposes
 	ClientBrokerage *string `json:"client_brokerage,omitempty"`
+	// Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+	FairMarketValue *ActivityTransferFairMarketValue `json:"fair_market_value,omitempty"`
+	// Date from which the asset was valued and used in the fair market value calculation
+	FairMarketValueDate *ActivityTransferFairMarketValueDate `json:"fair_market_value_date,omitempty"`
 	// Provides more granular detail on the purpose of transfer
 	TransferType *ActivityTransferType `json:"transfer_type,omitempty"`
 }
@@ -5790,6 +5882,20 @@ func (o *ActivityTransfer) GetClientBrokerage() *string {
 		return nil
 	}
 	return o.ClientBrokerage
+}
+
+func (o *ActivityTransfer) GetFairMarketValue() *ActivityTransferFairMarketValue {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValue
+}
+
+func (o *ActivityTransfer) GetFairMarketValueDate() *ActivityTransferFairMarketValueDate {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValueDate
 }
 
 func (o *ActivityTransfer) GetTransferType() *ActivityTransferType {
@@ -6479,6 +6585,8 @@ type Activity struct {
 	Deposit *ActivityDeposit `json:"deposit,omitempty"`
 	// Used to record the movement of funds to/ from the pending_drip memo location
 	Drip *ActivityDrip `json:"drip,omitempty"`
+	// Used to record the settlement/payout of event contracts based on real-world event outcomes
+	EventContractSettlement *ActivityEventContractSettlement `json:"event_contract_settlement,omitempty"`
 	// Used to record the exchange of certificates for a new security or cash and details related to the exchange
 	Exchange *ActivityExchange `json:"exchange,omitempty"`
 	// Used to record Fees that have been assessed to account and capture details related to the fee
@@ -6513,6 +6621,8 @@ type Activity struct {
 	NextActivityProcessDate *NextActivityProcessDate `json:"next_activity_process_date,omitempty"`
 	// None
 	None *None `json:"none,omitempty"`
+	// The resource name of the API resource that originated this ledger entry or activity. This field enables clients to link ledger activities back to their source transactions for reconciliation purposes. This field will only be populated when the client has direct access to the referenced resource via the Ascend API's.
+	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
 	// Used to record payments on interest-bearing securities where the payment is made in additional securities rather than cash and details related to the payment
 	PaymentInKind *ActivityPaymentInKind `json:"payment_in_kind,omitempty"`
 	// When populated, the activity_id of that precedes this one
@@ -6794,6 +6904,13 @@ func (o *Activity) GetDrip() *ActivityDrip {
 	return o.Drip
 }
 
+func (o *Activity) GetEventContractSettlement() *ActivityEventContractSettlement {
+	if o == nil {
+		return nil
+	}
+	return o.EventContractSettlement
+}
+
 func (o *Activity) GetExchange() *ActivityExchange {
 	if o == nil {
 		return nil
@@ -6911,6 +7028,13 @@ func (o *Activity) GetNone() *None {
 		return nil
 	}
 	return o.None
+}
+
+func (o *Activity) GetOriginatingResourceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingResourceName
 }
 
 func (o *Activity) GetPaymentInKind() *ActivityPaymentInKind {

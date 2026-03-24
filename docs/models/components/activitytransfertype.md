@@ -13,3 +13,8 @@ Provides more granular detail on the purpose of transfer
 | `ActivityTransferTypeMigration`               | MIGRATION                                     |
 | `ActivityTransferTypeManualAdjustment`        | MANUAL_ADJUSTMENT                             |
 | `ActivityTransferTypeInternalConversion`      | INTERNAL_CONVERSION                           |
+| `ActivityTransferTypeFreeReceive`             | FREE_RECEIVE                                  |
+| `ActivityTransferTypeFreeDeliver`             | FREE_DELIVER                                  |
+| `ActivityTransferTypeStockReward`             | STOCK_REWARD                                  |
+| `ActivityTransferTypeTokenizationTransfer`    | TOKENIZATION_TRANSFER                         |
+| `ActivityTransferTypeEscheatment`             | ESCHEATMENT                                   |

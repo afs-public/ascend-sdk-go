@@ -76,6 +76,20 @@ func (e IdentificationNumberVerified) ToPointer() *IdentificationNumberVerified 
 	return &e
 }
 
+// IdentityReportedDeceased - Whether or not the identity has been reported as deceased This is determined by parsing the vendor response for deceased indicators from the SSA Death Master File Equifax-specific indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased) null/unset = not checked or unable to determine, false = checked and not deceased, true = deceased
+type IdentityReportedDeceased string
+
+const (
+	IdentityReportedDeceasedDeceasedUnspecified IdentityReportedDeceased = "DECEASED_UNSPECIFIED"
+	IdentityReportedDeceasedDeceased            IdentityReportedDeceased = "DECEASED"
+	IdentityReportedDeceasedNotDeceased         IdentityReportedDeceased = "NOT_DECEASED"
+	IdentityReportedDeceasedUnknown             IdentityReportedDeceased = "UNKNOWN"
+)
+
+func (e IdentityReportedDeceased) ToPointer() *IdentityReportedDeceased {
+	return &e
+}
+
 type IdentityVerificationTypes string
 
 const (
@@ -173,6 +187,8 @@ type CustomerIdentificationResult struct {
 	ExternalVendorID *string `json:"external_vendor_id,omitempty"`
 	// Whether or not the customer identification number was verified
 	IdentificationNumberVerified *IdentificationNumberVerified `json:"identification_number_verified,omitempty"`
+	// Whether or not the identity has been reported as deceased This is determined by parsing the vendor response for deceased indicators from the SSA Death Master File Equifax-specific indicators: reason codes "90" (SSN Death Indicator) or "SQ" (SSN reported as deceased) null/unset = not checked or unable to determine, false = checked and not deceased, true = deceased
+	IdentityReportedDeceased *IdentityReportedDeceased `json:"identity_reported_deceased,omitempty"`
 	// Describes the type(s) of Identity Verification that was performed
 	IdentityVerificationTypes []IdentityVerificationTypes `json:"identity_verification_types,omitempty"`
 	// Whether or not the customer legal address was verified
@@ -262,6 +278,13 @@ func (o *CustomerIdentificationResult) GetIdentificationNumberVerified() *Identi
 		return nil
 	}
 	return o.IdentificationNumberVerified
+}
+
+func (o *CustomerIdentificationResult) GetIdentityReportedDeceased() *IdentityReportedDeceased {
+	if o == nil {
+		return nil
+	}
+	return o.IdentityReportedDeceased
 }
 
 func (o *CustomerIdentificationResult) GetIdentityVerificationTypes() []IdentityVerificationTypes {

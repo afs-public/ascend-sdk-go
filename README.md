@@ -616,6 +616,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 ### [Orders](docs/sdks/orders/README.md)
 
 * [CreateOrder](docs/sdks/orders/README.md#createorder) - Create Order
+* [ListAccountOrders](docs/sdks/orders/README.md#listaccountorders) - List Account Orders
 * [GetOrder](docs/sdks/orders/README.md#getorder) - Get Order
 * [CancelOrder](docs/sdks/orders/README.md#cancelorder) - Cancel Order
 * [SetExtraReportingData](docs/sdks/orders/README.md#setextrareportingdata) - Set Extra Reporting Data
@@ -652,24 +653,13 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ListPreIpoCompanyFundingRounds](docs/sdks/preipofundingrounds/README.md#listpreipocompanyfundingrounds) - List Pre IPO Company Funding Rounds
 * [GetPreIpoCompanyFundingRound](docs/sdks/preipofundingrounds/README.md#getpreipocompanyfundinground) - Get Pre IPO Company Funding Round
 
-### [PreIPOInterests](docs/sdks/preipointerests/README.md)
-
-* [CreatePreIpoCompanyInterest](docs/sdks/preipointerests/README.md#createpreipocompanyinterest) - Create Pre IPO Company Interest
-* [ListPreIpoCompanyInterests](docs/sdks/preipointerests/README.md#listpreipocompanyinterests) - List Pre IPO Company Interests
-* [GetPreIpoCompanyInterest](docs/sdks/preipointerests/README.md#getpreipocompanyinterest) - Get Pre IPO Company Interest
-* [UpdatePreIpoCompanyInterest](docs/sdks/preipointerests/README.md#updatepreipocompanyinterest) - Update Pre IPO Company Interest
-* [DeletePreIpoCompanyInterest](docs/sdks/preipointerests/README.md#deletepreipocompanyinterest) - Delete Pre IPO Company Interest
-
 ### [PreIPONewsEvents](docs/sdks/preiponewsevents/README.md)
 
 * [ListPreIpoCompanyNewsEvents](docs/sdks/preiponewsevents/README.md#listpreipocompanynewsevents) - List Pre IPO Company News Events
-* [GetPreIpoCompanyNewsEvent](docs/sdks/preiponewsevents/README.md#getpreipocompanynewsevent) - Get Pre IPO Company Event
 
 ### [PreIPOResearchDocuments](docs/sdks/preiporesearchdocuments/README.md)
 
 * [ListPreIpoCompanyResearchDocuments](docs/sdks/preiporesearchdocuments/README.md#listpreipocompanyresearchdocuments) - List Pre IPO Company Research Documents
-* [GetPreIpoCompanyResearchDocument](docs/sdks/preiporesearchdocuments/README.md#getpreipocompanyresearchdocument) - Get Pre IPO Company Research Document
-* [DownloadPreIpoCompanyResearchDocument](docs/sdks/preiporesearchdocuments/README.md#downloadpreipocompanyresearchdocument) - Download Pre IPO Company Research Document
 
 ### [Reader](docs/sdks/reader/README.md)
 
@@ -778,5 +768,30 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+## Qase TestOps Integration
+
+Test results can be automatically reported to [Qase TestOps](https://app.qase.io/project/CDX) for centralized visibility.
+
+### Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `QASE_MODE` | Set to `testops` to enable reporting (default: off) |
+| `QASE_API_TOKEN` | Qase API token for authentication |
+| `QASE_PROJECT` | Qase project code (default: `CDX`) |
+| `QASE_API_BASE_URL` | Qase API base URL (default: `https://api.qase.io/v1`) |
+
+### Running Tests with Qase Reporting
+
+```bash
+# Without Qase (default)
+go test -v ./ascend-sdk/v1/ascend-sdk-go/tests/...
+
+# With Qase reporting enabled
+QASE_MODE=testops QASE_API_TOKEN=<token> go test -v ./ascend-sdk/v1/ascend-sdk-go/tests/...
+```
+
+The custom reporter (`tests/qase_reporter.go`) uses only stdlib and is initialized via `TestMain`. Each test function records results via `defer GetQaseReporter().RecordTestResult(t, startTime)`.
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

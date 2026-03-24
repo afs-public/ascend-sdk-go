@@ -121,6 +121,15 @@ func TestOrderService(t *testing.T) {
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
 
+	t.Run("ListAccountOrders", func(t *testing.T) {
+		res, err := sdk.Orders.ListAccountOrders(ctx, fixtures.accountId, nil, nil, nil)
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+		assert.NotNil(t, res.ListAccountOrdersResponse)
+		assert.NotNil(t, res.ListAccountOrdersResponse.Orders)
+		assert.Greater(t, len(res.ListAccountOrdersResponse.Orders), 0)
+	})
+
 	t.Run("CancelOrder", func(t *testing.T) {
 		request := components.CancelOrderRequestCreate{
 			Name: "accounts/" + fixtures.accountId + "/orders/" + *fixtures.OrderId(t),

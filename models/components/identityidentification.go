@@ -17,6 +17,7 @@ const (
 	IdentityIdentificationTypePassport        IdentityIdentificationType = "PASSPORT"
 	IdentityIdentificationTypeDriversLicense  IdentityIdentificationType = "DRIVERS_LICENSE"
 	IdentityIdentificationTypeItin            IdentityIdentificationType = "ITIN"
+	IdentityIdentificationTypeIDCard          IdentityIdentificationType = "ID_CARD"
 )
 
 func (e IdentityIdentificationType) ToPointer() *IdentityIdentificationType {

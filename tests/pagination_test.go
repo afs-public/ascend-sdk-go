@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"testing"
+	"time"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 
@@ -14,6 +15,9 @@ import (
 )
 
 func TestPagination(t *testing.T) {
+	startTime := time.Now()
+	defer GetQaseReporter().RecordTestResult(t, startTime)
+
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
@@ -58,6 +62,9 @@ func TestPagination(t *testing.T) {
 }
 
 func TestEmptyInitialResponseHandling(t *testing.T) {
+	startTime := time.Now()
+	defer GetQaseReporter().RecordTestResult(t, startTime)
+
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
@@ -93,6 +100,9 @@ func TestEmptyInitialResponseHandling(t *testing.T) {
 }
 
 func TestPaginationWithSymbolFilters(t *testing.T) {
+	startTime := time.Now()
+	defer GetQaseReporter().RecordTestResult(t, startTime)
+
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
@@ -136,6 +146,9 @@ func TestPaginationWithSymbolFilters(t *testing.T) {
 }
 
 func TestPaginationWithUsableFilter(t *testing.T) {
+	startTime := time.Now()
+	defer GetQaseReporter().RecordTestResult(t, startTime)
+
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
@@ -178,6 +191,9 @@ func TestPaginationWithUsableFilter(t *testing.T) {
 }
 
 func TestComplexFilterPagination(t *testing.T) {
+	startTime := time.Now()
+	defer GetQaseReporter().RecordTestResult(t, startTime)
+
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 

@@ -59,6 +59,8 @@ const (
 	AccountTransferTypeReclaim                        AccountTransferType = "RECLAIM"
 	AccountTransferTypePositionTransferFund           AccountTransferType = "POSITION_TRANSFER_FUND"
 	AccountTransferTypeSponsoredTransfer              AccountTransferType = "SPONSORED_TRANSFER"
+	AccountTransferTypeDrsTransfer                    AccountTransferType = "DRS_TRANSFER"
+	AccountTransferTypeDwacTransfer                   AccountTransferType = "DWAC_TRANSFER"
 )
 
 func (e AccountTransferType) ToPointer() *AccountTransferType {
@@ -1844,6 +1846,43 @@ func (o *Drip) GetAction() *EntryAction {
 	return o.Action
 }
 
+// Outcome - The determined outcome of the event
+type Outcome string
+
+const (
+	OutcomeEventContractOutcomeUnspecified Outcome = "EVENT_CONTRACT_OUTCOME_UNSPECIFIED"
+	OutcomeFavorable                       Outcome = "FAVORABLE"
+	OutcomeUnfavorable                     Outcome = "UNFAVORABLE"
+	OutcomeVoid                            Outcome = "VOID"
+	OutcomeTie                             Outcome = "TIE"
+)
+
+func (e Outcome) ToPointer() *Outcome {
+	return &e
+}
+
+// EventContractSettlement - Used to record the settlement/payout of event contracts based on real-world event outcomes
+type EventContractSettlement struct {
+	// The exchange that issued the event contract
+	Exchange *string `json:"exchange,omitempty"`
+	// The determined outcome of the event
+	Outcome *Outcome `json:"outcome,omitempty"`
+}
+
+func (o *EventContractSettlement) GetExchange() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Exchange
+}
+
+func (o *EventContractSettlement) GetOutcome() *Outcome {
+	if o == nil {
+		return nil
+	}
+	return o.Outcome
+}
+
 // EntryExchangeCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
 type EntryExchangeCashRate struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -2038,6 +2077,9 @@ const (
 	EntryFeeTypePrintCheckAtFirm                    EntryFeeType = "PRINT_CHECK_AT_FIRM"
 	EntryFeeTypeVoidedCheck                         EntryFeeType = "VOIDED_CHECK"
 	EntryFeeTypeStopPaymentAfter180Days             EntryFeeType = "STOP_PAYMENT_AFTER_180_DAYS"
+	EntryFeeTypeConfirm                             EntryFeeType = "CONFIRM"
+	EntryFeeTypeClearing                            EntryFeeType = "CLEARING"
+	EntryFeeTypePromotionalCreditClawback           EntryFeeType = "PROMOTIONAL_CREDIT_CLAWBACK"
 )
 
 func (e EntryFeeType) ToPointer() *EntryFeeType {
@@ -6325,6 +6367,50 @@ func (o *EntryTrade) GetYieldRecords() []YieldRecord {
 	return o.YieldRecords
 }
 
+// EntryTransferFairMarketValue - Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+type EntryTransferFairMarketValue struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *EntryTransferFairMarketValue) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// EntryFairMarketValueDate - Date from which the asset was valued and used in the fair market value calculation
+type EntryFairMarketValueDate struct {
+	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+	Day *int `json:"day,omitempty"`
+	// Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+	Month *int `json:"month,omitempty"`
+	// Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+	Year *int `json:"year,omitempty"`
+}
+
+func (o *EntryFairMarketValueDate) GetDay() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Day
+}
+
+func (o *EntryFairMarketValueDate) GetMonth() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Month
+}
+
+func (o *EntryFairMarketValueDate) GetYear() *int {
+	if o == nil {
+		return nil
+	}
+	return o.Year
+}
+
 // EntryTransferType - Provides more detail on the type of transfer
 type EntryTransferType string
 
@@ -6335,6 +6421,11 @@ const (
 	EntryTransferTypeMigration               EntryTransferType = "MIGRATION"
 	EntryTransferTypeManualAdjustment        EntryTransferType = "MANUAL_ADJUSTMENT"
 	EntryTransferTypeInternalConversion      EntryTransferType = "INTERNAL_CONVERSION"
+	EntryTransferTypeFreeReceive             EntryTransferType = "FREE_RECEIVE"
+	EntryTransferTypeFreeDeliver             EntryTransferType = "FREE_DELIVER"
+	EntryTransferTypeStockReward             EntryTransferType = "STOCK_REWARD"
+	EntryTransferTypeTokenizationTransfer    EntryTransferType = "TOKENIZATION_TRANSFER"
+	EntryTransferTypeEscheatment             EntryTransferType = "ESCHEATMENT"
 )
 
 func (e EntryTransferType) ToPointer() *EntryTransferType {
@@ -6347,6 +6438,10 @@ type EntryTransfer struct {
 	AdditionalInstructions *string `json:"additional_instructions,omitempty"`
 	// String field that can be populated with the broker dealer undergoing a clearing platform conversion. Used for activity description purposes
 	ClientBrokerage *string `json:"client_brokerage,omitempty"`
+	// Total value of the securities being transferred. Used for sponsored transfers activity to ensure cost basis is accurately moved with the assets to the new account
+	FairMarketValue *EntryTransferFairMarketValue `json:"fair_market_value,omitempty"`
+	// Date from which the asset was valued and used in the fair market value calculation
+	FairMarketValueDate *EntryFairMarketValueDate `json:"fair_market_value_date,omitempty"`
 	// Provides more detail on the type of transfer
 	TransferType *EntryTransferType `json:"transfer_type,omitempty"`
 }
@@ -6363,6 +6458,20 @@ func (o *EntryTransfer) GetClientBrokerage() *string {
 		return nil
 	}
 	return o.ClientBrokerage
+}
+
+func (o *EntryTransfer) GetFairMarketValue() *EntryTransferFairMarketValue {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValue
+}
+
+func (o *EntryTransfer) GetFairMarketValueDate() *EntryFairMarketValueDate {
+	if o == nil {
+		return nil
+	}
+	return o.FairMarketValueDate
 }
 
 func (o *EntryTransfer) GetTransferType() *EntryTransferType {
@@ -7126,6 +7235,8 @@ type Entry struct {
 	Drip *Drip `json:"drip,omitempty"`
 	// The unique id of the entry
 	EntryID *string `json:"entry_id,omitempty"`
+	// Used to record the settlement/payout of event contracts based on real-world event outcomes
+	EventContractSettlement *EventContractSettlement `json:"event_contract_settlement,omitempty"`
 	// Used to record the exchange of certificates for a new security or cash and details related to the exchange
 	Exchange *Exchange `json:"exchange,omitempty"`
 	// Used to record Fees that have been assessed to account and capture details related to the fee
@@ -7154,6 +7265,8 @@ type Entry struct {
 	OriginalID *string `json:"original_id,omitempty"`
 	// The original entry process date; stable across reversals and corrections; use for maintaining lineage of entries through multiple corrections/reversals
 	OriginalProcessDate *OriginalProcessDate `json:"original_process_date,omitempty"`
+	// The resource name of the API resource that originated this ledger entry or activity. This field enables clients to link ledger activities back to their source transactions for reconciliation purposes. This field will only be populated when the client has direct access to the referenced resource via the Ascend API's.
+	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
 	// Used to record payments on interest-bearing securities where the payment is made in additional securities rather than cash and details related to the payment
 	PaymentInKind *PaymentInKind `json:"payment_in_kind,omitempty"`
 	// The monetary value paid for a given security in a trade Required, except for currency movements
@@ -7406,6 +7519,13 @@ func (o *Entry) GetEntryID() *string {
 	return o.EntryID
 }
 
+func (o *Entry) GetEventContractSettlement() *EventContractSettlement {
+	if o == nil {
+		return nil
+	}
+	return o.EventContractSettlement
+}
+
 func (o *Entry) GetExchange() *Exchange {
 	if o == nil {
 		return nil
@@ -7502,6 +7622,13 @@ func (o *Entry) GetOriginalProcessDate() *OriginalProcessDate {
 		return nil
 	}
 	return o.OriginalProcessDate
+}
+
+func (o *Entry) GetOriginatingResourceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingResourceName
 }
 
 func (o *Entry) GetPaymentInKind() *PaymentInKind {

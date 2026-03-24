@@ -62,6 +62,9 @@ const (
 	FeeTypePrintCheckAtFirm                    FeeType = "PRINT_CHECK_AT_FIRM"
 	FeeTypeVoidedCheck                         FeeType = "VOIDED_CHECK"
 	FeeTypeStopPaymentAfter180Days             FeeType = "STOP_PAYMENT_AFTER_180_DAYS"
+	FeeTypeConfirm                             FeeType = "CONFIRM"
+	FeeTypeClearing                            FeeType = "CLEARING"
+	FeeTypePromotionalCreditClawback           FeeType = "PROMOTIONAL_CREDIT_CLAWBACK"
 )
 
 func (e FeeType) ToPointer() *FeeType {

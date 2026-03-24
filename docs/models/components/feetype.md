@@ -50,3 +50,6 @@ The type of fee being assessed
 | `FeeTypePrintCheckAtFirm`                    | PRINT_CHECK_AT_FIRM                          |
 | `FeeTypeVoidedCheck`                         | VOIDED_CHECK                                 |
 | `FeeTypeStopPaymentAfter180Days`             | STOP_PAYMENT_AFTER_180_DAYS                  |
+| `FeeTypeConfirm`                             | CONFIRM                                      |
+| `FeeTypeClearing`                            | CLEARING                                     |
+| `FeeTypePromotionalCreditClawback`           | PROMOTIONAL_CREDIT_CLAWBACK                  |

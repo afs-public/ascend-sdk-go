@@ -6,8 +6,9 @@ The type of the asset in this order, which must be one of the following:
 
 ## Values
 
-| Name                   | Value                  |
-| ---------------------- | ---------------------- |
-| `AssetTypeEquity`      | EQUITY                 |
-| `AssetTypeFixedIncome` | FIXED_INCOME           |
-| `AssetTypeMutualFund`  | MUTUAL_FUND            |
+| Name                     | Value                    |
+| ------------------------ | ------------------------ |
+| `AssetTypeEquity`        | EQUITY                   |
+| `AssetTypeFixedIncome`   | FIXED_INCOME             |
+| `AssetTypeMutualFund`    | MUTUAL_FUND              |
+| `AssetTypeEventContract` | EVENT_CONTRACT           |

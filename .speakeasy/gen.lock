@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: 7d65635c0456b11478801834f897aed8
-  docVersion: v1:20260220:uat:5482f78d90fa
+  docChecksum: f79ffaf404005bb4e882718017d914d6
+  docVersion: v1:20260323:uat:35c1f0c6e7e6
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.3.3
-  configChecksum: d521381b41d3cb54029d0aba469e1b5d
+  releaseVersion: 1.3.4
+  configChecksum: 33db888d3e61a2b3ec4976783dcbf4ba
 features:
   go:
     additionalDependencies: 0.1.0
@@ -180,7 +180,6 @@ generatedFiles:
   - /models/components/document.go
   - /models/components/dowjonesdate.go
   - /models/components/downloadalternativeinvestmentdocumentresponse.go
-  - /models/components/downloadpreipocompanyresearchdocumentresponse.go
   - /models/components/eddaccountenrollmentmetadatacreate.go
   - /models/components/employmentcreate.go
   - /models/components/employmentupdate.go
@@ -295,6 +294,7 @@ generatedFiles:
   - /models/components/limitpricecreate.go
   - /models/components/linkdocumentsrequestcreate.go
   - /models/components/linkdocumentsresponse.go
+  - /models/components/listaccountordersresponse.go
   - /models/components/listaccountsresponse.go
   - /models/components/listachdepositschedulesresponse.go
   - /models/components/listachwithdrawalschedulesresponse.go
@@ -326,7 +326,6 @@ generatedFiles:
   - /models/components/listpositionsresponse.go
   - /models/components/listpreipocompaniesresponse.go
   - /models/components/listpreipocompanyfundingroundsresponse.go
-  - /models/components/listpreipocompanyinterestsresponse.go
   - /models/components/listpreipocompanynewseventsresponse.go
   - /models/components/listpreipocompanyresearchdocumentsresponse.go
   - /models/components/listpushsubscriptiondeliveriesresponse.go
@@ -391,9 +390,6 @@ generatedFiles:
   - /models/components/preipocompany.go
   - /models/components/preipocompanyfundinground.go
   - /models/components/preipocompanyfundingroundclosing.go
-  - /models/components/preipocompanyinterest.go
-  - /models/components/preipocompanyinterestcreate.go
-  - /models/components/preipocompanyinterestupdate.go
   - /models/components/preipocompanynewsevent.go
   - /models/components/preipocompanynewseventarticle.go
   - /models/components/preipocompanyresearchdocument.go
@@ -683,6 +679,7 @@ generatedFiles:
   - /models/operations/orderservicecancelorder.go
   - /models/operations/orderservicecreateorder.go
   - /models/operations/orderservicegetorder.go
+  - /models/operations/orderservicelistaccountorders.go
   - /models/operations/orderservicelistcorrespondentorders.go
   - /models/operations/orderservicesetextrareportingdata.go
   - /models/operations/positionjournalscancelpositionjournal.go
@@ -694,15 +691,7 @@ generatedFiles:
   - /models/operations/preipocompanieslistpreipocompanies.go
   - /models/operations/preipocompanyfundingroundsgetpreipocompanyfundinground.go
   - /models/operations/preipocompanyfundingroundslistpreipocompanyfundingrounds.go
-  - /models/operations/preipocompanyinterestscreatepreipocompanyinterest.go
-  - /models/operations/preipocompanyinterestsdeletepreipocompanyinterest.go
-  - /models/operations/preipocompanyinterestsgetpreipocompanyinterest.go
-  - /models/operations/preipocompanyinterestslistpreipocompanyinterests.go
-  - /models/operations/preipocompanyinterestsupdatepreipocompanyinterest.go
-  - /models/operations/preipocompanynewseventsgetpreipocompanynewsevent.go
   - /models/operations/preipocompanynewseventslistpreipocompanynewsevents.go
-  - /models/operations/preipocompanyresearchdocumentsdownloadpreipocompanyresearchdocument.go
-  - /models/operations/preipocompanyresearchdocumentsgetpreipocompanyresearchdocument.go
   - /models/operations/preipocompanyresearchdocumentslistpreipocompanyresearchdocuments.go
   - /models/operations/readergeteventmessage.go
   - /models/operations/readerlisteventmessages.go
@@ -905,6 +894,7 @@ generatedFiles:
   - docs/models/components/activitydrip.md
   - docs/models/components/activitydripaction.md
   - docs/models/components/activityeffectivedate.md
+  - docs/models/components/activityeventcontractsettlement.md
   - docs/models/components/activityexchange.md
   - docs/models/components/activityexchangecashrate.md
   - docs/models/components/activityexchangecorporateactiongeneralinformation.md
@@ -958,6 +948,7 @@ generatedFiles:
   - docs/models/components/activitynamechangeeffectivedate.md
   - docs/models/components/activitynamechangequantity.md
   - docs/models/components/activitynetamount.md
+  - docs/models/components/activityoutcome.md
   - docs/models/components/activitypaydate.md
   - docs/models/components/activitypaymentdate.md
   - docs/models/components/activitypaymentinkind.md
@@ -1049,6 +1040,8 @@ generatedFiles:
   - docs/models/components/activitytradepriceadjustmentrecord.md
   - docs/models/components/activitytradepriceadjustmenttype.md
   - docs/models/components/activitytransfer.md
+  - docs/models/components/activitytransferfairmarketvalue.md
+  - docs/models/components/activitytransferfairmarketvaluedate.md
   - docs/models/components/activitytransfertype.md
   - docs/models/components/activitytype.md
   - docs/models/components/activityunitsplit.md
@@ -1522,7 +1515,6 @@ generatedFiles:
   - docs/models/components/dowjonesdate.md
   - docs/models/components/dowjonesdetails.md
   - docs/models/components/downloadalternativeinvestmentdocumentresponse.md
-  - docs/models/components/downloadpreipocompanyresearchdocumentresponse.md
   - docs/models/components/drip.md
   - docs/models/components/duration.md
   - docs/models/components/eddaccountenrollmentmetadata.md
@@ -1673,6 +1665,7 @@ generatedFiles:
   - docs/models/components/entryfactordenominator.md
   - docs/models/components/entryfactornumerator.md
   - docs/models/components/entryfairmarketvalue.md
+  - docs/models/components/entryfairmarketvaluedate.md
   - docs/models/components/entryfee.md
   - docs/models/components/entryfeetype.md
   - docs/models/components/entryflipbrokercapacity.md
@@ -1781,6 +1774,7 @@ generatedFiles:
   - docs/models/components/entrytradepriceadjustmentamount.md
   - docs/models/components/entrytradepriceadjustmenttype.md
   - docs/models/components/entrytransfer.md
+  - docs/models/components/entrytransferfairmarketvalue.md
   - docs/models/components/entrytransfertype.md
   - docs/models/components/entrytype.md
   - docs/models/components/entryunitsplitcorporateactiongeneralinformation.md
@@ -1803,6 +1797,7 @@ generatedFiles:
   - docs/models/components/estimatedgrosscreditamount.md
   - docs/models/components/estimatednetamount.md
   - docs/models/components/estimatedvaluedescriptor.md
+  - docs/models/components/eventcontractsettlement.md
   - docs/models/components/eventmessage.md
   - docs/models/components/exchange.md
   - docs/models/components/execution.md
@@ -1978,6 +1973,7 @@ generatedFiles:
   - docs/models/components/identitylookupshortcode.md
   - docs/models/components/identitylookupstate.md
   - docs/models/components/identitylookuptype.md
+  - docs/models/components/identityreporteddeceased.md
   - docs/models/components/identityverification.md
   - docs/models/components/identityverificationresult.md
   - docs/models/components/identityverificationresultcreate.md
@@ -2148,6 +2144,7 @@ generatedFiles:
   - docs/models/components/liquidation.md
   - docs/models/components/liquidityneeds.md
   - docs/models/components/liquidnetworthrangeusd.md
+  - docs/models/components/listaccountordersresponse.md
   - docs/models/components/listaccountsresponse.md
   - docs/models/components/listachdepositschedulesresponse.md
   - docs/models/components/listachwithdrawalschedulesresponse.md
@@ -2179,7 +2176,6 @@ generatedFiles:
   - docs/models/components/listpositionsresponse.md
   - docs/models/components/listpreipocompaniesresponse.md
   - docs/models/components/listpreipocompanyfundingroundsresponse.md
-  - docs/models/components/listpreipocompanyinterestsresponse.md
   - docs/models/components/listpreipocompanynewseventsresponse.md
   - docs/models/components/listpreipocompanyresearchdocumentsresponse.md
   - docs/models/components/listpushsubscriptiondeliveriesresponse.md
@@ -2360,6 +2356,7 @@ generatedFiles:
   - docs/models/components/othersourcesofwealth.md
   - docs/models/components/othersourcesofwealthcreate.md
   - docs/models/components/othersourcesofwealthupdate.md
+  - docs/models/components/outcome.md
   - docs/models/components/ownershipstructure.md
   - docs/models/components/ownershiptype.md
   - docs/models/components/party.md
@@ -2488,10 +2485,6 @@ generatedFiles:
   - docs/models/components/preipocompany.md
   - docs/models/components/preipocompanyfundinground.md
   - docs/models/components/preipocompanyfundingroundclosing.md
-  - docs/models/components/preipocompanyinterest.md
-  - docs/models/components/preipocompanyinterestamount.md
-  - docs/models/components/preipocompanyinterestcreate.md
-  - docs/models/components/preipocompanyinterestupdate.md
   - docs/models/components/preipocompanynewsevent.md
   - docs/models/components/preipocompanynewseventarticle.md
   - docs/models/components/preipocompanyresearchdocument.md
@@ -3353,6 +3346,8 @@ generatedFiles:
   - docs/models/operations/orderservicecreateorderresponse.md
   - docs/models/operations/orderservicegetorderrequest.md
   - docs/models/operations/orderservicegetorderresponse.md
+  - docs/models/operations/orderservicelistaccountordersrequest.md
+  - docs/models/operations/orderservicelistaccountordersresponse.md
   - docs/models/operations/orderservicelistcorrespondentordersrequest.md
   - docs/models/operations/orderservicelistcorrespondentordersresponse.md
   - docs/models/operations/orderservicesetextrareportingdatarequest.md
@@ -3374,24 +3369,8 @@ generatedFiles:
   - docs/models/operations/preipocompanyfundingroundsgetpreipocompanyfundingroundresponse.md
   - docs/models/operations/preipocompanyfundingroundslistpreipocompanyfundingroundsrequest.md
   - docs/models/operations/preipocompanyfundingroundslistpreipocompanyfundingroundsresponse.md
-  - docs/models/operations/preipocompanyinterestscreatepreipocompanyinterestrequest.md
-  - docs/models/operations/preipocompanyinterestscreatepreipocompanyinterestresponse.md
-  - docs/models/operations/preipocompanyinterestsdeletepreipocompanyinterestrequest.md
-  - docs/models/operations/preipocompanyinterestsdeletepreipocompanyinterestresponse.md
-  - docs/models/operations/preipocompanyinterestsgetpreipocompanyinterestrequest.md
-  - docs/models/operations/preipocompanyinterestsgetpreipocompanyinterestresponse.md
-  - docs/models/operations/preipocompanyinterestslistpreipocompanyinterestsrequest.md
-  - docs/models/operations/preipocompanyinterestslistpreipocompanyinterestsresponse.md
-  - docs/models/operations/preipocompanyinterestsupdatepreipocompanyinterestrequest.md
-  - docs/models/operations/preipocompanyinterestsupdatepreipocompanyinterestresponse.md
-  - docs/models/operations/preipocompanynewseventsgetpreipocompanynewseventrequest.md
-  - docs/models/operations/preipocompanynewseventsgetpreipocompanynewseventresponse.md
   - docs/models/operations/preipocompanynewseventslistpreipocompanynewseventsrequest.md
   - docs/models/operations/preipocompanynewseventslistpreipocompanynewseventsresponse.md
-  - docs/models/operations/preipocompanyresearchdocumentsdownloadpreipocompanyresearchdocumentrequest.md
-  - docs/models/operations/preipocompanyresearchdocumentsdownloadpreipocompanyresearchdocumentresponse.md
-  - docs/models/operations/preipocompanyresearchdocumentsgetpreipocompanyresearchdocumentrequest.md
-  - docs/models/operations/preipocompanyresearchdocumentsgetpreipocompanyresearchdocumentresponse.md
   - docs/models/operations/preipocompanyresearchdocumentslistpreipocompanyresearchdocumentsrequest.md
   - docs/models/operations/preipocompanyresearchdocumentslistpreipocompanyresearchdocumentsresponse.md
   - docs/models/operations/programdatefilterprogram.md
@@ -3491,7 +3470,6 @@ generatedFiles:
   - docs/sdks/positionjournals/README.md
   - docs/sdks/preipocompanies/README.md
   - docs/sdks/preipofundingrounds/README.md
-  - docs/sdks/preipointerests/README.md
   - docs/sdks/preiponewsevents/README.md
   - docs/sdks/preiporesearchdocuments/README.md
   - docs/sdks/reader/README.md
@@ -3534,7 +3512,6 @@ generatedFiles:
   - positionjournals.go
   - preipocompanies.go
   - preipofundingrounds.go
-  - preipointerests.go
   - preiponewsevents.go
   - preiporesearchdocuments.go
   - reader.go
@@ -5984,8 +5961,8 @@ examples:
     speakeasy-default-ledger-get-entry:
       parameters:
         path:
-          account_id: "{\"account_id\":\"\"}"
-          entry_id: "{\"entry_id\":\"\"}"
+          account_id: "{account_id}"
+          entry_id: "{entry_id}"
       responses:
         "200":
           application/json: {}
@@ -6943,6 +6920,20 @@ examples:
         application/json: {"name": "accounts/ACC123456/assets/12345/instructions/abc12345"}
       responses:
         "200":
+          application/json: {}
+        default:
+          application/json: {}
+  OrderService_ListAccountOrders:
+    speakeasy-default-order-service-list-account-orders:
+      parameters:
+        path:
+          account_id: "01HBRQ5BW6ZAY4BNWP4GWRD80X"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
           application/json: {}
         default:
           application/json: {}

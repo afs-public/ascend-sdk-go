@@ -120,6 +120,7 @@ type IdentityLookupType string
 const (
 	IdentityLookupTypeTypeUnspecified IdentityLookupType = "TYPE_UNSPECIFIED"
 	IdentityLookupTypeSsn             IdentityLookupType = "SSN"
+	IdentityLookupTypeCpf             IdentityLookupType = "CPF"
 )
 
 func (e IdentityLookupType) ToPointer() *IdentityLookupType {

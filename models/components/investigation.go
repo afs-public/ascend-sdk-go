@@ -431,7 +431,7 @@ func (e InvestigationNameSuffix) ToPointer() *InvestigationNameSuffix {
 	return &e
 }
 
-// InvestigationExecutionDate - The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD
+// InvestigationExecutionDate - The date identity verification was performed.
 type InvestigationExecutionDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -468,7 +468,9 @@ type ProvidedIdentityVerification struct {
 	AddressVerified *bool `json:"address_verified,omitempty"`
 	// Indicates whether the identity's date of birth was verified
 	BirthDateVerified *bool `json:"birth_date_verified,omitempty"`
-	// The date identity verification was performed. Must be formatted as an ISO-8601 YYYY-MM-DD
+	// Indicates that the client directly verified the ID documents rather than using a third-party vendor (self-inspected)
+	ClientDirectlyVerifiedIDDocs *bool `json:"client_directly_verified_id_docs,omitempty"`
+	// The date identity verification was performed.
 	ExecutionDate *InvestigationExecutionDate `json:"execution_date,omitempty"`
 	// Client-generated identifier associated with the KYC results for the appropriate case
 	ExternalCaseID *string `json:"external_case_id,omitempty"`
@@ -498,6 +500,13 @@ func (o *ProvidedIdentityVerification) GetBirthDateVerified() *bool {
 		return nil
 	}
 	return o.BirthDateVerified
+}
+
+func (o *ProvidedIdentityVerification) GetClientDirectlyVerifiedIDDocs() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ClientDirectlyVerifiedIDDocs
 }
 
 func (o *ProvidedIdentityVerification) GetExecutionDate() *InvestigationExecutionDate {

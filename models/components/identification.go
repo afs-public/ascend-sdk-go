@@ -8,6 +8,7 @@ type IdentificationType string
 const (
 	IdentificationTypeTypeUnspecified IdentificationType = "TYPE_UNSPECIFIED"
 	IdentificationTypeSsn             IdentificationType = "SSN"
+	IdentificationTypeCpf             IdentificationType = "CPF"
 )
 
 func (e IdentificationType) ToPointer() *IdentificationType {
