@@ -460,11 +460,13 @@ const (
 	RegistrationTypeTrustRegistration                         RegistrationType = "TRUST_REGISTRATION"
 	RegistrationTypeCorporationRegistration                   RegistrationType = "CORPORATION_REGISTRATION"
 	RegistrationTypeLlcRegistration                           RegistrationType = "LLC_REGISTRATION"
+	RegistrationTypePartnershipRegistration                   RegistrationType = "PARTNERSHIP_REGISTRATION"
 	RegistrationTypeOperatingRegistration                     RegistrationType = "OPERATING_REGISTRATION"
 	RegistrationTypeIraBeneficiaryTraditionalRegistration     RegistrationType = "IRA_BENEFICIARY_TRADITIONAL_REGISTRATION"
 	RegistrationTypeIraBeneficiaryRothRegistration            RegistrationType = "IRA_BENEFICIARY_ROTH_REGISTRATION"
 	RegistrationTypeForeignIndividualRegistration             RegistrationType = "FOREIGN_INDIVIDUAL_REGISTRATION"
 	RegistrationTypeCustodialRegistration                     RegistrationType = "CUSTODIAL_REGISTRATION"
+	RegistrationTypeFuturesRegistration                       RegistrationType = "FUTURES_REGISTRATION"
 )
 
 func (e RegistrationType) ToPointer() *RegistrationType {

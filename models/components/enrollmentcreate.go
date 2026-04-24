@@ -37,6 +37,7 @@ const (
 	EnrollmentCreateTypeRegistrationTrust                     EnrollmentCreateType = "REGISTRATION_TRUST"
 	EnrollmentCreateTypeRegistrationCorporation               EnrollmentCreateType = "REGISTRATION_CORPORATION"
 	EnrollmentCreateTypeRegistrationLlc                       EnrollmentCreateType = "REGISTRATION_LLC"
+	EnrollmentCreateTypeRegistrationPartnership               EnrollmentCreateType = "REGISTRATION_PARTNERSHIP"
 	EnrollmentCreateTypeCashFdicCashSweep                     EnrollmentCreateType = "CASH_FDIC_CASH_SWEEP"
 	EnrollmentCreateTypeRetirementBeneficiaryDesignation      EnrollmentCreateType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	EnrollmentCreateTypeDividendReinvestmentPlan              EnrollmentCreateType = "DIVIDEND_REINVESTMENT_PLAN"
@@ -46,6 +47,8 @@ const (
 	EnrollmentCreateTypeRegistrationCustodial                 EnrollmentCreateType = "REGISTRATION_CUSTODIAL"
 	EnrollmentCreateTypeRegTMargin                            EnrollmentCreateType = "REG_T_MARGIN"
 	EnrollmentCreateTypeVirtualAccountNumber                  EnrollmentCreateType = "VIRTUAL_ACCOUNT_NUMBER"
+	EnrollmentCreateTypeRegistrationFutures                   EnrollmentCreateType = "REGISTRATION_FUTURES"
+	EnrollmentCreateTypeEventContractsKalshi                  EnrollmentCreateType = "EVENT_CONTRACTS_KALSHI"
 )
 
 func (e EnrollmentCreateType) ToPointer() *EnrollmentCreateType {
@@ -97,9 +100,13 @@ type EnrollmentCreate struct {
 	OperatingEnrollmentMetadata *OperatingEnrollmentMetadataCreate `json:"operating_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the ORDERS_OPTIONS_TRADING enrollment type
 	OrdersOptionsTradingEnrollmentMetadata *OrdersOptionsTradingEnrollmentMetadataCreate `json:"orders_options_trading_enrollment_metadata,omitempty"`
+	// Enrollment metadata for the PARTNERSHIP enrollment type
+	PartnershipEnrollmentMetadata *PartnershipEnrollmentMetadataCreate `json:"partnership_enrollment_metadata,omitempty"`
 	// The ULID is associated with the approver of a given enrollment. The approver you create will contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID associated with Apex's approver.
-	PrincipalApproverID     string                         `json:"principal_approver_id"`
-	TrustEnrollmentMetadata *TrustEnrollmentMetadataCreate `json:"trust_enrollment_metadata,omitempty"`
+	PrincipalApproverID string `json:"principal_approver_id"`
+	// Enrollment metadata for the SOLE_PROPRIETORSHIP enrollment type
+	SoleProprietorshipEnrollmentMetadata *SoleProprietorshipEnrollmentMetadataCreate `json:"sole_proprietorship_enrollment_metadata,omitempty"`
+	TrustEnrollmentMetadata              *TrustEnrollmentMetadataCreate              `json:"trust_enrollment_metadata,omitempty"`
 	// Describes the name of the enrollment; Expressed as an enum
 	Type EnrollmentCreateType `json:"type"`
 	// Enrollment metadata for the VIRTUAL_ACCOUNT_NUMBER enrollment type
@@ -267,11 +274,25 @@ func (o *EnrollmentCreate) GetOrdersOptionsTradingEnrollmentMetadata() *OrdersOp
 	return o.OrdersOptionsTradingEnrollmentMetadata
 }
 
+func (o *EnrollmentCreate) GetPartnershipEnrollmentMetadata() *PartnershipEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.PartnershipEnrollmentMetadata
+}
+
 func (o *EnrollmentCreate) GetPrincipalApproverID() string {
 	if o == nil {
 		return ""
 	}
 	return o.PrincipalApproverID
+}
+
+func (o *EnrollmentCreate) GetSoleProprietorshipEnrollmentMetadata() *SoleProprietorshipEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.SoleProprietorshipEnrollmentMetadata
 }
 
 func (o *EnrollmentCreate) GetTrustEnrollmentMetadata() *TrustEnrollmentMetadataCreate {

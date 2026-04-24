@@ -27,6 +27,7 @@ Otherwise, must be empty.
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationTrust`                     | REGISTRATION_TRUST                                                                     |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                                                               |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationLlc`                       | REGISTRATION_LLC                                                                       |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationPartnership`               | REGISTRATION_PARTNERSHIP                                                               |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                                                   |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                                                     |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                                                             |
@@ -36,3 +37,5 @@ Otherwise, must be empty.
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                                                 |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegTMargin`                            | REG_T_MARGIN                                                                           |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                                                 |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationFutures`                   | REGISTRATION_FUTURES                                                                   |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeEventContractsKalshi`                  | EVENT_CONTRACTS_KALSHI                                                                 |

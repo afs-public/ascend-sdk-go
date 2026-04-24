@@ -44,6 +44,7 @@ const (
 	LegalEntityUpdateEntityTypeEntityTypeUnspecified   LegalEntityUpdateEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	LegalEntityUpdateEntityTypeCorporation             LegalEntityUpdateEntityType = "CORPORATION"
 	LegalEntityUpdateEntityTypeLimitedLiabilityCompany LegalEntityUpdateEntityType = "LIMITED_LIABILITY_COMPANY"
+	LegalEntityUpdateEntityTypePartnership             LegalEntityUpdateEntityType = "PARTNERSHIP"
 	LegalEntityUpdateEntityTypeTrust                   LegalEntityUpdateEntityType = "TRUST"
 	LegalEntityUpdateEntityTypeEstate                  LegalEntityUpdateEntityType = "ESTATE"
 )

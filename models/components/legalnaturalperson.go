@@ -956,6 +956,7 @@ type LegalNaturalPersonFederalTaxClassification string
 const (
 	LegalNaturalPersonFederalTaxClassificationFederalTaxClassificationUnspecified LegalNaturalPersonFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	LegalNaturalPersonFederalTaxClassificationIndivSolepropOrSinglememberllc      LegalNaturalPersonFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
+	LegalNaturalPersonFederalTaxClassificationPartnership                         LegalNaturalPersonFederalTaxClassification = "PARTNERSHIP"
 	LegalNaturalPersonFederalTaxClassificationCCorporation                        LegalNaturalPersonFederalTaxClassification = "C_CORPORATION"
 	LegalNaturalPersonFederalTaxClassificationSCorporation                        LegalNaturalPersonFederalTaxClassification = "S_CORPORATION"
 	LegalNaturalPersonFederalTaxClassificationTrustEstate                         LegalNaturalPersonFederalTaxClassification = "TRUST_ESTATE"

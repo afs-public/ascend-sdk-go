@@ -80,6 +80,8 @@ type AccountsListAccountsRequest struct {
 	//  `identifiers.type`
 	//  `identifiers.value`
 	//  `create_time` with format of timestamp("2025-08-13T18:31:40Z")
+	//  `parties.legal_natural_person.investigation_id`
+	//  `parties.legal_entity.investigation_id`
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
 	// The view to return. Defaults to `BASIC`.
 	View *View `queryParam:"style=form,explode=true,name=view"`

@@ -102,6 +102,7 @@ const (
 	PartyEntityTypeEntityTypeUnspecified   PartyEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	PartyEntityTypeCorporation             PartyEntityType = "CORPORATION"
 	PartyEntityTypeLimitedLiabilityCompany PartyEntityType = "LIMITED_LIABILITY_COMPANY"
+	PartyEntityTypePartnership             PartyEntityType = "PARTNERSHIP"
 	PartyEntityTypeTrust                   PartyEntityType = "TRUST"
 	PartyEntityTypeEstate                  PartyEntityType = "ESTATE"
 )
@@ -393,6 +394,7 @@ type PartyFederalTaxClassification string
 const (
 	PartyFederalTaxClassificationFederalTaxClassificationUnspecified PartyFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	PartyFederalTaxClassificationIndivSolepropOrSinglememberllc      PartyFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
+	PartyFederalTaxClassificationPartnership                         PartyFederalTaxClassification = "PARTNERSHIP"
 	PartyFederalTaxClassificationCCorporation                        PartyFederalTaxClassification = "C_CORPORATION"
 	PartyFederalTaxClassificationSCorporation                        PartyFederalTaxClassification = "S_CORPORATION"
 	PartyFederalTaxClassificationTrustEstate                         PartyFederalTaxClassification = "TRUST_ESTATE"
@@ -1904,6 +1906,7 @@ type PartyLegalNaturalPersonFederalTaxClassification string
 const (
 	PartyLegalNaturalPersonFederalTaxClassificationFederalTaxClassificationUnspecified PartyLegalNaturalPersonFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	PartyLegalNaturalPersonFederalTaxClassificationIndivSolepropOrSinglememberllc      PartyLegalNaturalPersonFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
+	PartyLegalNaturalPersonFederalTaxClassificationPartnership                         PartyLegalNaturalPersonFederalTaxClassification = "PARTNERSHIP"
 	PartyLegalNaturalPersonFederalTaxClassificationCCorporation                        PartyLegalNaturalPersonFederalTaxClassification = "C_CORPORATION"
 	PartyLegalNaturalPersonFederalTaxClassificationSCorporation                        PartyLegalNaturalPersonFederalTaxClassification = "S_CORPORATION"
 	PartyLegalNaturalPersonFederalTaxClassificationTrustEstate                         PartyLegalNaturalPersonFederalTaxClassification = "TRUST_ESTATE"

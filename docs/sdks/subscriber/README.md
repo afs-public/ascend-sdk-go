@@ -74,11 +74,11 @@ func main() {
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| sdkerrors.Status   | 400, 401, 403, 409 | application/json   |
-| sdkerrors.Status   | 500                | application/json   |
-| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+| Error Type              | Status Code             | Content Type            |
+| ----------------------- | ----------------------- | ----------------------- |
+| sdkerrors.Status        | 400, 401, 403, 409, 429 | application/json        |
+| sdkerrors.Status        | 500                     | application/json        |
+| sdkerrors.SDKError      | 4XX, 5XX                | \*/\*                   |
 
 ## ListPushSubscriptions
 

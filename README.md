@@ -434,6 +434,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ListAvailableRestrictions](docs/sdks/accountmanagement/README.md#listavailablerestrictions) - List Available Restrictions
 * [CreateRestriction](docs/sdks/accountmanagement/README.md#createrestriction) - Create Restriction
 * [EndRestriction](docs/sdks/accountmanagement/README.md#endrestriction) - End Restriction
+* [CreateNote](docs/sdks/accountmanagement/README.md#createnote) - Create Note (Account)
+* [ListNotes](docs/sdks/accountmanagement/README.md#listnotes) - List Notes (Account)
+* [GetNote](docs/sdks/accountmanagement/README.md#getnote) - Get Note (Account)
 
 ### [AccountTransfers](docs/sdks/accounttransfers/README.md)
 
