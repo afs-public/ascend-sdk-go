@@ -44,6 +44,7 @@ const (
 	EntityTypeEntityTypeUnspecified   EntityType = "ENTITY_TYPE_UNSPECIFIED"
 	EntityTypeCorporation             EntityType = "CORPORATION"
 	EntityTypeLimitedLiabilityCompany EntityType = "LIMITED_LIABILITY_COMPANY"
+	EntityTypePartnership             EntityType = "PARTNERSHIP"
 	EntityTypeTrust                   EntityType = "TRUST"
 	EntityTypeEstate                  EntityType = "ESTATE"
 )

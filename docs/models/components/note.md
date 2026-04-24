@@ -1,0 +1,14 @@
+# Note
+
+A note attached to an account.
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `Content`                                                                      | **string*                                                                      | :heavy_minus_sign:                                                             | The content of the note.                                                       | Customer requested account review                                              |
+| `CreateTime`                                                                   | [*time.Time](https://pkg.go.dev/time#Time)                                     | :heavy_minus_sign:                                                             | The time the note was created.                                                 | 2024-01-15T10:30:00Z                                                           |
+| `Creator`                                                                      | **string*                                                                      | :heavy_minus_sign:                                                             | The ID of the user who created the note.                                       | 01HMVMCQW2VHT80RW42P7RSTVS                                                     |
+| `Name`                                                                         | **string*                                                                      | :heavy_minus_sign:                                                             | The resource name of the note. Format: accounts/{account}/notes/{note}         | accounts/01HC3MAQ4DR9QN1V8MJ4CN1HMK/notes/8096110d-fb55-4f9d-b883-b84f0b70d3ea |
+| `NoteID`                                                                       | **string*                                                                      | :heavy_minus_sign:                                                             | A system-generated unique identifier for the note.                             | 8096110d-fb55-4f9d-b883-b84f0b70d3ea                                           |

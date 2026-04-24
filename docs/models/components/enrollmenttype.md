@@ -23,6 +23,7 @@ The enrollment type.
 | `EnrollmentTypeRegistrationTrust`                     | REGISTRATION_TRUST                                    |
 | `EnrollmentTypeRegistrationCorporation`               | REGISTRATION_CORPORATION                              |
 | `EnrollmentTypeRegistrationLlc`                       | REGISTRATION_LLC                                      |
+| `EnrollmentTypeRegistrationPartnership`               | REGISTRATION_PARTNERSHIP                              |
 | `EnrollmentTypeCashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                  |
 | `EnrollmentTypeRetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                    |
 | `EnrollmentTypeDividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                            |
@@ -32,3 +33,5 @@ The enrollment type.
 | `EnrollmentTypeRegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                |
 | `EnrollmentTypeRegTMargin`                            | REG_T_MARGIN                                          |
 | `EnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                |
+| `EnrollmentTypeRegistrationFutures`                   | REGISTRATION_FUTURES                                  |
+| `EnrollmentTypeEventContractsKalshi`                  | EVENT_CONTRACTS_KALSHI                                |

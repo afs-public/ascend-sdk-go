@@ -40,6 +40,7 @@ const (
 	BeneficiaryEntityTypeEntityTypeUnspecified   BeneficiaryEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	BeneficiaryEntityTypeCorporation             BeneficiaryEntityType = "CORPORATION"
 	BeneficiaryEntityTypeLimitedLiabilityCompany BeneficiaryEntityType = "LIMITED_LIABILITY_COMPANY"
+	BeneficiaryEntityTypePartnership             BeneficiaryEntityType = "PARTNERSHIP"
 	BeneficiaryEntityTypeTrust                   BeneficiaryEntityType = "TRUST"
 	BeneficiaryEntityTypeEstate                  BeneficiaryEntityType = "ESTATE"
 )

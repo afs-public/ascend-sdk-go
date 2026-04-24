@@ -4,15 +4,12 @@ package tests
 
 import (
 	"context"
-	"strings"
-	"testing"
-
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
-	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"testing"
 )
 
 func TestTestSimulation_CheckDepositsForceApproveCheckDeposit(t *testing.T) {
@@ -34,35 +31,11 @@ func TestTestSimulation_CheckDepositsForceApproveCheckDeposit(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	// First, simulate creating a check deposit to get a check deposit ID
-	createRes, err := s.TestSimulation.SimulateCreateCheckDeposit(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", components.SimulateCreateCheckDepositRequestCreate{
-		Amount: components.DecimalCreate{
-			Value: ascendsdkgo.String("100"),
-		},
-		Parent: "01JHGTEPC6ZTAHCFRH2MD3VJJT",
+	res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "20250811022796", components.ForceApproveCheckDepositRequestCreate{
+		Name: "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/20250811022796",
 	})
 	require.NoError(t, err)
-	assert.Equal(t, 200, createRes.HTTPMeta.Response.StatusCode)
-	require.NotNil(t, createRes.CheckDeposit)
-	require.NotNil(t, createRes.CheckDeposit.Name)
-
-	// Extract check deposit ID from name: accounts/{account}/checkDeposits/{check_deposit}
-	nameParts := strings.Split(*createRes.CheckDeposit.Name, "/")
-	checkDepositID := nameParts[len(nameParts)-1]
-
-	// Force approve the check deposit
-	res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", checkDepositID, components.ForceApproveCheckDepositRequestCreate{
-		Name: "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/" + checkDepositID,
-	})
-	if err != nil {
-		statusErr, ok := err.(*sdkerrors.Status)
-		require.True(t, ok)
-		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), *statusErr.Message)
-	} else {
-		assert.NotNil(t, res)
-		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-	}
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
 }
 

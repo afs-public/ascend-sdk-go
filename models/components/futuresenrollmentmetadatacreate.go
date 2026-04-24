@@ -26,17 +26,25 @@ type FuturesEnrollmentMetadataCreate struct {
 	// Indicates whether the funds in the futures account are owned by the account owner
 	FundsOwnedByAccountOwner bool `json:"funds_owned_by_account_owner"`
 	// Indicates whether the account owner has prior experience trading futures
-	FuturesExperience bool `json:"futures_experience"`
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	FuturesExperience *bool `json:"futures_experience,omitempty"`
 	// The primary investment objective for the futures account
 	FuturesInvestmentObjective FuturesInvestmentObjective `json:"futures_investment_objective"`
 	// Indicates whether the account will trade investment retired funds
-	InvestmentRetiredFunds bool `json:"investment_retired_funds"`
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	InvestmentRetiredFunds *bool `json:"investment_retired_funds,omitempty"`
 	// Indicates whether the account owner has experience with various trading options and strategies
-	OptionsExperience bool `json:"options_experience"`
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	OptionsExperience *bool `json:"options_experience,omitempty"`
 	// Indicates whether the account owner understands the risks associated with trading futures
 	UnderstandFuturesRisks bool `json:"understand_futures_risks"`
 	// Indicates whether the account owner understands that losses can exceed deposited funds
-	UnderstandLossBeyondFunds bool `json:"understand_loss_beyond_funds"`
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	UnderstandLossBeyondFunds *bool `json:"understand_loss_beyond_funds,omitempty"`
 }
 
 func (o *FuturesEnrollmentMetadataCreate) GetCtfcNfaRegistered() bool {
@@ -67,9 +75,9 @@ func (o *FuturesEnrollmentMetadataCreate) GetFundsOwnedByAccountOwner() bool {
 	return o.FundsOwnedByAccountOwner
 }
 
-func (o *FuturesEnrollmentMetadataCreate) GetFuturesExperience() bool {
+func (o *FuturesEnrollmentMetadataCreate) GetFuturesExperience() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.FuturesExperience
 }
@@ -81,16 +89,16 @@ func (o *FuturesEnrollmentMetadataCreate) GetFuturesInvestmentObjective() Future
 	return o.FuturesInvestmentObjective
 }
 
-func (o *FuturesEnrollmentMetadataCreate) GetInvestmentRetiredFunds() bool {
+func (o *FuturesEnrollmentMetadataCreate) GetInvestmentRetiredFunds() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.InvestmentRetiredFunds
 }
 
-func (o *FuturesEnrollmentMetadataCreate) GetOptionsExperience() bool {
+func (o *FuturesEnrollmentMetadataCreate) GetOptionsExperience() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.OptionsExperience
 }
@@ -102,9 +110,9 @@ func (o *FuturesEnrollmentMetadataCreate) GetUnderstandFuturesRisks() bool {
 	return o.UnderstandFuturesRisks
 }
 
-func (o *FuturesEnrollmentMetadataCreate) GetUnderstandLossBeyondFunds() bool {
+func (o *FuturesEnrollmentMetadataCreate) GetUnderstandLossBeyondFunds() *bool {
 	if o == nil {
-		return false
+		return nil
 	}
 	return o.UnderstandLossBeyondFunds
 }

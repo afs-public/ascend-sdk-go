@@ -23,6 +23,7 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentType1RegistrationTrust`                     | REGISTRATION_TRUST                                     |
 | `EnrollmentType1RegistrationCorporation`               | REGISTRATION_CORPORATION                               |
 | `EnrollmentType1RegistrationLlc`                       | REGISTRATION_LLC                                       |
+| `EnrollmentType1RegistrationPartnership`               | REGISTRATION_PARTNERSHIP                               |
 | `EnrollmentType1CashFdicCashSweep`                     | CASH_FDIC_CASH_SWEEP                                   |
 | `EnrollmentType1RetirementBeneficiaryDesignation`      | RETIREMENT_BENEFICIARY_DESIGNATION                     |
 | `EnrollmentType1DividendReinvestmentPlan`              | DIVIDEND_REINVESTMENT_PLAN                             |
@@ -32,3 +33,5 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentType1RegistrationCustodial`                 | REGISTRATION_CUSTODIAL                                 |
 | `EnrollmentType1RegTMargin`                            | REG_T_MARGIN                                           |
 | `EnrollmentType1VirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                 |
+| `EnrollmentType1RegistrationFutures`                   | REGISTRATION_FUTURES                                   |
+| `EnrollmentType1EventContractsKalshi`                  | EVENT_CONTRACTS_KALSHI                                 |

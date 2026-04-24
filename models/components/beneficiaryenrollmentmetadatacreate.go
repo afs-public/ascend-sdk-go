@@ -4,9 +4,9 @@ package components
 
 // BeneficiaryEnrollmentMetadataCreate - Enrollment metadata for the BENEFICIARY_DESIGNATION enrollment type.
 type BeneficiaryEnrollmentMetadataCreate struct {
-	// Contingent Beneficiary list is optional, with a maximum of five contingent beneficiaries.
+	// Contingent Beneficiary list is optional, with a maximum of ten contingent beneficiaries.
 	ContingentBeneficiaries []BeneficiaryCreate `json:"contingent_beneficiaries,omitempty"`
-	// At least one primary beneficiary must be provided, with a maximum of five primary beneficiaries.
+	// At least one primary beneficiary must be provided, with a maximum of ten primary beneficiaries.
 	PrimaryBeneficiaries []BeneficiaryCreate `json:"primary_beneficiaries"`
 }
 

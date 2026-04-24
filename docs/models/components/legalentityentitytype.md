@@ -10,5 +10,6 @@ The entity type.
 | `LegalEntityEntityTypeEntityTypeUnspecified`   | ENTITY_TYPE_UNSPECIFIED                        |
 | `LegalEntityEntityTypeCorporation`             | CORPORATION                                    |
 | `LegalEntityEntityTypeLimitedLiabilityCompany` | LIMITED_LIABILITY_COMPANY                      |
+| `LegalEntityEntityTypePartnership`             | PARTNERSHIP                                    |
 | `LegalEntityEntityTypeTrust`                   | TRUST                                          |
 | `LegalEntityEntityTypeEstate`                  | ESTATE                                         |

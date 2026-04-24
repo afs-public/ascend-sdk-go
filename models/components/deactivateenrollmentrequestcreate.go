@@ -26,6 +26,7 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationTrust                     DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_TRUST"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCorporation               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CORPORATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationLlc                       DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_LLC"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationPartnership               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_PARTNERSHIP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeCashFdicCashSweep                     DeactivateEnrollmentRequestCreateEnrollmentType = "CASH_FDIC_CASH_SWEEP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRetirementBeneficiaryDesignation      DeactivateEnrollmentRequestCreateEnrollmentType = "RETIREMENT_BENEFICIARY_DESIGNATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeDividendReinvestmentPlan              DeactivateEnrollmentRequestCreateEnrollmentType = "DIVIDEND_REINVESTMENT_PLAN"
@@ -35,6 +36,8 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodial                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CUSTODIAL"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegTMargin                            DeactivateEnrollmentRequestCreateEnrollmentType = "REG_T_MARGIN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber                  DeactivateEnrollmentRequestCreateEnrollmentType = "VIRTUAL_ACCOUNT_NUMBER"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationFutures                   DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_FUTURES"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeEventContractsKalshi                  DeactivateEnrollmentRequestCreateEnrollmentType = "EVENT_CONTRACTS_KALSHI"
 )
 
 func (e DeactivateEnrollmentRequestCreateEnrollmentType) ToPointer() *DeactivateEnrollmentRequestCreateEnrollmentType {

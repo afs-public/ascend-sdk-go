@@ -88,6 +88,7 @@ const (
 	LegalEntityEntityTypeEntityTypeUnspecified   LegalEntityEntityType = "ENTITY_TYPE_UNSPECIFIED"
 	LegalEntityEntityTypeCorporation             LegalEntityEntityType = "CORPORATION"
 	LegalEntityEntityTypeLimitedLiabilityCompany LegalEntityEntityType = "LIMITED_LIABILITY_COMPANY"
+	LegalEntityEntityTypePartnership             LegalEntityEntityType = "PARTNERSHIP"
 	LegalEntityEntityTypeTrust                   LegalEntityEntityType = "TRUST"
 	LegalEntityEntityTypeEstate                  LegalEntityEntityType = "ESTATE"
 )
@@ -379,6 +380,7 @@ type LegalEntityFederalTaxClassification string
 const (
 	LegalEntityFederalTaxClassificationFederalTaxClassificationUnspecified LegalEntityFederalTaxClassification = "FEDERAL_TAX_CLASSIFICATION_UNSPECIFIED"
 	LegalEntityFederalTaxClassificationIndivSolepropOrSinglememberllc      LegalEntityFederalTaxClassification = "INDIV_SOLEPROP_OR_SINGLEMEMBERLLC"
+	LegalEntityFederalTaxClassificationPartnership                         LegalEntityFederalTaxClassification = "PARTNERSHIP"
 	LegalEntityFederalTaxClassificationCCorporation                        LegalEntityFederalTaxClassification = "C_CORPORATION"
 	LegalEntityFederalTaxClassificationSCorporation                        LegalEntityFederalTaxClassification = "S_CORPORATION"
 	LegalEntityFederalTaxClassificationTrustEstate                         LegalEntityFederalTaxClassification = "TRUST_ESTATE"
