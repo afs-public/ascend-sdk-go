@@ -51,6 +51,9 @@ func TestAccountManagement(t *testing.T) {
 	interestedPartyId := testAccountManagementCreateInterestedParty(t, sdk, ctx, *listAccountId)
 	testAccountManagementUpdateInterestedParty(t, sdk, ctx, *listAccountId, *interestedPartyId)
 	testAccountManagementDeleteInterestedParty(t, sdk, ctx, *listAccountId, *interestedPartyId)
+	noteId := testAccountManagementCreateNote(t, sdk, ctx, *listAccountId)
+	testAccountManagementGetNote(t, sdk, ctx, *listAccountId, *noteId)
+	testAccountManagementListNotes(t, sdk, ctx, *listAccountId)
 	testAccountManagementListAvailableRestrictions(t, sdk, ctx, *listAccountId)
 	restrictionId := testAccountManagementCreateRestriction(t, sdk, ctx, *listAccountId)
 	testAccountManagementEndRestriction(t, sdk, ctx, *listAccountId, *restrictionId)
@@ -249,6 +252,36 @@ func testAccountManagementDeleteInterestedParty(t *testing.T, skd *ascendsdk.SDK
 	res, err := skd.AccountManagement.DeleteInterestedParty(ctx, accountId, interestedPartyId)
 	require.NoError(t, err)
 	assert.NotNil(t, res.HTTPMeta.Response)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+}
+
+func testAccountManagementCreateNote(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) *string {
+	noteCreate := components.NoteCreate{
+		Content: "Test note content for account management",
+	}
+	res, err := sdk.AccountManagement.CreateNote(ctx, accountId, noteCreate)
+	require.NoError(t, err)
+	assert.NotNil(t, res.Note)
+	assert.NotNil(t, res.Note.NoteID)
+	assert.Equal(t, "Test note content for account management", *res.Note.Content)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	return res.Note.NoteID
+}
+
+func testAccountManagementGetNote(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string, noteId string) {
+	res, err := sdk.AccountManagement.GetNote(ctx, accountId, noteId)
+	require.NoError(t, err)
+	assert.NotNil(t, res.Note)
+	assert.Equal(t, noteId, *res.Note.NoteID)
+	assert.Equal(t, "Test note content for account management", *res.Note.Content)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+}
+
+func testAccountManagementListNotes(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) {
+	res, err := sdk.AccountManagement.ListNotes(ctx, accountId, nil, nil, nil)
+	require.NoError(t, err)
+	assert.NotNil(t, res.ListNotesResponse)
+	assert.Greater(t, len(res.ListNotesResponse.Notes), 0)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 }
 
