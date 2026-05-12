@@ -114,7 +114,7 @@ func (s *PersonManagement) CreateLegalNaturalPerson(ctx context.Context, request
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -126,8 +126,8 @@ func (s *PersonManagement) CreateLegalNaturalPerson(ctx context.Context, request
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -399,7 +399,7 @@ func (s *PersonManagement) ListLegalNaturalPersons(ctx context.Context, pageSize
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -411,8 +411,8 @@ func (s *PersonManagement) ListLegalNaturalPersons(ctx context.Context, pageSize
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -723,7 +723,7 @@ func (s *PersonManagement) GetLegalNaturalPerson(ctx context.Context, legalNatur
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -735,8 +735,8 @@ func (s *PersonManagement) GetLegalNaturalPerson(ctx context.Context, legalNatur
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1016,7 +1016,7 @@ func (s *PersonManagement) UpdateLegalNaturalPerson(ctx context.Context, legalNa
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1028,8 +1028,8 @@ func (s *PersonManagement) UpdateLegalNaturalPerson(ctx context.Context, legalNa
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1304,7 +1304,7 @@ func (s *PersonManagement) AssignLargeTrader(ctx context.Context, legalNaturalPe
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1316,8 +1316,8 @@ func (s *PersonManagement) AssignLargeTrader(ctx context.Context, legalNaturalPe
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1592,7 +1592,7 @@ func (s *PersonManagement) EndLargeTraderLegalNaturalPerson(ctx context.Context,
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1604,8 +1604,8 @@ func (s *PersonManagement) EndLargeTraderLegalNaturalPerson(ctx context.Context,
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1855,7 +1855,7 @@ func (s *PersonManagement) CreateLegalEntity(ctx context.Context, request compon
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1867,8 +1867,8 @@ func (s *PersonManagement) CreateLegalEntity(ctx context.Context, request compon
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2140,7 +2140,7 @@ func (s *PersonManagement) ListLegalEntities(ctx context.Context, pageSize *int,
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2152,8 +2152,8 @@ func (s *PersonManagement) ListLegalEntities(ctx context.Context, pageSize *int,
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2464,7 +2464,7 @@ func (s *PersonManagement) GetLegalEntity(ctx context.Context, legalEntityID str
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2476,8 +2476,8 @@ func (s *PersonManagement) GetLegalEntity(ctx context.Context, legalEntityID str
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2757,7 +2757,7 @@ func (s *PersonManagement) UpdateLegalEntity(ctx context.Context, legalEntityID 
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2769,8 +2769,8 @@ func (s *PersonManagement) UpdateLegalEntity(ctx context.Context, legalEntityID 
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3045,7 +3045,7 @@ func (s *PersonManagement) AssignLargeTraderLegalEntity(ctx context.Context, leg
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3057,8 +3057,8 @@ func (s *PersonManagement) AssignLargeTraderLegalEntity(ctx context.Context, leg
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3333,7 +3333,7 @@ func (s *PersonManagement) EndLargeTrader(ctx context.Context, legalEntityID str
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3345,8 +3345,8 @@ func (s *PersonManagement) EndLargeTrader(ctx context.Context, legalEntityID str
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {

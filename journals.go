@@ -111,7 +111,7 @@ func (s *Journals) RetrieveCashJournalConstraints(ctx context.Context, request c
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -123,8 +123,8 @@ func (s *Journals) RetrieveCashJournalConstraints(ctx context.Context, request c
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -369,7 +369,7 @@ func (s *Journals) CreateCashJournal(ctx context.Context, request components.Cas
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -381,8 +381,8 @@ func (s *Journals) CreateCashJournal(ctx context.Context, request components.Cas
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -626,7 +626,7 @@ func (s *Journals) GetCashJournal(ctx context.Context, cashJournalID string, opt
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -638,8 +638,8 @@ func (s *Journals) GetCashJournal(ctx context.Context, cashJournalID string, opt
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -889,7 +889,7 @@ func (s *Journals) CancelCashJournal(ctx context.Context, cashJournalID string, 
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -901,8 +901,8 @@ func (s *Journals) CancelCashJournal(ctx context.Context, cashJournalID string, 
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1147,7 +1147,7 @@ func (s *Journals) CheckPartyType(ctx context.Context, request components.CheckP
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1159,8 +1159,8 @@ func (s *Journals) CheckPartyType(ctx context.Context, request components.CheckP
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {

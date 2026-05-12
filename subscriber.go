@@ -114,7 +114,7 @@ func (s *Subscriber) CreatePushSubscription(ctx context.Context, request compone
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -126,8 +126,8 @@ func (s *Subscriber) CreatePushSubscription(ctx context.Context, request compone
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -402,7 +402,7 @@ func (s *Subscriber) ListPushSubscriptions(ctx context.Context, filter *string, 
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -414,8 +414,8 @@ func (s *Subscriber) ListPushSubscriptions(ctx context.Context, filter *string, 
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -725,7 +725,7 @@ func (s *Subscriber) GetPushSubscription(ctx context.Context, subscriptionID str
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -737,8 +737,8 @@ func (s *Subscriber) GetPushSubscription(ctx context.Context, subscriptionID str
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1018,7 +1018,7 @@ func (s *Subscriber) UpdatePushSubscription(ctx context.Context, subscriptionID 
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1030,8 +1030,8 @@ func (s *Subscriber) UpdatePushSubscription(ctx context.Context, subscriptionID 
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1298,7 +1298,7 @@ func (s *Subscriber) DeletePushSubscription(ctx context.Context, subscriptionID 
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1310,8 +1310,8 @@ func (s *Subscriber) DeletePushSubscription(ctx context.Context, subscriptionID 
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1559,7 +1559,7 @@ func (s *Subscriber) GetPushSubscriptionDelivery(ctx context.Context, subscripti
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1571,8 +1571,8 @@ func (s *Subscriber) GetPushSubscriptionDelivery(ctx context.Context, subscripti
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1846,7 +1846,7 @@ func (s *Subscriber) ListPushSubscriptionDeliveries(ctx context.Context, subscri
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1858,8 +1858,8 @@ func (s *Subscriber) ListPushSubscriptionDeliveries(ctx context.Context, subscri
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {

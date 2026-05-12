@@ -117,7 +117,7 @@ func (s *ScheduleTransfers) ListScheduleSummaries(ctx context.Context, filter *s
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -129,8 +129,8 @@ func (s *ScheduleTransfers) ListScheduleSummaries(ctx context.Context, filter *s
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -425,7 +425,7 @@ func (s *ScheduleTransfers) CreateAchDepositSchedule(ctx context.Context, accoun
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -437,8 +437,8 @@ func (s *ScheduleTransfers) CreateAchDepositSchedule(ctx context.Context, accoun
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -689,7 +689,7 @@ func (s *ScheduleTransfers) ListAchDepositSchedules(ctx context.Context, account
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -701,8 +701,8 @@ func (s *ScheduleTransfers) ListAchDepositSchedules(ctx context.Context, account
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -991,7 +991,7 @@ func (s *ScheduleTransfers) GetAchDepositSchedule(ctx context.Context, accountID
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1003,8 +1003,8 @@ func (s *ScheduleTransfers) GetAchDepositSchedule(ctx context.Context, accountID
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1262,7 +1262,7 @@ func (s *ScheduleTransfers) UpdateAchDepositSchedule(ctx context.Context, accoun
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1274,8 +1274,8 @@ func (s *ScheduleTransfers) UpdateAchDepositSchedule(ctx context.Context, accoun
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1528,7 +1528,7 @@ func (s *ScheduleTransfers) CancelAchDepositSchedule(ctx context.Context, accoun
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1540,8 +1540,8 @@ func (s *ScheduleTransfers) CancelAchDepositSchedule(ctx context.Context, accoun
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1793,7 +1793,7 @@ func (s *ScheduleTransfers) CreateAchWithdrawalSchedule(ctx context.Context, acc
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1805,8 +1805,8 @@ func (s *ScheduleTransfers) CreateAchWithdrawalSchedule(ctx context.Context, acc
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2057,7 +2057,7 @@ func (s *ScheduleTransfers) ListAchWithdrawalSchedules(ctx context.Context, acco
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2069,8 +2069,8 @@ func (s *ScheduleTransfers) ListAchWithdrawalSchedules(ctx context.Context, acco
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2359,7 +2359,7 @@ func (s *ScheduleTransfers) GetAchWithdrawalSchedule(ctx context.Context, accoun
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2371,8 +2371,8 @@ func (s *ScheduleTransfers) GetAchWithdrawalSchedule(ctx context.Context, accoun
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2630,7 +2630,7 @@ func (s *ScheduleTransfers) UpdateAchWithdrawalSchedule(ctx context.Context, acc
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2642,8 +2642,8 @@ func (s *ScheduleTransfers) UpdateAchWithdrawalSchedule(ctx context.Context, acc
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2896,7 +2896,7 @@ func (s *ScheduleTransfers) CancelAchWithdrawalSchedule(ctx context.Context, acc
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2908,8 +2908,8 @@ func (s *ScheduleTransfers) CancelAchWithdrawalSchedule(ctx context.Context, acc
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3156,7 +3156,7 @@ func (s *ScheduleTransfers) CreateCashJournalSchedule(ctx context.Context, reque
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3168,8 +3168,8 @@ func (s *ScheduleTransfers) CreateCashJournalSchedule(ctx context.Context, reque
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3413,7 +3413,7 @@ func (s *ScheduleTransfers) GetCashJournalSchedule(ctx context.Context, cashJour
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3425,8 +3425,8 @@ func (s *ScheduleTransfers) GetCashJournalSchedule(ctx context.Context, cashJour
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3683,7 +3683,7 @@ func (s *ScheduleTransfers) UpdateCashJournalSchedule(ctx context.Context, cashJ
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3695,8 +3695,8 @@ func (s *ScheduleTransfers) UpdateCashJournalSchedule(ctx context.Context, cashJ
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3948,7 +3948,7 @@ func (s *ScheduleTransfers) CancelCashJournalSchedule(ctx context.Context, cashJ
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3960,8 +3960,8 @@ func (s *ScheduleTransfers) CancelCashJournalSchedule(ctx context.Context, cashJ
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4205,7 +4205,7 @@ func (s *ScheduleTransfers) SearchCashJournalSchedules(ctx context.Context, requ
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4217,8 +4217,8 @@ func (s *ScheduleTransfers) SearchCashJournalSchedules(ctx context.Context, requ
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4468,7 +4468,7 @@ func (s *ScheduleTransfers) CreateCheckWithdrawalSchedule(ctx context.Context, a
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4480,8 +4480,8 @@ func (s *ScheduleTransfers) CreateCheckWithdrawalSchedule(ctx context.Context, a
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4732,7 +4732,7 @@ func (s *ScheduleTransfers) ListCheckWithdrawalSchedules(ctx context.Context, ac
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4744,8 +4744,8 @@ func (s *ScheduleTransfers) ListCheckWithdrawalSchedules(ctx context.Context, ac
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4988,7 +4988,7 @@ func (s *ScheduleTransfers) GetCheckWithdrawalSchedule(ctx context.Context, acco
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5000,8 +5000,8 @@ func (s *ScheduleTransfers) GetCheckWithdrawalSchedule(ctx context.Context, acco
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5259,7 +5259,7 @@ func (s *ScheduleTransfers) UpdateCheckWithdrawalSchedule(ctx context.Context, a
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5271,8 +5271,8 @@ func (s *ScheduleTransfers) UpdateCheckWithdrawalSchedule(ctx context.Context, a
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5525,7 +5525,7 @@ func (s *ScheduleTransfers) CancelCheckWithdrawalSchedule(ctx context.Context, a
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5537,8 +5537,8 @@ func (s *ScheduleTransfers) CancelCheckWithdrawalSchedule(ctx context.Context, a
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5790,7 +5790,7 @@ func (s *ScheduleTransfers) CreateWireWithdrawalSchedule(ctx context.Context, ac
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5802,8 +5802,8 @@ func (s *ScheduleTransfers) CreateWireWithdrawalSchedule(ctx context.Context, ac
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -6054,7 +6054,7 @@ func (s *ScheduleTransfers) ListWireWithdrawalSchedules(ctx context.Context, acc
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -6066,8 +6066,8 @@ func (s *ScheduleTransfers) ListWireWithdrawalSchedules(ctx context.Context, acc
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -6310,7 +6310,7 @@ func (s *ScheduleTransfers) GetWireWithdrawalSchedule(ctx context.Context, accou
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -6322,8 +6322,8 @@ func (s *ScheduleTransfers) GetWireWithdrawalSchedule(ctx context.Context, accou
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -6581,7 +6581,7 @@ func (s *ScheduleTransfers) UpdateWireWithdrawalSchedule(ctx context.Context, ac
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -6593,8 +6593,8 @@ func (s *ScheduleTransfers) UpdateWireWithdrawalSchedule(ctx context.Context, ac
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -6847,7 +6847,7 @@ func (s *ScheduleTransfers) CancelWireWithdrawalSchedule(ctx context.Context, ac
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -6859,8 +6859,8 @@ func (s *ScheduleTransfers) CancelWireWithdrawalSchedule(ctx context.Context, ac
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {

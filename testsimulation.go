@@ -115,7 +115,7 @@ func (s *TestSimulation) SimulateCreateCheckDeposit(ctx context.Context, account
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -127,8 +127,8 @@ func (s *TestSimulation) SimulateCreateCheckDeposit(ctx context.Context, account
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -379,7 +379,7 @@ func (s *TestSimulation) ForceApproveCheckDeposit(ctx context.Context, accountID
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -391,8 +391,8 @@ func (s *TestSimulation) ForceApproveCheckDeposit(ctx context.Context, accountID
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -645,7 +645,7 @@ func (s *TestSimulation) ForceApproveAchDeposit(ctx context.Context, accountID s
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -657,8 +657,8 @@ func (s *TestSimulation) ForceApproveAchDeposit(ctx context.Context, accountID s
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -911,7 +911,7 @@ func (s *TestSimulation) ForceNocAchDeposit(ctx context.Context, accountID strin
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -923,8 +923,8 @@ func (s *TestSimulation) ForceNocAchDeposit(ctx context.Context, accountID strin
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1177,7 +1177,7 @@ func (s *TestSimulation) ForceRejectAchDeposit(ctx context.Context, accountID st
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1189,8 +1189,8 @@ func (s *TestSimulation) ForceRejectAchDeposit(ctx context.Context, accountID st
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1443,7 +1443,7 @@ func (s *TestSimulation) ForceReturnAchDeposit(ctx context.Context, accountID st
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1455,8 +1455,8 @@ func (s *TestSimulation) ForceReturnAchDeposit(ctx context.Context, accountID st
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1709,7 +1709,7 @@ func (s *TestSimulation) ForceApproveAchWithdrawal(ctx context.Context, accountI
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1721,8 +1721,8 @@ func (s *TestSimulation) ForceApproveAchWithdrawal(ctx context.Context, accountI
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -1975,7 +1975,7 @@ func (s *TestSimulation) ForceNocAchWithdrawal(ctx context.Context, accountID st
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -1987,8 +1987,8 @@ func (s *TestSimulation) ForceNocAchWithdrawal(ctx context.Context, accountID st
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2241,7 +2241,7 @@ func (s *TestSimulation) ForceRejectAchWithdrawal(ctx context.Context, accountID
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2253,8 +2253,8 @@ func (s *TestSimulation) ForceRejectAchWithdrawal(ctx context.Context, accountID
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2507,7 +2507,7 @@ func (s *TestSimulation) ForceReturnAchWithdrawal(ctx context.Context, accountID
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2519,8 +2519,8 @@ func (s *TestSimulation) ForceReturnAchWithdrawal(ctx context.Context, accountID
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -2765,7 +2765,7 @@ func (s *TestSimulation) GetMicroDepositAmounts(ctx context.Context, accountID s
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -2777,8 +2777,8 @@ func (s *TestSimulation) GetMicroDepositAmounts(ctx context.Context, accountID s
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3031,7 +3031,7 @@ func (s *TestSimulation) ForceApproveIctDeposit(ctx context.Context, accountID s
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3043,8 +3043,8 @@ func (s *TestSimulation) ForceApproveIctDeposit(ctx context.Context, accountID s
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3297,7 +3297,7 @@ func (s *TestSimulation) ForceRejectIctDeposit(ctx context.Context, accountID st
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3309,8 +3309,8 @@ func (s *TestSimulation) ForceRejectIctDeposit(ctx context.Context, accountID st
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3563,7 +3563,7 @@ func (s *TestSimulation) ForceApproveIctWithdrawal(ctx context.Context, accountI
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3575,8 +3575,8 @@ func (s *TestSimulation) ForceApproveIctWithdrawal(ctx context.Context, accountI
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -3829,7 +3829,7 @@ func (s *TestSimulation) ForceRejectIctWithdrawal(ctx context.Context, accountID
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -3841,8 +3841,8 @@ func (s *TestSimulation) ForceRejectIctWithdrawal(ctx context.Context, accountID
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4095,7 +4095,7 @@ func (s *TestSimulation) ForceApproveWireWithdrawal(ctx context.Context, account
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4107,8 +4107,8 @@ func (s *TestSimulation) ForceApproveWireWithdrawal(ctx context.Context, account
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4361,7 +4361,7 @@ func (s *TestSimulation) ForceRejectWireWithdrawal(ctx context.Context, accountI
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4373,8 +4373,8 @@ func (s *TestSimulation) ForceRejectWireWithdrawal(ctx context.Context, accountI
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4626,7 +4626,7 @@ func (s *TestSimulation) SimulateWireDeposit(ctx context.Context, accountID stri
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4638,8 +4638,8 @@ func (s *TestSimulation) SimulateWireDeposit(ctx context.Context, accountID stri
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -4892,7 +4892,7 @@ func (s *TestSimulation) ForceApproveWireDeposit(ctx context.Context, accountID 
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -4904,8 +4904,8 @@ func (s *TestSimulation) ForceApproveWireDeposit(ctx context.Context, accountID 
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5158,7 +5158,7 @@ func (s *TestSimulation) ForceRejectWireDeposit(ctx context.Context, accountID s
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5170,8 +5170,8 @@ func (s *TestSimulation) ForceRejectWireDeposit(ctx context.Context, accountID s
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5423,7 +5423,7 @@ func (s *TestSimulation) ForceApproveCashJournal(ctx context.Context, cashJourna
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5435,8 +5435,8 @@ func (s *TestSimulation) ForceApproveCashJournal(ctx context.Context, cashJourna
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5686,7 +5686,7 @@ func (s *TestSimulation) ForceRejectCashJournal(ctx context.Context, cashJournal
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5698,8 +5698,8 @@ func (s *TestSimulation) ForceRejectCashJournal(ctx context.Context, cashJournal
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -5949,7 +5949,7 @@ func (s *TestSimulation) ForceApprovePositionJournal(ctx context.Context, positi
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -5961,8 +5961,8 @@ func (s *TestSimulation) ForceApprovePositionJournal(ctx context.Context, positi
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {
@@ -6214,7 +6214,7 @@ func (s *TestSimulation) ForceRejectPositionJournal(ctx context.Context, positio
 					InitialInterval: 500,
 					MaxInterval:     5000,
 					Exponent:        1.5,
-					MaxElapsedTime:  15000,
+					MaxElapsedTime:  60000,
 				},
 				RetryConnectionErrors: true,
 			}
@@ -6226,8 +6226,8 @@ func (s *TestSimulation) ForceRejectPositionJournal(ctx context.Context, positio
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"4XX",
-				"5XX",
+				"504",
+				"429",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil && req.Body != http.NoBody && req.GetBody != nil {

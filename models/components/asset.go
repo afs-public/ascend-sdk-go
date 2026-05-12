@@ -1530,6 +1530,7 @@ const (
 	AssetType1MutualFund      AssetType1 = "MUTUAL_FUND"
 	AssetType1AltInvestment   AssetType1 = "ALT_INVESTMENT"
 	AssetType1Index           AssetType1 = "INDEX"
+	AssetType1EventContract   AssetType1 = "EVENT_CONTRACT"
 )
 
 func (e AssetType1) ToPointer() *AssetType1 {
