@@ -1,5 +1,7 @@
 # LLCEnrollmentMetadataCreate
 
+Enrollment metadata for LLC accounts.
+
 
 ## Fields
 

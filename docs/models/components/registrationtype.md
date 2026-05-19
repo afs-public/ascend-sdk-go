@@ -11,6 +11,7 @@ The registration of the account (e.g. Individual, Joint, IRA, etc.)
 | `RegistrationTypeIndividualRegistration`                    | INDIVIDUAL_REGISTRATION                                     |
 | `RegistrationTypeEstateRegistration`                        | ESTATE_REGISTRATION                                         |
 | `RegistrationTypeTraditionalIraRegistration`                | TRADITIONAL_IRA_REGISTRATION                                |
+| `RegistrationTypeSimpleIraRegistration`                     | SIMPLE_IRA_REGISTRATION                                     |
 | `RegistrationTypeSepIraRegistration`                        | SEP_IRA_REGISTRATION                                        |
 | `RegistrationTypeRothIraRegistration`                       | ROTH_IRA_REGISTRATION                                       |
 | `RegistrationTypeRolloverIraRegistration`                   | ROLLOVER_IRA_REGISTRATION                                   |
@@ -28,3 +29,4 @@ The registration of the account (e.g. Individual, Joint, IRA, etc.)
 | `RegistrationTypeForeignIndividualRegistration`             | FOREIGN_INDIVIDUAL_REGISTRATION                             |
 | `RegistrationTypeCustodialRegistration`                     | CUSTODIAL_REGISTRATION                                      |
 | `RegistrationTypeFuturesRegistration`                       | FUTURES_REGISTRATION                                        |
+| `RegistrationTypeCustodialRothIraRegistration`              | CUSTODIAL_ROTH_IRA_REGISTRATION                             |

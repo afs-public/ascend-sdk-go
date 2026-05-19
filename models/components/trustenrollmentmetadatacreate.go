@@ -55,6 +55,7 @@ func (e OpenedOnBehalfOf) ToPointer() *OpenedOnBehalfOf {
 	return &e
 }
 
+// TrustEnrollmentMetadataCreate - Enrollment metadata for trust accounts.
 type TrustEnrollmentMetadataCreate struct {
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *TrustEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`

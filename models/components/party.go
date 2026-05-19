@@ -16,6 +16,7 @@ func (e PartyCftcDocumentDeliveryPreference) ToPointer() *PartyCftcDocumentDeliv
 	return &e
 }
 
+// PartyBusinessIndustrialClassification - The Standard Industrial Classification (SIC) of the entity.
 type PartyBusinessIndustrialClassification string
 
 const (
@@ -639,7 +640,8 @@ type PartyLegalEntity struct {
 	// Indicates whether the entity is an adviser. By default, this is set to `false`.
 	Adviser *bool `json:"adviser,omitempty"`
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
-	BrokerDealer                     *bool                                  `json:"broker_dealer,omitempty"`
+	BrokerDealer *bool `json:"broker_dealer,omitempty"`
+	// The Standard Industrial Classification (SIC) of the entity.
 	BusinessIndustrialClassification *PartyBusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
 	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
 	ClientEntityID *string `json:"client_entity_id,omitempty"`
@@ -704,6 +706,8 @@ type PartyLegalEntity struct {
 	RelatedDocumentIds []string `json:"related_document_ids,omitempty"`
 	// Indicates whether the trust is a revocable trust. By default, this is set to `false`.
 	RevocableTrust *bool `json:"revocable_trust,omitempty"`
+	// Unique identifier for the tax form associated with this legal entity. This identifier is assigned after successful consent to tax certification
+	TaxFormID *string `json:"tax_form_id,omitempty"`
 	// The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type
 	TaxID *string `json:"tax_id,omitempty"`
 	// The last four characters of the related person's tax identifier; Masked/truncated to "last four" in most usage contexts to preserve data privacy.
@@ -922,6 +926,13 @@ func (o *PartyLegalEntity) GetRevocableTrust() *bool {
 		return nil
 	}
 	return o.RevocableTrust
+}
+
+func (o *PartyLegalEntity) GetTaxFormID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxFormID
 }
 
 func (o *PartyLegalEntity) GetTaxID() *string {
@@ -1710,6 +1721,7 @@ func (o *PartyNaturalPersonFdd) GetOtherSourcesOfWealth() *PartyOtherSourcesOfWe
 	return o.OtherSourcesOfWealth
 }
 
+// PartyResidencyStatus - The residency status of the non-citizen resident.
 type PartyResidencyStatus string
 
 const (
@@ -1725,6 +1737,7 @@ func (e PartyResidencyStatus) ToPointer() *PartyResidencyStatus {
 
 // PartyNonCitizenResidency - Facilitates non-citizen lawful US residents to open domestic accounts
 type PartyNonCitizenResidency struct {
+	// The residency status of the non-citizen resident.
 	ResidencyStatus *PartyResidencyStatus `json:"residency_status,omitempty"`
 }
 
@@ -2219,6 +2232,8 @@ type PartyLegalNaturalPerson struct {
 	PoliticallyExposedImmediateFamilyNames []string `json:"politically_exposed_immediate_family_names,omitempty"`
 	// A Party's self-disclosed list of named politically exposed organizations they are personally associated with.
 	PoliticallyExposedOrganization *string `json:"politically_exposed_organization,omitempty"`
+	// Unique identifier for the tax form associated with this legal natural person. This identifier is assigned after successful consent to tax certification
+	TaxFormID *string `json:"tax_form_id,omitempty"`
 	// The full U.S. tax ID for a related person; Must be provided with `ITIN` or `SSN` tax ID type
 	TaxID *string `json:"tax_id,omitempty"`
 	// The last four characters of the related person's tax identifier; Masked/truncated to "last four" in most usage contexts to preserve data privacy.
@@ -2451,6 +2466,13 @@ func (o *PartyLegalNaturalPerson) GetPoliticallyExposedOrganization() *string {
 		return nil
 	}
 	return o.PoliticallyExposedOrganization
+}
+
+func (o *PartyLegalNaturalPerson) GetTaxFormID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxFormID
 }
 
 func (o *PartyLegalNaturalPerson) GetTaxID() *string {

@@ -17,6 +17,7 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentCreateTypeRegistrationJointCp`                   | REGISTRATION_JOINT_CP                                       |
 | `EnrollmentCreateTypeRegistrationEstate`                    | REGISTRATION_ESTATE                                         |
 | `EnrollmentCreateTypeRegistrationIraTraditional`            | REGISTRATION_IRA_TRADITIONAL                                |
+| `EnrollmentCreateTypeRegistrationIraSimple`                 | REGISTRATION_IRA_SIMPLE                                     |
 | `EnrollmentCreateTypeRegistrationIraSep`                    | REGISTRATION_IRA_SEP                                        |
 | `EnrollmentCreateTypeRegistrationIraRoth`                   | REGISTRATION_IRA_ROTH                                       |
 | `EnrollmentCreateTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                                   |
@@ -35,3 +36,4 @@ Describes the name of the enrollment; Expressed as an enum
 | `EnrollmentCreateTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                      |
 | `EnrollmentCreateTypeRegistrationFutures`                   | REGISTRATION_FUTURES                                        |
 | `EnrollmentCreateTypeEventContractsKalshi`                  | EVENT_CONTRACTS_KALSHI                                      |
+| `EnrollmentCreateTypeRegistrationCustodialIraRoth`          | REGISTRATION_CUSTODIAL_IRA_ROTH                             |

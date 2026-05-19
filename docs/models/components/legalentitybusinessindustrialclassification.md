@@ -1,5 +1,7 @@
 # LegalEntityBusinessIndustrialClassification
 
+The Standard Industrial Classification (SIC) of the entity.
+
 
 ## Values
 

@@ -760,6 +760,7 @@ func (o *NaturalPersonFdd) GetOtherSourcesOfWealth() *OtherSourcesOfWealth {
 	return o.OtherSourcesOfWealth
 }
 
+// LegalNaturalPersonResidencyStatus - The residency status of the non-citizen resident.
 type LegalNaturalPersonResidencyStatus string
 
 const (
@@ -775,6 +776,7 @@ func (e LegalNaturalPersonResidencyStatus) ToPointer() *LegalNaturalPersonReside
 
 // NonCitizenResidency - Facilitates non-citizen lawful US residents to open domestic accounts
 type NonCitizenResidency struct {
+	// The residency status of the non-citizen resident.
 	ResidencyStatus *LegalNaturalPersonResidencyStatus `json:"residency_status,omitempty"`
 }
 
@@ -1269,6 +1271,8 @@ type LegalNaturalPerson struct {
 	PoliticallyExposedImmediateFamilyNames []string `json:"politically_exposed_immediate_family_names,omitempty"`
 	// A Party's self-disclosed list of named politically exposed organizations they are personally associated with.
 	PoliticallyExposedOrganization *string `json:"politically_exposed_organization,omitempty"`
+	// Unique identifier for the tax form associated with this legal natural person. This identifier is assigned after successful consent to tax certification
+	TaxFormID *string `json:"tax_form_id,omitempty"`
 	// The full U.S. tax ID for a related person; Must be provided with `ITIN` or `SSN` tax ID type
 	TaxID *string `json:"tax_id,omitempty"`
 	// The last four characters of the related person's tax identifier; Masked/truncated to "last four" in most usage contexts to preserve data privacy.
@@ -1501,6 +1505,13 @@ func (o *LegalNaturalPerson) GetPoliticallyExposedOrganization() *string {
 		return nil
 	}
 	return o.PoliticallyExposedOrganization
+}
+
+func (o *LegalNaturalPerson) GetTaxFormID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxFormID
 }
 
 func (o *LegalNaturalPerson) GetTaxID() *string {

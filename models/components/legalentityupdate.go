@@ -2,6 +2,7 @@
 
 package components
 
+// LegalEntityUpdateBusinessIndustrialClassification - The Standard Industrial Classification (SIC) of the entity.
 type LegalEntityUpdateBusinessIndustrialClassification string
 
 const (
@@ -102,7 +103,8 @@ type LegalEntityUpdate struct {
 	// Indicates whether the entity is an adviser. By default, this is set to `false`.
 	Adviser *bool `json:"adviser,omitempty"`
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
-	BrokerDealer                     *bool                                              `json:"broker_dealer,omitempty"`
+	BrokerDealer *bool `json:"broker_dealer,omitempty"`
+	// The Standard Industrial Classification (SIC) of the entity.
 	BusinessIndustrialClassification *LegalEntityUpdateBusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
 	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
 	ClientEntityID *string `json:"client_entity_id,omitempty"`

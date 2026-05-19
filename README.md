@@ -420,6 +420,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 * [ListAccounts](docs/sdks/accountmanagement/README.md#listaccounts) - List Accounts
 * [UpdateAccount](docs/sdks/accountmanagement/README.md#updateaccount) - Update Account
+* [UpdateAccountGroup](docs/sdks/accountmanagement/README.md#updateaccountgroup) - Update Account Group
 * [AddParty](docs/sdks/accountmanagement/README.md#addparty) - Add Party
 * [UpdateParty](docs/sdks/accountmanagement/README.md#updateparty) - Update Party
 * [ReplaceParty](docs/sdks/accountmanagement/README.md#replaceparty) - Replace Party

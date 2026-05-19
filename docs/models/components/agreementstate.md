@@ -1,6 +1,6 @@
 # AgreementState
 
-The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or `AFFIRMED` if acknowledgement has been received by AFS
+The lifecycle state of an agreement associated with an enrollment.
 
 
 ## Values
@@ -11,3 +11,4 @@ The status of an agreement which blocks an enrollment; `REQUIRED` if not yet rec
 | `AgreementStateRequired`                  | REQUIRED                                  |
 | `AgreementStateAffirmed`                  | AFFIRMED                                  |
 | `AgreementStateVoided`                    | VOIDED                                    |
+| `AgreementStateAffirmationOptional`       | AFFIRMATION_OPTIONAL                      |

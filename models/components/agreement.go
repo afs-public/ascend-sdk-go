@@ -21,7 +21,7 @@ func (e AgreementSource) ToPointer() *AgreementSource {
 	return &e
 }
 
-// AgreementState - The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or `AFFIRMED` if acknowledgement has been received by AFS
+// AgreementState - The lifecycle state of an agreement associated with an enrollment.
 type AgreementState string
 
 const (
@@ -29,6 +29,7 @@ const (
 	AgreementStateRequired                  AgreementState = "REQUIRED"
 	AgreementStateAffirmed                  AgreementState = "AFFIRMED"
 	AgreementStateVoided                    AgreementState = "VOIDED"
+	AgreementStateAffirmationOptional       AgreementState = "AFFIRMATION_OPTIONAL"
 )
 
 func (e AgreementState) ToPointer() *AgreementState {
@@ -45,7 +46,7 @@ type Agreement struct {
 	AgreementName *string `json:"agreement_name,omitempty"`
 	// An internal indicator from where the agreement was generated; Typically `ACCOUNTS_SERVICE` if accessing our public APIs
 	AgreementSource *AgreementSource `json:"agreement_source,omitempty"`
-	// The status of an agreement which blocks an enrollment; `REQUIRED` if not yet received, or `AFFIRMED` if acknowledgement has been received by AFS
+	// The lifecycle state of an agreement associated with an enrollment.
 	AgreementState *AgreementState `json:"agreement_state,omitempty"`
 	// A URI referencing a static PDF containing the legalese of a given agreement; All agreements of the same nature link to the same publicly-available PDF.
 	AgreementURI *string `json:"agreement_uri,omitempty"`
