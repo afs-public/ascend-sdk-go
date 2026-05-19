@@ -16,6 +16,7 @@ const (
 	EnrollmentTypeRegistrationJointCp                   EnrollmentType = "REGISTRATION_JOINT_CP"
 	EnrollmentTypeRegistrationEstate                    EnrollmentType = "REGISTRATION_ESTATE"
 	EnrollmentTypeRegistrationIraTraditional            EnrollmentType = "REGISTRATION_IRA_TRADITIONAL"
+	EnrollmentTypeRegistrationIraSimple                 EnrollmentType = "REGISTRATION_IRA_SIMPLE"
 	EnrollmentTypeRegistrationIraSep                    EnrollmentType = "REGISTRATION_IRA_SEP"
 	EnrollmentTypeRegistrationIraRoth                   EnrollmentType = "REGISTRATION_IRA_ROTH"
 	EnrollmentTypeRegistrationIraRollover               EnrollmentType = "REGISTRATION_IRA_ROLLOVER"
@@ -34,6 +35,7 @@ const (
 	EnrollmentTypeVirtualAccountNumber                  EnrollmentType = "VIRTUAL_ACCOUNT_NUMBER"
 	EnrollmentTypeRegistrationFutures                   EnrollmentType = "REGISTRATION_FUTURES"
 	EnrollmentTypeEventContractsKalshi                  EnrollmentType = "EVENT_CONTRACTS_KALSHI"
+	EnrollmentTypeRegistrationCustodialIraRoth          EnrollmentType = "REGISTRATION_CUSTODIAL_IRA_ROTH"
 )
 
 func (e EnrollmentType) ToPointer() *EnrollmentType {

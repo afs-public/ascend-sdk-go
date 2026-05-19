@@ -3,6 +3,7 @@ package account_management1
 import (
 	"context"
 	"fmt"
+	"os"
 	"testing"
 
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
@@ -41,6 +42,7 @@ func TestAccountManagement(t *testing.T) {
 
 	testAccountManagementListAccounts(t, sdk, ctx)
 	testAccountManagementUpdateAccount(t, sdk, ctx, *listAccountId)
+	testAccountManagementUpdateAccountGroup(t, sdk, ctx, *listAccountId)
 	partyId := testAccountManagementAddParty(t, sdk, ctx, *listAccountId, *ownerPartyId, *legalNaturalPersonId)
 	testAccountManagementUpdateParty(t, sdk, ctx, *listAccountId, *partyId)
 	replacedPartyId := testAccountManagementReplaceParty(t, sdk, ctx, *listAccountId, *partyId, *legalNaturalPersonId, *ownerPartyId)
@@ -88,6 +90,17 @@ func testAccountManagementUpdateAccount(t *testing.T, sdk *ascendsdk.SDK, ctx co
 	}
 
 	res, err := sdk.AccountManagement.UpdateAccount(ctx, accountId, accountRequestUpdateCreate, nil)
+	require.NoError(t, err)
+	assert.NotNil(t, res.Account)
+	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+}
+
+func testAccountManagementUpdateAccountGroup(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) {
+	updateAccountGroupRequestUpdate := components.UpdateAccountGroupRequestUpdate{
+		AccountGroupID: ascendsdk.String(os.Getenv("ACCOUNT_GROUP_ID")),
+	}
+
+	res, err := sdk.AccountManagement.UpdateAccountGroup(ctx, accountId, updateAccountGroupRequestUpdate)
 	require.NoError(t, err)
 	assert.NotNil(t, res.Account)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

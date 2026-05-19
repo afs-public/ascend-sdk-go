@@ -32,7 +32,7 @@ func TestPersonManagement_AccountsListLegalNaturalPersons(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdkgo.Int(25), ascendsdkgo.String(""), nil, ascendsdkgo.String(""))
+	res, err := s.PersonManagement.ListLegalNaturalPersons(ctx, ascendsdkgo.Int(25), ascendsdkgo.String(""), ascendsdkgo.String("given_name desc"), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

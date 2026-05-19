@@ -4,6 +4,7 @@ package components
 
 // AssignLargeTraderRequestCreate - The request to assign a Large Trader ID to a Legal Natural Person/Legal Entity.
 type AssignLargeTraderRequestCreate struct {
+	// The Large Trader ID to assign
 	LargeTraderID string `json:"large_trader_id"`
 }
 

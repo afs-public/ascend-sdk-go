@@ -28,6 +28,7 @@ func (e ForeignIndividualAccountEnrollmentMetadataCreateFdicCashSweep) ToPointer
 	return &e
 }
 
+// ForeignIndividualAccountEnrollmentMetadataCreate - Enrollment metadata for foreign individual accounts.
 type ForeignIndividualAccountEnrollmentMetadataCreate struct {
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *ForeignIndividualAccountEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`

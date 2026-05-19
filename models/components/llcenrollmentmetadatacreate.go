@@ -41,6 +41,7 @@ func (e LLCEnrollmentMetadataCreateMoneyMarketFundSweep) ToPointer() *LLCEnrollm
 	return &e
 }
 
+// LLCEnrollmentMetadataCreate - Enrollment metadata for LLC accounts.
 type LLCEnrollmentMetadataCreate struct {
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *LLCEnrollmentMetadataCreateDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`

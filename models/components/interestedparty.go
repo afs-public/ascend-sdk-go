@@ -2,7 +2,7 @@
 
 package components
 
-// CftcDocumentDeliveryPreference - Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+// CftcDocumentDeliveryPreference - Delivery method instruction for CFTC documents for a given Interested Party record; Not set for interested parties (no email collected); only applies to CFTC regulated accounts
 type CftcDocumentDeliveryPreference string
 
 const (
@@ -162,7 +162,7 @@ func (e InterestedPartyTradeConfirmationDeliveryPreference) ToPointer() *Interes
 
 // InterestedParty - An interested party.
 type InterestedParty struct {
-	// Delivery method instruction for CFTC documents for a given Interested Party record; Defaults to `DIGITAL` on futures account creation Only applies to CFTC regulated accounts
+	// Delivery method instruction for CFTC documents for a given Interested Party record; Not set for interested parties (no email collected); only applies to CFTC regulated accounts
 	CftcDocumentDeliveryPreference *CftcDocumentDeliveryPreference `json:"cftc_document_delivery_preference,omitempty"`
 	// A system-generated unique identifier for an Interested Party on an account; Used to access the record after creation
 	InterestedPartyID *string `json:"interested_party_id,omitempty"`

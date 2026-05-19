@@ -2,6 +2,7 @@
 
 package components
 
+// ResidencyStatus - The residency status of the non-citizen resident.
 type ResidencyStatus string
 
 const (
@@ -17,6 +18,7 @@ func (e ResidencyStatus) ToPointer() *ResidencyStatus {
 
 // NonCitizenResidencyCreate - Non Citizenship Residency to facilitate non-Citizen lawful US residents to open domestic accounts.
 type NonCitizenResidencyCreate struct {
+	// The residency status of the non-citizen resident.
 	ResidencyStatus ResidencyStatus `json:"residency_status"`
 }
 

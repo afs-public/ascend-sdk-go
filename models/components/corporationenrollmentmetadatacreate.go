@@ -41,6 +41,7 @@ func (e MoneyMarketFundSweep) ToPointer() *MoneyMarketFundSweep {
 	return &e
 }
 
+// CorporationEnrollmentMetadataCreate - Enrollment metadata for corporation accounts.
 type CorporationEnrollmentMetadataCreate struct {
 	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
 	DividendReinvestmentPlan *DividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`

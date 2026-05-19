@@ -1,5 +1,7 @@
 # ForeignIndividualAccountEnrollmentMetadataCreate
 
+Enrollment metadata for foreign individual accounts.
+
 
 ## Fields
 

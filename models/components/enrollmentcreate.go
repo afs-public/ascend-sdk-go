@@ -31,6 +31,7 @@ const (
 	EnrollmentCreateTypeRegistrationJointCp                   EnrollmentCreateType = "REGISTRATION_JOINT_CP"
 	EnrollmentCreateTypeRegistrationEstate                    EnrollmentCreateType = "REGISTRATION_ESTATE"
 	EnrollmentCreateTypeRegistrationIraTraditional            EnrollmentCreateType = "REGISTRATION_IRA_TRADITIONAL"
+	EnrollmentCreateTypeRegistrationIraSimple                 EnrollmentCreateType = "REGISTRATION_IRA_SIMPLE"
 	EnrollmentCreateTypeRegistrationIraSep                    EnrollmentCreateType = "REGISTRATION_IRA_SEP"
 	EnrollmentCreateTypeRegistrationIraRoth                   EnrollmentCreateType = "REGISTRATION_IRA_ROTH"
 	EnrollmentCreateTypeRegistrationIraRollover               EnrollmentCreateType = "REGISTRATION_IRA_ROLLOVER"
@@ -49,6 +50,7 @@ const (
 	EnrollmentCreateTypeVirtualAccountNumber                  EnrollmentCreateType = "VIRTUAL_ACCOUNT_NUMBER"
 	EnrollmentCreateTypeRegistrationFutures                   EnrollmentCreateType = "REGISTRATION_FUTURES"
 	EnrollmentCreateTypeEventContractsKalshi                  EnrollmentCreateType = "EVENT_CONTRACTS_KALSHI"
+	EnrollmentCreateTypeRegistrationCustodialIraRoth          EnrollmentCreateType = "REGISTRATION_CUSTODIAL_IRA_ROTH"
 )
 
 func (e EnrollmentCreateType) ToPointer() *EnrollmentCreateType {
@@ -60,12 +62,16 @@ type EnrollmentCreate struct {
 	// Enrollment metadata for the BENEFICIARY_DESIGNATION enrollment type.
 	BeneficiaryEnrollmentMetadata *BeneficiaryEnrollmentMetadataCreate `json:"beneficiary_enrollment_metadata,omitempty"`
 	// The consent method for the enrollment. Defaults to ESIGNATURE.
-	ConsentMethod                 *EnrollmentCreateConsentMethod       `json:"consent_method,omitempty"`
+	ConsentMethod *EnrollmentCreateConsentMethod `json:"consent_method,omitempty"`
+	// Enrollment metadata for corporation accounts.
 	CorporationEnrollmentMetadata *CorporationEnrollmentMetadataCreate `json:"corporation_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the CUSTODIAL enrollment type
 	CustodialEnrollmentMetadata *CustodialEnrollmentMetadataCreate `json:"custodial_enrollment_metadata,omitempty"`
+	// Enrollment metadata for the REGISTRATION_CUSTODIAL_IRA_ROTH enrollment type
+	CustodialIraRothEnrollmentMetadata *CustodialIRARothEnrollmentMetadataCreate `json:"custodial_ira_roth_enrollment_metadata,omitempty"`
 	// Enrollment metadata for estate enrollments
-	EstateEnrollmentMetadata                   *EstateEnrollmentMetadataCreate                   `json:"estate_enrollment_metadata,omitempty"`
+	EstateEnrollmentMetadata *EstateEnrollmentMetadataCreate `json:"estate_enrollment_metadata,omitempty"`
+	// Enrollment metadata for foreign individual accounts.
 	ForeignIndividualAccountEnrollmentMetadata *ForeignIndividualAccountEnrollmentMetadataCreate `json:"foreign_individual_account_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the FOREIGN_JOINT_WROS enrollment type
 	ForeignJointAccountEnrollmentMetadata *ForeignJointAccountEnrollmentMetadataCreate `json:"foreign_joint_account_enrollment_metadata,omitempty"`
@@ -95,18 +101,18 @@ type EnrollmentCreate struct {
 	JointTenantsInCommonEnrollmentMetadata *JointTenantsInCommonEnrollmentMetadataCreate `json:"joint_tenants_in_common_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the With Right of Survivorship enrollment type
 	JointWithRightsOfSurvivorshipEnrollmentMetadata *JointWithRightsOfSurvivorshipEnrollmentMetadataCreate `json:"joint_with_rights_of_survivorship_enrollment_metadata,omitempty"`
-	LlcEnrollmentMetadata                           *LLCEnrollmentMetadataCreate                           `json:"llc_enrollment_metadata,omitempty"`
+	// Enrollment metadata for LLC accounts.
+	LlcEnrollmentMetadata *LLCEnrollmentMetadataCreate `json:"llc_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the REGISTRATION_OPERATING enrollment type.
 	OperatingEnrollmentMetadata *OperatingEnrollmentMetadataCreate `json:"operating_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the ORDERS_OPTIONS_TRADING enrollment type
 	OrdersOptionsTradingEnrollmentMetadata *OrdersOptionsTradingEnrollmentMetadataCreate `json:"orders_options_trading_enrollment_metadata,omitempty"`
-	// Enrollment metadata for the PARTNERSHIP enrollment type
-	PartnershipEnrollmentMetadata *PartnershipEnrollmentMetadataCreate `json:"partnership_enrollment_metadata,omitempty"`
 	// The ULID is associated with the approver of a given enrollment. The approver you create will contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID associated with Apex's approver.
 	PrincipalApproverID string `json:"principal_approver_id"`
 	// Enrollment metadata for the SOLE_PROPRIETORSHIP enrollment type
 	SoleProprietorshipEnrollmentMetadata *SoleProprietorshipEnrollmentMetadataCreate `json:"sole_proprietorship_enrollment_metadata,omitempty"`
-	TrustEnrollmentMetadata              *TrustEnrollmentMetadataCreate              `json:"trust_enrollment_metadata,omitempty"`
+	// Enrollment metadata for trust accounts.
+	TrustEnrollmentMetadata *TrustEnrollmentMetadataCreate `json:"trust_enrollment_metadata,omitempty"`
 	// Describes the name of the enrollment; Expressed as an enum
 	Type EnrollmentCreateType `json:"type"`
 	// Enrollment metadata for the VIRTUAL_ACCOUNT_NUMBER enrollment type
@@ -139,6 +145,13 @@ func (o *EnrollmentCreate) GetCustodialEnrollmentMetadata() *CustodialEnrollment
 		return nil
 	}
 	return o.CustodialEnrollmentMetadata
+}
+
+func (o *EnrollmentCreate) GetCustodialIraRothEnrollmentMetadata() *CustodialIRARothEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.CustodialIraRothEnrollmentMetadata
 }
 
 func (o *EnrollmentCreate) GetEstateEnrollmentMetadata() *EstateEnrollmentMetadataCreate {
@@ -272,13 +285,6 @@ func (o *EnrollmentCreate) GetOrdersOptionsTradingEnrollmentMetadata() *OrdersOp
 		return nil
 	}
 	return o.OrdersOptionsTradingEnrollmentMetadata
-}
-
-func (o *EnrollmentCreate) GetPartnershipEnrollmentMetadata() *PartnershipEnrollmentMetadataCreate {
-	if o == nil {
-		return nil
-	}
-	return o.PartnershipEnrollmentMetadata
 }
 
 func (o *EnrollmentCreate) GetPrincipalApproverID() string {

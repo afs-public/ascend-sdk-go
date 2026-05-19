@@ -21,6 +21,7 @@ Otherwise, must be empty.
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointCp`                   | REGISTRATION_JOINT_CP                                                                  |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationEstate`                    | REGISTRATION_ESTATE                                                                    |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraTraditional`            | REGISTRATION_IRA_TRADITIONAL                                                           |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSimple`                 | REGISTRATION_IRA_SIMPLE                                                                |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSep`                    | REGISTRATION_IRA_SEP                                                                   |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRoth`                   | REGISTRATION_IRA_ROTH                                                                  |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRollover`               | REGISTRATION_IRA_ROLLOVER                                                              |
@@ -39,3 +40,4 @@ Otherwise, must be empty.
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber`                  | VIRTUAL_ACCOUNT_NUMBER                                                                 |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationFutures`                   | REGISTRATION_FUTURES                                                                   |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeEventContractsKalshi`                  | EVENT_CONTRACTS_KALSHI                                                                 |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodialIraRoth`          | REGISTRATION_CUSTODIAL_IRA_ROTH                                                        |

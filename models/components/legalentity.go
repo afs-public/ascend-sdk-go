@@ -2,6 +2,7 @@
 
 package components
 
+// LegalEntityBusinessIndustrialClassification - The Standard Industrial Classification (SIC) of the entity.
 type LegalEntityBusinessIndustrialClassification string
 
 const (
@@ -625,7 +626,8 @@ type LegalEntity struct {
 	// Indicates whether the entity is an adviser. By default, this is set to `false`.
 	Adviser *bool `json:"adviser,omitempty"`
 	// Indicates whether the entity is a broker dealer. By default, this is set to `false`.
-	BrokerDealer                     *bool                                        `json:"broker_dealer,omitempty"`
+	BrokerDealer *bool `json:"broker_dealer,omitempty"`
+	// The Standard Industrial Classification (SIC) of the entity.
 	BusinessIndustrialClassification *LegalEntityBusinessIndustrialClassification `json:"business_industrial_classification,omitempty"`
 	// An external identifier for the legal entity. This identifier does not have internal uniqueness constraints.
 	ClientEntityID *string `json:"client_entity_id,omitempty"`
@@ -690,6 +692,8 @@ type LegalEntity struct {
 	RelatedDocumentIds []string `json:"related_document_ids,omitempty"`
 	// Indicates whether the trust is a revocable trust. By default, this is set to `false`.
 	RevocableTrust *bool `json:"revocable_trust,omitempty"`
+	// Unique identifier for the tax form associated with this legal entity. This identifier is assigned after successful consent to tax certification
+	TaxFormID *string `json:"tax_form_id,omitempty"`
 	// The full U.S. tax ID for a related entity; Must be provided with `EIN` tax ID type
 	TaxID *string `json:"tax_id,omitempty"`
 	// The last four characters of the related person's tax identifier; Masked/truncated to "last four" in most usage contexts to preserve data privacy.
@@ -908,6 +912,13 @@ func (o *LegalEntity) GetRevocableTrust() *bool {
 		return nil
 	}
 	return o.RevocableTrust
+}
+
+func (o *LegalEntity) GetTaxFormID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TaxFormID
 }
 
 func (o *LegalEntity) GetTaxID() *string {

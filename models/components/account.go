@@ -450,6 +450,7 @@ const (
 	RegistrationTypeIndividualRegistration                    RegistrationType = "INDIVIDUAL_REGISTRATION"
 	RegistrationTypeEstateRegistration                        RegistrationType = "ESTATE_REGISTRATION"
 	RegistrationTypeTraditionalIraRegistration                RegistrationType = "TRADITIONAL_IRA_REGISTRATION"
+	RegistrationTypeSimpleIraRegistration                     RegistrationType = "SIMPLE_IRA_REGISTRATION"
 	RegistrationTypeSepIraRegistration                        RegistrationType = "SEP_IRA_REGISTRATION"
 	RegistrationTypeRothIraRegistration                       RegistrationType = "ROTH_IRA_REGISTRATION"
 	RegistrationTypeRolloverIraRegistration                   RegistrationType = "ROLLOVER_IRA_REGISTRATION"
@@ -467,6 +468,7 @@ const (
 	RegistrationTypeForeignIndividualRegistration             RegistrationType = "FOREIGN_INDIVIDUAL_REGISTRATION"
 	RegistrationTypeCustodialRegistration                     RegistrationType = "CUSTODIAL_REGISTRATION"
 	RegistrationTypeFuturesRegistration                       RegistrationType = "FUTURES_REGISTRATION"
+	RegistrationTypeCustodialRothIraRegistration              RegistrationType = "CUSTODIAL_ROTH_IRA_REGISTRATION"
 )
 
 func (e RegistrationType) ToPointer() *RegistrationType {

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: b892cd8bce5822b456302bef9c91109b
-  docVersion: v1:20260512:uat:dd3486b54c08
+  docChecksum: a4d6cb82123eaa1be499950ba1fe9f44
+  docVersion: v1:20260518:uat:21f073ab387d
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.3.8
-  configChecksum: b1d1f91e621fe8801a68a6e9ea3941c9
+  releaseVersion: 1.3.9
+  configChecksum: 5953a8f29cb1914a1be71393aa15f754
 features:
   go:
     additionalDependencies: 0.1.0
@@ -158,6 +158,7 @@ generatedFiles:
   - /models/components/countrydetail.go
   - /models/components/createuploadlinkrequestcreate.go
   - /models/components/custodialenrollmentmetadatacreate.go
+  - /models/components/custodialirarothenrollmentmetadatacreate.go
   - /models/components/customeridentification.go
   - /models/components/customeridentificationresult.go
   - /models/components/customerprofilecreate.go
@@ -372,7 +373,6 @@ generatedFiles:
   - /models/components/otheraccountscreate.go
   - /models/components/othersourcesofwealthcreate.go
   - /models/components/othersourcesofwealthupdate.go
-  - /models/components/partnershipenrollmentmetadatacreate.go
   - /models/components/party.go
   - /models/components/partyrequestcreate.go
   - /models/components/partyrequestupdate.go
@@ -480,6 +480,7 @@ generatedFiles:
   - /models/components/trustedcontactcreate.go
   - /models/components/trustedcontactupdate.go
   - /models/components/trustenrollmentmetadatacreate.go
+  - /models/components/updateaccountgrouprequestupdate.go
   - /models/components/uploadlink.go
   - /models/components/verifyidentitylookuprequestcreate.go
   - /models/components/verifymicrodepositsrequestcreate.go
@@ -539,6 +540,7 @@ generatedFiles:
   - /models/operations/accountsremoveparty.go
   - /models/operations/accountsreplaceparty.go
   - /models/operations/accountsupdateaccount.go
+  - /models/operations/accountsupdateaccountgroup.go
   - /models/operations/accountsupdateinterestedparty.go
   - /models/operations/accountsupdatelegalentity.go
   - /models/operations/accountsupdatelegalnaturalperson.go
@@ -1460,6 +1462,10 @@ generatedFiles:
   - docs/models/components/custodialenrollmentmetadatacreate.md
   - docs/models/components/custodialenrollmentmetadatacreatedividendreinvestmentplan.md
   - docs/models/components/custodialenrollmentmetadatacreatefdiccashsweep.md
+  - docs/models/components/custodialirarothenrollmentmetadata.md
+  - docs/models/components/custodialirarothenrollmentmetadatacreate.md
+  - docs/models/components/custodialirarothenrollmentmetadatacreatedividendreinvestmentplan.md
+  - docs/models/components/custodialirarothenrollmentmetadatacreatefdiccashsweep.md
   - docs/models/components/customeridentification.md
   - docs/models/components/customeridentificationbirthdate.md
   - docs/models/components/customeridentificationlegaladdress.md
@@ -1551,6 +1557,8 @@ generatedFiles:
   - docs/models/components/enrollmentcreate.md
   - docs/models/components/enrollmentcreateconsentmethod.md
   - docs/models/components/enrollmentcreatetype.md
+  - docs/models/components/enrollmentcustodialirarothenrollmentmetadatadividendreinvestmentplan.md
+  - docs/models/components/enrollmentcustodialirarothenrollmentmetadatafdiccashsweep.md
   - docs/models/components/enrollmentdepositedfunds.md
   - docs/models/components/enrollmentdeterminedaccountriskrating.md
   - docs/models/components/enrollmentdividendreinvestmentplan.md
@@ -1621,22 +1629,6 @@ generatedFiles:
   - docs/models/components/enrollmentoperatingpurpose.md
   - docs/models/components/enrollmentoptionslevel.md
   - docs/models/components/enrollmentotheraccounts.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatadepositedfunds.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatadeterminedaccountriskrating.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatadividendreinvestmentplan.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadataeddaccountenrollmentmetadata.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatafdiccashsweep.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatafinancialprofile.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadataforeignbondtradingdetails.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatainitialdepositamount.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatalowpricedsecurities.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatalowpricedsecuritiespercentage.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatamoneymarketfundsweep.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadataotheraccounts.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadataplannedactivity.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadataprimaryaccountactivitytype.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatarelatedpepdetails.md
-  - docs/models/components/enrollmentpartnershipenrollmentmetadatawithdrawalfrequency.md
   - docs/models/components/enrollmentplannedactivity.md
   - docs/models/components/enrollmentprimaryaccountactivitytype.md
   - docs/models/components/enrollmentrelatedpepdetails.md
@@ -2389,11 +2381,6 @@ generatedFiles:
   - docs/models/components/outcome.md
   - docs/models/components/ownershipstructure.md
   - docs/models/components/ownershiptype.md
-  - docs/models/components/partnershipenrollmentmetadata.md
-  - docs/models/components/partnershipenrollmentmetadatacreate.md
-  - docs/models/components/partnershipenrollmentmetadatacreatedividendreinvestmentplan.md
-  - docs/models/components/partnershipenrollmentmetadatacreatefdiccashsweep.md
-  - docs/models/components/partnershipenrollmentmetadatacreatemoneymarketfundsweep.md
   - docs/models/components/party.md
   - docs/models/components/partybirthdate.md
   - docs/models/components/partybusinessindustrialclassification.md
@@ -2928,6 +2915,7 @@ generatedFiles:
   - docs/models/components/unitsplit.md
   - docs/models/components/universalfootnote.md
   - docs/models/components/unrestricted.md
+  - docs/models/components/updateaccountgrouprequestupdate.md
   - docs/models/components/updatedbankaccounttype.md
   - docs/models/components/uploadeddate.md
   - docs/models/components/uploadlink.md
@@ -3094,6 +3082,8 @@ generatedFiles:
   - docs/models/operations/accountsremovepartyresponse.md
   - docs/models/operations/accountsreplacepartyrequest.md
   - docs/models/operations/accountsreplacepartyresponse.md
+  - docs/models/operations/accountsupdateaccountgrouprequest.md
+  - docs/models/operations/accountsupdateaccountgroupresponse.md
   - docs/models/operations/accountsupdateaccountrequest.md
   - docs/models/operations/accountsupdateaccountresponse.md
   - docs/models/operations/accountsupdateinterestedpartyrequest.md
@@ -7019,6 +7009,22 @@ examples:
         path:
           account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
           note_id: "8096110d-fb55-4f9d-b883-b84f0b70d3ea"
+      responses:
+        "200":
+          application/json: {}
+        "400":
+          application/json: {}
+        "500":
+          application/json: {}
+        default:
+          application/json: {}
+  Accounts_UpdateAccountGroup:
+    speakeasy-default-accounts-update-account-group:
+      parameters:
+        path:
+          account_id: "01HC3MAQ4DR9QN1V8MJ4CN1HMK"
+      requestBody:
+        application/json: {}
       responses:
         "200":
           application/json: {}

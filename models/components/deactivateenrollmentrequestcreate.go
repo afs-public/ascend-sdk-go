@@ -20,6 +20,7 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointCp                   DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_JOINT_CP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationEstate                    DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_ESTATE"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraTraditional            DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_TRADITIONAL"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSimple                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_SIMPLE"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraSep                    DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_SEP"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRoth                   DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_ROTH"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIraRollover               DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_IRA_ROLLOVER"
@@ -38,6 +39,7 @@ const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeVirtualAccountNumber                  DeactivateEnrollmentRequestCreateEnrollmentType = "VIRTUAL_ACCOUNT_NUMBER"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationFutures                   DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_FUTURES"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeEventContractsKalshi                  DeactivateEnrollmentRequestCreateEnrollmentType = "EVENT_CONTRACTS_KALSHI"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationCustodialIraRoth          DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_CUSTODIAL_IRA_ROTH"
 )
 
 func (e DeactivateEnrollmentRequestCreateEnrollmentType) ToPointer() *DeactivateEnrollmentRequestCreateEnrollmentType {
