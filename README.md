@@ -616,6 +616,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [CreateOptionOrder](docs/sdks/optionorders/README.md#createoptionorder) - Create Option Order
 * [GetOptionOrder](docs/sdks/optionorders/README.md#getoptionorder) - Get Option Order
 * [CancelOptionOrder](docs/sdks/optionorders/README.md#canceloptionorder) - Cancel Option Order
+* [SetOptionExtraReportingData](docs/sdks/optionorders/README.md#setoptionextrareportingdata) - Set Option Extra Reporting Data
 
 ### [Orders](docs/sdks/orders/README.md)
 

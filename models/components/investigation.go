@@ -468,6 +468,8 @@ type ProvidedIdentityVerification struct {
 	AddressVerified *bool `json:"address_verified,omitempty"`
 	// Indicates whether the identity's date of birth was verified
 	BirthDateVerified *bool `json:"birth_date_verified,omitempty"`
+	// A collection of unique identifiers provided by the documents api that correspond to identity documents that were directly verified by the client rather than through a third-party vendor. Functions identically to raw_vendor_data_document_id for triggering IDV re-evaluation.
+	ClientDirectlyVerifiedDocumentIds []string `json:"client_directly_verified_document_ids,omitempty"`
 	// Indicates that the client directly verified the ID documents rather than using a third-party vendor (self-inspected)
 	ClientDirectlyVerifiedIDDocs *bool `json:"client_directly_verified_id_docs,omitempty"`
 	// The date identity verification was performed.
@@ -500,6 +502,13 @@ func (o *ProvidedIdentityVerification) GetBirthDateVerified() *bool {
 		return nil
 	}
 	return o.BirthDateVerified
+}
+
+func (o *ProvidedIdentityVerification) GetClientDirectlyVerifiedDocumentIds() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientDirectlyVerifiedDocumentIds
 }
 
 func (o *ProvidedIdentityVerification) GetClientDirectlyVerifiedIDDocs() *bool {

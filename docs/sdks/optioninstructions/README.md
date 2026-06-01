@@ -112,8 +112,8 @@ func main() {
     )
 
     res, err := s.OptionInstructions.ListOptionInstructions(ctx, operations.ExerciseServiceListOptionInstructionsRequest{
-        AccountID: "ACC123456",
-        AssetID: "12345",
+        AccountID: "-",
+        AssetID: "-",
         PageSize: ascendsdkgo.Int(50),
         PageToken: ascendsdkgo.String("eyJvZmZzZXQiOjUwfQ=="),
         Filter: ascendsdkgo.String("type == 'DO_NOT_EXERCISE' && account_id == '12345'"),

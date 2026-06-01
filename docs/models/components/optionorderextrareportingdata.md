@@ -1,0 +1,10 @@
+# OptionOrderExtraReportingData
+
+Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint.
+
+
+## Fields
+
+| Field                                      | Type                                       | Required                                   | Description                                | Example                                    |
+| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
+| `CancelConfirmedTime`                      | [*time.Time](https://pkg.go.dev/time#Time) | :heavy_minus_sign:                         | N/A                                        | 2025-12-13T15:28:17.262732Z                |

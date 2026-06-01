@@ -67,6 +67,8 @@ type TradingExecutions struct {
 	ExecutedPrices []TradingExecutedPrice `json:"executed_prices,omitempty"`
 	// The timestamp that this fill was transacted at the market
 	ExecutedTime *time.Time `json:"executed_time,omitempty"`
+	// This id field represents the unique id of the execution
+	ExecutionID *string `json:"execution_id,omitempty"`
 	// The net currency amount exchanged in this transaction, in the order currency. Will only be present for orders of Fixed Income assets.
 	GrossCreditAmount *GrossCreditAmount `json:"gross_credit_amount,omitempty"`
 	// The prevailing market price of the asset, without fees or commissions. Will only be present for orders of Fixed Income assets.
@@ -105,6 +107,13 @@ func (o *TradingExecutions) GetExecutedTime() *time.Time {
 		return nil
 	}
 	return o.ExecutedTime
+}
+
+func (o *TradingExecutions) GetExecutionID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExecutionID
 }
 
 func (o *TradingExecutions) GetGrossCreditAmount() *GrossCreditAmount {

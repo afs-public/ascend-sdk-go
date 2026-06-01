@@ -2,10 +2,66 @@
 
 package components
 
+import (
+	"github.com/afs-public/ascend-sdk-go/internal/utils"
+	"time"
+)
+
+// CancelOptionOrderRequestCreateCancelInitiator - Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT reporting services.
+type CancelOptionOrderRequestCreateCancelInitiator string
+
+const (
+	CancelOptionOrderRequestCreateCancelInitiatorInitiatorUnspecified CancelOptionOrderRequestCreateCancelInitiator = "INITIATOR_UNSPECIFIED"
+	CancelOptionOrderRequestCreateCancelInitiatorFirm                 CancelOptionOrderRequestCreateCancelInitiator = "FIRM"
+	CancelOptionOrderRequestCreateCancelInitiatorClient               CancelOptionOrderRequestCreateCancelInitiator = "CLIENT"
+)
+
+func (e CancelOptionOrderRequestCreateCancelInitiator) ToPointer() *CancelOptionOrderRequestCreateCancelInitiator {
+	return &e
+}
+
 // CancelOptionOrderRequestCreate - The message to request cancellation of an existing option order
 type CancelOptionOrderRequestCreate struct {
+	// Identifies whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT). Defaults to CLIENT if not provided. Required for correspondents using Apex CAT reporting services.
+	CancelInitiator *CancelOptionOrderRequestCreateCancelInitiator `json:"cancel_initiator,omitempty"`
+	// The time the correspondent received the cancel instruction from the customer. Required for correspondents using Apex CAT reporting services.
+	ClientCancelReceivedTime *time.Time `json:"client_cancel_received_time,omitempty"`
+	// The time the correspondent sent this cancel request, before Apex received it. Required for correspondents using Apex CAT reporting services.
+	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// Format: accounts/{account_id}/optionOrders/{option_order_id}
 	Name string `json:"name"`
+}
+
+func (c CancelOptionOrderRequestCreate) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CancelOptionOrderRequestCreate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"name"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *CancelOptionOrderRequestCreate) GetCancelInitiator() *CancelOptionOrderRequestCreateCancelInitiator {
+	if o == nil {
+		return nil
+	}
+	return o.CancelInitiator
+}
+
+func (o *CancelOptionOrderRequestCreate) GetClientCancelReceivedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelReceivedTime
+}
+
+func (o *CancelOptionOrderRequestCreate) GetClientCancelSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelSentTime
 }
 
 func (o *CancelOptionOrderRequestCreate) GetName() string {

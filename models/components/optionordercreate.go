@@ -101,6 +101,8 @@ type OptionOrderCreate struct {
 	ClientOrderID string `json:"client_order_id"`
 	// Required for any client who is having Apex do CAT reporting on their behalf.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
+	// The time the correspondent sent the original order to Apex. Set at order creation and cannot be modified. Required for correspondents using Apex CAT reporting services.
+	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
 	// Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode string `json:"currency_code"`
 	// Fees that will be applied to this option order.
@@ -165,6 +167,13 @@ func (o *OptionOrderCreate) GetClientReceivedTime() *time.Time {
 		return nil
 	}
 	return o.ClientReceivedTime
+}
+
+func (o *OptionOrderCreate) GetClientSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientSentTime
 }
 
 func (o *OptionOrderCreate) GetCurrencyCode() string {

@@ -128,7 +128,7 @@ func (e CompressedOrderOrderStatus) ToPointer() *CompressedOrderOrderStatus {
 	return &e
 }
 
-// CompressedOrderOrderType - The execution type of this order. Only MARKET is supported.
+// CompressedOrderOrderType - The execution type of this order.
 type CompressedOrderOrderType string
 
 const (
@@ -229,7 +229,7 @@ type CompressedOrder struct {
 	OrderRejectedReason *CompressedOrderOrderRejectedReason `json:"order_rejected_reason,omitempty"`
 	// The processing status of the order
 	OrderStatus *CompressedOrderOrderStatus `json:"order_status,omitempty"`
-	// The execution type of this order. Only MARKET is supported.
+	// The execution type of this order.
 	OrderType *CompressedOrderOrderType `json:"order_type,omitempty"`
 	// Numeric quantity of the order. Either a quantity or notional_value MUST be specified (but not both). For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places.
 	Quantity *CompressedOrderQuantity `json:"quantity,omitempty"`

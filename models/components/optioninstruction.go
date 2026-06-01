@@ -67,6 +67,8 @@ func (e OptionInstructionType) ToPointer() *OptionInstructionType {
 type OptionInstruction struct {
 	// Account identifier
 	AccountID *string `json:"account_id,omitempty"`
+	// Client-provided reference for tracking and duplicate detection on the client side
+	ClientReference *string `json:"client_reference,omitempty"`
 	// The time the instruction was created
 	CreateTime *time.Time `json:"create_time,omitempty"`
 	// The asset identifier
@@ -105,6 +107,13 @@ func (o *OptionInstruction) GetAccountID() *string {
 		return nil
 	}
 	return o.AccountID
+}
+
+func (o *OptionInstruction) GetClientReference() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientReference
 }
 
 func (o *OptionInstruction) GetCreateTime() *time.Time {
