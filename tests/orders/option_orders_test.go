@@ -142,4 +142,15 @@ func TestOptionOrderService(t *testing.T) {
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 		assert.NotNil(t, res.OptionOrder.OptionOrderID)
 	})
+
+	t.Run("SetOptionExtraReportingData", func(t *testing.T) {
+		now := time.Now().UTC()
+		request := components.SetOptionExtraReportingDataRequestCreate{
+			Name:                "accounts/" + fixtures.accountId + "/optionOrders/" + *fixtures.OptionOrderId(t),
+			CancelConfirmedTime: &now,
+		}
+		res, err := sdk.OptionOrders.SetOptionExtraReportingData(ctx, fixtures.accountId, *fixtures.OptionOrderId(t), request)
+		require.NoError(t, err)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	})
 }

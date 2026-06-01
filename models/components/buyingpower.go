@@ -41,6 +41,19 @@ func (o *DayTradeBuyingPowerAmount) GetValue() *string {
 	return o.Value
 }
 
+// IntradayBuyingPowerAmount - The intraday_buying_power_amount is the intraday trade buying power of the account in USD, returned from the request.
+type IntradayBuyingPowerAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *IntradayBuyingPowerAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // PositionMarketValueAmount - The position_market_value in USD returned from the request.
 type PositionMarketValueAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -125,7 +138,9 @@ type BuyingPower struct {
 	BuyingPowerAmount *BuyingPowerAmount `json:"buying_power_amount,omitempty"`
 	// The day_trade_buying_power_issued_amount is the day trade buying power of the account in USD, returned from the request. If the is_day_trade_buying_power_allowed boolean is true this will be set from day_trade_buying_power_issued value returned from the margins calculator, or else if it is false it will be set from buying_power_issued value returned from the margins calculator.
 	DayTradeBuyingPowerAmount *DayTradeBuyingPowerAmount `json:"day_trade_buying_power_amount,omitempty"`
-	// The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account, PDT is true and SOD Account equity >= $25,000, otherwise it will be false.
+	// The intraday_buying_power_amount is the intraday trade buying power of the account in USD, returned from the request.
+	IntradayBuyingPowerAmount *IntradayBuyingPowerAmount `json:"intraday_buying_power_amount,omitempty"`
+	// is_day_trade_buying_power_allowed indicates whether day trade buying power is available for the account.
 	IsDayTradeBuyingPowerAllowed *bool `json:"is_day_trade_buying_power_allowed,omitempty"`
 	// The service generated name of the BuyingPower Format: accounts/{account_id}/buyingPower
 	Name *string `json:"name,omitempty"`
@@ -163,6 +178,13 @@ func (o *BuyingPower) GetDayTradeBuyingPowerAmount() *DayTradeBuyingPowerAmount 
 		return nil
 	}
 	return o.DayTradeBuyingPowerAmount
+}
+
+func (o *BuyingPower) GetIntradayBuyingPowerAmount() *IntradayBuyingPowerAmount {
+	if o == nil {
+		return nil
+	}
+	return o.IntradayBuyingPowerAmount
 }
 
 func (o *BuyingPower) GetIsDayTradeBuyingPowerAllowed() *bool {

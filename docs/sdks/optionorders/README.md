@@ -8,6 +8,7 @@
 * [CreateOptionOrder](#createoptionorder) - Create Option Order
 * [GetOptionOrder](#getoptionorder) - Get Option Order
 * [CancelOptionOrder](#canceloptionorder) - Cancel Option Order
+* [SetOptionExtraReportingData](#setoptionextrareportingdata) - Set Option Extra Reporting Data
 
 ## CreateOptionOrder
 
@@ -211,6 +212,76 @@ func main() {
 ### Response
 
 **[*operations.OptionOrderServiceCancelOptionOrderResponse](../../models/operations/optionorderservicecanceloptionorderresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 401, 403, 404 | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## SetOptionExtraReportingData
+
+Sets post-cancel reporting data for an option order.
+
+ The option order must be in a canceled or pending_cancel state. Requires the option order resource name and the cancel_confirmed_time. If cancel_confirmed_time has already been set by a prior call, the existing value is preserved and the response reflects the original value.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="OptionOrderService_SetOptionExtraReportingData" method="post" path="/trading/v1/accounts/{account_id}/optionOrders/{optionOrder_id}:setExtraReportingData" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/types"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.OptionOrders.SetOptionExtraReportingData(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", "ebb0c9b5-2c74-45c9-a4ab-40596b778706", components.SetOptionExtraReportingDataRequestCreate{
+        CancelConfirmedTime: types.MustNewTimeFromString("2025-12-13T15:28:17.262732Z"),
+        Name: "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/optionOrders/ebb0c9b5-2c74-45c9-a4ab-40596b778706",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.OptionOrder != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                | Example                                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |                                                                                                                            |
+| `accountID`                                                                                                                | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The account id.                                                                                                            | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                                                 |
+| `optionOrderID`                                                                                                            | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The optionOrder id.                                                                                                        | ebb0c9b5-2c74-45c9-a4ab-40596b778706                                                                                       |
+| `setOptionExtraReportingDataRequestCreate`                                                                                 | [components.SetOptionExtraReportingDataRequestCreate](../../models/components/setoptionextrareportingdatarequestcreate.md) | :heavy_check_mark:                                                                                                         | N/A                                                                                                                        |                                                                                                                            |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |                                                                                                                            |
+
+### Response
+
+**[*operations.OptionOrderServiceSetOptionExtraReportingDataResponse](../../models/operations/optionorderservicesetoptionextrareportingdataresponse.md), error**
 
 ### Errors
 

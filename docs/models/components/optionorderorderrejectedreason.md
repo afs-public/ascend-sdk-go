@@ -37,3 +37,4 @@ When an option order has the REJECTED status, this will be populated with a syst
 | `OptionOrderOrderRejectedReasonInvalidOrderQuantity`                              | INVALID_ORDER_QUANTITY                                                            |
 | `OptionOrderOrderRejectedReasonClientReceivedTimeRequired`                        | CLIENT_RECEIVED_TIME_REQUIRED                                                     |
 | `OptionOrderOrderRejectedReasonUnsupportedPriceValue`                             | UNSUPPORTED_PRICE_VALUE                                                           |
+| `OptionOrderOrderRejectedReasonBoxTradesProhibited`                               | BOX_TRADES_PROHIBITED                                                             |

@@ -28,6 +28,19 @@ func (o *AssetBuyingPowerDayTradeBuyingPowerAmount) GetValue() *string {
 	return o.Value
 }
 
+// AssetBuyingPowerIntradayBuyingPowerAmount - The intraday_buying_power_amount is the intraday trade buying power of the account in USD, returned from the request.
+type AssetBuyingPowerIntradayBuyingPowerAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *AssetBuyingPowerIntradayBuyingPowerAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // AssetBuyingPowerSmaAmount - The sma_amount is the special memorandum account amount in USD, returned from the request. This will only be populated for margin accounts and is the margin equity minus the RegT requirements.
 type AssetBuyingPowerSmaAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -47,7 +60,9 @@ type AccountAssetBuyingPower struct {
 	BuyingPowerAmount *AssetBuyingPowerBuyingPowerAmount `json:"buying_power_amount,omitempty"`
 	// The day_trade_buying_power_issued_amount is the day trade buying power of the account in USD, returned from the request. If the is_day_trade_buying_power_allowed boolean is true this will be set from day_trade_buying_power_issued value returned from the margins calculator, or else if it is false it will be set from buying_power_issued value returned from the margins calculator.
 	DayTradeBuyingPowerAmount *AssetBuyingPowerDayTradeBuyingPowerAmount `json:"day_trade_buying_power_amount,omitempty"`
-	// The is_day_trade_buying_power_allowed boolean will be true if the account is a Margin account, PDT is true and SOD Account equity >= $25,000, otherwise it will be false.
+	// The intraday_buying_power_amount is the intraday trade buying power of the account in USD, returned from the request.
+	IntradayBuyingPowerAmount *AssetBuyingPowerIntradayBuyingPowerAmount `json:"intraday_buying_power_amount,omitempty"`
+	// is_day_trade_buying_power_allowed indicates whether day trade buying power is available for the account.
 	IsDayTradeBuyingPowerAllowed *bool `json:"is_day_trade_buying_power_allowed,omitempty"`
 	// The sma_amount is the special memorandum account amount in USD, returned from the request. This will only be populated for margin accounts and is the margin equity minus the RegT requirements.
 	SmaAmount *AssetBuyingPowerSmaAmount `json:"sma_amount,omitempty"`
@@ -65,6 +80,13 @@ func (o *AccountAssetBuyingPower) GetDayTradeBuyingPowerAmount() *AssetBuyingPow
 		return nil
 	}
 	return o.DayTradeBuyingPowerAmount
+}
+
+func (o *AccountAssetBuyingPower) GetIntradayBuyingPowerAmount() *AssetBuyingPowerIntradayBuyingPowerAmount {
+	if o == nil {
+		return nil
+	}
+	return o.IntradayBuyingPowerAmount
 }
 
 func (o *AccountAssetBuyingPower) GetIsDayTradeBuyingPowerAllowed() *bool {

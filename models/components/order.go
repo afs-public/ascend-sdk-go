@@ -391,6 +391,14 @@ const (
 	OrderRejectedReasonAssetNotSetUpForRoundUps                          OrderRejectedReason = "ASSET_NOT_SET_UP_FOR_ROUND_UPS"
 	OrderRejectedReasonBelowRoundUpMinimum                               OrderRejectedReason = "BELOW_ROUND_UP_MINIMUM"
 	OrderRejectedReasonStopPriceBelowMarketPrice                         OrderRejectedReason = "STOP_PRICE_BELOW_MARKET_PRICE"
+	OrderRejectedReasonPositionThresholdViolation                        OrderRejectedReason = "POSITION_THRESHOLD_VIOLATION"
+	OrderRejectedReasonUnsupportedPriceValue                             OrderRejectedReason = "UNSUPPORTED_PRICE_VALUE"
+	OrderRejectedReasonAssetNotShortable                                 OrderRejectedReason = "ASSET_NOT_SHORTABLE"
+	OrderRejectedReasonBoxTradesProhibited                               OrderRejectedReason = "BOX_TRADES_PROHIBITED"
+	OrderRejectedReasonDeskOrderNotAllowed                               OrderRejectedReason = "DESK_ORDER_NOT_ALLOWED"
+	OrderRejectedReasonUnsupportedTradingSessionForAsset                 OrderRejectedReason = "UNSUPPORTED_TRADING_SESSION_FOR_ASSET"
+	OrderRejectedReasonUnsupportedOrderTypeForAsset                      OrderRejectedReason = "UNSUPPORTED_ORDER_TYPE_FOR_ASSET"
+	OrderRejectedReasonUnsupportedTimeInForceForAsset                    OrderRejectedReason = "UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET"
 )
 
 func (e OrderRejectedReason) ToPointer() *OrderRejectedReason {
@@ -693,7 +701,7 @@ type Order struct {
 	FilledQuantity *FilledQuantity `json:"filled_quantity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier *string `json:"identifier,omitempty"`
-	// A string attribute denoting the country of issuance or where the asset is trading. * Only available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with ISO-3166 Alpha-2 Codes
+	// A string attribute denoting the country of issuance or where the asset is trading. * Only available for Mutual Fund and Fixed Income orders. * Only available when the identifier_type is SYMBOL or CUSIP. * Defaults to US when the identifier_type is SYMBOL or CUSIP. * Complies with ISO-3166 Alpha-2 Codes * identifier_issuing_region_code should match the issuing_region_code from the Assets API or the order will be REJECTED
 	IdentifierIssuingRegionCode *string `json:"identifier_issuing_region_code,omitempty"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported For Fixed Income: only CUSIP and ISIN are supported For Event Contracts: only SYMBOL and ASSET_ID are supported
 	IdentifierType *OrderIdentifierType `json:"identifier_type,omitempty"`

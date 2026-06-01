@@ -33,6 +33,8 @@ func (e OptionInstructionCreateType) ToPointer() *OptionInstructionCreateType {
 type OptionInstructionCreate struct {
 	// Account identifier
 	AccountID string `json:"account_id"`
+	// Client-provided reference for tracking and duplicate detection on the client side
+	ClientReference *string `json:"client_reference,omitempty"`
 	// The asset identifier
 	Identifier string `json:"identifier"`
 	// Type to identify the option asset associated with the instruction
@@ -52,6 +54,13 @@ func (o *OptionInstructionCreate) GetAccountID() string {
 		return ""
 	}
 	return o.AccountID
+}
+
+func (o *OptionInstructionCreate) GetClientReference() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientReference
 }
 
 func (o *OptionInstructionCreate) GetIdentifier() string {

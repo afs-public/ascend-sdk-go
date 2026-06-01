@@ -20,6 +20,19 @@ func (e OptionOrderBrokerCapacity) ToPointer() *OptionOrderBrokerCapacity {
 	return &e
 }
 
+// OptionOrderCancelInitiator - Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT). Populated from the CancelOptionOrderRequest.
+type OptionOrderCancelInitiator string
+
+const (
+	OptionOrderCancelInitiatorInitiatorUnspecified OptionOrderCancelInitiator = "INITIATOR_UNSPECIFIED"
+	OptionOrderCancelInitiatorFirm                 OptionOrderCancelInitiator = "FIRM"
+	OptionOrderCancelInitiatorClient               OptionOrderCancelInitiator = "CLIENT"
+)
+
+func (e OptionOrderCancelInitiator) ToPointer() *OptionOrderCancelInitiator {
+	return &e
+}
+
 // OptionOrderCancelRejectedReason - Used to denote when a cancel request has been rejected.
 type OptionOrderCancelRejectedReason string
 
@@ -63,6 +76,29 @@ const (
 
 func (e CumulativeNotionalValueDirection) ToPointer() *CumulativeNotionalValueDirection {
 	return &e
+}
+
+// OptionOrderExtraReportingData - Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint.
+type OptionOrderExtraReportingData struct {
+	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
+}
+
+func (o OptionOrderExtraReportingData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(o, "", false)
+}
+
+func (o *OptionOrderExtraReportingData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &o, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *OptionOrderExtraReportingData) GetCancelConfirmedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CancelConfirmedTime
 }
 
 // OptionOrderLimitPrice - The limit price for this option order. For single-leg option orders, this is the price per contract which the filled order must match or beat. For multi-leg orders, this represents the amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4 DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4 USD X 100 shares/contract--total debit against the ordering account.)
@@ -143,6 +179,7 @@ const (
 	OptionOrderOrderRejectedReasonInvalidOrderQuantity                              OptionOrderOrderRejectedReason = "INVALID_ORDER_QUANTITY"
 	OptionOrderOrderRejectedReasonClientReceivedTimeRequired                        OptionOrderOrderRejectedReason = "CLIENT_RECEIVED_TIME_REQUIRED"
 	OptionOrderOrderRejectedReasonUnsupportedPriceValue                             OptionOrderOrderRejectedReason = "UNSUPPORTED_PRICE_VALUE"
+	OptionOrderOrderRejectedReasonBoxTradesProhibited                               OptionOrderOrderRejectedReason = "BOX_TRADES_PROHIBITED"
 )
 
 func (e OptionOrderOrderRejectedReason) ToPointer() *OptionOrderOrderRejectedReason {
@@ -261,14 +298,22 @@ type OptionOrder struct {
 	AccountID *string `json:"account_id,omitempty"`
 	// The capacity in which the broker is acting for this option order.
 	BrokerCapacity *OptionOrderBrokerCapacity `json:"broker_capacity,omitempty"`
+	// Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT). Populated from the CancelOptionOrderRequest.
+	CancelInitiator *OptionOrderCancelInitiator `json:"cancel_initiator,omitempty"`
 	// Used to explain why an option order is canceled
 	CancelReason *string `json:"cancel_reason,omitempty"`
 	// Used to denote when a cancel request has been rejected.
 	CancelRejectedReason *OptionOrderCancelRejectedReason `json:"cancel_rejected_reason,omitempty"`
+	// The time the correspondent received the cancel instruction from the customer. Populated from the CancelOptionOrderRequest.
+	ClientCancelReceivedTime *time.Time `json:"client_cancel_received_time,omitempty"`
+	// The time the correspondent sent the cancel request. Populated from the CancelOptionOrderRequest.
+	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// User-supplied unique option order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
 	// Required for any client who is having Apex do CAT reporting on their behalf.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
+	// The time the correspondent sent the original order to Apex. Set at order creation and cannot be modified. Required for correspondents using Apex CAT reporting services.
+	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
 	// Time of the option order creation
 	CreateTime *time.Time `json:"create_time,omitempty"`
 	// This represents the absolute value of the notional amount (without fees) transacted across all of this legs. If present, this will always a positive number, or zero. This field will be empty if there are no leg executions.
@@ -277,6 +322,8 @@ type OptionOrder struct {
 	CumulativeNotionalValueDirection *CumulativeNotionalValueDirection `json:"cumulative_notional_value_direction,omitempty"`
 	// Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint.
+	ExtraReportingData *OptionOrderExtraReportingData `json:"extra_reporting_data,omitempty"`
 	// Fees that will be applied to this option order.
 	Fees []TradingFee `json:"fees,omitempty"`
 	// Time of the last option order update
@@ -332,6 +379,13 @@ func (o *OptionOrder) GetBrokerCapacity() *OptionOrderBrokerCapacity {
 	return o.BrokerCapacity
 }
 
+func (o *OptionOrder) GetCancelInitiator() *OptionOrderCancelInitiator {
+	if o == nil {
+		return nil
+	}
+	return o.CancelInitiator
+}
+
 func (o *OptionOrder) GetCancelReason() *string {
 	if o == nil {
 		return nil
@@ -346,6 +400,20 @@ func (o *OptionOrder) GetCancelRejectedReason() *OptionOrderCancelRejectedReason
 	return o.CancelRejectedReason
 }
 
+func (o *OptionOrder) GetClientCancelReceivedTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelReceivedTime
+}
+
+func (o *OptionOrder) GetClientCancelSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientCancelSentTime
+}
+
 func (o *OptionOrder) GetClientOrderID() *string {
 	if o == nil {
 		return nil
@@ -358,6 +426,13 @@ func (o *OptionOrder) GetClientReceivedTime() *time.Time {
 		return nil
 	}
 	return o.ClientReceivedTime
+}
+
+func (o *OptionOrder) GetClientSentTime() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.ClientSentTime
 }
 
 func (o *OptionOrder) GetCreateTime() *time.Time {
@@ -386,6 +461,13 @@ func (o *OptionOrder) GetCurrencyCode() *string {
 		return nil
 	}
 	return o.CurrencyCode
+}
+
+func (o *OptionOrder) GetExtraReportingData() *OptionOrderExtraReportingData {
+	if o == nil {
+		return nil
+	}
+	return o.ExtraReportingData
 }
 
 func (o *OptionOrder) GetFees() []TradingFee {
