@@ -610,7 +610,9 @@ type Account struct {
 	OwnershipType *OwnershipType `json:"ownership_type,omitempty"`
 	// Parties associated with the account (e.g. custodian).
 	Parties []Party `json:"parties,omitempty"`
-	// Indicates if the customer is a PDT; This is set if the account executes four or more day trades (buy and sell the same security intraday) within a period of five business days. By default, this is set to `false`.
+	// Deprecated: PDT designation no longer applies. This indicator will always be set to `false`.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	PatternDayTrader *bool `json:"pattern_day_trader,omitempty"`
 	// The primary registered representative for the account
 	PrimaryRegisteredRepID *string `json:"primary_registered_rep_id,omitempty"`

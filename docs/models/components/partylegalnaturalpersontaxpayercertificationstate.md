@@ -11,3 +11,5 @@ Taxpayer certification status.
 | `PartyLegalNaturalPersonTaxpayerCertificationStateCertified`                             | CERTIFIED                                                                                |
 | `PartyLegalNaturalPersonTaxpayerCertificationStateUncertified`                           | UNCERTIFIED                                                                              |
 | `PartyLegalNaturalPersonTaxpayerCertificationStatePendingCertification`                  | PENDING_CERTIFICATION                                                                    |
+| `PartyLegalNaturalPersonTaxpayerCertificationStateCertifiedWithBenefits`                 | CERTIFIED_WITH_BENEFITS                                                                  |
+| `PartyLegalNaturalPersonTaxpayerCertificationStatePendingConsent`                        | PENDING_CONSENT                                                                          |

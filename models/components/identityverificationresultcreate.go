@@ -8,6 +8,8 @@ type IdentityVerificationResultCreate struct {
 	AddressVerified bool `json:"address_verified"`
 	// Attestation that external result and review have verified the supplied investor's date of birth has been verified in conjunction with other PII
 	BirthDateVerified bool `json:"birth_date_verified"`
+	// Indicates whether the client has directly verified the identity documents (defaults to false).
+	ClientDirectlyVerifiedIDDocs *bool `json:"client_directly_verified_id_docs,omitempty"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//
 	//  * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date
@@ -40,6 +42,13 @@ func (o *IdentityVerificationResultCreate) GetBirthDateVerified() bool {
 		return false
 	}
 	return o.BirthDateVerified
+}
+
+func (o *IdentityVerificationResultCreate) GetClientDirectlyVerifiedIDDocs() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ClientDirectlyVerifiedIDDocs
 }
 
 func (o *IdentityVerificationResultCreate) GetExecutionDate() DateCreate {
