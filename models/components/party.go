@@ -505,6 +505,8 @@ const (
 	PartyTaxpayerCertificationStateCertified                             PartyTaxpayerCertificationState = "CERTIFIED"
 	PartyTaxpayerCertificationStateUncertified                           PartyTaxpayerCertificationState = "UNCERTIFIED"
 	PartyTaxpayerCertificationStatePendingCertification                  PartyTaxpayerCertificationState = "PENDING_CERTIFICATION"
+	PartyTaxpayerCertificationStateCertifiedWithBenefits                 PartyTaxpayerCertificationState = "CERTIFIED_WITH_BENEFITS"
+	PartyTaxpayerCertificationStatePendingConsent                        PartyTaxpayerCertificationState = "PENDING_CONSENT"
 )
 
 func (e PartyTaxpayerCertificationState) ToPointer() *PartyTaxpayerCertificationState {
@@ -557,6 +559,8 @@ type PartyTaxProfile struct {
 	TaxCertificationDate *PartyTaxCertificationDate `json:"tax_certification_date,omitempty"`
 	// Taxpayer certification status.
 	TaxpayerCertificationState *PartyTaxpayerCertificationState `json:"taxpayer_certification_state,omitempty"`
+	// Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+	TreatyBenefitsRequested *bool `json:"treaty_benefits_requested,omitempty"`
 	// United States Individual Taxpayer Identification Number (ITIN) status.
 	UsTinStatus *PartyUsTinStatus `json:"us_tin_status,omitempty"`
 	// B/C Notice status.
@@ -617,6 +621,13 @@ func (o *PartyTaxProfile) GetTaxpayerCertificationState() *PartyTaxpayerCertific
 		return nil
 	}
 	return o.TaxpayerCertificationState
+}
+
+func (o *PartyTaxProfile) GetTreatyBenefitsRequested() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TreatyBenefitsRequested
 }
 
 func (o *PartyTaxProfile) GetUsTinStatus() *PartyUsTinStatus {
@@ -1407,6 +1418,10 @@ type PartyIdentityVerificationResult struct {
 	AddressVerified *bool `json:"address_verified,omitempty"`
 	// Attestation that external result and review have verified the supplied investor's date of birth has been verified in conjunction with other PII
 	BirthDateVerified *bool `json:"birth_date_verified,omitempty"`
+	// Document IDs for identity documents that were directly verified by the client.
+	ClientDirectlyVerifiedDocumentIds []string `json:"client_directly_verified_document_ids,omitempty"`
+	// Indicates whether the client has directly verified the identity documents (defaults to false).
+	ClientDirectlyVerifiedIDDocs *bool `json:"client_directly_verified_id_docs,omitempty"`
 	// The datetime external identity verification results were run on a natural person
 	ExecutionDate *PartyExecutionDate `json:"execution_date,omitempty"`
 	// Client-generated identifier associated with the KYC results for the appropriate case
@@ -1437,6 +1452,20 @@ func (o *PartyIdentityVerificationResult) GetBirthDateVerified() *bool {
 		return nil
 	}
 	return o.BirthDateVerified
+}
+
+func (o *PartyIdentityVerificationResult) GetClientDirectlyVerifiedDocumentIds() []string {
+	if o == nil {
+		return nil
+	}
+	return o.ClientDirectlyVerifiedDocumentIds
+}
+
+func (o *PartyIdentityVerificationResult) GetClientDirectlyVerifiedIDDocs() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ClientDirectlyVerifiedIDDocs
 }
 
 func (o *PartyIdentityVerificationResult) GetExecutionDate() *PartyExecutionDate {
@@ -2029,6 +2058,8 @@ const (
 	PartyLegalNaturalPersonTaxpayerCertificationStateCertified                             PartyLegalNaturalPersonTaxpayerCertificationState = "CERTIFIED"
 	PartyLegalNaturalPersonTaxpayerCertificationStateUncertified                           PartyLegalNaturalPersonTaxpayerCertificationState = "UNCERTIFIED"
 	PartyLegalNaturalPersonTaxpayerCertificationStatePendingCertification                  PartyLegalNaturalPersonTaxpayerCertificationState = "PENDING_CERTIFICATION"
+	PartyLegalNaturalPersonTaxpayerCertificationStateCertifiedWithBenefits                 PartyLegalNaturalPersonTaxpayerCertificationState = "CERTIFIED_WITH_BENEFITS"
+	PartyLegalNaturalPersonTaxpayerCertificationStatePendingConsent                        PartyLegalNaturalPersonTaxpayerCertificationState = "PENDING_CONSENT"
 )
 
 func (e PartyLegalNaturalPersonTaxpayerCertificationState) ToPointer() *PartyLegalNaturalPersonTaxpayerCertificationState {
@@ -2081,6 +2112,8 @@ type PartyLegalNaturalPersonTaxProfile struct {
 	TaxCertificationDate *PartyLegalNaturalPersonTaxCertificationDate `json:"tax_certification_date,omitempty"`
 	// Taxpayer certification status.
 	TaxpayerCertificationState *PartyLegalNaturalPersonTaxpayerCertificationState `json:"taxpayer_certification_state,omitempty"`
+	// Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+	TreatyBenefitsRequested *bool `json:"treaty_benefits_requested,omitempty"`
 	// United States Individual Taxpayer Identification Number (ITIN) status.
 	UsTinStatus *PartyLegalNaturalPersonUsTinStatus `json:"us_tin_status,omitempty"`
 	// B/C Notice status.
@@ -2141,6 +2174,13 @@ func (o *PartyLegalNaturalPersonTaxProfile) GetTaxpayerCertificationState() *Par
 		return nil
 	}
 	return o.TaxpayerCertificationState
+}
+
+func (o *PartyLegalNaturalPersonTaxProfile) GetTreatyBenefitsRequested() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TreatyBenefitsRequested
 }
 
 func (o *PartyLegalNaturalPersonTaxProfile) GetUsTinStatus() *PartyLegalNaturalPersonUsTinStatus {

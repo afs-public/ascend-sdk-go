@@ -491,6 +491,8 @@ const (
 	LegalEntityTaxpayerCertificationStateCertified                             LegalEntityTaxpayerCertificationState = "CERTIFIED"
 	LegalEntityTaxpayerCertificationStateUncertified                           LegalEntityTaxpayerCertificationState = "UNCERTIFIED"
 	LegalEntityTaxpayerCertificationStatePendingCertification                  LegalEntityTaxpayerCertificationState = "PENDING_CERTIFICATION"
+	LegalEntityTaxpayerCertificationStateCertifiedWithBenefits                 LegalEntityTaxpayerCertificationState = "CERTIFIED_WITH_BENEFITS"
+	LegalEntityTaxpayerCertificationStatePendingConsent                        LegalEntityTaxpayerCertificationState = "PENDING_CONSENT"
 )
 
 func (e LegalEntityTaxpayerCertificationState) ToPointer() *LegalEntityTaxpayerCertificationState {
@@ -543,6 +545,8 @@ type LegalEntityTaxProfile struct {
 	TaxCertificationDate *LegalEntityTaxCertificationDate `json:"tax_certification_date,omitempty"`
 	// Taxpayer certification status.
 	TaxpayerCertificationState *LegalEntityTaxpayerCertificationState `json:"taxpayer_certification_state,omitempty"`
+	// Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+	TreatyBenefitsRequested *bool `json:"treaty_benefits_requested,omitempty"`
 	// United States Individual Taxpayer Identification Number (ITIN) status.
 	UsTinStatus *LegalEntityUsTinStatus `json:"us_tin_status,omitempty"`
 	// B/C Notice status.
@@ -603,6 +607,13 @@ func (o *LegalEntityTaxProfile) GetTaxpayerCertificationState() *LegalEntityTaxp
 		return nil
 	}
 	return o.TaxpayerCertificationState
+}
+
+func (o *LegalEntityTaxProfile) GetTreatyBenefitsRequested() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TreatyBenefitsRequested
 }
 
 func (o *LegalEntityTaxProfile) GetUsTinStatus() *LegalEntityUsTinStatus {

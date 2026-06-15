@@ -21,7 +21,7 @@ func (e IdentifierCreateType) ToPointer() *IdentifierCreateType {
 type IdentifierCreate struct {
 	// The type of identifier
 	Type IdentifierCreateType `json:"type"`
-	// The value of the identifier
+	// The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD; may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
 	Value string `json:"value"`
 }
 

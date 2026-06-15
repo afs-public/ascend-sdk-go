@@ -56,6 +56,8 @@ type TaxProfileCreate struct {
 	IrsFormType IrsFormType `json:"irs_form_type"`
 	// Legal tax region must be "US" if provided W-9, otherwise must be a non-US country.
 	LegalTaxRegionCode string `json:"legal_tax_region_code"`
+	// Whether treaty benefits are requested. Only applicable for W_8BEN and W_8BEN_E form types.
+	TreatyBenefitsRequested *bool `json:"treaty_benefits_requested,omitempty"`
 	// United States Individual Taxpayer Identification Number (ITIN) status.
 	UsTinStatus UsTinStatus `json:"us_tin_status"`
 }
@@ -79,6 +81,13 @@ func (o *TaxProfileCreate) GetLegalTaxRegionCode() string {
 		return ""
 	}
 	return o.LegalTaxRegionCode
+}
+
+func (o *TaxProfileCreate) GetTreatyBenefitsRequested() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TreatyBenefitsRequested
 }
 
 func (o *TaxProfileCreate) GetUsTinStatus() UsTinStatus {

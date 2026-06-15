@@ -21,6 +21,8 @@ func (e IdentifierUpdateType) ToPointer() *IdentifierUpdateType {
 type IdentifierUpdate struct {
 	// The type of identifier
 	Type *IdentifierUpdateType `json:"type,omitempty"`
+	// The value of the identifier. Immutable for ORIGINATING_FDID and ORIGINATING_CAT_REPORTER_CRD; may be updated for ORIGINATING_ACCOUNT_ID and CLIENT_ACCOUNT_ID.
+	Value *string `json:"value,omitempty"`
 }
 
 func (o *IdentifierUpdate) GetType() *IdentifierUpdateType {
@@ -28,4 +30,11 @@ func (o *IdentifierUpdate) GetType() *IdentifierUpdateType {
 		return nil
 	}
 	return o.Type
+}
+
+func (o *IdentifierUpdate) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
 }

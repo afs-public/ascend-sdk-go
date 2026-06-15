@@ -11,3 +11,5 @@ Taxpayer certification status.
 | `TaxpayerCertificationStateCertified`                             | CERTIFIED                                                         |
 | `TaxpayerCertificationStateUncertified`                           | UNCERTIFIED                                                       |
 | `TaxpayerCertificationStatePendingCertification`                  | PENDING_CERTIFICATION                                             |
+| `TaxpayerCertificationStateCertifiedWithBenefits`                 | CERTIFIED_WITH_BENEFITS                                           |
+| `TaxpayerCertificationStatePendingConsent`                        | PENDING_CONSENT                                                   |
