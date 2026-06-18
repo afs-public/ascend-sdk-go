@@ -9,9 +9,9 @@ import (
 type LedgerListPositionsRequest struct {
 	// The account id.
 	AccountID string `pathParam:"style=simple,explode=false,name=account_id"`
-	// The maximum number of positions to return. The service may return fewer than this value Default is 100 (subject to change) The maximum is 1000, values exceeding this will be set to 1000 (subject to change)
+	// The maximum number of positions to return. The service may return fewer than this valueDefault is 100 (subject to change)The maximum is 1000, values exceeding this will be set to 1000 (subject to change)
 	PageSize *int `queryParam:"style=form,explode=true,name=page_size"`
-	// This page token comes from a previous `ListPositions` call; provide this token to retrieve the subsequent page When paginating, all other parameters you include in `ListPositions` must match the call that includes the page token to maintain a stable result set
+	// This page token comes from a previous `ListPositions` call; provide this token to retrieve the subsequent pageWhen paginating, all other parameters you include in `ListPositions` must match the call that includes the page token to maintain a stable result set
 	PageToken *string `queryParam:"style=form,explode=true,name=page_token"`
 	// A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information;
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`

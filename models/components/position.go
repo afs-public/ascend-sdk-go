@@ -168,6 +168,19 @@ func (o *Settled) GetValue() *string {
 	return o.Value
 }
 
+// Short - Represents the amount of an asset that has been sold short, where shares were borrowed and sold with an obligation to repurchase and return them. This memo distinguishes intentional short sales from other negative position states
+type Short struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *Short) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
 // PositionTrade - This field represents the total amount of an asset owned by the account including transactions that have been executed but not yet settled, commonly known as the trade date position. It includes all transactions recorded in the Ledger with process_date and activity_date on or before the date in the response, even those with future settle_dates. Unlike the settled position, which only includes completed settlements, the trade position provides a forward-looking view of ownership that accounts for pending settlements
 type PositionTrade struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
@@ -226,6 +239,8 @@ type Position struct {
 	PositionVersion *string `json:"position_version,omitempty"`
 	// This field refers to the quantity of assets that have completed the entire clearing and settlement cycle, where ownership of the securities has been officially transferred and payment has been fully processed. The settled position includes all transactions that have been recorded in the Ledger with process_date, activity_date, and settle_date on or before the date specified in the response.
 	Settled *Settled `json:"settled,omitempty"`
+	// Represents the amount of an asset that has been sold short, where shares were borrowed and sold with an obligation to repurchase and return them. This memo distinguishes intentional short sales from other negative position states
+	Short *Short `json:"short,omitempty"`
 	// This field represents the total amount of an asset owned by the account including transactions that have been executed but not yet settled, commonly known as the trade date position. It includes all transactions recorded in the Ledger with process_date and activity_date on or before the date in the response, even those with future settle_dates. Unlike the settled position, which only includes completed settlements, the trade position provides a forward-looking view of ownership that accounts for pending settlements
 	Trade *PositionTrade `json:"trade,omitempty"`
 	// This field represents the portion of a settled position that is available for trading or withdrawal without restrictions. It is calculated by subtracting positions with pending restrictions from the total settled amount (currently: settled - (pending_outgoing_acat + pending_drip + pending_withdrawal)). As new memo location categories are added to the API, Apex may update this calculation to incorporate these values. Note that the Cash and Margin systems may place additional restrictions on cash/ assets according to their business logic.
@@ -335,6 +350,13 @@ func (o *Position) GetSettled() *Settled {
 		return nil
 	}
 	return o.Settled
+}
+
+func (o *Position) GetShort() *Short {
+	if o == nil {
+		return nil
+	}
+	return o.Short
 }
 
 func (o *Position) GetTrade() *PositionTrade {

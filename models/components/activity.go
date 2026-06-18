@@ -39,6 +39,7 @@ const (
 	ActivityAccountMemoPendingOutgoingAcat ActivityAccountMemo = "PENDING_OUTGOING_ACAT"
 	ActivityAccountMemoPendingDrip         ActivityAccountMemo = "PENDING_DRIP"
 	ActivityAccountMemoPendingWithdrawal   ActivityAccountMemo = "PENDING_WITHDRAWAL"
+	ActivityAccountMemoShort               ActivityAccountMemo = "SHORT"
 )
 
 func (e ActivityAccountMemo) ToPointer() *ActivityAccountMemo {
@@ -503,6 +504,73 @@ func (o *ActivityAllocation) GetYieldRecords() []YieldRecord {
 		return nil
 	}
 	return o.YieldRecords
+}
+
+// ActivityCapacity - Trade capacity type
+type ActivityCapacity string
+
+const (
+	ActivityCapacityCapacityUnspecified ActivityCapacity = "CAPACITY_UNSPECIFIED"
+	ActivityCapacityAgency              ActivityCapacity = "AGENCY"
+	ActivityCapacityPrincipal           ActivityCapacity = "PRINCIPAL"
+	ActivityCapacityMixed               ActivityCapacity = "MIXED"
+)
+
+func (e ActivityCapacity) ToPointer() *ActivityCapacity {
+	return &e
+}
+
+// ActivityOptionContractQuantity - Records the number of contracts exercised or assigned
+type ActivityOptionContractQuantity struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityOptionContractQuantity) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityAssignment - When booked with a type of MOVEMENT, this subtype will remove an options position due to assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from the assignment of an options position
+type ActivityAssignment struct {
+	// Trade capacity type
+	Capacity *ActivityCapacity `json:"capacity,omitempty"`
+	// Records the asset_id of the option that was exercised or assigned
+	OptionAssetID *string `json:"option_asset_id,omitempty"`
+	// Records the number of contracts exercised or assigned
+	OptionContractQuantity *ActivityOptionContractQuantity `json:"option_contract_quantity,omitempty"`
+	// Records the description of the option the account exercised or assigned
+	OptionDescription *string `json:"option_description,omitempty"`
+}
+
+func (o *ActivityAssignment) GetCapacity() *ActivityCapacity {
+	if o == nil {
+		return nil
+	}
+	return o.Capacity
+}
+
+func (o *ActivityAssignment) GetOptionAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionAssetID
+}
+
+func (o *ActivityAssignment) GetOptionContractQuantity() *ActivityOptionContractQuantity {
+	if o == nil {
+		return nil
+	}
+	return o.OptionContractQuantity
+}
+
+func (o *ActivityAssignment) GetOptionDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionDescription
 }
 
 // ActivityCashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
@@ -1839,6 +1907,131 @@ func (o *ActivityExchange) GetType() *ActivityExchangeType {
 	return o.Type
 }
 
+// ActivityExerciseCapacity - Trade capacity type
+type ActivityExerciseCapacity string
+
+const (
+	ActivityExerciseCapacityCapacityUnspecified ActivityExerciseCapacity = "CAPACITY_UNSPECIFIED"
+	ActivityExerciseCapacityAgency              ActivityExerciseCapacity = "AGENCY"
+	ActivityExerciseCapacityPrincipal           ActivityExerciseCapacity = "PRINCIPAL"
+	ActivityExerciseCapacityMixed               ActivityExerciseCapacity = "MIXED"
+)
+
+func (e ActivityExerciseCapacity) ToPointer() *ActivityExerciseCapacity {
+	return &e
+}
+
+// ActivityExerciseType - Exercise type classification
+type ActivityExerciseType string
+
+const (
+	ActivityExerciseTypeExerciseTypeUnspecified ActivityExerciseType = "EXERCISE_TYPE_UNSPECIFIED"
+	ActivityExerciseTypeAutoExercise            ActivityExerciseType = "AUTO_EXERCISE"
+	ActivityExerciseTypeEarlyExercise           ActivityExerciseType = "EARLY_EXERCISE"
+	ActivityExerciseTypeExerciseByException     ActivityExerciseType = "EXERCISE_BY_EXCEPTION"
+)
+
+func (e ActivityExerciseType) ToPointer() *ActivityExerciseType {
+	return &e
+}
+
+// ActivityExerciseOptionContractQuantity - Records the number of contracts exercised or assigned
+type ActivityExerciseOptionContractQuantity struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *ActivityExerciseOptionContractQuantity) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// ActivityExercise - When booked with a type of MOVEMENT, this subtype will remove an options position due to exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from exercising an options position
+type ActivityExercise struct {
+	// Trade capacity type
+	Capacity *ActivityExerciseCapacity `json:"capacity,omitempty"`
+	// Exercise type classification
+	ExerciseType *ActivityExerciseType `json:"exercise_type,omitempty"`
+	// Records the asset_id of the option that was exercised or assigned
+	OptionAssetID *string `json:"option_asset_id,omitempty"`
+	// Records the number of contracts exercised or assigned
+	OptionContractQuantity *ActivityExerciseOptionContractQuantity `json:"option_contract_quantity,omitempty"`
+	// Records the description of the option the account exercised or assigned
+	OptionDescription *string `json:"option_description,omitempty"`
+}
+
+func (o *ActivityExercise) GetCapacity() *ActivityExerciseCapacity {
+	if o == nil {
+		return nil
+	}
+	return o.Capacity
+}
+
+func (o *ActivityExercise) GetExerciseType() *ActivityExerciseType {
+	if o == nil {
+		return nil
+	}
+	return o.ExerciseType
+}
+
+func (o *ActivityExercise) GetOptionAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionAssetID
+}
+
+func (o *ActivityExercise) GetOptionContractQuantity() *ActivityExerciseOptionContractQuantity {
+	if o == nil {
+		return nil
+	}
+	return o.OptionContractQuantity
+}
+
+func (o *ActivityExercise) GetOptionDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionDescription
+}
+
+// ActivityMoneyness - Indicates whether the price of the underlying was above or below the strike price of the option
+type ActivityMoneyness string
+
+const (
+	ActivityMoneynessMoneynessUnspecified ActivityMoneyness = "MONEYNESS_UNSPECIFIED"
+	ActivityMoneynessInTheMoney           ActivityMoneyness = "IN_THE_MONEY"
+	ActivityMoneynessOutOfTheMoney        ActivityMoneyness = "OUT_OF_THE_MONEY"
+)
+
+func (e ActivityMoneyness) ToPointer() *ActivityMoneyness {
+	return &e
+}
+
+// ActivityExpiration - Used to record the removal of positions in options assets that have reached or passed their expiration date and expired worthless
+type ActivityExpiration struct {
+	// Indicates that instructions were received by Apex to not exercise an option contract that expired in the money
+	DoNotExercise *bool `json:"do_not_exercise,omitempty"`
+	// Indicates whether the price of the underlying was above or below the strike price of the option
+	Moneyness *ActivityMoneyness `json:"moneyness,omitempty"`
+}
+
+func (o *ActivityExpiration) GetDoNotExercise() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.DoNotExercise
+}
+
+func (o *ActivityExpiration) GetMoneyness() *ActivityMoneyness {
+	if o == nil {
+		return nil
+	}
+	return o.Moneyness
+}
+
 // ActivityFee - Used to record Fees that have been assessed to account and capture details related to the fee
 type ActivityFee struct {
 	// Free form text field providing additional information about a transaction
@@ -3149,6 +3342,46 @@ func (o *NextActivityProcessDate) GetYear() *int {
 
 // None
 type None struct {
+}
+
+// ActivityOptionAdjustment - Used to record the adjustment of an options position. Usually these adjustments are due to a corporate action event in the underlying asset, though in rare cases, the OCC may make adjustments for other reasons
+type ActivityOptionAdjustment struct {
+	// Asset Id of the new security after the option adjustment was processed
+	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
+	// Symbol of the new security after the option adjustment was processed
+	DisbursedSymbol *string `json:"disbursed_symbol,omitempty"`
+	// Asset Id of the existing security before the option adjustment was processed
+	TargetAssetID *string `json:"target_asset_id,omitempty"`
+	// Symbol of the existing security before the option adjustment was processed
+	TargetSymbol *string `json:"target_symbol,omitempty"`
+}
+
+func (o *ActivityOptionAdjustment) GetDisbursedAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedAssetID
+}
+
+func (o *ActivityOptionAdjustment) GetDisbursedSymbol() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedSymbol
+}
+
+func (o *ActivityOptionAdjustment) GetTargetAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetAssetID
+}
+
+func (o *ActivityOptionAdjustment) GetTargetSymbol() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetSymbol
 }
 
 // ActivityPaymentInKindCorporateActionGeneralInformation - Common fields for corporate actions
@@ -4648,6 +4881,7 @@ const (
 	ActivitySideModifierShortCover              ActivitySideModifier = "SHORT_COVER"
 	ActivitySideModifierOpen                    ActivitySideModifier = "OPEN"
 	ActivitySideModifierClose                   ActivitySideModifier = "CLOSE"
+	ActivitySideModifierCover                   ActivitySideModifier = "COVER"
 )
 
 func (e ActivitySideModifier) ToPointer() *ActivitySideModifier {
@@ -5596,6 +5830,8 @@ type ActivityTrade struct {
 	InternalError *bool `json:"internal_error,omitempty"`
 	// Set on penny-for-the-lot trades
 	IsWriteoff *bool `json:"is_writeoff,omitempty"`
+	// Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB) securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale trades.
+	LocateID *string `json:"locate_id,omitempty"`
 	// Repeated record containing information about the tax lots, if specified
 	Lots []Lot `json:"lots,omitempty"`
 	// Max Length 100 characters. Internally generated order id that is returned to client on exec reports
@@ -5726,6 +5962,13 @@ func (o *ActivityTrade) GetIsWriteoff() *bool {
 		return nil
 	}
 	return o.IsWriteoff
+}
+
+func (o *ActivityTrade) GetLocateID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LocateID
 }
 
 func (o *ActivityTrade) GetLots() []Lot {
@@ -6555,6 +6798,8 @@ type Activity struct {
 	AssetDescription *string `json:"asset_description,omitempty"`
 	// An Apex-provided, global identifier created on a per asset bases which provides connectivity across all areas Not populated on a currency only movement
 	AssetID *string `json:"asset_id,omitempty"`
+	// When booked with a type of MOVEMENT, this subtype will remove an options position due to assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from the assignment of an options position
+	Assignment *ActivityAssignment `json:"assignment,omitempty"`
 	// Object containing metadata for bond defaults
 	BondDefault *ActivityBondDefault `json:"bond_default,omitempty"`
 	// Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
@@ -6589,6 +6834,10 @@ type Activity struct {
 	EventContractSettlement *ActivityEventContractSettlement `json:"event_contract_settlement,omitempty"`
 	// Used to record the exchange of certificates for a new security or cash and details related to the exchange
 	Exchange *ActivityExchange `json:"exchange,omitempty"`
+	// When booked with a type of MOVEMENT, this subtype will remove an options position due to exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from exercising an options position
+	Exercise *ActivityExercise `json:"exercise,omitempty"`
+	// Used to record the removal of positions in options assets that have reached or passed their expiration date and expired worthless
+	Expiration *ActivityExpiration `json:"expiration,omitempty"`
 	// Used to record Fees that have been assessed to account and capture details related to the fee
 	Fee *ActivityFee `json:"fee,omitempty"`
 	// Any fees associated with the activity
@@ -6621,6 +6870,8 @@ type Activity struct {
 	NextActivityProcessDate *NextActivityProcessDate `json:"next_activity_process_date,omitempty"`
 	// None
 	None *None `json:"none,omitempty"`
+	// Used to record the adjustment of an options position. Usually these adjustments are due to a corporate action event in the underlying asset, though in rare cases, the OCC may make adjustments for other reasons
+	OptionAdjustment *ActivityOptionAdjustment `json:"option_adjustment,omitempty"`
 	// The resource name of the API resource that originated this ledger entry or activity. This field enables clients to link ledger activities back to their source transactions for reconciliation purposes. This field will only be populated when the client has direct access to the referenced resource via the Ascend API's.
 	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
 	// Used to record payments on interest-bearing securities where the payment is made in additional securities rather than cash and details related to the payment
@@ -6799,6 +7050,13 @@ func (o *Activity) GetAssetID() *string {
 	return o.AssetID
 }
 
+func (o *Activity) GetAssignment() *ActivityAssignment {
+	if o == nil {
+		return nil
+	}
+	return o.Assignment
+}
+
 func (o *Activity) GetBondDefault() *ActivityBondDefault {
 	if o == nil {
 		return nil
@@ -6918,6 +7176,20 @@ func (o *Activity) GetExchange() *ActivityExchange {
 	return o.Exchange
 }
 
+func (o *Activity) GetExercise() *ActivityExercise {
+	if o == nil {
+		return nil
+	}
+	return o.Exercise
+}
+
+func (o *Activity) GetExpiration() *ActivityExpiration {
+	if o == nil {
+		return nil
+	}
+	return o.Expiration
+}
+
 func (o *Activity) GetFee() *ActivityFee {
 	if o == nil {
 		return nil
@@ -7028,6 +7300,13 @@ func (o *Activity) GetNone() *None {
 		return nil
 	}
 	return o.None
+}
+
+func (o *Activity) GetOptionAdjustment() *ActivityOptionAdjustment {
+	if o == nil {
+		return nil
+	}
+	return o.OptionAdjustment
 }
 
 func (o *Activity) GetOriginatingResourceName() *string {
