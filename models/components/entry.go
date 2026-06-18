@@ -39,6 +39,7 @@ const (
 	AccountMemoPendingOutgoingAcat AccountMemo = "PENDING_OUTGOING_ACAT"
 	AccountMemoPendingDrip         AccountMemo = "PENDING_DRIP"
 	AccountMemoPendingWithdrawal   AccountMemo = "PENDING_WITHDRAWAL"
+	AccountMemoShort               AccountMemo = "SHORT"
 )
 
 func (e AccountMemo) ToPointer() *AccountMemo {
@@ -482,6 +483,8 @@ type Allocation struct {
 	GatewayClientOrderID *string `json:"gateway_client_order_id,omitempty"`
 	// Indicates the trade should be omitted from client billing
 	InternalError *bool `json:"internal_error,omitempty"`
+	// Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB) securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale trades.
+	LocateID *string `json:"locate_id,omitempty"`
 	// Trade lots
 	Lots []Lot `json:"lots,omitempty"`
 	// The price for the instrument that is prevailing in the market
@@ -550,6 +553,13 @@ func (o *Allocation) GetInternalError() *bool {
 	return o.InternalError
 }
 
+func (o *Allocation) GetLocateID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LocateID
+}
+
 func (o *Allocation) GetLots() []Lot {
 	if o == nil {
 		return nil
@@ -583,6 +593,73 @@ func (o *Allocation) GetYieldRecords() []YieldRecord {
 		return nil
 	}
 	return o.YieldRecords
+}
+
+// Capacity - Trade capacity type
+type Capacity string
+
+const (
+	CapacityCapacityUnspecified Capacity = "CAPACITY_UNSPECIFIED"
+	CapacityAgency              Capacity = "AGENCY"
+	CapacityPrincipal           Capacity = "PRINCIPAL"
+	CapacityMixed               Capacity = "MIXED"
+)
+
+func (e Capacity) ToPointer() *Capacity {
+	return &e
+}
+
+// OptionContractQuantity - Records the number of contracts exercised or assigned
+type OptionContractQuantity struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *OptionContractQuantity) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// Assignment - When booked with a type of MOVEMENT, this subtype will remove an options position due to assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from the assignment of an options position
+type Assignment struct {
+	// Trade capacity type
+	Capacity *Capacity `json:"capacity,omitempty"`
+	// Records the asset_id of the option that was exercised or assigned
+	OptionAssetID *string `json:"option_asset_id,omitempty"`
+	// Records the number of contracts exercised or assigned
+	OptionContractQuantity *OptionContractQuantity `json:"option_contract_quantity,omitempty"`
+	// Records the description of the option the account exercised or assigned
+	OptionDescription *string `json:"option_description,omitempty"`
+}
+
+func (o *Assignment) GetCapacity() *Capacity {
+	if o == nil {
+		return nil
+	}
+	return o.Capacity
+}
+
+func (o *Assignment) GetOptionAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionAssetID
+}
+
+func (o *Assignment) GetOptionContractQuantity() *OptionContractQuantity {
+	if o == nil {
+		return nil
+	}
+	return o.OptionContractQuantity
+}
+
+func (o *Assignment) GetOptionDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionDescription
 }
 
 // CashRate - The rate (raw value, not a percentage, example: 50% will be .5 in this field) at which cash will be disbursed to the shareholder
@@ -2030,6 +2107,131 @@ func (o *Exchange) GetType() *EntryExchangeType {
 	return o.Type
 }
 
+// EntryCapacity - Trade capacity type
+type EntryCapacity string
+
+const (
+	EntryCapacityCapacityUnspecified EntryCapacity = "CAPACITY_UNSPECIFIED"
+	EntryCapacityAgency              EntryCapacity = "AGENCY"
+	EntryCapacityPrincipal           EntryCapacity = "PRINCIPAL"
+	EntryCapacityMixed               EntryCapacity = "MIXED"
+)
+
+func (e EntryCapacity) ToPointer() *EntryCapacity {
+	return &e
+}
+
+// ExerciseType - Exercise type classification
+type ExerciseType string
+
+const (
+	ExerciseTypeExerciseTypeUnspecified ExerciseType = "EXERCISE_TYPE_UNSPECIFIED"
+	ExerciseTypeAutoExercise            ExerciseType = "AUTO_EXERCISE"
+	ExerciseTypeEarlyExercise           ExerciseType = "EARLY_EXERCISE"
+	ExerciseTypeExerciseByException     ExerciseType = "EXERCISE_BY_EXCEPTION"
+)
+
+func (e ExerciseType) ToPointer() *ExerciseType {
+	return &e
+}
+
+// EntryOptionContractQuantity - Records the number of contracts exercised or assigned
+type EntryOptionContractQuantity struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *EntryOptionContractQuantity) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// Exercise - When booked with a type of MOVEMENT, this subtype will remove an options position due to exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from exercising an options position
+type Exercise struct {
+	// Trade capacity type
+	Capacity *EntryCapacity `json:"capacity,omitempty"`
+	// Exercise type classification
+	ExerciseType *ExerciseType `json:"exercise_type,omitempty"`
+	// Records the asset_id of the option that was exercised or assigned
+	OptionAssetID *string `json:"option_asset_id,omitempty"`
+	// Records the number of contracts exercised or assigned
+	OptionContractQuantity *EntryOptionContractQuantity `json:"option_contract_quantity,omitempty"`
+	// Records the description of the option the account exercised or assigned
+	OptionDescription *string `json:"option_description,omitempty"`
+}
+
+func (o *Exercise) GetCapacity() *EntryCapacity {
+	if o == nil {
+		return nil
+	}
+	return o.Capacity
+}
+
+func (o *Exercise) GetExerciseType() *ExerciseType {
+	if o == nil {
+		return nil
+	}
+	return o.ExerciseType
+}
+
+func (o *Exercise) GetOptionAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionAssetID
+}
+
+func (o *Exercise) GetOptionContractQuantity() *EntryOptionContractQuantity {
+	if o == nil {
+		return nil
+	}
+	return o.OptionContractQuantity
+}
+
+func (o *Exercise) GetOptionDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OptionDescription
+}
+
+// Moneyness - Indicates whether the price of the underlying was above or below the strike price of the option
+type Moneyness string
+
+const (
+	MoneynessMoneynessUnspecified Moneyness = "MONEYNESS_UNSPECIFIED"
+	MoneynessInTheMoney           Moneyness = "IN_THE_MONEY"
+	MoneynessOutOfTheMoney        Moneyness = "OUT_OF_THE_MONEY"
+)
+
+func (e Moneyness) ToPointer() *Moneyness {
+	return &e
+}
+
+// Expiration - Used to record the removal of positions in options assets that have reached or passed their expiration date and expired worthless
+type Expiration struct {
+	// Indicates that instructions were received by Apex to not exercise an option contract that expired in the money
+	DoNotExercise *bool `json:"do_not_exercise,omitempty"`
+	// Indicates whether the price of the underlying was above or below the strike price of the option
+	Moneyness *Moneyness `json:"moneyness,omitempty"`
+}
+
+func (o *Expiration) GetDoNotExercise() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.DoNotExercise
+}
+
+func (o *Expiration) GetMoneyness() *Moneyness {
+	if o == nil {
+		return nil
+	}
+	return o.Moneyness
+}
+
 // EntryFeeType - Enum providing additional information about the type of fee being charged
 type EntryFeeType string
 
@@ -2242,6 +2444,8 @@ type Detail struct {
 	InternalError *bool `json:"internal_error,omitempty"`
 	// set on penny-for-the-lot trades
 	IsWriteoff *bool `json:"is_writeoff,omitempty"`
+	// Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB) securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale trades.
+	LocateID *string `json:"locate_id,omitempty"`
 	// Trade lots
 	Lots []Lot `json:"lots,omitempty"`
 	// "MMAP" for multi market average price, "UNKN" for unknown
@@ -2379,6 +2583,13 @@ func (o *Detail) GetIsWriteoff() *bool {
 		return nil
 	}
 	return o.IsWriteoff
+}
+
+func (o *Detail) GetLocateID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LocateID
 }
 
 func (o *Detail) GetLots() []Lot {
@@ -3706,6 +3917,45 @@ func (o *NameChange) GetQuantity() *EntryNameChangeQuantity {
 		return nil
 	}
 	return o.Quantity
+}
+
+// OptionAdjustment - Object containing metadata for option adjustments
+type OptionAdjustment struct {
+	// Asset Id of the new security after the option adjustment was processed
+	DisbursedAssetID *string `json:"disbursed_asset_id,omitempty"`
+	// Symbol of the new security after the option adjustment was processed
+	DisbursedSymbol *string `json:"disbursed_symbol,omitempty"`
+	TargetAssetID   *string `json:"target_asset_id,omitempty"`
+	// Symbol of the existing security before the option adjustment was processed
+	TargetSymbol *string `json:"target_symbol,omitempty"`
+}
+
+func (o *OptionAdjustment) GetDisbursedAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedAssetID
+}
+
+func (o *OptionAdjustment) GetDisbursedSymbol() *string {
+	if o == nil {
+		return nil
+	}
+	return o.DisbursedSymbol
+}
+
+func (o *OptionAdjustment) GetTargetAssetID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetAssetID
+}
+
+func (o *OptionAdjustment) GetTargetSymbol() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TargetSymbol
 }
 
 // OriginalProcessDate - The original entry process date; stable across reversals and corrections; use for maintaining lineage of entries through multiple corrections/reversals
@@ -5196,6 +5446,7 @@ const (
 	EntrySideModifierShortCover              EntrySideModifier = "SHORT_COVER"
 	EntrySideModifierOpen                    EntrySideModifier = "OPEN"
 	EntrySideModifierClose                   EntrySideModifier = "CLOSE"
+	EntrySideModifierCover                   EntrySideModifier = "COVER"
 )
 
 func (e EntrySideModifier) ToPointer() *EntrySideModifier {
@@ -6165,6 +6416,8 @@ type EntryTrade struct {
 	InternalError *bool `json:"internal_error,omitempty"`
 	// set on penny-for-the-lot trades
 	IsWriteoff *bool `json:"is_writeoff,omitempty"`
+	// Identifier of the stock locate that authorizes a short sale. For easy-to-borrow (ETB) securities the value is "ETB". Required when side_modifier is SHORT; omitted for non-short-sale trades.
+	LocateID *string `json:"locate_id,omitempty"`
 	// Trade lots
 	Lots []Lot `json:"lots,omitempty"`
 	// "MMAP" for multi market average price, "UNKN" for unknown
@@ -6302,6 +6555,13 @@ func (o *EntryTrade) GetIsWriteoff() *bool {
 		return nil
 	}
 	return o.IsWriteoff
+}
+
+func (o *EntryTrade) GetLocateID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LocateID
 }
 
 func (o *EntryTrade) GetLots() []Lot {
@@ -7207,6 +7467,8 @@ type Entry struct {
 	Allocation *Allocation `json:"allocation,omitempty"`
 	// An Apex-provided, global identifier created on a per asset bases which provides connectivity across all areas Required, except for currency movements which should instead have a currency_asset_id
 	AssetID *string `json:"asset_id,omitempty"`
+	// When booked with a type of MOVEMENT, this subtype will remove an options position due to assignment. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from the assignment of an options position
+	Assignment *Assignment `json:"assignment,omitempty"`
 	// Object containing metadata for bond defaults
 	BondDefault *BondDefault `json:"bond_default,omitempty"`
 	// Used to record a distribution of cash that an issuer has determined will be declared as income financed from capital gains and not ordinary income and details related to the capital gain
@@ -7239,6 +7501,10 @@ type Entry struct {
 	EventContractSettlement *EventContractSettlement `json:"event_contract_settlement,omitempty"`
 	// Used to record the exchange of certificates for a new security or cash and details related to the exchange
 	Exchange *Exchange `json:"exchange,omitempty"`
+	// When booked with a type of MOVEMENT, this subtype will remove an options position due to exercise. When booked with a type of TRADE, this subtype records the purchase/ sale of the underlying asset from exercising an options position
+	Exercise *Exercise `json:"exercise,omitempty"`
+	// Used to record the removal of positions in options assets that have reached or passed their expiration date and expired worthless
+	Expiration *Expiration `json:"expiration,omitempty"`
 	// Used to record Fees that have been assessed to account and capture details related to the fee
 	Fee *EntryFee `json:"fee,omitempty"`
 	// Object containing metadata for a Flip
@@ -7261,6 +7527,8 @@ type Entry struct {
 	Name *string `json:"name,omitempty"`
 	// Used to record changes in the name of a security/securities by the issuer which result in surrendering physical securities or the assigning of a new security identifier which result in new securities being issued and details related to the name changes
 	NameChange *NameChange `json:"name_change,omitempty"`
+	// Object containing metadata for option adjustments
+	OptionAdjustment *OptionAdjustment `json:"option_adjustment,omitempty"`
 	// The original entry id; stable across reversals and corrections; use for maintaining lineage of entries through multiple corrections/reversals
 	OriginalID *string `json:"original_id,omitempty"`
 	// The original entry process date; stable across reversals and corrections; use for maintaining lineage of entries through multiple corrections/reversals
@@ -7421,6 +7689,13 @@ func (o *Entry) GetAssetID() *string {
 	return o.AssetID
 }
 
+func (o *Entry) GetAssignment() *Assignment {
+	if o == nil {
+		return nil
+	}
+	return o.Assignment
+}
+
 func (o *Entry) GetBondDefault() *BondDefault {
 	if o == nil {
 		return nil
@@ -7533,6 +7808,20 @@ func (o *Entry) GetExchange() *Exchange {
 	return o.Exchange
 }
 
+func (o *Entry) GetExercise() *Exercise {
+	if o == nil {
+		return nil
+	}
+	return o.Exercise
+}
+
+func (o *Entry) GetExpiration() *Expiration {
+	if o == nil {
+		return nil
+	}
+	return o.Expiration
+}
+
 func (o *Entry) GetFee() *EntryFee {
 	if o == nil {
 		return nil
@@ -7608,6 +7897,13 @@ func (o *Entry) GetNameChange() *NameChange {
 		return nil
 	}
 	return o.NameChange
+}
+
+func (o *Entry) GetOptionAdjustment() *OptionAdjustment {
+	if o == nil {
+		return nil
+	}
+	return o.OptionAdjustment
 }
 
 func (o *Entry) GetOriginalID() *string {

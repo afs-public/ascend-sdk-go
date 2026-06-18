@@ -13,7 +13,10 @@ type LedgerListActivitiesRequest struct {
 	PageSize *int `queryParam:"style=form,explode=true,name=page_size"`
 	// A page token, received from a previous `ListActivity` call. Provide this to retrieve the subsequent page When paginating, all other parameters provided to `ListActivity` must match the call that provided the page token in order to maintain a stable result set
 	PageToken *string `queryParam:"style=form,explode=true,name=page_token"`
-	// A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information;
+	// For optimal performance, include process_date or activity_date in the CEL expression. Adding asset_id, type, and/or subtype_category further improves query efficiency when applicable. Queries without date fields will have slower response times.
+	//
+	//  See the CEL Search guide for more information:
+	//  https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search
 	Filter *string `queryParam:"style=form,explode=true,name=filter"`
 }
 

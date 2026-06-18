@@ -13,3 +13,4 @@ Indicates whether the trade is opening a new position or closing an existing pos
 | `ActivitySideModifierShortCover`              | SHORT_COVER                                   |
 | `ActivitySideModifierOpen`                    | OPEN                                          |
 | `ActivitySideModifierClose`                   | CLOSE                                         |
+| `ActivitySideModifierCover`                   | COVER                                         |

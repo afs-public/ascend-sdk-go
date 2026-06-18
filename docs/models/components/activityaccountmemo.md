@@ -13,3 +13,4 @@ Indicates the memo location impacted by an entry
 | `ActivityAccountMemoPendingOutgoingAcat` | PENDING_OUTGOING_ACAT                    |
 | `ActivityAccountMemoPendingDrip`         | PENDING_DRIP                             |
 | `ActivityAccountMemoPendingWithdrawal`   | PENDING_WITHDRAWAL                       |
+| `ActivityAccountMemoShort`               | SHORT                                    |
