@@ -9,6 +9,7 @@ The enrollment type.
 | ----------------------------------------------------- | ----------------------------------------------------- |
 | `EnrollmentTypeEnrollmentTypeUnspecified`             | ENROLLMENT_TYPE_UNSPECIFIED                           |
 | `EnrollmentTypeRegistrationIndividual`                | REGISTRATION_INDIVIDUAL                               |
+| `EnrollmentTypeLendingLimitedPurposeMargin`           | LENDING_LIMITED_PURPOSE_MARGIN                        |
 | `EnrollmentTypeLendingFullyPaidStockLoan`             | LENDING_FULLY_PAID_STOCK_LOAN                         |
 | `EnrollmentTypeBeneficiaryDesignation`                | BENEFICIARY_DESIGNATION                               |
 | `EnrollmentTypeRegistrationJointWros`                 | REGISTRATION_JOINT_WROS                               |

@@ -23,6 +23,7 @@ type EnrollmentCreateType string
 const (
 	EnrollmentCreateTypeEnrollmentTypeUnspecified             EnrollmentCreateType = "ENROLLMENT_TYPE_UNSPECIFIED"
 	EnrollmentCreateTypeRegistrationIndividual                EnrollmentCreateType = "REGISTRATION_INDIVIDUAL"
+	EnrollmentCreateTypeLendingLimitedPurposeMargin           EnrollmentCreateType = "LENDING_LIMITED_PURPOSE_MARGIN"
 	EnrollmentCreateTypeLendingFullyPaidStockLoan             EnrollmentCreateType = "LENDING_FULLY_PAID_STOCK_LOAN"
 	EnrollmentCreateTypeBeneficiaryDesignation                EnrollmentCreateType = "BENEFICIARY_DESIGNATION"
 	EnrollmentCreateTypeRegistrationJointWros                 EnrollmentCreateType = "REGISTRATION_JOINT_WROS"
@@ -107,6 +108,8 @@ type EnrollmentCreate struct {
 	OperatingEnrollmentMetadata *OperatingEnrollmentMetadataCreate `json:"operating_enrollment_metadata,omitempty"`
 	// Enrollment metadata for the ORDERS_OPTIONS_TRADING enrollment type
 	OrdersOptionsTradingEnrollmentMetadata *OrdersOptionsTradingEnrollmentMetadataCreate `json:"orders_options_trading_enrollment_metadata,omitempty"`
+	// Enrollment metadata for the PARTNERSHIP enrollment type
+	PartnershipEnrollmentMetadata *PartnershipEnrollmentMetadataCreate `json:"partnership_enrollment_metadata,omitempty"`
 	// The ULID is associated with the approver of a given enrollment. The approver you create will contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID associated with Apex's approver.
 	PrincipalApproverID string `json:"principal_approver_id"`
 	// Enrollment metadata for the SOLE_PROPRIETORSHIP enrollment type
@@ -285,6 +288,13 @@ func (o *EnrollmentCreate) GetOrdersOptionsTradingEnrollmentMetadata() *OrdersOp
 		return nil
 	}
 	return o.OrdersOptionsTradingEnrollmentMetadata
+}
+
+func (o *EnrollmentCreate) GetPartnershipEnrollmentMetadata() *PartnershipEnrollmentMetadataCreate {
+	if o == nil {
+		return nil
+	}
+	return o.PartnershipEnrollmentMetadata
 }
 
 func (o *EnrollmentCreate) GetPrincipalApproverID() string {

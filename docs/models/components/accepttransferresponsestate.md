@@ -20,3 +20,5 @@ The transfer state
 | `AcceptTransferResponseStatePendingBookkeeping`    | PENDING_BOOKKEEPING                                |
 | `AcceptTransferResponseStateCompleted`             | COMPLETED                                          |
 | `AcceptTransferResponseStatePurged`                | PURGED                                             |
+| `AcceptTransferResponseStatePendingReviewMargins`  | PENDING_REVIEW_MARGINS                             |
+| `AcceptTransferResponseStatePendingSubmission`     | PENDING_SUBMISSION                                 |

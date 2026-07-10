@@ -16,3 +16,5 @@ The type of transfer
 | `TransferTypePositionTransferFundFirmToMutualFundCompanyOnly` | POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY       |
 | `TransferTypeReclaim`                                         | RECLAIM                                                       |
 | `TransferTypeResidualCredit`                                  | RESIDUAL_CREDIT                                               |
+| `TransferTypeSponsoredTransfer`                               | SPONSORED_TRANSFER                                            |
+| `TransferTypeFreeReceive`                                     | FREE_RECEIVE                                                  |

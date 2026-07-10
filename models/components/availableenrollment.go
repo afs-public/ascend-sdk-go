@@ -8,6 +8,7 @@ type EnrollmentType string
 const (
 	EnrollmentTypeEnrollmentTypeUnspecified             EnrollmentType = "ENROLLMENT_TYPE_UNSPECIFIED"
 	EnrollmentTypeRegistrationIndividual                EnrollmentType = "REGISTRATION_INDIVIDUAL"
+	EnrollmentTypeLendingLimitedPurposeMargin           EnrollmentType = "LENDING_LIMITED_PURPOSE_MARGIN"
 	EnrollmentTypeLendingFullyPaidStockLoan             EnrollmentType = "LENDING_FULLY_PAID_STOCK_LOAN"
 	EnrollmentTypeBeneficiaryDesignation                EnrollmentType = "BENEFICIARY_DESIGNATION"
 	EnrollmentTypeRegistrationJointWros                 EnrollmentType = "REGISTRATION_JOINT_WROS"

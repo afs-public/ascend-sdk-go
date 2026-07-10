@@ -32,3 +32,4 @@ The purpose of the operating account.
 | `EnrollmentOperatingPurposeWash`                          | WASH                                                      |
 | `EnrollmentOperatingPurposeSettlement`                    | SETTLEMENT                                                |
 | `EnrollmentOperatingPurposeTransferLocation`              | TRANSFER_LOCATION                                         |
+| `EnrollmentOperatingPurposeControlDepository`             | CONTROL_DEPOSITORY                                        |

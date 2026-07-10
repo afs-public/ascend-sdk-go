@@ -12,6 +12,7 @@ type DeactivateEnrollmentRequestCreateEnrollmentType string
 const (
 	DeactivateEnrollmentRequestCreateEnrollmentTypeEnrollmentTypeUnspecified             DeactivateEnrollmentRequestCreateEnrollmentType = "ENROLLMENT_TYPE_UNSPECIFIED"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividual                DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_INDIVIDUAL"
+	DeactivateEnrollmentRequestCreateEnrollmentTypeLendingLimitedPurposeMargin           DeactivateEnrollmentRequestCreateEnrollmentType = "LENDING_LIMITED_PURPOSE_MARGIN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeLendingFullyPaidStockLoan             DeactivateEnrollmentRequestCreateEnrollmentType = "LENDING_FULLY_PAID_STOCK_LOAN"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeBeneficiaryDesignation                DeactivateEnrollmentRequestCreateEnrollmentType = "BENEFICIARY_DESIGNATION"
 	DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointWros                 DeactivateEnrollmentRequestCreateEnrollmentType = "REGISTRATION_JOINT_WROS"

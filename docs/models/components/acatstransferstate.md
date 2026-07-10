@@ -20,3 +20,5 @@ The transfer state
 | `AcatsTransferStatePendingBookkeeping`    | PENDING_BOOKKEEPING                       |
 | `AcatsTransferStateCompleted`             | COMPLETED                                 |
 | `AcatsTransferStatePurged`                | PURGED                                    |
+| `AcatsTransferStatePendingReviewMargins`  | PENDING_REVIEW_MARGINS                    |
+| `AcatsTransferStatePendingSubmission`     | PENDING_SUBMISSION                        |

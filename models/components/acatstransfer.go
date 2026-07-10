@@ -197,6 +197,8 @@ const (
 	AcatsTransferStatePendingBookkeeping    AcatsTransferState = "PENDING_BOOKKEEPING"
 	AcatsTransferStateCompleted             AcatsTransferState = "COMPLETED"
 	AcatsTransferStatePurged                AcatsTransferState = "PURGED"
+	AcatsTransferStatePendingReviewMargins  AcatsTransferState = "PENDING_REVIEW_MARGINS"
+	AcatsTransferStatePendingSubmission     AcatsTransferState = "PENDING_SUBMISSION"
 )
 
 func (e AcatsTransferState) ToPointer() *AcatsTransferState {
@@ -216,6 +218,8 @@ const (
 	TransferTypePositionTransferFundFirmToMutualFundCompanyOnly TransferType = "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY"
 	TransferTypeReclaim                                         TransferType = "RECLAIM"
 	TransferTypeResidualCredit                                  TransferType = "RESIDUAL_CREDIT"
+	TransferTypeSponsoredTransfer                               TransferType = "SPONSORED_TRANSFER"
+	TransferTypeFreeReceive                                     TransferType = "FREE_RECEIVE"
 )
 
 func (e TransferType) ToPointer() *TransferType {
