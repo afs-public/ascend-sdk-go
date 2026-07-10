@@ -197,6 +197,8 @@ const (
 	AcceptTransferResponseStatePendingBookkeeping    AcceptTransferResponseState = "PENDING_BOOKKEEPING"
 	AcceptTransferResponseStateCompleted             AcceptTransferResponseState = "COMPLETED"
 	AcceptTransferResponseStatePurged                AcceptTransferResponseState = "PURGED"
+	AcceptTransferResponseStatePendingReviewMargins  AcceptTransferResponseState = "PENDING_REVIEW_MARGINS"
+	AcceptTransferResponseStatePendingSubmission     AcceptTransferResponseState = "PENDING_SUBMISSION"
 )
 
 func (e AcceptTransferResponseState) ToPointer() *AcceptTransferResponseState {
@@ -216,6 +218,8 @@ const (
 	AcceptTransferResponseTransferTypePositionTransferFundFirmToMutualFundCompanyOnly AcceptTransferResponseTransferType = "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY"
 	AcceptTransferResponseTransferTypeReclaim                                         AcceptTransferResponseTransferType = "RECLAIM"
 	AcceptTransferResponseTransferTypeResidualCredit                                  AcceptTransferResponseTransferType = "RESIDUAL_CREDIT"
+	AcceptTransferResponseTransferTypeSponsoredTransfer                               AcceptTransferResponseTransferType = "SPONSORED_TRANSFER"
+	AcceptTransferResponseTransferTypeFreeReceive                                     AcceptTransferResponseTransferType = "FREE_RECEIVE"
 )
 
 func (e AcceptTransferResponseTransferType) ToPointer() *AcceptTransferResponseTransferType {

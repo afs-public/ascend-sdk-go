@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: bf2ac44ce30ef03c0d91cc453e77345a
-  docVersion: v1:20260618:uat:efef5adf4719
+  docChecksum: b750c4a970e6410a16b46a900ffcf771
+  docVersion: v1:20260710:uat:0c2ab6cbe347
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.3.12
-  configChecksum: da2a2662ab9277a571744d2e737ba62c
+  releaseVersion: 1.3.13
+  configChecksum: 5cf87b67a113d697ae832368b3880bf1
 features:
   go:
     additionalDependencies: 0.1.0
@@ -373,6 +373,7 @@ generatedFiles:
   - /models/components/otheraccountscreate.go
   - /models/components/othersourcesofwealthcreate.go
   - /models/components/othersourcesofwealthupdate.go
+  - /models/components/partnershipenrollmentmetadatacreate.go
   - /models/components/party.go
   - /models/components/partyrequestcreate.go
   - /models/components/partyrequestupdate.go
@@ -1645,6 +1646,22 @@ generatedFiles:
   - docs/models/components/enrollmentoperatingpurpose.md
   - docs/models/components/enrollmentoptionslevel.md
   - docs/models/components/enrollmentotheraccounts.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatadepositedfunds.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatadeterminedaccountriskrating.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatadividendreinvestmentplan.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadataeddaccountenrollmentmetadata.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatafdiccashsweep.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatafinancialprofile.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadataforeignbondtradingdetails.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatainitialdepositamount.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatalowpricedsecurities.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatalowpricedsecuritiespercentage.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatamoneymarketfundsweep.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadataotheraccounts.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadataplannedactivity.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadataprimaryaccountactivitytype.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatarelatedpepdetails.md
+  - docs/models/components/enrollmentpartnershipenrollmentmetadatawithdrawalfrequency.md
   - docs/models/components/enrollmentplannedactivity.md
   - docs/models/components/enrollmentprimaryaccountactivitytype.md
   - docs/models/components/enrollmentrelatedpepdetails.md
@@ -2408,6 +2425,11 @@ generatedFiles:
   - docs/models/components/outcome.md
   - docs/models/components/ownershipstructure.md
   - docs/models/components/ownershiptype.md
+  - docs/models/components/partnershipenrollmentmetadata.md
+  - docs/models/components/partnershipenrollmentmetadatacreate.md
+  - docs/models/components/partnershipenrollmentmetadatacreatedividendreinvestmentplan.md
+  - docs/models/components/partnershipenrollmentmetadatacreatefdiccashsweep.md
+  - docs/models/components/partnershipenrollmentmetadatacreatemoneymarketfundsweep.md
   - docs/models/components/party.md
   - docs/models/components/partybirthdate.md
   - docs/models/components/partybusinessindustrialclassification.md

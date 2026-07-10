@@ -197,6 +197,8 @@ const (
 	RejectTransferResponseStatePendingBookkeeping    RejectTransferResponseState = "PENDING_BOOKKEEPING"
 	RejectTransferResponseStateCompleted             RejectTransferResponseState = "COMPLETED"
 	RejectTransferResponseStatePurged                RejectTransferResponseState = "PURGED"
+	RejectTransferResponseStatePendingReviewMargins  RejectTransferResponseState = "PENDING_REVIEW_MARGINS"
+	RejectTransferResponseStatePendingSubmission     RejectTransferResponseState = "PENDING_SUBMISSION"
 )
 
 func (e RejectTransferResponseState) ToPointer() *RejectTransferResponseState {
@@ -216,6 +218,8 @@ const (
 	RejectTransferResponseTransferTypePositionTransferFundFirmToMutualFundCompanyOnly RejectTransferResponseTransferType = "POSITION_TRANSFER_FUND_FIRM_TO_MUTUAL_FUND_COMPANY_ONLY"
 	RejectTransferResponseTransferTypeReclaim                                         RejectTransferResponseTransferType = "RECLAIM"
 	RejectTransferResponseTransferTypeResidualCredit                                  RejectTransferResponseTransferType = "RESIDUAL_CREDIT"
+	RejectTransferResponseTransferTypeSponsoredTransfer                               RejectTransferResponseTransferType = "SPONSORED_TRANSFER"
+	RejectTransferResponseTransferTypeFreeReceive                                     RejectTransferResponseTransferType = "FREE_RECEIVE"
 )
 
 func (e RejectTransferResponseTransferType) ToPointer() *RejectTransferResponseTransferType {

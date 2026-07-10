@@ -2565,6 +2565,7 @@ const (
 	EnrollmentOperatingPurposeWash                          EnrollmentOperatingPurpose = "WASH"
 	EnrollmentOperatingPurposeSettlement                    EnrollmentOperatingPurpose = "SETTLEMENT"
 	EnrollmentOperatingPurposeTransferLocation              EnrollmentOperatingPurpose = "TRANSFER_LOCATION"
+	EnrollmentOperatingPurposeControlDepository             EnrollmentOperatingPurpose = "CONTROL_DEPOSITORY"
 )
 
 func (e EnrollmentOperatingPurpose) ToPointer() *EnrollmentOperatingPurpose {
@@ -2674,6 +2675,8 @@ func (o *TaxWithholdingMetadata) GetWithholdingType() *EnrollmentWithholdingType
 type OperatingEnrollmentMetadata struct {
 	// The purpose of the operating account.
 	OperatingPurpose *EnrollmentOperatingPurpose `json:"operating_purpose,omitempty"`
+	// Indicates whether the depository is foreign (true) or domestic (false). Used for CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+	RepresentsForeignEntity *bool `json:"represents_foreign_entity,omitempty"`
 	// Optional subtitle for the operating purpose
 	Subtitle *string `json:"subtitle,omitempty"`
 	// Optional tax withholding metadata for TAX_WITHHOLDING operating purpose
@@ -2685,6 +2688,13 @@ func (o *OperatingEnrollmentMetadata) GetOperatingPurpose() *EnrollmentOperating
 		return nil
 	}
 	return o.OperatingPurpose
+}
+
+func (o *OperatingEnrollmentMetadata) GetRepresentsForeignEntity() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RepresentsForeignEntity
 }
 
 func (o *OperatingEnrollmentMetadata) GetSubtitle() *string {
@@ -2827,6 +2837,401 @@ func (o *OrdersOptionsTradingEnrollmentMetadata) GetTotalYearsOptionsTradingExpe
 		return nil
 	}
 	return o.TotalYearsOptionsTradingExperience
+}
+
+// EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
+type EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan string
+
+const (
+	EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlanAutoEnrollDividendReinvestmentUnspecified EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan = "AUTO_ENROLL_DIVIDEND_REINVESTMENT_UNSPECIFIED"
+	EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlanDividendReinvestmentEnroll                EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan = "DIVIDEND_REINVESTMENT_ENROLL"
+	EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlanDividendReinvestmentDecline               EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan = "DIVIDEND_REINVESTMENT_DECLINE"
+)
+
+func (e EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan) ToPointer() *EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan {
+	return &e
+}
+
+// EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount - The initial deposit amount in USD
+type EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// EnrollmentPartnershipEnrollmentMetadataDepositedFunds - The initial amount of money placed into the account by the customer upon or after the account's establishment.
+type EnrollmentPartnershipEnrollmentMetadataDepositedFunds struct {
+	// The initial deposit amount in USD
+	InitialDepositAmount *EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount `json:"initial_deposit_amount,omitempty"`
+	// The source of the initial deposit
+	InitialDepositSource *string `json:"initial_deposit_source,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataDepositedFunds) GetInitialDepositAmount() *EnrollmentPartnershipEnrollmentMetadataInitialDepositAmount {
+	if o == nil {
+		return nil
+	}
+	return o.InitialDepositAmount
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataDepositedFunds) GetInitialDepositSource() *string {
+	if o == nil {
+		return nil
+	}
+	return o.InitialDepositSource
+}
+
+// EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating - The client determined account risk rating of the entity customer
+type EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating string
+
+const (
+	EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRatingDeterminedAccountRiskRatingUnspecified EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating = "DETERMINED_ACCOUNT_RISK_RATING_UNSPECIFIED"
+	EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRatingLow                                    EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating = "LOW"
+	EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRatingMedium                                 EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating = "MEDIUM"
+	EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRatingHigh                                   EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating = "HIGH"
+)
+
+func (e EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating) ToPointer() *EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating {
+	return &e
+}
+
+// EnrollmentPartnershipEnrollmentMetadataOtherAccounts - A customer-disclosed list of other Apex-held accounts owned by the Entity applicant at the time of this account's application; expressed as zero, one, or many account numbers
+type EnrollmentPartnershipEnrollmentMetadataOtherAccounts struct {
+	// Other account names held at Apex
+	AccountNames []string `json:"account_names,omitempty"`
+	// Other account numbers held at Apex
+	AccountNumbers []string `json:"account_numbers,omitempty"`
+	// The owner has other accounts at Apex
+	OwnerHasOtherAccountsAtApex *bool `json:"owner_has_other_accounts_at_apex,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataOtherAccounts) GetAccountNames() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountNames
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataOtherAccounts) GetAccountNumbers() []string {
+	if o == nil {
+		return nil
+	}
+	return o.AccountNumbers
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataOtherAccounts) GetOwnerHasOtherAccountsAtApex() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.OwnerHasOtherAccountsAtApex
+}
+
+// EnrollmentPartnershipEnrollmentMetadataFinancialProfile - Disclosure of the account owner's financial relationships and source of brokerage funds; facilitates the creation of the overall customer risk profile
+type EnrollmentPartnershipEnrollmentMetadataFinancialProfile struct {
+	// Bank names with whom the entity maintains a relationship with (e.g., accounts held with the bank)
+	BankingRelationships []string `json:"banking_relationships,omitempty"`
+	// A customer-disclosed list of other Apex-held accounts owned by the Entity applicant at the time of this account's application; expressed as zero, one, or many account numbers
+	OtherAccounts *EnrollmentPartnershipEnrollmentMetadataOtherAccounts `json:"other_accounts,omitempty"`
+	// The primary source of funds that will be deposited to this account
+	PrimarySourceOfDepositedFunds *string `json:"primary_source_of_deposited_funds,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataFinancialProfile) GetBankingRelationships() []string {
+	if o == nil {
+		return nil
+	}
+	return o.BankingRelationships
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataFinancialProfile) GetOtherAccounts() *EnrollmentPartnershipEnrollmentMetadataOtherAccounts {
+	if o == nil {
+		return nil
+	}
+	return o.OtherAccounts
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataFinancialProfile) GetPrimarySourceOfDepositedFunds() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PrimarySourceOfDepositedFunds
+}
+
+// EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails - The foreign bond trading countries details
+type EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails struct {
+	// Does the account anticipate trading in foreign bonds
+	ForeignBondTrading *bool `json:"foreign_bond_trading,omitempty"`
+	// The foreign bond trading countries details. If yes, than please provide details
+	ForeignBondTradingDetail []ForeignBondTradingDetail `json:"foreign_bond_trading_detail,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails) GetForeignBondTrading() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ForeignBondTrading
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails) GetForeignBondTradingDetail() []ForeignBondTradingDetail {
+	if o == nil {
+		return nil
+	}
+	return o.ForeignBondTradingDetail
+}
+
+// EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage - The percentage, by volume, of the account's trades which will involve low priced securities
+type EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage struct {
+	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
+	Value *string `json:"value,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage) GetValue() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Value
+}
+
+// EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities - The account anticipates trading in securities trading for less than $5 per share and are typically traded over-the-counter (OTC) or through pink sheets
+type EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities struct {
+	// The account anticipates trading in securities trading for less than $5 per share and are typically traded over-the-counter (OTC) or through pink sheets
+	LowPricedSecurities *bool `json:"low_priced_securities,omitempty"`
+	// The percentage, by volume, of the account's trades which will involve low priced securities
+	LowPricedSecuritiesPercentage *EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage `json:"low_priced_securities_percentage,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities) GetLowPricedSecurities() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.LowPricedSecurities
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities) GetLowPricedSecuritiesPercentage() *EnrollmentPartnershipEnrollmentMetadataLowPricedSecuritiesPercentage {
+	if o == nil {
+		return nil
+	}
+	return o.LowPricedSecuritiesPercentage
+}
+
+// EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType - The primary account activity type
+type EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType string
+
+const (
+	EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityTypePrimaryAccountActivityTypeUnspecified EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType = "PRIMARY_ACCOUNT_ACTIVITY_TYPE_UNSPECIFIED"
+	EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityTypeActiveTrading                         EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType = "ACTIVE_TRADING"
+	EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityTypeShortTermInvesting                    EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType = "SHORT_TERM_INVESTING"
+	EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityTypeLongTermInvesting                     EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType = "LONG_TERM_INVESTING"
+)
+
+func (e EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType) ToPointer() *EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType {
+	return &e
+}
+
+// EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency - The frequency by which cash is anticipated to be withdrawn from the account
+type EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency string
+
+const (
+	EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequencyWithdrawalFrequencyUnspecified EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency = "WITHDRAWAL_FREQUENCY_UNSPECIFIED"
+	EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequencyFrequent                       EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency = "FREQUENT"
+	EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequencyOccasional                     EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency = "OCCASIONAL"
+	EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequencyRare                           EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency = "RARE"
+)
+
+func (e EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency) ToPointer() *EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency {
+	return &e
+}
+
+// EnrollmentPartnershipEnrollmentMetadataPlannedActivity - Details the customer's intended trading and banking-related activities at the time of account application; informs risk checks and forms a baseline for anomalous activity detection
+type EnrollmentPartnershipEnrollmentMetadataPlannedActivity struct {
+	// The foreign bond trading countries details
+	ForeignBondTradingDetails *EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails `json:"foreign_bond_trading_details,omitempty"`
+	// The account anticipates trading in securities trading for less than $5 per share and are typically traded over-the-counter (OTC) or through pink sheets
+	LowPricedSecurities *EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities `json:"low_priced_securities,omitempty"`
+	// The primary account activity type
+	PrimaryAccountActivityType *EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType `json:"primary_account_activity_type,omitempty"`
+	// The frequency by which cash is anticipated to be withdrawn from the account
+	WithdrawalFrequency *EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency `json:"withdrawal_frequency,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataPlannedActivity) GetForeignBondTradingDetails() *EnrollmentPartnershipEnrollmentMetadataForeignBondTradingDetails {
+	if o == nil {
+		return nil
+	}
+	return o.ForeignBondTradingDetails
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataPlannedActivity) GetLowPricedSecurities() *EnrollmentPartnershipEnrollmentMetadataLowPricedSecurities {
+	if o == nil {
+		return nil
+	}
+	return o.LowPricedSecurities
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataPlannedActivity) GetPrimaryAccountActivityType() *EnrollmentPartnershipEnrollmentMetadataPrimaryAccountActivityType {
+	if o == nil {
+		return nil
+	}
+	return o.PrimaryAccountActivityType
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataPlannedActivity) GetWithdrawalFrequency() *EnrollmentPartnershipEnrollmentMetadataWithdrawalFrequency {
+	if o == nil {
+		return nil
+	}
+	return o.WithdrawalFrequency
+}
+
+// EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails - Information about the related politically exposed persons
+type EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails struct {
+	// Indication as to whether or not an account has direct or indirect related politically exposed persons
+	DirectOrIndirectRelatedPeps *bool `json:"direct_or_indirect_related_peps,omitempty"`
+	// Related Peps
+	RelatedPeps []RelatedPep `json:"related_peps,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails) GetDirectOrIndirectRelatedPeps() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.DirectOrIndirectRelatedPeps
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails) GetRelatedPeps() []RelatedPep {
+	if o == nil {
+		return nil
+	}
+	return o.RelatedPeps
+}
+
+// EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata - Enrollment metadata for entity accounts
+type EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata struct {
+	// The initial amount of money placed into the account by the customer upon or after the account's establishment.
+	DepositedFunds *EnrollmentPartnershipEnrollmentMetadataDepositedFunds `json:"deposited_funds,omitempty"`
+	// The client determined account risk rating of the entity customer
+	DeterminedAccountRiskRating *EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating `json:"determined_account_risk_rating,omitempty"`
+	// Disclosure of the account owner's financial relationships and source of brokerage funds; facilitates the creation of the overall customer risk profile
+	FinancialProfile *EnrollmentPartnershipEnrollmentMetadataFinancialProfile `json:"financial_profile,omitempty"`
+	// Details the customer's intended trading and banking-related activities at the time of account application; informs risk checks and forms a baseline for anomalous activity detection
+	PlannedActivity *EnrollmentPartnershipEnrollmentMetadataPlannedActivity `json:"planned_activity,omitempty"`
+	// Information about the related politically exposed persons
+	RelatedPepDetails *EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails `json:"related_pep_details,omitempty"`
+	// The scope of the business for the entity customer
+	ScopeOfBusiness *string `json:"scope_of_business,omitempty"`
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata) GetDepositedFunds() *EnrollmentPartnershipEnrollmentMetadataDepositedFunds {
+	if o == nil {
+		return nil
+	}
+	return o.DepositedFunds
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata) GetDeterminedAccountRiskRating() *EnrollmentPartnershipEnrollmentMetadataDeterminedAccountRiskRating {
+	if o == nil {
+		return nil
+	}
+	return o.DeterminedAccountRiskRating
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata) GetFinancialProfile() *EnrollmentPartnershipEnrollmentMetadataFinancialProfile {
+	if o == nil {
+		return nil
+	}
+	return o.FinancialProfile
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata) GetPlannedActivity() *EnrollmentPartnershipEnrollmentMetadataPlannedActivity {
+	if o == nil {
+		return nil
+	}
+	return o.PlannedActivity
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata) GetRelatedPepDetails() *EnrollmentPartnershipEnrollmentMetadataRelatedPepDetails {
+	if o == nil {
+		return nil
+	}
+	return o.RelatedPepDetails
+}
+
+func (o *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata) GetScopeOfBusiness() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ScopeOfBusiness
+}
+
+// EnrollmentPartnershipEnrollmentMetadataFdicCashSweep - Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
+type EnrollmentPartnershipEnrollmentMetadataFdicCashSweep string
+
+const (
+	EnrollmentPartnershipEnrollmentMetadataFdicCashSweepAutoEnrollFdicCashSweepUnspecified EnrollmentPartnershipEnrollmentMetadataFdicCashSweep = "AUTO_ENROLL_FDIC_CASH_SWEEP_UNSPECIFIED"
+	EnrollmentPartnershipEnrollmentMetadataFdicCashSweepFdicCashSweepEnroll                EnrollmentPartnershipEnrollmentMetadataFdicCashSweep = "FDIC_CASH_SWEEP_ENROLL"
+	EnrollmentPartnershipEnrollmentMetadataFdicCashSweepFdicCashSweepDecline               EnrollmentPartnershipEnrollmentMetadataFdicCashSweep = "FDIC_CASH_SWEEP_DECLINE"
+)
+
+func (e EnrollmentPartnershipEnrollmentMetadataFdicCashSweep) ToPointer() *EnrollmentPartnershipEnrollmentMetadataFdicCashSweep {
+	return &e
+}
+
+// EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep - Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+type EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep string
+
+const (
+	EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweepAutoEnrollMoneyMarketFundSweepUnspecified EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep = "AUTO_ENROLL_MONEY_MARKET_FUND_SWEEP_UNSPECIFIED"
+	EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweepMoneyMarketFundSweepEnroll                EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_ENROLL"
+	EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweepMoneyMarketFundSweepDecline               EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep = "MONEY_MARKET_FUND_SWEEP_DECLINE"
+)
+
+func (e EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep) ToPointer() *EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep {
+	return &e
+}
+
+// PartnershipEnrollmentMetadata - Metadata for the REGISTRATION_PARTNERSHIP enrollment type
+type PartnershipEnrollmentMetadata struct {
+	// Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
+	DividendReinvestmentPlan *EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan `json:"dividend_reinvestment_plan,omitempty"`
+	// Enrollment metadata for entity accounts
+	EddAccountEnrollmentMetadata *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata `json:"edd_account_enrollment_metadata,omitempty"`
+	// Option to auto-enroll in FDIC cash sweep; defaults to FDIC_CASH_SWEEP_ENROLL
+	FdicCashSweep *EnrollmentPartnershipEnrollmentMetadataFdicCashSweep `json:"fdic_cash_sweep,omitempty"`
+	// Option to auto-enroll in Money Market Fund Sweep; defaults to MONEY_MARKET_FUND_SWEEP_ENROLL
+	MoneyMarketFundSweep *EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep `json:"money_market_fund_sweep,omitempty"`
+}
+
+func (o *PartnershipEnrollmentMetadata) GetDividendReinvestmentPlan() *EnrollmentPartnershipEnrollmentMetadataDividendReinvestmentPlan {
+	if o == nil {
+		return nil
+	}
+	return o.DividendReinvestmentPlan
+}
+
+func (o *PartnershipEnrollmentMetadata) GetEddAccountEnrollmentMetadata() *EnrollmentPartnershipEnrollmentMetadataEddAccountEnrollmentMetadata {
+	if o == nil {
+		return nil
+	}
+	return o.EddAccountEnrollmentMetadata
+}
+
+func (o *PartnershipEnrollmentMetadata) GetFdicCashSweep() *EnrollmentPartnershipEnrollmentMetadataFdicCashSweep {
+	if o == nil {
+		return nil
+	}
+	return o.FdicCashSweep
+}
+
+func (o *PartnershipEnrollmentMetadata) GetMoneyMarketFundSweep() *EnrollmentPartnershipEnrollmentMetadataMoneyMarketFundSweep {
+	if o == nil {
+		return nil
+	}
+	return o.MoneyMarketFundSweep
 }
 
 // EnrollmentSoleProprietorshipEnrollmentMetadataDividendReinvestmentPlan - Option to auto-enroll in Dividend Reinvestment; defaults to DIVIDEND_REINVESTMENT_ENROLL
@@ -3014,6 +3419,7 @@ type EnrollmentType1 string
 const (
 	EnrollmentType1EnrollmentTypeUnspecified             EnrollmentType1 = "ENROLLMENT_TYPE_UNSPECIFIED"
 	EnrollmentType1RegistrationIndividual                EnrollmentType1 = "REGISTRATION_INDIVIDUAL"
+	EnrollmentType1LendingLimitedPurposeMargin           EnrollmentType1 = "LENDING_LIMITED_PURPOSE_MARGIN"
 	EnrollmentType1LendingFullyPaidStockLoan             EnrollmentType1 = "LENDING_FULLY_PAID_STOCK_LOAN"
 	EnrollmentType1BeneficiaryDesignation                EnrollmentType1 = "BENEFICIARY_DESIGNATION"
 	EnrollmentType1RegistrationJointWros                 EnrollmentType1 = "REGISTRATION_JOINT_WROS"
@@ -3126,6 +3532,8 @@ type Enrollment struct {
 	OperatingEnrollmentMetadata *OperatingEnrollmentMetadata `json:"operating_enrollment_metadata,omitempty"`
 	// Metadata for the ORDERS_OPTIONS_TRADING enrollment type
 	OrdersOptionsTradingEnrollmentMetadata *OrdersOptionsTradingEnrollmentMetadata `json:"orders_options_trading_enrollment_metadata,omitempty"`
+	// Metadata for the REGISTRATION_PARTNERSHIP enrollment type
+	PartnershipEnrollmentMetadata *PartnershipEnrollmentMetadata `json:"partnership_enrollment_metadata,omitempty"`
 	// The ULID is associated with the approver of a given enrollment. The approver you create will contain the CRD Number issued to the person by FINRA. As an RIA, you should use the ULID associated with Apex's approver.
 	PrincipalApproverID *string `json:"principal_approver_id,omitempty"`
 	// Metadata for the REGISTRATION_SOLE_PROPRIETORSHIP enrollment type
@@ -3340,6 +3748,13 @@ func (o *Enrollment) GetOrdersOptionsTradingEnrollmentMetadata() *OrdersOptionsT
 		return nil
 	}
 	return o.OrdersOptionsTradingEnrollmentMetadata
+}
+
+func (o *Enrollment) GetPartnershipEnrollmentMetadata() *PartnershipEnrollmentMetadata {
+	if o == nil {
+		return nil
+	}
+	return o.PartnershipEnrollmentMetadata
 }
 
 func (o *Enrollment) GetPrincipalApproverID() *string {

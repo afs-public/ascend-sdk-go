@@ -31,6 +31,7 @@ const (
 	OperatingPurposeWash                          OperatingPurpose = "WASH"
 	OperatingPurposeSettlement                    OperatingPurpose = "SETTLEMENT"
 	OperatingPurposeTransferLocation              OperatingPurpose = "TRANSFER_LOCATION"
+	OperatingPurposeControlDepository             OperatingPurpose = "CONTROL_DEPOSITORY"
 )
 
 func (e OperatingPurpose) ToPointer() *OperatingPurpose {
@@ -41,6 +42,8 @@ func (e OperatingPurpose) ToPointer() *OperatingPurpose {
 type OperatingEnrollmentMetadataCreate struct {
 	// The purpose of the operating account.
 	OperatingPurpose OperatingPurpose `json:"operating_purpose"`
+	// Indicates whether the depository is foreign (true) or domestic (false). Used for CONTROL_DEPOSITORY operating purpose to determine FINRA COA code.
+	RepresentsForeignEntity *bool `json:"represents_foreign_entity,omitempty"`
 	// Optional subtitle for the operating purpose
 	Subtitle *string `json:"subtitle,omitempty"`
 	// Enrollment metadata for TAX_WITHHOLDING operating purpose
@@ -52,6 +55,13 @@ func (o *OperatingEnrollmentMetadataCreate) GetOperatingPurpose() OperatingPurpo
 		return OperatingPurpose("")
 	}
 	return o.OperatingPurpose
+}
+
+func (o *OperatingEnrollmentMetadataCreate) GetRepresentsForeignEntity() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.RepresentsForeignEntity
 }
 
 func (o *OperatingEnrollmentMetadataCreate) GetSubtitle() *string {

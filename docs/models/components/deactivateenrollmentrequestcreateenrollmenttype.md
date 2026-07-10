@@ -13,6 +13,7 @@ Otherwise, must be empty.
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeEnrollmentTypeUnspecified`             | ENROLLMENT_TYPE_UNSPECIFIED                                                            |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationIndividual`                | REGISTRATION_INDIVIDUAL                                                                |
+| `DeactivateEnrollmentRequestCreateEnrollmentTypeLendingLimitedPurposeMargin`           | LENDING_LIMITED_PURPOSE_MARGIN                                                         |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeLendingFullyPaidStockLoan`             | LENDING_FULLY_PAID_STOCK_LOAN                                                          |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeBeneficiaryDesignation`                | BENEFICIARY_DESIGNATION                                                                |
 | `DeactivateEnrollmentRequestCreateEnrollmentTypeRegistrationJointWros`                 | REGISTRATION_JOINT_WROS                                                                |
