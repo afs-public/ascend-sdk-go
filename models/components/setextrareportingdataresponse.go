@@ -48,6 +48,7 @@ func (o *SetExtraReportingDataResponseCumulativeNotionalValue) GetValue() *strin
 
 // SetExtraReportingDataResponseExtraReportingData - Any reporting data provided by the SetExtraReportingData endpoint.
 type SetExtraReportingDataResponseExtraReportingData struct {
+	// The time the client has confirmed a cancel confirmation in their own system
 	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
 }
 

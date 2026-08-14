@@ -1191,11 +1191,11 @@ func (s *Orders) CancelOrder(ctx context.Context, accountID string, orderID stri
 
 // SetExtraReportingData - Set Extra Reporting Data
 // Sets extra reporting data to an existing order. Any SetExtraReportingDataRequest must include the name of the order and the cancel_confirmed_time
-func (s *Orders) SetExtraReportingData(ctx context.Context, accountID string, orderID string, setExtraReportingDataRequestCreate components.SetExtraReportingDataRequestCreate, opts ...operations.Option) (*operations.OrderServiceSetExtraReportingDataResponse, error) {
+func (s *Orders) SetExtraReportingData(ctx context.Context, accountID string, orderID string, tradingSetExtraReportingDataRequestCreate components.TradingSetExtraReportingDataRequestCreate, opts ...operations.Option) (*operations.OrderServiceSetExtraReportingDataResponse, error) {
 	request := operations.OrderServiceSetExtraReportingDataRequest{
-		AccountID:                          accountID,
-		OrderID:                            orderID,
-		SetExtraReportingDataRequestCreate: setExtraReportingDataRequestCreate,
+		AccountID: accountID,
+		OrderID:   orderID,
+		TradingSetExtraReportingDataRequestCreate: tradingSetExtraReportingDataRequestCreate,
 	}
 
 	o := operations.Options{}
@@ -1230,7 +1230,7 @@ func (s *Orders) SetExtraReportingData(ctx context.Context, accountID string, or
 		OAuth2Scopes:     []string{},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "SetExtraReportingDataRequestCreate", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TradingSetExtraReportingDataRequestCreate", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}

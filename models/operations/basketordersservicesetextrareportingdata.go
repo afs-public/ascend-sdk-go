@@ -10,8 +10,8 @@ type BasketOrdersServiceSetExtraReportingDataRequest struct {
 	// The correspondent id.
 	CorrespondentID string `pathParam:"style=simple,explode=false,name=correspondent_id"`
 	// The basket id.
-	BasketID                           string                                        `pathParam:"style=simple,explode=false,name=basket_id"`
-	SetExtraReportingDataRequestCreate components.SetExtraReportingDataRequestCreate `request:"mediaType=application/json"`
+	BasketID                                        string                                                     `pathParam:"style=simple,explode=false,name=basket_id"`
+	BasketTradingSetExtraReportingDataRequestCreate components.BasketTradingSetExtraReportingDataRequestCreate `request:"mediaType=application/json"`
 }
 
 func (o *BasketOrdersServiceSetExtraReportingDataRequest) GetCorrespondentID() string {
@@ -28,11 +28,11 @@ func (o *BasketOrdersServiceSetExtraReportingDataRequest) GetBasketID() string {
 	return o.BasketID
 }
 
-func (o *BasketOrdersServiceSetExtraReportingDataRequest) GetSetExtraReportingDataRequestCreate() components.SetExtraReportingDataRequestCreate {
+func (o *BasketOrdersServiceSetExtraReportingDataRequest) GetBasketTradingSetExtraReportingDataRequestCreate() components.BasketTradingSetExtraReportingDataRequestCreate {
 	if o == nil {
-		return components.SetExtraReportingDataRequestCreate{}
+		return components.BasketTradingSetExtraReportingDataRequestCreate{}
 	}
-	return o.SetExtraReportingDataRequestCreate
+	return o.BasketTradingSetExtraReportingDataRequestCreate
 }
 
 type BasketOrdersServiceSetExtraReportingDataResponse struct {

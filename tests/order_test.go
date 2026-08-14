@@ -32,7 +32,7 @@ func TestOrder_OrderSetExtraReportingData(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.Orders.SetExtraReportingData(ctx, "01K6P14WKCJT0G38KKHY52M4BQ", "a73f4471-832c-4ff2-9b14-f44420592a67", components.SetExtraReportingDataRequestCreate{
+	res, err := s.Orders.SetExtraReportingData(ctx, "01K6P14WKCJT0G38KKHY52M4BQ", "a73f4471-832c-4ff2-9b14-f44420592a67", components.TradingSetExtraReportingDataRequestCreate{
 		CancelConfirmedTime: types.MustNewTimeFromString("2025-12-13T15:28:17.262732Z"),
 		Name:                "accounts/01K6P14WKCJT0G38KKHY52M4BQ/orders/a73f4471-832c-4ff2-9b14-f44420592a67",
 	})
