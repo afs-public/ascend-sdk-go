@@ -10,8 +10,8 @@ type OrderServiceSetExtraReportingDataRequest struct {
 	// The account id.
 	AccountID string `pathParam:"style=simple,explode=false,name=account_id"`
 	// The order id.
-	OrderID                            string                                        `pathParam:"style=simple,explode=false,name=order_id"`
-	SetExtraReportingDataRequestCreate components.SetExtraReportingDataRequestCreate `request:"mediaType=application/json"`
+	OrderID                                   string                                               `pathParam:"style=simple,explode=false,name=order_id"`
+	TradingSetExtraReportingDataRequestCreate components.TradingSetExtraReportingDataRequestCreate `request:"mediaType=application/json"`
 }
 
 func (o *OrderServiceSetExtraReportingDataRequest) GetAccountID() string {
@@ -28,11 +28,11 @@ func (o *OrderServiceSetExtraReportingDataRequest) GetOrderID() string {
 	return o.OrderID
 }
 
-func (o *OrderServiceSetExtraReportingDataRequest) GetSetExtraReportingDataRequestCreate() components.SetExtraReportingDataRequestCreate {
+func (o *OrderServiceSetExtraReportingDataRequest) GetTradingSetExtraReportingDataRequestCreate() components.TradingSetExtraReportingDataRequestCreate {
 	if o == nil {
-		return components.SetExtraReportingDataRequestCreate{}
+		return components.TradingSetExtraReportingDataRequestCreate{}
 	}
-	return o.SetExtraReportingDataRequestCreate
+	return o.TradingSetExtraReportingDataRequestCreate
 }
 
 type OrderServiceSetExtraReportingDataResponse struct {

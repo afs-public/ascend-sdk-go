@@ -48,6 +48,7 @@ func (o *BasketOrderCumulativeNotionalValue) GetValue() *string {
 
 // BasketOrderExtraReportingData - Any reporting data provided by the SetExtraReportingData endpoint.
 type BasketOrderExtraReportingData struct {
+	// The time the client has confirmed a cancel confirmation in their own system
 	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
 }
 

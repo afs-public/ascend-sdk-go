@@ -2163,11 +2163,11 @@ func (s *BasketOrders) RemoveOrders(ctx context.Context, correspondentID string,
 
 // SetExtraReportingData - Set Extra Reporting Data
 // Sets extra reporting data to an existing basket order. Any SetExtraReportingDataRequest must include the name of the order and the cancel_confirmed_time
-func (s *BasketOrders) SetExtraReportingData(ctx context.Context, correspondentID string, basketID string, setExtraReportingDataRequestCreate components.SetExtraReportingDataRequestCreate, opts ...operations.Option) (*operations.BasketOrdersServiceSetExtraReportingDataResponse, error) {
+func (s *BasketOrders) SetExtraReportingData(ctx context.Context, correspondentID string, basketID string, basketTradingSetExtraReportingDataRequestCreate components.BasketTradingSetExtraReportingDataRequestCreate, opts ...operations.Option) (*operations.BasketOrdersServiceSetExtraReportingDataResponse, error) {
 	request := operations.BasketOrdersServiceSetExtraReportingDataRequest{
-		CorrespondentID:                    correspondentID,
-		BasketID:                           basketID,
-		SetExtraReportingDataRequestCreate: setExtraReportingDataRequestCreate,
+		CorrespondentID: correspondentID,
+		BasketID:        basketID,
+		BasketTradingSetExtraReportingDataRequestCreate: basketTradingSetExtraReportingDataRequestCreate,
 	}
 
 	o := operations.Options{}
@@ -2202,7 +2202,7 @@ func (s *BasketOrders) SetExtraReportingData(ctx context.Context, correspondentI
 		OAuth2Scopes:     []string{},
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "SetExtraReportingDataRequestCreate", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "BasketTradingSetExtraReportingDataRequestCreate", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}

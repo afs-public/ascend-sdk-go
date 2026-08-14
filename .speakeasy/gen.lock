@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: bedeb360-80eb-4771-a188-c9b48923fb79
 management:
-  docChecksum: b750c4a970e6410a16b46a900ffcf771
-  docVersion: v1:20260710:uat:0c2ab6cbe347
+  docChecksum: 4c8f2212b727219781a18b2fcc74f8f0
+  docVersion: v1:20260814:uat:c54c9dbed75d
   speakeasyVersion: 1.608.0
   generationVersion: 2.691.6
-  releaseVersion: 1.3.13
-  configChecksum: 5cf87b67a113d697ae832368b3880bf1
+  releaseVersion: 1.3.14
+  configChecksum: cbec110db70164bc78ad38992c482f8a
 features:
   go:
     additionalDependencies: 0.1.0
@@ -90,6 +90,7 @@ generatedFiles:
   - /models/components/basketordercreate.go
   - /models/components/baskettradingexecutedprice.go
   - /models/components/baskettradingexecutions.go
+  - /models/components/baskettradingsetextrareportingdatarequestcreate.go
   - /models/components/batchcreateuploadlinksrequestcreate.go
   - /models/components/batchcreateuploadlinksresponse.go
   - /models/components/beneficiary.go
@@ -447,7 +448,6 @@ generatedFiles:
   - /models/components/searchcashjournalschedulesresponse.go
   - /models/components/security.go
   - /models/components/setaccountaccreditationtyperequestcreate.go
-  - /models/components/setextrareportingdatarequestcreate.go
   - /models/components/setextrareportingdataresponse.go
   - /models/components/setoptionextrareportingdatarequestcreate.go
   - /models/components/settlealternativeorderrequestcreate.go
@@ -468,6 +468,7 @@ generatedFiles:
   - /models/components/tradingexecutedprice.go
   - /models/components/tradingexecutions.go
   - /models/components/tradingfee.go
+  - /models/components/tradingsetextrareportingdatarequestcreate.go
   - /models/components/transferaccountcreate.go
   - /models/components/transfercreate.go
   - /models/components/transfersbeneficiarycreate.go
@@ -1203,6 +1204,7 @@ generatedFiles:
   - docs/models/components/baskettradingexecutedpricetype.md
   - docs/models/components/baskettradingexecutions.md
   - docs/models/components/baskettradingexecutionsquantity.md
+  - docs/models/components/baskettradingsetextrareportingdatarequestcreate.md
   - docs/models/components/batchcreateuploadlinksrequestcreate.md
   - docs/models/components/batchcreateuploadlinksresponse.md
   - docs/models/components/beneficiary.md
@@ -2769,7 +2771,6 @@ generatedFiles:
   - docs/models/components/serviceaccountcreds.md
   - docs/models/components/setaccountaccreditationtyperequestcreate.md
   - docs/models/components/setaccountaccreditationtyperequestcreateaccreditationtype.md
-  - docs/models/components/setextrareportingdatarequestcreate.md
   - docs/models/components/setextrareportingdataresponse.md
   - docs/models/components/setextrareportingdataresponseassettype.md
   - docs/models/components/setextrareportingdataresponsebasketorder.md
@@ -2909,6 +2910,7 @@ generatedFiles:
   - docs/models/components/tradingfeeamount.md
   - docs/models/components/tradingfeetype.md
   - docs/models/components/tradingsession.md
+  - docs/models/components/tradingsetextrareportingdatarequestcreate.md
   - docs/models/components/transfer.md
   - docs/models/components/transferaccountcreate.md
   - docs/models/components/transfercreate.md
@@ -6299,7 +6301,7 @@ examples:
           correspondent_id: "01HPMZZM6RKMVZA1JQ63RQKJRP"
           basket_id: "fffd326-72fa-4d2b-bd1f-45384fe5d521"
       requestBody:
-        application/json: {"cancel_confirmed_time": "2025-12-13T15:28:17.262732Z", "name": "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X/orders/ebb0c9b5-2c74-45c9-a4ab-40596b778706"}
+        application/json: {"client_order_id": "4cff908e-aaed-401d-8ec9-929e3eb18cbc", "name": "correspondents/01HPMZZM6RKMVZA1JQ63RQKJRP/baskets/fffd326-72fa-4d2b-bd1f-45384fe5d521"}
       responses:
         "200":
           application/json: {}
