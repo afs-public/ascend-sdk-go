@@ -45,10 +45,15 @@ func TestCashJournals(t *testing.T) {
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
-	accountId, err := helpers.CreateAccountId(sdk, ctx)
+	accountId, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
+	require.NoError(t, err)
 
-	cashJournalId, err := createCashJournal(ctx, *sdk, accountId)
-
+	var cashJournalId string
+	err = helpers.RetryOnTransientError(func() error {
+		var opErr error
+		cashJournalId, opErr = createCashJournal(ctx, *sdk, accountId)
+		return opErr
+	})
 	require.NoError(t, err)
 
 	t.Run("Cash Journals Transfers Create Cash Journal Create Cash Journal1", func(t *testing.T) {

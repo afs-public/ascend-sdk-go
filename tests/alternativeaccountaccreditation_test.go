@@ -7,6 +7,7 @@ import (
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
@@ -31,7 +32,15 @@ func TestAlternativeAccountAccreditation_AccountAccreditationGetAccountAccredita
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeAccountAccreditation.GetAccountAccreditation(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT")
+	// UAT data churn periodically wipes the accreditation resource, so set
+	// it before reading rather than depending on state from earlier runs.
+	_, err := s.AlternativeAccountAccreditation.SetAccountAccreditationType(ctx, helpers.ALTS_ACCOUNT_ID, components.SetAccountAccreditationTypeRequestCreate{
+		AccreditationType: components.SetAccountAccreditationTypeRequestCreateAccreditationTypeNetWorthGt1M,
+		Name:              "accounts/" + helpers.ALTS_ACCOUNT_ID + "/accreditation",
+	})
+	require.NoError(t, err)
+
+	res, err := s.AlternativeAccountAccreditation.GetAccountAccreditation(ctx, helpers.ALTS_ACCOUNT_ID)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
@@ -56,9 +65,9 @@ func TestAlternativeAccountAccreditation_AccountAccreditationSetAccountAccredita
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeAccountAccreditation.SetAccountAccreditationType(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", components.SetAccountAccreditationTypeRequestCreate{
+	res, err := s.AlternativeAccountAccreditation.SetAccountAccreditationType(ctx, helpers.ALTS_ACCOUNT_ID, components.SetAccountAccreditationTypeRequestCreate{
 		AccreditationType: components.SetAccountAccreditationTypeRequestCreateAccreditationTypeNetWorthGt1M,
-		Name:              "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/accreditation",
+		Name:              "accounts/" + helpers.ALTS_ACCOUNT_ID + "/accreditation",
 	})
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)

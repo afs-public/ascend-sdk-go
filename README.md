@@ -532,6 +532,11 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 * [GetCheckDeposit](docs/sdks/checks/README.md#getcheckdeposit) - Get Check Deposit
 
+### [CostBasisService](docs/sdks/costbasisservice/README.md)
+
+* [SearchClosedLots](docs/sdks/costbasisservice/README.md#searchclosedlots) - Search Closed Lots
+* [SearchOpenLots](docs/sdks/costbasisservice/README.md#searchopenlots) - Search Open Lots
+
 ### [DataRetrieval](docs/sdks/dataretrieval/README.md)
 
 * [ListSnapshots](docs/sdks/dataretrieval/README.md#listsnapshots) - List Snapshots
@@ -773,30 +778,5 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
-
-## Qase TestOps Integration
-
-Test results can be automatically reported to [Qase TestOps](https://app.qase.io/project/CDX) for centralized visibility.
-
-### Environment Variables
-
-| Variable | Description |
-| --- | --- |
-| `QASE_MODE` | Set to `testops` to enable reporting (default: off) |
-| `QASE_API_TOKEN` | Qase API token for authentication |
-| `QASE_PROJECT` | Qase project code (default: `CDX`) |
-| `QASE_API_BASE_URL` | Qase API base URL (default: `https://api.qase.io/v1`) |
-
-### Running Tests with Qase Reporting
-
-```bash
-# Without Qase (default)
-go test -v ./ascend-sdk/v1/ascend-sdk-go/tests/...
-
-# With Qase reporting enabled
-QASE_MODE=testops QASE_API_TOKEN=<token> go test -v ./ascend-sdk/v1/ascend-sdk-go/tests/...
-```
-
-The custom reporter (`tests/qase_reporter.go`) uses only stdlib and is initialized via `TestMain`. Each test function records results via `defer GetQaseReporter().RecordTestResult(t, startTime)`.
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->

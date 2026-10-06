@@ -9,6 +9,7 @@ import (
 
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
 	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/stretchr/testify/assert"
@@ -21,10 +22,10 @@ func TestPositionJournals(t *testing.T) {
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
-	sourceAccountId, err := helpers.CreateAccountId(sdk, ctx)
+	sourceAccountId, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
 	require.NoError(t, err)
 
-	destinationAccountId, err := helpers.CreateAccountId(sdk, ctx)
+	destinationAccountId, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
 	require.NoError(t, err)
 
 	var positionJournalId string
@@ -45,7 +46,12 @@ func TestPositionJournals(t *testing.T) {
 			},
 		}
 
-		result, err := sdk.PositionJournals.CreatePositionJournal(ctx, request)
+		var result *operations.PositionJournalsCreatePositionJournalResponse
+		err := helpers.RetryOnTransientError(func() error {
+			var opErr error
+			result, opErr = sdk.PositionJournals.CreatePositionJournal(ctx, request)
+			return opErr
+		})
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 		assert.NotNil(t, result.PositionJournal)
@@ -90,10 +96,10 @@ func TestPositionJournalsTestSimulation(t *testing.T) {
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 
-	sourceAccountId, err := helpers.CreateAccountId(sdk, ctx)
+	sourceAccountId, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
 	require.NoError(t, err)
 
-	destinationAccountId, err := helpers.CreateAccountId(sdk, ctx)
+	destinationAccountId, err := helpers.CreateEnrolledAccount(sdk, ctx, t)
 	require.NoError(t, err)
 
 	t.Run("Test Simulation Force Approve Position Journal", func(t *testing.T) {
@@ -117,7 +123,12 @@ func TestPositionJournalsTestSimulation(t *testing.T) {
 			Description: ascendsdkgo.String("Stock reward for testing"),
 		}
 
-		createResult, err := sdk.PositionJournals.CreatePositionJournal(ctx, request)
+		var createResult *operations.PositionJournalsCreatePositionJournalResponse
+		err := helpers.RetryOnTransientError(func() error {
+			var opErr error
+			createResult, opErr = sdk.PositionJournals.CreatePositionJournal(ctx, request)
+			return opErr
+		})
 		require.NoError(t, err)
 		require.NotNil(t, createResult.PositionJournal)
 		require.NotNil(t, createResult.PositionJournal.Name)
@@ -134,7 +145,7 @@ func TestPositionJournalsTestSimulation(t *testing.T) {
 			statusErr, ok := err.(*sdkerrors.Status)
 			require.True(t, ok)
 			assert.Equal(t, 3, *statusErr.Code)
-			assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), *statusErr.Message)
+			assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), *statusErr.Message)
 		} else {
 			assert.NotNil(t, result)
 			assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
@@ -163,7 +174,12 @@ func TestPositionJournalsTestSimulation(t *testing.T) {
 			Description: ascendsdkgo.String("Stock reward for testing"),
 		}
 
-		createResult, err := sdk.PositionJournals.CreatePositionJournal(ctx, request)
+		var createResult *operations.PositionJournalsCreatePositionJournalResponse
+		err := helpers.RetryOnTransientError(func() error {
+			var opErr error
+			createResult, opErr = sdk.PositionJournals.CreatePositionJournal(ctx, request)
+			return opErr
+		})
 		require.NoError(t, err)
 		require.NotNil(t, createResult.PositionJournal)
 		require.NotNil(t, createResult.PositionJournal.Name)

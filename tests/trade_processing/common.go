@@ -20,7 +20,7 @@ type Fixtures struct {
 
 func CreateBooking(sdk *ascendsdk.SDK, ctx context.Context, accountId string) ([]string, error) {
 	// Create a new booking request
-	now := time.Now()
+	now := time.Now().UTC().Truncate(time.Second)
 	assetType := components.TradeCreateAssetTypeEquity
 	bookingRequest := components.TradeCreate{
 		AccountID:      accountId,
@@ -55,7 +55,7 @@ func CreateBooking(sdk *ascendsdk.SDK, ctx context.Context, accountId string) ([
 
 func CreateExecution(sdk *ascendsdk.SDK, ctx context.Context, accountId string, tradeID string) (string, error) {
 	// Create a new execution request
-	now := time.Now()
+	now := time.Now().UTC().Truncate(time.Second)
 	executionRequest := components.ExecutionCreate{
 		ExecutionTime: &now,
 		ExternalID:    uuid.New().String(),
@@ -75,7 +75,7 @@ func CreateExecution(sdk *ascendsdk.SDK, ctx context.Context, accountId string, 
 
 func CreateTradeAllocation(sdk *ascendsdk.SDK, ctx context.Context, accountId string, deceasedAccountID string) (string, error) {
 	// Create a new trade allocation request
-	now := time.Now()
+	now := time.Now().UTC().Truncate(time.Second)
 	assetType := components.TradeAllocationCreateAssetTypeEquity
 	allocationRequest := components.TradeAllocationCreate{
 		BrokerCapacity:    components.TradeAllocationCreateBrokerCapacityPrincipal,

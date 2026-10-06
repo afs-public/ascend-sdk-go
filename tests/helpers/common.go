@@ -11,6 +11,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
@@ -18,11 +19,29 @@ import (
 	ascendsdk "github.com/afs-public/ascend-sdk-go"
 
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/operations"
+	"github.com/afs-public/ascend-sdk-go/retry"
 )
+
+func envOr(key, fallback string) string {
+	if v := os.Getenv(key); v != "" {
+		return v
+	}
+	return fallback
+}
 
 var EnrollmentPrincipalApproverID = "01HMESE8WMDNTTWJ2BAEG3TZWA"
 
 const WITHDRAWAL_ACCOUNT_ID = "01JHGTEPC6ZTAHCFRH2MD3VJJT"
+
+// Dedicated alternative-investments test account. Created 2026-08 (after the
+// Monark update that routes SPV orders through Apex when the correspondent
+// isn't registered for the SPV), funded, and accredited. Pre-update accounts
+// like WITHDRAWAL_ACCOUNT_ID get their SPV orders rejected by Monark.
+var ALTS_ACCOUNT_ID = envOr("ALTS_ACCOUNT_ID", "01M0DMB41SQR6SYZDQYZN3CJY2")
+
+// An alternative order placed on ALTS_ACCOUNT_ID, used by get/settle tests.
+var ALTS_ORDER_ID = envOr("ALTS_ORDER_ID", "01M0DMH6QGPHZGFD4T1CJMABEM")
 
 func SetupAscendSDK() (*ascendsdk.SDK, error) {
 	privateKey := os.Getenv("SERVICE_ACCOUNT_CREDS_PRIVATE_KEY")
@@ -334,12 +353,33 @@ func CreateBankRelationship(s *ascendsdk.SDK, ctx context.Context, accountId str
 	return &bankRelationshipId, nil
 }
 
+// GetCorrectMicroDeposits fetches the micro-deposit amounts for a bank
+// relationship. Callers create the bank relationship and call this
+// immediately afterward with no delay; the amounts occasionally aren't
+// queryable yet ("The requested resource does not exist") for a brief window
+// after creation, observed intermittently against the real UAT environment.
+// Retries with a short fixed backoff to absorb that lag instead of treating
+// it as a hard failure.
 func GetCorrectMicroDeposits(s *ascendsdk.SDK, ctx context.Context, accountId string, bankRelationshipId string) ([]string, error) {
-	res, err := s.TestSimulation.GetMicroDepositAmounts(ctx, accountId, bankRelationshipId)
+	var amounts []string
+	// 40 attempts x 2s: a 20x2s window was observed intermittently to be
+	// insufficient against the real UAT environment. The SDK's own 504/429
+	// backoff (up to 60s per call) is disabled inside the poll -- this is a
+	// fast not-found-until-ready check, and stacking the two retry layers
+	// multiplies the worst case into tens of minutes.
+	err := retryOnTransientErrorN(func() error {
+		res, opErr := s.TestSimulation.GetMicroDepositAmounts(ctx, accountId, bankRelationshipId,
+			operations.WithRetries(retry.Config{Strategy: "none"}))
+		if opErr != nil {
+			return opErr
+		}
+		amounts = []string{*res.MicroDepositAmounts.GetAmount1().Value, *res.MicroDepositAmounts.GetAmount2().Value}
+		return nil
+	}, 40, 2*time.Second)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get micro deposits: %w", err)
 	}
-	return []string{*res.MicroDepositAmounts.GetAmount1().Value, *res.MicroDepositAmounts.GetAmount2().Value}, nil
+	return amounts, nil
 }
 
 func VerifyMicroDeposits(s *ascendsdk.SDK, ctx context.Context, accountId string, bankRelationshipId string, amounts []string) error {
@@ -378,5 +418,52 @@ func CreateEnrolledAccount(sdk *ascendsdk.SDK, ctx context.Context, t *testing.T
 	err = AffirmAgreements(sdk, ctx, *accountId, agg)
 	require.NoError(t, err)
 
+	require.NoError(t, WaitForAccountOpen(sdk, ctx, *accountId))
+
 	return accountId, nil
+}
+
+// WaitForAccountOpen polls until a freshly enrolled account reaches OPEN.
+// A new account can take tens of seconds to open against the real UAT
+// environment, and downstream resources (micro deposits, transfers, orders)
+// misbehave until it does.
+func WaitForAccountOpen(sdk *ascendsdk.SDK, ctx context.Context, accountId string) error {
+	return retryOnTransientErrorN(func() error {
+		res, err := sdk.AccountCreation.GetAccount(ctx, accountId, nil)
+		if err != nil {
+			return err
+		}
+		if res.Account == nil || res.Account.State == nil || *res.Account.State != components.AccountStateOpen {
+			return fmt.Errorf("account %s has not reached OPEN state", accountId)
+		}
+		return nil
+	}, 20, 2*time.Second)
+}
+
+// RetryOnTransientError retries op on any error, for callers that act on a
+// resource (an account, bank relationship, etc.) immediately after creating
+// or enrolling it. Several such resources have been observed intermittently
+// unusable for a window against the real UAT environment (up to ~20s in one
+// measured case) before settling -- e.g. "Permission denied on resource (or
+// it might not exist)" acting on a freshly enrolled account, or a push
+// subscription rejecting mutation right after creation. Scoped to
+// immediately-after-creation call sites specifically, since retrying on any
+// error is only safe there.
+func RetryOnTransientError(op func() error) error {
+	return retryOnTransientErrorN(op, 20, 2*time.Second)
+}
+
+func retryOnTransientErrorN(op func() error, maxAttempts int, retryDelay time.Duration) error {
+	var lastErr error
+	for attempt := 1; attempt <= maxAttempts; attempt++ {
+		err := op()
+		if err == nil {
+			return nil
+		}
+		lastErr = err
+		if attempt < maxAttempts {
+			time.Sleep(retryDelay)
+		}
+	}
+	return lastErr
 }

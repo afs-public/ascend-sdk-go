@@ -21,7 +21,6 @@ import (
 )
 
 type Fixture struct {
-	t                        *testing.T
 	sdk                      *ascendsdk.SDK
 	ctx                      context.Context
 	accountId                *string
@@ -36,9 +35,11 @@ func (f *Fixture) WireScheduleId(t *testing.T) *string {
 		return f.wireWithdrawalScheduleId
 	}
 
-	scheduleId, err := createScheduledWireWithdrawal(f.ctx, *f.AccountId(), *f.sdk)
+	scheduleId, err := createScheduledWireWithdrawal(f.ctx, *f.AccountId(t), *f.sdk)
 	require.NoError(t, err)
-	return &scheduleId
+
+	f.wireWithdrawalScheduleId = &scheduleId
+	return f.wireWithdrawalScheduleId
 }
 
 func (f *Fixture) ScheduleId(t *testing.T) *string {
@@ -46,9 +47,9 @@ func (f *Fixture) ScheduleId(t *testing.T) *string {
 		return f.scheduleId
 	}
 
-	scheduleId, err := CreateDepositSchedule(t, f.sdk, f.ctx, *f.AccountId(), *f.BankRelationshipId())
+	scheduleId, err := CreateDepositSchedule(t, f.sdk, f.ctx, *f.AccountId(t), *f.BankRelationshipId(t))
 	fmt.Println("schedule Id:", scheduleId)
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 
 	f.scheduleId = &scheduleId
 	return &scheduleId
@@ -59,52 +60,54 @@ func (f *Fixture) WithdrawalScheduleId(t *testing.T) *string {
 		return f.withdrawalScheduleId
 	}
 
-	withdrawalScheduleId, err := CreateWithdrawalSchedule(t, f.sdk, f.ctx, *f.AccountId(), *f.BankRelationshipId())
+	withdrawalScheduleId, err := CreateWithdrawalSchedule(t, f.sdk, f.ctx, *f.AccountId(t), *f.BankRelationshipId(t))
 	fmt.Println("withdraw schedule Id:", withdrawalScheduleId)
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 
 	f.withdrawalScheduleId = &withdrawalScheduleId
 	return &withdrawalScheduleId
 }
 
-func (f *Fixture) AccountId() *string {
+// AccountId, BankRelationshipId, createAndEnrollAccount, and
+// setupBankRelationship all take the *testing.T of whichever subtest is
+// calling them (not f.t, the parent test's T stored at Fixture construction)
+// -- require.NoError ultimately calls t.FailNow(), which must run on the
+// goroutine executing that specific t.Run subtest. Using the parent's T from
+// inside a subtest's goroutine produced "subtest may have called FailNow on
+// a parent test" panics whenever setup genuinely failed, masking the real
+// error.
+func (f *Fixture) AccountId(t *testing.T) *string {
 	if f.accountId != nil {
 		return f.accountId
 	}
-	f.accountId = f.createAndEnrollAccount()
+	f.accountId = f.createAndEnrollAccount(t)
 	return f.accountId
 }
 
-func (f *Fixture) BankRelationshipId() *string {
+func (f *Fixture) BankRelationshipId(t *testing.T) *string {
 	if f.bankRelationshipId != nil {
 		return f.bankRelationshipId
 	}
-	f.bankRelationshipId = f.setupBankRelationship(*f.AccountId())
+	f.bankRelationshipId = f.setupBankRelationship(t, *f.AccountId(t))
 	return f.bankRelationshipId
 }
 
-func (f *Fixture) createAndEnrollAccount() *string {
-	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
-	require.NoError(f.t, err)
-
-	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
-	require.NoError(f.t, err)
-
-	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
-	require.NoError(f.t, err)
+func (f *Fixture) createAndEnrollAccount(t *testing.T) *string {
+	accountId, err := helpers.CreateEnrolledAccount(f.sdk, f.ctx, t)
+	require.NoError(t, err)
 
 	return accountId
 }
 
-func (f *Fixture) setupBankRelationship(accountID string) *string {
+func (f *Fixture) setupBankRelationship(t *testing.T, accountID string) *string {
 	bankRelationshipId, err := helpers.CreateBankRelationship(f.sdk, f.ctx, accountID)
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 
 	correctMicroDeposits, err := helpers.GetCorrectMicroDeposits(f.sdk, f.ctx, accountID, *bankRelationshipId)
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 
 	err = helpers.VerifyMicroDeposits(f.sdk, f.ctx, accountID, *bankRelationshipId, correctMicroDeposits)
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 
 	return bankRelationshipId
 }
@@ -223,7 +226,6 @@ func TestScheduleTransfers(t *testing.T) {
 	require.NoError(t, err)
 
 	fixtures := &Fixture{
-		t:   t,
 		sdk: sdk,
 		ctx: ctx,
 	}
@@ -233,13 +235,13 @@ func TestScheduleTransfers(t *testing.T) {
 	})
 
 	t.Run("ListAchDepositSchedules", func(t *testing.T) {
-		res, err := sdk.ScheduleTransfers.ListAchDepositSchedules(ctx, *fixtures.AccountId(), nil, nil, nil)
+		res, err := sdk.ScheduleTransfers.ListAchDepositSchedules(ctx, *fixtures.AccountId(t), nil, nil, nil)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
 
 	t.Run("GetAchDepositSchedule", func(t *testing.T) {
-		res, err := sdk.ScheduleTransfers.GetAchDepositSchedule(ctx, *fixtures.AccountId(), *fixtures.ScheduleId(t))
+		res, err := sdk.ScheduleTransfers.GetAchDepositSchedule(ctx, *fixtures.AccountId(t), *fixtures.ScheduleId(t))
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
@@ -251,7 +253,7 @@ func TestScheduleTransfers(t *testing.T) {
 			},
 		}
 
-		res, err := sdk.ScheduleTransfers.UpdateAchDepositSchedule(ctx, *fixtures.AccountId(), *fixtures.ScheduleId(t), scheduleUpdate, ascendsdk.String("schedule_details.amount"))
+		res, err := sdk.ScheduleTransfers.UpdateAchDepositSchedule(ctx, *fixtures.AccountId(t), *fixtures.ScheduleId(t), scheduleUpdate, ascendsdk.String("schedule_details.amount"))
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 		assert.Equal(t, "20.00", *res.AchDepositSchedule.ScheduleDetails.Amount.Value)
@@ -259,10 +261,10 @@ func TestScheduleTransfers(t *testing.T) {
 
 	t.Run("CancelAchDepositSchedule", func(t *testing.T) {
 		req := components.CancelAchDepositScheduleRequestCreate{
-			Name:    "accounts/" + *fixtures.AccountId() + "/scheduleTransfers/achDepositSchedules/" + *fixtures.ScheduleId(t),
+			Name:    "accounts/" + *fixtures.AccountId(t) + "/scheduleTransfers/achDepositSchedules/" + *fixtures.ScheduleId(t),
 			Comment: ascendsdk.String("canceled due to test"),
 		}
-		res, err := sdk.ScheduleTransfers.CancelAchDepositSchedule(ctx, *fixtures.AccountId(), *fixtures.ScheduleId(t), req)
+		res, err := sdk.ScheduleTransfers.CancelAchDepositSchedule(ctx, *fixtures.AccountId(t), *fixtures.ScheduleId(t), req)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
@@ -272,13 +274,13 @@ func TestScheduleTransfers(t *testing.T) {
 	})
 
 	t.Run("ListAchWithdrawalSchedules", func(t *testing.T) {
-		res, err := sdk.ScheduleTransfers.ListAchWithdrawalSchedules(ctx, *fixtures.AccountId(), nil, nil, nil)
+		res, err := sdk.ScheduleTransfers.ListAchWithdrawalSchedules(ctx, *fixtures.AccountId(t), nil, nil, nil)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
 
 	t.Run("GetAchWithdrawalSchedule", func(t *testing.T) {
-		res, err := sdk.ScheduleTransfers.GetAchWithdrawalSchedule(ctx, *fixtures.AccountId(), *fixtures.WithdrawalScheduleId(t))
+		res, err := sdk.ScheduleTransfers.GetAchWithdrawalSchedule(ctx, *fixtures.AccountId(t), *fixtures.WithdrawalScheduleId(t))
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
@@ -290,7 +292,7 @@ func TestScheduleTransfers(t *testing.T) {
 			},
 		}
 
-		res, err := sdk.ScheduleTransfers.UpdateAchWithdrawalSchedule(ctx, *fixtures.AccountId(), *fixtures.WithdrawalScheduleId(t), scheduleUpdate, ascendsdk.String("schedule_details.amount"))
+		res, err := sdk.ScheduleTransfers.UpdateAchWithdrawalSchedule(ctx, *fixtures.AccountId(t), *fixtures.WithdrawalScheduleId(t), scheduleUpdate, ascendsdk.String("schedule_details.amount"))
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 		assert.Equal(t, "20.00", *res.AchWithdrawalSchedule.ScheduleDetails.Amount.Value)
@@ -298,10 +300,10 @@ func TestScheduleTransfers(t *testing.T) {
 
 	t.Run("CancelAchWithdrawalSchedule", func(t *testing.T) {
 		req := components.CancelAchWithdrawalScheduleRequestCreate{
-			Name:    "accounts/" + *fixtures.AccountId() + "/scheduleTransfers/achWithdrawalSchedules/" + *fixtures.WithdrawalScheduleId(t),
+			Name:    "accounts/" + *fixtures.AccountId(t) + "/scheduleTransfers/achWithdrawalSchedules/" + *fixtures.WithdrawalScheduleId(t),
 			Comment: ascendsdk.String("canceled due to test"),
 		}
-		res, err := sdk.ScheduleTransfers.CancelAchWithdrawalSchedule(ctx, *fixtures.AccountId(), *fixtures.WithdrawalScheduleId(t), req)
+		res, err := sdk.ScheduleTransfers.CancelAchWithdrawalSchedule(ctx, *fixtures.AccountId(t), *fixtures.WithdrawalScheduleId(t), req)
 		require.NoError(t, err)
 		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 	})
@@ -315,14 +317,14 @@ func TestScheduleTransfers(t *testing.T) {
 		filter := ""
 		pageToken := ""
 		pageSize := 10
-		result, err := sdk.ScheduleTransfers.ListWireWithdrawalSchedules(ctx, *fixtures.AccountId(), &filter, &pageSize, &pageToken)
+		result, err := sdk.ScheduleTransfers.ListWireWithdrawalSchedules(ctx, *fixtures.AccountId(t), &filter, &pageSize, &pageToken)
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})
 
 	t.Run("Test Schedule Transfers Transfers Get Wire Withdrawal Schedule Get Wire Withdrawal Schedule1", func(t *testing.T) {
 		fixtures.WireScheduleId(t)
-		result, err := sdk.ScheduleTransfers.GetWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(), *fixtures.WireScheduleId(t))
+		result, err := sdk.ScheduleTransfers.GetWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(t), *fixtures.WireScheduleId(t))
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})
@@ -337,16 +339,16 @@ func TestScheduleTransfers(t *testing.T) {
 
 		updateMask := "schedule_details.amount"
 
-		result, err := sdk.ScheduleTransfers.UpdateWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(), *fixtures.WireScheduleId(t), request, &updateMask)
+		result, err := sdk.ScheduleTransfers.UpdateWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(t), *fixtures.WireScheduleId(t), request, &updateMask)
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})
 
 	t.Run("Test Schedule Transfers Transfers Cancel Wire Withdrawal Schedule Cancel Wire Withdrawal Schedule1", func(t *testing.T) {
 		request := components.CancelWireWithdrawalScheduleRequestCreate{
-			Name: "accounts/" + *fixtures.AccountId() + "/scheduleTransfers/" + *fixtures.WithdrawalScheduleId(t),
+			Name: "accounts/" + *fixtures.AccountId(t) + "/wireWithdrawalSchedules/" + *fixtures.WireScheduleId(t),
 		}
-		result, err := sdk.ScheduleTransfers.CancelWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(), *fixtures.WireScheduleId(t), request)
+		result, err := sdk.ScheduleTransfers.CancelWireWithdrawalSchedule(fixtures.ctx, *fixtures.AccountId(t), *fixtures.WireScheduleId(t), request)
 		require.NoError(t, err)
 		assert.Equal(t, 200, result.HTTPMeta.Response.StatusCode)
 	})

@@ -7,8 +7,10 @@ import (
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"strings"
 	"testing"
 )
 
@@ -34,9 +36,18 @@ func TestTestSimulation_CheckDepositsForceApproveCheckDeposit(t *testing.T) {
 	res, err := s.TestSimulation.ForceApproveCheckDeposit(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "20250811022796", components.ForceApproveCheckDepositRequestCreate{
 		Name: "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/checkDeposits/20250811022796",
 	})
-	require.NoError(t, err)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
-
+	// This hardcoded check deposit is already approved/completed, so
+	// force-approving it again is expected to fail with a "does not need
+	// review" precondition error -- but accept a genuine 200 too, in case
+	// the deposit's state ever changes.
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), *statusErr.Message)
+	} else {
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func TestTestSimulation_CheckDepositsSimulateCreateCheckDeposit(t *testing.T) {

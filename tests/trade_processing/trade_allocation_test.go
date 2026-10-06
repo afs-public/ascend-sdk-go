@@ -44,7 +44,7 @@ func Test_Trade_Allocation(t *testing.T) {
 	})
 
 	t.Run("test Trade Allocation Trade Processing Rebook Trade Allocation Rebook TradeAllocation1", func(t *testing.T) {
-		now := time.Now()
+		now := time.Now().UTC().Truncate(time.Second)
 		assetType := components.TradeAllocationCreateAssetTypeEquity
 		request := components.RebookTradeAllocationRequestCreate{
 			Name:      "accounts/" + fixture.enrolledWithdrawalAccountId + "/tradeAllocations/" + rebookTradeAllocationID,

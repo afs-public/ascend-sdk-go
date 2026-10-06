@@ -97,7 +97,7 @@ func testAccountManagementUpdateAccount(t *testing.T, sdk *ascendsdk.SDK, ctx co
 
 func testAccountManagementUpdateAccountGroup(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, accountId string) {
 	updateAccountGroupRequestUpdate := components.UpdateAccountGroupRequestUpdate{
-		AccountGroupID: ascendsdk.String(os.Getenv("ACCOUNT_GROUP_ID")),
+		AccountGroupID: ascendsdk.String(os.Getenv("SECOND_ACCOUNT_GROUP_ID")),
 	}
 
 	res, err := sdk.AccountManagement.UpdateAccountGroup(ctx, accountId, updateAccountGroupRequestUpdate)

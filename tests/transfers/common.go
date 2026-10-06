@@ -22,6 +22,7 @@ type Fixtures struct {
 	ctx                           context.Context
 	enrolledDepositAccountId      string
 	enrolledWithdrawalAccountId   string
+	completedWithdrawalOwnerId    *string
 	completedWithdrawalAccountId  *string
 	pendingDepositAchAccountId    *string
 	pendingWithdrawalAchAccountId *string
@@ -150,50 +151,46 @@ func getPendingIctWithdrawal(fixture Fixtures) (string, error) {
 	return withdrawalId[len(withdrawalId)-1], nil
 }
 
-func getCompletedWithdrawalId(fixture Fixtures) (*string, error) {
-	res, err := fixture.sdk.BankRelationships.ListBankRelationships(fixture.ctx, fixture.enrolledWithdrawalAccountId, nil, nil, nil)
+// getCompletedWithdrawalId creates a fresh enrolled account for the
+// withdrawal rather than reusing the shared enrolledWithdrawalAccountId --
+// that account has accumulated dozens of bank relationships from other
+// tests, and its micro deposit amounts were observed to never become
+// queryable (not just delayed) even after 40s of retries, likely due to
+// degraded propagation on an account with that much history. A fresh
+// account with a single bank relationship doesn't hit this.
+func getCompletedWithdrawalId(fixture Fixtures, t *testing.T) (string, *string, error) {
+	accountIdPtr, err := helpers.CreateEnrolledAccount(fixture.sdk, fixture.ctx, t)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
-	for _, relationship := range res.ListBankRelationshipsResponse.BankRelationships {
-		if *relationship.State.State == components.BankRelationshipStateStateApproved {
-			cancelRelationShipId := strings.Split(*relationship.Name, "/")[3]
-			cancelRequest := components.CancelBankRelationshipRequestCreate{
-				Name:    "accounts/" + fixture.enrolledWithdrawalAccountId + "/bankRelationships/" + cancelRelationShipId,
-				Comment: "Canceling Bank User Request",
-			}
-			_, err = fixture.sdk.BankRelationships.CancelBankRelationship(fixture.ctx, fixture.enrolledWithdrawalAccountId, cancelRelationShipId, cancelRequest)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-	bankRelationShipPtr, err := helpers.CreateBankRelationship(fixture.sdk, fixture.ctx, fixture.enrolledWithdrawalAccountId)
+	accountId := *accountIdPtr
+
+	bankRelationShipPtr, err := helpers.CreateBankRelationship(fixture.sdk, fixture.ctx, accountId)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 	bankRelationShip := *bankRelationShipPtr
-	amounts, err := helpers.GetCorrectMicroDeposits(fixture.sdk, fixture.ctx, fixture.enrolledWithdrawalAccountId, bankRelationShip)
+	amounts, err := helpers.GetCorrectMicroDeposits(fixture.sdk, fixture.ctx, accountId, bankRelationShip)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
-	err = helpers.VerifyMicroDeposits(fixture.sdk, fixture.ctx, fixture.enrolledWithdrawalAccountId, bankRelationShip, amounts)
+	err = helpers.VerifyMicroDeposits(fixture.sdk, fixture.ctx, accountId, bankRelationShip, amounts)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 	achWithdrawalRequest := components.AchWithdrawalCreate{
-		BankRelationship: "accounts/" + fixture.enrolledWithdrawalAccountId + "/bankRelationships/" + bankRelationShip,
+		BankRelationship: "accounts/" + accountId + "/bankRelationships/" + bankRelationShip,
 		Amount:           &components.DecimalCreate{Value: ascendsdk.String("0.01")},
 		ClientTransferID: uuid.New().String(),
 		FullDisbursement: ascendsdk.Bool(false),
 		Memo:             ascendsdk.String("ACH"),
 	}
-	response, err := fixture.sdk.ACHTransfers.CreateAchWithdrawal(fixture.ctx, fixture.enrolledWithdrawalAccountId, achWithdrawalRequest)
+	response, err := fixture.sdk.ACHTransfers.CreateAchWithdrawal(fixture.ctx, accountId, achWithdrawalRequest)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 	withdrawalId := strings.Split(*response.AchWithdrawal.Name, "/")
-	return &withdrawalId[len(withdrawalId)-1], nil
+	return accountId, &withdrawalId[len(withdrawalId)-1], nil
 }
 
 func getWireWithdrawalId(accountId string, fixture Fixtures) (*string, error) {
