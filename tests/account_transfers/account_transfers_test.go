@@ -22,7 +22,6 @@ import (
 )
 
 type Fixture struct {
-	t                 *testing.T
 	sdk               *ascendsdk.SDK
 	ctx               context.Context
 	accountId         *string
@@ -30,38 +29,43 @@ type Fixture struct {
 	accountTransferId *string
 }
 
-func (f *Fixture) AccountId() *string {
+// Fixture methods take the *testing.T of whichever subtest is calling them --
+// require.NoError ultimately calls t.FailNow(), which must run on the
+// goroutine executing that specific t.Run subtest. Using a T stored at
+// Fixture construction produces "subtest may have called FailNow on a parent
+// test" panics whenever setup genuinely fails, masking the real error.
+func (f *Fixture) AccountId(t *testing.T) *string {
 	if f.accountId != nil {
 		return f.accountId
 	}
 
-	f.accountId = f.createAndEnrollAccount()
+	f.accountId = f.createAndEnrollAccount(t)
 	return f.accountId
 }
 
-func (f *Fixture) AccountNumber() *string {
+func (f *Fixture) AccountNumber(t *testing.T) *string {
 	if f.accountNumber != nil {
 		return f.accountNumber
 	}
 
-	accountId := f.AccountId()
-	require.NotNil(f.t, accountId, "Account ID should not be nil")
+	accountId := f.AccountId(t)
+	require.NotNil(t, accountId, "Account ID should not be nil")
 
 	sdk, err := helpers.SetupAscendSDK()
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 	ctx := context.Background()
 	account, _ := sdk.AccountCreation.GetAccount(ctx, *accountId, nil)
-	require.NotNil(f.t, account, "Account should not be nil")
+	require.NotNil(t, account, "Account should not be nil")
 	f.accountNumber = account.GetAccount().AccountNumber
 	return f.accountNumber
 }
 
-func (f *Fixture) AccountTransferId() *string {
+func (f *Fixture) AccountTransferId(t *testing.T) *string {
 	if f.accountTransferId != nil {
 		return f.accountTransferId
 	}
 	sdk, err := helpers.SetupAscendSDK()
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 	ctx := context.Background()
 	request := components.TransferCreate{
 		Assets: []components.AssetCreate{
@@ -75,14 +79,21 @@ func (f *Fixture) AccountTransferId() *string {
 		},
 		Deliverer: components.TransferAccountCreate{
 			ExternalAccount: &components.ExternalAccountCreate{
-				AccountNumber:     *f.AccountNumber(),
+				AccountNumber:     *f.AccountNumber(t),
 				ParticipantNumber: "158",
 			},
 		},
 	}
 
-	res, err := sdk.AccountTransfers.CreateTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), helpers.WITHDRAWAL_ACCOUNT_ID, request, nil)
-	require.NoError(f.t, err)
+	// The funding credit created just before this posts asynchronously;
+	// until it lands the API rejects the transfer for insufficient cash.
+	var res *operations.AccountTransfersCreateTransferResponse
+	err = helpers.RetryOnTransientError(func() error {
+		var opErr error
+		res, opErr = sdk.AccountTransfers.CreateTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), helpers.WITHDRAWAL_ACCOUNT_ID, request, nil)
+		return opErr
+	})
+	require.NoError(t, err)
 
 	name := res.AcatsTransfer.Name
 	parts := strings.Split(*name, "/")
@@ -93,15 +104,9 @@ func (f *Fixture) AccountTransferId() *string {
 	return accountTransferId
 }
 
-func (f *Fixture) createAndEnrollAccount() *string {
-	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
-	require.NoError(f.t, err)
-
-	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
-	require.NoError(f.t, err)
-
-	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
-	require.NoError(f.t, err)
+func (f *Fixture) createAndEnrollAccount(t *testing.T) *string {
+	accountId, err := helpers.CreateEnrolledAccount(f.sdk, f.ctx, t)
+	require.NoError(t, err)
 
 	return accountId
 }
@@ -113,7 +118,6 @@ func TestAccountTransfers(t *testing.T) {
 	require.NoError(t, err)
 
 	fixtures := &Fixture{
-		t:   t,
 		sdk: sdk,
 		ctx: ctx,
 	}
@@ -129,19 +133,19 @@ func TestAccountTransfers(t *testing.T) {
 			Type:             components.TransfersCreditCreateTypePromotional,
 		}
 
-		_, err := sdk.FeesAndCredits.CreateCredit(ctx, *fixtures.AccountId(), creditCreate)
+		_, err := sdk.FeesAndCredits.CreateCredit(ctx, *fixtures.AccountId(t), creditCreate)
 		require.NoError(t, err)
 
-		transferID := fixtures.AccountTransferId()
+		transferID := fixtures.AccountTransferId(t)
 		assert.NotNil(t, transferID, "Account transfer ID should not be nil")
 	})
 
 	t.Run("ListAccountTransfers", func(t *testing.T) {
-		require.NotNil(t, fixtures.AccountId(), "accountId is required to list account transfers")
+		require.NotNil(t, fixtures.AccountId(t), "accountId is required to list account transfers")
 
 		request := operations.AccountTransfersListTransfersRequest{
 			CorrespondentID: os.Getenv("CORRESPONDENT_ID"),
-			AccountID:       *fixtures.AccountId(),
+			AccountID:       *fixtures.AccountId(t),
 		}
 
 		res, err := sdk.AccountTransfers.ListTransfers(ctx, request)
@@ -151,18 +155,38 @@ func TestAccountTransfers(t *testing.T) {
 	})
 
 	t.Run("RejectTransfer", func(t *testing.T) {
-		require.NotNil(t, fixtures.AccountTransferId(), "accountTransferId is required to reject account transfer")
+		require.NotNil(t, fixtures.AccountTransferId(t), "accountTransferId is required to reject account transfer")
 
 		request := components.RejectTransferRequestCreate{
-			Name: "correspondents/" + os.Getenv("CORRESPONDENT_ID") + "/accounts/" + *fixtures.AccountId() + "/transfers/" + *fixtures.AccountTransferId(),
+			Name: "correspondents/" + os.Getenv("CORRESPONDENT_ID") + "/accounts/" + *fixtures.AccountId(t) + "/transfers/" + *fixtures.AccountTransferId(t),
 		}
-		res, err := sdk.AccountTransfers.RejectTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), *fixtures.AccountId(), *fixtures.AccountTransferId(), request)
+		res, err := sdk.AccountTransfers.RejectTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), *fixtures.AccountId(t), *fixtures.AccountTransferId(t), request)
 
 		require.NoError(t, err)
 		assert.NotNil(t, res.RejectTransferResponse)
 	})
 
 	t.Run("AcceptTransfer", func(t *testing.T) {
+		// Use a dedicated account: rejecting the earlier transfer restricts
+		// its deliverer account (ACAT_PARTIAL_OUTBOUND entitlement) for an
+		// unbounded window, so a second transfer on the same account is
+		// rejected as "Account not entitled".
+		acceptAccountId := fixtures.createAndEnrollAccount(t)
+		account, _ := sdk.AccountCreation.GetAccount(ctx, *acceptAccountId, nil)
+		require.NotNil(t, account, "Account should not be nil")
+		acceptAccountNumber := account.GetAccount().AccountNumber
+
+		creditCreate := components.TransfersCreditCreate{
+			Amount: components.DecimalCreate{
+				Value: ascendsdk.String("1000.00"),
+			},
+			ClientTransferID: uuid.New().String(),
+			Description:      ascendsdk.String("Credit awarded"),
+			Type:             components.TransfersCreditCreateTypePromotional,
+		}
+		_, err := sdk.FeesAndCredits.CreateCredit(ctx, *acceptAccountId, creditCreate)
+		require.NoError(t, err)
+
 		request := components.TransferCreate{
 			Assets: []components.AssetCreate{
 				{
@@ -175,13 +199,18 @@ func TestAccountTransfers(t *testing.T) {
 			},
 			Deliverer: components.TransferAccountCreate{
 				ExternalAccount: &components.ExternalAccountCreate{
-					AccountNumber:     *fixtures.AccountNumber(),
+					AccountNumber:     *acceptAccountNumber,
 					ParticipantNumber: "158",
 				},
 			},
 		}
 
-		res, err := sdk.AccountTransfers.CreateTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), helpers.WITHDRAWAL_ACCOUNT_ID, request, nil)
+		var res *operations.AccountTransfersCreateTransferResponse
+		err = helpers.RetryOnTransientError(func() error {
+			var opErr error
+			res, opErr = sdk.AccountTransfers.CreateTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), helpers.WITHDRAWAL_ACCOUNT_ID, request, nil)
+			return opErr
+		})
 		require.NoError(t, err)
 		assert.NotNil(t, res.AcatsTransfer)
 
@@ -192,18 +221,18 @@ func TestAccountTransfers(t *testing.T) {
 		require.NotNil(t, accountTransferId, "accountTransferId should not be nil")
 
 		acceptRequest := components.AcceptTransferRequestCreate{
-			Name: "correspondents/" + os.Getenv("CORRESPONDENT_ID") + "/accounts/" + *fixtures.AccountId() + "/transfers/" + *accountTransferId,
+			Name: "correspondents/" + os.Getenv("CORRESPONDENT_ID") + "/accounts/" + *acceptAccountId + "/transfers/" + *accountTransferId,
 		}
 
-		acceptRes, err := sdk.AccountTransfers.AcceptTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), *fixtures.AccountId(), *accountTransferId, acceptRequest)
+		acceptRes, err := sdk.AccountTransfers.AcceptTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), *acceptAccountId, *accountTransferId, acceptRequest)
 		require.NoError(t, err)
 		assert.NotNil(t, acceptRes.AcceptTransferResponse)
 	})
 
 	t.Run("GetAccountTransfer", func(t *testing.T) {
-		require.NotNil(t, fixtures.AccountTransferId(), "accountTransferId is required to get account transfer")
+		require.NotNil(t, fixtures.AccountTransferId(t), "accountTransferId is required to get account transfer")
 
-		res, err := sdk.AccountTransfers.GetTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), *fixtures.AccountId(), *fixtures.AccountTransferId())
+		res, err := sdk.AccountTransfers.GetTransfer(ctx, os.Getenv("CORRESPONDENT_ID"), *fixtures.AccountId(t), *fixtures.AccountTransferId(t))
 
 		require.NoError(t, err)
 		assert.NotNil(t, res.AcatsTransfer)

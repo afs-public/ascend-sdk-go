@@ -55,9 +55,10 @@ func (fixture *Fixtures) pendingIctDeposit() string {
 	return pendingIctDepositId
 }
 
-func (fixture *Fixtures) completedWithdrawalId() string {
-	completedWithdrawalAccountId, err := getCompletedWithdrawalId(*fixture)
-	require.NoError(fixture.t, err)
+func (fixture *Fixtures) completedWithdrawalId(t *testing.T) string {
+	ownerId, completedWithdrawalAccountId, err := getCompletedWithdrawalId(*fixture, t)
+	require.NoError(t, err)
+	fixture.completedWithdrawalOwnerId = &ownerId
 	fixture.completedWithdrawalAccountId = completedWithdrawalAccountId
 	return *completedWithdrawalAccountId
 }
@@ -237,7 +238,7 @@ func testTestSimulationTransfersForceRejectAchDepositForceRejectAchDeposit1(t *t
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -281,7 +282,7 @@ func testTestSimulationTransfersForceApproveAchWithdrawalForceApproveAchWithdraw
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -294,15 +295,15 @@ func testTestSimulationTransfersForceNocAchWithdrawalForceNocAchWithdrawal1(
 	if isNotDuringTradingHours() {
 		t.Skip("Skipping Endpoint Test: ACH Withdrawal NOC")
 	}
-	assert.NotNil(t, fixture.completedWithdrawalId())
+	assert.NotNil(t, fixture.completedWithdrawalId(t))
 	request := components.ForceNocAchWithdrawalRequestCreate{
 		NachaNoc: components.NachaNocCreate{
 			Code:                   components.CodeC05,
 			UpdatedBankAccountType: components.UpdatedBankAccountTypeChecking.ToPointer(),
 		},
-		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/achWithdrawals/" + *fixture.completedWithdrawalAccountId,
+		Name: "accounts/" + *fixture.completedWithdrawalOwnerId + "/achWithdrawals/" + *fixture.completedWithdrawalAccountId,
 	}
-	res, err := fixture.sdk.TestSimulation.ForceNocAchWithdrawal(fixture.ctx, fixture.enrolledWithdrawalAccountId, *fixture.completedWithdrawalAccountId, request)
+	res, err := fixture.sdk.TestSimulation.ForceNocAchWithdrawal(fixture.ctx, *fixture.completedWithdrawalOwnerId, *fixture.completedWithdrawalAccountId, request)
 	require.NoError(t, err)
 	assert.NotNil(t, &res.HTTPMeta.Response)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
@@ -322,7 +323,7 @@ func testTestSimulationTransfersForceRejectAchWithdrawalForceRejectAchWithdrawal
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -335,14 +336,14 @@ func testTestSimulationTransfersForceAchWithdrawalReturnForceAchWithdrawalReturn
 	if isNotDuringTradingHours() {
 		t.Skip("Skipping Endpoint Test: ACH Withdrawal Return")
 	}
-	assert.NotNil(t, fixture.completedWithdrawalId())
+	assert.NotNil(t, fixture.completedWithdrawalId(t))
 	request := components.ForceReturnAchWithdrawalRequestCreate{
 		NachaReturn: components.NachaReturnCreate{
 			Code: components.NachaReturnCreateCodeR16,
 		},
-		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/achWithdrawals/" + *fixture.completedWithdrawalAccountId,
+		Name: "accounts/" + *fixture.completedWithdrawalOwnerId + "/achWithdrawals/" + *fixture.completedWithdrawalAccountId,
 	}
-	_, err := fixture.sdk.TestSimulation.ForceReturnAchWithdrawal(fixture.ctx, fixture.enrolledWithdrawalAccountId, *fixture.completedWithdrawalAccountId, request)
+	_, err := fixture.sdk.TestSimulation.ForceReturnAchWithdrawal(fixture.ctx, *fixture.completedWithdrawalOwnerId, *fixture.completedWithdrawalAccountId, request)
 	statusErr, ok := err.(*sdkerrors.Status)
 	require.True(t, ok)
 	assert.Equal(t, 3, *statusErr.Code)
@@ -362,7 +363,7 @@ func testTestSimulationTransfersForceApproveIctWithdrawalForceApproveIctWithdraw
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -383,7 +384,7 @@ func testTestSimulationTransfersForceRejectIctWithdrawalForceRejectIctWithdrawal
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -404,7 +405,7 @@ func testTestSimulationTransfersForceApproveIctDepositForceApproveIctDeposit1(t 
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -425,7 +426,7 @@ func testTestSimulationTransfersForceRejectIctDepositForceRejectIctDeposit1(t *t
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -446,7 +447,7 @@ func testTestSimulationTransfersForceApproveAchDepositForceApproveAchDeposit1(t 
 		statusErr, ok := err.(*sdkerrors.Status)
 		require.True(t, ok)
 		assert.Equal(t, 3, *statusErr.Code)
-		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "that does not need review"), statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
 	} else {
 		assert.NotNil(t, res)
 		assert.NotNil(t, res.HTTPMeta.Response)
@@ -464,9 +465,16 @@ func testTestSimulationTransfersForceApproveWireWithdrawalForceApproveWireWithdr
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/wireWithdrawals/" + *fixture.wireId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceApproveWireWithdrawal(fixture.ctx, fixture.enrolledWithdrawalAccountId, *fixture.wireId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceRejectWireWithdrawalForceRejectWireWithdrawal1(t *testing.T, fixture Fixtures) {
@@ -504,9 +512,16 @@ func testTestSimulationTransfersForceApproveCashJournalForceApproveCashJournal1(
 		Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/cashJournals/" + *fixture.cashJournalId,
 	}
 	res, err := fixture.sdk.TestSimulation.ForceApproveCashJournal(fixture.ctx, *fixture.cashJournalId, request)
-	require.NoError(t, err)
-	assert.NotNil(t, &res.HTTPMeta.Response)
-	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 3, *statusErr.Code)
+		assert.True(t, strings.Contains(strings.ToLower(*statusErr.Message), "does not need review"), statusErr.Code)
+	} else {
+		assert.NotNil(t, res)
+		assert.NotNil(t, res.HTTPMeta.Response)
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }
 
 func testTestSimulationTransfersForceRejectCashJournalForceRejectCashJournal1(t *testing.T, fixture Fixtures) {

@@ -7,9 +7,12 @@ import (
 	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
 	"github.com/afs-public/ascend-sdk-go/internal/utils"
 	"github.com/afs-public/ascend-sdk-go/models/components"
+	"github.com/afs-public/ascend-sdk-go/models/sdkerrors"
+	"github.com/afs-public/ascend-sdk-go/tests/helpers"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	"strings"
 	"testing"
 )
 
@@ -32,12 +35,12 @@ func TestAlternativeOrders_AlternativeOrdersCreateAlternativeOrder(t *testing.T)
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeOrders.CreateAlternativeOrder(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", components.AlternativeOrderCreate{
+	res, err := s.AlternativeOrders.CreateAlternativeOrder(ctx, helpers.ALTS_ACCOUNT_ID, components.AlternativeOrderCreate{
 		ClientOrderID:  uuid.New().String(),
-		Identifier:     "6684398",
+		Identifier:     "13607391",
 		IdentifierType: components.AlternativeOrderCreateIdentifierTypeAssetID,
 		NotionalValue: &components.DecimalCreate{
-			Value: ascendsdkgo.String("10000"),
+			Value: ascendsdkgo.String("15000"),
 		},
 		Side: components.AlternativeOrderCreateSideBuy,
 	})
@@ -65,7 +68,7 @@ func TestAlternativeOrders_AlternativeOrdersListAlternativeOrders(t *testing.T) 
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeOrders.ListAlternativeOrders(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", ascendsdkgo.Int(25), ascendsdkgo.String(""), ascendsdkgo.String(""))
+	res, err := s.AlternativeOrders.ListAlternativeOrders(ctx, helpers.ALTS_ACCOUNT_ID, ascendsdkgo.Int(25), ascendsdkgo.String(""), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
@@ -90,7 +93,7 @@ func TestAlternativeOrders_AlternativeOrdersGetAlternativeOrder(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeOrders.GetAlternativeOrder(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "01KHYEFHKS7VM17YC8BQC6A8PV")
+	res, err := s.AlternativeOrders.GetAlternativeOrder(ctx, helpers.ALTS_ACCOUNT_ID, helpers.ALTS_ORDER_ID)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
@@ -115,7 +118,7 @@ func TestAlternativeOrders_AlternativeOrdersRetrievePendingInvestorActions(t *te
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeOrders.RetrievePendingInvestorActions(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "01KHYEFHKS7VM17YC8BQC6A8PV")
+	res, err := s.AlternativeOrders.RetrievePendingInvestorActions(ctx, helpers.ALTS_ACCOUNT_ID, helpers.ALTS_ORDER_ID)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
@@ -140,11 +143,19 @@ func TestAlternativeOrders_AlternativeOrdersSettleAlternativeOrder(t *testing.T)
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.AlternativeOrders.SettleAlternativeOrder(ctx, "01JHGTEPC6ZTAHCFRH2MD3VJJT", "01KHYEFHKS7VM17YC8BQC6A8PV", components.SettleAlternativeOrderRequestCreate{
-		Name:                  "accounts/01JHGTEPC6ZTAHCFRH2MD3VJJT/alternativeOrders/01KHYEFHKS7VM17YC8BQC6A8PV",
+	res, err := s.AlternativeOrders.SettleAlternativeOrder(ctx, helpers.ALTS_ACCOUNT_ID, helpers.ALTS_ORDER_ID, components.SettleAlternativeOrderRequestCreate{
+		Name:                  "accounts/" + helpers.ALTS_ACCOUNT_ID + "/alternativeOrders/" + helpers.ALTS_ORDER_ID,
 		OrderSettlementTarget: components.OrderSettlementTargetFilled.ToPointer(),
 	})
-	require.NoError(t, err)
-	assert.Equal(t, 400, res.HTTPMeta.Response.StatusCode)
-
+	// This hardcoded order is already FILLED, so settling it again is expected
+	// to fail with a SETTLEMENT_POST_FAILURE precondition error -- but accept
+	// a genuine 200 too, in case the order's state ever changes.
+	if err != nil {
+		statusErr, ok := err.(*sdkerrors.Status)
+		require.True(t, ok)
+		assert.Equal(t, 9, *statusErr.Code)
+		assert.True(t, strings.Contains(*statusErr.Message, "SETTLEMENT_POST_FAILURE"), *statusErr.Message)
+	} else {
+		assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
+	}
 }

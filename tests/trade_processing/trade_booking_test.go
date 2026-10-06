@@ -76,7 +76,7 @@ func Test_Trade_Booking(t *testing.T) {
 
 	t.Run("test Trade Booking Trade Processing Rebook Execution Rebook Execution1", func(t *testing.T) {
 
-		now := time.Now()
+		now := time.Now().UTC().Truncate(time.Second)
 		request := components.RebookExecutionRequestCreate{
 			Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/trades/" + bookingIds[0] + "/executions/" + rebookExecutionID,
 			Execution: components.ExecutionCreate{
@@ -103,7 +103,7 @@ func Test_Trade_Booking(t *testing.T) {
 
 	t.Run("test Trade Booking Trade Processing Rebook Trade Rebook Trade1", func(t *testing.T) {
 
-		now := time.Now()
+		now := time.Now().UTC().Truncate(time.Second)
 		assetType := components.TradeCreateAssetTypeEquity
 		request := components.RebookTradeRequestCreate{
 			Name: "accounts/" + fixture.enrolledWithdrawalAccountId + "/trades/" + bookingIds[0],

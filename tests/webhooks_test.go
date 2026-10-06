@@ -67,9 +67,6 @@ func generateSignature(sendTimeStr, body, secret string) string {
 }
 
 func TestEvents(t *testing.T) {
-	startTime := time.Now()
-	defer GetQaseReporter().RecordTestResult(t, startTime)
-
 	fmt.Println("Starting test for Events.ValidatePayload")
 
 	validSendTime := time.Now().UTC().Truncate(time.Second)
@@ -230,9 +227,6 @@ func TestEvents(t *testing.T) {
 }
 
 func TestIntegration_GetEventMessageAndValidate(t *testing.T) {
-	startTime := time.Now()
-	defer GetQaseReporter().RecordTestResult(t, startTime)
-
 	sdk, err := helpers.SetupAscendSDK()
 	require.NoError(t, err)
 

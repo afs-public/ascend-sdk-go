@@ -31,7 +31,10 @@ func TestDataRetrieval_SnapshotsListSnapshots(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String(""), ascendsdkgo.Int(25), ascendsdkgo.String(""))
+	// An unfiltered list forces the service onto its slow GCS/BQ scan path,
+	// which exceeds the 55s gateway timeout (504) in UAT; a snapshot_type
+	// filter keeps it on the fast path (~3s).
+	res, err := s.DataRetrieval.ListSnapshots(ctx, ascendsdkgo.String(`snapshot_type=="daily_accounts"`), ascendsdkgo.Int(25), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

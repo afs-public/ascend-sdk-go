@@ -21,7 +21,6 @@ import (
 )
 
 type CashJournalScheduleFixture struct {
-	t                     *testing.T
 	sdk                   *ascendsdk.SDK
 	ctx                   context.Context
 	sourceAccountId       string
@@ -29,23 +28,24 @@ type CashJournalScheduleFixture struct {
 	cashJournalScheduleId *string
 }
 
-func (f *CashJournalScheduleFixture) DestinationAccountId() *string {
+// DestinationAccountId, createAndEnrollAccount, and CashJournalScheduleId all
+// take the *testing.T of whichever subtest is calling them, not a T stored on
+// the fixture -- require.NoError ultimately calls t.FailNow(), which must run
+// on the goroutine executing that specific t.Run subtest. Using a different
+// T from inside a subtest's goroutine produces "subtest may have called
+// FailNow on a parent test" panics whenever setup genuinely fails, masking
+// the real error.
+func (f *CashJournalScheduleFixture) DestinationAccountId(t *testing.T) *string {
 	if f.destinationAccountId != nil {
 		return f.destinationAccountId
 	}
-	f.destinationAccountId = f.createAndEnrollAccount()
+	f.destinationAccountId = f.createAndEnrollAccount(t)
 	return f.destinationAccountId
 }
 
-func (f *CashJournalScheduleFixture) createAndEnrollAccount() *string {
-	accountId, err := helpers.CreateAccountId(f.sdk, f.ctx)
-	require.NoError(f.t, err)
-
-	agg, err := helpers.EnrollAccountIds(f.sdk, f.ctx, *accountId)
-	require.NoError(f.t, err)
-
-	err = helpers.AffirmAgreements(f.sdk, f.ctx, *accountId, agg)
-	require.NoError(f.t, err)
+func (f *CashJournalScheduleFixture) createAndEnrollAccount(t *testing.T) *string {
+	accountId, err := helpers.CreateEnrolledAccount(f.sdk, f.ctx, t)
+	require.NoError(t, err)
 
 	return accountId
 }
@@ -55,9 +55,9 @@ func (f *CashJournalScheduleFixture) CashJournalScheduleId(t *testing.T) *string
 		return f.cashJournalScheduleId
 	}
 
-	scheduleId, err := CreateCashJournalSchedule(t, f.sdk, f.ctx, f.sourceAccountId, *f.DestinationAccountId())
+	scheduleId, err := CreateCashJournalSchedule(t, f.sdk, f.ctx, f.sourceAccountId, *f.DestinationAccountId(t))
 	fmt.Println("cashJournalScheduleId:", scheduleId)
-	require.NoError(f.t, err)
+	require.NoError(t, err)
 
 	f.cashJournalScheduleId = &scheduleId
 	return &scheduleId
@@ -114,7 +114,6 @@ func TestCashJournalSchedules(t *testing.T) {
 	require.NoError(t, err)
 
 	fixtures := &CashJournalScheduleFixture{
-		t:               t,
 		sdk:             sdk,
 		ctx:             ctx,
 		sourceAccountId: withdrawal_account_id,

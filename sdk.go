@@ -2,7 +2,7 @@
 
 package ascendsdkgo
 
-// Generated from OpenAPI doc version v1:20260814:uat:c54c9dbed75d and generator version 2.691.6
+// Generated from OpenAPI doc version v1:20261005:uat:400dff6391e1 and generator version 2.691.6
 
 import (
 	"context"
@@ -103,6 +103,7 @@ type SDK struct {
 	InvestorDocs                    *InvestorDocs
 	DataRetrieval                   *DataRetrieval
 	OptionInstructions              *OptionInstructions
+	CostBasisService                *CostBasisService
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -179,9 +180,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *SDK {
 	sdk := &SDK{
-		SDKVersion: "1.3.14",
+		SDKVersion: "1.3.15",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.3.14 2.691.6 v1:20260814:uat:c54c9dbed75d github.com/afs-public/ascend-sdk-go",
+			UserAgent:  "speakeasy-sdk/go 1.3.15 2.691.6 v1:20261005:uat:400dff6391e1 github.com/afs-public/ascend-sdk-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -244,6 +245,7 @@ func New(opts ...SDKOption) *SDK {
 	sdk.InvestorDocs = newInvestorDocs(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.DataRetrieval = newDataRetrieval(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.OptionInstructions = newOptionInstructions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.CostBasisService = newCostBasisService(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }
