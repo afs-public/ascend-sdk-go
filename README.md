@@ -446,6 +446,7 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [AcceptTransfer](docs/sdks/accounttransfers/README.md#accepttransfer) - Accept Transfer
 * [RejectTransfer](docs/sdks/accounttransfers/README.md#rejecttransfer) - Reject Transfer
 * [GetTransfer](docs/sdks/accounttransfers/README.md#gettransfer) - Get Transfer
+* [PreviewTransfer](docs/sdks/accounttransfers/README.md#previewtransfer) - Preview Transfer
 
 ### [ACHTransfers](docs/sdks/achtransfers/README.md)
 
@@ -584,7 +585,9 @@ This can be a convenient way to configure timeouts, cookies, proxies, custom hea
 * [ListInvestigations](docs/sdks/investigations/README.md#listinvestigations) - List Investigations
 * [LinkDocuments](docs/sdks/investigations/README.md#linkdocuments) - Link Documents
 * [GetWatchlistItem](docs/sdks/investigations/README.md#getwatchlistitem) - Get Watchlist Item
+* [LinkCustomerIdentification](docs/sdks/investigations/README.md#linkcustomeridentification) - Link Customer Identification to an Investigation
 * [GetCustomerIdentification](docs/sdks/investigations/README.md#getcustomeridentification) - Get Identity Verification
+* [CreateCustomerIdentification](docs/sdks/investigations/README.md#createcustomeridentification) - Create Identity Verification
 * [CreateIdentityLookup](docs/sdks/investigations/README.md#createidentitylookup) - Create Identity Lookup
 * [VerifyIdentityLookup](docs/sdks/investigations/README.md#verifyidentitylookup) - Verify Identity Lookup
 

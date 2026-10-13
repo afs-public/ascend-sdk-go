@@ -41,7 +41,7 @@ func main() {
         }),
     )
 
-    res, err := s.FixedIncomePricing.PreviewOrderCost(ctx, "<id>", components.OrderCostPreviewRequestCreate{
+    res, err := s.FixedIncomePricing.PreviewOrderCost(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", components.OrderCostPreviewRequestCreate{
         AssetType: components.OrderCostPreviewRequestCreateAssetTypeFixedIncome,
         Identifier: "037833100",
         IdentifierType: components.OrderCostPreviewRequestCreateIdentifierTypeCusip,
@@ -49,7 +49,7 @@ func main() {
             Price: components.DecimalCreate{},
             Type: components.LimitPriceCreateTypePricePerUnit,
         },
-        Parent: "<value>",
+        Parent: "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X",
         Quantity: components.DecimalCreate{},
     })
     if err != nil {
@@ -63,12 +63,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `accountID`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | The account id.                                                                                      |
-| `orderCostPreviewRequestCreate`                                                                      | [components.OrderCostPreviewRequestCreate](../../models/components/ordercostpreviewrequestcreate.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
-| `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |                                                                                                      |
+| `accountID`                                                                                          | *string*                                                                                             | :heavy_check_mark:                                                                                   | The account id.                                                                                      | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                           |
+| `orderCostPreviewRequestCreate`                                                                      | [components.OrderCostPreviewRequestCreate](../../models/components/ordercostpreviewrequestcreate.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |                                                                                                      |
+| `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |                                                                                                      |
 
 ### Response
 
@@ -114,11 +114,11 @@ func main() {
         }),
     )
 
-    res, err := s.FixedIncomePricing.RetrieveQuote(ctx, "<id>", components.RetrieveQuoteRequestCreate{
+    res, err := s.FixedIncomePricing.RetrieveQuote(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", components.RetrieveQuoteRequestCreate{
         AssetType: components.RetrieveQuoteRequestCreateAssetTypeFixedIncome,
         Identifier: "037833100",
         IdentifierType: components.RetrieveQuoteRequestCreateIdentifierTypeCusip,
-        Parent: "<value>",
+        Parent: "accounts/01HBRQ5BW6ZAY4BNWP4GWRD80X",
     })
     if err != nil {
         log.Fatal(err)
@@ -131,12 +131,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `accountID`                                                                                    | *string*                                                                                       | :heavy_check_mark:                                                                             | The account id.                                                                                |
-| `retrieveQuoteRequestCreate`                                                                   | [components.RetrieveQuoteRequestCreate](../../models/components/retrievequoterequestcreate.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    | Example                                                                                        |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |                                                                                                |
+| `accountID`                                                                                    | *string*                                                                                       | :heavy_check_mark:                                                                             | The account id.                                                                                | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                     |
+| `retrieveQuoteRequestCreate`                                                                   | [components.RetrieveQuoteRequestCreate](../../models/components/retrievequoterequestcreate.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |                                                                                                |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |                                                                                                |
 
 ### Response
 
@@ -182,8 +182,8 @@ func main() {
         }),
     )
 
-    res, err := s.FixedIncomePricing.RetrieveFixedIncomeMarks(ctx, "<id>", components.RetrieveFixedIncomeMarksRequestCreate{
-        Parent: "<value>",
+    res, err := s.FixedIncomePricing.RetrieveFixedIncomeMarks(ctx, "01HBRQ5BW6ZAY4BNWP4GWRD80X", components.RetrieveFixedIncomeMarksRequestCreate{
+        Parent: "correspondents/01HBRQ5BW6ZAY4BNWP4GWRD80X",
         SecurityIdentifiers: []components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate{
             components.RetrieveFixedIncomeMarksRequestSecurityIdentifiersCreate{
                 Identifier: "US0378331005",
@@ -206,12 +206,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |
-| `correspondentID`                                                                                                    | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | The correspondent id.                                                                                                |
-| `retrieveFixedIncomeMarksRequestCreate`                                                                              | [components.RetrieveFixedIncomeMarksRequestCreate](../../models/components/retrievefixedincomemarksrequestcreate.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |
-| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |
+| Parameter                                                                                                            | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          | Example                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                | :heavy_check_mark:                                                                                                   | The context to use for the request.                                                                                  |                                                                                                                      |
+| `correspondentID`                                                                                                    | *string*                                                                                                             | :heavy_check_mark:                                                                                                   | The correspondent id.                                                                                                | 01HBRQ5BW6ZAY4BNWP4GWRD80X                                                                                           |
+| `retrieveFixedIncomeMarksRequestCreate`                                                                              | [components.RetrieveFixedIncomeMarksRequestCreate](../../models/components/retrievefixedincomemarksrequestcreate.md) | :heavy_check_mark:                                                                                                   | N/A                                                                                                                  |                                                                                                                      |
+| `opts`                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                             | :heavy_minus_sign:                                                                                                   | The options for this request.                                                                                        |                                                                                                                      |
 
 ### Response
 

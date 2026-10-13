@@ -13,7 +13,7 @@ func (e OrderCostPreviewRequestCreateAssetType) ToPointer() *OrderCostPreviewReq
 	return &e
 }
 
-// OrderCostPreviewRequestCreateBrokerCapacity - Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
+// OrderCostPreviewRequestCreateBrokerCapacity - Capacity used in determining the order cost. If not specified, defaults to the capacity configured for the correspondent by Apex.
 type OrderCostPreviewRequestCreateBrokerCapacity string
 
 const (
@@ -43,7 +43,7 @@ func (e OrderCostPreviewRequestCreateIdentifierType) ToPointer() *OrderCostPrevi
 type OrderCostPreviewRequestCreate struct {
 	// The type of asset being evaluated in cost calculations.
 	AssetType OrderCostPreviewRequestCreateAssetType `json:"asset_type"`
-	// Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
+	// Capacity used in determining the order cost. If not specified, defaults to the capacity configured for the correspondent by Apex.
 	BrokerCapacity *OrderCostPreviewRequestCreateBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`

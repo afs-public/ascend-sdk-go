@@ -199,6 +199,8 @@ const (
 	AcceptTransferResponseStatePurged                AcceptTransferResponseState = "PURGED"
 	AcceptTransferResponseStatePendingReviewMargins  AcceptTransferResponseState = "PENDING_REVIEW_MARGINS"
 	AcceptTransferResponseStatePendingSubmission     AcceptTransferResponseState = "PENDING_SUBMISSION"
+	AcceptTransferResponseStateResponseOverdue       AcceptTransferResponseState = "RESPONSE_OVERDUE"
+	AcceptTransferResponseStatePendingCorrection     AcceptTransferResponseState = "PENDING_CORRECTION"
 )
 
 func (e AcceptTransferResponseState) ToPointer() *AcceptTransferResponseState {

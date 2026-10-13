@@ -7,7 +7,7 @@ import (
 )
 
 type InvestorCommunicationServiceListDocumentsRequest struct {
-	// The maximum number of items to return; The service may return fewer than this value
+	// The maximum number of items to return; The service may return fewer than this value; If unspecified, zero, or negative, at most 20 items will be returned; The maximum allowed value is 200; if a larger value is requested, the page size will be overridden to 200
 	PageSize *int `queryParam:"style=form,explode=true,name=page_size"`
 	// Token used to get a specific page of results
 	PageToken *string `queryParam:"style=form,explode=true,name=page_token"`

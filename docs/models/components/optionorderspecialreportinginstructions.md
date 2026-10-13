@@ -32,3 +32,4 @@
 | `OptionOrderSpecialReportingInstructionsRoundUp`                                 | ROUND_UP                                                                         |
 | `OptionOrderSpecialReportingInstructionsCatParentAlgo`                           | CAT_PARENT_ALGO                                                                  |
 | `OptionOrderSpecialReportingInstructionsCatParentGtc`                            | CAT_PARENT_GTC                                                                   |
+| `OptionOrderSpecialReportingInstructionsManualOrder`                             | MANUAL_ORDER                                                                     |

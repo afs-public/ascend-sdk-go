@@ -22,3 +22,5 @@ The transfer state
 | `AcatsTransferStatePurged`                | PURGED                                    |
 | `AcatsTransferStatePendingReviewMargins`  | PENDING_REVIEW_MARGINS                    |
 | `AcatsTransferStatePendingSubmission`     | PENDING_SUBMISSION                        |
+| `AcatsTransferStateResponseOverdue`       | RESPONSE_OVERDUE                          |
+| `AcatsTransferStatePendingCorrection`     | PENDING_CORRECTION                        |

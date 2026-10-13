@@ -53,3 +53,5 @@ When an order has the REJECTED status, this will be populated with a system code
 | `OrderRejectedReasonUnsupportedTradingSessionForAsset`                 | UNSUPPORTED_TRADING_SESSION_FOR_ASSET                                  |
 | `OrderRejectedReasonUnsupportedOrderTypeForAsset`                      | UNSUPPORTED_ORDER_TYPE_FOR_ASSET                                       |
 | `OrderRejectedReasonUnsupportedTimeInForceForAsset`                    | UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET                                    |
+| `OrderRejectedReasonUnsupportedBrokerCapacity`                         | UNSUPPORTED_BROKER_CAPACITY                                            |
+| `OrderRejectedReasonAboveBrokerFeeMaximum`                             | ABOVE_BROKER_FEE_MAXIMUM                                               |

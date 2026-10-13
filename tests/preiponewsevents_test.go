@@ -31,7 +31,7 @@ func TestPreIpoNewsEvents_PreIpoCompanyNewsEventsListPreIpoCompanyNewsEvents(t *
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.PreIPONewsEvents.ListPreIpoCompanyNewsEvents(ctx, "a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d", ascendsdkgo.Int(25), ascendsdkgo.String(""))
+	res, err := s.PreIPONewsEvents.ListPreIpoCompanyNewsEvents(ctx, "74c41a5b-b5e0-4509-964f-ca2de584c052", ascendsdkgo.Int(25), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

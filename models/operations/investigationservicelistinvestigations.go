@@ -26,6 +26,14 @@ type InvestigationServiceListInvestigationsRequest struct {
 	//   - created_at
 	//   - updated_at
 	OrderBy *string `queryParam:"style=form,explode=true,name=order_by"`
+	// Include the total size of the collection specified by this query in the response (this may incur a performance penalty)
+	//
+	// **Field Dependencies:**
+	//
+	// When include_total_size is explicitly set to false, total_size in the response will be 0.
+	//
+	// Must be empty if `total_size` is `false`.
+	IncludeTotalSize *bool `queryParam:"style=form,explode=true,name=include_total_size"`
 }
 
 func (o *InvestigationServiceListInvestigationsRequest) GetPageSize() *int {
@@ -54,6 +62,13 @@ func (o *InvestigationServiceListInvestigationsRequest) GetOrderBy() *string {
 		return nil
 	}
 	return o.OrderBy
+}
+
+func (o *InvestigationServiceListInvestigationsRequest) GetIncludeTotalSize() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IncludeTotalSize
 }
 
 type InvestigationServiceListInvestigationsResponse struct {

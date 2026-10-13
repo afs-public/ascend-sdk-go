@@ -13,3 +13,4 @@ Side modifier for the trade.
 | `CancelTradeResponseSideModifierShortCover`              | SHORT_COVER                                              |
 | `CancelTradeResponseSideModifierOpen`                    | OPEN                                                     |
 | `CancelTradeResponseSideModifierClose`                   | CLOSE                                                    |
+| `CancelTradeResponseSideModifierCover`                   | COVER                                                    |

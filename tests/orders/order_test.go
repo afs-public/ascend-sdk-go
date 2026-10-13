@@ -59,7 +59,7 @@ func CreateOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, enrolled
 	create := components.OrderCreate{
 		AssetType:     components.AssetTypeEquity,
 		ClientOrderID: uuid.New().String(),
-		OrderDate: components.DateCreate{
+		OrderDate: &components.DateCreate{
 			Year:  ascendsdk.Int(time.Now().Year()),
 			Month: ascendsdk.Int(int(time.Now().Month())),
 			Day:   ascendsdk.Int(time.Now().Day()),

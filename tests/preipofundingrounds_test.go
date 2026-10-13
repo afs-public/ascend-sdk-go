@@ -31,7 +31,7 @@ func TestPreIpoFundingRounds_PreIpoCompanyFundingRoundsListPreIpoCompanyFundingR
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.PreIPOFundingRounds.ListPreIpoCompanyFundingRounds(ctx, "a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d", ascendsdkgo.Int(25), ascendsdkgo.String(""))
+	res, err := s.PreIPOFundingRounds.ListPreIpoCompanyFundingRounds(ctx, "74c41a5b-b5e0-4509-964f-ca2de584c052", ascendsdkgo.Int(25), ascendsdkgo.String(""))
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 
@@ -56,7 +56,7 @@ func TestPreIpoFundingRounds_PreIpoCompanyFundingRoundsGetPreIpoCompanyFundingRo
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.PreIPOFundingRounds.GetPreIpoCompanyFundingRound(ctx, "a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d", "019c6a2b-6801-7759-9e1d-3d5aaa64bc2a")
+	res, err := s.PreIPOFundingRounds.GetPreIpoCompanyFundingRound(ctx, "74c41a5b-b5e0-4509-964f-ca2de584c052", "019c6a2b-6801-7759-9e1d-3d5aaa64bc2a")
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

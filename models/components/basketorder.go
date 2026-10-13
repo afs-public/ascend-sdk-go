@@ -285,6 +285,8 @@ type BasketOrder struct {
 	IdentifierType *BasketOrderIdentifierType `json:"identifier_type,omitempty"`
 	// Time of the last order update
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
+	// Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders. Maximum 100 instructions per order. Each instruction must include quantity. When id is specified, trade_date and price must not be specified. When id is not specified, trade_date is required and price is optional.
+	LotMatchingInstructions []TradeLot `json:"lot_matching_instructions,omitempty"`
 	// The maximum number of shares to be sold if this is a notional SELL order of an Equity asset type. (Prohibited for other side or asset_type inputs.)
 	//
 	//  This will only be recognized for clients configured to bypass the short sale risk check. When specified, must be greater than 0 and can't exceed 5 decimal places.
@@ -451,6 +453,13 @@ func (o *BasketOrder) GetLastUpdateTime() *time.Time {
 		return nil
 	}
 	return o.LastUpdateTime
+}
+
+func (o *BasketOrder) GetLotMatchingInstructions() []TradeLot {
+	if o == nil {
+		return nil
+	}
+	return o.LotMatchingInstructions
 }
 
 func (o *BasketOrder) GetMaxSellQuantity() *BasketOrderMaxSellQuantity {

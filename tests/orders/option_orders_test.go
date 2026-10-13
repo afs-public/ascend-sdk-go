@@ -65,7 +65,7 @@ func CreateOptionOrder(t *testing.T, sdk *ascendsdk.SDK, ctx context.Context, en
 				SideModifier:   components.SideModifierOpen,
 			},
 		},
-		LimitPrice: components.DecimalCreate{Value: ascendsdk.String("5.00")},
+		LimitPrice: &components.DecimalCreate{Value: ascendsdk.String("5.00")},
 		OrderDate: components.DateCreate{
 			Year:  ascendsdk.Int(time.Now().Year()),
 			Month: ascendsdk.Int(int(time.Now().Month())),

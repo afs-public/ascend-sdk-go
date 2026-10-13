@@ -26,3 +26,4 @@ Describes the contents of a document and how it is used
 | `DocumentInvestorDocumentDocumentTypeFpslNegativeConsentForm`         | FPSL_NEGATIVE_CONSENT_FORM                                            |
 | `DocumentInvestorDocumentDocumentTypeCrsForm`                         | CRS_FORM                                                              |
 | `DocumentInvestorDocumentDocumentTypeFpslConfirmation`                | FPSL_CONFIRMATION                                                     |
+| `DocumentInvestorDocumentDocumentTypeEventContractStatementDaily`     | EVENT_CONTRACT_STATEMENT_DAILY                                        |

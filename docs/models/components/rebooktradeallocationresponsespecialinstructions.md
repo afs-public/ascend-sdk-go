@@ -52,3 +52,4 @@
 | `RebookTradeAllocationResponseSpecialInstructionsSuppressSecFee`                 | SUPPRESS_SEC_FEE                                                                 |
 | `RebookTradeAllocationResponseSpecialInstructionsSuppressTafFee`                 | SUPPRESS_TAF_FEE                                                                 |
 | `RebookTradeAllocationResponseSpecialInstructionsDividendReinvestment`           | DIVIDEND_REINVESTMENT                                                            |
+| `RebookTradeAllocationResponseSpecialInstructionsReportMsrb`                     | REPORT_MSRB                                                                      |

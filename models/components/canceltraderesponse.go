@@ -147,6 +147,7 @@ const (
 	CancelTradeResponseSideModifierShortCover              CancelTradeResponseSideModifier = "SHORT_COVER"
 	CancelTradeResponseSideModifierOpen                    CancelTradeResponseSideModifier = "OPEN"
 	CancelTradeResponseSideModifierClose                   CancelTradeResponseSideModifier = "CLOSE"
+	CancelTradeResponseSideModifierCover                   CancelTradeResponseSideModifier = "COVER"
 )
 
 func (e CancelTradeResponseSideModifier) ToPointer() *CancelTradeResponseSideModifier {
@@ -203,6 +204,7 @@ const (
 	CancelTradeResponseSpecialInstructionsSuppressSecFee                 CancelTradeResponseSpecialInstructions = "SUPPRESS_SEC_FEE"
 	CancelTradeResponseSpecialInstructionsSuppressTafFee                 CancelTradeResponseSpecialInstructions = "SUPPRESS_TAF_FEE"
 	CancelTradeResponseSpecialInstructionsDividendReinvestment           CancelTradeResponseSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	CancelTradeResponseSpecialInstructionsReportMsrb                     CancelTradeResponseSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e CancelTradeResponseSpecialInstructions) ToPointer() *CancelTradeResponseSpecialInstructions {
@@ -297,6 +299,10 @@ type CancelTradeResponseTrade struct {
 	Open *bool `json:"open,omitempty"`
 	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
+	// The resource name of the API resource that originated this trade, for example the order that produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk a Ledger activity to its trade and on to the originating order using only originating_resource_name fields.
+	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Route type for the trade.
 	RouteType *CancelTradeResponseRouteType `json:"route_type,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
@@ -448,6 +454,20 @@ func (o *CancelTradeResponseTrade) GetOrderID() *string {
 		return nil
 	}
 	return o.OrderID
+}
+
+func (o *CancelTradeResponseTrade) GetOriginatingResourceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingResourceName
+}
+
+func (o *CancelTradeResponseTrade) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *CancelTradeResponseTrade) GetRouteType() *CancelTradeResponseRouteType {

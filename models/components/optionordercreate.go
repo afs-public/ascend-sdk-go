@@ -26,6 +26,7 @@ type OptionOrderCreateOrderType string
 const (
 	OptionOrderCreateOrderTypeOrderTypeUnspecified OptionOrderCreateOrderType = "ORDER_TYPE_UNSPECIFIED"
 	OptionOrderCreateOrderTypeLimit                OptionOrderCreateOrderType = "LIMIT"
+	OptionOrderCreateOrderTypeMarket               OptionOrderCreateOrderType = "MARKET"
 )
 
 func (e OptionOrderCreateOrderType) ToPointer() *OptionOrderCreateOrderType {
@@ -75,6 +76,7 @@ const (
 	OptionOrderCreateSpecialReportingInstructionsRoundUp                                 OptionOrderCreateSpecialReportingInstructions = "ROUND_UP"
 	OptionOrderCreateSpecialReportingInstructionsCatParentAlgo                           OptionOrderCreateSpecialReportingInstructions = "CAT_PARENT_ALGO"
 	OptionOrderCreateSpecialReportingInstructionsCatParentGtc                            OptionOrderCreateSpecialReportingInstructions = "CAT_PARENT_GTC"
+	OptionOrderCreateSpecialReportingInstructionsManualOrder                             OptionOrderCreateSpecialReportingInstructions = "MANUAL_ORDER"
 )
 
 func (e OptionOrderCreateSpecialReportingInstructions) ToPointer() *OptionOrderCreateSpecialReportingInstructions {
@@ -99,7 +101,7 @@ type OptionOrderCreate struct {
 	BrokerCapacity OptionOrderCreateBrokerCapacity `json:"broker_capacity"`
 	// User-supplied unique option order ID. Cannot be more than 40 characters long.
 	ClientOrderID string `json:"client_order_id"`
-	// Required for any client who is having Apex do CAT reporting on their behalf.
+	// Required for any client who is having Apex do CAT reporting on their behalf. When special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the customer.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
 	// The time the correspondent sent the original order to Apex. Set at order creation and cannot be modified. Required for correspondents using Apex CAT reporting services.
 	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
@@ -114,7 +116,7 @@ type OptionOrderCreate struct {
 	//  [BigDecimal]:
 	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
 	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
-	LimitPrice DecimalCreate `json:"limit_price"`
+	LimitPrice *DecimalCreate `json:"limit_price,omitempty"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
 	//
 	//  * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date
@@ -131,7 +133,7 @@ type OptionOrderCreate struct {
 	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
 	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
 	Quantity DecimalCreate `json:"quantity"`
-	// Special Reporting Instructions to be applied to this option order. Can include multiple Instructions.
+	// Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the customer for CAT reporting; client_received_time should then be set to the time the order was received.
 	SpecialReportingInstructions []OptionOrderCreateSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate the system captures the intended time_in_force, which is why this a mandatory field.
 	TimeInForce OptionOrderCreateTimeInForce `json:"time_in_force"`
@@ -142,7 +144,7 @@ func (o OptionOrderCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OptionOrderCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"broker_capacity", "client_order_id", "currency_code", "legs", "limit_price", "order_date", "order_type", "price_direction", "quantity", "time_in_force"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"broker_capacity", "client_order_id", "currency_code", "legs", "order_date", "order_type", "price_direction", "quantity", "time_in_force"}); err != nil {
 		return err
 	}
 	return nil
@@ -197,9 +199,9 @@ func (o *OptionOrderCreate) GetLegs() []OptionOrderLegCreate {
 	return o.Legs
 }
 
-func (o *OptionOrderCreate) GetLimitPrice() DecimalCreate {
+func (o *OptionOrderCreate) GetLimitPrice() *DecimalCreate {
 	if o == nil {
-		return DecimalCreate{}
+		return nil
 	}
 	return o.LimitPrice
 }

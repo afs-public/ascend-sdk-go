@@ -14,7 +14,7 @@ func (e OptionOrderLegAssetType) ToPointer() *OptionOrderLegAssetType {
 	return &e
 }
 
-// AveragePrice - The computed average price for this leg, which is a weighted average (by quantity) of the executed prices.
+// AveragePrice - The computed average price for this leg, which is a weighted average (by quantity) of the executed prices. Supports up to 8 decimal places.
 type AveragePrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -84,7 +84,7 @@ type OptionOrderLeg struct {
 	AssetID *string `json:"asset_id,omitempty"`
 	// The type of the asset in this option order leg. Orders with only a single leg may only contain an OPTION asset type. Orders with multiple legs must contain at least one OPTION leg, and no more than one EQUITY leg.
 	AssetType *OptionOrderLegAssetType `json:"asset_type,omitempty"`
-	// The computed average price for this leg, which is a weighted average (by quantity) of the executed prices.
+	// The computed average price for this leg, which is a weighted average (by quantity) of the executed prices. Supports up to 8 decimal places.
 	AveragePrice *AveragePrice `json:"average_price,omitempty"`
 	// The computed direction for this leg. When `side` is BUY, `direction` will be DEBIT. When `side` is SELL, `direction` will be CREDIT.
 	Direction *OptionOrderLegDirection `json:"direction,omitempty"`

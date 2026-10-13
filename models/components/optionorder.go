@@ -80,6 +80,7 @@ func (e CumulativeNotionalValueDirection) ToPointer() *CumulativeNotionalValueDi
 
 // OptionOrderExtraReportingData - Post-cancel reporting data provided via the SetOptionExtraReportingData endpoint.
 type OptionOrderExtraReportingData struct {
+	// Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT CANCEL_CONFIRM_TIME.
 	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
 }
 
@@ -101,7 +102,11 @@ func (o *OptionOrderExtraReportingData) GetCancelConfirmedTime() *time.Time {
 	return o.CancelConfirmedTime
 }
 
-// OptionOrderLimitPrice - The limit price for this option order. For single-leg option orders, this is the price per contract which the filled order must match or beat. For multi-leg orders, this represents the amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4 DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4 USD X 100 shares/contract--total debit against the ordering account.)
+// OptionOrderLimitPrice - **Field Dependencies:**
+//
+// Required if `order_type` is `LIMIT`.
+//
+// Otherwise, must be empty.
 type OptionOrderLimitPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -212,6 +217,7 @@ type OptionOrderOrderType string
 const (
 	OptionOrderOrderTypeOrderTypeUnspecified OptionOrderOrderType = "ORDER_TYPE_UNSPECIFIED"
 	OptionOrderOrderTypeLimit                OptionOrderOrderType = "LIMIT"
+	OptionOrderOrderTypeMarket               OptionOrderOrderType = "MARKET"
 )
 
 func (e OptionOrderOrderType) ToPointer() *OptionOrderOrderType {
@@ -274,6 +280,7 @@ const (
 	OptionOrderSpecialReportingInstructionsRoundUp                                 OptionOrderSpecialReportingInstructions = "ROUND_UP"
 	OptionOrderSpecialReportingInstructionsCatParentAlgo                           OptionOrderSpecialReportingInstructions = "CAT_PARENT_ALGO"
 	OptionOrderSpecialReportingInstructionsCatParentGtc                            OptionOrderSpecialReportingInstructions = "CAT_PARENT_GTC"
+	OptionOrderSpecialReportingInstructionsManualOrder                             OptionOrderSpecialReportingInstructions = "MANUAL_ORDER"
 )
 
 func (e OptionOrderSpecialReportingInstructions) ToPointer() *OptionOrderSpecialReportingInstructions {
@@ -300,7 +307,7 @@ type OptionOrder struct {
 	BrokerCapacity *OptionOrderBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Whether the cancel was initiated by the correspondent firm (FIRM) or the customer (CLIENT). Populated from the CancelOptionOrderRequest.
 	CancelInitiator *OptionOrderCancelInitiator `json:"cancel_initiator,omitempty"`
-	// Used to explain why an option order is canceled
+	// Used to explain why an option order is canceled. Unused: reserved for future use. This field is not currently populated.
 	CancelReason *string `json:"cancel_reason,omitempty"`
 	// Used to denote when a cancel request has been rejected.
 	CancelRejectedReason *OptionOrderCancelRejectedReason `json:"cancel_rejected_reason,omitempty"`
@@ -310,7 +317,7 @@ type OptionOrder struct {
 	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// User-supplied unique option order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// Required for any client who is having Apex do CAT reporting on their behalf.
+	// Required for any client who is having Apex do CAT reporting on their behalf. When special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the customer.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
 	// The time the correspondent sent the original order to Apex. Set at order creation and cannot be modified. Required for correspondents using Apex CAT reporting services.
 	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
@@ -330,7 +337,11 @@ type OptionOrder struct {
 	LastUpdateTime *time.Time `json:"last_update_time,omitempty"`
 	// The legs of this option order. Only a single leg is allowed to be specified, and it must be for an OPTION security.
 	Legs []OptionOrderLeg `json:"legs,omitempty"`
-	// The limit price for this option order. For single-leg option orders, this is the price per contract which the filled order must match or beat. For multi-leg orders, this represents the amortized "price per unit" that must be matched or beat. (E.g. with a limit price of a $4 DEBIT, and an order with 2 legs that includes one leg buy 100 shares of SBX and another leg to sell 1 contract of SBX, then the fills will be guaranteed to result in no more than a $400--4 USD X 100 shares/contract--total debit against the ordering account.)
+	// **Field Dependencies:**
+	//
+	// Required if `order_type` is `LIMIT`.
+	//
+	// Otherwise, must be empty.
 	LimitPrice *OptionOrderLimitPrice `json:"limit_price,omitempty"`
 	// System generated name of the option order.
 	Name *string `json:"name,omitempty"`
@@ -348,7 +359,7 @@ type OptionOrder struct {
 	PriceDirection *OptionOrderPriceDirection `json:"price_direction,omitempty"`
 	// The quantity of the option order to be placed. The `ratio_quantity` of each leg will be multiplied by this value to determine the total number of units being ordered within each leg. (E.g. if a quantity of 3 is specified, and a leg with a `ratio_quantity` of 2 is specified, then the total number of contracts being ordered by that leg will be 6.)
 	Quantity *OptionOrderQuantity `json:"quantity,omitempty"`
-	// Special Reporting Instructions to be applied to this option order. Can include multiple Instructions.
+	// Special Reporting Instructions to be applied to this option order. Only CAT_PARENT_ALGO and MANUAL_ORDER are supported for option orders; any other value is rejected. CAT_PARENT_ALGO is only allowed on LIMIT orders. MANUAL_ORDER marks the order as manually received from the customer for CAT reporting; client_received_time should then be set to the time the order was received.
 	SpecialReportingInstructions []OptionOrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// Must be the value "DAY". Regulatory requirements dictate the system captures the intended time_in_force, which is why this a mandatory field.
 	TimeInForce *OptionOrderTimeInForce `json:"time_in_force,omitempty"`

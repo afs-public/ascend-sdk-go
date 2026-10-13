@@ -52,3 +52,4 @@
 | `CancelTradeResponseSpecialInstructionsSuppressSecFee`                 | SUPPRESS_SEC_FEE                                                       |
 | `CancelTradeResponseSpecialInstructionsSuppressTafFee`                 | SUPPRESS_TAF_FEE                                                       |
 | `CancelTradeResponseSpecialInstructionsDividendReinvestment`           | DIVIDEND_REINVESTMENT                                                  |
+| `CancelTradeResponseSpecialInstructionsReportMsrb`                     | REPORT_MSRB                                                            |

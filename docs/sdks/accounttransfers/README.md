@@ -10,6 +10,7 @@
 * [AcceptTransfer](#accepttransfer) - Accept Transfer
 * [RejectTransfer](#rejecttransfer) - Reject Transfer
 * [GetTransfer](#gettransfer) - Get Transfer
+* [PreviewTransfer](#previewtransfer) - Preview Transfer
 
 ## CreateTransfer
 
@@ -353,4 +354,66 @@ func main() {
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## PreviewTransfer
+
+Previews what an ACATS transfer of a linked account's holdings would look like: the holdings sorted into eligible and ineligible (with reasons), plus any transfer- or account-level conditions. The linked account comes from a Data Aggregator Connect connection (see [Create Connection](https://developer.apexclearing.com/apex-beta/v1-dev/reference/dacservice_createconnection)); ACATS resolves the holdings from it internally.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="AccountTransfers_PreviewTransfer" method="post" path="/acats/v1/transfers:preview" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.AccountTransfers.PreviewTransfer(ctx, components.PreviewTransferRequestCreate{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.PreviewTransferResponse != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [components.PreviewTransferRequestCreate](../../models/components/previewtransferrequestcreate.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+
+### Response
+
+**[*operations.AccountTransfersPreviewTransferResponse](../../models/operations/accounttransferspreviewtransferresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500                | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |

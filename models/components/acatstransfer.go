@@ -199,6 +199,8 @@ const (
 	AcatsTransferStatePurged                AcatsTransferState = "PURGED"
 	AcatsTransferStatePendingReviewMargins  AcatsTransferState = "PENDING_REVIEW_MARGINS"
 	AcatsTransferStatePendingSubmission     AcatsTransferState = "PENDING_SUBMISSION"
+	AcatsTransferStateResponseOverdue       AcatsTransferState = "RESPONSE_OVERDUE"
+	AcatsTransferStatePendingCorrection     AcatsTransferState = "PENDING_CORRECTION"
 )
 
 func (e AcatsTransferState) ToPointer() *AcatsTransferState {
