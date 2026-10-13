@@ -416,7 +416,7 @@ func main() {
     )
 
     res, err := s.TradeBooking.CreateExecution(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", "01FAKETRADEIDPROVIDEDFROMCREATETRADE", components.ExecutionCreate{
-        ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
+        ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00.000Z"),
         ExternalID: "0H06HAP3A3Y",
         Price: components.DecimalCreate{},
         Quantity: components.DecimalCreate{},
@@ -624,7 +624,7 @@ func main() {
 
     res, err := s.TradeBooking.RebookExecution(ctx, "02HASWB2DTMRT3DAM45P56J2T2", "01J0XX2KDN3M9QKFKRE2HYSCQM", "02G0XX2KDN3M9QKFKRE2HYSCMY", components.RebookExecutionRequestCreate{
         Execution: components.ExecutionCreate{
-            ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
+            ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00.000Z"),
             ExternalID: "0H06HAP3A3Y",
             Price: components.DecimalCreate{},
             Quantity: components.DecimalCreate{},

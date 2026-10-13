@@ -13,3 +13,4 @@ Side modifier for the trade allocation.
 | `CancelTradeAllocationResponseSideModifierShortCover`              | SHORT_COVER                                                        |
 | `CancelTradeAllocationResponseSideModifierOpen`                    | OPEN                                                               |
 | `CancelTradeAllocationResponseSideModifierClose`                   | CLOSE                                                              |
+| `CancelTradeAllocationResponseSideModifierCover`                   | COVER                                                              |

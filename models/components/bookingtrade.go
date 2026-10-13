@@ -147,6 +147,7 @@ const (
 	BookingTradeSideModifierShortCover              BookingTradeSideModifier = "SHORT_COVER"
 	BookingTradeSideModifierOpen                    BookingTradeSideModifier = "OPEN"
 	BookingTradeSideModifierClose                   BookingTradeSideModifier = "CLOSE"
+	BookingTradeSideModifierCover                   BookingTradeSideModifier = "COVER"
 )
 
 func (e BookingTradeSideModifier) ToPointer() *BookingTradeSideModifier {
@@ -203,6 +204,7 @@ const (
 	BookingTradeSpecialInstructionsSuppressSecFee                 BookingTradeSpecialInstructions = "SUPPRESS_SEC_FEE"
 	BookingTradeSpecialInstructionsSuppressTafFee                 BookingTradeSpecialInstructions = "SUPPRESS_TAF_FEE"
 	BookingTradeSpecialInstructionsDividendReinvestment           BookingTradeSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	BookingTradeSpecialInstructionsReportMsrb                     BookingTradeSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e BookingTradeSpecialInstructions) ToPointer() *BookingTradeSpecialInstructions {
@@ -297,6 +299,10 @@ type BookingTrade struct {
 	Open *bool `json:"open,omitempty"`
 	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
+	// The resource name of the API resource that originated this trade, for example the order that produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk a Ledger activity to its trade and on to the originating order using only originating_resource_name fields.
+	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Route type for the trade.
 	RouteType *BookingTradeRouteType `json:"route_type,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
@@ -448,6 +454,20 @@ func (o *BookingTrade) GetOrderID() *string {
 		return nil
 	}
 	return o.OrderID
+}
+
+func (o *BookingTrade) GetOriginatingResourceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingResourceName
+}
+
+func (o *BookingTrade) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *BookingTrade) GetRouteType() *BookingTradeRouteType {

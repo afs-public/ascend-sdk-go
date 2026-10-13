@@ -60,7 +60,7 @@ func (o *RebookTradeAllocationResponseCommissionAmount) GetValue() *string {
 	return o.Value
 }
 
-// RebookTradeAllocationResponseGrossAmount - Gross amount is calculated by the Booking service by multiplying price and quantity and fixing it to 2 fractional precision. Optionally specifiable. If present, will override the gross_amount calculated above.
+// RebookTradeAllocationResponseGrossAmount - Gross amount is calculated by the Booking service by multiplying price, quantity, and security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable for FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will override the gross_amount calculated above.
 type RebookTradeAllocationResponseGrossAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -217,6 +217,7 @@ const (
 	RebookTradeAllocationResponseSideModifierShortCover              RebookTradeAllocationResponseSideModifier = "SHORT_COVER"
 	RebookTradeAllocationResponseSideModifierOpen                    RebookTradeAllocationResponseSideModifier = "OPEN"
 	RebookTradeAllocationResponseSideModifierClose                   RebookTradeAllocationResponseSideModifier = "CLOSE"
+	RebookTradeAllocationResponseSideModifierCover                   RebookTradeAllocationResponseSideModifier = "COVER"
 )
 
 func (e RebookTradeAllocationResponseSideModifier) ToPointer() *RebookTradeAllocationResponseSideModifier {
@@ -273,6 +274,7 @@ const (
 	RebookTradeAllocationResponseSpecialInstructionsSuppressSecFee                 RebookTradeAllocationResponseSpecialInstructions = "SUPPRESS_SEC_FEE"
 	RebookTradeAllocationResponseSpecialInstructionsSuppressTafFee                 RebookTradeAllocationResponseSpecialInstructions = "SUPPRESS_TAF_FEE"
 	RebookTradeAllocationResponseSpecialInstructionsDividendReinvestment           RebookTradeAllocationResponseSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	RebookTradeAllocationResponseSpecialInstructionsReportMsrb                     RebookTradeAllocationResponseSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e RebookTradeAllocationResponseSpecialInstructions) ToPointer() *RebookTradeAllocationResponseSpecialInstructions {
@@ -339,6 +341,8 @@ type NewTradeAllocation struct {
 	ClientOrderID *string `json:"client_order_id,omitempty"`
 	// Commission amount of the trade allocation that will only be applied to the to_account_id.
 	CommissionAmount *RebookTradeAllocationResponseCommissionAmount `json:"commission_amount,omitempty"`
+	// Executing broker of the trade allocation.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
@@ -347,7 +351,7 @@ type NewTradeAllocation struct {
 	FromAccountID *string `json:"from_account_id,omitempty"`
 	// The current activity_id of the trade allocation that positions will be moved from in the Ledger.
 	FromActivityID *string `json:"from_activity_id,omitempty"`
-	// Gross amount is calculated by the Booking service by multiplying price and quantity and fixing it to 2 fractional precision. Optionally specifiable. If present, will override the gross_amount calculated above.
+	// Gross amount is calculated by the Booking service by multiplying price, quantity, and security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable for FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will override the gross_amount calculated above.
 	GrossAmount *RebookTradeAllocationResponseGrossAmount `json:"gross_amount,omitempty"`
 	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
 	Identifier *string `json:"identifier,omitempty"`
@@ -367,6 +371,8 @@ type NewTradeAllocation struct {
 	Price *RebookTradeAllocationResponsePrice `json:"price,omitempty"`
 	// Price adjustment that will be applied to the net price of the security.
 	PriceAdjustment *RebookTradeAllocationResponsePriceAdjustment `json:"price_adjustment,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Quantity with requirement of 12 or less integral number and 5 or less fractional precision.
 	Quantity *RebookTradeAllocationResponseQuantity `json:"quantity,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field in Eastern Time.
@@ -449,6 +455,13 @@ func (o *NewTradeAllocation) GetCommissionAmount() *RebookTradeAllocationRespons
 		return nil
 	}
 	return o.CommissionAmount
+}
+
+func (o *NewTradeAllocation) GetExecutingBroker() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExecutingBroker
 }
 
 func (o *NewTradeAllocation) GetExecutionTime() *time.Time {
@@ -547,6 +560,13 @@ func (o *NewTradeAllocation) GetPriceAdjustment() *RebookTradeAllocationResponse
 		return nil
 	}
 	return o.PriceAdjustment
+}
+
+func (o *NewTradeAllocation) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *NewTradeAllocation) GetQuantity() *RebookTradeAllocationResponseQuantity {
@@ -679,7 +699,7 @@ func (o *RebookTradeAllocationResponseOriginalTradeAllocationCommissionAmount) G
 	return o.Value
 }
 
-// RebookTradeAllocationResponseOriginalTradeAllocationGrossAmount - Gross amount is calculated by the Booking service by multiplying price and quantity and fixing it to 2 fractional precision. Optionally specifiable. If present, will override the gross_amount calculated above.
+// RebookTradeAllocationResponseOriginalTradeAllocationGrossAmount - Gross amount is calculated by the Booking service by multiplying price, quantity, and security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable for FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will override the gross_amount calculated above.
 type RebookTradeAllocationResponseOriginalTradeAllocationGrossAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -836,6 +856,7 @@ const (
 	RebookTradeAllocationResponseOriginalTradeAllocationSideModifierShortCover              RebookTradeAllocationResponseOriginalTradeAllocationSideModifier = "SHORT_COVER"
 	RebookTradeAllocationResponseOriginalTradeAllocationSideModifierOpen                    RebookTradeAllocationResponseOriginalTradeAllocationSideModifier = "OPEN"
 	RebookTradeAllocationResponseOriginalTradeAllocationSideModifierClose                   RebookTradeAllocationResponseOriginalTradeAllocationSideModifier = "CLOSE"
+	RebookTradeAllocationResponseOriginalTradeAllocationSideModifierCover                   RebookTradeAllocationResponseOriginalTradeAllocationSideModifier = "COVER"
 )
 
 func (e RebookTradeAllocationResponseOriginalTradeAllocationSideModifier) ToPointer() *RebookTradeAllocationResponseOriginalTradeAllocationSideModifier {
@@ -892,6 +913,7 @@ const (
 	RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructionsSuppressSecFee                 RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructions = "SUPPRESS_SEC_FEE"
 	RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructionsSuppressTafFee                 RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructions = "SUPPRESS_TAF_FEE"
 	RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructionsDividendReinvestment           RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructionsReportMsrb                     RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructions) ToPointer() *RebookTradeAllocationResponseOriginalTradeAllocationSpecialInstructions {
@@ -958,6 +980,8 @@ type OriginalTradeAllocation struct {
 	ClientOrderID *string `json:"client_order_id,omitempty"`
 	// Commission amount of the trade allocation that will only be applied to the to_account_id.
 	CommissionAmount *RebookTradeAllocationResponseOriginalTradeAllocationCommissionAmount `json:"commission_amount,omitempty"`
+	// Executing broker of the trade allocation.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
@@ -966,7 +990,7 @@ type OriginalTradeAllocation struct {
 	FromAccountID *string `json:"from_account_id,omitempty"`
 	// The current activity_id of the trade allocation that positions will be moved from in the Ledger.
 	FromActivityID *string `json:"from_activity_id,omitempty"`
-	// Gross amount is calculated by the Booking service by multiplying price and quantity and fixing it to 2 fractional precision. Optionally specifiable. If present, will override the gross_amount calculated above.
+	// Gross amount is calculated by the Booking service by multiplying price, quantity, and security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable for FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will override the gross_amount calculated above.
 	GrossAmount *RebookTradeAllocationResponseOriginalTradeAllocationGrossAmount `json:"gross_amount,omitempty"`
 	// Identifier (of the type specified in `identifier_type`). Responses will supply the originally requested identifier.
 	Identifier *string `json:"identifier,omitempty"`
@@ -986,6 +1010,8 @@ type OriginalTradeAllocation struct {
 	Price *RebookTradeAllocationResponseOriginalTradeAllocationPrice `json:"price,omitempty"`
 	// Price adjustment that will be applied to the net price of the security.
 	PriceAdjustment *RebookTradeAllocationResponseOriginalTradeAllocationPriceAdjustment `json:"price_adjustment,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Quantity with requirement of 12 or less integral number and 5 or less fractional precision.
 	Quantity *RebookTradeAllocationResponseOriginalTradeAllocationQuantity `json:"quantity,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated using the execution_time field in Eastern Time.
@@ -1068,6 +1094,13 @@ func (o *OriginalTradeAllocation) GetCommissionAmount() *RebookTradeAllocationRe
 		return nil
 	}
 	return o.CommissionAmount
+}
+
+func (o *OriginalTradeAllocation) GetExecutingBroker() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExecutingBroker
 }
 
 func (o *OriginalTradeAllocation) GetExecutionTime() *time.Time {
@@ -1166,6 +1199,13 @@ func (o *OriginalTradeAllocation) GetPriceAdjustment() *RebookTradeAllocationRes
 		return nil
 	}
 	return o.PriceAdjustment
+}
+
+func (o *OriginalTradeAllocation) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *OriginalTradeAllocation) GetQuantity() *RebookTradeAllocationResponseOriginalTradeAllocationQuantity {

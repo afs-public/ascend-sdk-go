@@ -13,3 +13,4 @@ Side modifier for the trade.
 | `RebookTradeResponseOriginalTradeSideModifierShortCover`              | SHORT_COVER                                                           |
 | `RebookTradeResponseOriginalTradeSideModifierOpen`                    | OPEN                                                                  |
 | `RebookTradeResponseOriginalTradeSideModifierClose`                   | CLOSE                                                                 |
+| `RebookTradeResponseOriginalTradeSideModifierCover`                   | COVER                                                                 |

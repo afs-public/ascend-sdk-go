@@ -48,7 +48,7 @@ func main() {
     res, err := s.TradeAllocation.CreateTradeAllocation(ctx, "01FAKEACCOUNT1TYKWEYRH8S2K", components.TradeAllocationCreate{
         AssetType: components.TradeAllocationCreateAssetTypeEquity,
         BrokerCapacity: components.TradeAllocationCreateBrokerCapacityAgency,
-        ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
+        ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00.000Z"),
         FromAccountID: "01HASWB2DTMRT3DAM45P56J2H3",
         Identifier: "AAPL",
         IdentifierType: components.TradeAllocationCreateIdentifierTypeSymbol,
@@ -263,7 +263,7 @@ func main() {
         TradeAllocation: components.TradeAllocationCreate{
             AssetType: components.TradeAllocationCreateAssetTypeEquity,
             BrokerCapacity: components.TradeAllocationCreateBrokerCapacityAgency,
-            ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00Z"),
+            ExecutionTime: types.MustNewTimeFromString("2024-07-17T12:00:00.000Z"),
             FromAccountID: "01HASWB2DTMRT3DAM45P56J2H3",
             Identifier: "AAPL",
             IdentifierType: components.TradeAllocationCreateIdentifierTypeSymbol,

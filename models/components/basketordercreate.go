@@ -101,6 +101,8 @@ type BasketOrderCreate struct {
 	Identifier string `json:"identifier"`
 	// The identifier type of the asset being ordered. For Equities: only SYMBOL is supported For Mutual Funds: only SYMBOL and CUSIP are supported
 	IdentifierType BasketOrderCreateIdentifierType `json:"identifier_type"`
+	// Specifies instructions for how to match tax lots to the order. Only applicable for SELL orders. Maximum 100 instructions per order. Each instruction must include quantity. When id is specified, trade_date and price must not be specified. When id is not specified, trade_date is required and price is optional.
+	LotMatchingInstructions []LotCreate `json:"lot_matching_instructions,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
 	//  [BigDecimal]:
@@ -194,6 +196,13 @@ func (o *BasketOrderCreate) GetIdentifierType() BasketOrderCreateIdentifierType 
 		return BasketOrderCreateIdentifierType("")
 	}
 	return o.IdentifierType
+}
+
+func (o *BasketOrderCreate) GetLotMatchingInstructions() []LotCreate {
+	if o == nil {
+		return nil
+	}
+	return o.LotMatchingInstructions
 }
 
 func (o *BasketOrderCreate) GetMaxSellQuantity() *DecimalCreate {

@@ -147,6 +147,7 @@ const (
 	RebookTradeResponseSideModifierShortCover              RebookTradeResponseSideModifier = "SHORT_COVER"
 	RebookTradeResponseSideModifierOpen                    RebookTradeResponseSideModifier = "OPEN"
 	RebookTradeResponseSideModifierClose                   RebookTradeResponseSideModifier = "CLOSE"
+	RebookTradeResponseSideModifierCover                   RebookTradeResponseSideModifier = "COVER"
 )
 
 func (e RebookTradeResponseSideModifier) ToPointer() *RebookTradeResponseSideModifier {
@@ -203,6 +204,7 @@ const (
 	RebookTradeResponseSpecialInstructionsSuppressSecFee                 RebookTradeResponseSpecialInstructions = "SUPPRESS_SEC_FEE"
 	RebookTradeResponseSpecialInstructionsSuppressTafFee                 RebookTradeResponseSpecialInstructions = "SUPPRESS_TAF_FEE"
 	RebookTradeResponseSpecialInstructionsDividendReinvestment           RebookTradeResponseSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	RebookTradeResponseSpecialInstructionsReportMsrb                     RebookTradeResponseSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e RebookTradeResponseSpecialInstructions) ToPointer() *RebookTradeResponseSpecialInstructions {
@@ -297,6 +299,10 @@ type NewTrade struct {
 	Open *bool `json:"open,omitempty"`
 	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
+	// The resource name of the API resource that originated this trade, for example the order that produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk a Ledger activity to its trade and on to the originating order using only originating_resource_name fields.
+	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Route type for the trade.
 	RouteType *RebookTradeResponseRouteType `json:"route_type,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
@@ -448,6 +454,20 @@ func (o *NewTrade) GetOrderID() *string {
 		return nil
 	}
 	return o.OrderID
+}
+
+func (o *NewTrade) GetOriginatingResourceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingResourceName
+}
+
+func (o *NewTrade) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *NewTrade) GetRouteType() *RebookTradeResponseRouteType {
@@ -658,6 +678,7 @@ const (
 	RebookTradeResponseOriginalTradeSideModifierShortCover              RebookTradeResponseOriginalTradeSideModifier = "SHORT_COVER"
 	RebookTradeResponseOriginalTradeSideModifierOpen                    RebookTradeResponseOriginalTradeSideModifier = "OPEN"
 	RebookTradeResponseOriginalTradeSideModifierClose                   RebookTradeResponseOriginalTradeSideModifier = "CLOSE"
+	RebookTradeResponseOriginalTradeSideModifierCover                   RebookTradeResponseOriginalTradeSideModifier = "COVER"
 )
 
 func (e RebookTradeResponseOriginalTradeSideModifier) ToPointer() *RebookTradeResponseOriginalTradeSideModifier {
@@ -714,6 +735,7 @@ const (
 	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressSecFee                 RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_SEC_FEE"
 	RebookTradeResponseOriginalTradeSpecialInstructionsSuppressTafFee                 RebookTradeResponseOriginalTradeSpecialInstructions = "SUPPRESS_TAF_FEE"
 	RebookTradeResponseOriginalTradeSpecialInstructionsDividendReinvestment           RebookTradeResponseOriginalTradeSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	RebookTradeResponseOriginalTradeSpecialInstructionsReportMsrb                     RebookTradeResponseOriginalTradeSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e RebookTradeResponseOriginalTradeSpecialInstructions) ToPointer() *RebookTradeResponseOriginalTradeSpecialInstructions {
@@ -808,6 +830,10 @@ type OriginalTrade struct {
 	Open *bool `json:"open,omitempty"`
 	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
+	// The resource name of the API resource that originated this trade, for example the order that produced it. Set by the system; any value supplied by the caller is ignored. Lets a client walk a Ledger activity to its trade and on to the originating order using only originating_resource_name fields.
+	OriginatingResourceName *string `json:"originating_resource_name,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Route type for the trade.
 	RouteType *RebookTradeResponseOriginalTradeRouteType `json:"route_type,omitempty"`
 	// Defaults to T+1 for equities if this is not provided. Calculated by the execution's execution_time field in Eastern Time.
@@ -959,6 +985,20 @@ func (o *OriginalTrade) GetOrderID() *string {
 		return nil
 	}
 	return o.OrderID
+}
+
+func (o *OriginalTrade) GetOriginatingResourceName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OriginatingResourceName
+}
+
+func (o *OriginalTrade) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *OriginalTrade) GetRouteType() *RebookTradeResponseOriginalTradeRouteType {

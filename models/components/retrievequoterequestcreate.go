@@ -13,7 +13,7 @@ func (e RetrieveQuoteRequestCreateAssetType) ToPointer() *RetrieveQuoteRequestCr
 	return &e
 }
 
-// RetrieveQuoteRequestCreateBrokerCapacity - Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+// RetrieveQuoteRequestCreateBrokerCapacity - Capacity used in determining bid and ask prices. If not specified, defaults to the capacity configured for the correspondent by Apex.
 type RetrieveQuoteRequestCreateBrokerCapacity string
 
 const (
@@ -43,7 +43,7 @@ func (e RetrieveQuoteRequestCreateIdentifierType) ToPointer() *RetrieveQuoteRequ
 type RetrieveQuoteRequestCreate struct {
 	// The type of asset being evaluated in cost calculations
 	AssetType RetrieveQuoteRequestCreateAssetType `json:"asset_type"`
-	// Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+	// Capacity used in determining bid and ask prices. If not specified, defaults to the capacity configured for the correspondent by Apex.
 	BrokerCapacity *RetrieveQuoteRequestCreateBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier string `json:"identifier"`

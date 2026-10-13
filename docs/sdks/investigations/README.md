@@ -10,7 +10,9 @@
 * [ListInvestigations](#listinvestigations) - List Investigations
 * [LinkDocuments](#linkdocuments) - Link Documents
 * [GetWatchlistItem](#getwatchlistitem) - Get Watchlist Item
+* [LinkCustomerIdentification](#linkcustomeridentification) - Link Customer Identification to an Investigation
 * [GetCustomerIdentification](#getcustomeridentification) - Get Identity Verification
+* [CreateCustomerIdentification](#createcustomeridentification) - Create Identity Verification
 * [CreateIdentityLookup](#createidentitylookup) - Create Identity Lookup
 * [VerifyIdentityLookup](#verifyidentitylookup) - Verify Identity Lookup
 
@@ -172,7 +174,7 @@ func main() {
         }),
     )
 
-    res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(100), ascendsdkgo.String(""), ascendsdkgo.String("person.given_name == 'Jane' && person.family_name == 'Dough'"), ascendsdkgo.String("person.given_name desc"))
+    res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(100), ascendsdkgo.String(""), ascendsdkgo.String("person.given_name == 'Jane' && person.family_name == 'Dough'"), ascendsdkgo.String("person.given_name desc"), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -203,6 +205,7 @@ func main() {
 | `pageToken`                                                                                                                                                                                                                                                                                                                                                                                 | **string*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | The page token used to request a specific page of the search results                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                                                                                                                                                                                                                                             |
 | `filter`                                                                                                                                                                                                                                                                                                                                                                                    | **string*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | A CEL string to filter results; See the [CEL Search](https://developer.apexclearing.com/apex-fintech-solutions/docs/cel-search) page in Guides for more information; Filter options include:<br/> ListInvestigationStatesResponse.investigation_states                                                                                                                                      | person.given_name == 'Jane' && person.family_name == 'Dough'                                                                                                                                                                                                                                                                                                                                |
 | `orderBy`                                                                                                                                                                                                                                                                                                                                                                                   | **string*                                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | The order in which investigations are listed. Only one field and direction can be specified. Supported fields (followed by 'asc' or 'desc'; 'asc' is default if left blank):<br/>  - investigation_request_state<br/>  - correspondent_id<br/>  - scope<br/>  - identity_verification<br/>  - watchlist_screen<br/>  - person.given_name<br/>  - person.family_name<br/>  - entity.legal_name<br/>  - created_at<br/>  - updated_at | person.given_name desc                                                                                                                                                                                                                                                                                                                                                                      |
+| `includeTotalSize`                                                                                                                                                                                                                                                                                                                                                                          | **bool*                                                                                                                                                                                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | Include the total size of the collection specified by this query in the response (this may incur a performance penalty)<br/><br/>**Field Dependencies:**<br/><br/>When include_total_size is explicitly set to false, total_size in the response will be 0.<br/><br/>Must be empty if `total_size` is `false`.                                                                              |                                                                                                                                                                                                                                                                                                                                                                                             |
 | `opts`                                                                                                                                                                                                                                                                                                                                                                                      | [][operations.Option](../../models/operations/option.md)                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                          | The options for this request.                                                                                                                                                                                                                                                                                                                                                               |                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ### Response
@@ -347,6 +350,71 @@ func main() {
 | sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 
+## LinkCustomerIdentification
+
+Use this endpoint to link a customer identification to an investigation Upon linking a CustomerIdentification, the Investigation.IdentityVerificationState will be re-evaluated based on the CustomerIdentification.Result The CustomerIdentification must exist, and CustomerIdentification.Result.completed must be true The CustomerIdentification.Identity.given_name must match the Investigation.Person.given_name The CustomerIdentification.Identity.family_name must match the Investigation.Person.family_name The CustomerIdentification.Identity.birth_date must match the Investigation.Person.birth_date If the above validations are not met, the service will return a FAILED_PRECONDITION error status with the incorrect fields
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="InvestigationService_LinkCustomerIdentification" method="post" path="/investigations/v1/investigations/{investigation_id}:linkCustomerIdentification" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.Investigations.LinkCustomerIdentification(ctx, "01HEWVF4ZSNKYRP293J53ASJCJ", components.LinkCustomerIdentificationRequestCreate{
+        CustomerIdentificationID: "01HEWVF4ZSNKYRP293J53ASJCJ",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Investigation != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              | Example                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                    | :heavy_check_mark:                                                                                                       | The context to use for the request.                                                                                      |                                                                                                                          |
+| `investigationID`                                                                                                        | *string*                                                                                                                 | :heavy_check_mark:                                                                                                       | The investigation id.                                                                                                    | 01HEWVF4ZSNKYRP293J53ASJCJ                                                                                               |
+| `linkCustomerIdentificationRequestCreate`                                                                                | [components.LinkCustomerIdentificationRequestCreate](../../models/components/linkcustomeridentificationrequestcreate.md) | :heavy_check_mark:                                                                                                       | N/A                                                                                                                      |                                                                                                                          |
+| `opts`                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                 | :heavy_minus_sign:                                                                                                       | The options for this request.                                                                                            |                                                                                                                          |
+
+### Response
+
+**[*operations.InvestigationServiceLinkCustomerIdentificationResponse](../../models/operations/investigationservicelinkcustomeridentificationresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
 ## GetCustomerIdentification
 
 Gets a CustomerIdentification by CustomerIdentification ID.
@@ -409,6 +477,73 @@ func main() {
 | Error Type         | Status Code        | Content Type       |
 | ------------------ | ------------------ | ------------------ |
 | sdkerrors.Status   | 400, 403, 404      | application/json   |
+| sdkerrors.Status   | 500, 503           | application/json   |
+| sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
+
+## CreateCustomerIdentification
+
+Request a new CustomerIdentificationCheck
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="CustomerIdentificationResultService_CreateCustomerIdentification" method="post" path="/cip/v1/correspondents/{correspondent_id}/customerIdentifications" -->
+```go
+package main
+
+import(
+	"context"
+	ascendsdkgo "github.com/afs-public/ascend-sdk-go"
+	"github.com/afs-public/ascend-sdk-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := ascendsdkgo.New(
+        ascendsdkgo.WithSecurity(components.Security{
+            APIKey: ascendsdkgo.String("ABCDEFGHIJ0123456789abcdefghij0123456789"),
+            ServiceAccountCreds: &components.ServiceAccountCreds{
+                PrivateKey: "-----BEGIN PRIVATE KEY--{OMITTED FOR BREVITY}",
+                Name: "FinFirm",
+                Organization: "correspondents/00000000-0000-0000-0000-000000000000",
+                Type: "serviceAccount",
+            },
+        }),
+    )
+
+    res, err := s.Investigations.CreateCustomerIdentification(ctx, "01HPMZZM6RKMVZA1JQ63RQKJRP", components.CustomerIdentificationCreate{
+        CheckTypes: []components.CustomerIdentificationCreateCheckTypes{
+            components.CustomerIdentificationCreateCheckTypesDatabase,
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.CustomerIdentification != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        | Example                                                                                            |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |                                                                                                    |
+| `correspondentID`                                                                                  | *string*                                                                                           | :heavy_check_mark:                                                                                 | The correspondent id.                                                                              | 01HPMZZM6RKMVZA1JQ63RQKJRP                                                                         |
+| `customerIdentificationCreate`                                                                     | [components.CustomerIdentificationCreate](../../models/components/customeridentificationcreate.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |                                                                                                    |
+| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |                                                                                                    |
+
+### Response
+
+**[*operations.CustomerIdentificationResultServiceCreateCustomerIdentificationResponse](../../models/operations/customeridentificationresultservicecreatecustomeridentificationresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| sdkerrors.Status   | 400, 403           | application/json   |
 | sdkerrors.Status   | 500, 503           | application/json   |
 | sdkerrors.SDKError | 4XX, 5XX           | \*/\*              |
 

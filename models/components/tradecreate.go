@@ -85,6 +85,7 @@ const (
 	TradeCreateSideModifierShortCover              TradeCreateSideModifier = "SHORT_COVER"
 	TradeCreateSideModifierOpen                    TradeCreateSideModifier = "OPEN"
 	TradeCreateSideModifierClose                   TradeCreateSideModifier = "CLOSE"
+	TradeCreateSideModifierCover                   TradeCreateSideModifier = "COVER"
 )
 
 func (e TradeCreateSideModifier) ToPointer() *TradeCreateSideModifier {
@@ -141,6 +142,7 @@ const (
 	SpecialInstructionsSuppressSecFee                 SpecialInstructions = "SUPPRESS_SEC_FEE"
 	SpecialInstructionsSuppressTafFee                 SpecialInstructions = "SUPPRESS_TAF_FEE"
 	SpecialInstructionsDividendReinvestment           SpecialInstructions = "DIVIDEND_REINVESTMENT"
+	SpecialInstructionsReportMsrb                     SpecialInstructions = "REPORT_MSRB"
 )
 
 func (e SpecialInstructions) ToPointer() *SpecialInstructions {
@@ -235,6 +237,8 @@ type TradeCreate struct {
 	Open *bool `json:"open,omitempty"`
 	// Street-level order id, unique by day per broker.
 	OrderID *string `json:"order_id,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// Route type for the trade.
 	RouteType RouteType `json:"route_type"`
 	// Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following:
@@ -374,6 +378,13 @@ func (o *TradeCreate) GetOrderID() *string {
 		return nil
 	}
 	return o.OrderID
+}
+
+func (o *TradeCreate) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *TradeCreate) GetRouteType() RouteType {

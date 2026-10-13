@@ -56,7 +56,7 @@ func TestPreIpoCompanies_PreIpoCompaniesGetPreIpoCompany(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.PreIPOCompanies.GetPreIpoCompany(ctx, "a6c63e95-fe8a-4703-a74a-f2a90c0a9c6d")
+	res, err := s.PreIPOCompanies.GetPreIpoCompany(ctx, "74c41a5b-b5e0-4509-964f-ca2de584c052")
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

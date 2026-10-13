@@ -59,6 +59,7 @@ const (
 	TradeAllocationCreateSideModifierShortCover              TradeAllocationCreateSideModifier = "SHORT_COVER"
 	TradeAllocationCreateSideModifierOpen                    TradeAllocationCreateSideModifier = "OPEN"
 	TradeAllocationCreateSideModifierClose                   TradeAllocationCreateSideModifier = "CLOSE"
+	TradeAllocationCreateSideModifierCover                   TradeAllocationCreateSideModifier = "COVER"
 )
 
 func (e TradeAllocationCreateSideModifier) ToPointer() *TradeAllocationCreateSideModifier {
@@ -115,6 +116,7 @@ const (
 	TradeAllocationCreateSpecialInstructionsSuppressSecFee                 TradeAllocationCreateSpecialInstructions = "SUPPRESS_SEC_FEE"
 	TradeAllocationCreateSpecialInstructionsSuppressTafFee                 TradeAllocationCreateSpecialInstructions = "SUPPRESS_TAF_FEE"
 	TradeAllocationCreateSpecialInstructionsDividendReinvestment           TradeAllocationCreateSpecialInstructions = "DIVIDEND_REINVESTMENT"
+	TradeAllocationCreateSpecialInstructionsReportMsrb                     TradeAllocationCreateSpecialInstructions = "REPORT_MSRB"
 )
 
 func (e TradeAllocationCreateSpecialInstructions) ToPointer() *TradeAllocationCreateSpecialInstructions {
@@ -171,6 +173,8 @@ type TradeAllocationCreate struct {
 	//  https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html
 	//  [decimal.Decimal]: https://docs.python.org/3/library/decimal.html
 	CommissionAmount *DecimalCreate `json:"commission_amount,omitempty"`
+	// Executing broker of the trade allocation.
+	ExecutingBroker *string `json:"executing_broker,omitempty"`
 	// Timestamp of when the trade allocation took place. If settlement_date is not provided, this field will be converted into Eastern Time and used to calculate settlement_date.
 	ExecutionTime *time.Time `json:"execution_time"`
 	// Client calculated fees that will only be applied to the to_account_id. Regulatory fees will be calculated automatically if they are not explicitly overwritten or suppressed.
@@ -207,6 +211,8 @@ type TradeAllocationCreate struct {
 	Price DecimalCreate `json:"price"`
 	// Price adjustment that will be applied to the net price of the security.
 	PriceAdjustment *PriceAdjustmentCreate `json:"price_adjustment,omitempty"`
+	// RIA Trade Away indicator.
+	Prime *bool `json:"prime,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
 	//  [BigDecimal]:
@@ -293,6 +299,13 @@ func (o *TradeAllocationCreate) GetCommissionAmount() *DecimalCreate {
 	return o.CommissionAmount
 }
 
+func (o *TradeAllocationCreate) GetExecutingBroker() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExecutingBroker
+}
+
 func (o *TradeAllocationCreate) GetExecutionTime() *time.Time {
 	if o == nil {
 		return nil
@@ -375,6 +388,13 @@ func (o *TradeAllocationCreate) GetPriceAdjustment() *PriceAdjustmentCreate {
 		return nil
 	}
 	return o.PriceAdjustment
+}
+
+func (o *TradeAllocationCreate) GetPrime() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Prime
 }
 
 func (o *TradeAllocationCreate) GetQuantity() DecimalCreate {

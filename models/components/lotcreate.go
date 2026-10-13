@@ -2,7 +2,7 @@
 
 package components
 
-// Money - Deprecated; use the price field instead
+// Money - Deprecated: use the price field instead
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type Money struct {
@@ -33,7 +33,7 @@ func (o *Money) GetPrice() *DecimalCreate {
 type LotCreate struct {
 	// User-specified ID for the lot
 	ID *string `json:"id,omitempty"`
-	// Deprecated; use the price field instead
+	// Deprecated: use the price field instead
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Money *Money `json:"money,omitempty"`

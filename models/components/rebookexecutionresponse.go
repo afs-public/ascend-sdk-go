@@ -33,7 +33,7 @@ func (o *RebookExecutionResponseCommissionAmount) GetValue() *string {
 	return o.Value
 }
 
-// RebookExecutionResponseGrossAmount - Gross amount is calculated by the Booking service by multiplying price and quantity and fixing it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable. If present, will override the gross_amount calculated above.
+// RebookExecutionResponseGrossAmount - Gross amount is calculated by the Booking service by multiplying price, quantity, and security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable for FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will override the gross_amount calculated above.
 type RebookExecutionResponseGrossAmount struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -168,7 +168,7 @@ type RebookExecutionResponseExecution struct {
 	ExecutionTime *time.Time `json:"execution_time,omitempty"`
 	// Used to generate execution_id, should be unique on the day for each source_application caller.
 	ExternalID *string `json:"external_id,omitempty"`
-	// Gross amount is calculated by the Booking service by multiplying price and quantity and fixing it to 2 fractional precision. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable. If present, will override the gross_amount calculated above.
+	// Gross amount is calculated by the Booking service by multiplying price, quantity, and security_type specific multiplier and round half up to 2 decimal point. Requirement of 11 or less integral number and 2 or less fractional precision. Optionally specifiable for FIXED_INCOME trades. Not allowed for trades of other instrument types. If present, will override the gross_amount calculated above.
 	GrossAmount *RebookExecutionResponseGrossAmount `json:"gross_amount,omitempty"`
 	// Caller provided but can be used for booking-service to note original trade details when booking into the error account or using the error asset.
 	Memo *string `json:"memo,omitempty"`

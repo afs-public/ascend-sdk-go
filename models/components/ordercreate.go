@@ -23,7 +23,7 @@ func (e AssetType) ToPointer() *AssetType {
 	return &e
 }
 
-// BrokerCapacity - Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
+// BrokerCapacity - Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  If not specified, defaults to the capacity configured for  the correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
 type BrokerCapacity string
 
 const (
@@ -107,6 +107,7 @@ const (
 	SpecialReportingInstructionsRoundUp                                 SpecialReportingInstructions = "ROUND_UP"
 	SpecialReportingInstructionsCatParentAlgo                           SpecialReportingInstructions = "CAT_PARENT_ALGO"
 	SpecialReportingInstructionsCatParentGtc                            SpecialReportingInstructions = "CAT_PARENT_GTC"
+	SpecialReportingInstructionsManualOrder                             SpecialReportingInstructions = "MANUAL_ORDER"
 )
 
 func (e SpecialReportingInstructions) ToPointer() *SpecialReportingInstructions {
@@ -150,11 +151,11 @@ type OrderCreate struct {
 	// The type of the asset in this order, which must be one of the following:
 	//  EQUITY, MUTUAL_FUND, and FIXED_INCOME.
 	AssetType AssetType `json:"asset_type"`
-	// Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
+	// Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  If not specified, defaults to the capacity configured for  the correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
 	BrokerCapacity *BrokerCapacity `json:"broker_capacity,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID string `json:"client_order_id"`
-	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
+	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed. When special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the customer.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
 	// Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. Denotes the time the client sent the order to Apex. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
 	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
@@ -162,6 +163,8 @@ type OrderCreate struct {
 	Commission *CommissionCreate `json:"commission,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Request that the order be handled by a desk trader. Only available for Equity orders. When omitted, treated as false.
+	DeskHandlingRequested *bool `json:"desk_handling_requested,omitempty"`
 	// Fees that will be applied to this order. Only the BROKER_FEE type is supported.
 	Fees []FeeCreate `json:"fees,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
@@ -174,6 +177,8 @@ type OrderCreate struct {
 	LetterOfIntent *LetterOfIntentCreate `json:"letter_of_intent,omitempty"`
 	// A limit price definition
 	LimitPrice *LimitPriceCreate `json:"limit_price,omitempty"`
+	// Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per order.
+	LotMatchingInstructions []LotMatchingInstructionCreate `json:"lot_matching_instructions,omitempty"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
 	//
 	//  [BigDecimal]:
@@ -191,7 +196,7 @@ type OrderCreate struct {
 	//  * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date
 	//
 	//  Related types are [google.type.TimeOfDay][google.type.TimeOfDay] and `google.protobuf.Timestamp`.
-	OrderDate DateCreate `json:"order_date"`
+	OrderDate *DateCreate `json:"order_date,omitempty"`
 	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported. For Event Contracts: only MARKET and LIMIT are supported.
 	OrderType OrderType `json:"order_type"`
 	// A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's [BigDecimal][] or Python's [decimal.Decimal][].
@@ -204,7 +209,7 @@ type OrderCreate struct {
 	RightsOfAccumulation *RightsOfAccumulationCreate `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side Side `json:"side"`
-	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
+	// Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions. Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders. MANUAL_ORDER marks the order as manually received from the customer for CAT reporting; client_received_time should then be set to the time the order was received.
 	SpecialReportingInstructions []SpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// A stop price definition
 	StopPrice *StopPriceCreate `json:"stop_price,omitempty"`
@@ -225,7 +230,7 @@ func (o OrderCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (o *OrderCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"asset_type", "client_order_id", "identifier", "identifier_type", "order_date", "order_type", "side", "time_in_force"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &o, "", false, []string{"asset_type", "client_order_id", "identifier", "identifier_type", "order_type", "side", "time_in_force"}); err != nil {
 		return err
 	}
 	return nil
@@ -280,6 +285,13 @@ func (o *OrderCreate) GetCurrencyCode() *string {
 	return o.CurrencyCode
 }
 
+func (o *OrderCreate) GetDeskHandlingRequested() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.DeskHandlingRequested
+}
+
 func (o *OrderCreate) GetFees() []FeeCreate {
 	if o == nil {
 		return nil
@@ -322,6 +334,13 @@ func (o *OrderCreate) GetLimitPrice() *LimitPriceCreate {
 	return o.LimitPrice
 }
 
+func (o *OrderCreate) GetLotMatchingInstructions() []LotMatchingInstructionCreate {
+	if o == nil {
+		return nil
+	}
+	return o.LotMatchingInstructions
+}
+
 func (o *OrderCreate) GetMaxSellQuantity() *DecimalCreate {
 	if o == nil {
 		return nil
@@ -336,9 +355,9 @@ func (o *OrderCreate) GetNotionalValue() *DecimalCreate {
 	return o.NotionalValue
 }
 
-func (o *OrderCreate) GetOrderDate() DateCreate {
+func (o *OrderCreate) GetOrderDate() *DateCreate {
 	if o == nil {
-		return DateCreate{}
+		return nil
 	}
 	return o.OrderDate
 }

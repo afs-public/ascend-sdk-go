@@ -75,7 +75,7 @@ func (o *BidQuantity) GetValue() *string {
 	return o.Value
 }
 
-// RetrieveQuoteResponseBrokerCapacity - Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+// RetrieveQuoteResponseBrokerCapacity - Capacity used in determining bid and ask prices. If not specified, defaults to the capacity configured for the correspondent by Apex.
 type RetrieveQuoteResponseBrokerCapacity string
 
 const (
@@ -134,7 +134,7 @@ type RetrieveQuoteResponse struct {
 	BidPrices []BidAskPrice `json:"bid_prices,omitempty"`
 	// The best bid quantity. This will be absent if no bid information is available
 	BidQuantity *BidQuantity `json:"bid_quantity,omitempty"`
-	// Capacity used in determining bid and ask prices. Defaults to "AGENCY" if no value specified.
+	// Capacity used in determining bid and ask prices. If not specified, defaults to the capacity configured for the correspondent by Apex.
 	BrokerCapacity *RetrieveQuoteResponseBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Identifier of the asset (of the type specified in `identifier_type`).
 	Identifier *string `json:"identifier,omitempty"`

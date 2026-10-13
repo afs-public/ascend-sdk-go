@@ -7,7 +7,9 @@ import (
 	"time"
 )
 
+// TradingSetExtraReportingDataRequestCreate - The message to request setting extra reporting data on an existing order.
 type TradingSetExtraReportingDataRequestCreate struct {
+	// Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT CANCEL_CONFIRM_TIME.
 	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time"`
 	// Format: accounts/{account_id}/orders/{order_id}
 	Name string `json:"name"`

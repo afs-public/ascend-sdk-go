@@ -56,7 +56,7 @@ func TestInvestigations_InvestigationServiceListInvestigations(t *testing.T) {
 		ascendsdkgo.WithClient(testHTTPClient),
 	)
 
-	res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(25), ascendsdkgo.String(""), ascendsdkgo.String(""), ascendsdkgo.String("person.given_name desc"))
+	res, err := s.Investigations.ListInvestigations(ctx, ascendsdkgo.Int(25), ascendsdkgo.String(""), ascendsdkgo.String(""), ascendsdkgo.String("person.given_name desc"), nil)
 	require.NoError(t, err)
 	assert.Equal(t, 200, res.HTTPMeta.Response.StatusCode)
 

@@ -13,3 +13,4 @@ Side modifier for the trade.
 | `TradeCreateSideModifierShortCover`              | SHORT_COVER                                      |
 | `TradeCreateSideModifierOpen`                    | OPEN                                             |
 | `TradeCreateSideModifierClose`                   | CLOSE                                            |
+| `TradeCreateSideModifierCover`                   | COVER                                            |

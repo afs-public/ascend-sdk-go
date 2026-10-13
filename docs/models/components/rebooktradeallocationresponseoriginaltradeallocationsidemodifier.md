@@ -13,3 +13,4 @@ Side modifier for the trade allocation.
 | `RebookTradeAllocationResponseOriginalTradeAllocationSideModifierShortCover`              | SHORT_COVER                                                                               |
 | `RebookTradeAllocationResponseOriginalTradeAllocationSideModifierOpen`                    | OPEN                                                                                      |
 | `RebookTradeAllocationResponseOriginalTradeAllocationSideModifierClose`                   | CLOSE                                                                                     |
+| `RebookTradeAllocationResponseOriginalTradeAllocationSideModifierCover`                   | COVER                                                                                     |

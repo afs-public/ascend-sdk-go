@@ -52,3 +52,4 @@
 | `BookingTradeSpecialInstructionsSuppressSecFee`                 | SUPPRESS_SEC_FEE                                                |
 | `BookingTradeSpecialInstructionsSuppressTafFee`                 | SUPPRESS_TAF_FEE                                                |
 | `BookingTradeSpecialInstructionsDividendReinvestment`           | DIVIDEND_REINVESTMENT                                           |
+| `BookingTradeSpecialInstructionsReportMsrb`                     | REPORT_MSRB                                                     |

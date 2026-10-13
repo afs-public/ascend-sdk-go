@@ -13,3 +13,4 @@ Side modifier for the trade.
 | `BookingTradeSideModifierShortCover`              | SHORT_COVER                                       |
 | `BookingTradeSideModifierOpen`                    | OPEN                                              |
 | `BookingTradeSideModifierClose`                   | CLOSE                                             |
+| `BookingTradeSideModifierCover`                   | COVER                                             |

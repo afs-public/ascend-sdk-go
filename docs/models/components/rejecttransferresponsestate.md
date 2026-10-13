@@ -22,3 +22,5 @@ The transfer state
 | `RejectTransferResponseStatePurged`                | PURGED                                             |
 | `RejectTransferResponseStatePendingReviewMargins`  | PENDING_REVIEW_MARGINS                             |
 | `RejectTransferResponseStatePendingSubmission`     | PENDING_SUBMISSION                                 |
+| `RejectTransferResponseStateResponseOverdue`       | RESPONSE_OVERDUE                                   |
+| `RejectTransferResponseStatePendingCorrection`     | PENDING_CORRECTION                                 |

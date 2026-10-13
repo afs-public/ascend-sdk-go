@@ -23,7 +23,7 @@ func (e OrderCostPreviewResponseAssetType) ToPointer() *OrderCostPreviewResponse
 	return &e
 }
 
-// OrderCostPreviewResponseBrokerCapacity - Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
+// OrderCostPreviewResponseBrokerCapacity - Capacity used in determining the order cost. If not specified, defaults to the capacity configured for the correspondent by Apex.
 type OrderCostPreviewResponseBrokerCapacity string
 
 const (
@@ -170,7 +170,7 @@ type OrderCostPreviewResponse struct {
 	AssetID *string `json:"asset_id,omitempty"`
 	// The type of asset referenced by the security identifier
 	AssetType *OrderCostPreviewResponseAssetType `json:"asset_type,omitempty"`
-	// Capacity used in determining the order cost. Defaults to "AGENCY" if no value specified.
+	// Capacity used in determining the order cost. If not specified, defaults to the capacity configured for the correspondent by Apex.
 	BrokerCapacity *OrderCostPreviewResponseBrokerCapacity `json:"broker_capacity,omitempty"`
 	// The estimated total of accrued interest that would be exchanged in an order of the given quantity
 	EstimatedAccruedInterest *EstimatedAccruedInterest `json:"estimated_accrued_interest,omitempty"`

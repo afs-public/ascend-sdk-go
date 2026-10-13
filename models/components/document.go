@@ -319,6 +319,7 @@ const (
 	DocumentInvestorDocumentDocumentTypeFpslNegativeConsentForm         DocumentInvestorDocumentDocumentType = "FPSL_NEGATIVE_CONSENT_FORM"
 	DocumentInvestorDocumentDocumentTypeCrsForm                         DocumentInvestorDocumentDocumentType = "CRS_FORM"
 	DocumentInvestorDocumentDocumentTypeFpslConfirmation                DocumentInvestorDocumentDocumentType = "FPSL_CONFIRMATION"
+	DocumentInvestorDocumentDocumentTypeEventContractStatementDaily     DocumentInvestorDocumentDocumentType = "EVENT_CONTRACT_STATEMENT_DAILY"
 )
 
 func (e DocumentInvestorDocumentDocumentType) ToPointer() *DocumentInvestorDocumentDocumentType {

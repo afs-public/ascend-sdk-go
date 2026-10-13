@@ -19,7 +19,7 @@ func (o *BookingLotMoneyPrice) GetValue() *string {
 	return o.Value
 }
 
-// BookingLotMoney - Deprecated; use the price field instead
+// BookingLotMoney - Deprecated: use the price field instead
 //
 // Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 type BookingLotMoney struct {
@@ -102,7 +102,7 @@ func (o *TradeDate) GetYear() *int {
 type BookingLot struct {
 	// User-specified ID for the lot
 	ID *string `json:"id,omitempty"`
-	// Deprecated; use the price field instead
+	// Deprecated: use the price field instead
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Money *BookingLotMoney `json:"money,omitempty"`

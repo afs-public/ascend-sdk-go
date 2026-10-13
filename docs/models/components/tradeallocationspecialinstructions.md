@@ -52,3 +52,4 @@
 | `TradeAllocationSpecialInstructionsSuppressSecFee`                 | SUPPRESS_SEC_FEE                                                   |
 | `TradeAllocationSpecialInstructionsSuppressTafFee`                 | SUPPRESS_TAF_FEE                                                   |
 | `TradeAllocationSpecialInstructionsDividendReinvestment`           | DIVIDEND_REINVESTMENT                                              |
+| `TradeAllocationSpecialInstructionsReportMsrb`                     | REPORT_MSRB                                                        |

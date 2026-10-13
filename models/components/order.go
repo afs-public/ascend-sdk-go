@@ -23,7 +23,7 @@ func (e OrderAssetType) ToPointer() *OrderAssetType {
 	return &e
 }
 
-// OrderBrokerCapacity - Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
+// OrderBrokerCapacity - Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  If not specified, defaults to the capacity configured for  the correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
 type OrderBrokerCapacity string
 
 const (
@@ -130,6 +130,7 @@ func (o *CumulativeNotionalValue) GetValue() *string {
 
 // ExtraReportingData - Any reporting data provided by the SetExtraReportingData endpoint.
 type ExtraReportingData struct {
+	// Correspondent-side timestamp when the cancellation was confirmed. Maps to CAT CANCEL_CONFIRM_TIME.
 	CancelConfirmedTime *time.Time `json:"cancel_confirmed_time,omitempty"`
 }
 
@@ -318,7 +319,15 @@ func (o *NotionalValue) GetValue() *string {
 	return o.Value
 }
 
-// OrderDate - The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
+// OrderDate - The date on which the order will go to the market.
+//
+//	When provided, the date must be either today or the next valid trading day (Eastern time):
+//	- If today is not a valid trading day, specify the next valid market day.
+//	- If the current time is after market close but before midnight Eastern, specify the next valid market day.
+//	- Otherwise, specify the current Eastern trading day.
+//
+//	Required for all orders except event contract orders with a non-DAY time_in_force
+//	(GTC, GTD, IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
 type OrderDate struct {
 	// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
 	Day *int `json:"day,omitempty"`
@@ -399,6 +408,8 @@ const (
 	OrderRejectedReasonUnsupportedTradingSessionForAsset                 OrderRejectedReason = "UNSUPPORTED_TRADING_SESSION_FOR_ASSET"
 	OrderRejectedReasonUnsupportedOrderTypeForAsset                      OrderRejectedReason = "UNSUPPORTED_ORDER_TYPE_FOR_ASSET"
 	OrderRejectedReasonUnsupportedTimeInForceForAsset                    OrderRejectedReason = "UNSUPPORTED_TIME_IN_FORCE_FOR_ASSET"
+	OrderRejectedReasonUnsupportedBrokerCapacity                         OrderRejectedReason = "UNSUPPORTED_BROKER_CAPACITY"
+	OrderRejectedReasonAboveBrokerFeeMaximum                             OrderRejectedReason = "ABOVE_BROKER_FEE_MAXIMUM"
 )
 
 func (e OrderRejectedReason) ToPointer() *OrderRejectedReason {
@@ -439,7 +450,7 @@ func (e OrderOrderType) ToPointer() *OrderOrderType {
 	return &e
 }
 
-// OrderPrevailingMarketPrice - The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME. Will be absent if an order has no executions.
+// OrderPrevailingMarketPrice - The prevailing market price, calculated as a weighted average of the fills in this order, up to 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent if an order has no executions.
 type OrderPrevailingMarketPrice struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -452,7 +463,7 @@ func (o *OrderPrevailingMarketPrice) GetValue() *string {
 	return o.Value
 }
 
-// OrderQuantity - Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
+// OrderQuantity - Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or full_position MUST be specified.
 type OrderQuantity struct {
 	// The decimal value, as a string; Refer to [Google’s Decimal type protocol buffer](https://github.com/googleapis/googleapis/blob/40203ca1880849480bbff7b8715491060bbccdf1/google/type/decimal.proto#L33) for details
 	Value *string `json:"value,omitempty"`
@@ -534,6 +545,7 @@ const (
 	OrderSpecialReportingInstructionsRoundUp                                 OrderSpecialReportingInstructions = "ROUND_UP"
 	OrderSpecialReportingInstructionsCatParentAlgo                           OrderSpecialReportingInstructions = "CAT_PARENT_ALGO"
 	OrderSpecialReportingInstructionsCatParentGtc                            OrderSpecialReportingInstructions = "CAT_PARENT_GTC"
+	OrderSpecialReportingInstructionsManualOrder                             OrderSpecialReportingInstructions = "MANUAL_ORDER"
 )
 
 func (e OrderSpecialReportingInstructions) ToPointer() *OrderSpecialReportingInstructions {
@@ -661,11 +673,14 @@ type Order struct {
 	AssetType *OrderAssetType `json:"asset_type,omitempty"`
 	// The average prices, as weighted averages, across all executions in this order. Will be absent if an order has no executions.
 	//
-	//  When asset_type = EQUITY or MUTUAL_FUND, there will be at most one value present, with a type of PRICE_PER_UNIT. This will have up to 4 decimal places for USD amounts less than $1, and a maximum of two for larger USD amounts.
-	//
-	//  When asset_type = FIXED_INCOME, there may be more than one value present which would have a type other than PRICE_PER_UNIT. Price values in PERCENTAGE_OF_PAR will have up to 8 decimal places of precision, and price values measured in yields will support up to 7 decimal places.
+	//  Returned values depend on asset_type:
+	//  - EQUITY: exactly one ExecutedPrice element of type PRICE_PER_UNIT in USD (up to 8 decimal places).
+	//  - MUTUAL_FUND: exactly one ExecutedPrice element of type PRICE_PER_UNIT in USD (up to 5 decimal places).
+	//  - FIXED_INCOME: may contain multiple elements with different types other than PRICE_PER_UNIT;
+	//   yield types (YIELD_TO_*) support up to 7 decimal places, other types support up to 8 decimal places.
+	//  - Other asset types: supports up to 5 decimal places.
 	AveragePrices []TradingExecutedPrice `json:"average_prices,omitempty"`
-	// Defaults to "AGENCY" if not specified, except for Fixed Income orders from RIA correspondents which default to "PRINCIPAL" when not specified. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  - RIA correspondents: Defaults to "PRINCIPAL" if not specified.  - Other correspondents: Defaults to "AGENCY" if not specified. For Event Contracts: Only "AGENCY" is allowed.
+	// Defaults to "AGENCY" for all asset types except Fixed Income. For Equities: Only "AGENCY" is allowed. For Mutual Funds: Only "AGENCY" is allowed. For Fixed Income: Either "AGENCY" or "PRINCIPAL" are allowed.  If not specified, defaults to the capacity configured for  the correspondent by Apex. For Event Contracts: Only "AGENCY" is allowed.
 	BrokerCapacity *OrderBrokerCapacity `json:"broker_capacity,omitempty"`
 	// Output only field that is required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. This field denotes the initiator of the cancel request. This field will be present when provided on the CancelOrderRequest
 	CancelInitiator *CancelInitiator `json:"cancel_initiator,omitempty"`
@@ -679,7 +694,7 @@ type Order struct {
 	ClientCancelSentTime *time.Time `json:"client_cancel_sent_time,omitempty"`
 	// User-supplied unique order ID. Cannot be more than 40 characters long.
 	ClientOrderID *string `json:"client_order_id,omitempty"`
-	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
+	// Required for Equity Orders for any client who is having Apex do CAT reporting on their behalf. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed. When special_reporting_instructions includes MANUAL_ORDER, this is also reported to CAT as the time the order was manually received from the customer.
 	ClientReceivedTime *time.Time `json:"client_received_time,omitempty"`
 	// Only relevant for CAT reporting when clients have Apex do CAT reporting on their behalf. Denotes the time the client sent the order to Apex. A value may be provided for non-Equity orders, and will be remembered, but valid timestamps will have no impact on how they are processed.
 	ClientSentTime *time.Time `json:"client_sent_time,omitempty"`
@@ -691,6 +706,8 @@ type Order struct {
 	CumulativeNotionalValue *CumulativeNotionalValue `json:"cumulative_notional_value,omitempty"`
 	// Defaults to "USD". Only "USD" is supported. Full list of currency codes is defined at: https://en.wikipedia.org/wiki/ISO_4217
 	CurrencyCode *string `json:"currency_code,omitempty"`
+	// Request that the order be handled by a desk trader. Only available for Equity orders. When omitted, treated as false.
+	DeskHandlingRequested *bool `json:"desk_handling_requested,omitempty"`
 	// The execution-level details that compose this order
 	Executions []TradingExecutions `json:"executions,omitempty"`
 	// Any reporting data provided by the SetExtraReportingData endpoint.
@@ -711,6 +728,8 @@ type Order struct {
 	LetterOfIntent *LetterOfIntent `json:"letter_of_intent,omitempty"`
 	// The limit price for this order.
 	LimitPrice *LimitPrice `json:"limit_price,omitempty"`
+	// Tax lot matching instructions specifying which lots to sell. Maximum 100 instructions per order.
+	LotMatchingInstructions []LotMatchingInstruction `json:"lot_matching_instructions,omitempty"`
 	// The maximum number of shares to be sold for a notional SELL order of an Equity asset type. This field restricts the quantity to sell, even if the notional amount requires more shares to fulfill. REQUIRED if your account is not subject to Apex position checks, and PROHIBITED if your account is subject to Apex position checks. Refer to Position Check for details. When specified, must be greater than 0 and can't exceed 5 decimal places.
 	MaxSellQuantity *MaxSellQuantity `json:"max_sell_quantity,omitempty"`
 	// System generated name of the order.
@@ -719,7 +738,15 @@ type Order struct {
 	NotionalValue *NotionalValue `json:"notional_value,omitempty"`
 	// A value derived from the order_status, indicating whether the order is still open. The statuses that indicate an order is open are: PENDING_NEW, NEW, PENDING_QUEUED, QUEUED, PARTIALLY_FILLED, and PENDING_CANCEL. An order with any other status is not considered open.
 	Open *bool `json:"open,omitempty"`
-	// The date on which the order will go to the market: must either be "today" or the next valid trading day. If the current day is not a valid trading day, then the next valid market day must be specified. If the current time is after market close, and before midnight Eastern, then the next valid market day must be specified. In all other cases, the current day, Eastern must be specified.
+	// The date on which the order will go to the market.
+	//
+	//  When provided, the date must be either today or the next valid trading day (Eastern time):
+	//  - If today is not a valid trading day, specify the next valid market day.
+	//  - If the current time is after market close but before midnight Eastern, specify the next valid market day.
+	//  - Otherwise, specify the current Eastern trading day.
+	//
+	//  Required for all orders except event contract orders with a non-DAY time_in_force
+	//  (GTC, GTD, IOC, FOK). When omitted for those orders, defaults to the current Eastern trading day.
 	OrderDate *OrderDate `json:"order_date,omitempty"`
 	// System generated unique id for the order.
 	OrderID *string `json:"order_id,omitempty"`
@@ -729,15 +756,15 @@ type Order struct {
 	OrderStatus *OrderStatus `json:"order_status,omitempty"`
 	// The execution type of this order. For Equities: MARKET, LIMIT, STOP and MARKET_IF_TOUCHED are supported. For Mutual Funds: only MARKET is supported. For Fixed Income: only LIMIT is supported. For Event Contracts: only MARKET and LIMIT are supported.
 	OrderType *OrderOrderType `json:"order_type,omitempty"`
-	// The prevailing market price, calculated as a weighted average of the fills in this order, up to a maximum of 5 decimal places. Can be up to 8 decimal places when asset_type = FIXED_INCOME. Will be absent if an order has no executions.
+	// The prevailing market price, calculated as a weighted average of the fills in this order, up to 8 decimal places. Will only be present for orders of Fixed Income assets. Will be absent if an order has no executions.
 	PrevailingMarketPrice *OrderPrevailingMarketPrice `json:"prevailing_market_price,omitempty"`
-	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and must be whole numbers for BUY orders or up to a maximum of 2 decimal places for SELL orders. Either a quantity or notional_value MUST be specified (but not both).
+	// Numeric quantity of the order. For Equities: Represents the number of shares, must be greater than zero and may not exceed 5 decimal places. For Mutual Funds: Only supported for SELL orders. Represents the number of shares, up to a maximum of 3 decimal places. For Fixed Income: Represents the par (face-value) amount being ordered, and may not exceed two decimal places for USD-based currencies. For Event Contracts: Represents the number of contracts being ordered, and may be up to a maximum of 2 decimal places. Exactly one of quantity, notional_value, or full_position MUST be specified.
 	Quantity *OrderQuantity `json:"quantity,omitempty"`
 	// Rights of Accumulation (ROA). An ROA allows an investor to aggregate their own fund shares with the holdings of certain related parties toward achieving the investment thresholds at which sales charge discounts become available.
 	RightsOfAccumulation *RightsOfAccumulation `json:"rights_of_accumulation,omitempty"`
 	// The side of this order.
 	Side *OrderSide `json:"side,omitempty"`
-	// Special Reporting Instructions to be applied to this order. Can include multiple Instructions. Only available for Equity, Mutual Fund, and Fixed Income orders.
+	// Special Reporting Instructions to be applied to this order. Can include up to 5 Instructions. Supported for Equity orders only; must be omitted for Mutual Fund, Fixed Income, and Event Contract orders. BROKER_DEALER_ORDER and FULLY_REGISTERED are not supported. CAT_PARENT_ALGO is only allowed on LIMIT orders; CAT_PARENT_GTC is only allowed on GOOD_TILL_DATE orders. MANUAL_ORDER marks the order as manually received from the customer for CAT reporting; client_received_time should then be set to the time the order was received.
 	SpecialReportingInstructions []OrderSpecialReportingInstructions `json:"special_reporting_instructions,omitempty"`
 	// The stop price for this order. Only allowed for equities.
 	StopPrice *StopPrice `json:"stop_price,omitempty"`
@@ -879,6 +906,13 @@ func (o *Order) GetCurrencyCode() *string {
 	return o.CurrencyCode
 }
 
+func (o *Order) GetDeskHandlingRequested() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.DeskHandlingRequested
+}
+
 func (o *Order) GetExecutions() []TradingExecutions {
 	if o == nil {
 		return nil
@@ -947,6 +981,13 @@ func (o *Order) GetLimitPrice() *LimitPrice {
 		return nil
 	}
 	return o.LimitPrice
+}
+
+func (o *Order) GetLotMatchingInstructions() []LotMatchingInstruction {
+	if o == nil {
+		return nil
+	}
+	return o.LotMatchingInstructions
 }
 
 func (o *Order) GetMaxSellQuantity() *MaxSellQuantity {
